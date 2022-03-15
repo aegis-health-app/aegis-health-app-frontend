@@ -30,7 +30,6 @@ const theme = extendTheme({
     }
   },
 
-  // Make sure values below matches any of the keys in `fontConfig`
   fonts: {
     heading: 'Poppins',
     body: 'Poppins',
