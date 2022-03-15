@@ -31,12 +31,16 @@ const ProfileSection = () => {
           </Text>
         </View>
       </View>
-      <Pressable onPress={() => navigation.navigate('SettingScreen')}>
-        <View alignItems="center">
-          <Icon as={MaterialIcons} name="settings" size={8} color="muted.600" />
-          <Text fontSize="md">Settings</Text>
-        </View>
-      </Pressable>
+      <View alignItems="center" justifyContent="center">
+        <Icon
+          as={MaterialIcons}
+          name="settings"
+          size={8}
+          color="muted.600"
+          onPress={() => navigation.navigate('SettingScreen')}
+        />
+        <Text fontSize="md">Settings</Text>
+      </View>
     </View>
   );
 };
