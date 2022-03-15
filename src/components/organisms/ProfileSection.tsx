@@ -35,7 +35,7 @@ const ProfileSection = () => {
         <Icon
           as={MaterialIcons}
           name="settings"
-          size={8}
+          size={9}
           color="muted.600"
           onPress={() => navigation.navigate('SettingScreen')}
         />
