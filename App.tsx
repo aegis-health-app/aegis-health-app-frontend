@@ -1,37 +1,48 @@
-import React from "react";
-import { Box, Text, View } from "native-base";
-import { SafeAreaView,StyleSheet } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { NativeBaseProvider } from "native-base";
-import { extendTheme } from "native-base";
-import AddButton from "./src/components/atoms/AddButton";
-import { Button } from "native-base";
-import RemButton from "./src/components/atoms/RemButton";
-import Card from "./src/components/organisms/CaretakerCard";
-import Divider from "./src/components/atoms/Divider";
-import NameChangeInput from "./src/components/atoms/NameChangeInput";
-import InfoCard from "./src/components/organisms/InfoCard";
+import React from 'react';
+import { NativeBaseProvider, extendTheme } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import MainNavigation from './src/navigation/MainNavigation';
 
 const theme = extendTheme({
-  main: {}
+  main: {},
+  fontConfig: {
+    Poppins: {
+      300: {
+        normal: 'Poppins-Light',
+        italic: 'Poppins-LightItalic'
+      },
+      400: {
+        normal: 'Poppins-Regular',
+        italic: 'Poppins-Italic'
+      },
+      500: {
+        normal: 'Poppins-Medium',
+        italic: 'Poppins-MediumItalic'
+      },
+      600: {
+        normal: 'Poppins-SemiBold',
+        italic: 'Poppins-SemiBoldItalic'
+      },
+      700: {
+        normal: 'Poppins-Bold',
+        italic: 'Poppins-BoldItalic'
+      }
+    }
+  },
+
+  fonts: {
+    heading: 'Poppins',
+    body: 'Poppins',
+    mono: 'Poppins'
+  }
 });
 
 const App = () => {
   return (
     <SafeAreaProvider>
-      <NativeBaseProvider>
-      <View bgColor="gray.100">
-      {/* <Text>Hello Test</Text> */}
-      <Card/>
-      <Card/>
-      <AddButton/>
-      <NameChangeInput placeholder="เปลี่ยนชื่อผู้ใช้"/>
-      <Divider/>
-      <RemButton/>
-      <Text>HI</Text>
-      <InfoCard name="จากแอปพลิเคชันของผู้ดูแล ให้กดปุ่ม “เพิ่มผู้สูงอายุ”"/>
-      <InfoCard name="สแกน QR code หรือกรอกโค้ดที่แสดงอยู่ด้านบน"/>
-      </View>
+      <NativeBaseProvider theme={theme}>
+        <MainNavigation />
       </NativeBaseProvider>
     </SafeAreaProvider>
   );
