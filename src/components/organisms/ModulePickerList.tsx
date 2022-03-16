@@ -14,7 +14,7 @@ const ModulePickerList = () => {
 
   return (
     <View my={6} w="full">
-      <Text fontSize="xl" fontWeight="600">
+      <Text fontSize="2xl" fontWeight="600">
         Modules
       </Text>
       <Text fontSize="md" color="gray.500">
