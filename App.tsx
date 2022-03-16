@@ -22,7 +22,6 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions
 } from 'react-native/Libraries/NewAppScreen';
@@ -69,14 +68,13 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
+          <Section title="About Aegis">
+            Aegis is an app for farming grades in ICE CAPSTONE, DATABASE
+            SYSTEMS, and SOFTWARE ENGINEERING
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
