@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootStackParamList } from './types';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigation from './TabNavigation';
 import SettingScreen from '../screens/SettingScreen';
@@ -14,8 +14,16 @@ import HealthRecordScreen from '../screens/HealthRecordScreen';
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
+  const navigationTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: '#FAFAFA'
+    }
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
         <Stack.Screen
           name="TabNavigation"
