@@ -13,7 +13,7 @@ const HomeScreen = () => {
         alignItems="center"
         justifyContent="flex-start"
         paddingTop={6}
-        paddingX={2}>
+        paddingX={4}>
         <ProfileSection />
         <Divider />
         <UpComingAlert />

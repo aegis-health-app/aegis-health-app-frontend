@@ -18,7 +18,7 @@ const ModulePickerCard = ({
   return (
     <Pressable
       w="1/2"
-      h={120}
+      h={100}
       backgroundColor={backgroundColor}
       borderRadius="md"
       justifyContent="center"
