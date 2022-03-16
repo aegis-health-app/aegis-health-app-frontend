@@ -33,6 +33,14 @@ const ModulePickerList = () => {
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
+              <Icon as={AntDesign} name="warning" size="xl" color="red.500" />
+            }
+            label="Emergency"
+            handlePress={() => navigation.navigate('EmergencyScreen')}
+          />
+          <ModulePickerCard
+            backgroundColor="#fff"
+            icon={
               <Icon
                 as={MaterialIcons}
                 name="notifications-active"
