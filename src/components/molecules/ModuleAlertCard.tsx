@@ -19,7 +19,7 @@ const ModuleAlertCard = ({
 }: ModuleAlertCardProps) => {
   return (
     <Shadow distance={8}>
-      <VStack w="96" mx={-4} px="8" py="2" style={styles.card}>
+      <VStack w="96" px="4" py="2" style={styles.card}>
         <HStack justifyContent="space-between">
           <Text color="darkBlue.600" fontSize="16">
             {moduleName}
