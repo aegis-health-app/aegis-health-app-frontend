@@ -31,17 +31,17 @@ const ModuleAlertCard = ({
           <Text fontSize="2xl" fontWeight="500">
             {title}
           </Text>
-          {description && <Text fontSize="xl">{description}</Text>}
+          {description && <Text fontSize="lg">{description}</Text>}
         </View>
         <HStack justifyContent="space-between" mt={4} mb={1}>
           <View flex={2} alignItems="center">
-            <Text fontSize="xl" color="blue.500">
+            <Text fontSize="lg" color="blue.500">
               I did it
             </Text>
           </View>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
           <View flex={2} alignItems="center">
-            <Text fontSize="xl" color="blue.500">
+            <Text fontSize="lg" color="blue.500">
               Dismiss
             </Text>
           </View>

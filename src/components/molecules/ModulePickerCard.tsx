@@ -26,6 +26,7 @@ const ModulePickerCard = ({
       onPress={handlePress}>
       <View alignItems="center">
         {icon}
+        {/* TODO: Return fontSize based on isElderly hook */}
         <Text fontWeight="400" fontSize="md" mt={2}>
           {label}
         </Text>
