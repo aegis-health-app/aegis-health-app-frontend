@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Text, View } from 'native-base';
+import { Pressable, Text, View } from 'native-base';
 import React from 'react';
 
 type ModulePickerCardType = {
@@ -16,19 +16,21 @@ const ModulePickerCard = ({
   handlePress
 }: ModulePickerCardType) => {
   return (
-    <View
+    <Pressable
       w="1/2"
       h={120}
       backgroundColor={backgroundColor}
-      alignItems="center"
-      justifyContent="center"
       borderRadius="md"
-      style={styles.card}>
-      {icon}
-      <Text fontWeight="400" fontSize="md">
-        {label}
-      </Text>
-    </View>
+      justifyContent="center"
+      style={styles.card}
+      onPress={handlePress}>
+      <View alignItems="center">
+        {icon}
+        <Text fontWeight="400" fontSize="md" mt={2}>
+          {label}
+        </Text>
+      </View>
+    </Pressable>
   );
 };
 
