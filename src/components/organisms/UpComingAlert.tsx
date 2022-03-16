@@ -4,11 +4,10 @@ import ModuleAlertCard from '../molecules/ModuleAlertCard';
 
 const UpComingAlert = () => {
   return (
-    <View>
+    <View w="full">
       <Text fontSize="2xl" fontWeight="600" mb={4}>
         Upcoming
       </Text>
-
       <ModuleAlertCard
         moduleName="Lorem Ipsum"
         title="Lorem Ipsum"
