@@ -13,19 +13,19 @@ const ModulePickerList = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <View w="full" my={6}>
-      <Text fontSize="2xl" fontWeight="600">
+    <View my={6} w="full">
+      <Text fontSize="xl" fontWeight="600">
         Modules
       </Text>
       <Text fontSize="md" color="gray.500">
         Choose your modules
       </Text>
-      <VStack space={2} mt={4}>
-        <HStack space={2} justifyContent="space-between" px={2}>
+      <VStack space={3} mt={4} justifyContent="center" alignItems="center">
+        <HStack space={3} justifyContent="space-between" px={2}>
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
-              <Icon as={AntDesign} name="warning" size="xl" color="red.500" />
+              <Icon as={AntDesign} name="warning" size="10" color="red.500" />
             }
             label="Emergency"
             handlePress={() => navigation.navigate('EmergencyScreen')}
@@ -36,7 +36,7 @@ const ModulePickerList = () => {
               <Icon
                 as={MaterialIcons}
                 name="notifications-active"
-                size="xl"
+                size="10"
                 color="orange.400"
               />
             }
@@ -44,14 +44,14 @@ const ModulePickerList = () => {
             handlePress={() => navigation.navigate('ReminderScreen')}
           />
         </HStack>
-        <HStack space={2} justifyContent="space-between" px={2}>
+        <HStack space={3} justifyContent="space-between" px={2}>
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
               <Icon
                 as={MaterialIcons}
                 name="note-add"
-                size="xl"
+                size="10"
                 color="green.500"
               />
             }
@@ -64,7 +64,7 @@ const ModulePickerList = () => {
               <Icon
                 as={MaterialIcons}
                 name="question-answer"
-                size="xl"
+                size="10"
                 color="pink.400"
               />
             }
@@ -72,14 +72,14 @@ const ModulePickerList = () => {
             handlePress={() => navigation.navigate('HealthRecordScreen')}
           />
         </HStack>
-        <HStack space={2} justifyContent="space-between" px={2}>
+        <HStack space={3} justifyContent="space-between" px={2}>
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
               <Icon
                 as={MaterialIcons}
                 name="menu-book"
-                size="xl"
+                size="10"
                 color="darkBlue.600"
               />
             }
