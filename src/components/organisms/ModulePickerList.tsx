@@ -14,11 +14,7 @@ const ModulePickerList = () => {
 
   return (
     <View my={6} w="full">
-<<<<<<< HEAD
       <Text fontSize="2xl" fontWeight="600">
-=======
-      <Text fontSize="xl" fontWeight="600">
->>>>>>> 61d199c (fix: module list spacing and size)
         Modules
       </Text>
       <Text fontSize="md" color="gray.500">
@@ -26,7 +22,6 @@ const ModulePickerList = () => {
       </Text>
       <VStack space={3} mt={4} justifyContent="center" alignItems="center">
         <HStack space={3} justifyContent="space-between" px={2}>
-<<<<<<< HEAD
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
@@ -35,8 +30,6 @@ const ModulePickerList = () => {
             label="Emergency"
             handlePress={() => navigation.navigate('EmergencyScreen')}
           />
-=======
->>>>>>> 61d199c (fix: module list spacing and size)
           <ModulePickerCard
             backgroundColor="#fff"
             icon={
