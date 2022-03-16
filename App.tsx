@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text } from "native-base";
+import { Box, Text, View } from "native-base";
 import { SafeAreaView,StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
@@ -10,6 +10,7 @@ import RemButton from "./src/components/atoms/RemButton";
 import Card from "./src/components/organisms/CaretakerCard";
 import Divider from "./src/components/atoms/Divider";
 import NameChangeInput from "./src/components/atoms/NameChangeInput";
+import InfoCard from "./src/components/organisms/InfoCard";
 
 const theme = extendTheme({
   main: {}
@@ -19,14 +20,18 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider>
+      <View bgColor="gray.100">
       {/* <Text>Hello Test</Text> */}
       <Card/>
       <Card/>
       <AddButton/>
-      <NameChangeInput/>
+      <NameChangeInput placeholder="เปลี่ยนชื่อผู้ใช้"/>
       <Divider/>
       <RemButton/>
       <Text>HI</Text>
+      <InfoCard name="จากแอปพลิเคชันของผู้ดูแล ให้กดปุ่ม “เพิ่มผู้สูงอายุ”"/>
+      <InfoCard name="สแกน QR code หรือกรอกโค้ดที่แสดงอยู่ด้านบน"/>
+      </View>
       </NativeBaseProvider>
     </SafeAreaProvider>
   );

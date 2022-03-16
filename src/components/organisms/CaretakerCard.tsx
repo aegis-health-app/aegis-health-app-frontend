@@ -33,7 +33,7 @@ const Card = () => {
                 {<Icon
                   as={MaterialIcons}
                   name="mode-edit"
-                  size={5}
+                  size="5"
                   color="muted.600"
                 />}>
                 <Text color="gray.800">
