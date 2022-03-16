@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text, View, Image, Icon } from 'native-base';
 import React from 'react';
-import { Pressable } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { RootStackParamList } from '../../navigation/types';
 
@@ -26,7 +25,7 @@ const ProfileSection = () => {
         />
         <View>
           <Text>Good Morning,</Text>
-          <Text fontSize="2xl" bold>
+          <Text fontSize="2xl" fontWeight="600">
             Name
           </Text>
         </View>
@@ -39,7 +38,7 @@ const ProfileSection = () => {
           color="muted.600"
           onPress={() => navigation.navigate('SettingScreen')}
         />
-        <Text fontSize="md">Settings</Text>
+        <Text fontSize="sm">Settings</Text>
       </View>
     </View>
   );
