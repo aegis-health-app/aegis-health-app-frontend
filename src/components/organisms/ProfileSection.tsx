@@ -17,15 +17,15 @@ const ProfileSection = () => {
       <View flexDir="row">
         <Image
           source={ProfilePic}
-          width="16"
-          height="16"
+          width="12"
+          height="12"
           borderRadius={4}
-          marginRight={6}
+          marginRight={4}
           alt="Profile Picture"
         />
         <View>
           <Text>Good Morning,</Text>
-          <Text fontSize="2xl" fontWeight="600">
+          <Text fontSize="xl" fontWeight="600">
             Name
           </Text>
         </View>
