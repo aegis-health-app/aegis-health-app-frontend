@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, View } from "native-base";
+import { Box, Text, View, ScrollView } from "native-base";
 import { SafeAreaView,StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
@@ -14,18 +14,16 @@ const theme = extendTheme({
 
 const UserLinkScreen = () => {
   return (
-    <SafeAreaProvider>
-      <NativeBaseProvider>
+    <ScrollView>
         <Header name="ผู้ดูแลของฉัน"/>
       <View bgColor="#FAFAFA">
       {/* <Text>Hello Test</Text> */}
-      <Card/>
-      <Card/>
-      <Card/>
+      <Card name="Supatach Vanichayangkuranont"/>
+      <Card name="Somying Muangyim"/>
+      <Card name="Somying Muangyim"/>
       <AddButton/>
       </View>
-      </NativeBaseProvider>
-    </SafeAreaProvider>
+      </ScrollView>
   );
 };
 export default UserLinkScreen;

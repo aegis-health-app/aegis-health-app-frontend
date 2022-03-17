@@ -9,7 +9,18 @@ import EditCaretakerScreen from "../../screens/EditCaretakerScreen";
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
-const Card = () => {
+type CardProps = {
+  name: string,
+};
+
+const handleNameLength = (name) => {
+  if(name.length <= 16) return 18;
+  return (300/name.length);
+}
+
+const Card = ({
+  name
+}:CardProps) => {
     const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     
@@ -24,6 +35,7 @@ const Card = () => {
           backgroundColor: "gray.50"
         }}>
             <Box bgColor="white" flexDir="row" justifyContent="space-between" px="2" py="2" alignItems="center">
+                <View flexDir="row" alignItems="center" minW="72%" overflow="hidden">
                 <Image
                 source={CaretakerPic}
                 width="16"
@@ -32,10 +44,11 @@ const Card = () => {
                 marginRight={3}
                 alt="Profile Picture"
                 />
-              <Text maxWidth="60%" fontSize="lg" fontWeight="bold">
-                Somying Muangyim
+              <Text fontSize={handleNameLength(name)}>
+                {name}
               </Text>
-              <Button borderRadius='lg' bgColor='gray.300' width="auto" flexDir="row" marginLeft="auto" onPress={() => navigation.navigate('EditCaretakerScreen')}
+              </View>
+              <Button borderRadius='lg' bgColor='gray.300' width="auto" flexDir="row" onPress={() => navigation.navigate('EditCaretakerScreen')}
                 leftIcon=
                 {<Icon
                   as={MaterialIcons}
@@ -43,7 +56,7 @@ const Card = () => {
                   size="5"
                   color="muted.600"
                 />}>
-                <Text color="gray.800">
+                <Text ml="-1" color="gray.800">
                   แก้ใข
                 </Text>
               </Button>
