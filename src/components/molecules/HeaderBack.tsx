@@ -27,7 +27,6 @@ const HeaderBack = ({
           </View>
           <View >
           <Text mt="3" color="black" fontSize="20" fontWeight="bold">
-            {/* todo center */}
               {name}
           </Text>
           </View>

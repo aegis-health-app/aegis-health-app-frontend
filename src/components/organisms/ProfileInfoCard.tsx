@@ -13,7 +13,6 @@ const ProfileInfoCard = () => {
                 alt="Profile Picture"
                 />
         </Box>
-        {/* todo center */}
         <View flexDir="row">
             <View flexDir="column">
                 <View>
