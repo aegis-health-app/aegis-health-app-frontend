@@ -4,15 +4,8 @@ import { SafeAreaView,StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
 import { extendTheme } from "native-base";
-import AddButton from "../components/atoms/AddButton";
-import { Button } from "native-base";
-import RemButton from "../components/atoms/RemButton";
-import Card from "../components/organisms/CaretakerCard";
-import Divider from "../components/atoms/Divider";
-import NameChangeInput from "../components/atoms/NameChangeInput";
 import InfoCard from "../components/organisms/InfoCard";
 import HeaderBack from "../components/molecules/HeaderBack";
-import ProfileInfoCard from "../components/organisms/ProfileInfoCard";
 
 
 const theme = extendTheme({
