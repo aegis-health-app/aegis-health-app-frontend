@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, Box, Button, VStack, View, Divider, Text, Icon } from "native-base";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Shadow } from "react-native-shadow-2";
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 

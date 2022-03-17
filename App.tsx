@@ -3,6 +3,8 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
+import Card from './src/components/organisms/CaretakerCard';
+import AddButton from './src/components/atoms/AddButton';
 
 const theme = extendTheme({
   main: {},

@@ -1,11 +1,18 @@
 import React from "react";
 import { Image, Box, Button, VStack, View, Divider, Text, Icon } from "native-base";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Shadow } from "react-native-shadow-2";
+import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+import EditCaretakerScreen from "../../screens/EditCaretakerScreen";
+
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
 const Card = () => {
+    const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
     return (
         <Box my='1' alignSelf="center" width="90%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
           borderColor: "coolGray.800",
@@ -28,7 +35,7 @@ const Card = () => {
               <Text maxWidth="60%" fontSize="lg" fontWeight="bold">
                 Somying Muangyim
               </Text>
-              <Button borderRadius='lg' bgColor='gray.300' width="auto" flexDir="row" marginLeft="auto" onPress={() => console.log('hello world')}
+              <Button borderRadius='lg' bgColor='gray.300' width="auto" flexDir="row" marginLeft="auto" onPress={() => navigation.navigate('EditCaretakerScreen')}
                 leftIcon=
                 {<Icon
                   as={MaterialIcons}
