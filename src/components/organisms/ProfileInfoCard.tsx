@@ -10,7 +10,6 @@ const ProfileInfoCard = () => {
             <Image
                 source={CaretakerPic}
                 borderRadius={10}
-                marginRight={3}
                 alt="Profile Picture"
                 />
         </Box>
