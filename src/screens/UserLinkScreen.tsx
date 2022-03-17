@@ -22,7 +22,7 @@ const UserLinkScreen = () => {
     <SafeAreaProvider>
       <NativeBaseProvider>
         <Header name="ผู้ดูแลของฉัน"/>
-      <View bgColor="gray.100">
+      <View bgColor="#FAFAFA">
       {/* <Text>Hello Test</Text> */}
       <Card/>
       <Card/>

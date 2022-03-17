@@ -19,7 +19,6 @@ const theme = extendTheme({
   main: {}
 });
 
-
 const QRPlaceholder = require('../assets/images/QRPlaceholder.png');
 
 const EditCaretakerScreen = () => {
@@ -27,7 +26,7 @@ const EditCaretakerScreen = () => {
     <SafeAreaProvider>
       <NativeBaseProvider>
           <HeaderBack name="เชื่อมต่อกับผู้ดูแล"/>
-            <View bgColor="gray.100">
+            <View bgColor="FAFAFA">
                 <View mt="10" flexDir="row" justifyContent="center">
                     <Image
                     source={QRPlaceholder}

@@ -17,7 +17,7 @@ const HeaderBack = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
       <Box>
-        <HStack bg="#FFF" px="2" py="3" alignItems="center" w="100%">
+        <HStack mb="6" bg="#FFF" px="2" py="3" alignItems="center" w="100%">
         <HStack alignItems="center">
           <IconButton mt="3" icon={<Icon size="sm" as={MaterialIcons} name="arrow-back-ios" color="blue.500" onPress={() => navigation.navigate('UserLinkScreen')}/>} />
           <Text mt="3" color="blue.500" fontSize="17" onPress={() => navigation.navigate('UserLinkScreen')}>

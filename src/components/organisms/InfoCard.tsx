@@ -23,7 +23,7 @@ const InfoCard = ({
         }} _light={{
           backgroundColor: "gray.50"
         }}>
-            <Box flexDir="row" justifyContent="flex-start" px="2" py="2" alignItems="center">
+            <Box bgColor="white" flexDir="row" justifyContent="flex-start" px="2" py="2" alignItems="center">
             <Icon
                   as={MaterialIcons}
                   name={icon}

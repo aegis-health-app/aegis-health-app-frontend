@@ -17,7 +17,7 @@ const Header = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
       <Box>
-        <HStack bg="#FFF" px="2" py="3" justifyContent="center" alignItems="flex-end" w="100%">
+        <HStack mb="6" bg="#FFF" px="2" py="3" justifyContent="center" alignItems="flex-end" w="100%">
           <HStack>
           <Text mt="3" color="black" fontSize="20" fontWeight="bold">
               {name}

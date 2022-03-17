@@ -23,7 +23,7 @@ const EditCaretakerScreen = () => {
     <SafeAreaProvider>
       <NativeBaseProvider>
           <HeaderBack name="ผู้ดูแลของฉัน"/>
-            <View bgColor="gray.100">
+            <View bgColor="#FAFAFA">
                 <ProfileInfoCard/>
                 <Divider/>
                 <Box flexDir="row">

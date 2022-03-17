@@ -12,7 +12,7 @@ const CaretakerPic = require('../../assets/images/Caretaker.png');
 const Card = () => {
     const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+    
     return (
         <Box my='1' alignSelf="center" width="90%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
           borderColor: "coolGray.800",
@@ -23,7 +23,7 @@ const Card = () => {
         }} _light={{
           backgroundColor: "gray.50"
         }}>
-            <Box flexDir="row" justifyContent="space-between" px="2" py="2" alignItems="center">
+            <Box bgColor="white" flexDir="row" justifyContent="space-between" px="2" py="2" alignItems="center">
                 <Image
                 source={CaretakerPic}
                 width="16"
