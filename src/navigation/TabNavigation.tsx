@@ -2,22 +2,39 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import UserLinkScreen from './../screens/UserLinkScreen';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, _ }) => {
+          if (route.name === 'Home') {
+            const iconName = focused ? 'home' : 'home-outline';
+            return <IonIcons name={iconName} size={26} color={color} />;
+          } else if (route.name === 'UserLinkScreen') {
+            const iconName = focused ? 'ios-people' : 'people-outline';
+            return <IonIcons name={iconName} size={26} color={color} />;
+          }
+        },
+        // tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+        tabBarLabelStyle: {
+          fontSize: 14
+        },
+        tabBarStyle: {
+          height: 55,
+          paddingBottom: 2
+        }
+      })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="home" color={color} size={26} />
-          )
+          tabBarLabel: 'Home'
         }}
       />
       <Tab.Screen
@@ -25,10 +42,7 @@ const TabNavigation = () => {
         component={UserLinkScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'My Caretakers',
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="people-outline" color={color} size={26} />
-          )
+          tabBarLabel: 'My Caretakers'
         }}
       />
     </Tab.Navigator>
