@@ -1,18 +1,37 @@
-import { View, Box, Image } from 'native-base';
+import { View, Box, Image, Text } from 'native-base';
 import React from 'react';
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
 const ProfileInfoCard = () => {
   return (
-    <Box alignItems="center" my="5">
+    <Box>
+        <Box alignItems="center" my="5">
             <Image
                 source={CaretakerPic}
                 borderRadius={10}
                 marginRight={3}
                 alt="Profile Picture"
                 />
-                </Box>
+        </Box>
+        {/* todo center */}
+        <Box flexDir="row">
+        <Text ml="5" color="gray.600" fontSize={16}>ชื่อ</Text>
+        <Text color="black" fontWeight="bold" fontSize={16}>Hi</Text>
+        </Box>
+        <Box flexDir="row">
+        <Text ml="5" color="gray.600" fontSize={16}>เพศ</Text>
+        <Text color="black" fontWeight="bold" fontSize={16}>Hi</Text>
+        </Box>
+        <Box flexDir="row">
+        <Text ml="5" color="gray.600" fontSize={16}>วันเกิด</Text>
+        <Text color="black" fontWeight="bold" fontSize={16}>Hi</Text>
+        </Box>
+        <Box flexDir="row">
+        <Text ml="5" color="gray.600" fontSize={16}>หมายเลขโทรศัพท์</Text>
+        <Text color="black" fontWeight="bold" fontSize={16}>Hi</Text>
+        </Box>
+    </Box>
   );
 };
 

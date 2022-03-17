@@ -10,25 +10,29 @@ type HeaderProps = {
     name: string,
   };
 
-const Header = ({
+const HeaderBack = ({
     name,
 }:HeaderProps) => {
     const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
       <Box>
-        <HStack bg="#FFF" px="2" py="3" justifyContent="center" alignItems="flex-end" w="100%">
-          <HStack>
-          <Text mt="3" color="black" fontSize="20" fontWeight="bold">
-              {name}
+        <HStack bg="#FFF" px="2" py="3" alignItems="center" w="100%">
+        <HStack alignItems="center">
+          <IconButton mt="3" icon={<Icon size="sm" as={MaterialIcons} name="arrow-back-ios" color="blue.500" onPress={() => navigation.navigate('UserLinkScreen')}/>} />
+          <Text mt="3" color="blue.500" fontSize="17">
+            กลับ
           </Text>
           </HStack>
-          <HStack position="absolute" right="5" top="5">
-          <IconButton icon={<Icon size="sm" as={MaterialIcons} name="help-outline" color="orange.500" onPress={() => navigation.navigate('UserLinkScreen')}/>} />
+          <HStack>
+          <Text mt="3" color="black" fontSize="20" fontWeight="bold">
+            {/* todo center */}
+              {name}
+          </Text>
           </HStack>
         </HStack>
       </Box>
   );
 };
 
-export default Header;
+export default HeaderBack;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, View } from "native-base";
+import { Box, Text, View, Image } from "native-base";
 import { SafeAreaView,StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
@@ -11,29 +11,27 @@ import Card from "../components/organisms/CaretakerCard";
 import Divider from "../components/atoms/Divider";
 import NameChangeInput from "../components/atoms/NameChangeInput";
 import InfoCard from "../components/organisms/InfoCard";
-import Header from "../components/molecules/Header";
+import HeaderBack from "../components/molecules/HeaderBack";
+import ProfileInfoCard from "../components/organisms/ProfileInfoCard";
 
 const theme = extendTheme({
   main: {}
 });
 
-const UserLinkScreen = () => {
+const EditCaretakerScreen = () => {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider>
-        <Header name="ผู้ดูแลของฉัน"/>
-      <View bgColor="gray.100">
-      {/* <Text>Hello Test</Text> */}
-      <Card/>
-      <Card/>
-      <Card/>
-      <AddButton/>
-      </View>
+          <HeaderBack name="เชื่อมต่อกับผู้ดูแล"/>
+            <View bgColor="gray.100">
+                <InfoCard icon="touch-app" desc="จากแอปพลิเคชันของผู้ดูแล ให้กดปุ่ม “เพิ่มผู้สูงอายุ”"/>
+                <InfoCard icon="qr-code-scanner" desc="สแกน QR code หรือกรอกโค้ดที่แสดงอยู่ด้านบน"/>             
+            </View>
       </NativeBaseProvider>
     </SafeAreaProvider>
   );
 };
-export default UserLinkScreen;
+export default EditCaretakerScreen;
 
 const styles = StyleSheet.create({
   container: {

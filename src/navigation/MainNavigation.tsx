@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigation from './TabNavigation';
 import SettingScreen from '../screens/SettingScreen';
 import EditCaretakerScreen from '../screens/EditCaretakerScreen';
+import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -25,6 +26,11 @@ const MainNavigation = () => {
         <Stack.Screen
           name="EditCaretakerScreen"
           component={EditCaretakerScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConnectCaretakerScreen"
+          component={ConnectCaretakerScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

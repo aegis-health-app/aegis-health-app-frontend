@@ -15,4 +15,5 @@ export type RootStackParamList = {
   EmotionalTrackingScreen: undefined;
   EditCaretakerScreen: undefined;
   UserLinkScreen: undefined;
+  ConnectCaretakerScreen: undefined;
 };

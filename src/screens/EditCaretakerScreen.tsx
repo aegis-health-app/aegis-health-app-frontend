@@ -11,7 +11,7 @@ import Card from "../components/organisms/CaretakerCard";
 import Divider from "../components/atoms/Divider";
 import NameChangeInput from "../components/atoms/NameChangeInput";
 import InfoCard from "../components/organisms/InfoCard";
-import Header from "../components/molecules/Header";
+import HeaderBack from "../components/molecules/HeaderBack";
 import ProfileInfoCard from "../components/organisms/ProfileInfoCard";
 
 const theme = extendTheme({
@@ -22,9 +22,13 @@ const EditCaretakerScreen = () => {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider>
-          <Header name="ผู้ดูแลของฉัน"/>
+          <HeaderBack name="ผู้ดูแลของฉัน"/>
             <View bgColor="gray.100">
                 <ProfileInfoCard/>
+                <Divider/>
+                <Box flexDir="row">
+                    <Text mb="1" ml="5" color="gray.600" fontSize={16}>เปลี่ยนชื่อผู้ใช้</Text>
+                </Box>
                 <NameChangeInput placeholder="เปลี่ยนชื่อผู้ใช้"/>
                 <Divider/>
                 <RemButton/>
