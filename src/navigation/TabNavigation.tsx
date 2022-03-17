@@ -41,8 +41,10 @@ const TabNavigation = () => {
         name="UserLinkScreen"
         component={UserLinkScreen}
         options={{
-          headerShown: false,
-          tabBarLabel: 'My Caretakers'
+          tabBarLabel: 'My Caretakers',
+          title: 'My Caretakers',
+          headerTitleAlign: 'center',
+          headerTitleStyle: { fontSize: 20, fontWeight: '500' }
         }}
       />
     </Tab.Navigator>
