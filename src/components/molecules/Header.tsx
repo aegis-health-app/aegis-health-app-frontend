@@ -24,7 +24,7 @@ const Header = ({
           </Text>
           </HStack>
           <HStack position="absolute" right="5" top="5">
-          <IconButton icon={<Icon size="sm" as={MaterialIcons} name="help-outline" color="orange.500" onPress={() => navigation.navigate('UserLinkScreen')}/>} />
+          <Icon mt="2" size="sm" as={MaterialIcons} name="help-outline" color="orange.500" onPress={() => navigation.navigate('UserLinkScreen')}/>
           </HStack>
         </HStack>
       </Box>
