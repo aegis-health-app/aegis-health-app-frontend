@@ -9,6 +9,8 @@ const ProfileInfoCard = () => {
         <Box alignItems="center" my="5">
             <Image
                 source={CaretakerPic}
+                w={160}
+                h={160}
                 borderRadius={10}
                 alt="Profile Picture"
                 />
