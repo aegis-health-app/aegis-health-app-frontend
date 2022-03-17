@@ -98,7 +98,7 @@ const ModulePickerList = () => {
             backgroundColor="lightBlue.200"
             icon={<ManageModuleIcon />}
             label="Select Modules"
-            handlePress={() => navigation.navigate('ModulePickerScreen')}
+            handlePress={() => navigation.navigate('ModuleManageScreen')}
           />
         </HStack>
       </VStack>

@@ -14,5 +14,5 @@ export type RootStackParamList = {
   MemoryScreen: undefined;
   EmotionalTrackingScreen: undefined;
   HealthBlogScreen: undefined;
-  ModulePickerScreen: undefined;
+  ModuleManageScreen: undefined;
 };
