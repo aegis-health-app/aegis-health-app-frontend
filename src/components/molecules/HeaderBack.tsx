@@ -17,21 +17,21 @@ const HeaderBack = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
       <Box>
-        <HStack mb="6" bg="#FFF" px="2" py="3" alignItems="center" w="100%">
-        <HStack alignItems="center">
+        <View flexDir="row" mb="6" bg="#FFF" px="2" py="3" justifyContent="center" alignItems="center" w="100%">
+        <View flexDir="row" alignItems="center" position="absolute" left="2">
           <Icon mx="2" mt="3" size="sm" as={MaterialIcons} name="arrow-back-ios" color="blue.500" 
           onPress={() => navigation.navigate('UserLinkScreen')}/>
           <Text mt="3" color="blue.500" fontSize="17" onPress={() => navigation.navigate('UserLinkScreen')}>
             กลับ
           </Text>
-          </HStack>
-          <HStack>
+          </View>
+          <View >
           <Text mt="3" color="black" fontSize="20" fontWeight="bold">
             {/* todo center */}
               {name}
           </Text>
-          </HStack>
-        </HStack>
+          </View>
+        </View>
       </Box>
   );
 };
