@@ -11,6 +11,7 @@ import EmergencyScreen from './../screens/EmergencyScreen';
 import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
 import HealthRecordScreen from '../screens/HealthRecordScreen';
+import ConnectScreen from './../screens/ConnectScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -67,7 +68,16 @@ const MainNavigation = () => {
           options={{
             title: 'Select Modules',
             headerTitleAlign: 'center',
-            headerTitleStyle: { fontSize: 20, fontWeight: '700' }
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="ConnectScreen"
+          component={ConnectScreen}
+          options={{
+            title: 'Connect',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
           }}
         />
       </Stack.Navigator>
