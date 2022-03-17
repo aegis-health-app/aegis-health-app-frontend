@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-const ModulePickerScreen = () => {
+const ModuleManageScreen = () => {
   return (
     <View>
-      <Text>ModulePickerScreen</Text>
+      <Text>ModuleManageScreen</Text>
     </View>
   );
 };
 
-export default ModulePickerScreen;
+export default ModuleManageScreen;
 
 const styles = StyleSheet.create({});
