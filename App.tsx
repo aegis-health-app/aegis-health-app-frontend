@@ -6,34 +6,34 @@ import MainNavigation from './src/navigation/MainNavigation';
 const theme = extendTheme({
   main: {},
   fontConfig: {
-    Poppins: {
+    Sarabun: {
       300: {
-        normal: 'Poppins-Light',
+        normal: 'Sarabun-Light',
         italic: 'Poppins-LightItalic'
       },
       400: {
-        normal: 'Poppins-Regular',
-        italic: 'Poppins-Italic'
+        normal: 'Sarabun-Regular',
+        italic: 'Sarabun-Italic'
       },
       500: {
-        normal: 'Poppins-Medium',
-        italic: 'Poppins-MediumItalic'
+        normal: 'Sarabun-Medium',
+        italic: 'Sarabun-MediumItalic'
       },
       600: {
-        normal: 'Poppins-SemiBold',
-        italic: 'Poppins-SemiBoldItalic'
+        normal: 'Sarabun-SemiBold',
+        italic: 'Sarabun-SemiBoldItalic'
       },
       700: {
-        normal: 'Poppins-Bold',
-        italic: 'Poppins-BoldItalic'
+        normal: 'Sarabun-Bold',
+        italic: 'Sarabun-BoldItalic'
       }
     }
   },
 
   fonts: {
-    heading: 'Poppins',
-    body: 'Poppins',
-    mono: 'Poppins'
+    heading: 'Sarabun',
+    body: 'Sarabun',
+    mono: 'Sarabun'
   }
 });
 
