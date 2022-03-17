@@ -55,7 +55,11 @@ const Card = ({
                   name="mode-edit"
                   size="5"
                   color="muted.600"
-                />}>
+                />}
+                _pressed={{
+                  bg: "gray.400"
+                }}
+                >
                 <Text ml="-1" color="gray.800">
                   แก้ใข
                 </Text>
