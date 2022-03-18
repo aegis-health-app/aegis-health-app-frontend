@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
 import './src/internationalization/i18n.config';
 import { TourGuideProvider } from 'rn-tourguide';
+import { useTranslation } from 'react-i18next';
 
 const theme = extendTheme({
   main: {},
@@ -65,14 +66,15 @@ const theme = extendTheme({
   }
 });
 
-const tourGuideLabels = {
-  previous: 'Vorheriger',
-  next: 'Nächster',
-  skip: 'Überspringen',
-  finish: 'Beenden'
-};
-
 const App = () => {
+  const { t } = useTranslation();
+  const tourGuideLabels = {
+    previous: t('29'),
+    next: t('30'),
+    skip: t('31'),
+    finish: t('32')
+  };
+
   return (
     <SafeAreaProvider>
       <TourGuideProvider
