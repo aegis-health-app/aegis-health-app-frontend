@@ -25,8 +25,7 @@ const TabNavigation = () => {
           fontSize: 14
         },
         tabBarStyle: {
-          height: 55,
-          paddingBottom: 2
+          padding: 2
         }
       })}>
       <Tab.Screen
