@@ -5,6 +5,8 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigation from './TabNavigation';
 import SettingScreen from '../screens/SettingScreen';
+import EditCaretakerScreen from '../screens/EditCaretakerScreen';
+import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
@@ -35,6 +37,16 @@ const MainNavigation = () => {
         <Stack.Screen
           name="SettingScreen"
           component={SettingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditCaretakerScreen"
+          component={EditCaretakerScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConnectCaretakerScreen"
+          component={ConnectCaretakerScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

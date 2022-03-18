@@ -1,7 +1,10 @@
 import React from 'react';
 import { NativeBaseProvider, extendTheme } from 'native-base';
+import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
+import Card from './src/components/organisms/CaretakerCard';
+import AddButton from './src/components/atoms/AddButton';
 
 const theme = extendTheme({
   main: {},
@@ -46,5 +49,12 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
-
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ccc',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },});
