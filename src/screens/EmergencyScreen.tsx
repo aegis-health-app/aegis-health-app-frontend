@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 
 const EmergencyScreen = () => {
@@ -10,5 +10,3 @@ const EmergencyScreen = () => {
 };
 
 export default EmergencyScreen;
-
-const styles = StyleSheet.create({});

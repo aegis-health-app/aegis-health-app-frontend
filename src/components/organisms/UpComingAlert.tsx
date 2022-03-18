@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, VStack, View } from 'native-base';
+import { Text, View } from 'native-base';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 
 const UpComingAlert = () => {

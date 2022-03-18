@@ -10,7 +10,7 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, _ }) => {
+        tabBarIcon: ({ focused, color }) => {
           if (route.name === 'Home') {
             const iconName = focused ? 'home' : 'home-outline';
             return <IonIcons name={iconName} size={26} color={color} />;
@@ -41,7 +41,7 @@ const TabNavigation = () => {
         name="UserLinkScreen"
         component={UserLinkScreen}
         options={{
-          headerShown:false
+          headerShown: false
         }}
       />
     </Tab.Navigator>
