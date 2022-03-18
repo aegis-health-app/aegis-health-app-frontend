@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text, View, Image, Icon } from 'native-base';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { RootStackParamList } from '../../navigation/types';
@@ -9,6 +10,7 @@ import { RootStackParamList } from '../../navigation/types';
 const ProfilePic = require('../../assets/images/sompoch.png');
 
 const ProfileSection = () => {
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -25,7 +27,7 @@ const ProfileSection = () => {
             alt="Profile Picture"
           />
           <View>
-            <Text>Good Morning,</Text>
+            <Text>{t('1')}</Text>
             <Text fontSize="xl" fontWeight="600">
               Name
             </Text>
