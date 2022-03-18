@@ -2,6 +2,7 @@ import { View, Text, Icon } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTranslation } from 'react-i18next';
 
 type EditButtonProps = {
   w?: string;
@@ -12,6 +13,7 @@ type EditButtonProps = {
 };
 
 const EditButton = ({ w, h, p, ml, onPress }: EditButtonProps) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       onPress={() => {
@@ -29,7 +31,7 @@ const EditButton = ({ w, h, p, ml, onPress }: EditButtonProps) => {
         ml={ml ?? 2}
         borderRadius={4}>
         <Icon as={MaterialIcons} name="edit" size="5" color="gray.500" mx={1} />
-        <Text>Edit</Text>
+        <Text>{t('25')}</Text>
       </View>
     </TouchableOpacity>
   );

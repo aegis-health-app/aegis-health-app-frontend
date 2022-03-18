@@ -3,9 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import UserLinkScreen from './../screens/UserLinkScreen';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import { useTranslation } from 'react-i18next';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
+  const { t } = useTranslation();
 
   return (
     <Tab.Navigator
@@ -34,18 +36,17 @@ const TabNavigation = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Home'
+          tabBarLabel: t('27')
         }}
       />
       <Tab.Screen
         name="UserLinkScreen"
         component={UserLinkScreen}
         options={{
-          title: 'ผู้ดูแลของฉัน',
+          title: t('28'),
           headerTitleAlign: 'center',
           headerTitleStyle: { fontSize: 20, fontWeight: '600' }
         }}
-        // ผู้ดูแลของฉัน
       />
     </Tab.Navigator>
   );
