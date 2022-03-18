@@ -2,7 +2,7 @@
  * Note: The screen name and its param type are defined here.
  */
 
- export type RootStackParamList = {
+export type RootStackParamList = {
   //Authorized Screens
   TabNavigation: undefined;
 
@@ -17,7 +17,7 @@
   HealthRecordScreen: undefined;
   MemoryScreen: undefined;
   EmotionalTrackingScreen: undefined;
-  EditCaretakerScreen: {itemId: string};
+  EditCaretakerScreen: { itemId: string };
   UserLinkScreen: undefined;
   ConnectCaretakerScreen: undefined;
   HealthBlogScreen: undefined;
