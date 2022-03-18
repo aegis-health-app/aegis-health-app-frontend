@@ -11,10 +11,10 @@ const InputBox = ({
     return (
       <View>
         <Box flexDir="row">
-          <Text mb="1" ml="5" color="gray.700" fontSize={16}>{name}</Text>
+          <Text mb="1" ml="5" color="#52525B" fontSize={16}>{name}</Text>
         </Box>
         <Box alignItems="center">
-          <Input borderColor="gray.700" placeholder={name} w="90%"/>
+          <Input borderColor="#ACB5BD" placeholder={name} w="90%"/>
         </Box>
       </View>);
   };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,12 +7,13 @@ import TabNavigation from './TabNavigation';
 import SettingScreen from '../screens/SettingScreen';
 import EditCaretakerScreen from '../screens/EditCaretakerScreen';
 import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
-import ModulePickerScreen from './../screens/ModulePickerScreen';
+import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
 import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
 import HealthRecordScreen from '../screens/HealthRecordScreen';
+import ConnectScreen from './../screens/ConnectScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -73,9 +75,22 @@ const MainNavigation = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ModulePickerScreen"
+          name="ModuleManageScreen"
           component={ModulePickerScreen}
-          options={{ headerShown: false }}
+          options={{
+            title: 'Select Modules',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="ConnectScreen"
+          component={ConnectScreen}
+          options={{
+            title: 'Connect',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
@@ -83,3 +98,9 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
+
+const styles = StyleSheet.create({
+  screenHeader: {
+    textAlign: 'center'
+  }
+});

@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Box, Button, VStack, View, Divider, Text, Icon } from "native-base";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet } from "react-native";
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
@@ -14,15 +15,8 @@ const InfoCard = ({
   desc
 }: InfoCardProps) => {
     return (
-        <Box my='1' alignSelf="center" width="90%" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
-          borderColor: "coolGray.800",
-          backgroundColor: "gray.800"
-        }} _web={{
-          shadow: 2,
-          borderWidth: 0
-        }} _light={{
-          backgroundColor: "gray.50"
-        }}>
+        <View flexDir="row" justifyContent="center">
+          <View flexDir="row" my={2} w="90%" bgColor="#fff" style={styles.card}>
             <Box bgColor="white" flexDir="row" justifyContent="flex-start" px="2" py="2" alignItems="center">
             <Icon
                   as={MaterialIcons}
@@ -34,9 +28,28 @@ const InfoCard = ({
               {desc}
               </Text>
             </Box>
-          </Box>
+          </View>
+        </View>
         
       );
 }
 
 export default InfoCard;
+
+const styles = StyleSheet.create({
+  card: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    borderRadius: 6
+  },
+  textWrapper: {
+    textWrap: 'wrap',
+    flex: 1
+  }
+});
