@@ -3,6 +3,7 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
 import './src/internationalization/i18n.config';
+import { TourGuideProvider } from 'rn-tourguide';
 
 const theme = extendTheme({
   main: {},
@@ -64,12 +65,26 @@ const theme = extendTheme({
   }
 });
 
+const tourGuideLabels = {
+  previous: 'Vorheriger',
+  next: 'Nächster',
+  skip: 'Überspringen',
+  finish: 'Beenden'
+};
+
 const App = () => {
   return (
     <SafeAreaProvider>
-      <NativeBaseProvider theme={theme}>
-        <MainNavigation />
-      </NativeBaseProvider>
+      <TourGuideProvider
+        {...{
+          borderRadius: 4,
+          labels: tourGuideLabels,
+          androidStatusBarVisible: true
+        }}>
+        <NativeBaseProvider theme={theme}>
+          <MainNavigation />
+        </NativeBaseProvider>
+      </TourGuideProvider>
     </SafeAreaProvider>
   );
 };

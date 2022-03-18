@@ -6,31 +6,34 @@ import EditButton from '../components/atoms/EditButton';
 import BasicProfile from '../components/molecules/BasicProfile';
 import Divider from '../components/atoms/Divider';
 import HealthProfile from '../components/molecules/HealthProfile';
+import { useTranslation } from 'react-i18next';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
 
 const ProfileScreen = () => {
+  const { t } = useTranslation();
+
   // TODO: Update dummy data to use the fetched data
   const basicProfiledata = [
     {
-      label: 'Name',
+      label: t('14'),
       value: 'Sompoch Muangyim'
     },
     {
-      label: 'Display Name',
+      label: t('15'),
       value: 'sompoch'
     },
     {
-      label: 'Gender',
+      label: t('16'),
       value: 'Male'
     },
     {
-      label: 'Birthday',
+      label: t('17'),
       value: '08/02/1951'
     },
     {
-      label: 'Phone Number',
+      label: t('18'),
       value: '0909090909'
     }
   ];
@@ -38,23 +41,23 @@ const ProfileScreen = () => {
   // TODO: Update dummy data to use the fetched datad
   const healthProfileData = [
     {
-      label: 'Health Issues',
+      label: t('19'),
       value: 'Diebetes, High blood pressure'
     },
     {
-      label: 'Personal Medicine',
+      label: t('20'),
       value: 'Ibuprofen'
     },
     {
-      label: 'Allergens',
+      label: t('21'),
       value: 'Chlorpheniramine เกสรดอกไม้'
     },
     {
-      label: 'Previous Vaccinations',
+      label: t('22'),
       value: 'บาดทะยัก คอตีบ'
     },
     {
-      label: 'Blood Type',
+      label: t('23'),
       value: 'B'
     }
   ];
@@ -63,7 +66,7 @@ const ProfileScreen = () => {
     <View style={styles.pageContainer}>
       <View style={styles.profileInfoItemRow}>
         <Text fontSize="2xl" fontWeight="700">
-          Details
+          {t('26')}
         </Text>
         <EditButton />
       </View>

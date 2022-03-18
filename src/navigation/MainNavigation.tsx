@@ -16,9 +16,11 @@ import ConnectScreen from './../screens/ConnectScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
+import { useTranslation } from 'react-i18next';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
+  const { t } = useTranslation();
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -40,7 +42,7 @@ const MainNavigation = () => {
           name="SettingScreen"
           component={SettingScreen}
           options={{
-            headerTitle: 'Settings',
+            headerTitle: t('2'),
             headerShown: true,
             headerRight: () => (
               <Icon as={Feather} name="help-circle" size="7" color="#F97316" />
@@ -51,7 +53,7 @@ const MainNavigation = () => {
           name="ProfileScreen"
           component={ProfileScreen}
           options={{
-            headerTitle: 'Profile',
+            headerTitle: t('24'),
             headerShown: true
           }}
         />

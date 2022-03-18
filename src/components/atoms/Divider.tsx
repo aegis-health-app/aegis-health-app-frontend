@@ -1,8 +1,14 @@
 import { Divider as NativeBaseDivider } from 'native-base';
 import React from 'react';
 
-const Divider2 = () => {
-  return <NativeBaseDivider backgroundColor="muted.300" my={4} w="100%" />;
+type DividerProps = {
+  my?: number;
 };
 
-export default Divider2;
+const Divider = ({ my }: DividerProps) => {
+  return (
+    <NativeBaseDivider backgroundColor="muted.300" my={my ?? 4} w="100%" />
+  );
+};
+
+export default Divider;
