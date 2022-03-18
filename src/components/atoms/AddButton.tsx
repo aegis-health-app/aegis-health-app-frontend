@@ -10,7 +10,7 @@ const AddButton = () => {
   return (
     <Box alignItems="center" margin="4">
       <Button
-        colorScheme="info"
+        colorScheme="primary"
         width="95%"
         size="md"
         variant="outline"
