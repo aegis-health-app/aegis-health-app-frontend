@@ -13,6 +13,9 @@ import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
 import HealthRecordScreen from '../screens/HealthRecordScreen';
 import ConnectScreen from './../screens/ConnectScreen';
+import { Icon } from 'native-base';
+import Feather from 'react-native-vector-icons/Feather';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,7 +39,21 @@ const MainNavigation = () => {
         <Stack.Screen
           name="SettingScreen"
           component={SettingScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerTitle: 'Settings',
+            headerShown: true,
+            headerRight: () => (
+              <Icon as={Feather} name="help-circle" size="7" color="#F97316" />
+            )
+          }}
+        />
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{
+            headerTitle: 'Profile',
+            headerShown: true
+          }}
         />
         <Stack.Screen
           name="EditCaretakerScreen"
