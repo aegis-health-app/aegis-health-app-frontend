@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -42,7 +41,11 @@ const MainNavigation = () => {
         <Stack.Screen
           name="EditCaretakerScreen"
           component={EditCaretakerScreen}
-          options={{ headerShown: false }}
+          options={{
+            title: 'ผู้ดูแลของฉัน',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
         />
         <Stack.Screen
           name="ConnectCaretakerScreen"
@@ -98,9 +101,3 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
-
-const styles = StyleSheet.create({
-  screenHeader: {
-    textAlign: 'center'
-  }
-});

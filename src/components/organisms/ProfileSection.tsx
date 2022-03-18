@@ -5,7 +5,6 @@ import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { RootStackParamList } from '../../navigation/types';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const ProfilePic = require('../../assets/images/sompoch.png');
 
 const ProfileSection = () => {
