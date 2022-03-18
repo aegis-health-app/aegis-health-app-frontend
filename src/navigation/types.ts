@@ -21,4 +21,7 @@ export type RootStackParamList = {
   ModuleManageScreen: undefined;
 
   ConnectScreen: undefined;
+
+  SignInScreen: undefined;
+  SignUpScreen: undefined;
 };
