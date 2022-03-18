@@ -67,7 +67,11 @@ const MainNavigation = () => {
         <Stack.Screen
           name="ConnectCaretakerScreen"
           component={ConnectCaretakerScreen}
-          options={{ headerShown: false }}
+          options={{
+            title: 'เชื่อมต่อกับผู้ดูแล',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
         />
         <Stack.Screen
           name="EmergencyScreen"

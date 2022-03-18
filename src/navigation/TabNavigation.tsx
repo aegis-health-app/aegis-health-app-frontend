@@ -25,7 +25,8 @@ const TabNavigation = () => {
           fontSize: 14
         },
         tabBarStyle: {
-          padding: 2
+          padding: 2,
+          minHeight: 55
         }
       })}>
       <Tab.Screen
@@ -40,8 +41,11 @@ const TabNavigation = () => {
         name="UserLinkScreen"
         component={UserLinkScreen}
         options={{
-          headerShown: false
+          title: 'ผู้ดูแลของฉัน',
+          headerTitleAlign: 'center',
+          headerTitleStyle: { fontSize: 20, fontWeight: '600' }
         }}
+        // ผู้ดูแลของฉัน
       />
     </Tab.Navigator>
   );

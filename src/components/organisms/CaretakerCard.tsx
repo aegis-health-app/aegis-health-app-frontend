@@ -11,13 +11,13 @@ const CaretakerPic = require('../../assets/images/Caretaker.png');
 type CardProps = {
   name: string;
 };
-
-const handleNameLength = (name) => {
-  if (name.length <= 18) {
-    return 20;
-  }
-  return 360 / name.length;
-};
+// TODO: Consider removal
+// const handleNameLength = (name) => {
+//   if (name.length <= 18) {
+//     return 20;
+//   }
+//   return 360 / name.length;
+// };
 
 const Card = ({ name }: CardProps) => {
   const navigation =
@@ -42,7 +42,9 @@ const Card = ({ name }: CardProps) => {
               marginRight={3}
               alt="Profile Picture"
             />
-            <Text fontSize={handleNameLength(name)}>{name}</Text>
+            <Text flex={1} flexWrap="wrap" numberOfLines={1}>
+              {name}
+            </Text>
           </View>
           <Button
             borderRadius="lg"
