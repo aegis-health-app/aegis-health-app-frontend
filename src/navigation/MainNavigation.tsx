@@ -17,6 +17,8 @@ import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
 import { useTranslation } from 'react-i18next';
+import SignInScreen from '../screens/SignInScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -114,6 +116,24 @@ const MainNavigation = () => {
           component={ConnectScreen}
           options={{
             title: 'Connect',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="SignInScreen"
+          component={SignInScreen}
+          options={{
+            title: 'Sign In',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{
+            title: 'Sign Up',
             headerTitleAlign: 'center',
             headerTitleStyle: { fontSize: 20, fontWeight: '600' }
           }}
