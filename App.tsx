@@ -2,6 +2,7 @@ import React from 'react';
 import { NativeBaseProvider, extendTheme } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
+import './src/internationalization/i18n.config';
 
 const theme = extendTheme({
   main: {},
