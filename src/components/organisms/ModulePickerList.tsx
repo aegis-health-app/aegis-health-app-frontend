@@ -95,6 +95,18 @@ const ModulePickerList = () => {
             handlePress={() => navigation.navigate('ModuleManageScreen')}
           />
         </HStack>
+        <ModulePickerCard
+          backgroundColor="#fff"
+          icon={<ManageModuleIcon />}
+          label="Dummy Sign In Page"
+          handlePress={() => navigation.navigate('SignInScreen')}
+        />
+        <ModulePickerCard
+          backgroundColor="#fff"
+          icon={<ManageModuleIcon />}
+          label="Dummy Sign Up Page"
+          handlePress={() => navigation.navigate('SignUpScreen')}
+        />
       </VStack>
     </View>
   );
