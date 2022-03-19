@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { View, Text, Divider, VStack, HStack } from 'native-base';
 import moment from 'moment';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ModuleAlertCardProps = {
   moduleName: string;
@@ -16,6 +17,8 @@ const ModuleAlertCard = ({
   title,
   description
 }: ModuleAlertCardProps) => {
+  const { t } = useTranslation();
+
   return (
     <View>
       <VStack px="4" py="2" backgroundColor="#fff" style={styles.card}>
@@ -36,13 +39,13 @@ const ModuleAlertCard = ({
         <HStack justifyContent="space-between" mt={4} mb={1}>
           <View flex={2} alignItems="center">
             <Text fontSize="lg" color="blue.500">
-              I did it
+              {t('34')}
             </Text>
           </View>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
           <View flex={2} alignItems="center">
             <Text fontSize="lg" color="blue.500">
-              Dismiss
+              {t('35')}
             </Text>
           </View>
         </HStack>
