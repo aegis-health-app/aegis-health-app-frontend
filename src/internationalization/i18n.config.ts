@@ -24,6 +24,7 @@ i18n
     resources,
     //language to use if translations in user language are not available
     fallbackLng: 'th',
+    compatibilityJSON: 'v3',
     interpolation: {
       escapeValue: false // not needed for react!!
     },
