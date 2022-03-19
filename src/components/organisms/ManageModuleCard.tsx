@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Text, View, Button } from 'native-base';
-import React from 'react';
+import { Text, View, Button, AlertDialog } from 'native-base';
+import React, { useState, useRef } from 'react';
 
 type ManageModuleCardProps = {
   icon: any;
@@ -26,8 +26,51 @@ const ManageModuleCard = ({
   isAdded,
   comingSoon
 }: ManageModuleCardProps) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const cancelRef = useRef(null);
+
+  function handlePressButton() {
+    if (!isAdded) {
+      setDialogOpen(true);
+    }
+  }
+
+  function handlePressDelete() {
+    setDialogOpen(false);
+    //TODO: Remove Module
+  }
+
   return (
     <View style={styles.card} bgColor="white" p={4} mb={2} w="full">
+      <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(!dialogOpen)}>
+        <AlertDialog.Content>
+          <AlertDialog.CloseButton />
+          <AlertDialog.Header>Confirmation</AlertDialog.Header>
+          <AlertDialog.Body>
+            Are you sure you want to remove this module?
+          </AlertDialog.Body>
+          <AlertDialog.Footer>
+            <Button.Group space={2}>
+              <Button
+                variant="ghost"
+                colorScheme="muted"
+                onPress={() => setDialogOpen(false)}
+                ref={cancelRef}>
+                Cancle
+              </Button>
+              <Button
+                colorScheme="danger"
+                onPress={handlePressDelete}
+                ref={cancelRef}>
+                Delete
+              </Button>
+            </Button.Group>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog>
       <View flexDir="row">
         {icon}
         <View flex={1}>
@@ -49,7 +92,10 @@ const ManageModuleCard = ({
                 Add
               </Button>
             ) : (
-              <Button variant="outline" colorScheme="error">
+              <Button
+                variant="outline"
+                colorScheme="error"
+                onPress={handlePressButton}>
                 Remove
               </Button>
             )}
