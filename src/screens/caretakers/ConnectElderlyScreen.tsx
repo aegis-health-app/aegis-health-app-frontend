@@ -16,6 +16,7 @@ const ConnectElderlyScreen = () => {
     return (
         <View>
             <View my="2" flexDir="row" justifyContent="center">
+            {/* TODO: change to tab instead */}
             <Button width="90%" onPress={() => navigation.navigate('InputCodeScreen')}>กรอกโค้ด</Button>
             </View>
             <ZStack mb="2" width="100%" height="100%" alignItems="center">

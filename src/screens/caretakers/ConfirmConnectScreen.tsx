@@ -15,7 +15,9 @@ const ConfirmConnectScreen = () => {
   return (
     <View>
         <View flexDir="column" alignItems="center" my="10">
-        <Text fontWeight="600" fontSize="lg">เชื่อมต่อกับ “Koon Yai” ?</Text>
+        <Text fontWeight="600" fontSize="lg">
+            เชื่อมต่อกับ “Koon Yai” ?
+        </Text>
         <Image
             mt="10"
             source={sompochHD}
@@ -24,8 +26,12 @@ const ConfirmConnectScreen = () => {
             borderRadius={10}
             alt="Profile Picture"
         />
-        <Text mt="2" fontWeight="600" fontSize="2xl">Sompoch Display Name</Text>
-        <Text fontWeight="300" color="#A1A1AA" fontSize="sm">Sompoch Muangyim</Text>
+        <Text mt="2" fontWeight="600" fontSize="2xl">
+            Sompoch Display Name
+        </Text>
+        <Text fontWeight="300" color="#A1A1AA" fontSize="sm">
+            Sompoch Muangyim
+        </Text>
         <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>เชื่อมต่อเลย!</Button>
         <Button variant="outline" colorScheme='danger' mt="4" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>ยกเลิก</Button>
     

@@ -12,6 +12,7 @@ const InputCodeScreen = () => {
 
   return (
     <View my="2">
+        {/* TODO: add tab */}
         <InputBox name="กรอกโค้ดประจำตัวของผู้สูงอายุ" placeholder="XXXXXX"/>
         <View my="5" flexDir="row" justifyContent="center">
             <Button width="90%" onPress={() => navigation.navigate('ConfirmConnectScreen')}>ดำเนินการต่อ</Button>
