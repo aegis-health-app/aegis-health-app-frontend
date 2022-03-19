@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { Image, ZStack, View, Box, Text } from 'native-base';
+import { Image, ZStack, View, Box, Text, Button } from 'native-base';
 
 
 const QRPlaceholder = require('../../assets/images/QRPlaceholder.png');
@@ -15,8 +15,9 @@ const ConnectElderlyScreen = () => {
 
     return (
         <View>
-            <Box top="20" width="100%" height="12">
-            </Box>
+            <View my="2" flexDir="row" justifyContent="center">
+            <Button width="90%" onPress={() => navigation.navigate('InputCodeScreen')}>กรอกโค้ด</Button>
+            </View>
             <ZStack mb="2" width="100%" height="100%" alignItems="center">
                 <Image height="100%" width="100%" source={QRBackground} alt="QR Background"/>
                 <Box top="18%" height="230" width="230" alignSelf="center" borderWidth="3" borderColor="#005DB4" justifyContent="center" alignItems="center">

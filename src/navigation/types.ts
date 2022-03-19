@@ -20,11 +20,6 @@ export type RootStackParamList = {
   ConnectCaretakerScreen: undefined;
   HealthBlogScreen: undefined;
   ModuleManageScreen: undefined;
-<<<<<<< HEAD
-=======
-  ConnectElderlyScreen: undefined;
-
->>>>>>> 320534d (wip: added ConnectElderlyScreen)
   ConnectScreen: undefined;
 
   SignInScreen: undefined;

@@ -3,9 +3,10 @@ import React from 'react';
 
 type InputBoxProps = {
   name: string;
+  placeholder?: string;
 };
 
-const InputBox = ({ name }: InputBoxProps) => {
+const InputBox = ({ name, placeholder }: InputBoxProps) => {
   return (
     <View>
       <Box flexDir="row">
