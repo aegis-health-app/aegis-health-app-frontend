@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Text, View, Button, AlertDialog } from 'native-base';
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type ManageModuleCardProps = {
   icon: any;
@@ -26,6 +27,7 @@ const ManageModuleCard = ({
   isAdded,
   comingSoon
 }: ManageModuleCardProps) => {
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const cancelRef = useRef(null);
 
@@ -48,10 +50,8 @@ const ManageModuleCard = ({
         onClose={() => setDialogOpen(!dialogOpen)}>
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
-          <AlertDialog.Header>Confirmation</AlertDialog.Header>
-          <AlertDialog.Body>
-            Are you sure you want to remove this module?
-          </AlertDialog.Body>
+          <AlertDialog.Header>{t('51')}</AlertDialog.Header>
+          <AlertDialog.Body>{t('52')}</AlertDialog.Body>
           <AlertDialog.Footer>
             <Button.Group space={2}>
               <Button
@@ -59,13 +59,13 @@ const ManageModuleCard = ({
                 colorScheme="muted"
                 onPress={() => setDialogOpen(false)}
                 ref={cancelRef}>
-                Cancle
+                {t('11')}
               </Button>
               <Button
                 colorScheme="danger"
                 onPress={handlePressDelete}
                 ref={cancelRef}>
-                Delete
+                {t('53')}
               </Button>
             </Button.Group>
           </AlertDialog.Footer>
@@ -83,20 +83,20 @@ const ManageModuleCard = ({
       <View mt={2}>
         {comingSoon ? (
           <Button variant="outline" colorScheme="muted">
-            Coming Soon!
+            {t('50')}
           </Button>
         ) : (
           <>
             {isAdded ? (
               <Button variant="outline" colorScheme="primary">
-                Add
+                {t('48')}
               </Button>
             ) : (
               <Button
                 variant="outline"
                 colorScheme="error"
                 onPress={handlePressButton}>
-                Remove
+                {t('49')}
               </Button>
             )}
           </>

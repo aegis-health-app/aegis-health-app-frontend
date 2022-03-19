@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Icon, ScrollView } from 'native-base';
 import ManageModuleCard from '../components/organisms/ManageModuleCard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useTranslation } from 'react-i18next';
 
 const ModuleManageScreen = () => {
+  const { t } = useTranslation();
+
   return (
     <ScrollView>
       <View px="6" py="6">
@@ -17,8 +20,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title="Reminder"
-          description="Create reminder for yourself or share them with caretakers."
+          title={t('39')}
+          description={t('44')}
           isAdded={true}
         />
         <ManageModuleCard
@@ -31,8 +34,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title="Health Records"
-          description="Keep track of your health over time and view your trends."
+          title={t('40')}
+          description={t('45')}
           isAdded={false}
         />
         <ManageModuleCard
@@ -45,8 +48,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title="Health Records"
-          description="Keep track of your health over time and view your trends."
+          title={t('41')}
+          description={t('46')}
           isAdded={true}
         />
         <ManageModuleCard
@@ -59,8 +62,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title="Health Blogs"
-          description="Stay up to date with accurate heath information."
+          title={t('42')}
+          description={t('47')}
           comingSoon={true}
         />
       </View>
