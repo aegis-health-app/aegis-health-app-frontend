@@ -16,6 +16,7 @@ import ConnectScreen from './../screens/ConnectScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
+<<<<<<< HEAD
 import { useTranslation } from 'react-i18next';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -23,6 +24,9 @@ import { TourguideContext } from '../contexts/TourguideContext';
 import { TouchableOpacity } from 'react-native';
 import ProfileEditScreen from '../screens/ProfileEditScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
+=======
+import ConnectElderlyScreen from '../screens/caretakers/ConnectElderlyScreen';
+>>>>>>> 320534d (wip: added ConnectElderlyScreen)
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -42,6 +46,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
+<<<<<<< HEAD
         {user ? (
           <>
             <Stack.Screen
@@ -171,6 +176,103 @@ const MainNavigation = () => {
             />
           </>
         )}
+=======
+        <Stack.Screen
+          name="TabNavigation"
+          component={TabNavigation}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SettingScreen"
+          component={SettingScreen}
+          options={{
+            headerTitle: 'Settings',
+            headerShown: true,
+            headerRight: () => (
+              <Icon as={Feather} name="help-circle" size="7" color="#F97316" />
+            )
+          }}
+        />
+        <Stack.Screen
+          name="ProfileScreen"
+          component={ProfileScreen}
+          options={{
+            headerTitle: 'Profile',
+            headerShown: true
+          }}
+        />
+        <Stack.Screen
+          name="EditCaretakerScreen"
+          component={EditCaretakerScreen}
+          options={{
+            title: 'ผู้ดูแลของฉัน',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+          }}
+        />
+        <Stack.Screen
+          name="ConnectCaretakerScreen"
+          component={ConnectCaretakerScreen}
+          options={{
+            title: 'เชื่อมต่อกับผู้ดูแล',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+          }}
+        />
+        <Stack.Screen
+          name="EmergencyScreen"
+          component={EmergencyScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ReminderScreen"
+          component={ReminderScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MemoryScreen"
+          component={MemoryPracticeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="HealthRecordScreen"
+          component={HealthRecordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="HealthBlogScreen"
+          component={HealthBlogScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ModuleManageScreen"
+          component={ModulePickerScreen}
+          options={{
+            title: 'Select Modules',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="ConnectScreen"
+          component={ConnectScreen}
+          options={{
+            title: 'Connect',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+          }}
+        />
+        <Stack.Screen
+          name="ConnectElderlyScreen"
+          component={ConnectElderlyScreen}
+          options={{
+            title: 'เชื่อมต่อกับผู้สูงอายุ',
+            headerTitleAlign: 'center',
+            headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+          }}
+        />
+
+>>>>>>> 320534d (wip: added ConnectElderlyScreen)
       </Stack.Navigator>
     </NavigationContainer>
   );

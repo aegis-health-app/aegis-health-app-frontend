@@ -12,7 +12,7 @@ const EditCaretakerScreen = () => {
     <NativeBaseProvider>
       <SafeAreaView edges={['right', 'top', 'left']}>
         <View>
-          <HeaderBack name="เชื่อมต่อกับผู้ดูแล" />
+          {/* <HeaderBack name="เชื่อมต่อกับผู้ดูแล" /> */}
           <View bgColor="FAFAFA">
             <View mt="10" flexDir="row" justifyContent="center">
               <Image source={QRPlaceholder} alt="QR Code" />
