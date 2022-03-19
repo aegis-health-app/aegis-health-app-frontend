@@ -104,7 +104,7 @@ const MainNavigation = () => {
           name="ModuleManageScreen"
           component={ModulePickerScreen}
           options={{
-            title: 'Select Modules',
+            title: t('43'),
             headerTitleAlign: 'center',
             headerTitleStyle: { fontSize: 20, fontWeight: '600' }
           }}
