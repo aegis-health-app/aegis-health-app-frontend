@@ -3,12 +3,13 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Image, ZStack, View, Box, Text, Button } from 'native-base';
-
+import { useTranslation } from 'react-i18next';
 
 const QRPlaceholder = require('../../assets/images/QRPlaceholder.png');
 const QRBackground = require('../../assets/images/QRBackground.png');
 
 const ConnectElderlyScreen = () => {
+    const { t } = useTranslation();
 
     const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -25,7 +26,7 @@ const ConnectElderlyScreen = () => {
                 <Image height="200" width="200" source={QRPlaceholder} alt="QR Placeholder"/>
                 </Box>
             </ZStack>
-            <Text position="absolute" alignSelf="center" bottom="24">Place QR code inside the scanning frame</Text>
+            <Text position="absolute" alignSelf="center" bottom="24">{t('110')}</Text>
         </View>
     );
 };

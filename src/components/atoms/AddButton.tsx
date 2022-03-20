@@ -3,8 +3,11 @@ import { Box, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 const AddButton = () => {
+  const { t } = useTranslation();
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
@@ -15,7 +18,7 @@ const AddButton = () => {
         size="md"
         variant="outline"
         onPress={() => navigation.navigate('ConnectCaretakerScreen')}>
-        เพิ่มผู้ดูแล
+        {t('100')}
       </Button>
     </Box>
   );

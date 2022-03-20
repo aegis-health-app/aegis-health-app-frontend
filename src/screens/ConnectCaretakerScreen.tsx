@@ -4,10 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeBaseProvider } from 'native-base';
 import InfoCard from '../components/organisms/InfoCard';
 import HeaderBack from '../components/molecules/HeaderBack';
+import { useTranslation } from 'react-i18next';
 
 const QRPlaceholder = require('../assets/images/QRPlaceholder.png');
 
 const EditCaretakerScreen = () => {
+  const { t } = useTranslation();
   return (
     <NativeBaseProvider>
       <SafeAreaView edges={['right', 'top', 'left']}>
@@ -19,7 +21,7 @@ const EditCaretakerScreen = () => {
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
               <Text mr="2" fontSize={16}>
-                โค้ดของฉัน:
+                {t('107')}
               </Text>
               <Text color="orange.500" fontSize={16} fontWeight="bold">
                 CODE
@@ -27,11 +29,11 @@ const EditCaretakerScreen = () => {
             </View>
             <InfoCard
               icon="touch-app"
-              desc="จากแอปพลิเคชันของผู้ดูแล ให้กดปุ่ม “เพิ่มผู้สูงอายุ”"
+              desc={t('108')}
             />
             <InfoCard
               icon="qr-code-scanner"
-              desc="สแกน QR code หรือกรอกโค้ดที่แสดงอยู่ด้านบน"
+              desc={t('109')}
             />
           </View>
         </View>

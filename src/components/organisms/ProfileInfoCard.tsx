@@ -1,9 +1,12 @@
 import { View, Box, Image, Text } from 'native-base';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
 const ProfileInfoCard = () => {
+  const { t } = useTranslation();
+
   return (
     <Box>
       <Box alignItems="center" my="5">
@@ -19,22 +22,22 @@ const ProfileInfoCard = () => {
         <View flexDir="column">
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              ชื่อ
+              {t('102')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              เพศ
+              {t('103')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              วันเกิด
+            {t('104')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              หมายเลขโทรศัพท์
+            {t('105')}
             </Text>
           </View>
         </View>
