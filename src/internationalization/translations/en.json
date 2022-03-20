@@ -14,7 +14,7 @@
   "13": "Back",
   "14": "Name",
   "15": "Display Name",
-  "16": "Gender",
+  "16": "Birth Gender",
   "17": "Birthdate",
   "18": "Phone Number",
   "19": "Health Issues",
@@ -52,10 +52,11 @@
   "51": "Confirmation",
   "52": "Are you sure you want to remove this module?",
   "53": "Remove",
-  "54": "Password",
-  "55": "Forgot Password?",
-  "56": "Sign In",
-  "57": "No account?",
-  "58": "Sign Up",
-  "59": "Already have an account?"
+  "54": "Edit Profile",
+  "55": "Edit Personal Information",
+  "56": "Take a picture",
+  "57": "From your device",
+  "58": "Save Changes",
+  "59": "Male",
+  "60": "Female"
 }

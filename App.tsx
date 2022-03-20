@@ -6,6 +6,7 @@ import './src/internationalization/i18n.config';
 import { TourGuideProvider } from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
 import TourguideContextProvider from './src/contexts/TourguideContext';
+import UserContextProvider from './src/contexts/UserContext';
 
 const theme = extendTheme({
   main: {},
@@ -63,6 +64,9 @@ const theme = extendTheme({
       700: '#c75c12',
       800: '#ae510f',
       900: '#95450d'
+    },
+    danger: {
+      500: '#c2410c'
     }
   }
 });
@@ -79,16 +83,18 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <TourguideContextProvider>
-        <TourGuideProvider
-          {...{
-            borderRadius: 4,
-            labels: tourGuideLabels,
-            androidStatusBarVisible: true
-          }}>
-          <NativeBaseProvider theme={theme}>
-            <MainNavigation />
-          </NativeBaseProvider>
-        </TourGuideProvider>
+        <UserContextProvider>
+          <TourGuideProvider
+            {...{
+              borderRadius: 4,
+              labels: tourGuideLabels,
+              androidStatusBarVisible: true
+            }}>
+            <NativeBaseProvider theme={theme}>
+              <MainNavigation />
+            </NativeBaseProvider>
+          </TourGuideProvider>
+        </UserContextProvider>
       </TourguideContextProvider>
     </SafeAreaProvider>
   );

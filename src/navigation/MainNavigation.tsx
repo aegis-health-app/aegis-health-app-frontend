@@ -21,6 +21,7 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { TourguideContext } from '../contexts/TourguideContext';
 import { TouchableOpacity } from 'react-native';
+import ProfileEditScreen from '../screens/ProfileEditScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -66,6 +67,14 @@ const MainNavigation = () => {
           component={ProfileScreen}
           options={{
             headerTitle: t('24'),
+            headerShown: true
+          }}
+        />
+        <Stack.Screen
+          name="ProfileEditScreen"
+          component={ProfileEditScreen}
+          options={{
+            headerTitle: t('54'),
             headerShown: true
           }}
         />
