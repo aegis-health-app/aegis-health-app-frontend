@@ -3,11 +3,12 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-
+import { useTranslation } from 'react-i18next';
 
 const sompochHD = require('../../assets/images/sompochHD.png');
 
 const ConfirmConnectScreen = () => {
+    const { t } = useTranslation();
 
     const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -16,7 +17,7 @@ const ConfirmConnectScreen = () => {
     <View>
         <View flexDir="column" alignItems="center" my="10">
         <Text fontWeight="600" fontSize="lg">
-            เชื่อมต่อกับ “Koon Yai” ?
+            {t('115')} “Koon Yai” ?
         </Text>
         <Image
             mt="10"
@@ -32,8 +33,8 @@ const ConfirmConnectScreen = () => {
         <Text fontWeight="300" color="#A1A1AA" fontSize="sm">
             Sompoch Muangyim
         </Text>
-        <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>เชื่อมต่อเลย!</Button>
-        <Button variant="outline" colorScheme='danger' mt="4" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>ยกเลิก</Button>
+        <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('113')}</Button>
+        <Button variant="outline" colorScheme='danger' mt="4" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('114')}</Button>
     
 
         </View>

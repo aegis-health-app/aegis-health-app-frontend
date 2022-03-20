@@ -23,6 +23,8 @@ const Card = ({ name }: CardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const { t } = useTranslation();
+
   return (
     <View flexDir="row" justifyContent="center">
       <View flexDir="row" my={1.5} w="90%" bgColor="#fff" style={styles.card}>

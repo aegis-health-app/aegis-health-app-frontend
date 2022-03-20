@@ -7,6 +7,7 @@ import ProfileInfoCard from '../components/organisms/ProfileInfoCard';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 
 const EditCaretakerScreen = () => {
+  const { t } = useTranslation();
   return (
     <KeyboardAvoidingView>
       <ScrollView>
