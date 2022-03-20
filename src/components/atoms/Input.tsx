@@ -1,5 +1,7 @@
 import { Box, Input, View, Text } from 'native-base';
 import React from 'react';
+import { TextInput } from 'react-native';
+import { useState } from 'react';
 
 type InputBoxProps = {
   name: string;
@@ -7,6 +9,15 @@ type InputBoxProps = {
 };
 
 const InputBox = ({ name, placeholder }: InputBoxProps) => {
+
+  const [value, setValue] = useState("");
+
+  // todo change display name
+  const handleChange = (text) => {
+    setValue(text);
+    // console.log(text);
+  }
+
   return (
     <View>
       <Box flexDir="row">
