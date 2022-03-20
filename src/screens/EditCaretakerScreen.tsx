@@ -14,7 +14,8 @@ const EditCaretakerScreen = ({route, navigation}) => {
 
   const { t } = useTranslation();
   return (
-    <ScrollView>
+    <KeyboardAvoidingView>
+      <ScrollView>
         <View bgColor="#FAFAFA">
           <ProfileInfoCard name={itemId} gender="Female" bdate="08/02/1917" phone="090909090"/>
           <Divider />
@@ -24,7 +25,8 @@ const EditCaretakerScreen = ({route, navigation}) => {
           <Divider />
           <RemButton name={itemId}/>
         </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 export default EditCaretakerScreen;
