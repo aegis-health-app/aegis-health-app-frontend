@@ -12,7 +12,7 @@ const EditCaretakerScreen = () => {
     <KeyboardAvoidingView>
       <ScrollView>
         <View bgColor="#FAFAFA">
-          <ProfileInfoCard />
+          <ProfileInfoCard name="Somying Muangyim" gender="Female" bdate="08/02/1917" phone="090909090"/>
           <Divider />
           <View paddingX={5}>
             <InputBox name="เปลี่ยนชื่อผู้ใช้" />
