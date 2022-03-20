@@ -40,12 +40,12 @@ const MainNavigation = () => {
     }
   };
 
-  const [user, setUser] = useState(true);
+  const [user] = useState(true);
 
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
-        {true ? (
+        {user ? (
           <>
             <Stack.Screen
               name="TabNavigation"

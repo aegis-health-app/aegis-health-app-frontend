@@ -50,9 +50,11 @@ const Card = ({ name }: CardProps) => {
             </Text>
           </View>
           <View ml={3}>
-          <EditButton 
-            onPress={() => navigation.navigate('EditCaretakerScreen', {itemId: name})}
-          />
+            <EditButton
+              onPress={() =>
+                navigation.navigate('EditCaretakerScreen', { itemId: name })
+              }
+            />
           </View>
         </Box>
       </View>
