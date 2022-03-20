@@ -3,7 +3,11 @@ import { Box, Button, AlertDialog, View, Text } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useState, useRef } from 'react';
 
-const RemButton = () => {
+type remButtonProps = {
+  name: string
+}
+
+const RemButton = ({name}: remButtonProps) => {
   const { t } = useTranslation();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -27,7 +31,11 @@ const RemButton = () => {
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
           <AlertDialog.Header>{t('120')}</AlertDialog.Header>
-          <AlertDialog.Body>{t('119')}</AlertDialog.Body>
+          <AlertDialog.Body>
+            <Text>
+              {t('119')}{name}{t('121')}
+            </Text>
+            </AlertDialog.Body>
           <AlertDialog.Footer>
             <Button.Group space={2}>
               <Button
