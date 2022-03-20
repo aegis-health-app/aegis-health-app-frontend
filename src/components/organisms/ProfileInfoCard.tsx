@@ -4,7 +4,19 @@ import { useTranslation } from 'react-i18next';
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
-const ProfileInfoCard = () => {
+type ProfileInfoCardProps = {
+  name: string,
+  gender: string,
+  bdate: string,
+  phone: string
+};
+
+const ProfileInfoCard = ({
+  name,
+  gender,
+  bdate,
+  phone
+}: ProfileInfoCardProps) => {
   const { t } = useTranslation();
 
   return (
@@ -44,22 +56,22 @@ const ProfileInfoCard = () => {
         <View flexDir="column" ml="6">
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              Somying Muangyim
+              {name}
             </Text>
           </View>
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              Female
+              {gender}
             </Text>
           </View>
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              08 Feb 1917
+              {bdate}
             </Text>
           </View>
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              090909090
+              {phone}
             </Text>
           </View>
         </View>
