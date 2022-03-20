@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Button, Image, Radio, ScrollView, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
 import { BloodType } from '../dto/User';
 import Divider from '../components/atoms/Divider';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
@@ -16,6 +17,20 @@ const ProfileEditScreen = () => {
   const { t } = useTranslation();
   const { userProfile, setUserProfile } = useContext(UserContext);
   const bloodTypeRef = useRef(null);
+  const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState(false);
+
+  const showDateTimePicker = () => {
+    setIsDateTimePickerVisible(true);
+  };
+
+  const hideDateTimePicker = () => {
+    setIsDateTimePickerVisible(false);
+  };
+
+  const handleDatePicked = (date) => {
+    console.log('A date has been picked: ', date);
+    hideDateTimePicker();
+  };
 
   return (
     <KeyboardAvoidingView>
@@ -70,7 +85,19 @@ const ProfileEditScreen = () => {
           <Spacer />
 
           {/* Birthdate */}
-          <InputBox name={t('17')} />
+          <Text fontSize={16} mb={2}>
+            {t('17')}
+          </Text>
+          <View style={styles.profileInfoItemRow}>
+            <Text fontSize="md">Test</Text>
+            <Button onPress={() => showDateTimePicker()}>{t('61')}</Button>
+          </View>
+          <Spacer />
+          <DateTimePicker
+            isVisible={isDateTimePickerVisible}
+            onConfirm={handleDatePicked}
+            onCancel={hideDateTimePicker}
+          />
 
           {/* Phone Number */}
           <InputBox name={t('18')} />
