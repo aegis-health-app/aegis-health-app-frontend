@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -19,10 +19,13 @@ import ProfileScreen from '../screens/ProfileScreen';
 import { useTranslation } from 'react-i18next';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import { TourguideContext } from '../contexts/TourguideContext';
+import { TouchableOpacity } from 'react-native';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
+  const { setShowSettingsTourguide } = useContext(TourguideContext);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -47,7 +50,14 @@ const MainNavigation = () => {
             headerTitle: t('2'),
             headerShown: true,
             headerRight: () => (
-              <Icon as={Feather} name="help-circle" size="7" color="#F97316" />
+              <TouchableOpacity onPress={() => setShowSettingsTourguide(true)}>
+                <Icon
+                  as={Feather}
+                  name="help-circle"
+                  size="7"
+                  color="#F97316"
+                />
+              </TouchableOpacity>
             )
           }}
         />

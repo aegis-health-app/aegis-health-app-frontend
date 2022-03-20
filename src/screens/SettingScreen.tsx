@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button, Switch, Text } from 'native-base';
 import Divider from '../components/atoms/Divider';
 import Spacer from '../components/atoms/Spacer';
@@ -7,12 +7,16 @@ import { LANGUAGES, useSettings } from '../hooks/useSettings';
 
 import { TourGuideZone, useTourGuideController } from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
+import { TourguideContext } from '../contexts/TourguideContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useAsyncEffect from '../hooks/useAsyncEffect';
 
 const SettingScreen = () => {
   const { language, changeLanguage, isSoundEffectOn, setIsSoundEffectOn } =
     useSettings();
   const { t } = useTranslation();
-
+  const { showSettingsTourguide, setShowSettingsTourguide } =
+    useContext(TourguideContext);
   const {
     canStart, // a boolean indicate if you can start tour guide
     start, // a function to start the tourguide
@@ -20,24 +24,42 @@ const SettingScreen = () => {
     eventEmitter // an object for listening some events
   } = useTourGuideController();
 
-  useEffect(() => {
-    if (canStart) {
-      if (start) {
-        start();
-      }
-    }
-  }, [canStart]);
+  /*
+    This useEffect will determine whether the tourguide should be shown
+    The guide should be shown automatically only on the first open of the page
+    The 'viewedSettingsTourguide' is the name of the key in AsyncStorage that stores
+    whether this specific tour guide has been viewed yet. If viewd, it returns true.
+  */
+  useAsyncEffect(async () => {
+    const fetchData = async () => {
+      const result = await AsyncStorage.getItem('viewedSettingsTourguide');
+      return result ? JSON.parse(result) : false;
+    };
+    const shouldShow = !(await fetchData());
+    setShowSettingsTourguide(shouldShow);
+  }, [AsyncStorage, showSettingsTourguide]);
 
-  React.useEffect(() => {
-    eventEmitter?.on('start', () => console.log('start'));
-    eventEmitter?.on('stop', () => {
+  /*
+    This useEffect will start the tour guide when the component is ready
+    and the condition is met.
+  */
+  useEffect(() => {
+    if (canStart && showSettingsTourguide && start) start();
+  }, [canStart, showSettingsTourguide]);
+
+  /*
+    This useEffect will allow you to run script when a specific event
+    of the tourguide is triggered.
+  */
+  useEffect(() => {
+    eventEmitter?.on('stop', async () => {
       console.log('stop');
       if (stop) {
+        setShowSettingsTourguide(false);
+        await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
         stop();
       }
     });
-    eventEmitter?.on('stepChange', () => console.log('stepChange'));
-
     // @ts-ignore
     return () => eventEmitter?.off('*', null);
   }, []);
@@ -45,9 +67,11 @@ const SettingScreen = () => {
   return (
     <View style={styles.pageContainer}>
       <TouchableOpacity
-        onPress={() => {
+        onPress={async () => {
           if (start) {
-            start();
+            setShowSettingsTourguide(true);
+            await AsyncStorage.setItem('viewedSettingsTourguide', 'false');
+            // start();
           }
         }}>
         <Text fontSize="2xl" fontWeight="700">

@@ -23,6 +23,7 @@
     "comma-dangle": ["error", "never"],
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/ban-ts-comment": 0,
-    "react-hooks/exhaustive-deps": 0
+    "react-hooks/exhaustive-deps": 0,
+    "curly": 0
   }
 }

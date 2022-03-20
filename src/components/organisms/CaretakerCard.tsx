@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image, Box, Button, View, Text, Icon } from 'native-base';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Image, Box, View, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
+import EditButton from '../atoms/EditButton';
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
@@ -46,27 +46,9 @@ const Card = ({ name }: CardProps) => {
               {name}
             </Text>
           </View>
-          <Button
-            borderRadius="lg"
-            bgColor="gray.300"
-            width="auto"
-            flexDir="row"
+          <EditButton
             onPress={() => navigation.navigate('EditCaretakerScreen')}
-            leftIcon={
-              <Icon
-                as={MaterialIcons}
-                name="mode-edit"
-                size="5"
-                color="muted.600"
-              />
-            }
-            _pressed={{
-              bg: 'gray.400'
-            }}>
-            <Text ml="-1" color="gray.800">
-              แก้ใข
-            </Text>
-          </Button>
+          />
         </Box>
       </View>
     </View>

@@ -5,6 +5,7 @@ import MainNavigation from './src/navigation/MainNavigation';
 import './src/internationalization/i18n.config';
 import { TourGuideProvider } from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
+import TourguideContextProvider from './src/contexts/TourguideContext';
 
 const theme = extendTheme({
   main: {},
@@ -77,16 +78,18 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      <TourGuideProvider
-        {...{
-          borderRadius: 4,
-          labels: tourGuideLabels,
-          androidStatusBarVisible: true
-        }}>
-        <NativeBaseProvider theme={theme}>
-          <MainNavigation />
-        </NativeBaseProvider>
-      </TourGuideProvider>
+      <TourguideContextProvider>
+        <TourGuideProvider
+          {...{
+            borderRadius: 4,
+            labels: tourGuideLabels,
+            androidStatusBarVisible: true
+          }}>
+          <NativeBaseProvider theme={theme}>
+            <MainNavigation />
+          </NativeBaseProvider>
+        </TourGuideProvider>
+      </TourguideContextProvider>
     </SafeAreaProvider>
   );
 };
