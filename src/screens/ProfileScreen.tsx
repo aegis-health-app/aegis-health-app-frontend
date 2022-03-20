@@ -7,12 +7,17 @@ import BasicProfile from '../components/molecules/BasicProfile';
 import Divider from '../components/atoms/Divider';
 import HealthProfile from '../components/molecules/HealthProfile';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
 
 const ProfileScreen = () => {
   const { t } = useTranslation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   // TODO: Update dummy data to use the fetched data
   const basicProfiledata = [
@@ -68,7 +73,7 @@ const ProfileScreen = () => {
         <Text fontSize="2xl" fontWeight="700">
           {t('26')}
         </Text>
-        <EditButton />
+        <EditButton onPress={() => navigation.navigate('ProfileEditScreen')} />
       </View>
       <Spacer />
       <View display="flex" flexDir="row" justifyContent="center">
@@ -77,7 +82,6 @@ const ProfileScreen = () => {
           width="32"
           height="32"
           borderRadius={4}
-          marginRight={4}
           alt="Profile Picture"
         />
       </View>
