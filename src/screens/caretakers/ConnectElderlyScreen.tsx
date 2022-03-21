@@ -18,11 +18,11 @@ const ConnectElderlyScreen = () => {
 
     return (
         <View>
-            <View my="2" flexDir="row" justifyContent="center">
             {/* TODO: change to tab instead */}
+            <Button.Group isAttached justifyContent="center" my="2">
             <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>Scan QR Code</Button>
             <Button variant="outline" borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>Enter Code</Button>
-            </View>
+            </Button.Group>
             <ZStack mb="2" width="100%" height="100%" alignItems="center">
                 <Image height="100%" width="100%" source={QRBackground} alt="QR Background"/>
                 <Box top="18%" height="230" width="230" alignSelf="center" borderWidth="3" borderColor="#005DB4" justifyContent="center" alignItems="center">
