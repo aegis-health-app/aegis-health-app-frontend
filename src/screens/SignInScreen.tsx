@@ -18,6 +18,7 @@ import FormHeader from '../components/atoms/FormHeader';
 import TextInput from '../components/atoms/TextInput';
 import images from '../assets/images';
 import useDimensions from '../hooks/useDimensions';
+import { useTranslation } from 'react-i18next';
 
 const SignInScreen = () => {
   const {
@@ -26,6 +27,7 @@ const SignInScreen = () => {
   } = useForm();
 
   const { ScreenWidth } = useDimensions();
+  const { t } = useTranslation();
 
   return (
     <SafeAreaView>
@@ -44,16 +46,16 @@ const SignInScreen = () => {
           </Center>
         </AspectRatio>
         <VStack px={2}>
-          <FormHeader headerText="Sign In" mt={10} mb={7} />
+          <FormHeader headerText={t('56')} mt={10} mb={7} />
           <TextInput
-            label="Phone Number"
+            label={t('18')}
             name="phoneNumber"
             control={control}
             errors={errors}
             mb={6}
           />
           <TextInput
-            label="Password"
+            label={t('54')}
             name="password"
             control={control}
             errors={errors}
@@ -61,10 +63,10 @@ const SignInScreen = () => {
           />
           <Pressable>
             <Text textAlign="right" color="blue.600" mb={2}>
-              Forgot Password?
+              {t('55')}
             </Text>
           </Pressable>
-          <Button w="full">Sign In</Button>
+          <Button w="full">{t('56')}</Button>
           <Box flex={1} />
           <AuthFooter page={AuthType.SIGNIN} />
         </VStack>
