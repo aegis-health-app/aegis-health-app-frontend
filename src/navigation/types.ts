@@ -3,6 +3,7 @@
  */
 
 export type RootStackParamList = {
+  //Authorized Screens
   TabNavigation: undefined;
 
   OnBoardingScreen: undefined;
@@ -20,9 +21,10 @@ export type RootStackParamList = {
   ConnectCaretakerScreen: undefined;
   HealthBlogScreen: undefined;
   ModuleManageScreen: undefined;
-
   ConnectScreen: undefined;
 
   SignInScreen: undefined;
   SignUpScreen: undefined;
+  // Unauthorized
+  LandingScreen: undefined;
 };
