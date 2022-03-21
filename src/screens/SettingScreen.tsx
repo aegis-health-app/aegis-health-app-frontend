@@ -1,11 +1,15 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Switch, Text } from 'native-base';
 import Divider from '../components/atoms/Divider';
 import Spacer from '../components/atoms/Spacer';
 import { LANGUAGES, useSettings } from '../hooks/useSettings';
 
-import { TourGuideZone, useTourGuideController } from 'rn-tourguide';
+import {
+  TourGuideZone,
+  TourGuideZoneByPosition,
+  useTourGuideController
+} from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
 import { TourguideContext } from '../contexts/TourguideContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -23,6 +27,7 @@ const SettingScreen = () => {
     stop, // a function  to stopping it
     eventEmitter // an object for listening some events
   } = useTourGuideController();
+  const [renderTourguide, setRenderTourguide] = useState(true);
 
   /*
     This useEffect will determine whether the tourguide should be shown
@@ -53,7 +58,6 @@ const SettingScreen = () => {
   */
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
-      console.log('stop');
       if (stop) {
         setShowSettingsTourguide(false);
         await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
@@ -66,14 +70,8 @@ const SettingScreen = () => {
 
   return (
     <View style={styles.pageContainer}>
-      <TouchableOpacity
-        onPress={async () => {
-          if (start) {
-            setShowSettingsTourguide(true);
-            await AsyncStorage.setItem('viewedSettingsTourguide', 'false');
-            // start();
-          }
-        }}>
+      {/* Section: App Settings */}
+      <TouchableOpacity>
         <Text fontSize="2xl" fontWeight="700">
           {t('2')}
         </Text>
@@ -84,31 +82,48 @@ const SettingScreen = () => {
       </Text>
       <Divider my={1} />
       <Spacer />
-      <TourGuideZone
-        zone={1}
-        shape="rectangle"
-        text={'With animated SVG morphing with awesome flubber 🍮💯'}>
-        <View style={styles.settingsItemRow}>
-          <View>
-            <Text fontSize="md">{t('4')}</Text>
-          </View>
-          <View style={styles.toggleButtonsContainer}>
-            <Button
-              variant={language === LANGUAGES.THAI ? 'solid' : 'outline'}
-              onPress={() => changeLanguage(LANGUAGES.THAI)}>
-              ไทย
-            </Button>
-            <Spacer h={0} />
-            <Button
-              variant={language === LANGUAGES.ENGLISH ? 'solid' : 'outline'}
-              onPress={() => changeLanguage(LANGUAGES.ENGLISH)}>
-              English
-            </Button>
-          </View>
-        </View>
-      </TourGuideZone>
+
+      {/* Language Toggle */}
+      <View style={styles.tourGuideWrapper}>
+        {renderTourguide && (
+          <TourGuideZone zone={1} shape="rectangle" text={t('76')}>
+            <View style={styles.settingsItemRow}>
+              <View>
+                <Text fontSize="md">{t('4')}</Text>
+              </View>
+              <View style={styles.toggleButtonsContainer}>
+                <Button
+                  variant={language === LANGUAGES.THAI ? 'solid' : 'outline'}
+                  onPress={() => {
+                    changeLanguage(LANGUAGES.THAI);
+                    setRenderTourguide(false);
+                    setTimeout(() => {
+                      setRenderTourguide(true);
+                    }, 0);
+                  }}>
+                  ไทย
+                </Button>
+                <Spacer h={0} />
+                <Button
+                  variant={language === LANGUAGES.ENGLISH ? 'solid' : 'outline'}
+                  onPress={() => {
+                    changeLanguage(LANGUAGES.ENGLISH);
+                    setRenderTourguide(false);
+                    setTimeout(() => {
+                      setRenderTourguide(true);
+                    }, 0);
+                  }}>
+                  English
+                </Button>
+              </View>
+            </View>
+          </TourGuideZone>
+        )}
+      </View>
       <Spacer />
-      <TourGuideZone zone={2} shape="rectangle" text={'Zone 2'}>
+
+      {/* Sound Effect Toggle */}
+      <TourGuideZone zone={2} shape="rectangle" text={t('77')}>
         <View style={styles.settingsItemRow}>
           <View>
             <Text fontSize="md">{t('5')}</Text>
@@ -123,12 +138,15 @@ const SettingScreen = () => {
         </View>
       </TourGuideZone>
       <Spacer h={32} />
-      <TourGuideZone zone={3} shape="rectangle" text={'Zone 2'}>
+
+      {/* Section: Account Settings */}
+      <TourGuideZone zone={3} shape="rectangle" text={t('78')}>
         <Text fontSize="lg" fontWeight="500" mb={0}>
           {t('6')}
         </Text>
         <Divider my={1} />
         <Spacer />
+        {/* Change account password */}
         <View style={styles.settingsItemRow}>
           <Button
             size="lg"
@@ -140,6 +158,7 @@ const SettingScreen = () => {
           </Button>
         </View>
         <Spacer />
+        {/* Change phone number */}
         <View style={styles.settingsItemRow}>
           <Button
             size="lg"
@@ -152,9 +171,20 @@ const SettingScreen = () => {
         </View>
       </TourGuideZone>
       <Spacer />
+      {/* Signou */}
       <Button size="lg" variant="outline" colorScheme="secondary">
         {t('12')}
       </Button>
+      <TourGuideZoneByPosition
+        zone={4}
+        shape={'circle'}
+        isTourGuide
+        top={-38}
+        right={14}
+        width={32}
+        height={32}
+        text={t('79')}
+      />
     </View>
   );
 };
@@ -175,5 +205,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     minWidth: 80
+  },
+  tourGuideWrapper: {
+    height: 40
   }
 });

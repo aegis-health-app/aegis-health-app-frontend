@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.0",
+    "@react-native-community/datetimepicker": "^6.0.2",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "formik": "^2.2.9",
     "i18next": "^21.6.14",
     "moment": "^2.29.1",
     "native-base": "^3.3.7",
@@ -31,7 +33,8 @@
     "react-native-screens": "^3.13.1",
     "react-native-svg": "^12.3.0",
     "react-native-vector-icons": "^9.1.0",
-    "rn-tourguide": "^3.2.0"
+    "rn-tourguide": "^3.2.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
