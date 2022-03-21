@@ -31,9 +31,9 @@ const InputCodeScreen = () => {
             </Button>
             <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>Enter Code</Button>
         </Button.Group>
-        <InputBox name={t('111')} placeholder="XXXXXX"/>
+        <InputBox name={t('133')} placeholder="XXXXXX"/>
         <View my="5" flexDir="row" justifyContent="center">
-            <Button width="90%" onPress={() => navigation.navigate('ConfirmConnectScreen')}>{t('112')}</Button>
+            <Button width="90%" onPress={() => navigation.navigate('ConfirmConnectScreen')}>{t('134')}</Button>
             </View>
     </View>
   );

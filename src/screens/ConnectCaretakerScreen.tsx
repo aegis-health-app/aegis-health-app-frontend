@@ -21,7 +21,7 @@ const EditCaretakerScreen = () => {
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
               <Text mr="2" fontSize={16}>
-                {t('107')}
+                {t('129')}
               </Text>
               <Text color="orange.500" fontSize={16} fontWeight="bold">
                 CODE
@@ -29,11 +29,11 @@ const EditCaretakerScreen = () => {
             </View>
             <InfoCard
               icon="touch-app"
-              desc={t('108')}
+              desc={t('130')}
             />
             <InfoCard
               icon="qr-code-scanner"
-              desc={t('109')}
+              desc={t('131')}
             />
           </View>
         </View>

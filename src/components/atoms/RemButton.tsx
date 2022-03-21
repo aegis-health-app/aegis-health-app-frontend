@@ -69,7 +69,7 @@ const RemButton = ({ name }: remButtonProps) => {
           _text: { color: '#F94000' }
         }}
         onPress={() => handlePressButton()}>
-        {t('101')}
+        {t('123')}
       </Button>
     </Box>
   );
