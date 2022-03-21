@@ -14,7 +14,7 @@ const OnBoardingLanguageSelector = () => {
   }, [selected]);
 
   return (
-    <View p={4} w="80" mb={10}>
+    <View px={4} w="80">
       <Radio.Group
         name="myRadioGroup"
         accessibilityLabel="favorite number"
@@ -29,8 +29,14 @@ const OnBoardingLanguageSelector = () => {
           borderColor="gray.200"
           w="full"
           my={2}>
-          <Radio value={LANGUAGES.THAI} my={1} size="lg">
-            <View flexDir="row">
+          <Radio
+            value={LANGUAGES.THAI}
+            my={1}
+            ml={2}
+            size="lg"
+            w="100%"
+            justifyContent="flex-start">
+            <View flexDir="row" justifyContent="flex-start">
               <Image
                 source={require('../../assets/images/th.png')}
                 style={styles.language}
@@ -48,8 +54,14 @@ const OnBoardingLanguageSelector = () => {
           borderWidth={2}
           borderColor="gray.200"
           w="full">
-          <Radio value={LANGUAGES.ENGLISH} my={1} size="lg">
-            <View flexDir="row">
+          <Radio
+            value={LANGUAGES.ENGLISH}
+            my={1}
+            ml={2}
+            size="lg"
+            w="100%"
+            justifyContent="flex-start">
+            <View flexDir="row" justifyContent="flex-start">
               <Image
                 source={require('../../assets/images/en.png')}
                 style={styles.language}
