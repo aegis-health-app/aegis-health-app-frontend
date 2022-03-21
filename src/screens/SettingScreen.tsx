@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Switch, Text } from 'native-base';
 import Divider from '../components/atoms/Divider';
@@ -14,6 +14,9 @@ import { useTranslation } from 'react-i18next';
 import { TourguideContext } from '../contexts/TourguideContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAsyncEffect from '../hooks/useAsyncEffect';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
 const SettingScreen = () => {
   const { language, changeLanguage, isSoundEffectOn, setIsSoundEffectOn } =
@@ -28,6 +31,8 @@ const SettingScreen = () => {
     eventEmitter // an object for listening some events
   } = useTourGuideController();
   const [renderTourguide, setRenderTourguide] = useState(true);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   /*
     This useEffect will determine whether the tourguide should be shown
@@ -71,11 +76,9 @@ const SettingScreen = () => {
   return (
     <View style={styles.pageContainer}>
       {/* Section: App Settings */}
-      <TouchableOpacity>
-        <Text fontSize="2xl" fontWeight="700">
-          {t('2')}
-        </Text>
-      </TouchableOpacity>
+      <Text fontSize="2xl" fontWeight="700">
+        {t('2')}
+      </Text>
       <Spacer />
       <Text fontSize="lg" fontWeight="500" mb={0}>
         {t('setting.header')}
@@ -153,7 +156,8 @@ const SettingScreen = () => {
             variant="link"
             padding={0}
             colorScheme="secondary"
-            fontWeight={900}>
+            fontWeight={900}
+            onPress={() => navigation.navigate('ChangeAccountPasswordScreen')}>
             {t('7')}
           </Button>
         </View>
@@ -165,7 +169,8 @@ const SettingScreen = () => {
             variant="link"
             padding={0}
             colorScheme="secondary"
-            fontWeight={900}>
+            fontWeight={900}
+            onPress={() => navigation.navigate('ChangePhoneNumberScreen')}>
             {t('8')}
           </Button>
         </View>

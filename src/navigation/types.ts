@@ -8,8 +8,8 @@
 
   AuthScreen: undefined;
   SettingScreen: undefined;
-  ChangeAccountPassword: undefined;
-  ChangePhoneNumber: undefined;
+  ChangeAccountPasswordScreen: undefined;
+  ChangePhoneNumberScreen: undefined;
   ProfileScreen: undefined;
   ProfileEditScreen: undefined;
   EmergencyScreen: undefined;
