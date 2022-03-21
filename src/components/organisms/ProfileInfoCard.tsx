@@ -34,22 +34,22 @@ const ProfileInfoCard = ({
         <View flexDir="column">
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              {t('102')}
+              {t('124')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              {t('103')}
+              {t('125')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              {t('104')}
+              {t('126')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-              {t('105')}
+              {t('127')}
             </Text>
           </View>
         </View>

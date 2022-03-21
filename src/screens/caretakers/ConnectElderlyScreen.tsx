@@ -42,7 +42,7 @@ const ConnectElderlyScreen = () => {
                 </Box>
                 {/* <RNCamera/> */}
             </ZStack>
-            <Text position="absolute" alignSelf="center" bottom="24">{t('110')}</Text>
+            <Text position="absolute" alignSelf="center" bottom="24">{t('132')}</Text>
         </View>
     );
 };
