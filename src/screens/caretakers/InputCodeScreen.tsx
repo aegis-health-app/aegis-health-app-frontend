@@ -16,7 +16,19 @@ const InputCodeScreen = () => {
     <View my="2">
         {/* TODO: add tab */}
           <Button.Group isAttached justifyContent="center" mb="4">
-            <Button variant="outline" borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>Scan QR Code</Button>
+            <Button borderWidth="1"
+                borderColor="#1D84DF"
+                backgroundColor="#FAFAFA"
+                _text={{ color: '#1D84DF' }}
+                _pressed={{
+                  borderColor: '#7CC2FF',
+                  _text: { color: '#7CC2FF' }
+                }}
+                borderRadius="0" 
+                width="45%" 
+                onPress={() => navigation.navigate('ConnectElderlyScreen')}>
+              Scan QR Code
+            </Button>
             <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>Enter Code</Button>
         </Button.Group>
         <InputBox name={t('111')} placeholder="XXXXXX"/>

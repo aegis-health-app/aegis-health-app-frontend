@@ -21,7 +21,19 @@ const ConnectElderlyScreen = () => {
             {/* TODO: change to tab instead */}
             <Button.Group isAttached justifyContent="center" my="2">
             <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>Scan QR Code</Button>
-            <Button variant="outline" borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>Enter Code</Button>
+            <Button borderWidth="1"
+                borderColor="#1D84DF"
+                backgroundColor="#FAFAFA"
+                _text={{ color: '#1D84DF' }}
+                _pressed={{
+                borderColor: '#7CC2FF',
+                _text: { color: '#7CC2FF' }
+                }} 
+                borderRadius="0" 
+                width="45%" 
+                onPress={() => navigation.navigate('InputCodeScreen')}
+            >Enter Code
+            </Button>
             </Button.Group>
             <ZStack mb="2" width="100%" height="100%" alignItems="center">
                 <Image height="100%" width="100%" source={QRBackground} alt="QR Background"/>
