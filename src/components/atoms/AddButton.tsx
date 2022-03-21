@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { Box, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
@@ -11,12 +12,18 @@ const AddButton = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <Box alignItems="center" margin="4">
+    <Box alignItems="center" margin="2.5">
       <Button
-        colorScheme="primary"
         width="95%"
         size="md"
-        variant="outline"
+        borderWidth="1"
+        borderColor="#1D84DF"
+        backgroundColor="#FAFAFA"
+        _text={{ color: '#1D84DF' }}
+        _pressed={{
+          borderColor: '#7CC2FF',
+          _text: { color: '#7CC2FF' }
+        }}
         onPress={() => navigation.navigate('ConnectCaretakerScreen')}>
         {t('100')}
       </Button>

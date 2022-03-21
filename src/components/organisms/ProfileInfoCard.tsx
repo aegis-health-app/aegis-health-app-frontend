@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
 type ProfileInfoCardProps = {
-  name: string,
-  gender: string,
-  bdate: string,
-  phone: string
+  name: string;
+  gender: string;
+  bdate: string;
+  phone: string;
 };
 
 const ProfileInfoCard = ({
@@ -44,12 +44,12 @@ const ProfileInfoCard = ({
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-            {t('104')}
+              {t('104')}
             </Text>
           </View>
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
-            {t('105')}
+              {t('105')}
             </Text>
           </View>
         </View>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box, Button, AlertDialog, View, Text } from 'native-base';
+import { Box, Button, AlertDialog, Text } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useState, useRef } from 'react';
 
 type remButtonProps = {
-  name: string
-}
+  name: string;
+};
 
-const RemButton = ({name}: remButtonProps) => {
+const RemButton = ({ name }: remButtonProps) => {
   const { t } = useTranslation();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -33,9 +33,11 @@ const RemButton = ({name}: remButtonProps) => {
           <AlertDialog.Header>{t('120')}</AlertDialog.Header>
           <AlertDialog.Body>
             <Text>
-              {t('119')}{name}{t('121')}
+              {t('119')}
+              {name}
+              {t('121')}
             </Text>
-            </AlertDialog.Body>
+          </AlertDialog.Body>
           <AlertDialog.Footer>
             <Button.Group space={2}>
               <Button
@@ -56,10 +58,16 @@ const RemButton = ({name}: remButtonProps) => {
         </AlertDialog.Content>
       </AlertDialog>
       <Button
-        colorScheme="danger"
         width="92%"
         size="md"
-        variant="outline"
+        borderWidth="1"
+        borderColor="#F97316"
+        backgroundColor="#FAFAFA"
+        _text={{ color: '#F97316' }}
+        _pressed={{
+          borderColor: '#F94000',
+          _text: { color: '#F94000' }
+        }}
         onPress={() => handlePressButton()}>
         {t('101')}
       </Button>
