@@ -125,8 +125,7 @@ const MainNavigation = () => {
           component={SignInScreen}
           options={{
             title: 'Sign In',
-            headerTitleAlign: 'center',
-            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+            headerShown: false
           }}
         />
         <Stack.Screen
@@ -134,8 +133,7 @@ const MainNavigation = () => {
           component={SignUpScreen}
           options={{
             title: 'Sign Up',
-            headerTitleAlign: 'center',
-            headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+            headerShown: false
           }}
         />
       </Stack.Navigator>
