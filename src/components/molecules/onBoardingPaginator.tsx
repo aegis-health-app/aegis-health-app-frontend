@@ -19,58 +19,60 @@ const OnBoardingPaginator = ({
   const { width } = useWindowDimensions();
   const { t } = useTranslation();
 
-  function onPressBack() {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+  async function onPressBack() {
+    const newIndex = currentIndex - 1;
+    console.log(newIndex);
+    setCurrentIndex(newIndex);
   }
 
-  function onPressNext() {
-    setCurrentIndex(currentIndex + 1);
+  async function onPressNext() {
+    const newIndex = currentIndex + 1;
+    setCurrentIndex(newIndex);
   }
 
   return (
-    <HStack
-      alignItems="center"
-      justifyContent="space-between"
-      mb={6}
-      px={4}
-      w={width}>
-      <Button
-        size="lg"
-        variant="outline"
-        colorScheme="primary"
-        onPress={onPressBack}>
-        {t('107')}
-      </Button>
-      <View flexDir="row">
-        {data.map((_, i) => {
-          const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
+    <View justifyContent="flex-end" h="100%">
+      <HStack
+        alignItems="center"
+        justifyContent="space-between"
+        px={4}
+        w={width}>
+        <Button
+          size="lg"
+          variant="outline"
+          colorScheme="primary"
+          onPress={() => onPressBack()}>
+          {t('107')}
+        </Button>
+        <View flexDir="row">
+          {data.map((_, i) => {
+            const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
-          const dotWidth = scrollX.interpolate({
-            inputRange,
-            outputRange: [10, 20, 10],
-            extrapolate: 'clamp'
-          });
+            const dotWidth = scrollX.interpolate({
+              inputRange,
+              outputRange: [10, 20, 10],
+              extrapolate: 'clamp'
+            });
 
-          const opacity = scrollX.interpolate({
-            inputRange,
-            outputRange: [0.3, 1, 0.3],
-            extrapolate: 'clamp'
-          });
+            const opacity = scrollX.interpolate({
+              inputRange,
+              outputRange: [0.3, 1, 0.3],
+              extrapolate: 'clamp'
+            });
 
-          return (
-            <Animated.View
-              style={[styles.dot, { width: dotWidth, opacity }]}
-              key={i.toString()}
-            />
-          );
-        })}
-      </View>
-      <Button size="lg" colorScheme="primary" onPress={onPressNext}>
-        {t('108')}
-      </Button>
-    </HStack>
+            return (
+              <Animated.View
+                style={[styles.dot, { width: dotWidth, opacity }]}
+                key={i.toString()}
+              />
+            );
+          })}
+        </View>
+        <Button size="lg" colorScheme="primary" onPress={() => onPressNext()}>
+          {t('108')}
+        </Button>
+      </HStack>
+    </View>
   );
 };
 
