@@ -126,70 +126,76 @@ const SettingScreen = () => {
       <Spacer />
 
       {/* Sound Effect Toggle */}
-      <TourGuideZone zone={2} shape="rectangle" text={t('77')}>
-        <View style={styles.settingsItemRow}>
-          <View>
-            <Text fontSize="md">{t('5')}</Text>
+      {renderTourguide && (
+        <TourGuideZone zone={2} shape="rectangle" text={t('77')}>
+          <View style={styles.settingsItemRow}>
+            <View>
+              <Text fontSize="md">{t('5')}</Text>
+            </View>
+            <View>
+              <Switch
+                size="sm"
+                isChecked={isSoundEffectOn}
+                onToggle={() => setIsSoundEffectOn(!isSoundEffectOn)}
+              />
+            </View>
           </View>
-          <View>
-            <Switch
-              size="sm"
-              isChecked={isSoundEffectOn}
-              onToggle={() => setIsSoundEffectOn(!isSoundEffectOn)}
-            />
-          </View>
-        </View>
-      </TourGuideZone>
+        </TourGuideZone>
+      )}
       <Spacer h={32} />
 
       {/* Section: Account Settings */}
-      <TourGuideZone zone={3} shape="rectangle" text={t('78')}>
-        <Text fontSize="lg" fontWeight="500" mb={0}>
-          {t('6')}
-        </Text>
-        <Divider my={1} />
-        <Spacer />
-        {/* Change account password */}
-        <View style={styles.settingsItemRow}>
-          <Button
-            size="lg"
-            variant="link"
-            padding={0}
-            colorScheme="secondary"
-            fontWeight={900}
-            onPress={() => navigation.navigate('ChangeAccountPasswordScreen')}>
-            {t('7')}
-          </Button>
-        </View>
-        <Spacer />
-        {/* Change phone number */}
-        <View style={styles.settingsItemRow}>
-          <Button
-            size="lg"
-            variant="link"
-            padding={0}
-            colorScheme="secondary"
-            fontWeight={900}
-            onPress={() => navigation.navigate('ChangePhoneNumberScreen')}>
-            {t('8')}
-          </Button>
-        </View>
-      </TourGuideZone>
+      {renderTourguide && (
+        <TourGuideZone zone={3} shape="rectangle" text={t('78')}>
+          <Text fontSize="lg" fontWeight="500" mb={0}>
+            {t('6')}
+          </Text>
+          <Divider my={1} />
+          <Spacer />
+          {/* Change account password */}
+          <View style={styles.settingsItemRow}>
+            <Button
+              size="lg"
+              variant="link"
+              padding={0}
+              colorScheme="secondary"
+              fontWeight={900}
+              onPress={() => navigation.navigate('ChangeAccountPasswordScreen')}>
+              {t('7')}
+            </Button>
+          </View>
+          <Spacer />
+          {/* Change phone number */}
+          <View style={styles.settingsItemRow}>
+            <Button
+              size="lg"
+              variant="link"
+              padding={0}
+              colorScheme="secondary"
+              fontWeight={900}
+              onPress={() => navigation.navigate('ChangePhoneNumberScreen')}>
+              {t('8')}
+            </Button>
+          </View>
+        </TourGuideZone>
+      )}
       <Spacer />
       {/* Signou */}
       <Button size="lg" variant="outline" colorScheme="secondary">
         {t('12')}
       </Button>
-      <TourGuideZoneByPosition
-        zone={4}
-        shape={'circle'}
-        isTourGuide
-        top={-38}
-        right={14}
-        width={32}
-        height={32}
-        text={t('79')}
-      />
+      {renderTourguide && (
+        <TourGuideZoneByPosition
+          zone={4}
+          shape={'circle'}
+          isTourGuide
+          top={-38}
+          right={14}
+          width={32}
+          height={32}
+          text={t('79')}
+        />
+      )}
     </View>
   );
 };
