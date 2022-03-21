@@ -26,6 +26,8 @@ import { TourguideContext } from '../contexts/TourguideContext';
 import { TouchableOpacity } from 'react-native';
 import ProfileEditScreen from '../screens/ProfileEditScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
+import ChangeAccountPasswordScreen from '../screens/ChangeAccountPasswordScreen';
+import ChangePhoneNumberScreen from '../screens/ChangePhoneNumberScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -77,6 +79,22 @@ const MainNavigation = () => {
               options={{
                 headerTitle: t('profile.profile'),
                 headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="ChangeAccountPasswordScreen"
+              component={ChangeAccountPasswordScreen}
+              options={{
+                headerTitle: t('24'),
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="ChangePhoneNumberScreen"
+              component={ChangePhoneNumberScreen}
+              options={{
+                headerTitle: t('24'),
+                headerShown: false
               }}
             />
             <Stack.Screen
