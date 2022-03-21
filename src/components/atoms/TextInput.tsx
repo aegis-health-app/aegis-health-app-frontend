@@ -20,7 +20,7 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
   return (
     <FormControl isRequired={isRequired} isInvalid={name in errors}>
-      <FormControl.Label {...props}>{label}</FormControl.Label>
+      <FormControl.Label mb={2}>{label}</FormControl.Label>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
