@@ -26,5 +26,5 @@ export type RootStackParamList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
   // Unauthorized
-  LandingScreen: undefined;
+  OnBoardingScreen: undefined;
 };

@@ -22,7 +22,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import { TourguideContext } from '../contexts/TourguideContext';
 import { TouchableOpacity } from 'react-native';
 import ProfileEditScreen from '../screens/ProfileEditScreen';
-import LandingScreen from '../screens/LandingScreen';
+import OnBoardingScreen from '../screens/OnBoardingScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -165,8 +165,8 @@ const MainNavigation = () => {
         ) : (
           <>
             <Stack.Screen
-              name="LandingScreen"
-              component={LandingScreen}
+              name="OnBoardingScreen"
+              component={OnBoardingScreen}
               options={{ headerShown: false }}
             />
           </>
