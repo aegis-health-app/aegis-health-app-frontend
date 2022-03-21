@@ -34,7 +34,20 @@ const ConfirmConnectScreen = () => {
             Sompoch Muangyim
         </Text>
         <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('113')}</Button>
-        <Button variant="outline" colorScheme='danger' mt="4" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('114')}</Button>
+        <Button borderWidth="1"
+                borderColor="#F97316"
+                backgroundColor="#FAFAFA"
+                _text={{ color: '#F97316' }}
+                _pressed={{
+                borderColor: '#F94000',
+                _text: { color: '#F94000' }
+                }} 
+                colorScheme='danger' 
+                mt="4"
+                width="90%" 
+                onPress={() => navigation.navigate('ConnectElderlyScreen')}>
+        {t('114')}
+        </Button>
     
 
         </View>
