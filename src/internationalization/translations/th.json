@@ -53,8 +53,8 @@
   "52": "คุณต้องการที่จะลบฟีเจอร์นี้หรือไม่",
   "53": "ลบ",
   "home": {
-    "userGreet": "สวัสดี",
-    "settingButton": "ตั้งค่า"
+    "settingButton": "ตั้งค่า",
+    "profileTouchIndicator": "แตะเพื่อดูข้อมูลส่วนตัวของคุณ"
   },
   "setting": {
     "header": "ตั้งค่าแอพ",
