@@ -158,7 +158,6 @@
     "startButton": "Get Started"
   },
   "userLink": {
-<<<<<<< HEAD
     "addCaretaker": "Add Caretaker",
     "removeCaretaker": "Remove Caretaker",
     "removeAlertBody1": "This will remove '",
@@ -176,10 +175,7 @@
     "cancelButton": "Cancel",
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "Connect",
-    "headerElderly": "Connect"
-=======
-    "edit": "Edit",
-    "addCaretaker": "Add Caretaker"
->>>>>>> 847633b (fix: change UserLink screenn to match new translation convention)
+    "headerElderly": "Connect",
+    "edit": "Edit"
   }
 }
