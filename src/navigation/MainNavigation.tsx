@@ -53,7 +53,7 @@ const MainNavigation = () => {
               name="SettingScreen"
               component={SettingScreen}
               options={{
-                headerTitle: t('2'),
+                headerTitle: t('home.settingButton'),
                 headerShown: true,
                 headerRight: () => (
                   <TouchableOpacity

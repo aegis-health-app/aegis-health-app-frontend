@@ -13,7 +13,7 @@ const OnBoardingItem = ({ slide }: OnBoardingItemProps) => {
   return (
     <View
       w={width}
-      flex={1}
+      height="500"
       justifyContent="center"
       alignItems="center"
       position="relative">

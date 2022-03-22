@@ -23,50 +23,50 @@ const OnBoardingScreen = () => {
   const onBoardingSlides: OnBoardingSLide[] = [
     {
       page: 1,
-      title: t('109'),
-      desc: t('110'),
+      title: t('onBoarding.header1'),
+      desc: t('onBoarding.desc1'),
       image: require('../assets/images/landing/1.png')
     },
     {
       page: 2,
-      title: t('91'),
-      desc: t('92'),
+      title: t('onBoarding.header2'),
+      desc: t('onBoarding.desc2'),
       image: require('../assets/images/landing/2.png')
     },
     {
       page: 3,
-      title: t('93'),
-      desc: t('94'),
+      title: t('onBoarding.header3'),
+      desc: t('onBoarding.desc3'),
       image: require('../assets/images/landing/3.png')
     },
     {
       page: 4,
-      title: t('95'),
-      desc: t('96'),
+      title: t('onBoarding.header4'),
+      desc: t('onBoarding.desc4'),
       image: require('../assets/images/landing/4.png')
     },
     {
       page: 5,
-      title: t('97'),
-      desc: t('98'),
+      title: t('onBoarding.header5'),
+      desc: t('onBoarding.desc5'),
       image: require('../assets/images/landing/5.png')
     },
     {
       page: 6,
-      title: t('99'),
-      desc: t('100'),
+      title: t('onBoarding.header6'),
+      desc: t('onBoarding.desc6'),
       image: require('../assets/images/landing/6.png')
     },
     {
       page: 7,
-      title: t('101'),
-      desc: t('102'),
+      title: t('onBoarding.header7'),
+      desc: t('onBoarding.desc7'),
       image: require('../assets/images/landing/7.png')
     },
     {
       page: 8,
-      title: t('103'),
-      desc: t('104'),
+      title: t('onBoarding.header8'),
+      desc: t('onBoarding.desc8'),
       image: require('../assets/images/landing/8.png')
     }
   ];
@@ -122,7 +122,7 @@ const OnBoardingScreen = () => {
           <OnBoardingLanguageSelector />
           <View px={5} mt={4}>
             <Button width="100%" onPress={() => scrollTo(1)}>
-              {t('30')}
+              {t('misc.next')}
             </Button>
           </View>
         </View>
@@ -141,7 +141,7 @@ const OnBoardingScreen = () => {
         <View px={6} mb={10}>
           <Button colorScheme="primary" width="80" size="lg">
             <Text bold fontWeight="600" fontSize="lg" color="#fff">
-              {t('113')}
+              {t('onBoarding.startButton')}
             </Text>
           </Button>
         </View>

@@ -27,7 +27,7 @@ const ProfileSection = () => {
             alt="Profile Picture"
           />
           <View>
-            <Text>{t('1')}</Text>
+            <Text>{t('home.userGreet')}</Text>
             <Text fontSize="xl" fontWeight="600">
               Name
             </Text>
