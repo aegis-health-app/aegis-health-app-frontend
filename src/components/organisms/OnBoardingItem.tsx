@@ -26,7 +26,7 @@ const OnBoardingItem = ({ slide }: OnBoardingItemProps) => {
           mb={6}
         />
       </View>
-      <VStack mt={12} px={8} space={4}>
+      <VStack px={8} space={4}>
         <Text
           fontWeight="bold"
           fontSize="2xl"
