@@ -111,7 +111,7 @@
     "gender": "Gender"
   },
   "modules": {
-    "upcoming": "Upcoming",
+    "notification": "Notification",
     "iDidIt": "I did it",
     "dismiss": "Dismiss",
     "modules": "Modules",
@@ -131,7 +131,8 @@
     "add": "Add",
     "remove": "Remove",
     "comingSoon": "Coming Soon!",
-    "confirm": "Confirmation"
+    "confirm": "Confirmation",
+    "cancel": "Cancel"
   },
   "onBoarding": {
     "languageTh": "Thai",

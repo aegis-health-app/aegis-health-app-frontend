@@ -20,8 +20,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title={t('39')}
-          description={t('44')}
+          title={t('modules.notification')}
+          description={t('moduleSelection.reminderDesc')}
           isAdded={true}
         />
         <ManageModuleCard
@@ -34,8 +34,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title={t('40')}
-          description={t('45')}
+          title={t('modules.healthRecord')}
+          description={t('moduleSelection.trackDesc')}
           isAdded={false}
         />
         <ManageModuleCard
@@ -48,7 +48,7 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title={t('41')}
+          title={t('modules.memoryPractice')}
           description={t('46')}
           isAdded={true}
         />
@@ -62,8 +62,8 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title={t('42')}
-          description={t('47')}
+          title={t('modules.healthBlogs')}
+          description={t('moduleSelection.healthBlogDsc')}
           comingSoon={true}
         />
       </View>

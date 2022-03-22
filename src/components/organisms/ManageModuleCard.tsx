@@ -50,8 +50,12 @@ const ManageModuleCard = ({
         onClose={() => setDialogOpen(!dialogOpen)}>
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
-          <AlertDialog.Header>{t('51')}</AlertDialog.Header>
-          <AlertDialog.Body>{t('52')}</AlertDialog.Body>
+          <AlertDialog.Header>
+            {t('moduleSelection.confirm')}
+          </AlertDialog.Header>
+          <AlertDialog.Body>
+            {t('moduleSelection.removeConfirmationText')}
+          </AlertDialog.Body>
           <AlertDialog.Footer>
             <Button.Group space={2}>
               <Button
@@ -59,13 +63,13 @@ const ManageModuleCard = ({
                 colorScheme="muted"
                 onPress={() => setDialogOpen(false)}
                 ref={cancelRef}>
-                {t('11')}
+                {t('moduleSelection.cancel')}
               </Button>
               <Button
                 colorScheme="danger"
                 onPress={handlePressDelete}
                 ref={cancelRef}>
-                {t('53')}
+                {t('moduleSelection.remove')}
               </Button>
             </Button.Group>
           </AlertDialog.Footer>
@@ -83,20 +87,20 @@ const ManageModuleCard = ({
       <View mt={2}>
         {comingSoon ? (
           <Button variant="outline" colorScheme="muted">
-            {t('50')}
+            {t('moduleSelection.comingSoon')}
           </Button>
         ) : (
           <>
             {isAdded ? (
               <Button variant="outline" colorScheme="primary">
-                {t('48')}
+                {t('moduleSelection.add')}
               </Button>
             ) : (
               <Button
                 variant="outline"
                 colorScheme="error"
                 onPress={handlePressButton}>
-                {t('49')}
+                {t('moduleSelection.remove')}
               </Button>
             )}
           </>

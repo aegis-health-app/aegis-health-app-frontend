@@ -17,10 +17,10 @@ const ModulePickerList = () => {
   return (
     <View my={6} w="full">
       <Text fontSize="2xl" fontWeight="600">
-        {t('36')}
+        {t('modules.modules')}
       </Text>
       <Text fontSize="md" color="gray.500">
-        {t('37')}
+        {t('modules.chooseModules')}
       </Text>
       <VStack space={3} mt={4} justifyContent="center" alignItems="center">
         <HStack space={3} justifyContent="space-between" px={2}>
@@ -29,7 +29,7 @@ const ModulePickerList = () => {
             icon={
               <Icon as={AntDesign} name="warning" size="10" color="red.500" />
             }
-            label={t('38')}
+            label={t('modules.emergency')}
             handlePress={() => navigation.navigate('EmergencyScreen')}
           />
           <ModulePickerCard
@@ -42,7 +42,7 @@ const ModulePickerList = () => {
                 color="orange.400"
               />
             }
-            label={t('39')}
+            label={t('modules.reminder')}
             handlePress={() => navigation.navigate('ReminderScreen')}
           />
         </HStack>
@@ -57,7 +57,7 @@ const ModulePickerList = () => {
                 color="green.500"
               />
             }
-            label={t('40')}
+            label={t('modules.memoryPractice')}
             handlePress={() => navigation.navigate('MemoryScreen')}
           />
           <ModulePickerCard
@@ -70,7 +70,7 @@ const ModulePickerList = () => {
                 color="pink.400"
               />
             }
-            label={t('41')}
+            label={t('modules.healthRecord')}
             handlePress={() => navigation.navigate('HealthRecordScreen')}
           />
         </HStack>
@@ -85,13 +85,13 @@ const ModulePickerList = () => {
                 color="darkBlue.600"
               />
             }
-            label={t('42')}
+            label={t('modules.healthBlogs')}
             handlePress={() => navigation.navigate('HealthBlogScreen')}
           />
           <ModulePickerCard
             backgroundColor="lightBlue.200"
             icon={<ManageModuleIcon />}
-            label={t('42')}
+            label={t('modules.selectModules')}
             handlePress={() => navigation.navigate('ModuleManageScreen')}
           />
         </HStack>

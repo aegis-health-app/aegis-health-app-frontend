@@ -112,7 +112,7 @@
     "gender": "เพศ"
   },
   "modules": {
-    "upcoming": "การแจ้งเตือน",
+    "notification": "การแจ้งเตือน",
     "iDidIt": "ฉันทำแล้ว",
     "dismiss": "ปิด",
     "modules": "ฟีเจอร์",
@@ -132,7 +132,8 @@
     "add": "เพิ่ม",
     "remove": "ลบออก",
     "comingSoon": "กำลังอยู่ในการพัฒนาฟีเจอร์",
-    "confirm": "การยืนยัน"
+    "confirm": "การยืนยัน",
+    "cancel": "ยกเลิก"
   },
   "onBoarding": {
     "languageTh": "ภาษาไทย",
