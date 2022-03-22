@@ -1,4 +1,4 @@
-import { Button, FlatList, Image, View } from 'native-base';
+import { Button, FlatList, Image, View, Text } from 'native-base';
 import { Animated, StyleSheet } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
 import { OnBoardingSLide } from '../dto/onBoarding';
@@ -138,12 +138,12 @@ const OnBoardingScreen = () => {
         </View>
       )}
       {currentIndex === onBoardingSlides.length - 1 && (
-        <View h={40} mb={10}>
-          <View px={5} mt={4}>
-            <Button width="100%" onPress={() => scrollTo(1)}>
+        <View px={6} mb={10}>
+          <Button colorScheme="primary" width="80" size="lg">
+            <Text bold fontWeight="600" fontSize="lg" color="#fff">
               {t('113')}
-            </Button>
-          </View>
+            </Text>
+          </Button>
         </View>
       )}
     </View>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   logo: {
     resizeMode: 'contain',
     position: 'absolute',
-    top: -200,
+    top: -220,
     left: 0
   }
 });

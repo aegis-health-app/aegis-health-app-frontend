@@ -43,7 +43,7 @@ const OnBoardingLanguageSelector = () => {
                 alt="Thai"
               />
               <Text bold fontSize="xl">
-                {t('112')}
+                ภาษาไทย
               </Text>
             </View>
           </Radio>
@@ -68,7 +68,7 @@ const OnBoardingLanguageSelector = () => {
                 alt="English"
               />
               <Text bold fontSize="xl">
-                {t('111')}
+                English
               </Text>
             </View>
           </Radio>
