@@ -42,7 +42,7 @@ const OnBoardingPaginator = ({
           variant="outline"
           colorScheme="primary"
           onPress={() => onPressBack()}>
-          {t('107')}
+          {t('onBoarding.backButton')}
         </Button>
         <View flexDir="row">
           {data.map((_, i) => {
@@ -69,7 +69,7 @@ const OnBoardingPaginator = ({
           })}
         </View>
         <Button size="lg" colorScheme="primary" onPress={() => onPressNext()}>
-          {t('108')}
+          {t('onBoarding.nextButton')}
         </Button>
       </HStack>
     </View>

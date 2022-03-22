@@ -80,7 +80,7 @@ const SettingScreen = () => {
       </TouchableOpacity>
       <Spacer />
       <Text fontSize="lg" fontWeight="500" mb={0}>
-        {t('3')}
+        {t('setting.header')}
       </Text>
       <Divider my={1} />
       <Spacer />
