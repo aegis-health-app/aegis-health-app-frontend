@@ -1,18 +1,18 @@
 import { useFormik } from 'formik';
-import { FormControl, Input, Text, Button, VStack } from 'native-base';
-import React, { useContext } from 'react';
+import { FormControl, Input, Text, Button, VStack, Icon } from 'native-base';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Divider from '../components/atoms/Divider';
 import { useSettings } from '../hooks/useSettings';
 import { UserContext } from '../contexts/UserContext';
-import moment from 'moment';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { changePasswordSchema } from '../dto/Password';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ChangeAccountPasswordScreen = () => {
   const { t } = useTranslation();
@@ -20,6 +20,9 @@ const ChangeAccountPasswordScreen = () => {
   const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
 
   const initialValues = {
     oldPassword: '',
@@ -54,14 +57,27 @@ const ChangeAccountPasswordScreen = () => {
             Enter Your Old Password
           </Text>
         </View>
+        <Spacer />
         <View style={styles.inputRow}>
           <FormControl isInvalid={'oldPassword' in errors}>
-            <FormControl.Label>{t('Password')}</FormControl.Label>
+            <FormControl.Label>{t('Old Password')}</FormControl.Label>
             <Input
               onBlur={handleBlur('oldPassword')}
               placeholder={t('Password')}
               onChangeText={handleChange('oldPassword')}
               value={values.newPassword}
+              type={showOldPassword ? 'text' : 'password'}
+              InputRightElement={
+                <Icon
+                  mr={2}
+                  size="sm"
+                  h="full"
+                  as={Ionicons}
+                  name={showOldPassword ? 'eye' : 'eye-off'}
+                  color="muted.400"
+                  onPress={() => setShowOldPassword(!showOldPassword)}
+                />
+              }
             />
             <FormControl.ErrorMessage mt={0}>
               {touched.oldPassword ? errors.oldPassword : ''}
@@ -74,15 +90,28 @@ const ChangeAccountPasswordScreen = () => {
           <Text fontSize="xl" fontWeight={'md'}>
             Enter Your New Password
           </Text>
+          <Spacer />
           {/* Old Password */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'newPassword' in errors}>
-              <FormControl.Label>{t('Password')}</FormControl.Label>
+              <FormControl.Label>{t('New Password')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('newPassword')}
                 placeholder={t('Password')}
                 onChangeText={handleChange('newPassword')}
                 value={values.newPassword}
+                type={showNewPassword ? 'text' : 'password'}
+                InputRightElement={
+                  <Icon
+                    mr={2}
+                    size="sm"
+                    h="full"
+                    as={Ionicons}
+                    name={showNewPassword ? 'eye' : 'eye-off'}
+                    color="muted.400"
+                    onPress={() => setShowNewPassword(!showNewPassword)}
+                  />
+                }
               />
               <FormControl.ErrorMessage mt={0}>
                 {touched.newPassword ? errors.newPassword : ''}
@@ -90,12 +119,24 @@ const ChangeAccountPasswordScreen = () => {
             </FormControl>
             <Spacer />
             <FormControl isInvalid={'repeatNewPassword' in errors}>
-              <FormControl.Label>{t('Password')}</FormControl.Label>
+              <FormControl.Label>{t('Repeat New Password')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('repeatNewPassword')}
                 placeholder={t('Password')}
                 onChangeText={handleChange('repeatNewPassword')}
                 value={values.repeatNewPassword}
+                type={showRepeatPassword ? 'text' : 'password'}
+                InputRightElement={
+                  <Icon
+                    mr={2}
+                    size="sm"
+                    h="full"
+                    as={Ionicons}
+                    name={showRepeatPassword ? 'eye' : 'eye-off'}
+                    color="muted.400"
+                    onPress={() => setShowRepeatPassword(!showRepeatPassword)}
+                  />
+                }
               />
               <FormControl.ErrorMessage mt={0}>
                 {touched.repeatNewPassword ? errors.repeatNewPassword : ''}
