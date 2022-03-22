@@ -11,6 +11,8 @@ const AddButton = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { t } = useTranslation();
+
   return (
     <Box alignItems="center" margin="2.5">
       <Button

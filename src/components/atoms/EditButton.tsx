@@ -29,7 +29,7 @@ const EditButton = ({ w, h, p, onPress }: EditButtonProps) => {
       _pressed={{
         bg: 'gray.400'
       }}>
-      <Text>{t('25')}</Text>
+      <Text>{t('userLink.edit')}</Text>
     </Button>
   );
 };

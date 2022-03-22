@@ -118,7 +118,7 @@
     "chooseModules": "Choose your modules",
     "emergency": "Emergency",
     "reminder": "Reminder",
-    "memoryPractice": "Memory Practice",
+    "memory": "Memory Recall",
     "healthRecord": "Health Records",
     "healthBlogs": "Health Blogs",
     "selectModules": "Select Modules"
@@ -158,6 +158,7 @@
     "startButton": "Get Started"
   },
   "userLink": {
+<<<<<<< HEAD
     "addCaretaker": "Add Caretaker",
     "removeCaretaker": "Remove Caretaker",
     "removeAlertBody1": "This will remove '",
@@ -176,5 +177,9 @@
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "Connect",
     "headerElderly": "Connect"
+=======
+    "edit": "Edit",
+    "addCaretaker": "Add Caretaker"
+>>>>>>> 847633b (fix: change UserLink screenn to match new translation convention)
   }
 }
