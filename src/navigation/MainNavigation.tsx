@@ -16,6 +16,9 @@ import ConnectScreen from './../screens/ConnectScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
+import ConnectElderlyScreen from '../screens/caretakers/ConnectElderlyScreen';
+import InputCodeScreen from '../screens/caretakers/InputCodeScreen';
+import ConfirmConnectScreen from '../screens/caretakers/ConfirmConnectScreen';
 import { useTranslation } from 'react-i18next';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
@@ -42,6 +45,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
+
         {user ? (
           <>
             <Stack.Screen
@@ -161,7 +165,35 @@ const MainNavigation = () => {
                 headerShown: false
               }}
             />
-          </>
+            <Stack.Screen
+              name="ConnectElderlyScreen"
+              component={ConnectElderlyScreen}
+              options={{
+                title: t('userLink.header'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+              }}
+            />
+            <Stack.Screen
+              name="InputCodeScreen"
+              component={InputCodeScreen}
+              options={{
+                title: t('userLink.header'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                animation: "none",
+              }}
+            />
+            <Stack.Screen
+              name="ConfirmConnectScreen"
+              component={ConfirmConnectScreen}
+              options={{
+                title: t('userLink.header'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+              }}
+            />
+              </>
         ) : (
           <>
             <Stack.Screen
