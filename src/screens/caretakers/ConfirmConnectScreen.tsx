@@ -17,7 +17,9 @@ const ConfirmConnectScreen = () => {
     <View>
         <View flexDir="column" alignItems="center" my="10">
         <Text fontWeight="600" fontSize="lg">
-            {t('115')} “Koon Yai” ?
+            {t('userLink.connectText1')}
+            Koon Yai
+            {t('userLink.connectText2')}
         </Text>
         <Image
             mt="10"
@@ -33,7 +35,7 @@ const ConfirmConnectScreen = () => {
         <Text fontWeight="300" color="#A1A1AA" fontSize="sm">
             Sompoch Muangyim
         </Text>
-        <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('113')}</Button>
+        <Button mt="10" width="90%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('userLink.connectButton')}</Button>
         <Button borderWidth="1"
                 borderColor="#F97316"
                 backgroundColor="#FAFAFA"
@@ -46,7 +48,7 @@ const ConfirmConnectScreen = () => {
                 mt="4"
                 width="90%" 
                 onPress={() => navigation.navigate('ConnectElderlyScreen')}>
-        {t('114')}
+        {t('userLink.cancelButton')}
         </Button>
     
 

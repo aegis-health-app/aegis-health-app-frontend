@@ -37,7 +37,7 @@ const MainNavigation = () => {
     }
   };
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
 
   return (
     <NavigationContainer theme={navigationTheme}>
