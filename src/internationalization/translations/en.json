@@ -52,8 +52,8 @@
   "52": "Are you sure you want to remove this module?",
   "53": "Remove",
   "home": {
-    "userGreet": "Hello,",
-    "settingButton": "Settings"
+    "settingButton": "Settings",
+    "profileTouchIndicator": "Click to see your profile"
   },
   "setting": {
     "header": "App Settings",

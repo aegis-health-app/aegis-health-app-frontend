@@ -15,7 +15,11 @@ const ProfileSection = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <View flexDir="row" justifyContent="space-between" width="100%">
+    <View
+      flexDir="row"
+      justifyContent="space-between"
+      width="100%"
+      alignItems="center">
       <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
         <View flexDir="row">
           <Image
@@ -27,9 +31,11 @@ const ProfileSection = () => {
             alt="Profile Picture"
           />
           <View>
-            <Text>{t('home.userGreet')}</Text>
             <Text fontSize="xl" fontWeight="600">
               Name
+            </Text>
+            <Text fontSize="sm" fontWeight="400" color="gray.500">
+              {t('home.profileTouchIndicator')}
             </Text>
           </View>
         </View>
@@ -38,11 +44,13 @@ const ProfileSection = () => {
         <Icon
           as={MaterialIcons}
           name="settings"
-          size={9}
+          size={8}
           color="muted.600"
           onPress={() => navigation.navigate('SettingScreen')}
         />
-        <Text fontSize="sm">{t('home.settingButton')}</Text>
+        <Text fontSize="sm" color="gray.500">
+          {t('home.settingButton')}
+        </Text>
       </View>
     </View>
   );
