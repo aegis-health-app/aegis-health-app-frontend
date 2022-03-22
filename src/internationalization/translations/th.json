@@ -108,7 +108,8 @@
     "edt": "แก้ไข",
     "details": "รายละเอียด",
     "home": "หน้าหลัก",
-    "myCaretaker": "ผู้ดูแลของฉัน"
+    "myCaretaker": "ผู้ดูแลของฉัน",
+    "gender": "เพศ"
   },
   "modules": {
     "upcoming": "การแจ้งเตือน",
