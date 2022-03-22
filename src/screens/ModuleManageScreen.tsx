@@ -48,7 +48,7 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-          title={t('modules.memoryPractice')}
+          title={t('modules.memory')}
           description={t('46')}
           isAdded={true}
         />

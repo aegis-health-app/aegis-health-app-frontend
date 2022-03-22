@@ -119,7 +119,7 @@
     "chooseModules": "เลือกฟีเจอร์ที่ต้องการใช้งาน",
     "emergency": "แจ้งเหตุฉุกเฉิน",
     "reminder": "เตือนความจำ",
-    "memoryPractice": "รำลึกวันวาน",
+    "memory": "ย้อนความหลัง",
     "healthRecord": "บันทึกข้อมูลสุขภาพ",
     "healthBlogs": "บล็อกสุขภาพ",
     "selectModules": "เลือกฟีเจอร์"
@@ -176,6 +176,7 @@
     "cancelButton": "ยกเลิก",
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "เชื่อมต่อกับผู้สูงอายุ",
-    "headerElderly": "เชื่อมต่อกับผู้ดูแล"
+    "headerElderly": "เชื่อมต่อกับผู้ดูแล",
+    "edit": "แก้ไข"
   }
 }
