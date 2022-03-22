@@ -8,7 +8,7 @@ const UpComingAlert = () => {
   return (
     <View w="full">
       <Text fontSize="2xl" fontWeight="600" mb={4}>
-        {t('33')}
+        {t('modules.notification')}
       </Text>
       <ModuleAlertCard
         moduleName="Lorem Ipsum"

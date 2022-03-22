@@ -42,7 +42,7 @@ const ProfileSection = () => {
           color="muted.600"
           onPress={() => navigation.navigate('SettingScreen')}
         />
-        <Text fontSize="sm">Settings</Text>
+        <Text fontSize="sm">{t('home.settingButton')}</Text>
       </View>
     </View>
   );

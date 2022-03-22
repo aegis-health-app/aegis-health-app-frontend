@@ -45,8 +45,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
-
-        {user ? (
+        {true ? (
           <>
             <Stack.Screen
               name="TabNavigation"
@@ -181,7 +180,7 @@ const MainNavigation = () => {
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' },
-                animation: "none",
+                animation: 'none'
               }}
             />
             <Stack.Screen
@@ -193,7 +192,7 @@ const MainNavigation = () => {
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' }
               }}
             />
-              </>
+          </>
         ) : (
           <>
             <Stack.Screen

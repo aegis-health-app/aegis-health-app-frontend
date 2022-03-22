@@ -39,13 +39,13 @@ const ModuleAlertCard = ({
         <HStack justifyContent="space-between" mt={4} mb={1}>
           <View flex={2} alignItems="center">
             <Text fontSize="lg" color="blue.500">
-              {t('34')}
+              {t('modules.dismiss')}
             </Text>
           </View>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
           <View flex={2} alignItems="center">
             <Text fontSize="lg" color="blue.500">
-              {t('35')}
+              {t('modules.iDidIt')}
             </Text>
           </View>
         </HStack>
