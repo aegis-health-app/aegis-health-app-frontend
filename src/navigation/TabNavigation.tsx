@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import UserLinkScreen from './../screens/UserLinkScreen';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import { Icon } from 'native-base';
+import Feather from 'react-native-vector-icons/Feather';
 import { useTranslation } from 'react-i18next';
 
 const TabNavigation = () => {
