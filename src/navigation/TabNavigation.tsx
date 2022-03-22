@@ -43,7 +43,7 @@ const TabNavigation = () => {
         name="UserLinkScreen"
         component={UserLinkScreen}
         options={{
-          title: t('28'),
+          title: t('profile.myCaretaker'),
           headerTitleAlign: 'center',
           headerTitleStyle: { fontSize: 20, fontWeight: '800' },
           headerStyle: {height:70},

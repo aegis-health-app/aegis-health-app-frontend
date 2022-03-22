@@ -172,7 +172,8 @@
     "connectText2":"” ?",
     "connectButton": "เชื่อมต่อเลย !",
     "cancelButton": "ยกเลิก",
-    "cameraHelpText": "Place QR code inside the scanning frame"
-
+    "cameraHelpText": "Place QR code inside the scanning frame",
+    "header": "เชื่อมต่อกับผู้สูงอายุ",
+    "headerElderly": "เชื่อมต่อกับผู้ดูแล"
   }
 }
