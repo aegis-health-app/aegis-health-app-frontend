@@ -160,7 +160,9 @@ const SettingScreen = () => {
               padding={0}
               colorScheme="secondary"
               fontWeight={900}
-              onPress={() => navigation.navigate('ChangeAccountPasswordScreen')}>
+              onPress={() =>
+                navigation.navigate('ChangeAccountPasswordScreen')
+              }>
               {t('7')}
             </Button>
           </View>
