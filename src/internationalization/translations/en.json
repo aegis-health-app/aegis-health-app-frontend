@@ -172,7 +172,8 @@
     "connectText2": "” ?",
     "connectButton": "Yes, Connect Us",
     "cancelButton": "Cancel",
-    "cameraHelpText": "Place QR code inside the scanning frame"
-
+    "cameraHelpText": "Place QR code inside the scanning frame",
+    "header": "Connect",
+    "headerElderly": "Connect"
   }
 }

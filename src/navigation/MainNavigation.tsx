@@ -88,7 +88,7 @@ const MainNavigation = () => {
               name="EditCaretakerScreen"
               component={EditCaretakerScreen}
               options={{
-                title: 'ผู้ดูแลของฉัน',
+                title: t('profile.myCaretaker'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
@@ -97,7 +97,7 @@ const MainNavigation = () => {
               name="ConnectCaretakerScreen"
               component={ConnectCaretakerScreen}
               options={{
-                title: 'เชื่อมต่อกับผู้ดูแล',
+                title: t('userLink.headerElderly'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
