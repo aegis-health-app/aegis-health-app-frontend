@@ -1,23 +1,20 @@
 import { useFormik } from 'formik';
-import { FormControl, Input, Text, Button, VStack, Icon } from 'native-base';
-import React, { useContext, useState } from 'react';
+import { FormControl, Text, Button, VStack, Icon } from 'native-base';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Divider from '../components/atoms/Divider';
-import { useSettings } from '../hooks/useSettings';
-import { UserContext } from '../contexts/UserContext';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { changePasswordSchema } from '../dto/Password';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Input from '../components/atoms/InputField';
 
 const ChangeAccountPasswordScreen = () => {
   const { t } = useTranslation();
-  const { userProfile, setUserProfile } = useContext(UserContext);
-  const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
@@ -65,7 +62,7 @@ const ChangeAccountPasswordScreen = () => {
               onBlur={handleBlur('oldPassword')}
               placeholder={t('Password')}
               onChangeText={handleChange('oldPassword')}
-              value={values.newPassword}
+              value={values.oldPassword}
               type={showOldPassword ? 'text' : 'password'}
               InputRightElement={
                 <Icon
@@ -117,7 +114,9 @@ const ChangeAccountPasswordScreen = () => {
                 {touched.newPassword ? errors.newPassword : ''}
               </FormControl.ErrorMessage>
             </FormControl>
-            <Spacer />
+          </View>
+          <Spacer />
+          <View style={styles.inputRow}>
             <FormControl isInvalid={'repeatNewPassword' in errors}>
               <FormControl.Label>{t('Repeat New Password')}</FormControl.Label>
               <Input
@@ -144,7 +143,7 @@ const ChangeAccountPasswordScreen = () => {
             </FormControl>
           </View>
         </View>
-        <View style={styles.inputRow}>{/* f */}</View>
+        <Spacer h={24} />
         {/* Buttons */}
         <VStack space={2}>
           <Button onPress={() => handleSubmit()}>Change password</Button>
