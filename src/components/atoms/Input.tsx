@@ -22,14 +22,6 @@ const InputBox = ({ name }: InputBoxProps) => {
           fontSize="sm"
           padding={3}
         />
-        {/* When form validation is implemented, use this text style */}
-        {/* <Text
-          fontSize="sm"
-          display="flex"
-          alignSelf="flex-start"
-          color="danger.500">
-          Hint Text
-        </Text> */}
       </Box>
     </View>
   );
