@@ -38,7 +38,7 @@ const TabNavigation = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: t('27')
+          tabBarLabel: t('profile.home')
         }}
       />
       <Tab.Screen
