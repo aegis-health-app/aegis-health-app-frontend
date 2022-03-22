@@ -11,7 +11,6 @@ export const useSettings = () => {
   const [isSoundEffectOn, setIsSoundEffectOn] = useState(true);
 
   const changeLanguage = (lang: string) => {
-    console.log(lang);
     setLanguage(lang);
     i18n.changeLanguage(lang);
   };
