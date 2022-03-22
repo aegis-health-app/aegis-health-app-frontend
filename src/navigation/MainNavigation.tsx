@@ -75,7 +75,7 @@ const MainNavigation = () => {
               name="ProfileScreen"
               component={ProfileScreen}
               options={{
-                headerTitle: t('24'),
+                headerTitle: t('profile.profile'),
                 headerShown: true
               }}
             />
@@ -83,7 +83,7 @@ const MainNavigation = () => {
               name="ProfileEditScreen"
               component={ProfileEditScreen}
               options={{
-                headerTitle: t('54'),
+                headerTitle: t('userForm.editProfile'),
                 headerShown: true
               }}
             />
