@@ -57,7 +57,7 @@ const ModulePickerList = () => {
                 color="green.500"
               />
             }
-            label={t('modules.healthRecord')}
+            label={t('modules.memoryPractice')}
             handlePress={() => navigation.navigate('MemoryScreen')}
           />
           <ModulePickerCard
@@ -70,7 +70,7 @@ const ModulePickerList = () => {
                 color="pink.400"
               />
             }
-            label={t('modules.memory')}
+            label={t('modules.healthRecord')}
             handlePress={() => navigation.navigate('HealthRecordScreen')}
           />
         </HStack>
