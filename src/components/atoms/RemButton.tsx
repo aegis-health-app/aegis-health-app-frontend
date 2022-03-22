@@ -30,12 +30,12 @@ const RemButton = ({ name }: remButtonProps) => {
         onClose={() => setDialogOpen(!dialogOpen)}>
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
-          <AlertDialog.Header>{t('120')}</AlertDialog.Header>
+          <AlertDialog.Header>{t('userLink.removeCaretaker')}</AlertDialog.Header>
           <AlertDialog.Body>
             <Text>
-              {t('119')}
+              {t('userLink.removeAlertBody1')}
               {name}
-              {t('121')}
+              {t('userLink.removeAlertBody2')}
             </Text>
           </AlertDialog.Body>
           <AlertDialog.Footer>
@@ -45,13 +45,13 @@ const RemButton = ({ name }: remButtonProps) => {
                 colorScheme="muted"
                 onPress={() => setDialogOpen(false)}
                 ref={cancelRef}>
-                {t('11')}
+                {t('setting.cancel')}
               </Button>
               <Button
                 colorScheme="danger"
                 onPress={handlePressDelete}
                 ref={cancelRef}>
-                {t('53')}
+                {t('misc.remove')}
               </Button>
             </Button.Group>
           </AlertDialog.Footer>
@@ -69,7 +69,7 @@ const RemButton = ({ name }: remButtonProps) => {
           _text: { color: '#F94000' }
         }}
         onPress={() => handlePressButton()}>
-        {t('123')}
+        {t('userLink.removeCaretaker')}
       </Button>
     </Box>
   );

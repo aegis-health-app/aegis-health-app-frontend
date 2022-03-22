@@ -78,7 +78,8 @@
     "previous": "Previous",
     "next": "Next",
     "skip": "Skip",
-    "finish": "Finish"
+    "finish": "Finish",
+    "remove": "Remove"
   },
   "userForm": {
     "editProfile": "Edit Profile",
@@ -88,7 +89,8 @@
     "saveChange": "Save Changes",
     "male": "Male",
     "female": "Female",
-    "editBirthdate": "Edit Birthdate"
+    "editBirthdate": "Edit Birthdate",
+    "editName": "Edit Display Name"
   },
   "profile": {
     "name": "Name",
@@ -105,7 +107,8 @@
     "edt": "Edit",
     "details": "Details",
     "home": "Home",
-    "myCaretaker": "My Caretakers"
+    "myCaretaker": "My Caretakers",
+    "gender": "Gender"
   },
   "modules": {
     "upcoming": "Upcoming",
@@ -152,5 +155,24 @@
     "backButton": "<< Back",
     "nextButton": "Next >>",
     "startButton": "Get Started"
+  },
+  "userLink": {
+    "addCaretaker": "Add Caretaker",
+    "removeCaretaker": "Remove Caretaker",
+    "removeAlertBody1": "This will remove '",
+    "removeAlertBody2": "' from your caretaker list. This action cannot be reverted.",
+    "myCode": "My Code: ",
+    "infoCard1": "From the Caretaker’s app, navigate to “Add Elderly” page.",
+    "infoCard2": "Scan the QR code or enter the code shown above.",
+    "scanQR": "Scan QR Code",
+    "enterCode": "Enter Code",
+    "enterElderlyCode": "Enter your elderly's code",
+    "enterButton": "Enter",
+    "connectText1": "Connect with “",
+    "connectText2": "” ?",
+    "connectButton": "Yes, Connect Us",
+    "cancelButton": "Cancel",
+    "cameraHelpText": "Place QR code inside the scanning frame"
+
   }
 }

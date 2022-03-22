@@ -20,7 +20,7 @@ const ConnectElderlyScreen = () => {
         <View>
             {/* TODO: change to tab instead */}
             <Button.Group isAttached justifyContent="center" my="2">
-            <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>Scan QR Code</Button>
+            <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('userLink.scanQR')}</Button>
             <Button borderWidth="1"
                 borderColor="#1D84DF"
                 backgroundColor="#FAFAFA"
@@ -32,7 +32,7 @@ const ConnectElderlyScreen = () => {
                 borderRadius="0" 
                 width="45%" 
                 onPress={() => navigation.navigate('InputCodeScreen')}
-            >Enter Code
+            >{t('userLink.enterCode')}
             </Button>
             </Button.Group>
             <ZStack mb="2" width="100%" height="100%" alignItems="center">
@@ -42,7 +42,7 @@ const ConnectElderlyScreen = () => {
                 </Box>
                 {/* <RNCamera/> */}
             </ZStack>
-            <Text position="absolute" alignSelf="center" bottom="24">{t('132')}</Text>
+            <Text position="absolute" alignSelf="center" bottom="24">{t('userLink.cameraHelpText')}</Text>
         </View>
     );
 };

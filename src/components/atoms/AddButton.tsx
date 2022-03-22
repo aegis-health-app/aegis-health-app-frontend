@@ -25,7 +25,7 @@ const AddButton = () => {
           _text: { color: '#7CC2FF' }
         }}
         onPress={() => navigation.navigate('ConnectCaretakerScreen')}>
-        {t('122')}
+        {t('userLink.addCaretaker')}
       </Button>
     </Box>
   );

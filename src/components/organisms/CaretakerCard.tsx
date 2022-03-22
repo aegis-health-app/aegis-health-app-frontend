@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import EditButton from '../atoms/EditButton';
+import { useTranslation } from 'react-i18next';
 
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
@@ -48,9 +49,11 @@ const Card = ({ name }: CardProps) => {
               {name}
             </Text>
           </View>
-          <EditButton
-            onPress={() => navigation.navigate('EditCaretakerScreen')}
+          <View ml={3}>
+          <EditButton 
+            onPress={() => navigation.navigate('EditCaretakerScreen', {itemId: name})}
           />
+          </View>
         </Box>
       </View>
     </View>

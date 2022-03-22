@@ -27,13 +27,15 @@ const InputCodeScreen = () => {
                 borderRadius="0" 
                 width="45%" 
                 onPress={() => navigation.navigate('ConnectElderlyScreen')}>
-              Scan QR Code
+              {t('userLink.scanQR')}
             </Button>
-            <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>Enter Code</Button>
+            <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('InputCodeScreen')}>{t('userLink.enterCode')}</Button>
         </Button.Group>
-        <InputBox name={t('133')} placeholder="XXXXXX"/>
-        <View my="5" flexDir="row" justifyContent="center">
-            <Button width="90%" onPress={() => navigation.navigate('ConfirmConnectScreen')}>{t('134')}</Button>
+        <View paddingX={5}>
+        <InputBox name={t('userLink.enterElderlyCode')}/>
+        </View>
+        <View my="2" flexDir="row" justifyContent="center">
+            <Button width="90%" onPress={() => navigation.navigate('ConfirmConnectScreen')}>{t('userLink.enterButton')}</Button>
             </View>
     </View>
   );

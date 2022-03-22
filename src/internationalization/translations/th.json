@@ -79,7 +79,8 @@
     "previous": "ย้อนกลับ",
     "next": "ไปต่อ",
     "skip": "ข้าม",
-    "finish": "เสร็จสิ้น"
+    "finish": "เสร็จสิ้น",
+    "remove": "ลบ"
   },
   "userForm": {
     "editProfile": "แก้ไขข้อมูล",
@@ -89,7 +90,8 @@
     "saveChange": "บันทึกข้อมูล",
     "male": "ชาย",
     "female": "หญิง",
-    "editBirthdate": "แก้ไขวันเกิด"
+    "editBirthdate": "แก้ไขวันเกิด",
+    "editName": "เปลี่ยนชื่อผู้ใช้"
   },
   "profile": {
     "name": "ชื่อ",
@@ -153,5 +155,24 @@
     "backButton": "<< กลับ",
     "nextButton": "ไปต่อ >>",
     "startButton": "เริ่มต้นการใช้งาน"
+  },
+  "userLink": {
+    "addCaretaker": "เพิ่มผู้ดูแล",
+    "removeCaretaker": "ลบผู้ดูแลคนนี้ออก",
+    "removeAlertBody1": "This will remove '",
+    "removeAlertBody2": "' from your caretaker list. This action cannot be reverted.",
+    "myCode": "โค้ดของฉัน: ",
+    "infoCard1": "จากแอปพลิเคชันของผู้ดูแล ให้กดปุ่ม “เพิ่มผู้สูงอายุ”",
+    "infoCard2": "สแกน QR code หรือกรอกโค้ดที่แสดงอยู่ด้านบน",
+    "scanQR": "สแกน QR Code",
+    "enterCode": "กรอกโค้ด",
+    "enterElderlyCode": "กรอกโค้ดประจำตัวของผู้สูงอายุ",
+    "enterButton": "ดำเนินการต่อ",
+    "connectText1": "เชื่อมต่อกับ “",
+    "connectText2":"” ?",
+    "connectButton": "เชื่อมต่อเลย !",
+    "cancelButton": "ยกเลิก",
+    "cameraHelpText": "Place QR code inside the scanning frame"
+
   }
 }
