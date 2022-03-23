@@ -23,9 +23,11 @@ export const BirthGender = {
 };
 
 export const userProfileSchema = Yup.object({
-  firstName: Yup.string().required(i18n.t('73')),
-  lastName: Yup.string().required(i18n.t('74')),
-  displayName: Yup.string().required(i18n.t('75')),
+  firstName: Yup.string().required(i18n.t('editProfile.firstNameBlankWarning')),
+  lastName: Yup.string().required(i18n.t('editProfile.lastNameBlankWarning')),
+  displayName: Yup.string().required(
+    i18n.t('editProfile.displayNameBlankWarning')
+  ),
   birthGender: Yup.string(),
   birthDate: Yup.string(),
   healthIssues: Yup.string(),
