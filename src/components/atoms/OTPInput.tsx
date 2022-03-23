@@ -46,7 +46,6 @@ const OTPInput: React.FC<OTPProps> = ({ count = 6 }) => {
           ))}
         </HStack>
       </TouchableWithoutFeedback>
-
       <Input
         ref={inputRef}
         keyboardType="numeric"

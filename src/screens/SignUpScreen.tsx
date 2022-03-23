@@ -7,6 +7,7 @@ import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
 import FormHeader from '../components/atoms/FormHeader';
 import TextInput from '../components/atoms/TextInput';
 import { useTranslation } from 'react-i18next';
+import ControlledOTPInput from '../components/molecules/ControlledOTPInput';
 
 const SignUpScreen = () => {
   const {
@@ -37,6 +38,13 @@ const SignUpScreen = () => {
           />
           <Button w="full">{t('auth.continue')}</Button>
           <Box flex={1} />
+          <ControlledOTPInput
+            label={t('general.otp')}
+            name="otp"
+            errors={errors}
+            control={control}
+            isRequired
+          />
           <AuthFooter page={AuthType.SIGNUP} />
         </VStack>
       </ScrollView>
