@@ -74,10 +74,10 @@ const theme = extendTheme({
 const App = () => {
   const { t } = useTranslation();
   const tourGuideLabels = {
-    previous: t('29'),
-    next: t('30'),
-    skip: t('31'),
-    finish: t('32')
+    previous: t('misc.previous'),
+    next: t('misc.next'),
+    skip: t('misc.skip'),
+    finish: t('misc.finish')
   };
 
   return (

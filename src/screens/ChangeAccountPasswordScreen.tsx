@@ -1,5 +1,4 @@
-import { useFormik } from 'formik';
-import { FormControl, Text, Button, VStack, Icon } from 'native-base';
+import { Text, Button, VStack, Icon } from 'native-base';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -11,7 +10,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { changePasswordSchema } from '../dto/Password';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Input from '../components/atoms/InputField';
+import { useForm } from 'react-hook-form';
+import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
+import TextInput from '../components/atoms/TextInput';
 
 const ChangeAccountPasswordScreen = () => {
   const { t } = useTranslation();
@@ -21,19 +22,12 @@ const ChangeAccountPasswordScreen = () => {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
 
-  const initialValues = {
-    oldPassword: '',
-    newPassword: '',
-    repeatNewPassword: ''
-  };
-  const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: changePasswordSchema,
-      onSubmit: (data) => {
-        onFormSubmit(data);
-      }
-    });
+  const resolver = useYupValidationResolver(changePasswordSchema);
+  const {
+    control,
+    formState: { errors },
+    handleSubmit
+  } = useForm({ resolver, mode: 'onTouched' });
 
   const onFormSubmit = (data) => {
     console.log('submit password change', data);
@@ -56,32 +50,25 @@ const ChangeAccountPasswordScreen = () => {
         </View>
         <Spacer />
         <View style={styles.inputRow}>
-          <FormControl isInvalid={'oldPassword' in errors}>
-            <FormControl.Label>
-              {t('changePassword.oldPassword')}
-            </FormControl.Label>
-            <Input
-              onBlur={handleBlur('oldPassword')}
-              placeholder={t('changePassword.password')}
-              onChangeText={handleChange('oldPassword')}
-              value={values.oldPassword}
-              type={showOldPassword ? 'text' : 'password'}
-              InputRightElement={
-                <Icon
-                  mr={2}
-                  size="sm"
-                  h="full"
-                  as={Ionicons}
-                  name={showOldPassword ? 'eye' : 'eye-off'}
-                  color="muted.400"
-                  onPress={() => setShowOldPassword(!showOldPassword)}
-                />
-              }
-            />
-            <FormControl.ErrorMessage mt={0}>
-              {touched.oldPassword ? errors.oldPassword : ''}
-            </FormControl.ErrorMessage>
-          </FormControl>
+          <TextInput
+            label={t('changePassword.oldPassword')}
+            placeholder={t('changePassword.oldPassword')}
+            name="oldPassword"
+            control={control}
+            errors={errors}
+            type={showOldPassword ? 'text' : 'password'}
+            InputRightElement={
+              <Icon
+                mr={2}
+                size="sm"
+                h="full"
+                as={Ionicons}
+                name={showOldPassword ? 'eye' : 'eye-off'}
+                color="muted.400"
+                onPress={() => setShowOldPassword(!showOldPassword)}
+              />
+            }
+          />
         </View>
         <Spacer />
         {/* Input new password */}
@@ -92,67 +79,53 @@ const ChangeAccountPasswordScreen = () => {
           <Spacer />
           {/* Old Password */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'newPassword' in errors}>
-              <FormControl.Label>
-                {t('changePassword.newPassword')}
-              </FormControl.Label>
-              <Input
-                onBlur={handleBlur('newPassword')}
-                placeholder={t('changePassword.password')}
-                onChangeText={handleChange('newPassword')}
-                value={values.newPassword}
-                type={showNewPassword ? 'text' : 'password'}
-                InputRightElement={
-                  <Icon
-                    mr={2}
-                    size="sm"
-                    h="full"
-                    as={Ionicons}
-                    name={showNewPassword ? 'eye' : 'eye-off'}
-                    color="muted.400"
-                    onPress={() => setShowNewPassword(!showNewPassword)}
-                  />
-                }
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.newPassword ? errors.newPassword : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('changePassword.newPassword')}
+              placeholder={t('changePassword.newPassword')}
+              name="newPassword"
+              control={control}
+              errors={errors}
+              type={showNewPassword ? 'text' : 'password'}
+              InputRightElement={
+                <Icon
+                  mr={2}
+                  size="sm"
+                  h="full"
+                  as={Ionicons}
+                  name={showNewPassword ? 'eye' : 'eye-off'}
+                  color="muted.400"
+                  onPress={() => setShowNewPassword(!showNewPassword)}
+                />
+              }
+            />
           </View>
           <Spacer />
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'repeatNewPassword' in errors}>
-              <FormControl.Label>
-                {t('changePassword.repeatNewPassword')}
-              </FormControl.Label>
-              <Input
-                onBlur={handleBlur('repeatNewPassword')}
-                placeholder={t('Password')}
-                onChangeText={handleChange('repeatNewPassword')}
-                value={values.repeatNewPassword}
-                type={showRepeatPassword ? 'text' : 'password'}
-                InputRightElement={
-                  <Icon
-                    mr={2}
-                    size="sm"
-                    h="full"
-                    as={Ionicons}
-                    name={showRepeatPassword ? 'eye' : 'eye-off'}
-                    color="muted.400"
-                    onPress={() => setShowRepeatPassword(!showRepeatPassword)}
-                  />
-                }
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.repeatNewPassword ? errors.repeatNewPassword : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('changePassword.repeatNewPassword')}
+              placeholder={t('changePassword.repeatNewPassword')}
+              name="repeatNewPassword"
+              control={control}
+              errors={errors}
+              type={showRepeatPassword ? 'text' : 'password'}
+              InputRightElement={
+                <Icon
+                  mr={2}
+                  size="sm"
+                  h="full"
+                  as={Ionicons}
+                  name={showRepeatPassword ? 'eye' : 'eye-off'}
+                  color="muted.400"
+                  onPress={() => setShowRepeatPassword(!showRepeatPassword)}
+                />
+              }
+            />
           </View>
         </View>
         <Spacer h={24} />
         {/* Buttons */}
         <VStack space={2}>
-          <Button onPress={() => handleSubmit()}>
+          <Button onPress={handleSubmit(onFormSubmit)}>
             {t('changePassword.changePassword')}
           </Button>
           <Button

@@ -26,7 +26,7 @@ const ProfileScreen = () => {
       value: 'Sompoch Muangyim'
     },
     {
-      label: t('profile.dislpayName'),
+      label: t('profile.displayName'),
       value: 'sompoch'
     },
     {
@@ -34,7 +34,7 @@ const ProfileScreen = () => {
       value: 'Male'
     },
     {
-      label: t('profile.birthdate'),
+      label: t('profile.birthDate'),
       value: '08/02/1951'
     },
     {
