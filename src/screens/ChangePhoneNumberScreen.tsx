@@ -1,17 +1,15 @@
-import { useFormik } from 'formik';
-import { FormControl, Input, Text, Button, VStack } from 'native-base';
-import React, { useContext } from 'react';
+import { Text, Button, VStack } from 'native-base';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Divider from '../components/atoms/Divider';
-import { useSettings } from '../hooks/useSettings';
-import { UserContext } from '../contexts/UserContext';
-import moment from 'moment';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+
+// WORK IN PROGRESS
 
 const ChangePhoneNumberScreen = () => {
   const { t } = useTranslation();

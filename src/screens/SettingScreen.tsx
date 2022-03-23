@@ -77,7 +77,7 @@ const SettingScreen = () => {
     <View style={styles.pageContainer}>
       {/* Section: App Settings */}
       <Text fontSize="2xl" fontWeight="700">
-        {t('2')}
+        {t('setting.settings')}
       </Text>
       <Spacer />
       <Text fontSize="lg" fontWeight="500" mb={0}>
@@ -89,10 +89,13 @@ const SettingScreen = () => {
       {/* Language Toggle */}
       <View style={styles.tourGuideWrapper}>
         {renderTourguide && (
-          <TourGuideZone zone={1} shape="rectangle" text={t('76')}>
+          <TourGuideZone
+            zone={1}
+            shape="rectangle"
+            text={t('settingTutorial.step1')}>
             <View style={styles.settingsItemRow}>
               <View>
-                <Text fontSize="md">{t('4')}</Text>
+                <Text fontSize="md">{t('setting.language')}</Text>
               </View>
               <View style={styles.toggleButtonsContainer}>
                 <Button
@@ -127,10 +130,13 @@ const SettingScreen = () => {
 
       {/* Sound Effect Toggle */}
       {renderTourguide && (
-        <TourGuideZone zone={2} shape="rectangle" text={t('77')}>
+        <TourGuideZone
+          zone={2}
+          shape="rectangle"
+          text={t('settingTutorial.step2')}>
           <View style={styles.settingsItemRow}>
             <View>
-              <Text fontSize="md">{t('5')}</Text>
+              <Text fontSize="md">{t('setting.soundEffect')}</Text>
             </View>
             <View>
               <Switch
@@ -146,9 +152,12 @@ const SettingScreen = () => {
 
       {/* Section: Account Settings */}
       {renderTourguide && (
-        <TourGuideZone zone={3} shape="rectangle" text={t('78')}>
+        <TourGuideZone
+          zone={3}
+          shape="rectangle"
+          text={t('settingTutorial.step3')}>
           <Text fontSize="lg" fontWeight="500" mb={0}>
-            {t('6')}
+            {t('setting.account')}
           </Text>
           <Divider my={1} />
           <Spacer />
@@ -163,7 +172,7 @@ const SettingScreen = () => {
               onPress={() =>
                 navigation.navigate('ChangeAccountPasswordScreen')
               }>
-              {t('7')}
+              {t('setting.changeAccPassword')}
             </Button>
           </View>
           <Spacer />
@@ -176,7 +185,7 @@ const SettingScreen = () => {
               colorScheme="secondary"
               fontWeight={900}
               onPress={() => navigation.navigate('ChangePhoneNumberScreen')}>
-              {t('8')}
+              {t('setting.changePhoneNumber')}
             </Button>
           </View>
         </TourGuideZone>
@@ -184,7 +193,7 @@ const SettingScreen = () => {
       <Spacer />
       {/* Signou */}
       <Button size="lg" variant="outline" colorScheme="secondary">
-        {t('12')}
+        {t('setting.signOut')}
       </Button>
       {renderTourguide && (
         <TourGuideZoneByPosition
@@ -195,7 +204,7 @@ const SettingScreen = () => {
           right={14}
           width={32}
           height={32}
-          text={t('79')}
+          text={t('settingTutorial.step4')}
         />
       )}
     </View>

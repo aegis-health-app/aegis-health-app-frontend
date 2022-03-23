@@ -85,7 +85,7 @@ const MainNavigation = () => {
               name="ChangeAccountPasswordScreen"
               component={ChangeAccountPasswordScreen}
               options={{
-                headerTitle: t('24'),
+                headerTitle: t('setting.changePhoneNumber'),
                 headerShown: false
               }}
             />
@@ -93,7 +93,7 @@ const MainNavigation = () => {
               name="ChangePhoneNumberScreen"
               component={ChangePhoneNumberScreen}
               options={{
-                headerTitle: t('24'),
+                headerTitle: t('setting.changeAccPassword'),
                 headerShown: false
               }}
             />
@@ -152,7 +152,7 @@ const MainNavigation = () => {
               name="ModuleManageScreen"
               component={ModulePickerScreen}
               options={{
-                title: t('43'),
+                title: t('modules.selectModules'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}

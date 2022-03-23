@@ -44,23 +44,25 @@ const ChangeAccountPasswordScreen = () => {
       <View style={styles.pageContainer}>
         <View>
           <Text fontSize="2xl" fontWeight={'md'}>
-            Change password
+            {t('changePassword.changePassword')}
           </Text>
         </View>
         <Divider my={1} />
         {/* Input old password */}
         <View style={styles.title}>
           <Text fontSize="xl" fontWeight={'md'}>
-            Enter Your Old Password
+            {t('changePassword.enterOldPassword')}
           </Text>
         </View>
         <Spacer />
         <View style={styles.inputRow}>
           <FormControl isInvalid={'oldPassword' in errors}>
-            <FormControl.Label>{t('Old Password')}</FormControl.Label>
+            <FormControl.Label>
+              {t('changePassword.oldPassword')}
+            </FormControl.Label>
             <Input
               onBlur={handleBlur('oldPassword')}
-              placeholder={t('Password')}
+              placeholder={t('changePassword.password')}
               onChangeText={handleChange('oldPassword')}
               value={values.oldPassword}
               type={showOldPassword ? 'text' : 'password'}
@@ -85,16 +87,18 @@ const ChangeAccountPasswordScreen = () => {
         {/* Input new password */}
         <View>
           <Text fontSize="xl" fontWeight={'md'}>
-            Enter Your New Password
+            {t('changePassword.enterNewPassword')}
           </Text>
           <Spacer />
           {/* Old Password */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'newPassword' in errors}>
-              <FormControl.Label>{t('New Password')}</FormControl.Label>
+              <FormControl.Label>
+                {t('changePassword.newPassword')}
+              </FormControl.Label>
               <Input
                 onBlur={handleBlur('newPassword')}
-                placeholder={t('Password')}
+                placeholder={t('changePassword.password')}
                 onChangeText={handleChange('newPassword')}
                 value={values.newPassword}
                 type={showNewPassword ? 'text' : 'password'}
@@ -118,7 +122,9 @@ const ChangeAccountPasswordScreen = () => {
           <Spacer />
           <View style={styles.inputRow}>
             <FormControl isInvalid={'repeatNewPassword' in errors}>
-              <FormControl.Label>{t('Repeat New Password')}</FormControl.Label>
+              <FormControl.Label>
+                {t('changePassword.repeatNewPassword')}
+              </FormControl.Label>
               <Input
                 onBlur={handleBlur('repeatNewPassword')}
                 placeholder={t('Password')}
@@ -146,13 +152,15 @@ const ChangeAccountPasswordScreen = () => {
         <Spacer h={24} />
         {/* Buttons */}
         <VStack space={2}>
-          <Button onPress={() => handleSubmit()}>Change password</Button>
+          <Button onPress={() => handleSubmit()}>
+            {t('changePassword.changePassword')}
+          </Button>
           <Button
             w="100%"
             colorScheme="secondary"
             variant="outline"
             onPress={() => navigation.goBack()}>
-            {t('11')}
+            {t('changePassword.cancelButton')}
           </Button>
         </VStack>
       </View>
