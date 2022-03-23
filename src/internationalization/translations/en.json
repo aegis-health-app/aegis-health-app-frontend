@@ -60,6 +60,7 @@
     "profileTouchIndicator": "Click to see your profile"
   },
   "setting": {
+    "settings": "Settings",
     "header": "App Settings",
     "language": "Language",
     "soundEffect": "Sound Effect",
@@ -91,6 +92,7 @@
     "takePic": "Take a picture",
     "fromDevice": "From your device",
     "saveChange": "Save Changes",
+    "cancel": "Cancel",
     "male": "Male",
     "female": "Female",
     "editBirthdate": "Edit Birthdate",
@@ -98,6 +100,7 @@
   },
   "profile": {
     "name": "Name",
+    "lastName": "Last Name",
     "displayName": "Display Name",
     "birthGender": "Birth Gender",
     "birthDate": "Birth Date",
@@ -191,5 +194,19 @@
     "alreadyHaveAccount": "Already have an account?",
     "signUp": "Sign Up",
     "continue": "Continue"
+  },
+  "changePassword": {
+    "enterOldPassword": "Enter Your Old Password",
+    "enterNewPassword": "Enter Your New Password",
+    "oldPassword": "Old Password",
+    "password": "Password",
+    "newPassword": "New Password",
+    "repeatNewPassword": "Repeat New Password",
+    "changePassword": "Change Password",
+    "cancelButton": "Cancel",
+    "blankOldPasswordWarning": "Old Password cannot be left blank",
+    "blankNewPasswordWarning": "New Password cannot be left blank",
+    "passwordsMustMatch": "Passwords must match",
+    "samePasswordWarning": "New password cannot be the same as the old password"
   }
 }

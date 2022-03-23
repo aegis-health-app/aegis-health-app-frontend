@@ -60,6 +60,7 @@
     "profileTouchIndicator": "แตะเพื่อดูข้อมูลส่วนตัวของคุณ"
   },
   "setting": {
+    "settings": "ตั้งค่า",
     "header": "ตั้งค่าแอพ",
     "language": "ภาษา",
     "soundEffect": "เสียงประกอบ",
@@ -98,6 +99,7 @@
   },
   "profile": {
     "name": "ชื่อ",
+    "lastName": "นามสกุล",
     "displayName": "ชื่อผู้ใช้",
     "birthGender": "เพศ",
     "birthDate": "วันเกิด",
@@ -191,5 +193,19 @@
     "alreadyHaveAccount": "มีบัญชีผู้ใช้แล้ว?",
     "signUp": "สมัครใช้งาน",
     "continue": "ดำเนินการต่อ"
+  },
+  "changePassword": {
+    "enterOldPassword": "กรอกรหัสผ่านเดิม",
+    "enterNewPassword": "กรอกรหัสใหม่",
+    "oldPassword": "รหัสผ่านเก่า",
+    "password": "รหัสผ่าน",
+    "newPassword": "รหัสผ่านใหม่",
+    "repeatNewPassword": "ยืนยันรหัสผ่าน",
+    "changePassword": "เปลี่ยนรหัสผ่าน",
+    "cancelButton": "ยกเลิก",
+    "blankOldPasswordWarning": "กรุณากรอกรหัสผ่านเก่า",
+    "blankNewPasswordWarning": "กรุณากรอกรหัสผ่านใหม่",
+    "passwordsMustMatch": "รหัสผ่านไม่ตรงกัน",
+    "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
   }
 }

@@ -22,23 +22,23 @@ const ProfileScreen = () => {
   // TODO: Update dummy data to use the fetched data
   const basicProfiledata = [
     {
-      label: t('14'),
+      label: t('profile.name'),
       value: 'Sompoch Muangyim'
     },
     {
-      label: t('15'),
+      label: t('profile.dislpayName'),
       value: 'sompoch'
     },
     {
-      label: t('16'),
+      label: t('profile.birthGender'),
       value: 'Male'
     },
     {
-      label: t('17'),
+      label: t('profile.birthdate'),
       value: '08/02/1951'
     },
     {
-      label: t('18'),
+      label: t('profile.phoneNumber'),
       value: '0909090909'
     }
   ];
@@ -46,23 +46,23 @@ const ProfileScreen = () => {
   // TODO: Update dummy data to use the fetched datad
   const healthProfileData = [
     {
-      label: t('19'),
+      label: t('profile.healthIssues'),
       value: 'Diebetes, High blood pressure'
     },
     {
-      label: t('20'),
+      label: t('profile.personalMedicine'),
       value: 'Ibuprofen'
     },
     {
-      label: t('21'),
+      label: t('profile.allergens'),
       value: 'Chlorpheniramine เกสรดอกไม้'
     },
     {
-      label: t('22'),
+      label: t('profile.previousVaccinations'),
       value: 'บาดทะยัก คอตีบ'
     },
     {
-      label: t('23'),
+      label: t('profile.bloodType'),
       value: 'B'
     }
   ];
@@ -71,7 +71,7 @@ const ProfileScreen = () => {
     <View style={styles.pageContainer}>
       <View style={styles.profileInfoItemRow}>
         <Text fontSize="2xl" fontWeight="700">
-          {t('26')}
+          {t('profile.details')}
         </Text>
         <EditButton onPress={() => navigation.navigate('ProfileEditScreen')} />
       </View>

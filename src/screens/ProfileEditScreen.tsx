@@ -104,7 +104,7 @@ const ProfileEditScreen = () => {
       <ScrollView style={styles.pageContainer}>
         <View style={styles.profileInfoItemRow}>
           <Text fontSize="2xl" fontWeight="700">
-            {t('55')}
+            {t('profile.details')}
           </Text>
         </View>
         <Spacer />
@@ -119,9 +119,9 @@ const ProfileEditScreen = () => {
         </View>
         <Spacer />
         <View justifyContent="center" alignItems="center">
-          <Button width={48}>{t('56')}</Button>
+          <Button width={48}>{t('userForm.takePic')}</Button>
           <Spacer />
-          <Button width={48}>{t('57')}</Button>
+          <Button width={48}>{t('userForm.fromDevice')}</Button>
           <Spacer />
         </View>
 
@@ -129,10 +129,10 @@ const ProfileEditScreen = () => {
           {/* First Name */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'firstName' in errors}>
-              <FormControl.Label>{t('62')}</FormControl.Label>
+              <FormControl.Label>{t('profile.name')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('firstName')}
-                placeholder={t('62')}
+                placeholder={t('profile.name')}
                 onChangeText={handleChange('firstName')}
                 value={values.firstName}
               />
@@ -145,10 +145,10 @@ const ProfileEditScreen = () => {
           {/* Last Name */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'lastName' in errors}>
-              <FormControl.Label>{t('63')}</FormControl.Label>
+              <FormControl.Label>{t('profile.lastName')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('lastName')}
-                placeholder={t('63')}
+                placeholder={t('profile.lastName')}
                 onChangeText={handleChange('lastName')}
                 value={values.lastName}
               />
@@ -161,10 +161,10 @@ const ProfileEditScreen = () => {
           {/* Display Name */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'displayName' in errors}>
-              <FormControl.Label>{t('15')}</FormControl.Label>
+              <FormControl.Label>{t('profile.displayName')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('displayName')}
-                placeholder={t('15')}
+                placeholder={t('profile.displayName')}
                 onChangeText={handleChange('displayName')}
                 value={values.displayName}
               />
@@ -176,7 +176,7 @@ const ProfileEditScreen = () => {
 
           {/* Gender */}
           <Text fontSize={16} mb={2}>
-            {t('16')}
+            {t('profile.birthGender')}
           </Text>
           <View style={styles.profileInfoItemRow}>
             <View style={styles.toggleButtonsContainer}>
@@ -188,7 +188,7 @@ const ProfileEditScreen = () => {
                     birthGender: BirthGender.MALE
                   })
                 }>
-                {t('59')}
+                {t('userForm.male')}
               </Button>
               <Spacer h={0} />
               <Button
@@ -199,7 +199,7 @@ const ProfileEditScreen = () => {
                     birthGender: BirthGender.FEMALE
                   })
                 }>
-                {t('60')}
+                {t('userForm.female')}
               </Button>
             </View>
           </View>
@@ -207,7 +207,7 @@ const ProfileEditScreen = () => {
 
           {/* Birthdate */}
           <Text fontSize={16} mb={2}>
-            {t('17')}
+            {t('profile.birthDate')}
           </Text>
           {(Platform.OS === 'ios' || show) && (
             <View style={styles.profileInfoItemRow}>
@@ -227,7 +227,9 @@ const ProfileEditScreen = () => {
             {Platform.OS === 'android' && (
               <View style={styles.profileInfoItemRow}>
                 <Text w={100}>{getFormattedDate(date)}</Text>
-                <Button onPress={() => showDatepicker()}>{t('61')}</Button>
+                <Button onPress={() => showDatepicker()}>
+                  {t('userForm.editBirthdate')}
+                </Button>
               </View>
             )}
           </View>
@@ -236,10 +238,10 @@ const ProfileEditScreen = () => {
           {/* Health Issues */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'healthIssues' in errors}>
-              <FormControl.Label>{t('19')}</FormControl.Label>
+              <FormControl.Label>{t('profile.healthIssues')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('healthIssues')}
-                placeholder={t('19')}
+                placeholder={t('profile.healthIssues')}
                 onChangeText={handleChange('healthIssues')}
                 value={values.healthIssues}
               />
@@ -252,10 +254,12 @@ const ProfileEditScreen = () => {
           {/* Personal Medicine */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'personalMedicine' in errors}>
-              <FormControl.Label>{t('20')}</FormControl.Label>
+              <FormControl.Label>
+                {t('profile.personalMedicine')}
+              </FormControl.Label>
               <Input
                 onBlur={handleBlur('personalMedicine')}
-                placeholder={t('20')}
+                placeholder={t('profile.personalMedicine')}
                 onChangeText={handleChange('personalMedicine')}
                 value={values.personalMedicine}
               />
@@ -268,10 +272,10 @@ const ProfileEditScreen = () => {
           {/* Allergens */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'allergens' in errors}>
-              <FormControl.Label>{t('21')}</FormControl.Label>
+              <FormControl.Label>{t('profile.allergens')}</FormControl.Label>
               <Input
                 onBlur={handleBlur('allergens')}
-                placeholder={t('21')}
+                placeholder={t('profile.allergens')}
                 onChangeText={handleChange('allergens')}
                 value={values.allergens}
               />
@@ -284,10 +288,12 @@ const ProfileEditScreen = () => {
           {/* Previous Vaccinations */}
           <View style={styles.inputRow}>
             <FormControl isInvalid={'previousVaccinations' in errors}>
-              <FormControl.Label>{t('22')}</FormControl.Label>
+              <FormControl.Label>
+                {t('profile.previousVaccinations')}
+              </FormControl.Label>
               <Input
                 onBlur={handleBlur('previousVaccinations')}
-                placeholder={t('22')}
+                placeholder={t('profile.previousVaccinations')}
                 onChangeText={handleChange('previousVaccinations')}
                 value={values.previousVaccinations}
               />
@@ -301,7 +307,7 @@ const ProfileEditScreen = () => {
 
           {/* Blood Type */}
           <Text fontSize={16} mb={2}>
-            {t('23')}
+            {t('profile.bloodType')}
           </Text>
           <Radio.Group
             name="myRadioGroup"
@@ -337,7 +343,7 @@ const ProfileEditScreen = () => {
         <Divider />
         <View justifyContent="center" alignItems="center">
           <Button w="100%" onPress={handleSubmit}>
-            {t('58')}
+            {t('userForm.saveChange')}
           </Button>
           <Spacer />
           <Button
@@ -345,7 +351,7 @@ const ProfileEditScreen = () => {
             colorScheme="secondary"
             variant="outline"
             onPress={() => navigation.goBack()}>
-            {t('11')}
+            {t('userForm.cancel')}
           </Button>
           <Spacer />
         </View>
