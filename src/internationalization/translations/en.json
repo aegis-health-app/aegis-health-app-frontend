@@ -52,6 +52,9 @@
   "51": "Confirmation",
   "52": "Are you sure you want to remove this module?",
   "53": "Remove",
+  "general": {
+    "otp": "Verification Code"
+  },
   "home": {
     "settingButton": "Settings",
     "profileTouchIndicator": "Click to see your profile"
