@@ -48,15 +48,7 @@ const ModuleManageScreen = () => {
               mr={4}
             />
           }
-<<<<<<< HEAD
-<<<<<<< HEAD
           title={t('modules.memory')}
-=======
-          title={t('modules.memoryPractice')}
->>>>>>> 56a40d5 (fix: change Home page and its components to match the new translation convention)
-=======
-          title={t('modules.memory')}
->>>>>>> 847633b (fix: change UserLink screenn to match new translation convention)
           description={t('46')}
           isAdded={true}
         />
