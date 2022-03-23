@@ -22,7 +22,6 @@ const OTPInput: React.FC<OTPProps> = ({ count = 6 }) => {
 
   const focusOTP = () => {
     inputRef?.current?.focus();
-    console.log('focus otp');
   };
 
   return (
