@@ -13,7 +13,7 @@ export const UserContext = createContext({} as UserContextStruct);
 const UserContextProvider = ({ ...props }) => {
   const [userProfile, setUserProfile] = useState<User | undefined>({
     name: '',
-    dislpayName: '',
+    displayName: '',
     birthGender: '',
     birthDate: '',
     phoneNumber: '',

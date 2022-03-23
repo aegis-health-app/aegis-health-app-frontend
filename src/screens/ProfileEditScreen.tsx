@@ -1,29 +1,21 @@
 import { Platform, StyleSheet } from 'react-native';
 import React, { useContext, useState } from 'react';
-import {
-  Button,
-  Image,
-  Radio,
-  ScrollView,
-  Text,
-  View,
-  FormControl
-} from 'native-base';
+import { Button, Image, Radio, ScrollView, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
-// import InputBox from '../components/atoms/Input';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
 import { BloodType, User, userProfileSchema, BirthGender } from '../dto/User';
 import Divider from '../components/atoms/Divider';
-import { useFormik } from 'formik';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { LANGUAGES, useSettings } from '../hooks/useSettings';
-import Input from '../components/atoms/InputField';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import { useForm } from 'react-hook-form';
+import TextInput from '../components/atoms/TextInput';
+import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
@@ -48,14 +40,12 @@ const ProfileEditScreen = () => {
     bloodType: 'N/A'
   };
 
-  const { values, errors, handleBlur, handleChange, touched, handleSubmit } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: userProfileSchema,
-      onSubmit: (values) => {
-        onFormSubmit(values);
-      }
-    });
+  const resolver = useYupValidationResolver(userProfileSchema);
+  const {
+    control,
+    formState: { errors },
+    handleSubmit
+  } = useForm({ resolver, mode: 'onTouched' });
 
   const [date, setDate] = useState(new Date(700938977));
   const [mode, setMode] = useState('date');
@@ -128,50 +118,38 @@ const ProfileEditScreen = () => {
         <View>
           {/* First Name */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'firstName' in errors}>
-              <FormControl.Label>{t('profile.name')}</FormControl.Label>
-              <Input
-                onBlur={handleBlur('firstName')}
-                placeholder={t('profile.name')}
-                onChangeText={handleChange('firstName')}
-                value={values.firstName}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.firstName ? errors.firstName : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.name')}
+              placeholder={t('profile.name')}
+              defaultValue={initialValues.firstName}
+              name="firstName"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Last Name */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'lastName' in errors}>
-              <FormControl.Label>{t('profile.lastName')}</FormControl.Label>
-              <Input
-                onBlur={handleBlur('lastName')}
-                placeholder={t('profile.lastName')}
-                onChangeText={handleChange('lastName')}
-                value={values.lastName}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.lastName ? errors.lastName : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.lastName')}
+              placeholder={t('profile.lastName')}
+              defaultValue={initialValues.lastName}
+              name="lastName"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Display Name */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'displayName' in errors}>
-              <FormControl.Label>{t('profile.displayName')}</FormControl.Label>
-              <Input
-                onBlur={handleBlur('displayName')}
-                placeholder={t('profile.displayName')}
-                onChangeText={handleChange('displayName')}
-                value={values.displayName}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.displayName ? errors.displayName : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.displayName')}
+              placeholder={t('profile.displayName')}
+              defaultValue={initialValues.displayName}
+              name="displayName"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Gender */}
@@ -237,72 +215,50 @@ const ProfileEditScreen = () => {
 
           {/* Health Issues */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'healthIssues' in errors}>
-              <FormControl.Label>{t('profile.healthIssues')}</FormControl.Label>
-              <Input
-                onBlur={handleBlur('healthIssues')}
-                placeholder={t('profile.healthIssues')}
-                onChangeText={handleChange('healthIssues')}
-                value={values.healthIssues}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.healthIssues ? errors.healthIssues : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.healthIssues')}
+              placeholder={t('profile.healthIssues')}
+              defaultValue={initialValues.healthIssues}
+              name="healthIssues"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Personal Medicine */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'personalMedicine' in errors}>
-              <FormControl.Label>
-                {t('profile.personalMedicine')}
-              </FormControl.Label>
-              <Input
-                onBlur={handleBlur('personalMedicine')}
-                placeholder={t('profile.personalMedicine')}
-                onChangeText={handleChange('personalMedicine')}
-                value={values.personalMedicine}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.personalMedicine ? errors.personalMedicine : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.personalMedicine')}
+              placeholder={t('profile.personalMedicine')}
+              defaultValue={initialValues.personalMedicine}
+              name="personalMedicine"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Allergens */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'allergens' in errors}>
-              <FormControl.Label>{t('profile.allergens')}</FormControl.Label>
-              <Input
-                onBlur={handleBlur('allergens')}
-                placeholder={t('profile.allergens')}
-                onChangeText={handleChange('allergens')}
-                value={values.allergens}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.allergens ? errors.allergens : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.allergens')}
+              placeholder={t('profile.allergens')}
+              defaultValue={initialValues.allergens}
+              name="allergens"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Previous Vaccinations */}
           <View style={styles.inputRow}>
-            <FormControl isInvalid={'previousVaccinations' in errors}>
-              <FormControl.Label>
-                {t('profile.previousVaccinations')}
-              </FormControl.Label>
-              <Input
-                onBlur={handleBlur('previousVaccinations')}
-                placeholder={t('profile.previousVaccinations')}
-                onChangeText={handleChange('previousVaccinations')}
-                value={values.previousVaccinations}
-              />
-              <FormControl.ErrorMessage mt={0}>
-                {touched.previousVaccinations
-                  ? errors.previousVaccinations
-                  : ''}
-              </FormControl.ErrorMessage>
-            </FormControl>
+            <TextInput
+              label={t('profile.previousVaccinations')}
+              placeholder={t('profile.previousVaccinations')}
+              defaultValue={initialValues.previousVaccinations}
+              name="previousVaccinations"
+              control={control}
+              errors={errors}
+            />
           </View>
 
           {/* Blood Type */}
@@ -342,7 +298,7 @@ const ProfileEditScreen = () => {
         </View>
         <Divider />
         <View justifyContent="center" alignItems="center">
-          <Button w="100%" onPress={handleSubmit}>
+          <Button w="100%" onPress={handleSubmit(onFormSubmit)}>
             {t('userForm.saveChange')}
           </Button>
           <Spacer />
