@@ -93,6 +93,20 @@
     "confirm": "Confirmation",
     "cancel": "Cancel"
   },
+  "planSelection": {
+    "header": "Sign Up",
+    "subheader": "What is your objective?",
+    "selfCareHeader": "Take care of myself",
+    "selfCareBullet1": "Catered Reminders",
+    "selfCareBullet2": "Health Recordings",
+    "selfCareBullet3": "Connect with your caretaker",
+    "selfCareButtonText": "Select Elderly Plan",
+    "elderlyCareHeader": "Take care of others",
+    "elderlyCareBullet1": "Catered Reminders",
+    "elderlyCareBullet2": "Health Recordings",
+    "elderlyCareBullet3": "Connect with who you take care of",
+    "elderlyCareButtonText": "Select Caretaker Plan"
+  },
   "onBoarding": {
     "languageTh": "Thai",
     "languageEn": "English",

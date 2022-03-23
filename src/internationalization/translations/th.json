@@ -116,6 +116,20 @@
     "nextButton": "ไปต่อ >>",
     "startButton": "เริ่มต้นการใช้งาน"
   },
+  "planSelection": {
+    "header": "สมัครใช้งาน",
+    "subheader": "คุณต้องการใช้สำหรับอะไร?",
+    "selfCareHeader": "ดูแลตนเอง",
+    "selfCareBullet1": "สร้างการตั้งเตือน",
+    "selfCareBullet2": "จดบันทึกข้อมูลสุขภาพ",
+    "selfCareBullet3": "เชื่อมต่อกับผู้ดูแล",
+    "selfCareButtonText": "เลือกดูแลตัวเอง",
+    "elderlyCareHeader": "ดูแลผู้อื่น",
+    "elderlyCareBullet1": "สร้างการตั้งเตือนผู้สูงอายุ",
+    "elderlyCareBullet2": "จดบันทึกข้อมูลสุขภาพผู้สูงอายุ",
+    "elderlyCareBullet3": "เชื่อมต่อกับผู้สูงอายุ",
+    "elderlyCareButtonText": "เลือกดูแลผู้อื่น"
+  },
   "userLink": {
     "addCaretaker": "เพิ่มผู้ดูแล",
     "removeCaretaker": "ลบผู้ดูแลคนนี้ออก",
