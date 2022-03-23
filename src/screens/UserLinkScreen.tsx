@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, Button } from 'native-base';
 import AddButton from '../components/atoms/AddButton';
 import Card from '../components/organisms/CaretakerCard';
@@ -9,15 +9,19 @@ import { RootStackParamList } from '../navigation/types';
 
 const UserLinkScreen = () => {
 
+  // todo: connect with backend's data
+  const [caretakerNumber, setCaretakerNumber] = useState([
+    {name: "Supatach Vanichayangkuranont"}, 
+    {name: "Somying Muangyim"}, 
+    {name: "Somying Muangyim"}
+  ]);
   const navigation =
   useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <ScrollView>
       <View bgColor="#FAFAFA">
-        <Card name="Supatach Vanichayangkuranont" />
-        <Card name="Somying Muangyim" />
-        <Card name="Somying Muangyim" />
+        {Array.from(Array(caretakerNumber.length)).map((x, index) => <Card key={index} name={caretakerNumber[index].name}/>)}
         <AddButton />
 
         {/* Placeholder Navigation */}
