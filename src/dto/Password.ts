@@ -16,7 +16,7 @@ export const changePasswordSchema = Yup.object({
       i18n.t('changePassword.samePasswordWarning')
     ),
   repeatNewPassword: Yup.string()
-    .required('Password cannot be left blank')
+    .required(i18n.t('changePassword.blankNewPasswordWarning'))
     .oneOf(
       [Yup.ref('newPassword'), null],
       i18n.t('changePassword.passwordsMustMatch')
