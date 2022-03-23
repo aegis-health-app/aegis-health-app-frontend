@@ -7,8 +7,6 @@ import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 
 const AddButton = () => {
-  const { t } = useTranslation();
-
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
