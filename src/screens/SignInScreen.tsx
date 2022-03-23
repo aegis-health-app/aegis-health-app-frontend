@@ -46,7 +46,7 @@ const SignInScreen = () => {
           </Center>
         </AspectRatio>
         <VStack px={2}>
-          <FormHeader headerText={t('56')} mt={10} mb={7} />
+          <FormHeader headerText={t('auth.signIn')} mt={10} mb={7} />
           <TextInput
             label={t('18')}
             name="phoneNumber"
@@ -55,7 +55,7 @@ const SignInScreen = () => {
             mb={6}
           />
           <TextInput
-            label={t('54')}
+            label={t('auth.password')}
             name="password"
             control={control}
             errors={errors}
@@ -63,10 +63,10 @@ const SignInScreen = () => {
           />
           <Pressable>
             <Text textAlign="right" color="blue.600" mb={2}>
-              {t('55')}
+              {t('auth.forgotPassword')}
             </Text>
           </Pressable>
-          <Button w="full">{t('56')}</Button>
+          <Button w="full">{t('auth.signIn')}</Button>
           <Box flex={1} />
           <AuthFooter page={AuthType.SIGNIN} />
         </VStack>

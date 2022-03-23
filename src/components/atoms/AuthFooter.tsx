@@ -16,13 +16,13 @@ const AuthFooter: React.FC<TextInputProps> = ({ page, ...props }) => {
   return (
     <HStack justifyContent="center" my={10} {...props}>
       <Text>
-        {page === AuthType.SIGNIN && t('57')}
-        {page === AuthType.SIGNUP && t('59')}
+        {page === AuthType.SIGNIN && t('auth.noAccount')}
+        {page === AuthType.SIGNUP && t('auth.alreadyHaveAccount')}
       </Text>
       <Pressable>
         <Text color="blue.600">
-          {page === AuthType.SIGNIN && ` ${t('58')}`}
-          {page === AuthType.SIGNUP && ` ${t('56')}`}
+          {page === AuthType.SIGNIN && ` ${t('auth.footerSignUp')}`}
+          {page === AuthType.SIGNUP && ` ${t('auth.signIn')}`}
         </Text>
       </Pressable>
     </HStack>

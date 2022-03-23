@@ -171,12 +171,22 @@
     "enterElderlyCode": "กรอกโค้ดประจำตัวของผู้สูงอายุ",
     "enterButton": "ดำเนินการต่อ",
     "connectText1": "เชื่อมต่อกับ “",
-    "connectText2":"” ?",
+    "connectText2": "” ?",
     "connectButton": "เชื่อมต่อเลย !",
     "cancelButton": "ยกเลิก",
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "เชื่อมต่อกับผู้สูงอายุ",
     "headerElderly": "เชื่อมต่อกับผู้ดูแล",
     "edit": "แก้ไข"
+  },
+  "auth": {
+    "password": "รหัสผ่าน",
+    "forgotPassword": "ลืมรหัสผ่าน",
+    "signIn": "ลงชื่อเข้าใช้",
+    "noAccount": "ยังไม่มีบัญชี?",
+    "footerSignUp": "สร้างบัญชี",
+    "alreadyHaveAccount": "มีบัญชีผู้ใช้แล้ว?",
+    "signUp": "สมัครใช้งาน",
+    "continue": "ดำเนินการต่อ"
   }
 }
