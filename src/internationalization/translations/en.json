@@ -1,4 +1,5 @@
-{  "1": "Hello,",
+{
+  "1": "Hello,",
   "2": "Settings",
   "3": "App Settings",
   "4": "Language",
@@ -177,5 +178,15 @@
     "header": "Connect",
     "headerElderly": "Connect",
     "edit": "Edit"
+  },
+  "auth": {
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "signIn": "Sign In",
+    "noAccount": "No account?",
+    "footerSignUp": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUp": "Sign Up",
+    "continue": "Continue"
   }
 }
