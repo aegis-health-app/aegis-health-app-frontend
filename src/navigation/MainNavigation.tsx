@@ -28,6 +28,7 @@ import ProfileEditScreen from '../screens/ProfileEditScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import ChangeAccountPasswordScreen from '../screens/ChangeAccountPasswordScreen';
 import ChangePhoneNumberScreen from '../screens/ChangePhoneNumberScreen';
+import PlanSelectionScreen from '../screens/PlanSelectionScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -208,6 +209,14 @@ const MainNavigation = () => {
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+              }}
+            />
+            <Stack.Screen
+              name="PlanSelectionScreen"
+              component={PlanSelectionScreen}
+              options={{
+                title: 'Plan Selection',
+                headerShown: false
               }}
             />
           </>
