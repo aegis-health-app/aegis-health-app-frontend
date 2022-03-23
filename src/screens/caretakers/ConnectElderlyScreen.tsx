@@ -4,47 +4,83 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Image, ZStack, View, Box, Text, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
-// import { RNCamera } from 'react-native-camera';
-
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 
 const QRPlaceholder = require('../../assets/images/QRPlaceholder.png');
 const QRBackground = require('../../assets/images/QRBackground.png');
 
 const ConnectElderlyScreen = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    const navigation =
+  const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-    return (
-        <View>
-            {/* TODO: change to tab instead */}
-            <Button.Group isAttached justifyContent="center" my="2">
-            <Button borderRadius="0" width="45%" onPress={() => navigation.navigate('ConnectElderlyScreen')}>{t('userLink.scanQR')}</Button>
-            <Button borderWidth="1"
-                borderColor="#1D84DF"
-                backgroundColor="#FAFAFA"
-                _text={{ color: '#1D84DF' }}
-                _pressed={{
-                borderColor: '#7CC2FF',
-                _text: { color: '#7CC2FF' }
-                }} 
-                borderRadius="0" 
-                width="45%" 
-                onPress={() => navigation.navigate('InputCodeScreen')}
-            >{t('userLink.enterCode')}
-            </Button>
-            </Button.Group>
-            <ZStack mb="2" width="100%" height="100%" alignItems="center">
-                <Image height="100%" width="100%" source={QRBackground} alt="QR Background"/>
-                <Box top="18%" height="230" width="230" alignSelf="center" borderWidth="3" borderColor="#005DB4" justifyContent="center" alignItems="center">
-                <Image height="200" width="200" source={QRPlaceholder} alt="QR Placeholder"/>
-                </Box>
-                {/* <RNCamera/> */}
-            </ZStack>
-            <Text position="absolute" alignSelf="center" bottom="24">{t('userLink.cameraHelpText')}</Text>
-        </View>
-    );
+  return (
+    <View>
+      {/* TODO: change to tab instead */}
+      <Button.Group isAttached justifyContent="center" my="2">
+        <Button
+          borderRadius="0"
+          width="45%"
+          onPress={() => navigation.navigate('ConnectElderlyScreen')}>
+          {t('userLink.scanQR')}
+        </Button>
+        <Button
+          borderWidth="1"
+          borderColor="#1D84DF"
+          backgroundColor="#FAFAFA"
+          _text={{ color: '#1D84DF' }}
+          _pressed={{
+            borderColor: '#7CC2FF',
+            _text: { color: '#7CC2FF' }
+          }}
+          borderRadius="0"
+          width="45%"
+          onPress={() => navigation.navigate('InputCodeScreen')}>
+          {t('userLink.enterCode')}
+        </Button>
+      </Button.Group>
+      <ZStack mb="2" width="100%" height="100%" alignItems="center">
+        <Image
+          height="100%"
+          width="100%"
+          source={QRBackground}
+          alt="QR Background"
+        />
+        <Box
+          top="18%"
+          height="230"
+          width="230"
+          alignSelf="center"
+          borderWidth="3"
+          borderColor="#005DB4"
+          justifyContent="center"
+          alignItems="center">
+          <Image
+            height="200"
+            width="200"
+            source={QRPlaceholder}
+            alt="QR Placeholder"
+          />
+        </Box>
+        <QRCodeScanner
+          onRead={() => console.log('success')}
+          // flashMode={RNCamera.Constants.FlashMode.torch}
+          topContent={
+            <Text>
+              Go to <Text>wikipedia.org/wiki/QR_code</Text> on your computer and
+              scan the QR code.
+            </Text>
+          }
+          bottomContent={<Button>OK. Got it!</Button>}
+        />
+      </ZStack>
+      <Text position="absolute" alignSelf="center" bottom="24">
+        {t('userLink.cameraHelpText')}
+      </Text>
+    </View>
+  );
 };
 
 export default ConnectElderlyScreen;
