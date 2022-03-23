@@ -6,7 +6,19 @@ type InputBoxProps = {
   placeholder?: string;
 };
 
+<<<<<<< HEAD
 const InputBox = ({ name }: InputBoxProps) => {
+=======
+const InputBox = ({ name, placeholder }: InputBoxProps) => {
+
+  const [value, setValue] = useState("");
+
+  // todo change display name
+  const handleChange = (text) => {
+    setValue(text);
+  }
+
+>>>>>>> 9edb478 (test commit)
   return (
     <View>
       <Box flexDir="row">
