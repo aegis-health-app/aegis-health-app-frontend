@@ -15,6 +15,13 @@ export interface User {
   gender: 'F' | 'M';
   isElderly: boolean;
   uid: number;
+  healthCondition?: string | null;
+  bloodType: BloodType;
+  personalMedication?: string | null;
+  allergy?: string | null;
+  vaccine?: string | null;
+  phone?: string;
+}
 }
 
 export interface Caretaker extends User {
@@ -23,10 +30,4 @@ export interface Caretaker extends User {
 
 export interface Elderly extends User {
   listModuleid: ModuleId[];
-  healthCondition?: string | null;
-  bloodType: BloodType;
-  personalMedication?: string | null;
-  allergy?: string | null;
-  vaccine?: string | null;
-  phone?: string;
 }
