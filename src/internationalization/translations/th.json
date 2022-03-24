@@ -135,7 +135,8 @@
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "เชื่อมต่อกับผู้สูงอายุ",
     "headerElderly": "เชื่อมต่อกับผู้ดูแล",
-    "edit": "แก้ไข"
+    "edit": "แก้ไข",
+    "invalidCode": "มีบางอย่างผิดพลาด โปรดลองใหม่อีกครั้งในภายหลัง"
   },
   "auth": {
     "password": "รหัสผ่าน",

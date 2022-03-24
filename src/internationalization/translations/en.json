@@ -135,7 +135,8 @@
     "cameraHelpText": "Place QR code inside the scanning frame",
     "header": "Connect",
     "headerElderly": "Connect",
-    "edit": "Edit"
+    "edit": "Edit",
+    "invalidCode": "Invalid code. Please try again later."
   },
   "auth": {
     "password": "Password",
