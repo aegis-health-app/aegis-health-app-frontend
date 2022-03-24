@@ -1,7 +1,7 @@
 import { Button, FlatList, Image, View, Text } from 'native-base';
 import { Animated, StyleSheet } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
-import { OnBoardingSLide } from '../dto/onBoarding';
+import { OnBoardingSLide } from '../interfaces/onBoarding';
 import OnBoardingPaginator from '../components/molecules/onBoardingPaginator';
 import OnBoardingLanguageSelector from '../components/molecules/OnBoardingLanguageSelector';
 import { useTranslation } from 'react-i18next';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { createContext } from 'react';
-import { User } from '../dto/User';
+import { User } from '../interfaces/User';
 
 export interface UserContextStruct {
   userProfile: User | undefined;
