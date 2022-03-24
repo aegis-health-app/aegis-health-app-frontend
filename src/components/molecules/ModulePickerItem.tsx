@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Icon } from 'native-base';
+import { Icon } from 'native-base';
 import { ModuleId } from '../../dto/modules/modules.dto';
 import ModulePickerCard from './ModulePickerCard';
 import AntDesign from 'react-native-vector-icons/AntDesign';
