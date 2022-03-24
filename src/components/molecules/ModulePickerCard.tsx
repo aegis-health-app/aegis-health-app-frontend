@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { Pressable, Text, View } from 'native-base';
 import React from 'react';
 
@@ -38,9 +38,10 @@ const ModulePickerCard = ({
 
 export default ModulePickerCard;
 
+const width = Dimensions.get('screen').width;
 const styles = StyleSheet.create({
   card: {
-    width: 170,
+    width: width / 2.3,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
