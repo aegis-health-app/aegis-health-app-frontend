@@ -1,5 +1,5 @@
 import { Text, Button, VStack } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,6 +8,10 @@ import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import TextInput from '../components/atoms/TextInput';
+import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
+import { changePhoneNumberSchema } from '../dto/PhoneNumber';
+import { useForm } from 'react-hook-form';
 
 // WORK IN PROGRESS
 
@@ -15,16 +19,25 @@ const ChangePhoneNumberScreen = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const handleSubmit = () => {
-    console.log('continue');
+  const resolver = useYupValidationResolver(changePhoneNumberSchema);
+  const {
+    control,
+    formState: { errors },
+    handleSubmit
+  } = useForm({ resolver, mode: 'onTouched' });
+
+  const onFormSubmit = (data) => {
+    console.log('submit password change', data);
   };
+
+  const [phoneNumberValid, setPhoneNumberValid] = useState(false);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <View style={styles.pageContainer}>
         <View>
           <Text fontSize="2xl" fontWeight={'md'}>
-            Change password
+            Change Phone Number
           </Text>
         </View>
         <Divider my={1} />
@@ -39,14 +52,33 @@ const ChangePhoneNumberScreen = () => {
           </Text>
         </View>
         <Spacer />
-        <VStack space={2}>
-          <Button onPress={() => handleSubmit()}>Continue</Button>
+        <Spacer />
+        <View style={styles.inputRow}>
+          <TextInput
+            label="Phone Number"
+            placeholder="0xx-xxx-xxxx"
+            name="phoneNumber"
+            control={control}
+            errors={errors}
+            type="text"
+          />
+        </View>
+        <Spacer />
+        <VStack space={4}>
+          <Button
+            w="100%"
+            colorScheme={phoneNumberValid ? 'primary' : 'muted.400'}
+            variant="solid"
+            disabled
+            onPress={() => navigation.goBack()}>
+            continue
+          </Button>
           <Button
             w="100%"
             colorScheme="secondary"
             variant="outline"
             onPress={() => navigation.goBack()}>
-            {t('11')}
+            {t('changePassword.cancelButton')}
           </Button>
         </VStack>
       </View>
