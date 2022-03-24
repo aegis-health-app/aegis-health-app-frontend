@@ -10,6 +10,7 @@ export type RootStackParamList = {
   SettingScreen: undefined;
   ChangeAccountPasswordScreen: undefined;
   ChangePhoneNumberScreen: undefined;
+  ChangePhoneNumberVerificationScreen: undefined;
   ProfileScreen: undefined;
   ProfileEditScreen: undefined;
   EmergencyScreen: undefined;
