@@ -1,19 +1,32 @@
-import React, { useState, createContext } from 'react';
-import { User } from '../interfaces/User';
+import React, { useState, useEffect, createContext } from 'react';
+import { User } from './../dto/modules/user.dto';
 
-export interface UserContextStruct {
-  userProfile: User | undefined;
-  setUserProfile: (value: User) => void;
+export interface UserContextProps {
+  user: User | undefined;
+  setUser: (value: User) => void;
+  isElderly: boolean | undefined;
 }
 
-export const UserContext = createContext({} as UserContextStruct);
+export const UserContext = createContext({} as UserContextProps);
 
 const UserContextProvider = ({ ...props }) => {
-  const [userProfile, setUserProfile] = useState<User | undefined>(undefined);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [isElderly, setIsEldery] = useState<boolean>(false);
+
+  useEffect(() => {
+    // fetching user from back-end
+  }, []);
+
+  useEffect(() => {
+    if (user?.isElderly === true) {
+      setIsEldery(true);
+    }
+  }, [user]);
 
   const value = {
-    userProfile,
-    setUserProfile
+    user,
+    setUser,
+    isElderly
   };
   return <UserContext.Provider value={value} {...props} />;
 };
