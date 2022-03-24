@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { Text, View, Button, HStack, FlatList } from 'native-base';
-import ModulePickerCard from './../molecules/ModulePickerCard';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import ManageModuleIcon from '../atoms/ManageModuleIcon';
 import { useTranslation } from 'react-i18next';
 import { ElderlyContext } from '../../contexts/ElderlyContext';
 import ModulePickerItem from '../molecules/ModulePickerItem';
