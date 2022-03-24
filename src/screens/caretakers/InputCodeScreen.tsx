@@ -35,10 +35,6 @@ const InputCodeScreen = () => {
 
   const { isValid} = useFormState({control})
 
-  useEffect(() => {
-    console.log(isValid, codes.includes(watchElderlyCode["elderlyCode"]))
-  })
-
   const handleSubmit = () => {
     if(codes.includes(watchElderlyCode["elderlyCode"])) {
       navigation.navigate('ConfirmConnectScreen')
