@@ -1,37 +1,29 @@
-import { Text, Button, VStack } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Button, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Divider from '../components/atoms/Divider';
 import Spacer from '../components/atoms/Spacer';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
 import TextInput from '../components/atoms/TextInput';
+import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
-import { changePhoneNumberSchema } from '../dto/PhoneNumber';
-import { useForm } from 'react-hook-form';
+import { RootStackParamList } from '../navigation/types';
 
-// WORK IN PROGRESS
-
-const ChangePhoneNumberScreen = () => {
+const ChangePhoneNumberVerificationScreen = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const resolver = useYupValidationResolver(changePhoneNumberSchema);
+  const [codeValid, setCodeValid] = useState(false);
+  const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
   const {
     control,
     formState: { errors },
     handleSubmit
   } = useForm({ resolver, mode: 'onTouched' });
-
-  const onFormSubmit = (data) => {
-    console.log('submit password change', data);
-  };
-
-  const [phoneNumberValid, setPhoneNumberValid] = useState(true);
-
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <View style={styles.pageContainer}>
@@ -44,20 +36,18 @@ const ChangePhoneNumberScreen = () => {
         {/* Input new phone number */}
         <View style={styles.title}>
           <Text fontSize="xl" fontWeight={'md'}>
-            Enter Your New Phone Number
+            Enter Your Verification Code
           </Text>
           <Text fontSize="sm" fontWeight={'regular'} color="gray.400">
-            We’ll text you a confirmation code. Message and data rates may
-            apply.
+            Enter the verification code sent to
           </Text>
         </View>
         <Spacer />
         <Spacer />
         <View style={styles.inputRow}>
           <TextInput
-            label="Phone Number"
-            placeholder="0xx-xxx-xxxx"
-            name="phoneNumber"
+            label="Verification Code"
+            name="verificationCode"
             control={control}
             errors={errors}
             type="text"
@@ -65,16 +55,24 @@ const ChangePhoneNumberScreen = () => {
         </View>
         <Spacer />
         <VStack space={4}>
+          {/* continue button */}
           <Button
             w="100%"
-            colorScheme={phoneNumberValid ? 'primary' : 'muted.200'}
+            colorScheme={codeValid ? 'primary' : 'gray'}
             variant="solid"
-            disabled={phoneNumberValid ? false : true}
-            onPress={() =>
-              navigation.navigate('ChangePhoneNumberVerificationScreen')
-            }>
-            continue
+            disabled={codeValid ? true : false}
+            onPress={() => console.log('submitted')}>
+            submit
           </Button>
+          {/* Resend verification code button */}
+          <Button
+            w="100%"
+            colorScheme="secondary"
+            variant="outline"
+            onPress={() => navigation.goBack()}>
+            Resend Verification Code 0:59 Secs
+          </Button>
+          {/* cancle button */}
           <Button
             w="100%"
             colorScheme="secondary"
@@ -88,7 +86,7 @@ const ChangePhoneNumberScreen = () => {
   );
 };
 
-export default ChangePhoneNumberScreen;
+export default ChangePhoneNumberVerificationScreen;
 
 const styles = StyleSheet.create({
   pageContainer: {
