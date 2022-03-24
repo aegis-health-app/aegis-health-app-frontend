@@ -5,7 +5,12 @@ import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
-import { BloodType, User, userProfileSchema, BirthGender } from '../dto/User';
+import {
+  BloodType,
+  User,
+  userProfileSchema,
+  BirthGender
+} from '../interfaces/User';
 import Divider from '../components/atoms/Divider';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';

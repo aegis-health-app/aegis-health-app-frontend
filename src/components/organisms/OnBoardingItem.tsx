@@ -1,7 +1,7 @@
 import { View, Text, Image, VStack } from 'native-base';
 import React from 'react';
 import { useWindowDimensions, StyleSheet } from 'react-native';
-import { OnBoardingSLide } from '../../dto/onBoarding';
+import { OnBoardingSLide } from '../../interfaces/onBoarding';
 
 type OnBoardingItemProps = {
   slide: OnBoardingSLide;
