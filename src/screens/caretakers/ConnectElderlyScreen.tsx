@@ -18,7 +18,6 @@ const ConnectElderlyScreen = () => {
 
   return (
     <View>
-      {/* TODO: change to tab instead */}
       <Button.Group isAttached justifyContent="center" my="2">
         <Button
           borderRadius="0"
