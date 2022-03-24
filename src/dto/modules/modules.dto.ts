@@ -1,15 +1,23 @@
 export enum ModuleEnum {
-  reminder = 1,
+  emergency = 0, //default emergency
+  reminder,
   healthRecords,
   memoryRecall,
-  healthBlogs
+  healthBlogs,
+  moduleManage
 }
 
-export type ModuleId = 1 | 2 | 3 | 4;
+export type ModuleId = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface Module {
   moduleid: ModuleId;
-  mname: string;
+  mname:
+    | 'Emergency'
+    | 'Reminder'
+    | 'Health Records'
+    | 'Memory Recall'
+    | 'Health Blogs'
+    | 'Modules Manage';
 }
 
 export interface ElderlyHomeProfile {
