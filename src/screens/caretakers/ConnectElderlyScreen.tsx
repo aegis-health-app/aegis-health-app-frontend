@@ -41,14 +41,16 @@ const ConnectElderlyScreen = () => {
           {t('userLink.enterCode')}
         </Button>
       </Button.Group>
-      <ZStack mb="2" width="100%" height="100%" alignItems="center">
-        <Image
-          height="100%"
-          width="100%"
-          source={QRBackground}
-          alt="QR Background"
-        />
-        <Box
+      <ZStack mb="2" width="100%" height="100%">
+        <QRCodeScanner
+          containerStyle={{justifyContent: "center", marginBottom:120}}
+          onRead={() => {
+            console.log('success')
+            navigation.navigate('ConfirmConnectScreen')
+        }}
+          // flashMode={RNCamera.Constants.FlashMode.torch}
+          />
+          <Box
           top="18%"
           height="230"
           width="230"
@@ -56,25 +58,13 @@ const ConnectElderlyScreen = () => {
           borderWidth="3"
           borderColor="#005DB4"
           justifyContent="center"
-          alignItems="center">
-          <Image
-            height="200"
-            width="200"
-            source={QRPlaceholder}
-            alt="QR Placeholder"
-          />
-        </Box>
-        <QRCodeScanner
-          onRead={() => console.log('success')}
-          // flashMode={RNCamera.Constants.FlashMode.torch}
-          topContent={
-            <Text>
-              Go to <Text>wikipedia.org/wiki/QR_code</Text> on your computer and
-              scan the QR code.
-            </Text>
-          }
-          bottomContent={<Button>OK. Got it!</Button>}
-        />
+          alignItems="center"></Box>
+        {/* <Image
+          height="100%"
+          width="100%"
+          source={QRBackground}
+          alt="QR Background"
+        /> */}
       </ZStack>
       <Text position="absolute" alignSelf="center" bottom="24">
         {t('userLink.cameraHelpText')}
