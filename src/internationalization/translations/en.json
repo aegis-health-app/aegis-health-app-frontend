@@ -236,5 +236,9 @@
     "body": "Unable to update your profile image. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
+  },
+  "changePhoneNumber":{
+    "blankPhoneNumberWarning": "Phone Number cannot be left blank",
+    "invalidPhoneNumberWarning": "Please input a valid phone number"
   }
 }

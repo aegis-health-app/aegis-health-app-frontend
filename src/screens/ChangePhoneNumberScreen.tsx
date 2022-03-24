@@ -23,11 +23,19 @@ const ChangePhoneNumberScreen = () => {
   const {
     control,
     formState: { errors },
-    handleSubmit
-  } = useForm({ resolver, mode: 'onTouched' });
+    handleSubmit,
+    getValues
+  } = useForm({ resolver, mode: 'onChange' });
 
   const onFormSubmit = (data) => {
+    navigation.navigate('ChangePhoneNumberVerificationScreen', {
+      phoneNumber: '0xx-xxx-xxxx'
+    });
     console.log('submit password change', data);
+  };
+
+  const shouldDisable = (errors) => {
+    return errors['phoneNumber']?.message;
   };
 
   const [phoneNumberValid, setPhoneNumberValid] = useState(true);
@@ -67,12 +75,16 @@ const ChangePhoneNumberScreen = () => {
         <VStack space={4}>
           <Button
             w="100%"
-            colorScheme={phoneNumberValid ? 'primary' : 'muted.200'}
+            backgroundColor={
+              // @ts-ignore
+              !shouldDisable(errors) && getValues('phoneNumber')
+                ? 'primary.500'
+                : 'muted.300'
+            }
+            colorScheme={'primary'}
             variant="solid"
             disabled={phoneNumberValid ? false : true}
-            onPress={() =>
-              navigation.navigate('ChangePhoneNumberVerificationScreen')
-            }>
+            onPress={handleSubmit(onFormSubmit)}>
             continue
           </Button>
           <Button
