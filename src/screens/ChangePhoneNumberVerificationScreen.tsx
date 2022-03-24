@@ -13,10 +13,11 @@ import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode'
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
 
-const ChangePhoneNumberVerificationScreen = () => {
+const ChangePhoneNumberVerificationScreen = ({ route }) => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { phoneNumber } = route.params;
   const [codeValid, setCodeValid] = useState(false);
   const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
   const {
@@ -39,7 +40,7 @@ const ChangePhoneNumberVerificationScreen = () => {
             Enter Your Verification Code
           </Text>
           <Text fontSize="sm" fontWeight={'regular'} color="gray.400">
-            Enter the verification code sent to
+            Enter the verification code sent to {phoneNumber}
           </Text>
         </View>
         <Spacer />
