@@ -1,9 +1,5 @@
 import React, { useContext } from 'react';
 import { Text, View, Button, HStack, FlatList } from 'native-base';
-<<<<<<< HEAD
-=======
-import ModulePickerCard from './../molecules/ModulePickerCard';
->>>>>>> 458cbb8 (wip: dynamic module list)
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
@@ -15,11 +11,7 @@ const ModulePickerList = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
-<<<<<<< HEAD
   const { elderlyProfile } = useContext(ElderlyContext);
-=======
-  const { moduleList } = useContext(ElderlyContext);
->>>>>>> 458cbb8 (wip: dynamic module list)
 
   return (
     <View flex={1} mt={2}>
