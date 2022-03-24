@@ -22,7 +22,6 @@ export interface User {
   vaccine?: string | null;
   phone?: string;
 }
-}
 
 export interface Caretaker extends User {
   listElderly: Elderly[];
