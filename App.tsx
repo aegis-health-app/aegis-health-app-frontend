@@ -7,6 +7,7 @@ import { TourGuideProvider } from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
 import TourguideContextProvider from './src/contexts/TourguideContext';
 import UserContextProvider from './src/contexts/UserContext';
+import ElderlyContextProvider from './src/contexts/ElderlyContext';
 
 const theme = extendTheme({
   main: {},
@@ -84,16 +85,18 @@ const App = () => {
     <SafeAreaProvider>
       <TourguideContextProvider>
         <UserContextProvider>
-          <TourGuideProvider
-            {...{
-              borderRadius: 4,
-              labels: tourGuideLabels,
-              androidStatusBarVisible: true
-            }}>
-            <NativeBaseProvider theme={theme}>
-              <MainNavigation />
-            </NativeBaseProvider>
-          </TourGuideProvider>
+          <ElderlyContextProvider>
+            <TourGuideProvider
+              {...{
+                borderRadius: 4,
+                labels: tourGuideLabels,
+                androidStatusBarVisible: true
+              }}>
+              <NativeBaseProvider theme={theme}>
+                <MainNavigation />
+              </NativeBaseProvider>
+            </TourGuideProvider>
+          </ElderlyContextProvider>
         </UserContextProvider>
       </TourguideContextProvider>
     </SafeAreaProvider>
