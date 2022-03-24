@@ -17,8 +17,9 @@ const ModulePickerCard = ({
 }: ModulePickerCardType) => {
   return (
     <Pressable
-      w="1/2"
       h={100}
+      mx={1.5}
+      my={1.5}
       backgroundColor={backgroundColor}
       borderRadius="md"
       justifyContent="center"
@@ -39,6 +40,7 @@ export default ModulePickerCard;
 
 const styles = StyleSheet.create({
   card: {
+    width: 170,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, Icon, VStack, HStack } from 'native-base';
+import React, { useContext } from 'react';
+import { Text, View, Button, HStack, FlatList } from 'native-base';
 import ModulePickerCard from './../molecules/ModulePickerCard';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import ManageModuleIcon from '../atoms/ManageModuleIcon';
 import { useTranslation } from 'react-i18next';
+import { ElderlyContext } from '../../contexts/ElderlyContext';
+import ModulePickerItem from '../molecules/ModulePickerItem';
 
 const ModulePickerList = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
+  const { moduleList } = useContext(ElderlyContext);
 
   return (
-    <View my={6} w="full">
+    <View flex={1} mt={2}>
       <Text fontSize="2xl" fontWeight="600">
         {t('modules.modules')}
       </Text>
