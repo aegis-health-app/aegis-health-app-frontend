@@ -153,7 +153,7 @@
   },
   "auth": {
     "password": "รหัสผ่าน",
-    "forgotPassword": "ลืมรหัสผ่าน",
+    "forgotPassword": "ลืมรหัสผ่าน?",
     "signIn": "ลงชื่อเข้าใช้",
     "noAccount": "ยังไม่มีบัญชี?",
     "footerSignUp": "สร้างบัญชี",
@@ -174,5 +174,8 @@
     "blankNewPasswordWarning": "กรุณากรอกรหัสผ่านใหม่",
     "passwordsMustMatch": "รหัสผ่านไม่ตรงกัน",
     "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
+  },
+  "error": {
+    "isRequired": "กรุณากรอก${name}"
   }
 }
