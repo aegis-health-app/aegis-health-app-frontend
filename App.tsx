@@ -9,8 +9,6 @@ import TourguideContextProvider from './src/contexts/TourguideContext';
 import UserContextProvider from './src/contexts/UserContext';
 import ElderlyContextProvider from './src/contexts/ElderlyContext';
 import CaretakerContextProvider from './src/contexts/CaretakerContext';
-import useAsyncEffect from './src/hooks/useAsyncEffect';
-import { requestCameraPermission } from './src/utils/permission';
 
 const theme = extendTheme({
   main: {},
@@ -83,10 +81,6 @@ const App = () => {
     skip: t('misc.skip'),
     finish: t('misc.finish')
   };
-
-  useAsyncEffect(async () => {
-    requestCameraPermission();
-  }, []);
 
   return (
     <SafeAreaProvider>

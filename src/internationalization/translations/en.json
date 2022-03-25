@@ -186,6 +186,14 @@
     "header": "Enter Your New Password"
   },
   "error": {
-    "isRequired": "{{name}} cannot be left blank"
+    "isRequired": "{{name}} cannot be left blank",
+    "samePasswordWarning": "New password cannot be the same as the old password"
+  },
+  "cameraPermissions": {
+    "title": "Need Camera Permission",
+    "message": "This application needs access to your camera.",
+    "buttonNeutral": "Ask Me Later",
+    "buttonNegative": "Cancel",
+    "buttonPositive": "OK"
   }
 }
