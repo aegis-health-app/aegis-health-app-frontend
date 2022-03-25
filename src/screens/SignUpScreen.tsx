@@ -91,6 +91,7 @@ const SignUpScreen = () => {
     []
   );
 
+  const sendOTP = () => null;
 
   return (
     <SafeAreaView>
@@ -210,6 +211,38 @@ const SignUpScreen = () => {
               <Button w="full" onPress={handleSubmit(continueToNextStage)}>
                 {t('auth.continue')}
               </Button>
+            </View>
+          )}
+          {signUpStage === 2 && (
+            <View>
+              <FormHeader
+                headerText={t('auth.enterOTPCode')}
+                my={2}
+                size={20}
+              />
+              <FormDescription
+                text={t('auth.otpDetail', { phone: watch('phoneNumber') })}
+                mb={2}
+              />
+              <Pressable onPress={backToPreviousStage}>
+                <Text color="blue.600" mb={2}>
+                  {t('auth.changePhoneNumber')}
+                </Text>
+              </Pressable>
+              <ControlledOTPInput
+                label={t('general.otp')}
+                name="otp"
+                errors={errors}
+                control={control}
+                isRequired
+              />
+              <Button
+                w="full"
+                onPress={handleSubmit(continueToNextStage)}
+                mb={4}>
+                {t('auth.submitOTP')}
+              </Button>
+              <OTPTimerButton onPress={sendOTP} />
             </View>
           )}
 
