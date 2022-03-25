@@ -116,6 +116,12 @@ const ModulePickerList = () => {
             label="Plan Selection Page"
             handlePress={() => navigation.navigate('PlanSelectionScreen')}
           />
+          <ModulePickerCard
+            backgroundColor="#fff"
+            icon={<ManageModuleIcon />}
+            label="Forgot Password Page"
+            handlePress={() => navigation.navigate('ForgotPasswordScreen')}
+          />
         </HStack>
       </VStack>
     </View>
