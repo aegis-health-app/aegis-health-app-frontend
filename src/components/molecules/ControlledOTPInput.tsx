@@ -20,7 +20,7 @@ const ControlledOTPInput: React.FC<ControlledOTPInputProps> = ({
   ...props
 }) => {
   return (
-    <FormControl isRequired={isRequired} isInvalid={name in errors}>
+    <FormControl isRequired={isRequired} isInvalid={name in errors} mb={6}>
       <FormControl.Label mb={2}>{`${label} `}</FormControl.Label>
       <Controller
         control={control}
