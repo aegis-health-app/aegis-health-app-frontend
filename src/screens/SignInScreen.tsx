@@ -59,6 +59,7 @@ const SignInScreen = () => {
               label={t('profile.phoneNumber')}
               placeholder={t('profile.phoneNumber')}
               name="phoneNumber"
+              keyboardType="number-pad"
               control={control}
               errors={errors}
               isRequired
