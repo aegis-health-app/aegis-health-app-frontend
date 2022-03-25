@@ -18,12 +18,19 @@ function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
   return temp;
 }
 
+//TODO: add axios
+function addModule(targetId: ModuleId, modules: Module[]): Module[] {
+  // http request to backend and set value
+}
+
 /**
  * This function delete module by its id and send across backend.
  * @param targetId what module to find it it's already added
  * @param modules list of modules received from backend
  * @returns modules after deletion
  */
+
+//TODO: add axios
 export async function deleteModuleAndSend(
   targetId: ModuleId,
   modules: Module[]
@@ -33,7 +40,6 @@ export async function deleteModuleAndSend(
   }
 
   const deleted = deleteModule(targetId, modules);
-  // axios
 
   return deleted;
 }
