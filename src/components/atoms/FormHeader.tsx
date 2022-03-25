@@ -3,11 +3,16 @@ import React from 'react';
 
 type TextInputProps = {
   headerText: string;
+  size?: number;
 } & ITextProps;
 
-const TextInput: React.FC<TextInputProps> = ({ headerText, ...props }) => {
+const TextInput: React.FC<TextInputProps> = ({
+  headerText,
+  size,
+  ...props
+}) => {
   return (
-    <Text fontSize={24} {...props}>
+    <Text fontSize={size || 24} fontWeight="medium" {...props}>
       {headerText}
     </Text>
   );
