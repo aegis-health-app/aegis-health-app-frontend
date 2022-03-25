@@ -81,10 +81,7 @@ const SignUpScreen = () => {
                   errors={errors}
                   hasRequiredStar
                   isRequired
-                  errorMessage={t('error.isRequired').replace(
-                    '${name}',
-                    t(info.label)
-                  )}
+                  errorMessage={t('error.isRequired', { name: t(info.label) })}
                 />
               )}
 
@@ -97,10 +94,7 @@ const SignUpScreen = () => {
                   errors={errors}
                   hasRequiredStar
                   isRequired
-                  errorMessage={t('error.isRequired').replace(
-                    '${name}',
-                    t(info.label)
-                  )}
+                  errorMessage={t('error.isRequired', { name: t(info.label) })}
                 />
               )}
               {info.type === 'birthDate' && (

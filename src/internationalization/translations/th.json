@@ -186,6 +186,6 @@
     "header": "กรุณากรอกรหัสผ่านใหม่"
   },
   "error": {
-    "isRequired": "กรุณากรอก${name}"
+    "isRequired": "กรุณากรอก{{name}}"
   }
 }
