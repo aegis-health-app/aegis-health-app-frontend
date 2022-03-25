@@ -165,7 +165,12 @@
     "alreadyHaveAccount": "Already have an account?",
     "signUp": "Sign Up",
     "confirmPassword": "Confirm Password",
-    "continue": "Continue"
+    "continue": "Continue",
+    "generalInfo": "General Information",
+    "enterOTPCode": "Enter Your Verification Code",
+    "otpDetail": "Enter the verification code sent to {{phone}}.",
+    "changePhoneNumber": "Change phone number",
+    "submitOTP": "Submit"
   },
   "changePassword": {
     "enterOldPassword": "Enter Your Old Password",
