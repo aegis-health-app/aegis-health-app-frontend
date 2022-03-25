@@ -29,6 +29,7 @@ import OnBoardingScreen from '../screens/OnBoardingScreen';
 import ChangeAccountPasswordScreen from '../screens/ChangeAccountPasswordScreen';
 import ChangePhoneNumberScreen from '../screens/ChangePhoneNumberScreen';
 import PlanSelectionScreen from '../screens/PlanSelectionScreen';
+import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -180,6 +181,14 @@ const MainNavigation = () => {
               component={SignUpScreen}
               options={{
                 title: 'Sign Up',
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="ForgotPasswordScreen"
+              component={ForgotPasswordScreen}
+              options={{
+                title: 'Forgot Password',
                 headerShown: false
               }}
             />
