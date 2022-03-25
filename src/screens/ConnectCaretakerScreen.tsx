@@ -24,7 +24,6 @@ const EditCaretakerScreen = () => {
                 logoSize={100}
                 value="todo: insert QR code value here" 
               />
-              {/* <Image source={QRPlaceholder} alt="QR Code" /> */}
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
               <Text mr="2" fontSize={16}>
