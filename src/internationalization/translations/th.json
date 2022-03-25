@@ -1,6 +1,10 @@
 {
   "general": {
-    "otp": "รหัสยืนยันตัวตน"
+    "otp": "รหัสยืนยัน",
+    "enterOTP": "กรุณากรอกรหัสยืนยันของคุณ",
+    "enterOTPDesc": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ ",
+    "phonePlaceholder": "0xxxxxxxxx",
+    "resendOTP": "ส่งรหัสยืนยันอีกครั้ง"
   },
   "home": {
     "settingButton": "ตั้งค่า",
@@ -174,7 +178,11 @@
     "blankOldPasswordWarning": "กรุณากรอกรหัสผ่านเก่า",
     "blankNewPasswordWarning": "กรุณากรอกรหัสผ่านใหม่",
     "passwordsMustMatch": "รหัสผ่านไม่ตรงกัน",
-    "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
+    "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้",
+    "enterPhone": "กรุณากรอกหมายเลขโทรศัพท์",
+    "enterPhoneDesc": "เราจะส่งรหัสยืนยันตัวตนไปให้คุณทางข้อความ อาจมีค่าบริการเพิ่มเติม",
+    "phoneNumber": "หมายเลขโทรศัพท์",
+    "header": "กรุณากรอกรหัสผ่านใหม่"
   },
   "error": {
     "isRequired": "กรุณากรอก${name}"

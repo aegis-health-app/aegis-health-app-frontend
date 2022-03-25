@@ -1,6 +1,10 @@
 {
   "general": {
-    "otp": "Verification Code"
+    "otp": "Verification Code",
+    "enterOTP": "Enter Your Verification Code",
+    "enterOTPDesc": "Enter the verification code sent to ",
+    "phonePlaceholder": "0xxxxxxxxx",
+    "resendOTP": "Resend Verification Code"
   },
   "home": {
     "settingButton": "Settings",
@@ -174,7 +178,11 @@
     "blankOldPasswordWarning": "Old Password cannot be left blank",
     "blankNewPasswordWarning": "New Password cannot be left blank",
     "passwordsMustMatch": "Passwords must match",
-    "samePasswordWarning": "New password cannot be the same as the old password"
+    "samePasswordWarning": "New password cannot be the same as the old password",
+    "enterPhone": "Enter Your Phone Number",
+    "enterPhoneDesc": "We’ll text you a confirmation code. Message and data rates may apply.",
+    "phoneNumber": "Phone Number",
+    "header": "Enter Your New Password"
   },
   "error": {
     "isRequired": "${name} cannot be left blank"
