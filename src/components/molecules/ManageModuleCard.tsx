@@ -3,7 +3,7 @@ import { Text, View, Button, AlertDialog } from 'native-base';
 import React, { useState, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ModuleId } from '../../dto/modules/modules.dto';
-import { deleteModuleAndSend } from '../../../utils/module/manage';
+import { deleteModuleAndSend } from '../../utils/module/manage';
 import { ElderlyContext } from '../../contexts/ElderlyContext';
 
 type ManageModuleCardProps = {

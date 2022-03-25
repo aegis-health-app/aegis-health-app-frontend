@@ -1,4 +1,5 @@
-import { Module, ModuleId } from '../../src/dto/modules/modules.dto';
+import { Module, ModuleId } from '../../dto/modules/modules.dto';
+import axios from 'axios';
 
 /**
  * This function delete module by id and append must have module (Emergency & Select module)
@@ -21,6 +22,7 @@ function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
 //TODO: add axios
 function addModule(targetId: ModuleId, modules: Module[]): Module[] {
   // http request to backend and set value
+  axios.post();
 }
 
 /**
