@@ -2,13 +2,9 @@ import React from 'react';
 import { FlatList, Text, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 import Spacer from '../atoms/Spacer';
+import { ProfileItem } from '../../interfaces/User';
 
-type ProfileInfoItemProp = {
-  label: string;
-  value: string;
-};
-
-const ProfileInfoItem = ({ label, value }: ProfileInfoItemProp) => (
+const ProfileInfoItem = ({ label, value }: ProfileItem) => (
   <View>
     <View style={styles.profileInfoItemRow}>
       <View style={styles.profileInfoItemLabel}>
@@ -25,7 +21,7 @@ const ProfileInfoItem = ({ label, value }: ProfileInfoItemProp) => (
 );
 
 type BasicProfileProps = {
-  data: ProfileInfoItemProp[];
+  data: ProfileItem[];
 };
 
 const BasicProfile = ({ data }: BasicProfileProps) => {

@@ -15,3 +15,8 @@ export const userProfileSchema = Yup.object({
   vaccine: Yup.string(),
   phone: Yup.string().oneOf(['N/A', 'A', 'B', 'O', 'AB'])
 });
+
+export interface ProfileItem {
+  label: string;
+  value: string | number | Date;
+}
