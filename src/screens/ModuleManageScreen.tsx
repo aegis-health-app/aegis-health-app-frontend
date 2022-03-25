@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Icon, ScrollView } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +6,7 @@ import ManageModuleCard from './../components/molecules/ManageModuleCard';
 
 const ModuleManageScreen = () => {
   const { t } = useTranslation();
+  const { moduleList } = useContext(ElderlyContext);
 
   return (
     <ScrollView>
