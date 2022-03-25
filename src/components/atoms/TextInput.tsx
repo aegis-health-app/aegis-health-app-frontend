@@ -1,6 +1,7 @@
-import { FormControl, IInputProps, Input } from 'native-base';
-import React from 'react';
+import { FormControl, Icon, IInputProps, Input } from 'native-base';
+import React, { useState } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 type TextInputProps = {
   label: string;
@@ -41,6 +42,61 @@ const TextInput: React.FC<TextInputProps> = ({
             onChangeText={(val) => onChange(val)}
             value={value}
             InputRightElement={inputRightElement}
+            {...props}
+          />
+        )}
+        name={name}
+        rules={{ required: errorMessage, minLength: 3 }}
+        defaultValue={defaultValue ?? ''}
+      />
+      <FormControl.ErrorMessage mt={2}>
+        {errors[name]?.message}
+      </FormControl.ErrorMessage>
+    </FormControl>
+  );
+};
+
+export const PasswordTextInput: React.FC<TextInputProps> = ({
+  label,
+  name,
+  hasRequiredStar,
+  placeholder,
+  defaultValue,
+  control,
+  errors,
+  errorMessage,
+  ...props
+}) => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  return (
+    <FormControl isRequired={hasRequiredStar} isInvalid={name in errors}>
+      <FormControl.Label mb={2}>{label}</FormControl.Label>
+      <Controller
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Input
+            borderColor="#ACB5BD"
+            w="100%"
+            size="xl"
+            fontSize="sm"
+            padding={3}
+            onBlur={onBlur}
+            placeholder={placeholder}
+            onChangeText={(val) => onChange(val)}
+            value={value}
+            type={showPassword ? 'text' : 'password'}
+            InputRightElement={
+              <Icon
+                mr={2}
+                size="sm"
+                h="full"
+                as={Ionicons}
+                name={showPassword ? 'eye' : 'eye-off'}
+                color="muted.400"
+                onPress={() => setShowPassword((prev) => !prev)}
+              />
+            }
             {...props}
           />
         )}
