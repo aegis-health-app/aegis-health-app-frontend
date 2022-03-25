@@ -19,7 +19,11 @@ const HomeScreen = () => {
           <ProfileSection />
           <Divider />
           <UpComingAlert />
-          <ScrollView horizontal scrollEnabled={false} width="100%">
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            scrollEnabled={false}
+            width="100%">
             <ModulePickerList />
           </ScrollView>
         </View>
