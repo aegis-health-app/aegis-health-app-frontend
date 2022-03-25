@@ -21,108 +21,21 @@ const ModulePickerList = () => {
       <Text fontSize="md" color="gray.500">
         {t('modules.chooseModules')}
       </Text>
-      <VStack space={3} mt={4} justifyContent="center" alignItems="center">
-        <HStack space={3} justifyContent="space-between" px={2}>
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={
-              <Icon as={AntDesign} name="warning" size="10" color="red.500" />
-            }
-            label={t('modules.emergency')}
-            handlePress={() => navigation.navigate('EmergencyScreen')}
-          />
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={
-              <Icon
-                as={MaterialIcons}
-                name="notifications-active"
-                size="10"
-                color="orange.400"
-              />
-            }
-            label={t('modules.reminder')}
-            handlePress={() => navigation.navigate('ReminderScreen')}
-          />
-        </HStack>
-        <HStack space={3} justifyContent="space-between" px={2}>
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={
-              <Icon
-                as={MaterialIcons}
-                name="note-add"
-                size="10"
-                color="green.500"
-              />
-            }
-            label={t('modules.healthRecord')}
-            handlePress={() => navigation.navigate('MemoryScreen')}
-          />
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={
-              <Icon
-                as={MaterialIcons}
-                name="question-answer"
-                size="10"
-                color="pink.400"
-              />
-            }
-            label={t('modules.memory')}
-            handlePress={() => navigation.navigate('HealthRecordScreen')}
-          />
-        </HStack>
-        <HStack space={3} justifyContent="space-between" px={2}>
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={
-              <Icon
-                as={MaterialIcons}
-                name="menu-book"
-                size="10"
-                color="darkBlue.600"
-              />
-            }
-            label={t('modules.healthBlogs')}
-            handlePress={() => navigation.navigate('HealthBlogScreen')}
-          />
-          <ModulePickerCard
-            backgroundColor="lightBlue.200"
-            icon={<ManageModuleIcon />}
-            label={t('modules.selectModules')}
-            handlePress={() => navigation.navigate('ModuleManageScreen')}
-          />
-        </HStack>
-        <HStack space={3} justifyContent="space-between" px={2}>
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={<ManageModuleIcon />}
-            label="Dummy Sign In Page"
-            handlePress={() => navigation.navigate('SignInScreen')}
-          />
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={<ManageModuleIcon />}
-            label="Dummy Sign Up Page"
-            handlePress={() => navigation.navigate('SignUpScreen')}
-          />
-        </HStack>
-        <HStack space={3} justifyContent="space-between" px={2}>
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={<ManageModuleIcon />}
-            label="Plan Selection Page"
-            handlePress={() => navigation.navigate('PlanSelectionScreen')}
-          />
-          <ModulePickerCard
-            backgroundColor="#fff"
-            icon={<ManageModuleIcon />}
-            label="Forgot Password Page"
-            handlePress={() => navigation.navigate('ForgotPasswordScreen')}
-          />
-        </HStack>
-      </VStack>
+      <FlatList
+        data={moduleList}
+        renderItem={({ item }) => <ModulePickerItem mid={item.moduleid} />}
+        keyExtractor={(_, key) => key.toString()}
+        numColumns={2}
+        scrollEnabled={false}
+      />
+      <HStack justifyContent="center" w="full">
+        <Button onPress={() => navigation.navigate('SignInScreen')}>
+          Dummy Sign In Page
+        </Button>
+        <Button onPress={() => navigation.navigate('SignUpScreen')}>
+          Dummy Sign Up Page
+        </Button>
+      </HStack>
     </View>
   );
 };
