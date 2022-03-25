@@ -7,17 +7,16 @@ export interface UserContextProps {
   user: User | undefined;
   setUser: (value: User) => void;
   isElderly: boolean | undefined;
-  token: string;
-  setToken: (token: string) => Promise<void>;
+  userToken: string;
 }
 
 export const UserContext = createContext({} as UserContextProps);
 
 const UserContextProvider = ({ ...props }) => {
-  const { setToken, getToken } = useAuthentication();
+  const { getToken } = useAuthentication();
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isElderly, setIsEldery] = useState<boolean>(false);
-  const [token, setUserToken] = useState<string>('');
+  const [userToken, setUserToken] = useState<string>('');
 
   useEffect(() => {
     // fetching user from back-end
@@ -38,8 +37,7 @@ const UserContextProvider = ({ ...props }) => {
     user,
     setUser,
     isElderly,
-    token,
-    setToken
+    userToken
   };
   return <UserContext.Provider value={value} {...props} />;
 };
