@@ -239,6 +239,11 @@
   },
   "changePhoneNumber":{
     "blankPhoneNumberWarning": "Phone Number cannot be left blank",
-    "invalidPhoneNumberWarning": "Please input a valid phone number"
+    "invalidPhoneNumberWarning": "Please input a valid phone number",
+    "changePhoneNumber":"Change Phone Number",
+    "enterPhoneNumber":"Enter Your New Phone Number",
+    "enterPhoneNumberDescription":"We’ll text you a confirmation code. Message and data rates may apply.",
+    "phoneNumber":"Phone Number",
+    "continue":"Continue"
   }
 }

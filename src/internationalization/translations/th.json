@@ -236,5 +236,14 @@
     "body": "ไม่สามารถเปลี่ยนรูปประจำตัวได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
+  },
+  "changePhoneNumber":{
+    "blankPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์",
+    "invalidPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง",
+    "changePhoneNumber":"เปลี่ยนหมายเลขโทรศัพท์",
+    "enterPhoneNumber":"กรอกหมายเลขโทรศัพท์ใหม่",
+    "enterPhoneNumberDescription":"เราจะส่งรหัสยืนยันตัวตนไปให้คุณทางข้อความ อาจมีค่าบริการเพิ่มเติม",
+    "phoneNumber":"เบอร์โทรศัพท์ใหม่",
+    "continue":"ดำเนินการต่อ"
   }
 }
