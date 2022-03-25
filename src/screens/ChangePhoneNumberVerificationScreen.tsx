@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Text, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Divider from '../components/atoms/Divider';
 import Spacer from '../components/atoms/Spacer';
 import TextInput from '../components/atoms/TextInput';
+import ControlledOTPInput from '../components/molecules/ControlledOTPInput';
 import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
@@ -23,8 +24,45 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
   const {
     control,
     formState: { errors },
-    handleSubmit
-  } = useForm({ resolver, mode: 'onTouched' });
+    handleSubmit,
+    getValues
+  } = useForm({ resolver, mode: 'onChange' });
+
+  const shouldDisable = (errors) => {
+    return errors['verificationCode']?.message;
+  };
+
+  const onFormSubmit = (data) => {
+    console.log({ data });
+  };
+
+  const [canResend, setCanResend] = useState(false);
+  const [resendTimer, setResendTimer] = useState(60);
+
+  const timer = () => {
+    if (resendTimer > 0) {
+      setResendTimer(resendTimer - 1);
+      return;
+    } else {
+      setCanResend(true);
+    }
+    return;
+  };
+  useEffect(() => {
+    const resendInterval = setInterval(() => {
+      if (resendTimer > 0) {
+        setResendTimer(resendTimer - 1);
+      } else {
+        clearInterval(resendInterval);
+      }
+    }, 1000);
+  }, [resendTimer]);
+
+  const resendVerificationCode = () => {
+    console.log('resend the otp');
+    setResendTimer(60);
+  };
+
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <View style={styles.pageContainer}>
@@ -45,24 +83,29 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
         </View>
         <Spacer />
         <Spacer />
-        <View style={styles.inputRow}>
-          <TextInput
-            label="Verification Code"
-            name="verificationCode"
-            control={control}
-            errors={errors}
-            type="text"
-          />
-        </View>
+        <ControlledOTPInput
+          label={t('general.otp')}
+          name="otp"
+          errors={errors}
+          control={control}
+          isRequired
+        />
         <Spacer />
         <VStack space={4}>
           {/* continue button */}
           <Button
             w="100%"
-            colorScheme={codeValid ? 'primary' : 'gray'}
+            backgroundColor={
+              // @ts-ignore
+              !shouldDisable(errors)
+                ? // (getValues('otp') as string).toString().length === 6
+                  'primary.500'
+                : 'muted.300'
+            }
+            colorScheme={'primary'}
             variant="solid"
             disabled={codeValid ? true : false}
-            onPress={() => console.log('submitted')}>
+            onPress={handleSubmit(onFormSubmit)}>
             submit
           </Button>
           {/* Resend verification code button */}
@@ -70,8 +113,8 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
             w="100%"
             colorScheme="secondary"
             variant="outline"
-            onPress={() => navigation.goBack()}>
-            Resend Verification Code 0:59 Secs
+            onPress={() => resendVerificationCode()}>
+            Resend Verification Code 0:{resendTimer} Secs
           </Button>
           {/* cancle button */}
           <Button

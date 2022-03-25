@@ -29,7 +29,7 @@ const ChangePhoneNumberScreen = () => {
 
   const onFormSubmit = (data) => {
     navigation.navigate('ChangePhoneNumberVerificationScreen', {
-      phoneNumber: '0xx-xxx-xxxx'
+      phoneNumber: data.phoneNumber
     });
     console.log('submit password change', data);
   };
@@ -83,7 +83,6 @@ const ChangePhoneNumberScreen = () => {
             }
             colorScheme={'primary'}
             variant="solid"
-            disabled={phoneNumberValid ? false : true}
             onPress={handleSubmit(onFormSubmit)}>
             continue
           </Button>
