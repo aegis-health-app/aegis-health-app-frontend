@@ -1,5 +1,5 @@
 import { Text, Button, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -38,32 +38,29 @@ const ChangePhoneNumberScreen = () => {
     return errors['phoneNumber']?.message;
   };
 
-  const [phoneNumberValid, setPhoneNumberValid] = useState(true);
-
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <View style={styles.pageContainer}>
         <View>
           <Text fontSize="2xl" fontWeight={'md'}>
-            Change Phone Number
+            {t('changePhoneNumber.changePhoneNumber')}
           </Text>
         </View>
         <Divider my={1} />
         {/* Input new phone number */}
         <View style={styles.title}>
           <Text fontSize="xl" fontWeight={'md'}>
-            Enter Your New Phone Number
+            {t('changePhoneNumber.enterPhoneNumber')}
           </Text>
           <Text fontSize="sm" fontWeight={'regular'} color="gray.400">
-            We’ll text you a confirmation code. Message and data rates may
-            apply.
+            {t('changePhoneNumber.enterPhoneNumberDescription')}
           </Text>
         </View>
         <Spacer />
         <Spacer />
         <View style={styles.inputRow}>
           <TextInput
-            label="Phone Number"
+            label={t('changePhoneNumber.phoneNumber')}
             placeholder="0xx-xxx-xxxx"
             name="phoneNumber"
             control={control}
@@ -84,7 +81,7 @@ const ChangePhoneNumberScreen = () => {
             colorScheme={'primary'}
             variant="solid"
             onPress={handleSubmit(onFormSubmit)}>
-            continue
+            {t('changePhoneNumber.continue')}
           </Button>
           <Button
             w="100%"
