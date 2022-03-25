@@ -111,7 +111,7 @@ const MainNavigation = () => {
               options={{
                 title: t('profile.myCaretaker'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
               }}
             />
             <Stack.Screen
@@ -120,7 +120,7 @@ const MainNavigation = () => {
               options={{
                 title: t('userLink.headerElderly'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
               }}
             />
             <Stack.Screen

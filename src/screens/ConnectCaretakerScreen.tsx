@@ -3,10 +3,11 @@ import { Text, View, Image } from 'native-base';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeBaseProvider } from 'native-base';
 import InfoCard from '../components/organisms/InfoCard';
-import HeaderBack from '../components/molecules/HeaderBack';
 import { useTranslation } from 'react-i18next';
+import QRCode from 'react-native-qrcode-svg';
 
 const QRPlaceholder = require('../assets/images/QRPlaceholder.png');
+let base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..';
 
 const EditCaretakerScreen = () => {
   const { t } = useTranslation();
@@ -14,10 +15,16 @@ const EditCaretakerScreen = () => {
     <NativeBaseProvider>
       <SafeAreaView edges={['right', 'top', 'left']}>
         <View>
-          {/* <HeaderBack name="เชื่อมต่อกับผู้ดูแล" /> */}
           <View bgColor="FAFAFA">
             <View mt="10" flexDir="row" justifyContent="center">
-              <Image source={QRPlaceholder} alt="QR Code" />
+              <QRCode 
+                logo={{uri: base64Logo}}
+                size={225}
+                quietZone={17.5}
+                logoSize={100}
+                value="todo: insert QR code value here" 
+              />
+              {/* <Image source={QRPlaceholder} alt="QR Code" /> */}
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
               <Text mr="2" fontSize={16}>
