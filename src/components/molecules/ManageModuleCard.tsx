@@ -1,10 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { Text, View, Button, AlertDialog } from 'native-base';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ModuleId } from '../../dto/modules/modules.dto';
+import { deleteModuleAndSend } from '../../../utils/module/manage';
+import { ElderlyContext } from '../../contexts/ElderlyContext';
 
 type ManageModuleCardProps = {
-  icon: any;
+  icon: Element;
+  moduleId: ModuleId;
   title: string;
   description: string;
   isAdded?: boolean;
@@ -22,6 +26,7 @@ type ManageModuleCardProps = {
  */
 const ManageModuleCard = ({
   icon,
+  moduleId,
   title,
   description,
   isAdded,
@@ -30,6 +35,7 @@ const ManageModuleCard = ({
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const cancelRef = useRef(null);
+  const { moduleList, setModuleList } = useContext(ElderlyContext);
 
   function handlePressButton() {
     if (!isAdded) {
@@ -37,9 +43,16 @@ const ManageModuleCard = ({
     }
   }
 
-  function handlePressDelete() {
+  async function handlePressDelete() {
     setDialogOpen(false);
-    //TODO: Remove Module
+    try {
+      const result = await deleteModuleAndSend(moduleId, moduleList);
+      if (result) {
+        setModuleList(result);
+      }
+    } catch (err) {
+      // open toast if http request failed
+    }
   }
 
   return (
