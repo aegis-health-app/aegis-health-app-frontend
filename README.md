@@ -85,3 +85,14 @@ Repository for Frontend codebase of Aegis Health App
 
   export default images;
   ```
+
+- useAuthentication: sets and gets the JSON Web Token
+  ```
+  const { getToken, setToken } = useAuthentication()
+
+  // getting the token
+  const token = getToken() // "opfhp1o2i83unyp1o2u3rno..."
+
+  // setting the token
+  setToken("opfhp1o2i83unyp1o2u3rno...")
+  ```
