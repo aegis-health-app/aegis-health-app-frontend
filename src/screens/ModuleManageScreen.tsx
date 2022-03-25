@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Icon, ScrollView } from 'native-base';
-import ManageModuleCard from '../components/organisms/ManageModuleCard';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
+import ManageModuleCard from './../components/molecules/ManageModuleCard';
+import { ElderlyContext } from '../contexts/ElderlyContext';
+import { getModuleIsAddedValue } from '../../utils/module/manage';
 
 const ModuleManageScreen = () => {
   const { t } = useTranslation();
+  const { moduleList } = useContext(ElderlyContext);
 
   return (
     <ScrollView>
       <View px="6" py="6">
         <ManageModuleCard
+          moduleId={1}
           icon={
             <Icon
               as={MaterialIcons}
@@ -22,9 +26,10 @@ const ModuleManageScreen = () => {
           }
           title={t('modules.notification')}
           description={t('moduleSelection.reminderDesc')}
-          isAdded={true}
+          isAdded={getModuleIsAddedValue(1, moduleList)}
         />
         <ManageModuleCard
+          moduleId={2}
           icon={
             <Icon
               as={MaterialIcons}
@@ -36,9 +41,10 @@ const ModuleManageScreen = () => {
           }
           title={t('modules.healthRecord')}
           description={t('moduleSelection.trackDesc')}
-          isAdded={false}
+          isAdded={getModuleIsAddedValue(2, moduleList)}
         />
         <ManageModuleCard
+          moduleId={3}
           icon={
             <Icon
               as={MaterialIcons}
@@ -50,9 +56,10 @@ const ModuleManageScreen = () => {
           }
           title={t('modules.memory')}
           description={t('46')}
-          isAdded={true}
+          isAdded={getModuleIsAddedValue(3, moduleList)}
         />
         <ManageModuleCard
+          moduleId={4}
           icon={
             <Icon
               as={MaterialIcons}
@@ -64,7 +71,7 @@ const ModuleManageScreen = () => {
           }
           title={t('modules.healthBlogs')}
           description={t('moduleSelection.healthBlogDsc')}
-          comingSoon={true}
+          isAdded={getModuleIsAddedValue(4, moduleList)}
         />
       </View>
     </ScrollView>

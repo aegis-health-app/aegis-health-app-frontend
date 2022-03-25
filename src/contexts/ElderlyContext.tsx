@@ -19,6 +19,8 @@ const ElderlyContextProvider = ({ ...props }) => {
   useEffect(() => {
     // if user is an elderly...
     // Note: must add Emergency module every time the data is received
+
+    // fetch data from backend + add moduleid 0 and moduleid 5
     const data: Module[] = [
       { moduleid: 0, mname: 'Emergency' },
       {
