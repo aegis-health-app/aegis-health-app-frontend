@@ -2,7 +2,6 @@ import { ScrollView } from 'native-base';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// import { useTranslation } from 'react-i18next';
 import ForgotPasswordStage1 from '../components/molecules/ForgotPasswordStage1';
 import ForgotPasswordStage2 from '../components/molecules/ForgotPasswordStage2';
 import ForgotPasswordStage3 from '../components/molecules/ForgotPasswordStage3';
@@ -19,7 +18,7 @@ const ForgotPasswordScreen = () => {
     formState: { errors },
     watch
   } = useForm();
-  // const { t } = useTranslation();
+
   const [stage, setStage] = useState(stages.first);
 
   return (
