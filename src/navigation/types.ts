@@ -30,6 +30,7 @@ export type RootStackParamList = {
 
   SignInScreen: undefined;
   SignUpScreen: undefined;
+  ForgotPasswordScreen: undefined;
 
   PlanSelectionScreen: undefined;
   // Unauthorized
