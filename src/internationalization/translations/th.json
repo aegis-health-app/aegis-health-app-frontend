@@ -206,5 +206,17 @@
     "buttonNeutral": "ไว้ทีหลัง",
     "buttonNegative": "ยกเลิก",
     "buttonPositive": "ตกลง"
+  },
+  "changePasswordSuccess": {
+    "header": "สำเร็จ",
+    "body": "รหัสผ่านของคุณได้ถูกเปลี่ยนเรียบร้อยแล้ว",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "changePasswordError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
   }
 }
