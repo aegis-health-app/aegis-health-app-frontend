@@ -5,6 +5,8 @@ import { Control, Controller, FieldValues } from 'react-hook-form';
 type TextInputProps = {
   label: string;
   name: string;
+  hasRequiredStar?: boolean;
+  errorMessage?: string;
   errors: { [x: string]: { message: string } };
   control: Control<FieldValues, any>;
   inputRightElement?: IInputProps['InputRightElement'];
@@ -13,16 +15,17 @@ type TextInputProps = {
 const TextInput: React.FC<TextInputProps> = ({
   label,
   name,
-  isRequired,
+  hasRequiredStar,
   placeholder,
   defaultValue,
   control,
   errors,
   inputRightElement,
+  errorMessage,
   ...props
 }) => {
   return (
-    <FormControl isRequired={isRequired} isInvalid={name in errors}>
+    <FormControl isRequired={hasRequiredStar} isInvalid={name in errors}>
       <FormControl.Label mb={2}>{label}</FormControl.Label>
       <Controller
         control={control}
@@ -42,10 +45,10 @@ const TextInput: React.FC<TextInputProps> = ({
           />
         )}
         name={name}
-        rules={{ required: 'Field is required', minLength: 3 }}
+        rules={{ required: errorMessage, minLength: 3 }}
         defaultValue={defaultValue ?? ''}
       />
-      <FormControl.ErrorMessage mt={0}>
+      <FormControl.ErrorMessage mt={2}>
         {errors[name]?.message}
       </FormControl.ErrorMessage>
     </FormControl>

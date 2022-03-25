@@ -1,4 +1,4 @@
-{ 
+{
   "general": {
     "otp": "Verification Code"
   },
@@ -154,7 +154,7 @@
   },
   "auth": {
     "password": "Password",
-    "forgotPassword": "Forgot Password?",
+    "forgotPassword": "Forgot your password?",
     "signIn": "Sign In",
     "noAccount": "No account?",
     "footerSignUp": "Sign Up",
@@ -175,5 +175,8 @@
     "blankNewPasswordWarning": "New Password cannot be left blank",
     "passwordsMustMatch": "Passwords must match",
     "samePasswordWarning": "New password cannot be the same as the old password"
+  },
+  "error": {
+    "isRequired": "${name} cannot be left blank"
   }
 }
