@@ -185,6 +185,6 @@
     "header": "Enter Your New Password"
   },
   "error": {
-    "isRequired": "${name} cannot be left blank"
+    "isRequired": "{{name}} cannot be left blank"
   }
 }
