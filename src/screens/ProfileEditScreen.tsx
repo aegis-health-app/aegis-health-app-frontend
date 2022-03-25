@@ -1,16 +1,11 @@
 import { Platform, StyleSheet } from 'react-native';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Image, Radio, ScrollView, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
-import {
-  BloodType,
-  User,
-  userProfileSchema,
-  BirthGender
-} from '../interfaces/User';
+import { userProfileSchema } from '../interfaces/User';
 import Divider from '../components/atoms/Divider';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -21,28 +16,41 @@ import { RootStackParamList } from '../navigation/types';
 import { useForm } from 'react-hook-form';
 import TextInput from '../components/atoms/TextInput';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
+import { Gender, User, BloodType } from '../dto/modules/user.dto';
+import {
+  launchCamera,
+  launchImageLibrary,
+  ImagePickerResponse
+} from 'react-native-image-picker';
+import { CameraPhotoOptions } from '../utils/permission';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
 
 const ProfileEditScreen = () => {
   const { t } = useTranslation();
-  const { userProfile, setUserProfile } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
+  // temporary user
   const initialValues: User = {
-    firstName: '',
-    lastName: '',
-    displayName: '',
-    birthGender: '',
-    birthDate: '',
-    healthIssues: '',
-    personalMedicine: '',
-    allergens: '',
-    previousVaccinations: '',
-    bloodType: 'N/A'
+    imageid: '',
+    fname: '',
+    lname: '',
+    dname: '',
+    bday: '',
+    gender: 'M',
+    isElderly: true,
+    uid: 0,
+    healthCondition: '',
+    bloodType: 'N/A',
+    allergy: '',
+    personalMedication: '',
+    vaccine: '',
+    phone: ''
   };
 
   const resolver = useYupValidationResolver(userProfileSchema);
@@ -61,9 +69,9 @@ const ProfileEditScreen = () => {
     const currentDate = selectedDate.getTime() + 7 * 60 * 60 * 1000;
     setShow(false);
     setDate(new Date(currentDate));
-    setUserProfile({
-      ...userProfile,
-      birthDate: currentDate.toString()
+    setUser({
+      ...initialValues,
+      bday: currentDate.toString()
     });
   };
 
@@ -82,17 +90,49 @@ const ProfileEditScreen = () => {
     return momentDate.format('MM/DD/YYYY');
   };
 
+  const takePicture = async () => {
+    const result: ImagePickerResponse = await launchCamera(CameraPhotoOptions);
+    setNewProfileImage(result);
+    console.log(result);
+    if (result.assets) console.log(result.assets[0].uri);
+  };
+
+  const selectPictureFromDevice = async () => {
+    const result: ImagePickerResponse = await launchImageLibrary(
+      CameraPhotoOptions
+    );
+    setNewProfileImage(result);
+  };
+
+  // TODO: Update the parameter type with DTO form backend
+  const uploadNewProfileImage = async (data) => {
+    // Send the new profile image
+    console.log(data);
+  };
+
+  // TODO: Update the parameter type with DTO form backend
+  const submitUpdatedProfileInfo = async (data) => {
+    // Send new updated profile info
+    console.log(data);
+  };
+
   const onFormSubmit = async (data) => {
     data = {
       ...data,
-      birthGender: userProfile?.birthGender || BirthGender.MALE,
-      birthDate: userProfile?.birthDate
-        ? moment(userProfile?.birthDate, 'YYYY-MM-DD')
+      gender: user?.gender || Gender.male,
+      bday: user?.bday
+        ? moment(user?.bday, 'YYYY-MM-DD')
         : date.toLocaleDateString('en-us'),
-      bloodType: userProfile?.bloodType
+      bloodType: user?.bloodType
     };
-    console.log({ data });
+    submitUpdatedProfileInfo(data).then(() => {
+      if (newProfileImage) uploadNewProfileImage(newProfileImage);
+    });
   };
+
+  useEffect(() => {
+    setUser(initialValues);
+  }, []);
 
   return (
     <KeyboardAvoidingView>
@@ -105,7 +145,11 @@ const ProfileEditScreen = () => {
         <Spacer />
         <View display="flex" flexDir="row" justifyContent="center">
           <Image
-            source={ProfilePic}
+            source={
+              newProfileImage && newProfileImage.assets
+                ? { uri: newProfileImage.assets[0].uri }
+                : ProfilePic
+            }
             width="32"
             height="32"
             borderRadius={4}
@@ -114,9 +158,13 @@ const ProfileEditScreen = () => {
         </View>
         <Spacer />
         <View justifyContent="center" alignItems="center">
-          <Button width={48}>{t('userForm.takePic')}</Button>
+          <Button width={48} onPress={() => takePicture()}>
+            {t('userForm.takePic')}
+          </Button>
           <Spacer />
-          <Button width={48}>{t('userForm.fromDevice')}</Button>
+          <Button width={48} onPress={() => selectPictureFromDevice()}>
+            {t('userForm.fromDevice')}
+          </Button>
           <Spacer />
         </View>
 
@@ -126,8 +174,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.name')}
               placeholder={t('profile.name')}
-              defaultValue={initialValues.firstName}
-              name="firstName"
+              defaultValue={initialValues.fname}
+              name="fname"
               control={control}
               errors={errors}
             />
@@ -138,8 +186,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.lastName')}
               placeholder={t('profile.lastName')}
-              defaultValue={initialValues.lastName}
-              name="lastName"
+              defaultValue={initialValues.lname}
+              name="lname"
               control={control}
               errors={errors}
             />
@@ -150,8 +198,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.displayName')}
               placeholder={t('profile.displayName')}
-              defaultValue={initialValues.displayName}
-              name="displayName"
+              defaultValue={initialValues.dname}
+              name="dname"
               control={control}
               errors={errors}
             />
@@ -164,22 +212,22 @@ const ProfileEditScreen = () => {
           <View style={styles.profileInfoItemRow}>
             <View style={styles.toggleButtonsContainer}>
               <Button
-                variant={true ? 'solid' : 'outline'}
+                variant={user?.gender === Gender.male ? 'solid' : 'outline'}
                 onPress={() =>
-                  setUserProfile({
-                    ...userProfile,
-                    birthGender: BirthGender.MALE
+                  setUser({
+                    ...(user ?? initialValues),
+                    gender: Gender.male
                   })
                 }>
                 {t('userForm.male')}
               </Button>
               <Spacer h={0} />
               <Button
-                variant={false ? 'solid' : 'outline'}
+                variant={user?.gender === Gender.female ? 'solid' : 'outline'}
                 onPress={() =>
-                  setUserProfile({
-                    ...userProfile,
-                    birthGender: BirthGender.FEMALE
+                  setUser({
+                    ...(user ?? initialValues),
+                    gender: Gender.female
                   })
                 }>
                 {t('userForm.female')}
@@ -223,8 +271,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.healthIssues')}
               placeholder={t('profile.healthIssues')}
-              defaultValue={initialValues.healthIssues}
-              name="healthIssues"
+              defaultValue={initialValues.healthCondition ?? ''}
+              name="healthCondition"
               control={control}
               errors={errors}
             />
@@ -235,8 +283,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.personalMedicine')}
               placeholder={t('profile.personalMedicine')}
-              defaultValue={initialValues.personalMedicine}
-              name="personalMedicine"
+              defaultValue={initialValues.personalMedication ?? ''}
+              name="personalMedication"
               control={control}
               errors={errors}
             />
@@ -247,8 +295,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.allergens')}
               placeholder={t('profile.allergens')}
-              defaultValue={initialValues.allergens}
-              name="allergens"
+              defaultValue={initialValues.allergy ?? ''}
+              name="allergy"
               control={control}
               errors={errors}
             />
@@ -259,8 +307,8 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.previousVaccinations')}
               placeholder={t('profile.previousVaccinations')}
-              defaultValue={initialValues.previousVaccinations}
-              name="previousVaccinations"
+              defaultValue={initialValues.vaccine ?? ''}
+              name="vaccine"
               control={control}
               errors={errors}
             />
@@ -273,13 +321,12 @@ const ProfileEditScreen = () => {
           <Radio.Group
             name="myRadioGroup"
             accessibilityLabel="favorite number"
-            value={userProfile?.bloodType}
-            defaultValue={userProfile?.bloodType}
+            value={user?.bloodType}
+            defaultValue={user?.bloodType}
             onChange={(nextValue: BloodType) => {
-              console.log(nextValue);
-              if (setUserProfile) {
-                setUserProfile({
-                  ...userProfile,
+              if (setUser) {
+                setUser({
+                  ...(user ?? initialValues),
                   bloodType: nextValue
                 });
               }

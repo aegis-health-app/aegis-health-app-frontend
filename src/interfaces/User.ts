@@ -1,38 +1,17 @@
 import * as Yup from 'yup';
 import i18n from '../internationalization/i18n.config';
 
-export interface User {
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  displayName?: string | undefined;
-  birthGender?: string | undefined;
-  birthDate?: string | undefined;
-  phoneNumber?: string | undefined;
-  healthIssues?: string | undefined;
-  personalMedicine?: string | undefined;
-  allergens?: string | undefined;
-  previousVaccinations?: string | undefined;
-  bloodType?: BloodType;
-}
-
 export type BloodType = 'N/A' | 'A' | 'B' | 'O' | 'AB' | string;
 
-export const BirthGender = {
-  MALE: 'MALE',
-  FEMALE: 'FEMALE'
-};
-
 export const userProfileSchema = Yup.object({
-  firstName: Yup.string().required(i18n.t('editProfile.firstNameBlankWarning')),
-  lastName: Yup.string().required(i18n.t('editProfile.lastNameBlankWarning')),
-  displayName: Yup.string().required(
-    i18n.t('editProfile.displayNameBlankWarning')
-  ),
-  birthGender: Yup.string(),
-  birthDate: Yup.string(),
-  healthIssues: Yup.string(),
-  personalMedicine: Yup.string(),
-  allergens: Yup.string(),
-  previousVaccinations: Yup.string(),
-  bloodType: Yup.string().oneOf(['N/A', 'A', 'B', 'O', 'AB'])
+  fname: Yup.string().required(i18n.t('editProfile.firstNameBlankWarning')),
+  lname: Yup.string().required(i18n.t('editProfile.lastNameBlankWarning')),
+  dname: Yup.string().required(i18n.t('editProfile.displayNameBlankWarning')),
+  gender: Yup.string(),
+  bday: Yup.string(),
+  healthCondition: Yup.string(),
+  personalMedication: Yup.string(),
+  allergy: Yup.string(),
+  vaccine: Yup.string(),
+  phone: Yup.string().oneOf(['N/A', 'A', 'B', 'O', 'AB'])
 });
