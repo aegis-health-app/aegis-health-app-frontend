@@ -34,7 +34,7 @@ const SignInScreen = () => {
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const onFormSubmit = useCallback(() => {}, []);
+  const onFormSubmit = useCallback(() => null, []);
 
   return (
     <SafeAreaView>
