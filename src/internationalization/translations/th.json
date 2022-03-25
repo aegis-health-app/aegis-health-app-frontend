@@ -165,7 +165,12 @@
     "alreadyHaveAccount": "มีบัญชีผู้ใช้แล้ว?",
     "signUp": "สมัครใช้งาน",
     "confirmPassword": "ยืนยันรหัสผ่าน",
-    "continue": "ดำเนินการต่อ"
+    "continue": "ดำเนินการต่อ",
+    "generalInfo": "ข้อมูลทั่วไป",
+    "enterOTPCode": "กรุณากรอกรหัสยืนยันของคุณ",
+    "otpDetail": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ {{phone}}",
+    "changePhoneNumber": "เปลี่ยนหมายเลขโทรศัพท์",
+    "submitOTP": "ดำเนินการต่อ"
   },
   "changePassword": {
     "enterOldPassword": "กรอกรหัสผ่านเดิม",
