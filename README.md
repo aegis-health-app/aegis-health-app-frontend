@@ -96,3 +96,9 @@ Repository for Frontend codebase of Aegis Health App
   // setting the token
   setToken("opfhp1o2i83unyp1o2u3rno...")
   ```
+
+## How to reduce hours of pain
+
+If you change the contents of `.env` and the content of the app doesn't follow, run this script
+
+`yarn start --reset-cache`
