@@ -8,7 +8,6 @@ import {
   Pressable,
   ScrollView,
   Text,
-  View,
   VStack
 } from 'native-base';
 import React, { useCallback, useState } from 'react';
