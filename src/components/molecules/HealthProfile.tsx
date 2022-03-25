@@ -2,13 +2,9 @@ import React from 'react';
 import { FlatList, Text, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 import Spacer from '../atoms/Spacer';
+import { ProfileItem } from '../../interfaces/User';
 
-type HealthInfoItemProp = {
-  label: string;
-  value: string;
-};
-
-const HealthInfoItem = ({ label, value }: HealthInfoItemProp) => (
+const HealthInfoItem = ({ label, value }: ProfileItem) => (
   <View>
     <View style={styles.HealthInfoItemRow}>
       <View style={styles.HealthInfoItemLabel}>
@@ -25,7 +21,7 @@ const HealthInfoItem = ({ label, value }: HealthInfoItemProp) => (
 );
 
 type HealthProfileProps = {
-  data: HealthInfoItemProp[];
+  data: ProfileItem[];
 };
 
 const HealthProfile = ({ data }: HealthProfileProps) => {

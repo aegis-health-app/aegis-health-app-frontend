@@ -1,18 +1,20 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text, View, Image, Icon } from 'native-base';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
 
-const ProfilePic = require('../../assets/images/sompoch.png');
+const ProfilePic = require('../../assets/images/profile.png');
 
 const ProfileSection = () => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { user } = useContext(UserContext);
 
   return (
     <View
@@ -23,7 +25,7 @@ const ProfileSection = () => {
       <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
         <View flexDir="row">
           <Image
-            source={ProfilePic}
+            source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
             width="12"
             height="12"
             borderRadius={4}

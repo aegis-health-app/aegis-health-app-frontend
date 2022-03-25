@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import EditButton from '../components/atoms/EditButton';
@@ -10,62 +10,71 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { UserContext } from '../contexts/UserContext';
+import { ProfileItem } from '../interfaces/User';
+import { getFormattedDate } from '../utils/getFormattedDate';
+import { useSettings } from '../hooks/useSettings';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
 
 const ProfileScreen = () => {
   const { t } = useTranslation();
+  const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { user } = useContext(UserContext);
 
-  // TODO: Update dummy data to use the fetched data
-  const basicProfiledata = [
-    {
-      label: t('profile.name'),
-      value: 'Sompoch Muangyim'
-    },
-    {
-      label: t('profile.displayName'),
-      value: 'sompoch'
-    },
-    {
-      label: t('profile.birthGender'),
-      value: 'Male'
-    },
-    {
-      label: t('profile.birthDate'),
-      value: '08/02/1951'
-    },
-    {
-      label: t('profile.phoneNumber'),
-      value: '0909090909'
-    }
-  ];
+  const [basicProfile, setBasicProfile] = useState<ProfileItem[]>([]);
+  const [healthProfile, setHealthProfile] = useState<ProfileItem[]>([]);
 
-  // TODO: Update dummy data to use the fetched datad
-  const healthProfileData = [
-    {
-      label: t('profile.healthIssues'),
-      value: 'Diebetes, High blood pressure'
-    },
-    {
-      label: t('profile.personalMedicine'),
-      value: 'Ibuprofen'
-    },
-    {
-      label: t('profile.allergens'),
-      value: 'Chlorpheniramine เกสรดอกไม้'
-    },
-    {
-      label: t('profile.previousVaccinations'),
-      value: 'บาดทะยัก คอตีบ'
-    },
-    {
-      label: t('profile.bloodType'),
-      value: 'B'
-    }
-  ];
+  useEffect(() => {
+    if (!user) return;
+    setBasicProfile([
+      {
+        label: t('profile.name'),
+        value: `${user.fname} ${user.lname}`
+      },
+      {
+        label: t('profile.displayName'),
+        value: user.dname
+      },
+      {
+        label: t('profile.birthGender'),
+        value: user.gender
+      },
+      {
+        label: t('profile.birthDate'),
+        value: getFormattedDate(new Date(user.bday), language)
+      },
+      {
+        label: t('profile.phoneNumber'),
+        value: user.phone ?? ''
+      }
+    ]);
+    setHealthProfile([
+      {
+        label: t('profile.healthIssues'),
+        value: user.healthCondition ?? ''
+      },
+      {
+        label: t('profile.personalMedicine'),
+        value: user.personalMedication ?? ''
+      },
+      {
+        label: t('profile.allergens'),
+        value: user.allergy ?? ''
+      },
+      {
+        label: t('profile.previousVaccinations'),
+        value: user.vaccine ?? ''
+      },
+      {
+        label: t('profile.bloodType'),
+        value: user.bloodType ?? 'N/A'
+      }
+    ]);
+  }, [user]);
 
   return (
     <View style={styles.pageContainer}>
@@ -78,7 +87,7 @@ const ProfileScreen = () => {
       <Spacer />
       <View display="flex" flexDir="row" justifyContent="center">
         <Image
-          source={ProfilePic}
+          source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
           width="32"
           height="32"
           borderRadius={4}
@@ -86,9 +95,9 @@ const ProfileScreen = () => {
         />
       </View>
       <Spacer />
-      <BasicProfile data={basicProfiledata} />
+      <BasicProfile data={basicProfile} />
       <Divider />
-      <HealthProfile data={healthProfileData} />
+      <HealthProfile data={healthProfile} />
       <Spacer />
     </View>
   );

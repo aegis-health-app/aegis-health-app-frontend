@@ -1,5 +1,5 @@
 import { Platform, StyleSheet } from 'react-native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image, Radio, ScrollView, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
@@ -26,42 +26,29 @@ import {
   CameraPhotoOptions,
   requestCameraPermission
 } from '../utils/permission';
+import { client } from '../config/axiosConfig';
 
 // Temporary profile image
-const ProfilePic = require('../assets/images/sompochHD.png');
+const ProfilePic = require('../assets/images/profile.png');
 
 const ProfileEditScreen = () => {
   const { t } = useTranslation();
-  const { user, setUser } = useContext(UserContext);
+  const { user, updateUserProfile, getUserProfile } = useContext(UserContext);
   const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
-
-  // temporary user
-  const initialValues: User = {
-    imageid: '',
-    fname: '',
-    lname: '',
-    dname: '',
-    bday: '',
-    gender: 'M',
-    isElderly: true,
-    uid: 0,
-    healthCondition: '',
-    bloodType: 'N/A',
-    allergy: '',
-    personalMedication: '',
-    vaccine: '',
-    phone: ''
-  };
+  const [initialValues, setInitialValues] = useState<User | undefined>(user);
 
   const resolver = useYupValidationResolver(userProfileSchema);
   const {
     control,
     formState: { errors },
     handleSubmit
-  } = useForm({ resolver, mode: 'onTouched' });
+  } = useForm({
+    resolver,
+    mode: 'onTouched'
+  });
 
   const [date, setDate] = useState(new Date(700938977));
   const [mode, setMode] = useState('date');
@@ -72,10 +59,12 @@ const ProfileEditScreen = () => {
     const currentDate = selectedDate.getTime() + 7 * 60 * 60 * 1000;
     setShow(false);
     setDate(new Date(currentDate));
-    setUser({
-      ...initialValues,
-      bday: currentDate.toString()
-    });
+    if (user) {
+      setInitialValues({
+        ...user,
+        bday: currentDate.toString()
+      });
+    }
   };
 
   const showMode = (currentMode) => {
@@ -107,37 +96,65 @@ const ProfileEditScreen = () => {
       CameraPhotoOptions
     );
     setNewProfileImage(result);
+    console.log(result);
+  };
+
+  const uploadNewProfileImage = async () => {
+    if (!newProfileImage?.assets) return;
+    const formData = new FormData();
+    const profileImage = newProfileImage.assets[0];
+    console.log({ profileImage });
+
+    if (profileImage.uri && user) {
+      formData.append('file', {
+        uri:
+          Platform.OS === 'android'
+            ? profileImage.uri
+            : profileImage.uri.replace('file://', ''),
+        name: profileImage.fileName,
+        type: profileImage.type
+      });
+      client
+        .post(`/user/profile/${user.uid}/image`, formData)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          getUserProfile();
+        });
+    }
   };
 
   // TODO: Update the parameter type with DTO form backend
-  const uploadNewProfileImage = async (data) => {
-    // Send the new profile image
-    console.log(data);
-  };
-
-  // TODO: Update the parameter type with DTO form backend
-  const submitUpdatedProfileInfo = async (data) => {
-    // Send new updated profile info
-    console.log(data);
-  };
+  const submitUpdatedProfileInfo = async (payload) =>
+    updateUserProfile(payload);
 
   const onFormSubmit = async (data) => {
     data = {
       ...data,
-      gender: user?.gender || Gender.male,
-      bday: user?.bday
-        ? moment(user?.bday, 'YYYY-MM-DD')
+      gender: initialValues?.gender || Gender.male,
+      bday: initialValues?.bday
+        ? moment(initialValues?.bday, 'YYYY-MM-DD')
         : date.toLocaleDateString('en-us'),
-      bloodType: user?.bloodType
+      bloodType: initialValues?.bloodType
     };
     submitUpdatedProfileInfo(data).then(() => {
-      if (newProfileImage) uploadNewProfileImage(newProfileImage);
+      if (newProfileImage) uploadNewProfileImage();
     });
   };
 
-  useEffect(() => {
-    setUser(initialValues);
-  }, []);
+  const getImage = () => {
+    const newImage =
+      newProfileImage && newProfileImage.assets
+        ? { uri: newProfileImage.assets[0].uri }
+        : ProfilePic;
+    const imageSrc =
+      user?.imageid && !newProfileImage ? { uri: user?.imageid } : newImage;
+    return imageSrc;
+  };
 
   return (
     <KeyboardAvoidingView>
@@ -150,11 +167,7 @@ const ProfileEditScreen = () => {
         <Spacer />
         <View display="flex" flexDir="row" justifyContent="center">
           <Image
-            source={
-              newProfileImage && newProfileImage.assets
-                ? { uri: newProfileImage.assets[0].uri }
-                : ProfilePic
-            }
+            source={getImage()}
             width="32"
             height="32"
             borderRadius={4}
@@ -179,7 +192,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.name')}
               placeholder={t('profile.name')}
-              defaultValue={initialValues.fname}
+              defaultValue={initialValues?.fname}
               name="fname"
               control={control}
               errors={errors}
@@ -191,7 +204,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.lastName')}
               placeholder={t('profile.lastName')}
-              defaultValue={initialValues.lname}
+              defaultValue={initialValues?.lname}
               name="lname"
               control={control}
               errors={errors}
@@ -203,7 +216,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.displayName')}
               placeholder={t('profile.displayName')}
-              defaultValue={initialValues.dname}
+              defaultValue={initialValues?.dname}
               name="dname"
               control={control}
               errors={errors}
@@ -217,24 +230,32 @@ const ProfileEditScreen = () => {
           <View style={styles.profileInfoItemRow}>
             <View style={styles.toggleButtonsContainer}>
               <Button
-                variant={user?.gender === Gender.male ? 'solid' : 'outline'}
-                onPress={() =>
-                  setUser({
-                    ...(user ?? initialValues),
-                    gender: Gender.male
-                  })
-                }>
+                variant={
+                  initialValues?.gender === Gender.male ? 'solid' : 'outline'
+                }
+                onPress={() => {
+                  if (user) {
+                    setInitialValues({
+                      ...user,
+                      gender: Gender.male
+                    });
+                  }
+                }}>
                 {t('userForm.male')}
               </Button>
               <Spacer h={0} />
               <Button
-                variant={user?.gender === Gender.female ? 'solid' : 'outline'}
-                onPress={() =>
-                  setUser({
-                    ...(user ?? initialValues),
-                    gender: Gender.female
-                  })
-                }>
+                variant={
+                  initialValues?.gender === Gender.female ? 'solid' : 'outline'
+                }
+                onPress={() => {
+                  if (user) {
+                    setInitialValues({
+                      ...user,
+                      gender: Gender.female
+                    });
+                  }
+                }}>
                 {t('userForm.female')}
               </Button>
             </View>
@@ -276,7 +297,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.healthIssues')}
               placeholder={t('profile.healthIssues')}
-              defaultValue={initialValues.healthCondition ?? ''}
+              defaultValue={initialValues?.healthCondition ?? ''}
               name="healthCondition"
               control={control}
               errors={errors}
@@ -288,7 +309,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.personalMedicine')}
               placeholder={t('profile.personalMedicine')}
-              defaultValue={initialValues.personalMedication ?? ''}
+              defaultValue={initialValues?.personalMedication ?? ''}
               name="personalMedication"
               control={control}
               errors={errors}
@@ -300,7 +321,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.allergens')}
               placeholder={t('profile.allergens')}
-              defaultValue={initialValues.allergy ?? ''}
+              defaultValue={initialValues?.allergy ?? ''}
               name="allergy"
               control={control}
               errors={errors}
@@ -312,7 +333,7 @@ const ProfileEditScreen = () => {
             <TextInput
               label={t('profile.previousVaccinations')}
               placeholder={t('profile.previousVaccinations')}
-              defaultValue={initialValues.vaccine ?? ''}
+              defaultValue={initialValues?.vaccine ?? ''}
               name="vaccine"
               control={control}
               errors={errors}
@@ -329,9 +350,9 @@ const ProfileEditScreen = () => {
             value={user?.bloodType}
             defaultValue={user?.bloodType}
             onChange={(nextValue: BloodType) => {
-              if (setUser) {
-                setUser({
-                  ...(user ?? initialValues),
+              if (user) {
+                setInitialValues({
+                  ...user,
                   bloodType: nextValue
                 });
               }
