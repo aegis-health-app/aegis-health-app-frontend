@@ -51,5 +51,5 @@ export function getModuleIsAddedValue(
     return module.moduleid === targetId;
   });
 
-  return result ? true : false;
+  return result ? false : true;
 }
