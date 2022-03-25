@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen = () => {
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
-      <ScrollView>
+      <ScrollView nestedScrollEnabled>
         <View
           flex={1}
           alignItems="center"
@@ -19,7 +19,9 @@ const HomeScreen = () => {
           <ProfileSection />
           <Divider />
           <UpComingAlert />
-          <ModulePickerList />
+          <ScrollView horizontal scrollEnabled={false} width="100%">
+            <ModulePickerList />
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>
