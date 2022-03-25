@@ -42,28 +42,22 @@ const ConnectElderlyScreen = () => {
       </Button.Group>
       <ZStack mb="2" width="100%" height="100%">
         <QRCodeScanner
-          containerStyle={{justifyContent: "center", marginBottom:120}}
-          onRead={() => {
-            console.log('success')
+          customMarker={<Box
+            top="-20"
+            height="230"
+            width="230"
+            alignSelf="center"
+            borderWidth="3"
+            borderColor="#005DB4"
+            justifyContent="center"
+            alignItems="center"></Box>}
+          showMarker={true}
+          containerStyle={{justifyContent: "center", marginBottom: 120}}
+          onRead={(e) => {
+            console.log('success', e)
             navigation.navigate('ConfirmConnectScreen')
         }}
-          // flashMode={RNCamera.Constants.FlashMode.torch}
           />
-          <Box
-          top="18%"
-          height="230"
-          width="230"
-          alignSelf="center"
-          borderWidth="3"
-          borderColor="#005DB4"
-          justifyContent="center"
-          alignItems="center"></Box>
-        {/* <Image
-          height="100%"
-          width="100%"
-          source={QRBackground}
-          alt="QR Background"
-        /> */}
       </ZStack>
       <Text position="absolute" alignSelf="center" bottom="24">
         {t('userLink.cameraHelpText')}
