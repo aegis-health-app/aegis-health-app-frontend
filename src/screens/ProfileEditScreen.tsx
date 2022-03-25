@@ -22,7 +22,10 @@ import {
   launchImageLibrary,
   ImagePickerResponse
 } from 'react-native-image-picker';
-import { CameraPhotoOptions } from '../utils/permission';
+import {
+  CameraPhotoOptions,
+  requestCameraPermission
+} from '../utils/permission';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/sompochHD.png');
@@ -91,10 +94,12 @@ const ProfileEditScreen = () => {
   };
 
   const takePicture = async () => {
-    const result: ImagePickerResponse = await launchCamera(CameraPhotoOptions);
-    setNewProfileImage(result);
-    console.log(result);
-    if (result.assets) console.log(result.assets[0].uri);
+    requestCameraPermission().then(async () => {
+      const result: ImagePickerResponse = await launchCamera(
+        CameraPhotoOptions
+      );
+      setNewProfileImage(result);
+    });
   };
 
   const selectPictureFromDevice = async () => {

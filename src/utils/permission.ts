@@ -1,5 +1,6 @@
 import { PermissionsAndroid, Platform } from 'react-native';
 import { CameraOptions } from 'react-native-image-picker';
+import i18n from '../internationalization/i18n.config';
 
 export const CameraPhotoOptions: CameraOptions = {
   mediaType: 'photo'
@@ -11,13 +12,11 @@ export const requestCameraPermission = async () => {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.CAMERA,
         {
-          title: 'Cool Photo App Camera Permission',
-          message:
-            'Cool Photo App needs access to your camera ' +
-            'so you can take awesome pictures.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK'
+          title: i18n.t('cameraPermissions.title'),
+          message: i18n.t('cameraPermissions.message'),
+          buttonNeutral: i18n.t('cameraPermissions.buttonNeutral'),
+          buttonNegative: i18n.t('cameraPermissions.buttonNegative'),
+          buttonPositive: i18n.t('cameraPermissions.buttonPositive')
         }
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {

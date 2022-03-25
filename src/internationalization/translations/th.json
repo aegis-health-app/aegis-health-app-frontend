@@ -186,6 +186,14 @@
     "header": "กรุณากรอกรหัสผ่านใหม่"
   },
   "error": {
-    "isRequired": "กรุณากรอก{{name}}"
+    "isRequired": "กรุณากรอก{{name}}",
+    "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
+  },
+  "cameraPermissions": {
+    "title": "โปรดอนุญาตการเข้าถึงกล้องของอุปกรณ์นี้",
+    "message": "แอปพลิเคชันนี้ต้องการเข้าถึงกล้องของอุปกรณ์ของคุณ",
+    "buttonNeutral": "ไว้ทีหลัง",
+    "buttonNegative": "ยกเลิก",
+    "buttonPositive": "ตกลง"
   }
 }
