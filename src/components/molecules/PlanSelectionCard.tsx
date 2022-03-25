@@ -54,7 +54,6 @@ const PlanSelectionCard = ({
           height={150}
           resizeMode="contain"
           mr={3}
-          // width={ScreenWidth}
         />
         <View w="1/2">
           {/* TODO: Return fontSize based on isElderly hook */}
