@@ -160,6 +160,7 @@
     "footerSignUp": "สร้างบัญชี",
     "alreadyHaveAccount": "มีบัญชีผู้ใช้แล้ว?",
     "signUp": "สมัครใช้งาน",
+    "confirmPassword": "ยืนยันรหัสผ่าน",
     "continue": "ดำเนินการต่อ"
   },
   "changePassword": {
