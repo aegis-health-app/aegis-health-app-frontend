@@ -63,10 +63,9 @@ const SignInScreen = () => {
               control={control}
               errors={errors}
               isRequired
-              errorMessage={t('error.isRequired').replace(
-                '${name}',
-                t('profile.phoneNumber')
-              )}
+              errorMessage={t('error.isRequired', {
+                name: t('profile.phoneNumber')
+              })}
             />
           </Box>
           <Box mb={6}>
@@ -77,10 +76,7 @@ const SignInScreen = () => {
               control={control}
               errors={errors}
               isRequired
-              errorMessage={t('error.isRequired').replace(
-                '${name}',
-                t('auth.password')
-              )}
+              errorMessage={t('error.isRequired', { name: t('auth.password') })}
               type={showPassword ? 'text' : 'password'}
               InputRightElement={
                 <Icon
