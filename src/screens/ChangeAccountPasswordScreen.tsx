@@ -8,20 +8,26 @@ import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-import { changePasswordSchema } from '../interfaces/Password';
+import {
+  ChangePasswordDto,
+  changePasswordSchema
+} from '../interfaces/Password';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import TextInput from '../components/atoms/TextInput';
+import { client } from '../config/axiosConfig';
+import Alert from '../components/organisms/Alert';
 
 const ChangeAccountPasswordScreen = () => {
-  const { t } = useTranslation();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
-
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const resolver = useYupValidationResolver(changePasswordSchema);
   const {
     control,
@@ -31,10 +37,38 @@ const ChangeAccountPasswordScreen = () => {
 
   const onFormSubmit = (data) => {
     console.log('submit password change', data);
+    const payload: ChangePasswordDto = {
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword
+    };
+    client
+      .put('/setting/changePassword', payload)
+      .then(() => {
+        setShowSuccessAlert(true);
+      })
+      .catch((err) => {
+        setShowErrorAlert(true);
+        console.log(err);
+      });
   };
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
+      <Alert
+        isOpen={showErrorAlert}
+        close={() => setShowErrorAlert(false)}
+        type="ERROR"
+        message="changePasswordError"
+      />
+      <Alert
+        isOpen={showSuccessAlert}
+        close={() => {
+          setShowSuccessAlert(false);
+          navigation.navigate('SettingScreen');
+        }}
+        type="SUCCESS"
+        message="changePasswordSuccess"
+      />
       <View style={styles.pageContainer}>
         <View>
           <Text fontSize="2xl" fontWeight={'md'}>

@@ -206,5 +206,17 @@
     "buttonNeutral": "Ask Me Later",
     "buttonNegative": "Cancel",
     "buttonPositive": "OK"
+  },
+  "changePasswordSuccess": {
+    "header": "Success",
+    "body": "Your password has been changed successfully.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "changePasswordError": {
+    "header": "Success",
+    "body": "Your password has been changed successfully.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
   }
 }

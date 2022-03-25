@@ -26,3 +26,8 @@ export const changePasswordSchema = Yup.object({
       i18n.t('changePassword.samePasswordWarning')
     )
 });
+
+export interface ChangePasswordDto {
+  oldPassword: string;
+  newPassword: string;
+}
