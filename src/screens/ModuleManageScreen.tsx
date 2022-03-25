@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
 import ManageModuleCard from './../components/molecules/ManageModuleCard';
 import { ElderlyContext } from '../contexts/ElderlyContext';
-import { getModuleIsAddedValue } from '../../utils/module/manage';
+import { getModuleIsAddedValue } from '../utils/module/manage';
 
 const ModuleManageScreen = () => {
   const { t } = useTranslation();
