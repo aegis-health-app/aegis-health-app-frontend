@@ -13,9 +13,11 @@ const InputCodeScreen = () => {
 
   const { t } = useTranslation();
 
+  const navigation =
+  useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const codeSchema = Yup.object({
-    // elderlyCode: Yup.string().oneOf(codes, t('userLink.invalidCode'))
-    elderlyCode: Yup.string().max(6,'').min(6,'')
+    elderlyCode: Yup.string().min(6,'')
   })
 
   const {
@@ -27,13 +29,10 @@ const InputCodeScreen = () => {
 
   // todo: get codes from backend
   const [codes, setCodes] = useState(['000000','AAAAAA'])
-  const watchElderlyCode = watch();
   const [isCodeValid, setIsCodeValid] = useState(true)
+  const watchElderlyCode = watch();
 
-  const navigation =
-  useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const { isValid} = useFormState({control})
+  const { isValid } = useFormState({control})
 
   const handleSubmit = () => {
     if(codes.includes(watchElderlyCode["elderlyCode"])) {
