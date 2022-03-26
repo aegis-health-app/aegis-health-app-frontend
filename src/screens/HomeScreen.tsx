@@ -8,17 +8,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const HomeScreen = () => {
-  function handlePressFab() {}
-
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <Fab
         placement="bottom-right"
+        renderInPortal={false}
         size="sm"
-        bottom="16"
         bgColor="#000"
         icon={<Icon as={AntDesign} name="question" size="6" color="#fff" />}
-        onPress={handlePressFab}
       />
       <ScrollView nestedScrollEnabled>
         <View
