@@ -89,7 +89,6 @@ const ManageModuleCard = ({
 
   return (
     <View style={styles.card} bgColor="white" p={4} mb={2} w="full">
-      <Text>{JSON.stringify(elderlyProfile?.listModuleid)}</Text>
       <AlertDialog
         leastDestructiveRef={cancelRef}
         isOpen={dialogOpen}

@@ -60,6 +60,7 @@ export async function postAddModule(
  * @param modules list of modules received from backend
  * @returns modules after deletion
  */
+
 export async function postRemovedModule(
   targetId: ModuleId
 ): Promise<ModuleId[] | void> {
