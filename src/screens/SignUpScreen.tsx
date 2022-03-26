@@ -260,6 +260,29 @@ const SignUpScreen = () => {
             </View>
           )}
 
+          {signUpStage === 3 && (
+            <View>
+              <FormHeader headerText={t('auth.healthInfo')} my={2} size={20} />
+              {informationList[2].map((info) => (
+                <Box mb={6} key={`${info.label}-${info.name}`}>
+                  {!info.type && (
+                    <TextInput
+                      label={`${t(info.label)} `}
+                      placeholder={t(info.placeholder || info.label)}
+                      name={info.name}
+                      control={control}
+                      errors={errors}
+                    />
+                  )}
+
+                </Box>
+              ))}
+              <Button w="full" onPress={handleSubmit(continueToNextStage)}>
+                {t('auth.continue')}
+              </Button>
+            </View>
+          )}
+
           <Box flex={1} />
           {signUpStage < 4 ? (
             <AuthFooter page={AuthType.SIGNUP} />
