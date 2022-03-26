@@ -1,5 +1,5 @@
 import { Box, Button, ScrollView, VStack } from 'native-base';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
@@ -27,11 +27,61 @@ interface InformationList {
 
 const bloodTypes = ['N/A', 'A', 'B', 'O', 'AB'];
 
+const informationList: InformationList[][] = [
+  [
+    {
+      label: 'profile.name',
+      name: 'name',
+      type: TextInputValidationType.NAME
+    },
+    {
+      label: 'profile.lastName',
+      name: 'lastName',
+      type: TextInputValidationType.NAME
+    },
+    {
+      label: 'profile.displayName',
+      name: 'displayName',
+      type: 'text'
+    },
+    { label: 'profile.birthDate', name: 'birthDate', type: 'birthDate' },
+    { label: 'profile.birthGender', name: 'birthGender', type: 'gender' },
+    {
+      label: 'profile.phoneNumber',
+      name: 'phoneNumber',
+      type: TextInputValidationType.PHONE
+    },
+    { label: 'auth.password', name: 'password', type: 'password' },
+    {
+      label: 'auth.confirmPassword',
+      name: 'confirmPassword',
+      type: 'password'
+    }
+  ],
+  [],
+  [
+    { label: 'profile.healthIssues', name: 'healthIssues', type: 'text' },
+    {
+      label: 'profile.personalMedicine',
+      name: 'personalMedicine',
+      type: 'text'
+    },
+    { label: 'profile.allergens', name: 'allergens', type: 'text' },
+    {
+      label: 'profile.previousVaccinations',
+      name: 'previousVaccinations',
+      type: 'text'
+    },
+    { label: 'profile.bloodType', name: 'bloodType', type: 'bloodGroup' }
+  ]
+];
+
 const SignUpScreen = () => {
   const {
     control,
     formState: { errors },
     handleSubmit,
+    setError,
     watch
   } = useForm();
 
@@ -48,62 +98,22 @@ const SignUpScreen = () => {
     if (signUpStage > 1) setSignUpStage((prev) => prev - 1);
   }, [signUpStage]);
 
-  const continueToNextStage = useCallback(() => {
-    if (signUpStage === 1) setSignUpStage((prev) => prev + 1);
-    if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
-    if (signUpStage === 3) setSignUpStage((prev) => prev + 1);
-  }, [signUpStage]);
-
-  const informationList: InformationList[][] = useMemo(
-    () => [
-      [
-        {
-          label: 'profile.name',
-          name: 'name',
-          type: TextInputValidationType.NAME
-        },
-        {
-          label: 'profile.lastName',
-          name: 'lastName',
-          type: TextInputValidationType.NAME
-        },
-        {
-          label: 'profile.displayName',
-          name: 'displayName',
-          type: 'text'
-        },
-        { label: 'profile.birthDate', name: 'birthDate', type: 'birthDate' },
-        { label: 'profile.birthGender', name: 'birthGender', type: 'gender' },
-        {
-          label: 'profile.phoneNumber',
-          name: 'phoneNumber',
-          type: TextInputValidationType.PHONE
-        },
-        { label: 'auth.password', name: 'password', type: 'password' },
-        {
-          label: 'auth.confirmPassword',
-          name: 'confirmPassword',
-          type: 'password'
+  const continueToNextStage = useCallback(
+    (data) => {
+      if (signUpStage === 1) {
+        if (data.password === data.confirmPassword) {
+          setSignUpStage((prev) => prev + 1);
+        } else {
+          setError('confirmPassword', {
+            type: 'manual',
+            message: t('error.passwordNotMatched')
+          });
         }
-      ],
-      [],
-      [
-        { label: 'profile.healthIssues', name: 'healthIssues', type: 'text' },
-        {
-          label: 'profile.personalMedicine',
-          name: 'personalMedicine',
-          type: 'text'
-        },
-        { label: 'profile.allergens', name: 'allergens', type: 'text' },
-        {
-          label: 'profile.previousVaccinations',
-          name: 'previousVaccinations',
-          type: 'text'
-        },
-        { label: 'profile.bloodType', name: 'bloodType', type: 'bloodGroup' }
-      ]
-    ],
-    []
+      }
+      if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
+      if (signUpStage === 3) setSignUpStage((prev) => prev + 1);
+    },
+    [signUpStage]
   );
 
   return (
