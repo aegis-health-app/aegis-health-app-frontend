@@ -197,6 +197,7 @@
   "error": {
     "isRequired": "กรุณากรอก{{name}}",
     "invalid": "{{name}}ไม่ถูกต้อง",
+    "passwordNotMatched": "รหัสผ่านไม่ตรงกัน",
     "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
   },
   "cameraPermissions": {

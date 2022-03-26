@@ -126,7 +126,7 @@ export const PasswordTextInput: React.FC<TextInputProps> = ({
           />
         )}
         name={name}
-        rules={{ required: errorMessage, minLength: 3 }}
+        rules={{ required: errorMessage }}
         defaultValue={defaultValue ?? ''}
       />
       <FormControl.ErrorMessage mt={2}>
