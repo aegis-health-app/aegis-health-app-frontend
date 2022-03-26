@@ -1,5 +1,5 @@
 import { Button, Pressable, Text } from 'native-base';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -18,7 +18,7 @@ const SignUpStageTwo = ({
 }) => {
   const { t } = useTranslation();
 
-  const isValidOTP = watch('otp').length === 6;
+  const isValidOTP = watch('otp')?.length === 6;
 
   const sendOTP = () => null;
 
