@@ -27,18 +27,23 @@ import {
   requestCameraPermission
 } from '../utils/permission';
 import { client } from '../config/axiosConfig';
+import Alert from '../components/organisms/Alert';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
 
 const ProfileEditScreen = () => {
   const { t } = useTranslation();
-  const { user, updateUserProfile, getUserProfile } = useContext(UserContext);
+  const { user, getUserProfile } = useContext(UserContext);
   const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
   const [initialValues, setInitialValues] = useState<User | undefined>(user);
+  const [showImageUploadError, setShowImageUploadError] =
+    useState<boolean>(false);
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
 
   const resolver = useYupValidationResolver(userProfileSchema);
   const {
@@ -103,7 +108,6 @@ const ProfileEditScreen = () => {
     if (!newProfileImage?.assets) return;
     const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
-    console.log({ profileImage });
 
     if (profileImage.uri && user) {
       formData.append('file', {
@@ -119,13 +123,26 @@ const ProfileEditScreen = () => {
         .then(({ data }) => {
           console.log(data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          setShowImageUploadError(true);
         })
         .finally(() => {
           getUserProfile();
         });
     }
+  };
+
+  const updateUserProfile = async (payload) => {
+    client
+      .patch('/user', payload)
+      .then(() => {
+        setShowSuccessAlert(true);
+        getUserProfile();
+      })
+      .catch((err) => {
+        setShowErrorAlert(true);
+        console.log(err);
+      });
   };
 
   // TODO: Update the parameter type with DTO form backend
@@ -158,6 +175,27 @@ const ProfileEditScreen = () => {
 
   return (
     <KeyboardAvoidingView>
+      <Alert
+        isOpen={showImageUploadError}
+        close={() => setShowImageUploadError(false)}
+        type="ERROR"
+        message="uploadImageError"
+      />
+      <Alert
+        isOpen={showErrorAlert}
+        close={() => setShowErrorAlert(false)}
+        type="ERROR"
+        message="updateProfileError"
+      />
+      <Alert
+        isOpen={showSuccessAlert}
+        close={() => {
+          setShowSuccessAlert(false);
+          navigation.navigate('ProfileScreen');
+        }}
+        type="SUCCESS"
+        message="updateProfileSuccess"
+      />
       <ScrollView style={styles.pageContainer}>
         <View style={styles.profileInfoItemRow}>
           <Text fontSize="2xl" fontWeight="700">

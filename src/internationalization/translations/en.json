@@ -214,9 +214,27 @@
     "secondaryButton": ""
   },
   "changePasswordError": {
-    "header": "Success",
-    "body": "Your password has been changed successfully.",
+    "header": "Error",
+    "body": "Unable to change your password. Please try again later.",
     "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateProfileSuccess": {
+    "header": "Success",
+    "body": "Your personal inforamtion has been updated",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateProfileError": {
+    "header": "Error",
+    "body": "Unable to update your personal information. Please try again later.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "uploadImageError": {
+    "header": "Error",
+    "body": "Unable to change your password. Please try again later.",
+    "primaryButton": "ตกลง",
     "secondaryButton": ""
   }
 }

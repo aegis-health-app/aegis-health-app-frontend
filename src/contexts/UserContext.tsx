@@ -10,7 +10,6 @@ export interface UserContextProps {
   isElderly: boolean | undefined;
   userToken: string;
   getUserProfile: () => Promise<void>;
-  updateUserProfile: (payload: User) => Promise<void>;
 }
 
 export const UserContext = createContext({} as UserContextProps);
@@ -29,15 +28,6 @@ const UserContextProvider = ({ ...props }) => {
       })
       .catch((err) => {
         console.log({ err });
-      });
-  };
-
-  const updateUserProfile = async (payload) => {
-    client
-      .patch('/user', payload)
-      .then(() => getUserProfile())
-      .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -61,8 +51,7 @@ const UserContextProvider = ({ ...props }) => {
     setUser,
     isElderly,
     userToken,
-    getUserProfile,
-    updateUserProfile
+    getUserProfile
   };
   return <UserContext.Provider value={value} {...props} />;
 };
