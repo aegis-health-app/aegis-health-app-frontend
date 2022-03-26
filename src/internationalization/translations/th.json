@@ -8,7 +8,10 @@
   },
   "home": {
     "settingButton": "ตั้งค่า",
-    "profileTouchIndicator": "แตะเพื่อดูข้อมูลส่วนตัวของคุณ"
+    "profileTouchIndicator": "แตะเพื่อดูข้อมูลส่วนตัวของคุณ",
+    "myElderly": "ผู้สูงอายุของฉัน",
+    "viewElderly": "สามารถดูรายชื่อผู้สูงอายุได้ตรงนี้",
+    "addElderlyButton": "เพิ่มผู้สูงอายุ"
   },
   "setting": {
     "settings": "ตั้งค่า",
@@ -85,6 +88,7 @@
   },
   "modules": {
     "notification": "การแจ้งเตือน",
+    "viewAll": "ดูทั้งหมด",
     "iDidIt": "ฉันทำแล้ว",
     "dismiss": "ปิด",
     "modules": "ฟีเจอร์",

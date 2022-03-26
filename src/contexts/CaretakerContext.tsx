@@ -1,29 +1,30 @@
-import React, { useState, useEffect, createContext } from 'react';
-import { Caretaker, Elderly } from '../dto/modules/user.dto';
+import React, { useState, createContext } from 'react';
+import { Caretaker } from '../dto/modules/user.dto';
+import { getCaretakerHomeProfile } from '../utils/caretaker/profile';
+import useAsyncEffect from './../hooks/useAsyncEffect';
+import { CaretakerHomeProfile } from './../dto/modules/caretaking.dto';
 
 export interface CaretakerContextProps {
-  caretakerHomeProfile: Caretaker | undefined;
-  setCaretakerHomeProfile: (val: Caretaker) => void;
-
-  elderlyList: Elderly[];
-  setElderlyList: (val: Elderly[]) => void;
+  caretakerHomeProfile: CaretakerHomeProfile | undefined;
+  setCaretakerHomeProfile: (val: CaretakerHomeProfile) => void;
 }
 
 export const CaretakerContext = createContext({} as CaretakerContextProps);
 
 const CaretakerContextProvider = ({ ...props }) => {
-  const [caretakerHomeProfile, setCaretakerHomeProfile] = useState<Caretaker>();
-  const [elderlyList, setElderlyList] = useState<Elderly[]>([]);
+  const [caretakerHomeProfile, setCaretakerHomeProfile] =
+    useState<CaretakerHomeProfile>();
 
-  useEffect(() => {
-    // if user is an caretaker...
+  useAsyncEffect(async () => {
+    const _caretakerHomeProfile = await getCaretakerHomeProfile();
+    if (_caretakerHomeProfile) {
+      setCaretakerHomeProfile(_caretakerHomeProfile);
+    }
   }, []);
 
   const value = {
     caretakerHomeProfile,
-    setCaretakerHomeProfile,
-    elderlyList,
-    setElderlyList
+    setCaretakerHomeProfile
   };
 
   return <CaretakerContext.Provider value={value} {...props} />;
