@@ -66,6 +66,7 @@ const ChangePhoneNumberScreen = () => {
             control={control}
             errors={errors}
             type="text"
+            keyboardType="numeric"
           />
         </View>
         <Spacer />
