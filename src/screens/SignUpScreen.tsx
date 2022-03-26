@@ -293,6 +293,18 @@ const SignUpScreen = () => {
             </View>
           )}
 
+          {signUpStage === 4 && (
+            <View>
+              <FormHeader
+                headerText={t('auth.uploadProfile')}
+                my={2}
+                size={20}
+              />
+              <FormDescription text={t('auth.uploadProfileDesc')} mb={6} />
+              <PictureSelection />
+            </View>
+          )}
+
           <Box flex={1} />
           {signUpStage < 4 ? (
             <AuthFooter page={AuthType.SIGNUP} />
