@@ -12,7 +12,6 @@ import EmergencyScreen from './../screens/EmergencyScreen';
 import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
 import HealthRecordScreen from '../screens/HealthRecordScreen';
-import ConnectScreen from './../screens/ConnectScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -176,15 +175,6 @@ const MainNavigation = () => {
               component={ModulePickerScreen}
               options={{
                 title: t('modules.selectModules'),
-                headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
-              }}
-            />
-            <Stack.Screen
-              name="ConnectScreen"
-              component={ConnectScreen}
-              options={{
-                title: 'Connect',
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
