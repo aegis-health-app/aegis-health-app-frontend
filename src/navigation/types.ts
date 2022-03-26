@@ -5,6 +5,7 @@
 export type RootStackParamList = {
   //Authorized Screens
   TabNavigation: undefined;
+  CaretakerHomeScreen: undefined;
 
   AuthScreen: undefined;
   SettingScreen: undefined;
