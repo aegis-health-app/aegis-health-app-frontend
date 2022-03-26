@@ -27,7 +27,6 @@ const ElderlyContextProvider = ({ ...props }) => {
     const _elderlyProfile = await getElderlyProfile();
     const _elderlyCode = await getElderlyCode();
 
-    console.log(_elderlyCode["code"])
     setElderlyCode(_elderlyCode["code"])
 
     if (_elderlyProfile.listModuleid) {

@@ -15,8 +15,6 @@ const ConfirmConnectScreen = ({ route }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  console.log(elderlyInfo);
-
   return (
     <View>
       <View flexDir="column" alignItems="center" my="10">

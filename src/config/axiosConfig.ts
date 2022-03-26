@@ -13,8 +13,5 @@ client.interceptors.request.use(
       return req;
     } else return req;
   },
-  (error) => {
-    console.log(error)
-    console.log('hi')
-    Promise.reject(error)}
+  (error) => Promise.reject(error)
 );
