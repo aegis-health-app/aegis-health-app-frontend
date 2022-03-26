@@ -14,6 +14,8 @@ const SignUpStageOne = ({
   informationList,
   gender,
   setGender,
+  date,
+  setDate,
   control,
   errors,
   handleSubmit,
@@ -22,7 +24,6 @@ const SignUpStageOne = ({
   const { t } = useTranslation();
   const { language } = useSettings();
 
-  const [date, setDate] = useState(new Date(700938977));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
@@ -113,18 +114,18 @@ const SignUpStageOne = ({
                 <HStack justifyContent="flex-start">
                   <Button
                     minWidth={20}
-                    variant={gender === 'male' ? 'solid' : 'outline'}
+                    variant={gender === 'M' ? 'solid' : 'outline'}
                     onPress={() => {
-                      setGender('male');
+                      setGender('M');
                     }}>
                     {t('userForm.male')}
                   </Button>
                   <Spacer />
                   <Button
                     minWidth={20}
-                    variant={gender === 'female' ? 'solid' : 'outline'}
+                    variant={gender === 'F' ? 'solid' : 'outline'}
                     onPress={() => {
-                      setGender('female');
+                      setGender('F');
                     }}>
                     {t('userForm.female')}
                   </Button>
