@@ -218,5 +218,23 @@
     "body": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
+  },
+  "updateProfileSuccess": {
+    "header": "สำเร็จ",
+    "body": "ข้อมูลส่วนตัวของคุณถูกเปลี่ยนเรียบร้อยแล้ว",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "updateProfileError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถเปลี่ยนข้อมูลส่วนตัวของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "uploadImageError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
   }
 }
