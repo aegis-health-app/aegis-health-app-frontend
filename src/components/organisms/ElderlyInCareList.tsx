@@ -44,8 +44,8 @@ const ElderlyInCareList = () => {
           my={10}
           w="full"
           h="40">
-          <Text fontSize="xl" color="gray.500">
-            No elderly under your care :)
+          <Text fontSize="lg" color="gray.500">
+            {t('home.noElderlyInCare')}
           </Text>
         </View>
       )}
@@ -56,7 +56,7 @@ const ElderlyInCareList = () => {
         size="lg"
         w="full"
         my={4}
-        onPress={() => navigation.navigate('ConnectScreen')}>
+        onPress={() => navigation.navigate('ConnectCaretakerScreen')}>
         {t('home.addElderlyButton')}
       </Button>
     </View>
