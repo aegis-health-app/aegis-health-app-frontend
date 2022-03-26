@@ -233,8 +233,8 @@
   },
   "uploadImageError": {
     "header": "Error",
-    "body": "Unable to change your password. Please try again later.",
-    "primaryButton": "ตกลง",
+    "body": "Unable to update your profile image. Please try again later.",
+    "primaryButton": "OK",
     "secondaryButton": ""
   }
 }

@@ -108,7 +108,7 @@ const ProfileEditScreen = () => {
     if (!newProfileImage?.assets) return;
     const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
-
+    console.log(profileImage);
     if (profileImage.uri && user) {
       formData.append('file', {
         uri:
@@ -118,12 +118,14 @@ const ProfileEditScreen = () => {
         name: profileImage.fileName,
         type: profileImage.type
       });
+      console.log(formData);
       client
         .post(`/user/profile/${user.uid}/image`, formData)
         .then(({ data }) => {
           console.log(data);
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log('res', err.response);
           setShowImageUploadError(true);
         })
         .finally(() => {
@@ -159,18 +161,15 @@ const ProfileEditScreen = () => {
       bloodType: initialValues?.bloodType
     };
     submitUpdatedProfileInfo(data).then(() => {
-      if (newProfileImage) uploadNewProfileImage();
+      if (newProfileImage && newProfileImage?.assets) uploadNewProfileImage();
     });
   };
 
   const getImage = () => {
-    const newImage =
-      newProfileImage && newProfileImage.assets
-        ? { uri: newProfileImage.assets[0].uri }
-        : ProfilePic;
-    const imageSrc =
-      user?.imageid && !newProfileImage ? { uri: user?.imageid } : newImage;
-    return imageSrc;
+    if (newProfileImage && newProfileImage.assets)
+      return { uri: newProfileImage.assets[0].uri };
+    if (user?.imageid) return { uri: user.imageid };
+    return ProfilePic;
   };
 
   return (
@@ -191,7 +190,7 @@ const ProfileEditScreen = () => {
         isOpen={showSuccessAlert}
         close={() => {
           setShowSuccessAlert(false);
-          navigation.navigate('ProfileScreen');
+          if (!showImageUploadError) navigation.navigate('ProfileScreen');
         }}
         type="SUCCESS"
         message="updateProfileSuccess"
