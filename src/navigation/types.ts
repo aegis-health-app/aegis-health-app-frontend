@@ -28,8 +28,6 @@ export type RootStackParamList = {
   InputCodeScreen: undefined;
   ConfirmConnectScreen: { info : object };
 
-  ConnectScreen: undefined;
-
   SignInScreen: undefined;
   SignUpScreen: { isElderly: boolean };
   ForgotPasswordScreen: undefined;
