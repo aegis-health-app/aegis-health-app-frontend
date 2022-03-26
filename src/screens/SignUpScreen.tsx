@@ -197,8 +197,12 @@ const SignUpScreen = () => {
           {signUpStage < 4 ? (
             <AuthFooter page={AuthType.SIGNUP} />
           ) : (
-            <Button w="full" onPress={handleSubmit(continueToNextStage)} mb={4}>
-              {t('auth.continue')}
+            <Button
+              w="full"
+              onPress={handleSubmit(continueToNextStage)}
+              mb={4}
+              variant={newProfileImage ? 'solid' : 'outline'}>
+              {t(newProfileImage ? 'auth.continue' : 'misc.maybeLater')}
             </Button>
           )}
         </VStack>
