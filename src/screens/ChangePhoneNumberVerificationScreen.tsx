@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack';
 import { Button, Text, VStack } from 'native-base';
-import React, { useState } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,12 +17,16 @@ import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode'
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
 
-const ChangePhoneNumberVerificationScreen = ({ route }) => {
+const ChangePhoneNumberVerificationScreen = ({
+  route
+}: NativeStackScreenProps<
+  RootStackParamList,
+  'ChangePhoneNumberVerificationScreen'
+>) => {
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { phoneNumber } = route.params;
-  const [codeValid, setCodeValid] = useState(false);
   const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
   const {
     control,
@@ -78,7 +85,6 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
             }
             colorScheme={'primary'}
             variant="solid"
-            // disabled={codeValid ? true : false}
             onPress={handleSubmit(onFormSubmit)}>
             {t('changePhoneNumber.submit')}
           </Button>
