@@ -1,6 +1,7 @@
 import { FormControl, HStack, IInputProps, Input, View } from 'native-base';
 import React, { useCallback, useRef } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { TouchableWithoutFeedback } from 'react-native';
 
 interface NativeBaseInputProps {
@@ -35,6 +36,8 @@ const ControlledOTPInput: React.FC<ControlledOTPInputProps> = ({
   const focusOTP = () => {
     inputRef?.current?.focus();
   };
+
+  const { t } = useTranslation();
 
   return (
     <FormControl isRequired={isRequired} isInvalid={name in errors} mb={6}>
@@ -75,7 +78,13 @@ const ControlledOTPInput: React.FC<ControlledOTPInputProps> = ({
           </View>
         )}
         name={name}
-        rules={{ required: 'OTP is required' }}
+        rules={{
+          required: t('error.isRequired', { name: label }) as string,
+          pattern: {
+            value: /^[0-9]{6}$/,
+            message: t('error.invalid', { name: label })
+          }
+        }}
         defaultValue=""
       />
       <FormControl.ErrorMessage>
