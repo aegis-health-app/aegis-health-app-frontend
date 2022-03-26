@@ -8,7 +8,10 @@
   },
   "home": {
     "settingButton": "Settings",
-    "profileTouchIndicator": "Click to see your profile"
+    "profileTouchIndicator": "Click to see your profile",
+    "myElderly": "My Elderly",
+    "viewElderly": "View your elderly here",
+    "addElderlyButton": "Add an Elderly"
   },
   "setting": {
     "settings": "Settings",
@@ -85,6 +88,7 @@
   },
   "modules": {
     "notification": "Notification",
+    "viewAll": "View All",
     "iDidIt": "I did it",
     "dismiss": "Dismiss",
     "modules": "Modules",
