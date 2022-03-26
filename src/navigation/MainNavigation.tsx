@@ -32,6 +32,7 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ChangePhoneNumberVerificationScreen from '../screens/ChangePhoneNumberVerificationScreen';
 import { UserContext } from '../contexts/UserContext';
 import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
+import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -237,6 +238,15 @@ const MainNavigation = () => {
               options={{
                 title: 'Plan Selection',
                 headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="TakeCareElderlyScreen"
+              component={TakeCareElderlyScreen}
+              options={{
+                title: 'Profile',
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
               }}
             />
           </>

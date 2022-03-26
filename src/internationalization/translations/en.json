@@ -12,7 +12,8 @@
     "myElderly": "My Elderly",
     "viewElderly": "View your elderly here",
     "addElderlyButton": "Add an Elderly",
-    "noElderlyInCare": "No elderly under your care"
+    "noElderlyInCare": "No elderly under your care",
+    "takeCare": "Take Care"
   },
   "setting": {
     "settings": "Settings",

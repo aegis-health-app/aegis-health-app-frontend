@@ -26,7 +26,12 @@ export type RootStackParamList = {
   ModuleManageScreen: undefined;
   ConnectElderlyScreen: undefined;
   InputCodeScreen: undefined;
+<<<<<<< HEAD
   ConfirmConnectScreen: { info : object };
+=======
+  ConfirmConnectScreen: undefined;
+  TakeCareElderlyScreen: { uid: number };
+>>>>>>> ec8df36 (wip: Elderly list caretaking selection)
 
   SignInScreen: undefined;
   SignUpScreen: undefined;

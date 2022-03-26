@@ -3,14 +3,23 @@ import { client } from '../../config/axiosConfig';
 import { Elderly } from './../../dto/modules/user.dto';
 
 export async function getCaretakerHomeProfile(): Promise<CaretakerHomeProfile> {
-  const { data } = await client.get('home/caretakerHome');
-  return data as CaretakerHomeProfile;
+  try {
+    const { data } = await client.get('home/caretakerHome');
+    return data as CaretakerHomeProfile;
+  } catch (err) {
+    throw Error('Cannot get caretaker home profile.');
+  }
 }
 
-export async function getCatakingElderlyByEid(eid: number): Promise<Elderly> {
+export async function getCaretakingElderlyByEid(eid: number): Promise<Elderly> {
   if (eid < 0) {
     throw Error('eid cannot be less than 0!');
   }
-  const { data } = await client.get(`home/elderlyInfo/${eid}`);
-  return data as Elderly;
+
+  try {
+    const { data } = await client.get(`home/elderlyInfo/${eid}`);
+    return data as Elderly;
+  } catch (err) {
+    throw Error('Cannot get elderly by its id.');
+  }
 }
