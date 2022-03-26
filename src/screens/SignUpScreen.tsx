@@ -90,7 +90,8 @@ const SignUpScreen = () => {
 
   const [signUpStage, setSignUpStage] = useState<number>(1);
 
-  const [gender, setGender] = useState('male');
+  const [gender, setGender] = useState('M');
+  const [date, setDate] = useState(new Date(700938977));
 
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
@@ -127,6 +128,8 @@ const SignUpScreen = () => {
               informationList={informationList}
               gender={gender}
               setGender={setGender}
+              date={date}
+              setDate={setDate}
               control={control}
               errors={errors}
               handleSubmit={handleSubmit}
