@@ -265,7 +265,7 @@ const SignUpScreen = () => {
               <FormHeader headerText={t('auth.healthInfo')} my={2} size={20} />
               {informationList[2].map((info) => (
                 <Box mb={6} key={`${info.label}-${info.name}`}>
-                  {!info.type && (
+                  {['text', 'phone', 'name'].includes(info.type) && (
                     <TextInput
                       label={`${t(info.label)} `}
                       placeholder={t(info.placeholder || info.label)}
