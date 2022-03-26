@@ -35,7 +35,8 @@
     "next": "ไปต่อ",
     "skip": "ข้าม",
     "finish": "เสร็จสิ้น",
-    "remove": "ลบ"
+    "remove": "ลบ",
+    "maybeLater": "ดำเนินการในภายหลัง"
   },
   "userForm": {
     "editProfile": "แก้ไขข้อมูล",
@@ -171,7 +172,9 @@
     "otpDetail": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ {{phone}}",
     "changePhoneNumber": "เปลี่ยนหมายเลขโทรศัพท์",
     "submitOTP": "ดำเนินการต่อ",
-    "healthInfo": "ข้อมูลเกี่ยวกับสุขภาพ (ไม่จำเป็น)"
+    "healthInfo": "ข้อมูลเกี่ยวกับสุขภาพ (ไม่จำเป็น)",
+    "uploadProfile": "เพิ่มรูปโปรไฟล์ของคุณ",
+    "uploadProfileDesc": "ตกแต่งโปรไฟล์ของคุณด้วยรูปภาพ"
   },
   "changePassword": {
     "enterOldPassword": "กรอกรหัสผ่านเดิม",

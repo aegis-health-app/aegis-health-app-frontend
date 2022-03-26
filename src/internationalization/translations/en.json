@@ -35,7 +35,8 @@
     "next": "Next",
     "skip": "Skip",
     "finish": "Finish",
-    "remove": "Remove"
+    "remove": "Remove",
+    "maybeLater": "Maybe Later"
   },
   "userForm": {
     "editProfile": "Edit Profile",
@@ -171,7 +172,9 @@
     "otpDetail": "Enter the verification code sent to {{phone}}.",
     "changePhoneNumber": "Change phone number",
     "submitOTP": "Submit",
-    "healthInfo": "Health Information (Not Required)"
+    "healthInfo": "Health Information (Not Required)",
+    "uploadProfile": "Upload your profile picture",
+    "uploadProfileDesc": "Customize your profile with your image."
   },
   "changePassword": {
     "enterOldPassword": "Enter Your Old Password",
