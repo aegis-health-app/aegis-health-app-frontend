@@ -75,7 +75,7 @@ const ControlledOTPInput: React.FC<ControlledOTPInputProps> = ({
           </View>
         )}
         name={name}
-        rules={{ required: 'Field is required', minLength: 3 }}
+        rules={{ required: 'OTP is required' }}
         defaultValue=""
       />
       <FormControl.ErrorMessage>
