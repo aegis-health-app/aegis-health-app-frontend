@@ -1,5 +1,5 @@
 import { Module, ModuleId } from '../../dto/modules/modules.dto';
-import axios from 'axios';
+import { client } from './../../config/axiosConfig';
 
 /**
  * This function delete module by id and append must have module (Emergency & Select module)
@@ -20,30 +20,43 @@ function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
 }
 
 //TODO: add axios
-function addModule(targetId: ModuleId, modules: Module[]): Module[] {
-  // http request to backend and set value
-  axios.post();
+/**
+ *
+ * @param targetId what module to add
+ * @returns
+ */
+export async function postAddModule(
+  targetId: ModuleId
+): Promise<ModuleId[] | void> {
+  if (targetId === 0 || targetId === 100) {
+    return;
+  }
+  const { data } = await client.post('home/module', {
+    moduleid: targetId
+  });
+
+  return data;
 }
 
 /**
  * This function delete module by its id and send across backend.
- * @param targetId what module to find it it's already added
+ * @param targetId what module to find if it's already added
  * @param modules list of modules received from backend
  * @returns modules after deletion
  */
 
-//TODO: add axios
-export async function deleteModuleAndSend(
-  targetId: ModuleId,
-  modules: Module[]
-): Promise<Module[] | void> {
-  if (targetId === 0 || targetId === 5) {
+export async function postDeleteModule(
+  targetId: ModuleId
+): Promise<ModuleId[] | void> {
+  if (targetId === 0 || targetId === 100) {
     return;
   }
 
-  const deleted = deleteModule(targetId, modules);
-
-  return deleted;
+  // const deleted = deleteModule(targetId, modules);
+  const { data } = await client.delete('home/module', {
+    data: targetId
+  });
+  return data;
 }
 
 /**
@@ -53,11 +66,23 @@ export async function deleteModuleAndSend(
  */
 export function getModuleIsAddedValue(
   targetId: ModuleId,
-  modules: Module[]
+  modules: ModuleId[]
 ): boolean {
-  const result = modules.find((module) => {
-    return module.moduleid === targetId;
+  if (modules.length === 0) return false;
+
+  const result = modules.find((id) => {
+    return id === targetId;
   });
+  console.log(`${targetId} ${modules}`);
 
   return result ? false : true;
+}
+
+export async function getModuleList(): Promise<Module[]> {
+  const { data } = await client.get('home/allModule');
+  return data as Module[];
+}
+
+export function addEmergencyAndManageToModuleIds(ids: ModuleId[]): ModuleId[] {
+  return [0, ...ids, 100];
 }

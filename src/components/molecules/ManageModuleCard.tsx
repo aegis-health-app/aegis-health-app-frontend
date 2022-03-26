@@ -1,10 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { Text, View, Button, AlertDialog } from 'native-base';
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ModuleId } from '../../dto/modules/modules.dto';
-import { deleteModuleAndSend } from '../../utils/module/manage';
+import { postDeleteModule, postAddModule } from '../../utils/module/manage';
 import { ElderlyContext } from '../../contexts/ElderlyContext';
+import {
+  getModuleIsAddedValue,
+  addEmergencyAndManageToModuleIds
+} from './../../utils/module/manage';
 
 type ManageModuleCardProps = {
   icon: Element;
@@ -29,13 +33,23 @@ const ManageModuleCard = ({
   moduleId,
   title,
   description,
-  isAdded,
   comingSoon
 }: ManageModuleCardProps) => {
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const cancelRef = useRef(null);
-  const { moduleList, setModuleList } = useContext(ElderlyContext);
+  const { elderlyProfile, setElderlyProfile } = useContext(ElderlyContext);
+
+  const [isAdded, setIsAdded] = useState(false);
+  useEffect(() => {
+    if (elderlyProfile?.listModuleid) {
+      const result = getModuleIsAddedValue(
+        moduleId,
+        elderlyProfile.listModuleid
+      );
+      setIsAdded(result);
+    }
+  }, [elderlyProfile]);
 
   function handlePressButton() {
     if (!isAdded) {
@@ -43,20 +57,39 @@ const ManageModuleCard = ({
     }
   }
 
-  async function handlePressDelete() {
-    setDialogOpen(false);
+  async function handlePressAdd() {
+    if (!elderlyProfile) return;
+
     try {
-      const result = await deleteModuleAndSend(moduleId, moduleList);
+      const result = await postAddModule(moduleId);
       if (result) {
-        setModuleList(result);
+        const _result = addEmergencyAndManageToModuleIds(result);
+        setElderlyProfile({ ...elderlyProfile, listModuleid: _result });
+        //TODO: show toast
       }
     } catch (err) {
-      // open toast if http request failed
+      // open alert if http request failed
+    }
+  }
+
+  async function handlePressDelete() {
+    setDialogOpen(false);
+    if (!elderlyProfile) return;
+
+    try {
+      const result = await postDeleteModule(moduleId);
+      if (result) {
+        const _result = addEmergencyAndManageToModuleIds(result);
+        setElderlyProfile({ ...elderlyProfile, listModuleid: _result });
+      }
+    } catch (err) {
+      // open alert if http request failed
     }
   }
 
   return (
     <View style={styles.card} bgColor="white" p={4} mb={2} w="full">
+      <Text>{JSON.stringify(elderlyProfile?.listModuleid)}</Text>
       <AlertDialog
         leastDestructiveRef={cancelRef}
         isOpen={dialogOpen}
@@ -105,7 +138,10 @@ const ManageModuleCard = ({
         ) : (
           <>
             {isAdded ? (
-              <Button variant="outline" colorScheme="primary">
+              <Button
+                variant="outline"
+                colorScheme="primary"
+                onPress={handlePressAdd}>
                 {t('moduleSelection.add')}
               </Button>
             ) : (

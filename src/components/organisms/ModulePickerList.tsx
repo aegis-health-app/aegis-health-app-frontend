@@ -11,7 +11,7 @@ const ModulePickerList = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
-  const { moduleList } = useContext(ElderlyContext);
+  const { elderlyProfile } = useContext(ElderlyContext);
 
   return (
     <View flex={1} mt={2}>
@@ -22,8 +22,8 @@ const ModulePickerList = () => {
         {t('modules.chooseModules')}
       </Text>
       <FlatList
-        data={moduleList}
-        renderItem={({ item }) => <ModulePickerItem mid={item.moduleid} />}
+        data={elderlyProfile?.listModuleid}
+        renderItem={({ item }) => <ModulePickerItem mid={item} />}
         keyExtractor={(_, key) => key.toString()}
         numColumns={2}
         scrollEnabled={false}

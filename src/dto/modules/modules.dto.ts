@@ -4,10 +4,10 @@ export enum ModuleEnum {
   healthRecords,
   memoryRecall,
   healthBlogs,
-  moduleManage
+  moduleManage = 100
 }
 
-export type ModuleId = 0 | 1 | 2 | 3 | 4 | 5;
+export type ModuleId = 0 | 1 | 2 | 3 | 4 | 100;
 
 export interface Module {
   moduleid: ModuleId;
@@ -21,7 +21,7 @@ export interface Module {
 }
 
 export interface ElderlyHomeProfile {
-  uid: number;
+  listModuleid: ModuleId[];
   dname: string;
   imageid: string;
 }
