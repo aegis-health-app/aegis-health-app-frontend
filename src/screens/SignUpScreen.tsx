@@ -24,6 +24,7 @@ import { useSettings } from '../hooks/useSettings';
 import Divider from '../components/atoms/Divider';
 import FormDescription from '../components/atoms/FormDescription';
 import OTPTimerButton from '../components/atoms/OTPTimerButton';
+import ControlledRadioGroup from '../components/molecules/ControlledRadioGroup';
 
 interface InformationList {
   label: string;
@@ -31,6 +32,8 @@ interface InformationList {
   name: string;
   type?: 'password' | 'birthDate' | 'gender' | 'bloodGroup';
 }
+
+const bloodTypes = ['N/A', 'A', 'B', 'O', 'AB'];
 
 const SignUpScreen = () => {
   const {
@@ -71,22 +74,33 @@ const SignUpScreen = () => {
   const continueToNextStage = useCallback(() => {
     if (signUpStage === 1) setSignUpStage((prev) => prev + 1);
     if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
+    if (signUpStage === 3) setSignUpStage((prev) => prev + 1);
   }, [signUpStage]);
 
-  const informationList: InformationList[] = useMemo(
+  const informationList: InformationList[][] = useMemo(
     () => [
-      { label: 'profile.name', name: 'name' },
-      { label: 'profile.lastName', name: 'lastName' },
-      { label: 'profile.displayName', name: 'displayName' },
-      { label: 'profile.birthDate', name: 'birthDate', type: 'birthDate' },
-      { label: 'profile.birthGender', name: 'birthGender', type: 'gender' },
-      { label: 'profile.phoneNumber', name: 'phoneNumber' },
-      { label: 'auth.password', name: 'password', type: 'password' },
-      {
-        label: 'auth.confirmPassword',
-        name: 'confirmPassword',
-        type: 'password'
-      }
+      [
+        { label: 'profile.name', name: 'name' },
+        { label: 'profile.lastName', name: 'lastName' },
+        { label: 'profile.displayName', name: 'displayName' },
+        { label: 'profile.birthDate', name: 'birthDate', type: 'birthDate' },
+        { label: 'profile.birthGender', name: 'birthGender', type: 'gender' },
+        { label: 'profile.phoneNumber', name: 'phoneNumber' },
+        { label: 'auth.password', name: 'password', type: 'password' },
+        {
+          label: 'auth.confirmPassword',
+          name: 'confirmPassword',
+          type: 'password'
+        }
+      ],
+      [],
+      [
+        { label: 'profile.healthIssues', name: 'healthIssues' },
+        { label: 'profile.personalMedicine', name: 'personalMedicine' },
+        { label: 'profile.allergens', name: 'allergens' },
+        { label: 'profile.previousVaccinations', name: 'previousVaccinations' },
+        { label: 'profile.bloodType', name: 'bloodType', type: 'bloodGroup' }
+      ]
     ],
     []
   );
@@ -102,7 +116,7 @@ const SignUpScreen = () => {
           {signUpStage === 1 && (
             <View>
               <FormHeader headerText={t('auth.generalInfo')} my={2} size={20} />
-              {informationList.map((info) => (
+              {informationList[0].map((info) => (
                 <Box mb={6} key={`${info.label}-${info.name}`}>
                   {!info.type && (
                     <TextInput
@@ -243,6 +257,29 @@ const SignUpScreen = () => {
                 {t('auth.submitOTP')}
               </Button>
               <OTPTimerButton onPress={sendOTP} />
+            </View>
+          )}
+
+          {signUpStage === 3 && (
+            <View>
+              <FormHeader headerText={t('auth.healthInfo')} my={2} size={20} />
+              {informationList[2].map((info) => (
+                <Box mb={6} key={`${info.label}-${info.name}`}>
+                  {!info.type && (
+                    <TextInput
+                      label={`${t(info.label)} `}
+                      placeholder={t(info.placeholder || info.label)}
+                      name={info.name}
+                      control={control}
+                      errors={errors}
+                    />
+                  )}
+
+                </Box>
+              ))}
+              <Button w="full" onPress={handleSubmit(continueToNextStage)}>
+                {t('auth.continue')}
+              </Button>
             </View>
           )}
 
