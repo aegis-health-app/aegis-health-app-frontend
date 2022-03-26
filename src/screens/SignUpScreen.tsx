@@ -173,9 +173,9 @@ const SignUpScreen = () => {
             imageid: imageUploadResponse.data.imageUrl
           });
           if (patchResponse.data) {
-            navigation.replace('ProfileScreen');
+            navigation.replace('TabNavigation');
           }
-        } else navigation.replace('ProfileScreen');
+        } else navigation.replace('TabNavigation');
       }
     },
     [signUpStage, newProfileImage, navigation, setSignUpStage, client]
