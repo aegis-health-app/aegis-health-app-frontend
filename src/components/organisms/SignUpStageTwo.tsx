@@ -1,5 +1,5 @@
 import { Button, Pressable, Text } from 'native-base';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -17,6 +17,9 @@ const SignUpStageTwo = ({
   continueToNextStage
 }) => {
   const { t } = useTranslation();
+
+  const isValidOTP = watch('otp').length === 6;
+
   const sendOTP = () => null;
 
   return (
@@ -38,7 +41,11 @@ const SignUpStageTwo = ({
         control={control}
         isRequired
       />
-      <Button w="full" onPress={handleSubmit(continueToNextStage)} mb={4}>
+      <Button
+        w="full"
+        onPress={handleSubmit(continueToNextStage)}
+        mb={4}
+        isDisabled={!isValidOTP}>
         {t('auth.submitOTP')}
       </Button>
       <OTPTimerButton onPress={sendOTP} />
