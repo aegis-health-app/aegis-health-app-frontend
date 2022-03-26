@@ -11,7 +11,8 @@
     "profileTouchIndicator": "แตะเพื่อดูข้อมูลส่วนตัวของคุณ",
     "myElderly": "ผู้สูงอายุของฉัน",
     "viewElderly": "สามารถดูรายชื่อผู้สูงอายุได้ตรงนี้",
-    "addElderlyButton": "เพิ่มผู้สูงอายุ"
+    "addElderlyButton": "เพิ่มผู้สูงอายุ",
+    "noElderlyInCare": "คุณยังไม่ผู้สูงอายุในการดูแล"
   },
   "setting": {
     "settings": "ตั้งค่า",

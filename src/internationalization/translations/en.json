@@ -11,7 +11,8 @@
     "profileTouchIndicator": "Click to see your profile",
     "myElderly": "My Elderly",
     "viewElderly": "View your elderly here",
-    "addElderlyButton": "Add an Elderly"
+    "addElderlyButton": "Add an Elderly",
+    "noElderlyInCare": "No elderly under your care"
   },
   "setting": {
     "settings": "Settings",
