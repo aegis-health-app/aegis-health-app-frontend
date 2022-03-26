@@ -275,6 +275,16 @@ const SignUpScreen = () => {
                     />
                   )}
 
+                  {info.type === 'bloodGroup' && (
+                    <ControlledRadioGroup
+                      label={`${t(info.label)} `}
+                      choices={bloodTypes}
+                      defaultValue={bloodTypes[0]}
+                      name={info.name}
+                      control={control}
+                      errors={errors}
+                    />
+                  )}
                 </Box>
               ))}
               <Button w="full" onPress={handleSubmit(continueToNextStage)}>
