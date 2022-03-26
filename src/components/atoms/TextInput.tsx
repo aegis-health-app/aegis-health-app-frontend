@@ -21,7 +21,7 @@ type TextInputProps = {
 } & IInputProps;
 
 const validationPatterns = {
-  phone: /^([0-9]){9,10}$/,
+  phone: /^([0-9]){10}$/,
   name: /^(([A-Za-z\u0E00-\u0E7F])){1,50}$/
 };
 
