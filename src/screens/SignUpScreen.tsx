@@ -25,6 +25,7 @@ import Divider from '../components/atoms/Divider';
 import FormDescription from '../components/atoms/FormDescription';
 import OTPTimerButton from '../components/atoms/OTPTimerButton';
 import ControlledRadioGroup from '../components/molecules/ControlledRadioGroup';
+import PictureSelection from '../components/organisms/PictureSelection';
 
 interface InformationList {
   label: string;
@@ -236,7 +237,7 @@ const SignUpScreen = () => {
               />
               <FormDescription
                 text={t('auth.otpDetail', { phone: watch('phoneNumber') })}
-                mb={2}
+                mb={4}
               />
               <Pressable onPress={backToPreviousStage}>
                 <Text color="blue.600" mb={2}>
@@ -293,8 +294,26 @@ const SignUpScreen = () => {
             </View>
           )}
 
+          {signUpStage === 4 && (
+            <View>
+              <FormHeader
+                headerText={t('auth.uploadProfile')}
+                my={2}
+                size={20}
+              />
+              <FormDescription text={t('auth.uploadProfileDesc')} mb={6} />
+              <PictureSelection />
+            </View>
+          )}
+
           <Box flex={1} />
-          <AuthFooter page={AuthType.SIGNUP} />
+          {signUpStage < 4 ? (
+            <AuthFooter page={AuthType.SIGNUP} />
+          ) : (
+            <Button w="full" onPress={handleSubmit(continueToNextStage)} mb={4}>
+              {t('auth.continue')}
+            </Button>
+          )}
         </VStack>
       </ScrollView>
     </SafeAreaView>
