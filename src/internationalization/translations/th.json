@@ -170,7 +170,8 @@
     "enterOTPCode": "กรุณากรอกรหัสยืนยันของคุณ",
     "otpDetail": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ {{phone}}",
     "changePhoneNumber": "เปลี่ยนหมายเลขโทรศัพท์",
-    "submitOTP": "ดำเนินการต่อ"
+    "submitOTP": "ดำเนินการต่อ",
+    "healthInfo": "ข้อมูลเกี่ยวกับสุขภาพ (ไม่จำเป็น)"
   },
   "changePassword": {
     "enterOldPassword": "กรอกรหัสผ่านเดิม",
