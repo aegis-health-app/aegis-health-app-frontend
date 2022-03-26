@@ -16,6 +16,7 @@ import ControlledRadioGroup from '../components/molecules/ControlledRadioGroup';
 import PictureSelection from '../components/organisms/PictureSelection';
 import SignUpStageOne from '../components/organisms/SignUpStageOne';
 import SignUpStageTwo from '../components/organisms/SignUpStageTwo';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 interface InformationList {
   label: string;
@@ -40,6 +41,8 @@ const SignUpScreen = () => {
   const [signUpStage, setSignUpStage] = useState<number>(1);
 
   const [gender, setGender] = useState('male');
+
+  const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
   const backToPreviousStage = useCallback(() => {
     if (signUpStage > 1) setSignUpStage((prev) => prev - 1);
@@ -172,7 +175,11 @@ const SignUpScreen = () => {
                 size={20}
               />
               <FormDescription text={t('auth.uploadProfileDesc')} mb={6} />
-              <PictureSelection />
+              <PictureSelection
+                isIndependent={false}
+                dependentImage={newProfileImage}
+                setDependentImage={setNewProfileImage}
+              />
             </View>
           )}
 
