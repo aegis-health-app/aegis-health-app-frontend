@@ -101,14 +101,12 @@ const ProfileEditScreen = () => {
       CameraPhotoOptions
     );
     setNewProfileImage(result);
-    console.log(result);
   };
 
   const uploadNewProfileImage = async () => {
     if (!newProfileImage?.assets) return;
     const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
-    console.log(profileImage);
     if (profileImage.uri && user) {
       formData.append('file', {
         uri:
@@ -118,14 +116,9 @@ const ProfileEditScreen = () => {
         name: profileImage.fileName,
         type: profileImage.type
       });
-      console.log(formData);
       client
         .post(`/user/profile/${user.uid}/image`, formData)
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log('res', err.response);
+        .catch(() => {
           setShowImageUploadError(true);
         })
         .finally(() => {
@@ -141,9 +134,8 @@ const ProfileEditScreen = () => {
         setShowSuccessAlert(true);
         getUserProfile();
       })
-      .catch((err) => {
+      .catch(() => {
         setShowErrorAlert(true);
-        console.log(err);
       });
   };
 
