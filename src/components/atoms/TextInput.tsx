@@ -1,7 +1,13 @@
 import { FormControl, Icon, IInputProps, Input } from 'native-base';
 import React, { useState } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
+export enum TextInputValidationType {
+  PHONE = 'phone',
+  NAME = 'name'
+}
 
 type TextInputProps = {
   label: string;
@@ -11,7 +17,13 @@ type TextInputProps = {
   errors: { [x: string]: { message: string } };
   control: Control<FieldValues, any>;
   inputRightElement?: IInputProps['InputRightElement'];
+  validationType?: TextInputValidationType;
 } & IInputProps;
+
+const validationPatterns = {
+  phone: /^([0-9]){9,10}$/,
+  name: /^(([A-Za-z\u0E00-\u0E7F])){1,50}$/
+};
 
 const TextInput: React.FC<TextInputProps> = ({
   label,
@@ -23,8 +35,10 @@ const TextInput: React.FC<TextInputProps> = ({
   errors,
   inputRightElement,
   errorMessage,
+  validationType,
   ...props
 }) => {
+  const { t } = useTranslation();
   return (
     <FormControl isRequired={hasRequiredStar} isInvalid={name in errors}>
       <FormControl.Label mb={2}>{label}</FormControl.Label>
@@ -42,11 +56,22 @@ const TextInput: React.FC<TextInputProps> = ({
             onChangeText={(val) => onChange(val)}
             value={value}
             InputRightElement={inputRightElement}
+            keyboardType={
+              validationType === TextInputValidationType.PHONE
+                ? 'numeric'
+                : 'default'
+            }
             {...props}
           />
         )}
         name={name}
-        rules={{ required: errorMessage, minLength: 3 }}
+        rules={{
+          required: errorMessage,
+          pattern: validationType && {
+            value: validationPatterns[validationType] || '',
+            message: t('error.invalid', { name: label })
+          }
+        }}
         defaultValue={defaultValue ?? ''}
       />
       <FormControl.ErrorMessage mt={2}>
