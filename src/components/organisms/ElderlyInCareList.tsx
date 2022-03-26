@@ -2,21 +2,30 @@ import { Button, FlatList, Text, View } from 'native-base';
 import React, { useContext, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
-import ElderlyInCareItem from '../molecules/ElderlyInCareItem';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { ElderlyHomeProfile } from '../../dto/modules/modules.dto';
+import UserCard from './UserCard';
+import { ElderlyInCare } from './../../dto/modules/caretaking.dto';
 
 const ElderlyInCareList = () => {
   const { t } = useTranslation();
   const { caretakerHomeProfile } = useContext(CaretakerContext);
-  const [elderies, setElderies] = useState<ElderlyHomeProfile[]>([]);
+  const [elderies, setElderies] = useState<ElderlyInCare[]>([]);
 
   useEffect(() => {
-    if (caretakerHomeProfile?.listElderly) {
-      setElderies(caretakerHomeProfile.listElderly);
-    }
+    setElderies([
+      {
+        dname: 'Rick',
+        imageid: 'https://www.beartai.com/wp-content/uploads/2021/08/23.png',
+        uid: 1
+      },
+      {
+        dname: 'Ashley',
+        imageid: 'https://www.beartai.com/wp-content/uploads/2021/08/23.png',
+        uid: 2
+      }
+    ]);
   }, [caretakerHomeProfile]);
 
   const navigation =
@@ -33,8 +42,15 @@ const ElderlyInCareList = () => {
 
       {elderies.length > 0 ? (
         <FlatList
-          data={caretakerHomeProfile?.listElderly}
-          renderItem={({ item }) => <ElderlyInCareItem elderly={item} />}
+          data={elderies}
+          renderItem={({ item }) => (
+            <UserCard
+              name={item.dname}
+              imageId={item.imageid}
+              uid={item.uid}
+              userIsElderly={true}
+            />
+          )}
           keyExtractor={(_, key) => key.toString()}
         />
       ) : (
@@ -54,9 +70,10 @@ const ElderlyInCareList = () => {
         variant="outline"
         colorScheme="primary"
         size="lg"
-        w="full"
+        w="90%"
         my={4}
-        onPress={() => navigation.navigate('ConnectCaretakerScreen')}>
+        alignSelf="center"
+        onPress={() => navigation.navigate('ConnectElderlyScreen')}>
         {t('home.addElderlyButton')}
       </Button>
     </View>

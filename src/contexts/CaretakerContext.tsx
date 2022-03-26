@@ -1,5 +1,4 @@
 import React, { useState, createContext } from 'react';
-import { Caretaker } from '../dto/modules/user.dto';
 import { getCaretakerHomeProfile } from '../utils/caretaker/profile';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { CaretakerHomeProfile } from './../dto/modules/caretaking.dto';

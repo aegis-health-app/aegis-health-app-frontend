@@ -1,7 +1,11 @@
-import { ElderlyHomeProfile } from './modules.dto';
+export interface ElderlyInCare {
+  uid: number;
+  dname: string;
+  imageid: string;
+}
 
 export interface CaretakerHomeProfile {
   dname: string;
   imageid: string;
-  listElderly: ElderlyHomeProfile[];
+  listElderly: ElderlyInCare[];
 }
