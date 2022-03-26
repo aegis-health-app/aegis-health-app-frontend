@@ -4,7 +4,6 @@ import { getElderlyProfile } from '../utils/elderly/profile';
 import { ElderlyHomeProfile, Module } from './../dto/modules/modules.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getElderlyCode } from '../utils/elderly/code';
-
 export interface ElderlyContextProps {
   elderlyProfile: ElderlyHomeProfile | undefined;
   setElderlyProfile: (val: ElderlyHomeProfile) => void;
@@ -22,12 +21,11 @@ const ElderlyContextProvider = ({ ...props }) => {
   const [elderlyCode, setElderlyCode] = useState<string>('');
 
   //If the user is elderly, get moduleIds and all available modules from the backend.
-  //TODO: maybe check if the user is an elderly
   useAsyncEffect(async () => {
     const _elderlyProfile = await getElderlyProfile();
     const _elderlyCode = await getElderlyCode();
 
-    setElderlyCode(_elderlyCode["code"])
+    setElderlyCode(_elderlyCode['code']);
 
     if (_elderlyProfile.listModuleid) {
       _elderlyProfile.listModuleid = [0, ..._elderlyProfile?.listModuleid, 100];

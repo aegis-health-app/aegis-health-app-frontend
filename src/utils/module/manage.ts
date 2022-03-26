@@ -1,5 +1,4 @@
 import { Module, ModuleId } from '../../dto/modules/modules.dto';
-<<<<<<< HEAD
 import { client } from './../../config/axiosConfig';
 
 /**
@@ -18,8 +17,6 @@ export async function postAddModule(
   });
 
   return data;
-=======
-import axios from 'axios';
 
 /**
  * This function delete module by id and append must have module (Emergency & Select module)
@@ -39,25 +36,30 @@ function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
   return temp;
 }
 
-//TODO: add axios
-function addModule(targetId: ModuleId, modules: Module[]): Module[] {
-  // http request to backend and set value
-  axios.post();
->>>>>>> 886bc2a (chore: move manage.ts to utils folder)
+/**
+ *
+ * @param targetId what module to add
+ * @returns
+ */
+export async function postAddModule(
+  targetId: ModuleId
+): Promise<ModuleId[] | void> {
+  if (targetId === 0 || targetId === 100) {
+    return;
+  }
+  const { data } = await client.post('home/module', {
+    moduleid: targetId
+  });
+
+  return data;
 }
 
 /**
  * This function delete module by its id and send across backend.
-<<<<<<< HEAD
  * @param targetId what module to find if it's already added
-=======
- * @param targetId what module to find it it's already added
->>>>>>> 886bc2a (chore: move manage.ts to utils folder)
  * @param modules list of modules received from backend
  * @returns modules after deletion
  */
-
-<<<<<<< HEAD
 export async function postRemovedModule(
   targetId: ModuleId
 ): Promise<ModuleId[] | void> {
@@ -71,20 +73,18 @@ export async function postRemovedModule(
     }
   });
   return data;
-=======
-//TODO: add axios
-export async function deleteModuleAndSend(
-  targetId: ModuleId,
-  modules: Module[]
-): Promise<Module[] | void> {
-  if (targetId === 0 || targetId === 5) {
+
+export async function postDeleteModule(
+  targetId: ModuleId
+): Promise<ModuleId[] | void> {
+  if (targetId === 0 || targetId === 100) {
     return;
   }
 
-  const deleted = deleteModule(targetId, modules);
-
-  return deleted;
->>>>>>> 886bc2a (chore: move manage.ts to utils folder)
+  const { data } = await client.delete('home/module', {
+    data: targetId
+  });
+  return data;
 }
 
 /**
@@ -94,24 +94,16 @@ export async function deleteModuleAndSend(
  */
 export function getModuleIsAddedValue(
   targetId: ModuleId,
-<<<<<<< HEAD
   modules: ModuleId[]
 ): boolean {
   if (modules.length === 0) return false;
 
   const result = modules.find((id) => {
     return id === targetId;
-=======
-  modules: Module[]
-): boolean {
-  const result = modules.find((module) => {
-    return module.moduleid === targetId;
->>>>>>> 886bc2a (chore: move manage.ts to utils folder)
   });
 
   return result ? false : true;
 }
-<<<<<<< HEAD
 
 /**
  * This function get all module (its name and its id) from backend.
@@ -132,5 +124,3 @@ export async function getModuleList(): Promise<Module[]> {
 export function addEmergencyAndManageToModuleIds(ids: ModuleId[]): ModuleId[] {
   return [0, ...ids, 100];
 }
-=======
->>>>>>> 886bc2a (chore: move manage.ts to utils folder)
