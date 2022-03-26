@@ -1,14 +1,25 @@
-import { ScrollView, View } from 'native-base';
+import { Fab, Icon, ScrollView, View } from 'native-base';
 import Divider from '../components/atoms/Divider';
 import React from 'react';
 import ProfileSection from './../components/organisms/ProfileSection';
 import UpComingAlert from './../components/organisms/UpComingAlert';
 import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const HomeScreen = () => {
+  function handlePressFab() {}
+
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
+      <Fab
+        placement="bottom-right"
+        size="sm"
+        bottom="16"
+        bgColor="#000"
+        icon={<Icon as={AntDesign} name="question" size="6" color="#fff" />}
+        onPress={handlePressFab}
+      />
       <ScrollView nestedScrollEnabled>
         <View
           flex={1}
