@@ -42,7 +42,7 @@ const ConnectElderlyScreen = () => {
           {t('userLink.enterCode')}
         </Button>
       </Button.Group>
-      <ZStack mb="2" width="100%" height="100%">
+      <View mt="16">
         <QRCodeScanner
           customMarker={
             <Box
@@ -59,10 +59,13 @@ const ConnectElderlyScreen = () => {
           containerStyle={{ justifyContent: 'center', marginBottom: 120 }}
           onRead={(e) => handleRead(e.data)}
         />
-      </ZStack>
-      <Text position="absolute" alignSelf="center" bottom="24">
-        {t('userLink.cameraHelpText')}
-      </Text>
+      <View position="absolute" alignSelf="center" bottom="-400" background="white" zIndex="100">
+        <Text >
+          {t('userLink.cameraHelpText')}
+        </Text>
+      </View>
+      </View>
+      
     </View>
   );
 };
