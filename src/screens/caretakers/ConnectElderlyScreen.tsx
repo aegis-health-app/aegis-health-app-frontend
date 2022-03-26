@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Image, ZStack, View, Box, Text, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { client } from '../../config/axiosConfig';
 
 const ConnectElderlyScreen = () => {
-  // todo: get codes from backend
-  const codes = ['000000', 'AAAAAA'];
+  const [elderlyData, setElderlyData] = useState({});
 
   const { t } = useTranslation();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const handleRead = (val) => {
-    if (codes.includes(val)) navigation.navigate('ConfirmConnectScreen');
+  const handleRead = async (val) => {
+    await client
+      .get(`/link/elderly/${val}`)
+      .then(({ data }) => {
+        setElderlyData(data);
+        console.log(elderlyData);
+        navigation.navigate('ConfirmConnectScreen', { info: elderlyData });
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
   };
+
+  const handlePress = async (val) => {
+    await client
+      .get(`/link/elderly/${val}`)
+      .then(({ data }) => {
+        setElderlyData(data);
+        console.log(elderlyData);
+        navigation.navigate('ConfirmConnectScreen', { info: elderlyData });
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  }
+
   return (
     <View>
       <Button.Group isAttached justifyContent="center" my="2">
@@ -59,13 +82,16 @@ const ConnectElderlyScreen = () => {
           containerStyle={{ justifyContent: 'center', marginBottom: 120 }}
           onRead={(e) => handleRead(e.data)}
         />
-      <View position="absolute" alignSelf="center" bottom="-400" background="white" zIndex="100">
-        <Text >
-          {t('userLink.cameraHelpText')}
-        </Text>
+        <View
+          position="absolute"
+          alignSelf="center"
+          bottom="-400"
+          background="white"
+          zIndex="100">
+          <Text>{t('userLink.cameraHelpText')}</Text>
+        </View>
+        <Button position="absolute" alignSelf="center" bottom="-300" width="90%" onPress={() => handlePress('E3QW53')}>test successful QR scan</Button>
       </View>
-      </View>
-      
     </View>
   );
 };

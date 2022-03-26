@@ -25,7 +25,7 @@ export type RootStackParamList = {
   ModuleManageScreen: undefined;
   ConnectElderlyScreen: undefined;
   InputCodeScreen: undefined;
-  ConfirmConnectScreen: undefined;
+  ConfirmConnectScreen: { info : object };
 
   ConnectScreen: undefined;
 

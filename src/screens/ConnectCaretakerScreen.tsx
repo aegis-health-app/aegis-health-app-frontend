@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, Image } from 'native-base';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeBaseProvider } from 'native-base';
 import InfoCard from '../components/organisms/InfoCard';
 import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
+import { ElderlyContext } from '../contexts/ElderlyContext';
 
-const QRPlaceholder = require('../assets/images/QRPlaceholder.png');
 let base64Logo = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAA..';
 
 const EditCaretakerScreen = () => {
+
+  const {elderlyCode, setElderlyCode} = useContext(ElderlyContext)
   const { t } = useTranslation();
   return (
     <NativeBaseProvider>
@@ -22,7 +24,7 @@ const EditCaretakerScreen = () => {
                 size={225}
                 quietZone={17.5}
                 logoSize={100}
-                value="todo: insert QR code value here" 
+                value={elderlyCode}
               />
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
@@ -30,7 +32,7 @@ const EditCaretakerScreen = () => {
                 {t('userLink.myCode')}
               </Text>
               <Text color="orange.500" fontSize={16} fontWeight="bold">
-                CODE
+                {elderlyCode}
               </Text>
             </View>
             <InfoCard
