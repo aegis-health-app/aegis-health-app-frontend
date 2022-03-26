@@ -2,28 +2,9 @@ import { Module, ModuleId } from '../../dto/modules/modules.dto';
 import { client } from './../../config/axiosConfig';
 
 /**
- * This function delete module by id and append must have module (Emergency & Select module)
- * @param targetId
- * @param modules
- * @returns
- */
-function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
-  const temp = modules.filter((module) => {
-    if (module.moduleid !== targetId) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-
-  return temp;
-}
-
-//TODO: add axios
-/**
- *
+ * This function add module by its id and send across backend.
  * @param targetId what module to add
- * @returns
+ * @returns selected module ids
  */
 export async function postAddModule(
   targetId: ModuleId
@@ -45,16 +26,17 @@ export async function postAddModule(
  * @returns modules after deletion
  */
 
-export async function postDeleteModule(
+export async function postRemovedModule(
   targetId: ModuleId
 ): Promise<ModuleId[] | void> {
   if (targetId === 0 || targetId === 100) {
     return;
   }
 
-  // const deleted = deleteModule(targetId, modules);
   const { data } = await client.delete('home/module', {
-    data: targetId
+    data: {
+      moduleid: targetId
+    }
   });
   return data;
 }
@@ -73,16 +55,26 @@ export function getModuleIsAddedValue(
   const result = modules.find((id) => {
     return id === targetId;
   });
-  console.log(`${targetId} ${modules}`);
 
   return result ? false : true;
 }
 
+/**
+ * This function get all module (its name and its id) from backend.
+ * @returns Retrieved module name and id.
+ */
 export async function getModuleList(): Promise<Module[]> {
   const { data } = await client.get('home/allModule');
   return data as Module[];
 }
 
+/**
+ * Since module uses Flatlist to render, and there are two required item which is Emergency and Module Manager.
+ * This function add Emergency (moduleid of 0) and Module Manager (moduleid of 100) to every time
+ * elderly profile is updated.
+ * @param ids module ids from elderly profile object
+ * @returns ids with id of 0 and 100 added
+ */
 export function addEmergencyAndManageToModuleIds(ids: ModuleId[]): ModuleId[] {
   return [0, ...ids, 100];
 }

@@ -3,7 +3,7 @@ import { Text, View, Button, AlertDialog } from 'native-base';
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ModuleId } from '../../dto/modules/modules.dto';
-import { postDeleteModule, postAddModule } from '../../utils/module/manage';
+import { postRemovedModule, postAddModule } from '../../utils/module/manage';
 import { ElderlyContext } from '../../contexts/ElderlyContext';
 import {
   getModuleIsAddedValue,
@@ -72,12 +72,12 @@ const ManageModuleCard = ({
     }
   }
 
-  async function handlePressDelete() {
+  async function handlePressRemove() {
     setDialogOpen(false);
     if (!elderlyProfile) return;
 
     try {
-      const result = await postDeleteModule(moduleId);
+      const result = await postRemovedModule(moduleId);
       if (result) {
         const _result = addEmergencyAndManageToModuleIds(result);
         setElderlyProfile({ ...elderlyProfile, listModuleid: _result });
@@ -89,7 +89,6 @@ const ManageModuleCard = ({
 
   return (
     <View style={styles.card} bgColor="white" p={4} mb={2} w="full">
-      <Text>{JSON.stringify(elderlyProfile?.listModuleid)}</Text>
       <AlertDialog
         leastDestructiveRef={cancelRef}
         isOpen={dialogOpen}
@@ -113,7 +112,7 @@ const ManageModuleCard = ({
               </Button>
               <Button
                 colorScheme="danger"
-                onPress={handlePressDelete}
+                onPress={handlePressRemove}
                 ref={cancelRef}>
                 {t('moduleSelection.remove')}
               </Button>
