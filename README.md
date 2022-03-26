@@ -102,3 +102,40 @@ Repository for Frontend codebase of Aegis Health App
 If you change the contents of `.env` and the content of the app doesn't follow, run this script
 
 `yarn start --reset-cache`
+
+## How to use the rn-tourguide
+
+- Adds the ability to display a walkthrough of the page by highlighting the selected portion of the screen and displaying a text popup
+- Able to navigate forward and backward between each tutorial popups
+- For implementation demo and prop descriptions, see this link
+  - https://morioh.com/p/3444d39c7926
+
+
+Usage
+```ts
+// setup
+const {
+    canStart, // a boolean indicate if you can start tour guide
+    start, // a function to start the tourguide
+    stop, // a function  to stopping it
+    eventEmitter // an object for listening some events
+  } = useTourGuideController();
+
+...
+
+// starting the tour
+<TouchableOpacity
+  onPress={() => {
+    if (start) {
+      start();
+    }
+  }}>
+ <YourComponentHere />
+</TouchableOpacity>
+
+// selecting the highlighted areas and the sequence of the tour
+<TourGuideZone zone={2} shape="rectangle" text={'Zone 2'}>
+  <YourComponentHere />
+</TourGuideZone>
+
+```
