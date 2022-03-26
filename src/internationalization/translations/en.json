@@ -170,7 +170,8 @@
     "enterOTPCode": "Enter Your Verification Code",
     "otpDetail": "Enter the verification code sent to {{phone}}.",
     "changePhoneNumber": "Change phone number",
-    "submitOTP": "Submit"
+    "submitOTP": "Submit",
+    "healthInfo": "Health Information (Not Required)"
   },
   "changePassword": {
     "enterOldPassword": "Enter Your Old Password",
