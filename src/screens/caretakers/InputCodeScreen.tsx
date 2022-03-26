@@ -20,8 +20,6 @@ const InputCodeScreen = () => {
     elderlyCode: Yup.string().min(6, '')
   });
 
-  const [elderlyData, setElderlyData] = useState({});
-
   const {
     control,
     formState: { errors },
@@ -40,9 +38,8 @@ const InputCodeScreen = () => {
     await client
       .get(`/link/elderly/${enteredCode}`)
       .then(({ data }) => {
-        setElderlyData(data);
-        console.log(elderlyData);
-        navigation.navigate('ConfirmConnectScreen', { info: elderlyData });
+        console.log(data);
+        navigation.navigate('ConfirmConnectScreen', { info: data });
         setIsCodeValid(true)
       })
       .catch((err) => {

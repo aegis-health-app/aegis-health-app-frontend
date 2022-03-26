@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
@@ -8,7 +8,6 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import { client } from '../../config/axiosConfig';
 
 const ConnectElderlyScreen = () => {
-  const [elderlyData, setElderlyData] = useState({});
 
   const { t } = useTranslation();
 
@@ -19,22 +18,21 @@ const ConnectElderlyScreen = () => {
     await client
       .get(`/link/elderly/${val}`)
       .then(({ data }) => {
-        setElderlyData(data);
-        console.log(elderlyData);
-        navigation.navigate('ConfirmConnectScreen', { info: elderlyData });
+        console.log(data);
+        navigation.navigate('ConfirmConnectScreen', { info: data });
       })
       .catch((err) => {
         console.log({ err });
       });
   };
 
+  //remove later
   const handlePress = async (val) => {
     await client
       .get(`/link/elderly/${val}`)
       .then(({ data }) => {
-        setElderlyData(data);
-        console.log(elderlyData);
-        navigation.navigate('ConfirmConnectScreen', { info: elderlyData });
+        console.log(data);
+        navigation.navigate('ConfirmConnectScreen', { info: data });
       })
       .catch((err) => {
         console.log({ err });
@@ -90,6 +88,7 @@ const ConnectElderlyScreen = () => {
           zIndex="100">
           <Text>{t('userLink.cameraHelpText')}</Text>
         </View>
+        {/* remove later */}
         <Button position="absolute" alignSelf="center" bottom="-300" width="90%" onPress={() => handlePress('E3QW53')}>test successful QR scan</Button>
       </View>
     </View>
