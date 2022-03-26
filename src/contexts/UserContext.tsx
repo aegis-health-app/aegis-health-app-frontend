@@ -17,9 +17,8 @@ export const UserContext = createContext({} as UserContextProps);
 const UserContextProvider = ({ ...props }) => {
   const { getToken } = useAuthentication();
   const [user, setUser] = useState<User | undefined>(undefined);
-  const [isElderly, setIsEldery] = useState<boolean>(false);
+  const [isElderly, setIsElderly] = useState<boolean>(false);
   const [userToken, setUserToken] = useState<string>('');
-
   const getUserProfile = async () => {
     client
       .get<User>('/user')
@@ -37,7 +36,7 @@ const UserContextProvider = ({ ...props }) => {
 
   useEffect(() => {
     if (user?.isElderly === true) {
-      setIsEldery(true);
+      setIsElderly(true);
     }
   }, [user]);
 
