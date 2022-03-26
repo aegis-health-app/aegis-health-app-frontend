@@ -1,11 +1,13 @@
-import React, { useState, useEffect, createContext } from 'react';
-import { Elderly } from '../dto/modules/user.dto';
-import { Module } from './../dto/modules/modules.dto';
+import React, { useState, createContext, useContext, useEffect } from 'react';
+import { getModuleList } from '../utils/module/manage';
+import { getElderlyProfile } from '../utils/elderly/profile';
+import { ElderlyHomeProfile, Module } from './../dto/modules/modules.dto';
+import useAsyncEffect from './../hooks/useAsyncEffect';
+import { UserContext } from './UserContext';
 
 export interface ElderlyContextProps {
-  elderlyHomeProfile: Elderly | undefined;
-  setElderlyHomeProfile: (val: Elderly) => void;
-
+  elderlyProfile: ElderlyHomeProfile | undefined;
+  setElderlyProfile: (val: ElderlyHomeProfile) => void;
   moduleList: Module[];
   setModuleList: (val: Module[]) => void;
 }
@@ -13,44 +15,36 @@ export interface ElderlyContextProps {
 export const ElderlyContext = createContext({} as ElderlyContextProps);
 
 const ElderlyContextProvider = ({ ...props }) => {
-  const [elderlyHomeProfile, setElderlyHomeProfile] = useState<Elderly>();
-  const [moduleList, setModuleList] = useState<Module[]>([]);
+  const [elderlyProfile, setElderlyProfile] = useState<ElderlyHomeProfile>();
+  const [moduleList, setModuleList] = useState<Module[]>([]); // available modules and its name
+  const { isElderly } = useContext(UserContext);
 
-  useEffect(() => {
-    // if user is an elderly...
-    // Note: must add Emergency module every time the data is received
+  React.useEffect(() => {
+    console.log(elderlyProfile);
+  }, [elderlyProfile]);
 
-    // fetch data from backend + add moduleid 0 and moduleid 5
-    const data: Module[] = [
-      { moduleid: 0, mname: 'Emergency' },
-      {
-        moduleid: 1,
-        mname: 'Reminder'
-      },
-      {
-        moduleid: 2,
-        mname: 'Health Records'
-      },
-      {
-        moduleid: 3,
-        mname: 'Memory Recall'
-      },
-      {
-        moduleid: 4,
-        mname: 'Health Blogs'
-      },
-      {
-        moduleid: 5,
-        mname: 'Modules Manage'
-      }
-    ];
+  //If the user is elderly, get moduleIds and all available modules from the backend.
+  useAsyncEffect(async () => {
+    // if (isElderly === false) {
+    //   return;
+    // }
+    const _elderlyProfile = await getElderlyProfile();
 
-    setModuleList(data);
-  }, []);
+    if (_elderlyProfile.listModuleid) {
+      _elderlyProfile.listModuleid = [0, ..._elderlyProfile?.listModuleid, 100];
+      setElderlyProfile(_elderlyProfile);
+    }
+
+    const _moduleList = await getModuleList();
+
+    _moduleList.unshift({ mname: 'Emergency', moduleid: 0 });
+    _moduleList.push({ mname: 'Modules Manage', moduleid: 100 });
+    setModuleList(_moduleList);
+  }, [isElderly]);
 
   const value = {
-    elderlyHomeProfile,
-    setElderlyHomeProfile,
+    elderlyProfile,
+    setElderlyProfile,
     moduleList,
     setModuleList
   };

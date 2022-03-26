@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Icon } from 'native-base';
 import { ModuleId } from '../../dto/modules/modules.dto';
 import ModulePickerCard from './ModulePickerCard';
@@ -110,4 +110,4 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
   return <RenderModulePickerItemByMid />;
 };
 
-export default ModulePickerItem;
+export default memo(ModulePickerItem);
