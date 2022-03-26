@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Text, VStack } from 'native-base';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -25,7 +25,7 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
     control,
     formState: { errors },
     handleSubmit,
-    getValues
+    watch
   } = useForm({ resolver, mode: 'onChange' });
 
   const shouldDisable = (errors) => {
@@ -34,6 +34,7 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
 
   const onFormSubmit = (data) => {
     console.log({ data });
+    console.log('send verification code');
   };
 
   return (
@@ -63,6 +64,7 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
           control={control}
           isRequired
         />
+
         <Spacer />
         <VStack space={4}>
           {/* continue button */}
@@ -70,11 +72,13 @@ const ChangePhoneNumberVerificationScreen = ({ route }) => {
             w="100%"
             backgroundColor={
               // @ts-ignore
-              !shouldDisable(errors) ? 'primary.500' : 'muted.300'
+              !shouldDisable(errors) && watch('otp')?.length === 6
+                ? 'primary.500'
+                : 'muted.300'
             }
             colorScheme={'primary'}
             variant="solid"
-            disabled={codeValid ? true : false}
+            // disabled={codeValid ? true : false}
             onPress={handleSubmit(onFormSubmit)}>
             {t('changePhoneNumber.submit')}
           </Button>
