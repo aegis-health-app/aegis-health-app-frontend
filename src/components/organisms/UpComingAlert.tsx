@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const UpComingAlert = () => {
   const { t } = useTranslation();
   return (
-    <View w="full">
+    <View>
       <Text fontSize="2xl" fontWeight="600" mb={4}>
         {t('modules.notification')}
       </Text>
