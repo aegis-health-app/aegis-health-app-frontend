@@ -242,11 +242,11 @@
     "invalidPhoneNumberWarning": "Please input a valid phone number",
     "changePhoneNumber":"Change Phone Number",
     "enterPhoneNumber":"Enter Your New Phone Number",
-    "enterPhoneNumberDescription":"We’ll text you a confirmation code. Message and data rates may apply.",
+    "enterPhoneNumberDescription":"We will send 6 digits code to your phone for the verification.",
     "phoneNumber":"Phone Number",
     "continue":"Continue",
     "enterYourVerificationCode":"Enter Your Verification Code",
     "verificationCodeSentTo":"Enter the verification code sent to",
-    "submit":"submit"
+    "submit":"Submit"
   }
 }
