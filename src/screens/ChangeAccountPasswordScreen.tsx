@@ -36,7 +36,6 @@ const ChangeAccountPasswordScreen = () => {
   } = useForm({ resolver, mode: 'onTouched' });
 
   const onFormSubmit = (data) => {
-    console.log('submit password change', data);
     const payload: ChangePasswordDto = {
       oldPassword: data.oldPassword,
       newPassword: data.newPassword
@@ -46,9 +45,8 @@ const ChangeAccountPasswordScreen = () => {
       .then(() => {
         setShowSuccessAlert(true);
       })
-      .catch((err) => {
+      .catch(() => {
         setShowErrorAlert(true);
-        console.log(err);
       });
   };
 
