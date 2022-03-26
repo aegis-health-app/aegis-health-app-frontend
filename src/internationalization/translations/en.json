@@ -196,6 +196,7 @@
   },
   "error": {
     "isRequired": "{{name}} cannot be left blank",
+    "invalid": "Invalid {{name}}",
     "samePasswordWarning": "New password cannot be the same as the old password"
   },
   "cameraPermissions": {

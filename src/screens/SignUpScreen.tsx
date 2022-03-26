@@ -4,7 +4,9 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
 import FormHeader from '../components/atoms/FormHeader';
-import TextInput from '../components/atoms/TextInput';
+import TextInput, {
+  TextInputValidationType
+} from '../components/atoms/TextInput';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../hooks/useDimensions';
 import { View } from 'react-native';
@@ -19,7 +21,7 @@ interface InformationList {
   label: string;
   placeholder?: string;
   name: string;
-  type?: 'password' | 'birthDate' | 'gender' | 'bloodGroup';
+  type: string;
 }
 
 const bloodTypes = ['N/A', 'A', 'B', 'O', 'AB'];
@@ -52,12 +54,28 @@ const SignUpScreen = () => {
   const informationList: InformationList[][] = useMemo(
     () => [
       [
-        { label: 'profile.name', name: 'name' },
-        { label: 'profile.lastName', name: 'lastName' },
-        { label: 'profile.displayName', name: 'displayName' },
+        {
+          label: 'profile.name',
+          name: 'name',
+          type: TextInputValidationType.NAME
+        },
+        {
+          label: 'profile.lastName',
+          name: 'lastName',
+          type: TextInputValidationType.NAME
+        },
+        {
+          label: 'profile.displayName',
+          name: 'displayName',
+          type: 'text'
+        },
         { label: 'profile.birthDate', name: 'birthDate', type: 'birthDate' },
         { label: 'profile.birthGender', name: 'birthGender', type: 'gender' },
-        { label: 'profile.phoneNumber', name: 'phoneNumber' },
+        {
+          label: 'profile.phoneNumber',
+          name: 'phoneNumber',
+          type: TextInputValidationType.PHONE
+        },
         { label: 'auth.password', name: 'password', type: 'password' },
         {
           label: 'auth.confirmPassword',
@@ -67,10 +85,18 @@ const SignUpScreen = () => {
       ],
       [],
       [
-        { label: 'profile.healthIssues', name: 'healthIssues' },
-        { label: 'profile.personalMedicine', name: 'personalMedicine' },
-        { label: 'profile.allergens', name: 'allergens' },
-        { label: 'profile.previousVaccinations', name: 'previousVaccinations' },
+        { label: 'profile.healthIssues', name: 'healthIssues', type: 'text' },
+        {
+          label: 'profile.personalMedicine',
+          name: 'personalMedicine',
+          type: 'text'
+        },
+        { label: 'profile.allergens', name: 'allergens', type: 'text' },
+        {
+          label: 'profile.previousVaccinations',
+          name: 'previousVaccinations',
+          type: 'text'
+        },
         { label: 'profile.bloodType', name: 'bloodType', type: 'bloodGroup' }
       ]
     ],
@@ -108,9 +134,9 @@ const SignUpScreen = () => {
           {signUpStage === 3 && (
             <View>
               <FormHeader headerText={t('auth.healthInfo')} my={2} size={20} />
-              {informationList[2].map((info) => (
+              {informationList[2].map((info: InformationList) => (
                 <Box mb={6} key={`${info.label}-${info.name}`}>
-                  {!info.type && (
+                  {['text', 'phone', 'name'].includes(info.type) && (
                     <TextInput
                       label={`${t(info.label)} `}
                       placeholder={t(info.placeholder || info.label)}

@@ -43,7 +43,7 @@ const SignUpStageOne = ({
       <FormHeader headerText={t('auth.generalInfo')} my={2} size={20} />
       {informationList[0].map((info) => (
         <Box mb={6} key={`${info.label}-${info.name}`}>
-          {!info.type && (
+          {['text', 'phone', 'name'].includes(info.type) && (
             <TextInput
               label={`${t(info.label)} `}
               placeholder={t(info.placeholder || info.label)}
@@ -52,6 +52,7 @@ const SignUpStageOne = ({
               errors={errors}
               hasRequiredStar
               isRequired
+              validationType={info.type}
               errorMessage={t('error.isRequired', {
                 name: t(info.label)
               })}

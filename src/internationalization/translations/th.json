@@ -196,6 +196,7 @@
   },
   "error": {
     "isRequired": "กรุณากรอก{{name}}",
+    "invalid": "{{name}}ไม่ถูกต้อง",
     "samePasswordWarning": "รหัสผ่านใหม่ไม่สามารถตรงกับรหัสผ่านเก่าได้"
   },
   "cameraPermissions": {
