@@ -5,17 +5,19 @@ import { RootStackParamList } from '../../navigation/types';
 import { Image, ZStack, View, Box, Text, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
-
-const QRPlaceholder = require('../../assets/images/QRPlaceholder.png');
-const QRBackground = require('../../assets/images/QRBackground.png');
 
 const ConnectElderlyScreen = () => {
+  // todo: get codes from backend
+  const codes = ['000000', 'AAAAAA'];
+
   const { t } = useTranslation();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const handleRead = (val) => {
+    if (codes.includes(val)) navigation.navigate('ConfirmConnectScreen');
+  };
   return (
     <View>
       <Button.Group isAttached justifyContent="center" my="2">
@@ -42,22 +44,21 @@ const ConnectElderlyScreen = () => {
       </Button.Group>
       <ZStack mb="2" width="100%" height="100%">
         <QRCodeScanner
-          customMarker={<Box
-            top="-20"
-            height="230"
-            width="230"
-            alignSelf="center"
-            borderWidth="3"
-            borderColor="#005DB4"
-            justifyContent="center"
-            alignItems="center"></Box>}
+          customMarker={
+            <Box
+              top="-20"
+              height="230"
+              width="230"
+              alignSelf="center"
+              borderWidth="3"
+              borderColor="#005DB4"
+              justifyContent="center"
+              alignItems="center"></Box>
+          }
           showMarker={true}
-          containerStyle={{justifyContent: "center", marginBottom: 120}}
-          onRead={(e) => {
-            console.log('success', e)
-            navigation.navigate('ConfirmConnectScreen')
-        }}
-          />
+          containerStyle={{ justifyContent: 'center', marginBottom: 120 }}
+          onRead={(e) => handleRead(e.data)}
+        />
       </ZStack>
       <Text position="absolute" alignSelf="center" bottom="24">
         {t('userLink.cameraHelpText')}
