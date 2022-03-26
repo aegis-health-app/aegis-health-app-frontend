@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -31,11 +31,14 @@ import ChangePhoneNumberScreen from '../screens/ChangePhoneNumberScreen';
 import PlanSelectionScreen from '../screens/PlanSelectionScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import ChangePhoneNumberVerificationScreen from '../screens/ChangePhoneNumberVerificationScreen';
+import { UserContext } from '../contexts/UserContext';
+import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
   const { setShowSettingsTourguide } = useContext(TourguideContext);
+  const { user } = useContext(UserContext);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -45,18 +48,26 @@ const MainNavigation = () => {
     }
   };
 
-  const [user] = useState(true);
-
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
         {user ? (
           <>
-            <Stack.Screen
-              name="TabNavigation"
-              component={TabNavigation}
-              options={{ headerShown: false }}
-            />
+            {user?.isElderly ? (
+              <Stack.Screen
+                name="TabNavigation"
+                component={TabNavigation}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              <Stack.Screen
+                name="CaretakerHomeScreen"
+                component={CaretakerHomeScreen}
+                options={{
+                  headerShown: false
+                }}
+              />
+            )}
             <Stack.Screen
               name="SettingScreen"
               component={SettingScreen}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { client } from '../config/axiosConfig';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { useAuthentication } from '../hooks/useAuthentication';
+import { getUser } from '../utils/user/user';
 import { User } from './../dto/modules/user.dto';
 
 export interface UserContextProps {
@@ -30,9 +31,10 @@ const UserContextProvider = ({ ...props }) => {
       });
   };
 
-  useEffect(() => {
-    getUserProfile();
-  }, [userToken]);
+  useAsyncEffect(async () => {
+    const _user = await getUser();
+    setUser(_user);
+  }, []);
 
   useEffect(() => {
     if (user?.isElderly === true) {

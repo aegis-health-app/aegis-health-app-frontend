@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
+import ElderlyHomeScreen from '../screens/ElderlyHomeScreen';
 import UserLinkScreen from './../screens/UserLinkScreen';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import { Icon } from 'native-base';
@@ -34,7 +34,7 @@ const TabNavigation = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={ElderlyHomeScreen}
         options={{
           headerShown: false,
           tabBarLabel: t('profile.home')
@@ -47,6 +47,7 @@ const TabNavigation = () => {
           title: t('profile.myCaretaker'),
           headerTitleAlign: 'center',
           headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+          headerStyle: { height: 70 },
           headerRight: () => (
             <Icon
               as={Feather}
