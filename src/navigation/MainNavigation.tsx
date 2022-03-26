@@ -122,7 +122,8 @@ const MainNavigation = () => {
               options={{
                 title: t('profile.myCaretaker'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerShown: true
               }}
             />
             <Stack.Screen

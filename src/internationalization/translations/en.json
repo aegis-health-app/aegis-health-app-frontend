@@ -29,6 +29,15 @@
     "step3": "Tap here to change your account phone number or password.",
     "step4": "Press the help button to replay the guide."
   },
+  "homeTutorial": {
+    "step1": "You can edit your profile information from the profile screen.",
+    "step2": "You can edit settings and manage your account from the settings screen.",
+    "step3": "The most recent relevant notification will be displayed here. You can tap to interact with it or dismiss it.",
+    "step4": "The modules you've select will live here. Click on the module card to access it. Click the “+” icon to add a new module.",
+    "step5": "Press the “Home” button to return to the home page.",
+    "step6": "Press the “My Caretakers” button to view and edit your caretakers.",
+    "step7": "Press the help button to replay the guide."
+  },
   "misc": {
     "back": "Back",
     "previous": "Previous",

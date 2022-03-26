@@ -23,7 +23,6 @@ const TabNavigation = () => {
             return <IonIcons name={iconName} size={26} color={color} />;
           }
         },
-        // tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
         tabBarLabelStyle: {
           fontSize: 14
@@ -48,9 +47,14 @@ const TabNavigation = () => {
           title: t('profile.myCaretaker'),
           headerTitleAlign: 'center',
           headerTitleStyle: { fontSize: 20, fontWeight: '800' },
-          headerStyle: {height:70},
           headerRight: () => (
-            <Icon as={Feather} name="help-circle" size="7" color="#F97316" mr="4"/>
+            <Icon
+              as={Feather}
+              name="help-circle"
+              size="7"
+              color="#F97316"
+              mr="4"
+            />
           )
         }}
       />
