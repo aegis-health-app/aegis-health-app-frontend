@@ -244,6 +244,9 @@
     "enterPhoneNumber":"Enter Your New Phone Number",
     "enterPhoneNumberDescription":"We’ll text you a confirmation code. Message and data rates may apply.",
     "phoneNumber":"Phone Number",
-    "continue":"Continue"
+    "continue":"Continue",
+    "enterYourVerificationCode":"Enter Your Verification Code",
+    "verificationCodeSentTo":"Enter the verification code sent to",
+    "submit":"submit"
   }
 }

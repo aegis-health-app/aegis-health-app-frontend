@@ -244,6 +244,9 @@
     "enterPhoneNumber":"กรอกหมายเลขโทรศัพท์ใหม่",
     "enterPhoneNumberDescription":"เราจะส่งรหัสยืนยันตัวตนไปให้คุณทางข้อความ อาจมีค่าบริการเพิ่มเติม",
     "phoneNumber":"เบอร์โทรศัพท์ใหม่",
-    "continue":"ดำเนินการต่อ"
+    "continue":"ดำเนินการต่อ",
+    "enterYourVerificationCode":"กรอกรหัสยืนยัน",
+    "verificationCodeSentTo":"โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่",
+    "submit":"ดำเนินการต่อ"
   }
 }

@@ -28,12 +28,9 @@ import ProfileEditScreen from '../screens/ProfileEditScreen';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import ChangeAccountPasswordScreen from '../screens/ChangeAccountPasswordScreen';
 import ChangePhoneNumberScreen from '../screens/ChangePhoneNumberScreen';
-<<<<<<< HEAD
 import PlanSelectionScreen from '../screens/PlanSelectionScreen';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
-=======
 import ChangePhoneNumberVerificationScreen from '../screens/ChangePhoneNumberVerificationScreen';
->>>>>>> f0fea2d (wip:change phone number page and verification code page)
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
