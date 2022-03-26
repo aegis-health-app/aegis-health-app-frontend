@@ -8,7 +8,6 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import { client } from '../../config/axiosConfig';
 
 const ConnectElderlyScreen = () => {
-
   const { t } = useTranslation();
 
   const navigation =
@@ -18,7 +17,6 @@ const ConnectElderlyScreen = () => {
     await client
       .get(`/link/elderly/${val}`)
       .then(({ data }) => {
-        console.log(data);
         navigation.navigate('ConfirmConnectScreen', { info: data });
       })
       .catch((err) => {
@@ -37,7 +35,7 @@ const ConnectElderlyScreen = () => {
       .catch((err) => {
         console.log({ err });
       });
-  }
+  };
 
   return (
     <View>
@@ -89,7 +87,14 @@ const ConnectElderlyScreen = () => {
           <Text>{t('userLink.cameraHelpText')}</Text>
         </View>
         {/* remove later */}
-        <Button position="absolute" alignSelf="center" bottom="-300" width="90%" onPress={() => handlePress('E3QW53')}>test successful QR scan</Button>
+        <Button
+          position="absolute"
+          alignSelf="center"
+          bottom="-300"
+          width="90%"
+          onPress={() => handlePress('E3QW53')}>
+          test successful QR scan
+        </Button>
       </View>
     </View>
   );

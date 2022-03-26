@@ -26,25 +26,22 @@ const InputCodeScreen = () => {
     watch
   } = useForm({ resolver: useYupValidationResolver(codeSchema), mode: 'all' });
 
-  // todo: get codes from backend
-  const [codes, setCodes] = useState(['000000', 'AAAAAA']);
   const [isCodeValid, setIsCodeValid] = useState(true);
   const watchElderlyCode = watch();
 
   const { isValid } = useFormState({ control });
 
   const handleSubmit = async () => {
-    const enteredCode = watchElderlyCode["elderlyCode"]
+    const enteredCode = watchElderlyCode['elderlyCode'];
     await client
       .get(`/link/elderly/${enteredCode}`)
       .then(({ data }) => {
-        console.log(data);
         navigation.navigate('ConfirmConnectScreen', { info: data });
-        setIsCodeValid(true)
+        setIsCodeValid(true);
       })
       .catch((err) => {
         console.log({ err });
-        setIsCodeValid(false)
+        setIsCodeValid(false);
       });
   };
 
