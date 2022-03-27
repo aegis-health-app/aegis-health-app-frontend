@@ -46,7 +46,7 @@ const UserCard = ({
       px={2}
       style={styles.card}>
       <>
-        <Text>{userIsElderly ? uid : null}</Text>
+        <Text>{userIsElderly ? uid : ''}</Text>
         <Image
           source={imageId ? imageId : ProfilePic}
           style={styles.image}
