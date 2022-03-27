@@ -51,6 +51,5 @@ export const requestOTP = async (phone: string) =>
 
 export const verifyOTP = async (token: string, otp: string) => {
   const payload = { token, pin: otp };
-  return { data: { status: payload.pin === '000000' ? 'success' : 'fail' } }; // OTP is by default 000000 for staging
-  //   return await client.post('/otp/verifyOtp', payload);
+    return await client.post('/otp/verifyOtp', payload);
 };
