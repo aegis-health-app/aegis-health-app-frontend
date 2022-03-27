@@ -1,13 +1,18 @@
 import { Text, View, Image, Button } from 'native-base';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 
 const sompochHD = require('../../assets/images/sompochHD.png');
 
-const ConfirmConnectScreen = ({ route }) => {
+const ConfirmConnectScreen = ({
+  route
+}: NativeStackScreenProps<RootStackParamList, 'ConfirmConnectScreen'>) => {
   const elderlyInfo = route.params;
 
   const { t } = useTranslation();
@@ -25,7 +30,11 @@ const ConfirmConnectScreen = ({ route }) => {
         </Text>
         <Image
           mt="10"
-          source={sompochHD}
+          source={
+            elderlyInfo['info']['imageid']
+              ? elderlyInfo['info']['imageid']
+              : sompochHD
+          }
           w={160}
           h={160}
           borderRadius={10}
