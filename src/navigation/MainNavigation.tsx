@@ -51,7 +51,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
-        {user ? (
+        {/* {user ? (
           <>
             {user?.isElderly ? (
               <Stack.Screen
@@ -259,7 +259,15 @@ const MainNavigation = () => {
               options={{ headerShown: false }}
             />
           </>
-        )}
+        )} */}
+        <Stack.Screen
+          name="ForgotPasswordScreen"
+          component={ForgotPasswordScreen}
+          options={{
+            title: 'Forgot Password',
+            headerShown: false
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

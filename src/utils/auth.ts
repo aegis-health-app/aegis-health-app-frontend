@@ -51,5 +51,5 @@ export const requestOTP = async (phone: string) =>
 
 export const verifyOTP = async (token: string, otp: string) => {
   const payload = { token, pin: otp };
-    return await client.post('/otp/verifyOtp', payload);
+  return await client.post('/otp/verifyOtp', payload);
 };
