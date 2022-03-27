@@ -117,12 +117,13 @@ const ProfileEditScreen = () => {
         type: profileImage.type
       });
       try {
-        const { data } = await client.post(`/user/profile/image`, formData)
+        const { data } = await client.post(`/user/profile/image`, formData);
         if (data) getUserProfile();
       } catch (error) {
         setShowImageUploadError(true);
       }
-    };
+    }
+  };
 
   const updateUserProfile = async (payload) => {
     client
@@ -257,7 +258,9 @@ const ProfileEditScreen = () => {
             <View style={styles.toggleButtonsContainer}>
               <Button
                 variant={
-                  initialValues?.gender === GenderEnum.male ? 'solid' : 'outline'
+                  initialValues?.gender === GenderEnum.male
+                    ? 'solid'
+                    : 'outline'
                 }
                 onPress={() => {
                   if (user) {
@@ -272,7 +275,9 @@ const ProfileEditScreen = () => {
               <Spacer h={0} />
               <Button
                 variant={
-                  initialValues?.gender === GenderEnum.female ? 'solid' : 'outline'
+                  initialValues?.gender === GenderEnum.female
+                    ? 'solid'
+                    : 'outline'
                 }
                 onPress={() => {
                   if (user) {

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View } from 'native-base';
+import { Image, Text, View } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getCaretakingElderlyByEid } from '../utils/caretaker/profile';
 import { useTranslation } from 'react-i18next';
+import images from '../assets/images';
 
 const TakeCareElderlyScreen = ({
   route,
@@ -27,7 +28,11 @@ const TakeCareElderlyScreen = ({
       </Text>
       <View display="flex" flexDir="row" justifyContent="center">
         <Image
-          source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
+          source={
+            elderly?.imageid
+              ? { uri: elderly.imageid }
+              : images.picturePlaceholder
+          }
           width="32"
           height="32"
           borderRadius={4}
@@ -39,5 +44,3 @@ const TakeCareElderlyScreen = ({
 };
 
 export default TakeCareElderlyScreen;
-
-// const styles = StyleSheet.c;
