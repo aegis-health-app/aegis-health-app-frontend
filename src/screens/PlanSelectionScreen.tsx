@@ -36,7 +36,9 @@ const PlanSelectionScreen = () => {
             ]}
             buttonText={t('planSelection.selfCareButtonText')}
             buttonColor={null}
-            handlePress={() => navigation.navigate('ProfileScreen')}
+            handlePress={() =>
+              navigation.navigate('SignUpScreen', { isElderly: true })
+            }
           />
           <PlanSelectionCard
             backgroundColor="#fff"
@@ -49,7 +51,9 @@ const PlanSelectionScreen = () => {
             ]}
             buttonText={t('planSelection.elderlyCareButtonText')}
             buttonColor="#ff9145"
-            handlePress={() => navigation.navigate('ProfileScreen')}
+            handlePress={() =>
+              navigation.navigate('SignUpScreen', { isElderly: false })
+            }
           />
           <Box flex={1} />
           <AuthFooter page={AuthType.SIGNUP} />
