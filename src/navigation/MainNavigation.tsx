@@ -189,6 +189,7 @@ const MainNavigation = () => {
             <Stack.Screen
               name="SignUpScreen"
               component={SignUpScreen}
+              initialParams={{ isElderly: true }}
               options={{
                 title: 'Sign Up',
                 headerShown: false
