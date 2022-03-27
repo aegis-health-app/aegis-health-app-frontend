@@ -9,33 +9,34 @@ import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
+import { Elderly } from './../../dto/modules/user.dto';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
 const ConfirmConnectScreen = ({
   route
 }: NativeStackScreenProps<RootStackParamList, 'ConfirmConnectScreen'>) => {
-  const elderlyInfo = route.params;
+  const { info } = route.params;
 
   const { t } = useTranslation();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const { user } = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   //TODO: error handling
   const handlePress = async () => {
-    await client
-      .post('/user/relationship', {
-        "eid": elderlyInfo['info']['uid'],
-        "cid": user?.uid,
-      }).then(() => {
-        navigation.navigate('ConnectElderlyScreen');
-      })
-      .catch((err) => {
-        console.log({ err });
+    try {
+      const { data } = await client.post('/user/relationship', {
+        eid: info.uid,
+        cid: user?.uid
       });
+      const elderlyResult = data as Elderly;
+      navigation.navigate('ConnectElderlyScreen');
+    } catch (err) {
+      // show toast to display error
+    }
   };
 
   return (
@@ -43,31 +44,24 @@ const ConfirmConnectScreen = ({
       <View flexDir="column" alignItems="center" my="10">
         <Text fontWeight="600" fontSize="lg">
           {t('userLink.connectText1')}
-          {elderlyInfo['info']['fname']} {elderlyInfo['info']['lname']}
+          {info.fname} {info.lname}
           {t('userLink.connectText2')}
         </Text>
         <Image
           mt="10"
-          source={
-            elderlyInfo['info']['imageid']
-              ? elderlyInfo['info']['imageid']
-              : ProfilePic
-          }
+          source={info.imageid ? info.imageid : ProfilePic}
           w={160}
           h={160}
           borderRadius={10}
           alt="Profile Picture"
         />
         <Text mt="2" fontWeight="600" fontSize="2xl">
-          {elderlyInfo['info']['dname']}
+          {info.dname}
         </Text>
         <Text fontWeight="300" color="#A1A1AA" fontSize="sm">
-          {elderlyInfo['info']['fname']} {elderlyInfo['info']['lname']}
+          {info.fname} {info.lname}
         </Text>
-        <Button
-          mt="10"
-          width="90%"
-          onPress={() => handlePress()}>
+        <Button mt="10" width="90%" onPress={() => handlePress()}>
           {t('userLink.connectButton')}
         </Button>
         <Button
