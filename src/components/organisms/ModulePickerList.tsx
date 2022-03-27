@@ -32,7 +32,7 @@ const ModulePickerList = () => {
         <Button onPress={() => navigation.navigate('SignInScreen')}>
           Dummy Sign In Page
         </Button>
-        <Button onPress={() => navigation.navigate('SignUpScreen')}>
+        <Button onPress={() => navigation.navigate('PlanSelectionScreen')}>
           Dummy Sign Up Page
         </Button>
       </HStack>
