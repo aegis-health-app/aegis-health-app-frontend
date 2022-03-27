@@ -30,7 +30,7 @@ export type RootStackParamList = {
   ConnectScreen: undefined;
 
   SignInScreen: undefined;
-  SignUpScreen: undefined;
+  SignUpScreen: { isElderly: boolean };
   ForgotPasswordScreen: undefined;
 
   PlanSelectionScreen: undefined;
