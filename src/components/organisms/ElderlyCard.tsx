@@ -27,10 +27,7 @@ const ElderlyCard = ({
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
 
-  console.log(imageId);
-
   function handlePressTakeCare() {
-    console.log('clicked');
     if (uid !== undefined) {
       navigation.navigate('TakeCareElderlyScreen', {
         uid: uid
@@ -49,7 +46,6 @@ const ElderlyCard = ({
       px={2}
       style={styles.card}>
       <>
-        <Text>{uid}</Text>
         <Image
           source={{ uri: imageId }}
           style={styles.image}
