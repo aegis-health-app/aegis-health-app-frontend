@@ -49,12 +49,26 @@ const ChangePhoneNumberVerificationScreen = ({
       newPhone: phoneNumber,
       enteredPin: otp
     };
+<<<<<<< HEAD
     try {
       const { data } = await client.put('/setting/changePhoneNumber', payload);
       if (data) setShowSuccessAlert(true);
     } catch (err) {
       setShowErrorAlert(true);
     }
+=======
+    console.log(payload);
+    client
+      .put('/setting/changePhoneNumber', payload)
+      .then(() => {
+        console.log('show success alert');
+        setShowSuccessAlert(true);
+      })
+      .catch((err) => {
+        console.log({ err });
+        setShowErrorAlert(true);
+      });
+>>>>>>> 61de8ac (feat: setup alert after change phone number)
   };
 
   return (
@@ -63,7 +77,11 @@ const ChangePhoneNumberVerificationScreen = ({
         isOpen={showErrorAlert}
         close={() => setShowErrorAlert(false)}
         type={AlertType.ERROR}
+<<<<<<< HEAD
         message="changePhoneNumberError"
+=======
+        message="changePasswordError"
+>>>>>>> 61de8ac (feat: setup alert after change phone number)
       />
       <Alert
         isOpen={showSuccessAlert}
@@ -72,8 +90,12 @@ const ChangePhoneNumberVerificationScreen = ({
           navigation.navigate('SettingScreen');
         }}
         type={AlertType.SUCCESS}
+<<<<<<< HEAD
         message="changePhoneNumberSuccess"
         customString={phoneNumber}
+=======
+        message="changePasswordSuccess"
+>>>>>>> 61de8ac (feat: setup alert after change phone number)
       />
       <View style={styles.pageContainer}>
         <View>
@@ -100,6 +122,10 @@ const ChangePhoneNumberVerificationScreen = ({
           control={control}
           isRequired
         />
+<<<<<<< HEAD
+=======
+        <Text>{JSON.stringify(errors)}</Text>
+>>>>>>> 61de8ac (feat: setup alert after change phone number)
         <Spacer />
         <VStack space={4}>
           {/* Continue button */}
