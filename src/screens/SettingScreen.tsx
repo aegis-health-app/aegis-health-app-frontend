@@ -9,7 +9,7 @@ import {
   TourGuideZone,
   TourGuideZoneByPosition,
   useTourGuideController
-} from 'rn-tourguide';
+} from '../library/rn-multiple-tourguide';
 import { useTranslation } from 'react-i18next';
 import { TourguideContext } from '../contexts/TourguideContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -28,11 +28,23 @@ const SettingScreen = () => {
     canStart, // a boolean indicate if you can start tour guide
     start, // a function to start the tourguide
     stop, // a function  to stopping it
-    eventEmitter // an object for listening some events
-  } = useTourGuideController();
+    eventEmitter, // an object for listening some events
+    tourKey
+  } = useTourGuideController('setting');
   const [renderTourguide, setRenderTourguide] = useState(true);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const guideStepCount = 4;
+  let stepCount = 0;
+
+  const handleOnStop = () => (stepCount = 0);
+  const handleOnStepChange = () => {
+    stepCount++;
+    if (stepCount > guideStepCount && stop) {
+      stop();
+      stepCount = 0;
+    }
+  };
 
   /*
     This useEffect will determine whether the tourguide should be shown
@@ -63,15 +75,14 @@ const SettingScreen = () => {
   */
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
-      if (stop) {
-        setShowSettingsTourguide(false);
-        await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
-        stop();
-      }
+      setShowSettingsTourguide(false);
+      await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
+      handleOnStop();
     });
-    // @ts-ignore
-    return () => eventEmitter?.off('*', null);
-  }, []);
+    eventEmitter?.on('stepChange', () => {
+      handleOnStepChange();
+    });
+  }, [eventEmitter]);
 
   return (
     <View style={styles.pageContainer}>
@@ -90,6 +101,7 @@ const SettingScreen = () => {
       <View style={styles.tourGuideWrapper}>
         {renderTourguide && (
           <TourGuideZone
+            tourKey={tourKey}
             zone={1}
             shape="rectangle"
             text={t('settingTutorial.step1')}>
@@ -131,6 +143,7 @@ const SettingScreen = () => {
       {/* Sound Effect Toggle */}
       {renderTourguide && (
         <TourGuideZone
+          tourKey={tourKey}
           zone={2}
           shape="rectangle"
           text={t('settingTutorial.step2')}>
@@ -153,6 +166,7 @@ const SettingScreen = () => {
       {/* Section: Account Settings */}
       {renderTourguide && (
         <TourGuideZone
+          tourKey={tourKey}
           zone={3}
           shape="rectangle"
           text={t('settingTutorial.step3')}>
@@ -197,6 +211,7 @@ const SettingScreen = () => {
       </Button>
       {renderTourguide && (
         <TourGuideZoneByPosition
+          tourKey={tourKey}
           zone={4}
           shape={'circle'}
           isTourGuide

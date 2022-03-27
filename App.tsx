@@ -3,12 +3,13 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
 import './src/internationalization/i18n.config';
-import { TourGuideProvider } from 'rn-tourguide';
+// import { TourGuideProvider } from 'rn-tourguide';
 import { useTranslation } from 'react-i18next';
 import TourguideContextProvider from './src/contexts/TourguideContext';
 import UserContextProvider from './src/contexts/UserContext';
 import ElderlyContextProvider from './src/contexts/ElderlyContext';
 import CaretakerContextProvider from './src/contexts/CaretakerContext';
+import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
 
 const theme = extendTheme({
   main: {},

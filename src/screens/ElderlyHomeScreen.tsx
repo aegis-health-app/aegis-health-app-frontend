@@ -9,7 +9,7 @@ import {
   TourGuideZone,
   TourGuideZoneByPosition,
   useTourGuideController
-} from 'rn-tourguide';
+} from '../library/rn-multiple-tourguide';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TourguideContext } from '../contexts/TourguideContext';
@@ -24,13 +24,24 @@ import useDimensions from '../hooks/useDimensions';
 const ProfilePic = require('../assets/images/sompoch.png');
 
 const ElderlyHomeScreen = () => {
-  const { canStart, start, stop, eventEmitter } = useTourGuideController();
+  const { canStart, start, stop, eventEmitter, tourKey } = useTourGuideController('home');
   const { showHomeTourguide, setShowHomeTourguide } =
     useContext(TourguideContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
+  const guideStepCount = 7;
+  let stepCount = 0;
+
+  const handleOnStop = () => (stepCount = 0);
+  const handleOnStepChange = () => {
+    stepCount++;
+    if (stepCount > guideStepCount && stop) {
+      stop();
+      stepCount = 0;
+    }
+  };
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -47,15 +58,14 @@ const ElderlyHomeScreen = () => {
 
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
-      if (stop) {
-        setShowHomeTourguide(false);
-        await AsyncStorage.setItem('viewedHomeTourguide', 'true');
-        stop();
-      }
+      setShowHomeTourguide(false);
+      await AsyncStorage.setItem('viewedHomeTourguide', 'true');
+      handleOnStop();
     });
-    // @ts-ignore
-    return () => eventEmitter?.off('*', null);
-  }, []);
+    eventEmitter?.on('stepChange', () => {
+      handleOnStepChange();
+    });
+  }, [eventEmitter]);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
@@ -72,6 +82,7 @@ const ElderlyHomeScreen = () => {
             width="100%"
             alignItems="center">
             <TourGuideZone
+              tourKey={tourKey}
               zone={1}
               shape="rectangle"
               text={t('homeTutorial.step1')}>
@@ -98,6 +109,7 @@ const ElderlyHomeScreen = () => {
               </TouchableOpacity>
             </TourGuideZone>
             <TourGuideZone
+              tourKey={tourKey}
               zone={2}
               shape="rectangle"
               text={t('homeTutorial.step2')}>
@@ -118,6 +130,7 @@ const ElderlyHomeScreen = () => {
           <Divider />
           <View w="full">
             <TourGuideZone
+              tourKey={tourKey}
               zone={3}
               shape="rectangle"
               text={t('homeTutorial.step3')}>
@@ -130,6 +143,7 @@ const ElderlyHomeScreen = () => {
             scrollEnabled={false}
             width="100%">
             <TourGuideZone
+              tourKey={tourKey}
               zone={4}
               shape="rectangle"
               text={t('homeTutorial.step4')}>
@@ -139,6 +153,7 @@ const ElderlyHomeScreen = () => {
         </View>
       </ScrollView>
       <TourGuideZoneByPosition
+        tourKey={tourKey}
         zone={7}
         shape="circle"
         isTourGuide
@@ -161,6 +176,7 @@ const ElderlyHomeScreen = () => {
         }}
       />
       <TourGuideZoneByPosition
+        tourKey={tourKey}
         zone={5}
         shape={'rectangle'}
         isTourGuide
@@ -171,6 +187,7 @@ const ElderlyHomeScreen = () => {
         text={t('homeTutorial.step5')}
       />
       <TourGuideZoneByPosition
+        tourKey={tourKey}
         zone={6}
         shape={'rectangle'}
         isTourGuide
