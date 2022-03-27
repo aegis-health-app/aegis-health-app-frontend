@@ -23,7 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { UserContext } from '../contexts/UserContext';
-import { signUp, SignUpPayload } from '../utils/auth';
+import { requestOTP, signUp, SignUpPayload, verifyOTP } from '../utils/auth';
 
 interface InformationList {
   label: string;
@@ -100,6 +100,7 @@ const SignUpScreen = ({ route }) => {
   const { user } = useContext(UserContext);
 
   const [signUpStage, setSignUpStage] = useState<number>(1);
+  const [otpToken, setOTPToken] = useState<string>('');
 
   const [gender, setGender] = useState('M');
   const [date, setDate] = useState(new Date(700938977));
@@ -122,11 +123,14 @@ const SignUpScreen = ({ route }) => {
         personalMedicine,
         allergens,
         previousVaccinations,
-        bloodType
+        bloodType,
+        otp
       } = data;
 
       if (signUpStage === 1) {
         if (data.password === data.confirmPassword) {
+          const requestOTPResponse = await requestOTP(phoneNumber);
+          setOTPToken(requestOTPResponse.data.token);
           setSignUpStage((prev) => prev + 1);
         } else {
           setError('confirmPassword', {
@@ -136,7 +140,21 @@ const SignUpScreen = ({ route }) => {
         }
       }
 
-      if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
+      if (signUpStage === 2) {
+        const verifyOTPResponse = await verifyOTP(otpToken, otp);
+
+        if (
+          verifyOTPResponse.status === 200 ||
+          verifyOTPResponse.data.status === 'success'
+        ) {
+          setSignUpStage((prev) => prev + 1);
+        } else {
+          setError('otp', {
+            type: 'manual',
+            message: t('error.invalid', { name: t('general.otp') })
+          });
+        }
+      }
 
       if (signUpStage === 3) {
         const { isElderly } = route?.params;
@@ -183,7 +201,15 @@ const SignUpScreen = ({ route }) => {
         } else navigation.replace('TabNavigation');
       }
     },
-    [signUpStage, newProfileImage, navigation, setSignUpStage, client, route]
+    [
+      signUpStage,
+      newProfileImage,
+      navigation,
+      setSignUpStage,
+      client,
+      route,
+      otpToken
+    ]
   );
 
   return (

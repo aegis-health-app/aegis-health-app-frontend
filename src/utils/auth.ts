@@ -17,11 +17,34 @@ export interface SignUpPayload {
   password: string;
 }
 
+export interface SignInPayload {
+  imageid: string;
+  fname: string;
+  lname: string;
+  dname: string;
+  bday: string;
+  gender: string;
+  isElderly: boolean;
+  healthCondition: string;
+  bloodType: string;
+  personalMedication: string;
+  allergy: string;
+  vaccine: string;
+  phone: string;
+  password: string;
+}
+
 export const signUp = async (payload: SignUpPayload) =>
   await client.post('/user/signUp', payload);
+
+export const signIn = async (payload: SignInPayload) =>
+  await client.post('/user/login', payload);
 
 export const requestOTP = async (phone: string) =>
   await client.get(`/otp/request/${phone}`);
 
-export const verifyOTP = async (token: string, otp: string) =>
-  await client.post('/otp/verifyOtp', { token, pin: otp });
+export const verifyOTP = async (token: string, otp: string) => {
+  const payload = { token, pin: otp };
+  return { data: { status: payload.pin === '000000' ? 'success' : 'fail' } }; // OTP is by default 000000 for staging
+  //   return await client.post('/otp/verifyOtp', payload);
+};
