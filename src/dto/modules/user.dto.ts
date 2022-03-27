@@ -33,3 +33,12 @@ export interface Caretaker extends User {
 export interface Elderly extends User {
   listModuleid: ModuleId[];
 }
+
+export interface CaretakerInfoView {
+    fullName: string;
+    gender: 'F' | 'M';
+    bdate: string;
+    phone?: string;
+    imageId: string;
+    cid: number;
+}

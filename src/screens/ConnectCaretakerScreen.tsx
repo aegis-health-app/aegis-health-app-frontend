@@ -24,7 +24,7 @@ const EditCaretakerScreen = () => {
                 size={225}
                 quietZone={17.5}
                 logoSize={100}
-                value={elderlyCode}
+                value={elderlyCode.code}
               />
             </View>
             <View mb="20" flexDir="row" justifyContent="center">
@@ -32,7 +32,7 @@ const EditCaretakerScreen = () => {
                 {t('userLink.myCode')}
               </Text>
               <Text color="orange.500" fontSize={16} fontWeight="bold">
-                {elderlyCode}
+                {elderlyCode.code}
               </Text>
             </View>
             <InfoCard
