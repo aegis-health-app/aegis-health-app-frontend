@@ -1,5 +1,5 @@
 import { Box, Button, ScrollView, VStack } from 'native-base';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
@@ -17,6 +17,12 @@ import PictureSelection from '../components/organisms/PictureSelection';
 import SignUpStageOne from '../components/organisms/SignUpStageOne';
 import SignUpStageTwo from '../components/organisms/SignUpStageTwo';
 import { ImagePickerResponse } from 'react-native-image-picker';
+import { client } from '../config/axiosConfig';
+import { useAuthentication } from '../hooks/useAuthentication';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+import { UserContext } from '../contexts/UserContext';
 
 interface InformationList {
   label: string;
@@ -87,10 +93,15 @@ const SignUpScreen = () => {
 
   const { t } = useTranslation();
   const { ScreenHeight } = useDimensions();
+  const { setToken } = useAuthentication();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { user } = useContext(UserContext);
 
   const [signUpStage, setSignUpStage] = useState<number>(1);
 
-  const [gender, setGender] = useState('male');
+  const [gender, setGender] = useState('M');
+  const [date, setDate] = useState(new Date(700938977));
 
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
@@ -99,7 +110,19 @@ const SignUpScreen = () => {
   }, [signUpStage]);
 
   const continueToNextStage = useCallback(
-    (data) => {
+    async (data) => {
+      const {
+        name,
+        lastName,
+        displayName,
+        phoneNumber,
+        password,
+        healthIssues,
+        personalMedicine,
+        allergens,
+        previousVaccinations,
+        bloodType
+      } = data;
       if (signUpStage === 1) {
         if (data.password === data.confirmPassword) {
           setSignUpStage((prev) => prev + 1);
@@ -111,9 +134,51 @@ const SignUpScreen = () => {
         }
       }
       if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
-      if (signUpStage === 3) setSignUpStage((prev) => prev + 1);
+      if (signUpStage === 3) {
+        const payload = {
+          imageid: '',
+          fname: name,
+          lname: lastName,
+          dname: displayName,
+          bday: date.toISOString().substring(0, 10),
+          gender: gender,
+          isElderly: true,
+          healthCondition: healthIssues,
+          bloodType: bloodType === 'N/A' ? '' : bloodType,
+          personalMedication: personalMedicine,
+          allergy: allergens,
+          vaccine: previousVaccinations,
+          phone: phoneNumber,
+          password: password
+        };
+
+        const signUpResponse = await client.post('/user/signUp', payload);
+        if (signUpResponse.data) {
+          setToken(signUpResponse.data.token);
+          setSignUpStage((prev) => prev + 1);
+        }
+      }
+      if (signUpStage === 4) {
+        if (newProfileImage) {
+          const formData = new FormData();
+          formData.append('file', newProfileImage);
+          const imageUploadResponse = await client.post(
+            `user/profile/${user?.uid}/image`,
+            formData,
+            {
+              headers: { 'Content-Type': 'multipart/form-data' }
+            }
+          );
+          const patchResponse = await client.patch('user', {
+            imageid: imageUploadResponse.data.imageUrl
+          });
+          if (patchResponse.data) {
+            navigation.replace('TabNavigation');
+          }
+        } else navigation.replace('TabNavigation');
+      }
     },
-    [signUpStage]
+    [signUpStage, newProfileImage, navigation, setSignUpStage, client]
   );
 
   return (
@@ -127,6 +192,8 @@ const SignUpScreen = () => {
               informationList={informationList}
               gender={gender}
               setGender={setGender}
+              date={date}
+              setDate={setDate}
               control={control}
               errors={errors}
               handleSubmit={handleSubmit}
