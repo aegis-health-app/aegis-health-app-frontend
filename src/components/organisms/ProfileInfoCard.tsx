@@ -5,14 +5,16 @@ import { useTranslation } from 'react-i18next';
 const CaretakerPic = require('../../assets/images/Caretaker.png');
 
 type ProfileInfoCardProps = {
-  name: string;
+  fname: string;
+  lname: string
   gender: string;
   bdate: string;
   phone: string;
 };
 
 const ProfileInfoCard = ({
-  name,
+  fname,
+  lname,
   gender,
   bdate,
   phone
@@ -56,7 +58,7 @@ const ProfileInfoCard = ({
         <View flexDir="column" ml="6">
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              {name}
+              {fname} {lname}
             </Text>
           </View>
           <View>

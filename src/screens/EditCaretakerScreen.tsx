@@ -6,24 +6,26 @@ import InputBox from '../components/atoms/Input';
 import ProfileInfoCard from '../components/organisms/ProfileInfoCard';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { useTranslation } from 'react-i18next';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
-const EditCaretakerScreen = ({route, navigation}) => {
+const EditCaretakerScreen = ({route}:NativeStackScreenProps<RootStackParamList, 'EditCaretakerScreen'>) => {
 
   // WIP
-  const {itemId} = route.params;
+  const {info} = route.params;
 
   const { t } = useTranslation();
   return (
     <KeyboardAvoidingView>
       <ScrollView>
         <View bgColor="#FAFAFA">
-          <ProfileInfoCard name={itemId} gender="Female" bdate="08/02/1917" phone="090909090"/>
+          <ProfileInfoCard fname={info["fname"]} lname={info["lname"]} gender="Female" bdate="08/02/1917" phone="090909090"/>
           <Divider />
           <View paddingX={5}>
             <InputBox name={t('userForm.editName')} />
           </View>
           <Divider />
-          <RemButton name={itemId}/>
+          <RemButton fname={info["fname"]} lname={info["lname"]} cid={info["cid"]}/>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

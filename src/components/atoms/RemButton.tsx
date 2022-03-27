@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, AlertDialog, Text } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useState, useRef } from 'react';
+import { client } from '../../config/axiosConfig';
+import { UserContext } from '../../contexts/UserContext';
 
 type remButtonProps = {
-  name: string;
+  fname: string;
+  lname: string;
+  cid: string;
 };
 
-const RemButton = ({ name }: remButtonProps) => {
+const RemButton = ({ fname, lname, cid }: remButtonProps) => {
   const { t } = useTranslation();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -17,9 +21,16 @@ const RemButton = ({ name }: remButtonProps) => {
     setDialogOpen(true);
   }
 
-  function handlePressDelete() {
+  const { user } = useContext(UserContext);
+
+  async function handlePressDelete() {
+    //TODO: error handling
+    await client
+      .delete('/user/relationship', { data: { eid: user?.uid, cid: cid } })
+      .catch((err) => {
+        console.log({ err });
+      });
     setDialogOpen(false);
-    //TODO: Remove caretaker
   }
 
   return (
@@ -30,11 +41,13 @@ const RemButton = ({ name }: remButtonProps) => {
         onClose={() => setDialogOpen(!dialogOpen)}>
         <AlertDialog.Content>
           <AlertDialog.CloseButton />
-          <AlertDialog.Header>{t('userLink.removeCaretaker')}</AlertDialog.Header>
+          <AlertDialog.Header>
+            {t('userLink.removeCaretaker')}
+          </AlertDialog.Header>
           <AlertDialog.Body>
             <Text>
               {t('userLink.removeAlertBody1')}
-              {name}
+              {fname} {lname}
               {t('userLink.removeAlertBody2')}
             </Text>
           </AlertDialog.Body>
