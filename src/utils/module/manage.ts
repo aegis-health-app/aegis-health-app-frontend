@@ -18,41 +18,6 @@ export async function postAddModule(
 
   return data;
 }
-/**
- * This function delete module by id and append must have module (Emergency & Select module)
- * @param targetId
- * @param modules
- * @returns
- */
-function deleteModule(targetId: ModuleId, modules: Module[]): Module[] {
-  const temp = modules.filter((module) => {
-    if (module.moduleid !== targetId) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-
-  return temp;
-}
-
-/**
- *
- * @param targetId what module to add
- * @returns
- */
-export async function postAddModule(
-  targetId: ModuleId
-): Promise<ModuleId[] | void> {
-  if (targetId === 0 || targetId === 100) {
-    return;
-  }
-  const { data } = await client.post('home/module', {
-    moduleid: targetId
-  });
-
-  return data;
-}
 
 /**
  * This function delete module by its id and send across backend.

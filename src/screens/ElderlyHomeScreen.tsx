@@ -23,7 +23,7 @@ import useDimensions from '../hooks/useDimensions';
 
 const ProfilePic = require('../assets/images/sompoch.png');
 
-const HomeScreen = () => {
+const ElderlyHomeScreen = () => {
   const { canStart, start, stop, eventEmitter } = useTourGuideController();
   const { showHomeTourguide, setShowHomeTourguide } =
     useContext(TourguideContext);
