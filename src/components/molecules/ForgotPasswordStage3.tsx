@@ -1,7 +1,5 @@
-import { Box, Button, Icon, Text, VStack } from 'native-base';
+import { Button, Icon, VStack } from 'native-base';
 import React, { useState } from 'react';
-
-import AuthFooter, { AuthType } from '../atoms/AuthFooter';
 import FormHeader from '../atoms/FormHeader';
 import FormTitle from '../atoms/FormTitle';
 import TextInput from '../atoms/TextInput';
@@ -15,12 +13,14 @@ type ForgotPasswordProps = {
   control: any;
   errors: any;
   watch: any;
+  handleSubmit: any;
 };
 
 const ForgotPasswordStage3 = ({
   control,
   errors,
-  watch
+  watch,
+  handleSubmit
 }: ForgotPasswordProps) => {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
@@ -82,8 +82,6 @@ const ForgotPasswordStage3 = ({
       <Button w="full" onPress={() => console.log('test')}>
         {t('changePassword.changePassword')}
       </Button>
-      <Box flex={1} />
-      <AuthFooter page={AuthType.SIGNUP} />
     </VStack>
   );
 };
