@@ -2,10 +2,11 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { Image, ZStack, View, Box, Text, Button } from 'native-base';
+import { View, Box, Text, Button } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { client } from '../../config/axiosConfig';
+import { ElderlyLinkResponse } from '../../dto/modules/modules.dto';
 
 const ConnectElderlyScreen = () => {
   const { t } = useTranslation();
@@ -14,27 +15,15 @@ const ConnectElderlyScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleRead = async (val) => {
-    await client
-      .get(`/link/elderly/${val}`)
-      .then(({ data }) => {
-        navigation.navigate('ConfirmConnectScreen', { info: data });
-      })
-      .catch((err) => {
-        console.log({ err });
+    try {
+      const { data } = await client.get(`/link/elderly/${val}`);
+      navigation.navigate('ConfirmConnectScreen', {
+        info: data as ElderlyLinkResponse
       });
-  };
-
-  //remove later
-  const handlePress = async (val) => {
-    await client
-      .get(`/link/elderly/${val}`)
-      .then(({ data }) => {
-        console.log(data);
-        navigation.navigate('ConfirmConnectScreen', { info: data });
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
+    } catch (err) {
+      console.log(err);
+      // show toast to display err to user.
+    }
   };
 
   return (
@@ -92,7 +81,7 @@ const ConnectElderlyScreen = () => {
           alignSelf="center"
           bottom="-300"
           width="90%"
-          onPress={() => handlePress('E3QW53')}>
+          onPress={() => handleRead('E3QW53')}>
           test successful QR scan
         </Button>
       </View>
