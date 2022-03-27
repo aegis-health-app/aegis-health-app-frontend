@@ -28,6 +28,7 @@ import {
 } from '../utils/permission';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
+import { getUser } from '../utils/user/user';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -126,15 +127,13 @@ const ProfileEditScreen = () => {
   };
 
   const updateUserProfile = async (payload) => {
-    client
-      .patch('/user', payload)
-      .then(() => {
-        setShowSuccessAlert(true);
-        getUserProfile();
-      })
-      .catch(() => {
-        setShowErrorAlert(true);
-      });
+    try {
+      await client.patch('/user', payload);
+      setShowSuccessAlert(true);
+      getUserProfile();
+    } catch (err) {
+      setShowErrorAlert(true);
+    }
   };
 
   // TODO: Update the parameter type with DTO form backend
@@ -150,9 +149,9 @@ const ProfileEditScreen = () => {
         : date.toLocaleDateString('en-us'),
       bloodType: initialValues?.bloodType
     };
-    submitUpdatedProfileInfo(data).then(() => {
-      if (newProfileImage && newProfileImage?.assets) uploadNewProfileImage();
-    });
+
+    await submitUpdatedProfileInfo(data);
+    if (newProfileImage && newProfileImage?.assets) uploadNewProfileImage();
   };
 
   const getImage = () => {

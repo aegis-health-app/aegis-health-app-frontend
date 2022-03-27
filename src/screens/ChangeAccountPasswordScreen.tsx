@@ -35,19 +35,18 @@ const ChangeAccountPasswordScreen = () => {
     handleSubmit
   } = useForm({ resolver, mode: 'onTouched' });
 
-  const onFormSubmit = (data) => {
+  const onFormSubmit = async (data) => {
     const payload: ChangePasswordDto = {
       oldPassword: data.oldPassword,
       newPassword: data.newPassword
     };
-    client
-      .put('/setting/changePassword', payload)
-      .then(() => {
-        setShowSuccessAlert(true);
-      })
-      .catch(() => {
-        setShowErrorAlert(true);
-      });
+
+    try {
+      await client.put('/setting/changePassword', payload);
+      setShowSuccessAlert(true);
+    } catch (err) {
+      setShowErrorAlert(true);
+    }
   };
 
   return (

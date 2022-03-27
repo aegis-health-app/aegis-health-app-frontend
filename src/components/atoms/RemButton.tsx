@@ -15,10 +15,9 @@ type remButtonProps = {
 };
 
 const RemButton = ({ fname, lname, cid }: remButtonProps) => {
-
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-    
+
   const { t } = useTranslation();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -31,13 +30,15 @@ const RemButton = ({ fname, lname, cid }: remButtonProps) => {
   const { user } = useContext(UserContext);
 
   async function handlePressDelete() {
-    //TODO: error handling
-    await client
-      .delete('/user/relationship', { data: { eid: user?.uid, cid: cid } }).then(() => navigation.navigate('UserLinkScreen'))
-      .catch((err) => {
-        console.log({ err });
+    try {
+      await client.delete('/user/relationship', {
+        data: { eid: user?.uid, cid: cid }
       });
-    setDialogOpen(false);
+      navigation.navigate('UserLinkScreen');
+      setDialogOpen(false);
+    } catch (err) {
+      // error handling
+    }
   }
 
   return (
