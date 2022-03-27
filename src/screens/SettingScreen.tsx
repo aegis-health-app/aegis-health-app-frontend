@@ -215,10 +215,10 @@ const SettingScreen = () => {
           zone={4}
           shape={'circle'}
           isTourGuide
-          top={-38}
-          right={14}
-          width={32}
-          height={32}
+          top={-48}
+          right={6}
+          width={48}
+          height={48}
           text={t('settingTutorial.step4')}
         />
       )}
