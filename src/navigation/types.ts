@@ -1,3 +1,5 @@
+import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
+
 /**
  * Note: The screen name and its param type are defined here.
  */
@@ -26,12 +28,8 @@ export type RootStackParamList = {
   ModuleManageScreen: undefined;
   ConnectElderlyScreen: undefined;
   InputCodeScreen: undefined;
-<<<<<<< HEAD
-  ConfirmConnectScreen: { info : object };
-=======
-  ConfirmConnectScreen: undefined;
+  ConfirmConnectScreen: { info: ElderlyLinkResponse };
   TakeCareElderlyScreen: { uid: number };
->>>>>>> ec8df36 (wip: Elderly list caretaking selection)
 
   SignInScreen: undefined;
   SignUpScreen: undefined;
