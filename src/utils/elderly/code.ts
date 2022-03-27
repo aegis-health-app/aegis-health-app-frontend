@@ -1,7 +1,7 @@
 import { client } from '../../config/axiosConfig';
-import { ElderlyLinkCode } from '../../dto/modules/code.dto';
 
-export async function getElderlyCode(): Promise<ElderlyLinkCode> {
+export async function getElderlyCode(): Promise<string> {
   const { data } = await client.get('/link/elderlycode');
-  return data as ElderlyLinkCode;
+  console.log(data.code);
+  return data.code;
 }
