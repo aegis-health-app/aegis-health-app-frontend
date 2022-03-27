@@ -29,18 +29,13 @@ const ForgotPasswordScreen = () => {
   const [stage, setStage] = useState(stages.first);
   const [otpToken, setOtpToken] = useState();
   const [number, setNumber] = useState();
-  const { userToken } = useContext(UserContext);
 
   const continueToNextStage = useCallback(
     async (data) => {
-      console.log(stage);
       if (stage === stages.first) {
         try {
           const { phoneNumber } = data;
-          console.log(phoneNumber);
-          console.log(userToken);
           const res = await client.get(`/otp/request/${phoneNumber}`);
-          console.log(res.data);
           setNumber(phoneNumber);
           setOtpToken(res.data.token);
           setStage(stages.second);
@@ -62,7 +57,7 @@ const ForgotPasswordScreen = () => {
             console.log('wrong pin');
           }
         } catch (err) {
-          console.log('error');
+          console.log(err);
         }
       } else if (stage === stages.third) {
         // WIP: need to wait for backend api endpoint
