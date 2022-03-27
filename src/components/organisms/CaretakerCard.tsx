@@ -14,7 +14,7 @@ type UserCardProps = {
   fullName: string;
   imageId: string;
   userIsElderly: boolean;
-  uid?: number;
+  uid: number;
   gender: 'F' | 'M';
   bdate: string;
   phone?: string | '';
@@ -61,14 +61,14 @@ const UserCard = ({
       <EditButton
         onPress={() =>
           navigation.navigate('EditCaretakerScreen', {
-            info: {
+              info: {
               fullName: fullName,
               gender: gender,
               bdate: bdate,
               phone: phone,
               imageId: imageId,
               cid: uid
-            }
+              }
           })
         }
       />

@@ -15,8 +15,7 @@ const UserLinkScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
-    <ScrollView>
-      <View bgColor="#FAFAFA">
+      <View bgColor="#FAFAFA" flex={1}>
         <FlatList
           data={caretakerList}
           renderItem={({ item }) => (
@@ -31,7 +30,7 @@ const UserLinkScreen = () => {
                 phone={item.phone}
                 uid={item.uid}
               />
-            </View>
+            </View>   
           )}
           keyExtractor={(_, key) => key.toString()}
         />
@@ -46,7 +45,6 @@ const UserLinkScreen = () => {
           </Button>
         </View>
       </View>
-    </ScrollView>
   );
 };
 export default UserLinkScreen;
