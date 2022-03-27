@@ -18,7 +18,7 @@ export type RootStackParamList = {
   HealthRecordScreen: undefined;
   MemoryScreen: undefined;
   EmotionalTrackingScreen: undefined;
-  EditCaretakerScreen: { itemId: string };
+  EditCaretakerScreen: { info: object };
   UserLinkScreen: undefined;
   ConnectCaretakerScreen: undefined;
   HealthBlogScreen: undefined;

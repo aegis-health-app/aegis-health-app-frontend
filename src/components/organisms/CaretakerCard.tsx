@@ -52,7 +52,7 @@ const Card = ({ name }: CardProps) => {
           <View ml={3}>
             <EditButton
               onPress={() =>
-                navigation.navigate('EditCaretakerScreen', { itemId: name })
+                navigation.navigate('EditCaretakerScreen', { info: {}})
               }
             />
           </View>
