@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { View, ScrollView, Button, FlatList } from 'native-base';
 import AddButton from '../components/atoms/AddButton';
-import Card from '../components/organisms/UserCard';
+import Card from '../components/organisms/CaretakerCard';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-import UserCard from './../components/organisms/UserCard';
+import UserCard from '../components/organisms/CaretakerCard';
 import { ElderlyContext } from '../contexts/ElderlyContext';
 
 const UserLinkScreen = () => {
@@ -29,6 +29,7 @@ const UserLinkScreen = () => {
                 gender={item.gender}
                 bdate={item.bday}
                 phone={item.phone}
+                uid={item.uid}
               />
             </View>
           )}

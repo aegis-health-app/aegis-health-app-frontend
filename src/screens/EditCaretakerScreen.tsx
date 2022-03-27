@@ -13,7 +13,7 @@ const EditCaretakerScreen = ({route}:NativeStackScreenProps<RootStackParamList, 
 
   // WIP
   const {info} = route.params;
-
+  
   const { t } = useTranslation();
   return (
     <KeyboardAvoidingView>

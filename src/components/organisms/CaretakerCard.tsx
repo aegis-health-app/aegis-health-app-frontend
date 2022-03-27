@@ -20,20 +20,20 @@ type UserCardProps = {
   phone?: string | '';
 };
 
-const UserCard = ({ name, fullName, imageId, userIsElderly, gender, bdate, uid, phone }: UserCardProps) => {
+const UserCard = ({
+  name,
+  fullName,
+  imageId,
+  userIsElderly,
+  gender,
+  bdate,
+  uid,
+  phone
+}: UserCardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
-
-  function handlePressTakeCare() {
-    console.log('clicked');
-    if (uid !== undefined) {
-      // navigation.navigate('TakeCareElderlyScreen', {
-      //   uid: uid
-      // });
-    }
-  }
 
   return (
     <View
@@ -46,9 +46,9 @@ const UserCard = ({ name, fullName, imageId, userIsElderly, gender, bdate, uid, 
       px={2}
       style={styles.card}>
       <>
-        <Text>{uid}</Text>
+        <Text>{userIsElderly ? uid : null}</Text>
         <Image
-          source={imageId? imageId: ProfilePic}
+          source={imageId ? imageId : ProfilePic}
           style={styles.image}
           borderRadius={10}
           marginRight={3}
@@ -58,21 +58,20 @@ const UserCard = ({ name, fullName, imageId, userIsElderly, gender, bdate, uid, 
           {name}
         </Text>
       </>
-      {userIsElderly ? (
-        <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
-      ) : (
-        <EditButton
-          onPress={() =>
-            navigation.navigate('EditCaretakerScreen', { info: {
-              "fullName": fullName,
-              "gender": gender,
-              "bdate": bdate,
-              "phone": phone,
-              "imageId": imageId
-            }})
-          }
-        />
-      )}
+      <EditButton
+        onPress={() =>
+          navigation.navigate('EditCaretakerScreen', {
+            info: {
+              fullName: fullName,
+              gender: gender,
+              bdate: bdate,
+              phone: phone,
+              imageId: imageId,
+              cid: uid
+            }
+          })
+        }
+      />
     </View>
   );
 };
