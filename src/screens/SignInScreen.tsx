@@ -21,20 +21,45 @@ import images from '../assets/images';
 import useDimensions from '../hooks/useDimensions';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+import { signIn } from '../utils/auth';
+import { useAuthentication } from '../hooks/useAuthentication';
 
 const SignInScreen = () => {
   const {
     control,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    setError
   } = useForm();
 
   const { ScreenWidth } = useDimensions();
   const { t } = useTranslation();
+  const { setToken } = useAuthentication();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const onFormSubmit = useCallback(() => null, []);
+  const onFormSubmit = useCallback(async (data) => {
+    const { phoneNumber, password } = data;
+    const signInResponse = await signIn(phoneNumber, password);
+    if (signInResponse?.data?.token) {
+      setToken(signInResponse.data.token);
+      navigation.replace('TabNavigation');
+    } else {
+      setError('phoneNumber', {
+        type: 'manual',
+        message: t('error.wrongCredentials')
+      });
+      setError('password', {
+        type: 'manual',
+        message: t('error.wrongCredentials')
+      });
+    }
+  }, []);
 
   return (
     <SafeAreaView>

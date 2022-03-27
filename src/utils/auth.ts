@@ -37,8 +37,14 @@ export interface SignInPayload {
 export const signUp = async (payload: SignUpPayload) =>
   await client.post('/user/signUp', payload);
 
-export const signIn = async (payload: SignInPayload) =>
-  await client.post('/user/login', payload);
+export const signIn = async (phone: string, password: string) => {
+  try {
+    return await client.post('/user/login', { phone, password });
+  } catch (e) {
+    const error: { status: number } = e as { status: number };
+    return { data: { status: error.status } };
+  }
+};
 
 export const requestOTP = async (phone: string) =>
   await client.get(`/otp/request/${phone}`);
