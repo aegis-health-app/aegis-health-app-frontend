@@ -4,7 +4,7 @@ import {
   NativeStackScreenProps
 } from '@react-navigation/native-stack';
 import { Button, Text, VStack } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -17,6 +17,7 @@ import { client } from '../config/axiosConfig';
 import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
+import Alert, { AlertType } from '../components/organisms/Alert';
 
 const ChangePhoneNumberVerificationScreen = ({
   route
@@ -29,6 +30,8 @@ const ChangePhoneNumberVerificationScreen = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { phoneNumber } = route.params;
   const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const {
     control,
     formState: { errors },
@@ -50,14 +53,31 @@ const ChangePhoneNumberVerificationScreen = ({
       .put('/setting/changePhoneNumber', payload)
       .then(() => {
         console.log('show success alert');
+        setShowSuccessAlert(true);
       })
       .catch((err) => {
         console.log({ err });
+        setShowErrorAlert(true);
       });
   };
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
+      <Alert
+        isOpen={showErrorAlert}
+        close={() => setShowErrorAlert(false)}
+        type={AlertType.ERROR}
+        message="changePasswordError"
+      />
+      <Alert
+        isOpen={showSuccessAlert}
+        close={() => {
+          setShowSuccessAlert(false);
+          navigation.navigate('SettingScreen');
+        }}
+        type={AlertType.SUCCESS}
+        message="changePasswordSuccess"
+      />
       <View style={styles.pageContainer}>
         <View>
           <Text fontSize="2xl" fontWeight={'md'}>
@@ -83,7 +103,7 @@ const ChangePhoneNumberVerificationScreen = ({
           control={control}
           isRequired
         />
-
+        <Text>{JSON.stringify(errors)}</Text>
         <Spacer />
         <VStack space={4}>
           {/* Continue button */}
