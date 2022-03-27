@@ -1,12 +1,54 @@
-import { View, Fab, Icon, ScrollView, Divider } from 'native-base';
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { View, Fab, Icon, ScrollView, Divider, Image, Text } from 'native-base';
+import React, { useContext, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ElderlyInCareList from '../components/organisms/ElderlyInCareList';
-import ProfileSection from './../components/organisms/ProfileSection';
+import { TourguideContext } from '../contexts/TourguideContext';
+import useAsyncEffect from '../hooks/useAsyncEffect';
+import {
+  TourGuideZone,
+  useTourGuideController
+} from '../library/rn-multiple-tourguide';
+import { RootStackParamList } from '../navigation/types';
 import UpComingAlert from './../components/organisms/UpComingAlert';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const ProfilePic = require('../assets/images/sompoch.png');
 
 const CaretakerHomeScreen = () => {
+  const { canStart, start, eventEmitter, tourKey } =
+    useTourGuideController('home');
+  const { showHomeTourguide, setShowHomeTourguide } =
+    useContext(TourguideContext);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { t } = useTranslation();
+
+  useAsyncEffect(async () => {
+    const fetchData = async () => {
+      const result = await AsyncStorage.getItem('viewedCaretakerHomeTourguide');
+      return result ? JSON.parse(result) : false;
+    };
+    const shouldShow = !(await fetchData());
+    setShowHomeTourguide(shouldShow);
+  }, [AsyncStorage, showHomeTourguide]);
+
+  useEffect(() => {
+    if (canStart && showHomeTourguide && start) start();
+  }, [canStart, showHomeTourguide]);
+
+  useEffect(() => {
+    eventEmitter?.on('stop', async () => {
+      setShowHomeTourguide(false);
+      await AsyncStorage.setItem('viewedCaretakerHomeTourguide', 'true');
+    });
+  }, [eventEmitter]);
+
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <Fab
@@ -24,7 +66,57 @@ const CaretakerHomeScreen = () => {
           justifyContent="flex-start"
           paddingTop={6}
           paddingX={4}>
-          <ProfileSection />
+          <View
+            flexDir="row"
+            justifyContent="space-between"
+            width="100%"
+            alignItems="center">
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={1}
+              shape="rectangle"
+              text={t('homeTutorial.step1')}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ProfileScreen')}>
+                <View flexDir="row">
+                  <Image
+                    source={ProfilePic}
+                    width="12"
+                    height="12"
+                    borderRadius={4}
+                    marginRight={4}
+                    alt="Profile Picture"
+                  />
+                  <View>
+                    <Text fontSize="xl" fontWeight="600">
+                      Name
+                    </Text>
+                    <Text fontSize="sm" fontWeight="400" color="gray.500">
+                      {t('home.profileTouchIndicator')}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </TourGuideZone>
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={2}
+              shape="rectangle"
+              text={t('homeTutorial.step2')}>
+              <View alignItems="center" justifyContent="center">
+                <Icon
+                  as={MaterialIcons}
+                  name="settings"
+                  size={8}
+                  color="muted.600"
+                  onPress={() => navigation.navigate('SettingScreen')}
+                />
+                <Text fontSize="sm" color="gray.500">
+                  {t('home.settingButton')}
+                </Text>
+              </View>
+            </TourGuideZone>
+          </View>
           <Divider />
           <UpComingAlert />
           <ScrollView
