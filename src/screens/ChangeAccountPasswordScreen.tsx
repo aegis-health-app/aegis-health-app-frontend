@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import TextInput from '../components/atoms/TextInput';
 import { client } from '../config/axiosConfig';
-import Alert from '../components/organisms/Alert';
+import Alert, { AlertType } from '../components/organisms/Alert';
 
 const ChangeAccountPasswordScreen = () => {
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
@@ -55,7 +55,7 @@ const ChangeAccountPasswordScreen = () => {
       <Alert
         isOpen={showErrorAlert}
         close={() => setShowErrorAlert(false)}
-        type="ERROR"
+        type={AlertType.ERROR}
         message="changePasswordError"
       />
       <Alert
@@ -64,7 +64,7 @@ const ChangeAccountPasswordScreen = () => {
           setShowSuccessAlert(false);
           navigation.navigate('SettingScreen');
         }}
-        type="SUCCESS"
+        type={AlertType.SUCCESS}
         message="changePasswordSuccess"
       />
       <View style={styles.pageContainer}>

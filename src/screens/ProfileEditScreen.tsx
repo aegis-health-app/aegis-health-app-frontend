@@ -27,7 +27,7 @@ import {
   requestCameraPermission
 } from '../utils/permission';
 import { client } from '../config/axiosConfig';
-import Alert from '../components/organisms/Alert';
+import Alert, { AlertType } from '../components/organisms/Alert';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -169,13 +169,13 @@ const ProfileEditScreen = () => {
       <Alert
         isOpen={showImageUploadError}
         close={() => setShowImageUploadError(false)}
-        type="ERROR"
+        type={AlertType.ERROR}
         message="uploadImageError"
       />
       <Alert
         isOpen={showErrorAlert}
         close={() => setShowErrorAlert(false)}
-        type="ERROR"
+        type={AlertType.ERROR}
         message="updateProfileError"
       />
       <Alert
@@ -184,7 +184,7 @@ const ProfileEditScreen = () => {
           setShowSuccessAlert(false);
           if (!showImageUploadError) navigation.navigate('ProfileScreen');
         }}
-        type="SUCCESS"
+        type={AlertType.SUCCESS}
         message="updateProfileSuccess"
       />
       <ScrollView style={styles.pageContainer}>

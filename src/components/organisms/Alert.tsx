@@ -2,7 +2,11 @@ import React from 'react';
 import { AlertDialog, Button } from 'native-base';
 import { AlertMessage, AlertMessages } from '../../constants/AlertMessages';
 
-export type AlertType = 'ERROR' | 'SUCCESS' | 'INFO';
+export enum AlertType {
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS',
+  INFO = 'INFO'
+}
 
 type AlertProps = {
   isOpen: boolean;
@@ -18,13 +22,13 @@ const Alert = (props: AlertProps) => {
     return AlertMessages[message];
   };
 
-  const primaryButtonColor = (type: AlertType) => {
-    switch (type) {
-      case 'ERROR':
+  const primaryButtonColor = (kind: AlertType) => {
+    switch (kind) {
+      case AlertType.ERROR:
         return 'danger';
-      case 'SUCCESS':
+      case AlertType.SUCCESS:
         return 'primary';
-      case 'INFO':
+      case AlertType.INFO:
         return 'info';
       default:
         return 'primary';
