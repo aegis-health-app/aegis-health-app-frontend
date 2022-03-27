@@ -23,6 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { UserContext } from '../contexts/UserContext';
+import { signUp, SignUpPayload } from '../utils/auth';
 
 interface InformationList {
   label: string;
@@ -153,7 +154,7 @@ const SignUpScreen = ({ route }) => {
           password: password
         };
 
-        const signUpResponse = await client.post('/user/signUp', payload);
+        const signUpResponse = await signUp(payload);
         if (signUpResponse.data) {
           setToken(signUpResponse.data.token);
           setSignUpStage((prev) => prev + 1);
