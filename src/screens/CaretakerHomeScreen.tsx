@@ -1,7 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { View, Fab, Icon, ScrollView, Divider, Image, Text } from 'native-base';
+import {
+  View,
+  Fab,
+  Icon,
+  ScrollView,
+  Divider,
+  Image,
+  Text,
+  Button
+} from 'native-base';
 import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
@@ -12,6 +21,7 @@ import { TourguideContext } from '../contexts/TourguideContext';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import {
   TourGuideZone,
+  TourGuideZoneByPosition,
   useTourGuideController
 } from '../library/rn-multiple-tourguide';
 import { RootStackParamList } from '../navigation/types';
@@ -22,8 +32,8 @@ const ProfilePic = require('../assets/images/sompoch.png');
 
 const CaretakerHomeScreen = () => {
   const { canStart, start, eventEmitter, tourKey } =
-    useTourGuideController('home');
-  const { showHomeTourguide, setShowHomeTourguide } =
+    useTourGuideController('caretakerHome');
+  const { showCaretakerHomeTourguide, setShowCaretakerHomeTourguide } =
     useContext(TourguideContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -35,16 +45,16 @@ const CaretakerHomeScreen = () => {
       return result ? JSON.parse(result) : false;
     };
     const shouldShow = !(await fetchData());
-    setShowHomeTourguide(shouldShow);
-  }, [AsyncStorage, showHomeTourguide]);
+    setShowCaretakerHomeTourguide(shouldShow);
+  }, [AsyncStorage, showCaretakerHomeTourguide]);
 
   useEffect(() => {
-    if (canStart && showHomeTourguide && start) start();
-  }, [canStart, showHomeTourguide]);
+    if (canStart && showCaretakerHomeTourguide && start) start();
+  }, [canStart, showCaretakerHomeTourguide]);
 
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
-      setShowHomeTourguide(false);
+      setShowCaretakerHomeTourguide(false);
       await AsyncStorage.setItem('viewedCaretakerHomeTourguide', 'true');
     });
   }, [eventEmitter]);
@@ -75,7 +85,7 @@ const CaretakerHomeScreen = () => {
               tourKey={tourKey}
               zone={1}
               shape="rectangle"
-              text={t('homeTutorial.step1')}>
+              text={t('homeCaretakerTutorial.step1')}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('ProfileScreen')}>
                 <View flexDir="row">
@@ -102,7 +112,7 @@ const CaretakerHomeScreen = () => {
               tourKey={tourKey}
               zone={2}
               shape="rectangle"
-              text={t('homeTutorial.step2')}>
+              text={t('homeCaretakerTutorial.step2')}>
               <View alignItems="center" justifyContent="center">
                 <Icon
                   as={MaterialIcons}
@@ -118,16 +128,69 @@ const CaretakerHomeScreen = () => {
             </TourGuideZone>
           </View>
           <Divider />
-          <UpComingAlert />
+          <View w="full">
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={3}
+              shape="rectangle"
+              text={t('homeCaretakerTutorial.step3')}>
+              <UpComingAlert />
+            </TourGuideZone>
+          </View>
+
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            scrollEnabled={false}
-            width="100%">
-            <ElderlyInCareList />
+            scrollEnabled={false}>
+            <View>
+              <TourGuideZone
+                tourKey={tourKey}
+                zone={4}
+                shape="rectangle"
+                text={t('homeCaretakerTutorial.step4')}>
+                <ElderlyInCareList />
+              </TourGuideZone>
+            </View>
           </ScrollView>
+          <View w="full">
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={5}
+              shape="rectangle"
+              text={t('homeCaretakerTutorial.step5')}>
+              <View>
+                <Button
+                  variant="outline"
+                  colorScheme="primary"
+                  width="100%"
+                  my={4}
+                  onPress={() => navigation.navigate('ConnectElderlyScreen')}>
+                  {t('home.addElderlyButton')}
+                </Button>
+              </View>
+            </TourGuideZone>
+          </View>
         </View>
       </ScrollView>
+      <Fab
+        placement="bottom-right"
+        renderInPortal={false}
+        size="sm"
+        bgColor="#000"
+        icon={<Icon as={AntDesign} name="question" size="6" color="#fff" />}
+        onPress={() => start()}
+      />
+      <TourGuideZoneByPosition
+        tourKey={tourKey}
+        zone={6}
+        shape="circle"
+        isTourGuide
+        bottom={16}
+        right={16}
+        width={56}
+        height={56}
+        text={t('homeCaretakerTutorial.step6')}
+      />
     </SafeAreaView>
   );
 };

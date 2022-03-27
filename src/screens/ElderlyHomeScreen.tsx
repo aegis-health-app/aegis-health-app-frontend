@@ -25,8 +25,8 @@ const ProfilePic = require('../assets/images/sompoch.png');
 
 const ElderlyHomeScreen = () => {
   const { canStart, start, eventEmitter, tourKey } =
-    useTourGuideController('home');
-  const { showHomeTourguide, setShowHomeTourguide } =
+    useTourGuideController('elderlyHome');
+  const { showElderlyHomeTourguide, setElderlyshowElderlyHomeTourguide } =
     useContext(TourguideContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -39,16 +39,16 @@ const ElderlyHomeScreen = () => {
       return result ? JSON.parse(result) : false;
     };
     const shouldShow = !(await fetchData());
-    setShowHomeTourguide(shouldShow);
-  }, [AsyncStorage, showHomeTourguide]);
+    setElderlyshowElderlyHomeTourguide(shouldShow);
+  }, [AsyncStorage, showElderlyHomeTourguide]);
 
   useEffect(() => {
-    if (canStart && showHomeTourguide && start) start();
-  }, [canStart, showHomeTourguide]);
+    if (canStart && showElderlyHomeTourguide && start) start();
+  }, [canStart, showElderlyHomeTourguide]);
 
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
-      setShowHomeTourguide(false);
+      setElderlyshowElderlyHomeTourguide(false);
       await AsyncStorage.setItem('viewedElderlyHomeTourguide', 'true');
     });
   }, [eventEmitter]);
@@ -71,7 +71,7 @@ const ElderlyHomeScreen = () => {
               tourKey={tourKey}
               zone={1}
               shape="rectangle"
-              text={t('homeTutorial.step1')}>
+              text={t('homeElderlyTutorial.step1')}>
               <TouchableOpacity
                 onPress={() => navigation.navigate('ProfileScreen')}>
                 <View flexDir="row">
@@ -98,7 +98,7 @@ const ElderlyHomeScreen = () => {
               tourKey={tourKey}
               zone={2}
               shape="rectangle"
-              text={t('homeTutorial.step2')}>
+              text={t('homeElderlyTutorial.step2')}>
               <View alignItems="center" justifyContent="center">
                 <Icon
                   as={MaterialIcons}
@@ -119,7 +119,7 @@ const ElderlyHomeScreen = () => {
               tourKey={tourKey}
               zone={3}
               shape="rectangle"
-              text={t('homeTutorial.step3')}>
+              text={t('homeElderlyTutorial.step3')}>
               <UpComingAlert />
             </TourGuideZone>
           </View>
@@ -132,7 +132,7 @@ const ElderlyHomeScreen = () => {
               tourKey={tourKey}
               zone={4}
               shape="rectangle"
-              text={t('homeTutorial.step4')}>
+              text={t('homeElderlyTutorial.step4')}>
               <ModulePickerList />
             </TourGuideZone>
           </ScrollView>
@@ -147,7 +147,7 @@ const ElderlyHomeScreen = () => {
         right={16}
         width={56}
         height={56}
-        text={t('homeTutorial.step7')}
+        text={t('homeElderlyTutorial.step7')}
       />
       <Fab
         placement="bottom-right"
@@ -170,7 +170,7 @@ const ElderlyHomeScreen = () => {
         left={0}
         width={ScreenWidth / 2}
         height={50}
-        text={t('homeTutorial.step5')}
+        text={t('homeElderlyTutorial.step5')}
       />
       <TourGuideZoneByPosition
         tourKey={tourKey}
@@ -181,7 +181,7 @@ const ElderlyHomeScreen = () => {
         right={0}
         width={ScreenWidth / 2}
         height={50}
-        text={t('homeTutorial.step6')}
+        text={t('homeElderlyTutorial.step6')}
       />
     </SafeAreaView>
   );
