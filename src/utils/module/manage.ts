@@ -17,7 +17,7 @@ export async function postAddModule(
   });
 
   return data;
-
+}
 /**
  * This function delete module by id and append must have module (Emergency & Select module)
  * @param targetId
@@ -74,6 +74,7 @@ export async function postRemovedModule(
     }
   });
   return data;
+}
 
 export async function postDeleteModule(
   targetId: ModuleId
