@@ -13,6 +13,7 @@ import Divider from '../components/atoms/Divider';
 import OTPTimerButton from '../components/atoms/OTPTimerButton';
 import Spacer from '../components/atoms/Spacer';
 import ControlledOTPInput from '../components/molecules/ControlledOTPInput';
+import { client } from '../config/axiosConfig';
 import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
@@ -41,6 +42,15 @@ const ChangePhoneNumberVerificationScreen = ({
 
   const onFormSubmit = (data) => {
     console.log({ data });
+    client
+      .put('/setting/changePhoneNumber')
+      .then(() => {
+        console.log('show success message');
+      })
+      .catch((err) => {
+        console.log({ err });
+        console.log('show error message');
+      });
     console.log('send verification code');
   };
 
