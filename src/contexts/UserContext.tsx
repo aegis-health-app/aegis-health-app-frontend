@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { client } from '../config/axiosConfig';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { useAuthentication } from '../hooks/useAuthentication';
 import { getUser } from '../utils/user/user';
@@ -20,21 +19,17 @@ const UserContextProvider = ({ ...props }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [isElderly, setIsElderly] = useState<boolean>(false);
   const [userToken, setUserToken] = useState<string>('');
+
   const getUserProfile = async () => {
-    client
-      .get<User>('/user')
-      .then(({ data }) => {
-        setUser(data as User);
-      })
-      .catch((err) => {
-        console.log({ err });
-      });
+    const _user = await getUser();
+    if (_user) {
+      setUser(_user);
+    }
   };
 
-  useAsyncEffect(async () => {
-    const _user = await getUser();
-    setUser(_user);
-  }, []);
+  useEffect(() => {
+    getUserProfile();
+  }, [userToken]);
 
   useEffect(() => {
     if (user?.isElderly === true) {

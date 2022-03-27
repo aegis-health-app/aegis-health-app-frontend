@@ -34,6 +34,7 @@ const ElderlyInCareList = () => {
       {elderies.length > 0 ? (
         <FlatList
           data={elderies}
+          scrollEnabled={false}
           renderItem={({ item }) => (
             <View alignItems="center">
               <ElderlyCard

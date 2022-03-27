@@ -77,8 +77,12 @@ export function getModuleIsAddedValue(
  * @returns Retrieved module name and id.
  */
 export async function getModuleList(): Promise<Module[]> {
-  const { data } = await client.get('home/allModule');
-  return data as Module[];
+  try {
+    const { data } = await client.get('home/allModule');
+    return data as Module[];
+  } catch (err) {
+    throw Error('Cannot get all module!');
+  }
 }
 
 /**
