@@ -16,7 +16,7 @@ import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from '../hooks/useSettings';
 
 // Temporary profile image
-const ProfilePic = require('../assets/images/sompochHD.png');
+const ProfilePic = require('../assets/images/profile.png');
 
 const ProfileScreen = () => {
   const { t } = useTranslation();
