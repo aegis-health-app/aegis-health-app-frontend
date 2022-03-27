@@ -19,3 +19,9 @@ export interface SignUpPayload {
 
 export const signUp = async (payload: SignUpPayload) =>
   await client.post('/user/signUp', payload);
+
+export const requestOTP = async (phone: string) =>
+  await client.get(`/otp/request/${phone}`);
+
+export const verifyOTP = async (token: string, otp: string) =>
+  await client.post('/otp/verifyOtp', { token, pin: otp });
