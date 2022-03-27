@@ -124,6 +124,7 @@ const SignUpScreen = ({ route }) => {
         previousVaccinations,
         bloodType
       } = data;
+
       if (signUpStage === 1) {
         if (data.password === data.confirmPassword) {
           setSignUpStage((prev) => prev + 1);
@@ -134,9 +135,11 @@ const SignUpScreen = ({ route }) => {
           });
         }
       }
+
       if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
+
       if (signUpStage === 3) {
-        const { isElderly } = route?.params ?? true;
+        const { isElderly } = route?.params;
         const payload: SignUpPayload = {
           imageid: '',
           fname: name,
