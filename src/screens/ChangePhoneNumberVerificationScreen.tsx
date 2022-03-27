@@ -32,32 +32,28 @@ const ChangePhoneNumberVerificationScreen = ({
   const {
     control,
     formState: { errors },
-    handleSubmit,
-    watch
+    handleSubmit
   } = useForm({ resolver, mode: 'onChange' });
 
   const shouldDisable = (errors) => {
     return errors['verificationCode']?.message;
   };
 
-  const onFormSubmit = () => {
-    console.log('submit verification code');
-    //@ts-ignore
-    const otp = watch('otp');
+  const onFormSubmit = (data) => {
+    const { otp } = data;
     const payload = {
       newPhone: phoneNumber,
       enteredPin: otp
     };
+    console.log(payload);
     client
       .put('/setting/changePhoneNumber', payload)
       .then(() => {
-        console.log('show success message');
+        console.log('show success alert');
       })
       .catch((err) => {
         console.log({ err });
-        console.log('show error message');
       });
-    console.log('send verification code');
   };
 
   return (
@@ -90,7 +86,7 @@ const ChangePhoneNumberVerificationScreen = ({
 
         <Spacer />
         <VStack space={4}>
-          {/* continue button */}
+          {/* Continue button */}
           <Button
             w="100%"
             backgroundColor={
@@ -98,12 +94,12 @@ const ChangePhoneNumberVerificationScreen = ({
             }
             colorScheme={'primary'}
             variant="solid"
-            onPress={() => onFormSubmit()}>
+            onPress={handleSubmit(onFormSubmit)}>
             {t('changePhoneNumber.submit')}
           </Button>
           {/* Resend verification code button */}
           <OTPTimerButton onPress={() => console.log('Sending OTP')} />
-          {/* cancle button */}
+          {/* Cancle button */}
           <Button
             w="100%"
             colorScheme="secondary"
