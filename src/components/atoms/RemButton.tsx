@@ -33,15 +33,15 @@ const RemButton = ({ fullName, cid }: remButtonProps) => {
   const { user } = useContext(UserContext);
 
   async function handlePressDelete() {
-    try {
-      await client.delete('/user/relationship', {
-        data: { eid: user?.uid, cid: cid }
+    await client.delete('/user/relationship', { data: { eid: user?.uid, cid: cid } })
+      .then(() => {
+        setCaretakerList(caretakerList.filter(ele => ele.uid !== cid))
+        navigation.navigate('UserLinkScreen')
+      }
+        )
+      .catch((err) => {
+        console.log({ err });
       });
-      navigation.navigate('UserLinkScreen');
-      setDialogOpen(false);
-    } catch (err) {
-      // error handling
-    }
   }
 
   return (
