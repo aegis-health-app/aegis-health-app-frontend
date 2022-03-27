@@ -25,3 +25,11 @@ export interface ElderlyHomeProfile {
   dname: string;
   imageid: string;
 }
+
+export interface ElderlyLinkResponse {
+  uid: number;
+  imageid: string;
+  fname: string;
+  lname: string;
+  dname: string;
+}
