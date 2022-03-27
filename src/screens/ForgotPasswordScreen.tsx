@@ -31,43 +31,46 @@ const ForgotPasswordScreen = () => {
   const [number, setNumber] = useState();
   const { userToken } = useContext(UserContext);
 
-  const continueToNextStage = useCallback(async (data) => {
-    console.log(stage);
-    if (stage === stages.first) {
-      try {
-        const { phoneNumber } = data;
-        console.log(phoneNumber);
-        console.log(userToken); // why is this empty even after I log in??
-        const res = await client.get(`/otp/request/${phoneNumber}`);
-        // console.log(res);
-        setNumber(phoneNumber);
-        setOtpToken(res.data.token);
-        setStage(stages.second);
-      } catch (err) {
-        console.log(err);
-      }
-    } else if (stage === stages.second) {
-      try {
-        const { otp } = data;
-        const payload = {
-          token: otpToken,
-          pin: otp
-        };
-        const res = await client.post('/otp/verifyOtp', payload);
-        // need to console log here for it to pass wtf??
-        if (res.data.status === 'success') {
-          setStage(stages.third);
-        } else {
-          console.log('wrong pin');
+  const continueToNextStage = useCallback(
+    async (data) => {
+      console.log(stage);
+      if (stage === stages.first) {
+        try {
+          const { phoneNumber } = data;
+          console.log(phoneNumber);
+          console.log(userToken);
+          const res = await client.get(`/otp/request/${phoneNumber}`);
+          console.log(res.data);
+          setNumber(phoneNumber);
+          setOtpToken(res.data.token);
+          setStage(stages.second);
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log('error');
+      } else if (stage === stages.second) {
+        try {
+          const { otp } = data;
+          const payload = {
+            token: otpToken,
+            pin: otp
+          };
+          const res = await client.post('/otp/verifyOtp', payload);
+          console.log(res.data);
+          if (res.data.status === 'success') {
+            setStage(stages.third);
+          } else {
+            console.log('wrong pin');
+          }
+        } catch (err) {
+          console.log('error');
+        }
+      } else if (stage === stages.third) {
+        // WIP: need to wait for backend api endpoint
+        console.log('reset password');
       }
-    } else if (stage === stages.third) {
-      // WIP: need to wait for backend api endpoint
-      console.log('reset password');
-    }
-  }, []);
+    },
+    [stage]
+  );
 
   const resendOtp = async () => {
     const res = await client.get(`/otp/request/${number}`);
