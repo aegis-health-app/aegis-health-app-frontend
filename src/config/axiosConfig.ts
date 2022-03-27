@@ -7,8 +7,7 @@ export const client = Axios.create({
 client.interceptors.request.use(
   async (req) => {
     if (!req.headers?.Authorization) {
-      const token = (await AsyncStorage.getItem('token')) ?? 
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI4LCJyb2xlIjoiQ2FyZXRha2VyIiwiaWF0IjoxNjQ4MjI1ODMxLCJleHAiOjE2NDg4MzA2MzF9.lHR0SMB7tjGsMQTISm2iE19LeeX9osTBKqqUHeoq8Kk';
+      const token = (await AsyncStorage.getItem('token')) ?? '';
       if (req.headers) req.headers.Authorization = `Bearer ${token}`;
       return req;
     } else return req;
