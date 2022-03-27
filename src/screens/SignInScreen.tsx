@@ -50,6 +50,7 @@ const SignInScreen = () => {
       setToken(signInResponse.data.token);
       navigation.replace('TabNavigation');
     } else {
+      console.log(signInResponse);
       setError('phoneNumber', {
         type: 'manual',
         message: t('error.wrongCredentials')
