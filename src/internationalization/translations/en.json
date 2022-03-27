@@ -34,7 +34,7 @@
     "step3": "Tap here to change your account phone number or password.",
     "step4": "Press the help button to replay the guide."
   },
-  "homeTutorial": {
+  "homeElderlyTutorial": {
     "step1": "You can edit your profile information from the profile screen.",
     "step2": "You can edit settings and manage your account from the settings screen.",
     "step3": "The most recent relevant notification will be displayed here. You can tap to interact with it or dismiss it.",
@@ -42,6 +42,14 @@
     "step5": "Press the “Home” button to return to the home page.",
     "step6": "Press the “My Caretakers” button to view and edit your caretakers.",
     "step7": "Press the help button to replay the guide."
+  },
+  "homeCaretakerTutorial": {
+    "step1": "You can edit your profile information from the profile screen.",
+    "step2": "You can edit settings and manage your account from the settings screen.",
+    "step3": "The most recent relevant notification will be displayed here. You can tap to interact with it or dismiss it.",
+    "step4": "All elderlies who are connected to you will show up here. Tap “Take Care” to interact with modules specific to each elderly.",
+    "step5": "Press the “Add Elderly” button to connect to a new elderly with QR code or the 6-digit code provided on the elderly’s screen.",
+    "step6": "Press the help button to replay the guide."
   },
   "misc": {
     "back": "Back",

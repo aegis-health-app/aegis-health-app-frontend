@@ -1,17 +1,16 @@
-import { Button, FlatList, Text, View } from 'native-base';
+import { FlatList, Text, View } from 'native-base';
 import React, { useContext, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
 import { ElderlyInCare } from './../../dto/modules/caretaking.dto';
 import ElderlyCard from './ElderlyCard';
+import useDimensions from '../../hooks/useDimensions';
 
 const ElderlyInCareList = () => {
   const { t } = useTranslation();
   const { caretakerHomeProfile } = useContext(CaretakerContext);
   const [elderies, setElderies] = useState<ElderlyInCare[]>([]);
+  const { ScreenWidth } = useDimensions();
 
   useEffect(() => {
     if (caretakerHomeProfile?.listElderly) {
@@ -19,11 +18,8 @@ const ElderlyInCareList = () => {
     }
   }, [caretakerHomeProfile]);
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
   return (
-    <View flex={1} minW="full" mt={4} minH="96">
+    <View flex={1} w={ScreenWidth - 32} mt={4} minH="96">
       <Text fontSize="2xl" fontWeight="600">
         {t('home.myElderly')}
       </Text>
@@ -54,14 +50,6 @@ const ElderlyInCareList = () => {
           </Text>
         </View>
       )}
-
-      <Button
-        variant="outline"
-        colorScheme="primary"
-        my={4}
-        onPress={() => navigation.navigate('ConnectElderlyScreen')}>
-        {t('home.addElderlyButton')}
-      </Button>
     </View>
   );
 };
