@@ -8,9 +8,9 @@ const ProfilePic = require('../../assets/images/profile.png');
 
 type ProfileInfoCardProps = {
   fullName: string;
-  gender: string;
+  gender: 'F'|'M';
   bdate: string;
-  phone?: string | '';
+  phone?: string;
   imageId: string;
 };
 
