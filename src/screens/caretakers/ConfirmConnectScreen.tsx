@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
 
-const sompochHD = require('../../assets/images/sompochHD.png');
+const ProfilePic = require('../../assets/images/profile.png');
 
 const ConfirmConnectScreen = ({
   route
@@ -29,7 +29,9 @@ const ConfirmConnectScreen = ({
     await client
       .post('/user/relationship', {
         "eid": elderlyInfo['info']['uid'],
-        "cid": user?.uid
+        "cid": user?.uid,
+      }).then(() => {
+        navigation.navigate('ConnectElderlyScreen');
       })
       .catch((err) => {
         console.log({ err });
@@ -49,7 +51,7 @@ const ConfirmConnectScreen = ({
           source={
             elderlyInfo['info']['imageid']
               ? elderlyInfo['info']['imageid']
-              : sompochHD
+              : ProfilePic
           }
           w={160}
           h={160}
@@ -65,7 +67,7 @@ const ConfirmConnectScreen = ({
         <Button
           mt="10"
           width="90%"
-          onPress={() => navigation.navigate('ConnectElderlyScreen')}>
+          onPress={() => handlePress()}>
           {t('userLink.connectButton')}
         </Button>
         <Button

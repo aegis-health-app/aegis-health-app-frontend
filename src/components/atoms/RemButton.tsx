@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useState, useRef } from 'react';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
 
 type remButtonProps = {
   fname: string;
@@ -12,6 +15,10 @@ type remButtonProps = {
 };
 
 const RemButton = ({ fname, lname, cid }: remButtonProps) => {
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+    
   const { t } = useTranslation();
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -26,7 +33,7 @@ const RemButton = ({ fname, lname, cid }: remButtonProps) => {
   async function handlePressDelete() {
     //TODO: error handling
     await client
-      .delete('/user/relationship', { data: { eid: user?.uid, cid: cid } })
+      .delete('/user/relationship', { data: { eid: user?.uid, cid: cid } }).then(() => navigation.navigate('UserLinkScreen'))
       .catch((err) => {
         console.log({ err });
       });
