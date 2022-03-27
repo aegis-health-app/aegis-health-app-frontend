@@ -16,7 +16,7 @@ import { RootStackParamList } from '../navigation/types';
 import { useForm } from 'react-hook-form';
 import TextInput from '../components/atoms/TextInput';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
-import { Gender, User, BloodType } from '../dto/modules/user.dto';
+import { User, BloodType, GenderEnum } from '../dto/modules/user.dto';
 import {
   launchCamera,
   launchImageLibrary,
@@ -116,16 +116,13 @@ const ProfileEditScreen = () => {
         name: profileImage.fileName,
         type: profileImage.type
       });
-      client
-        .post(`/user/profile/${user.uid}/image`, formData)
-        .catch(() => {
-          setShowImageUploadError(true);
-        })
-        .finally(() => {
-          getUserProfile();
-        });
-    }
-  };
+      try {
+        const { data } = await client.post(`/user/profile/image`, formData)
+        if (data) getUserProfile();
+      } catch (error) {
+        setShowImageUploadError(true);
+      }
+    };
 
   const updateUserProfile = async (payload) => {
     client
@@ -146,7 +143,7 @@ const ProfileEditScreen = () => {
   const onFormSubmit = async (data) => {
     data = {
       ...data,
-      gender: initialValues?.gender || Gender.male,
+      gender: initialValues?.gender || GenderEnum.male,
       bday: initialValues?.bday
         ? moment(initialValues?.bday, 'YYYY-MM-DD')
         : date.toLocaleDateString('en-us'),
@@ -260,13 +257,13 @@ const ProfileEditScreen = () => {
             <View style={styles.toggleButtonsContainer}>
               <Button
                 variant={
-                  initialValues?.gender === Gender.male ? 'solid' : 'outline'
+                  initialValues?.gender === GenderEnum.male ? 'solid' : 'outline'
                 }
                 onPress={() => {
                   if (user) {
                     setInitialValues({
                       ...user,
-                      gender: Gender.male
+                      gender: GenderEnum.male
                     });
                   }
                 }}>
@@ -275,13 +272,13 @@ const ProfileEditScreen = () => {
               <Spacer h={0} />
               <Button
                 variant={
-                  initialValues?.gender === Gender.female ? 'solid' : 'outline'
+                  initialValues?.gender === GenderEnum.female ? 'solid' : 'outline'
                 }
                 onPress={() => {
                   if (user) {
                     setInitialValues({
                       ...user,
-                      gender: Gender.female
+                      gender: GenderEnum.female
                     });
                   }
                 }}>

@@ -6,6 +6,7 @@ import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
+import useDimensions from '../../hooks/useDimensions';
 
 type ElderlyCardProps = {
   name: string;
@@ -24,6 +25,7 @@ const ElderlyCard = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
+  const { ScreenWidth } = useDimensions();
 
   console.log(imageId);
 
@@ -42,7 +44,7 @@ const ElderlyCard = ({
       my={1.5}
       justifyContent="space-between"
       alignItems="center"
-      width="96"
+      width={ScreenWidth - 32}
       p={1}
       px={2}
       style={styles.card}>

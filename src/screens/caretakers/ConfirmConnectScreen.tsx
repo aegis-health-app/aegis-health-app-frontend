@@ -32,7 +32,7 @@ const ConfirmConnectScreen = ({
         eid: info.uid,
         cid: user?.uid
       });
-      const elderlyResult = data as Elderly;
+      // const elderlyResult = data as Elderly;
       navigation.navigate('ConnectElderlyScreen');
     } catch (err) {
       // show toast to display error
