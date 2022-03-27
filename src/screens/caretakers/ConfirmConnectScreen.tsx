@@ -1,5 +1,5 @@
 import { Text, View, Image, Button } from 'native-base';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
@@ -8,6 +8,7 @@ import {
 import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
+import { UserContext } from '../../contexts/UserContext';
 
 const sompochHD = require('../../assets/images/sompochHD.png');
 
@@ -21,12 +22,14 @@ const ConfirmConnectScreen = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  //TODO: get cid from usercontext & error handling
+  const { user } = useContext(UserContext)
+
+  //TODO: error handling
   const handlePress = async () => {
     await client
       .post('/user/relationship', {
         "eid": elderlyInfo['info']['uid'],
-        "cid": null
+        "cid": user?.uid
       })
       .catch((err) => {
         console.log({ err });
