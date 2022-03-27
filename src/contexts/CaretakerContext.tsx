@@ -18,6 +18,7 @@ const CaretakerContextProvider = ({ ...props }) => {
     const _caretakerHomeProfile = await getCaretakerHomeProfile();
     if (_caretakerHomeProfile) {
       setCaretakerHomeProfile(_caretakerHomeProfile);
+      console.log(caretakerHomeProfile?.listElderly);
     }
   }, []);
 

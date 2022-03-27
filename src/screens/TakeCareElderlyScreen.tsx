@@ -5,6 +5,7 @@ import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getCaretakingElderlyByEid } from '../utils/caretaker/profile';
+import { useTranslation } from 'react-i18next';
 
 const TakeCareElderlyScreen = ({
   route,
@@ -12,6 +13,7 @@ const TakeCareElderlyScreen = ({
 }: NativeStackScreenProps<RootStackParamList, 'TakeCareElderlyScreen'>) => {
   const { uid } = route.params;
   const [elderly, setElderly] = useState<Elderly>();
+  const { t } = useTranslation();
 
   useAsyncEffect(async () => {
     const _elderly = await getCaretakingElderlyByEid(uid);
@@ -20,9 +22,22 @@ const TakeCareElderlyScreen = ({
 
   return (
     <View>
-      <Text>{JSON.stringify(elderly)}</Text>
+      <Text fontSize="2xl" fontWeight="700">
+        Profile Information
+      </Text>
+      <View display="flex" flexDir="row" justifyContent="center">
+        <Image
+          source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
+          width="32"
+          height="32"
+          borderRadius={4}
+          alt="Profile Picture"
+        />
+      </View>
     </View>
   );
 };
 
 export default TakeCareElderlyScreen;
+
+// const styles = StyleSheet.c;

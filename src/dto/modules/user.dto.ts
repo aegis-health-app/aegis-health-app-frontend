@@ -2,17 +2,20 @@ import { ModuleId } from './modules.dto';
 
 export type BloodType = 'N/A' | 'A' | 'B' | 'O' | 'AB' | string;
 
-export enum Gender {
+export enum GenderEnum {
   female = 'F',
   male = 'M'
 }
+
+export type Gender = 'M' | 'F';
+
 export interface User {
   imageid: string;
   fname: string;
   lname: string;
   dname: string;
   bday: string;
-  gender: 'F' | 'M';
+  gender: Gender;
   isElderly: boolean;
   uid: number;
   healthCondition?: string | null;
