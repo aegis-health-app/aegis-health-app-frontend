@@ -4,19 +4,28 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
+import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
 
-type UserCardProps = {
+type ElderlyCardProps = {
   name: string;
   imageId: string;
+  userIsElderly: boolean;
   uid?: number;
 };
 
-const UserCard = ({ name, imageId, uid }: UserCardProps) => {
+const ElderlyCard = ({
+  name,
+  imageId,
+  userIsElderly,
+  uid
+}: ElderlyCardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
+
+  console.log(imageId);
 
   function handlePressTakeCare() {
     console.log('clicked');
@@ -33,7 +42,7 @@ const UserCard = ({ name, imageId, uid }: UserCardProps) => {
       my={1.5}
       justifyContent="space-between"
       alignItems="center"
-      width="93%"
+      width="96"
       p={1}
       px={2}
       style={styles.card}>
@@ -50,12 +59,20 @@ const UserCard = ({ name, imageId, uid }: UserCardProps) => {
           {name}
         </Text>
       </>
-      <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
+      {userIsElderly ? (
+        <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
+      ) : (
+        <EditButton
+          onPress={() =>
+            navigation.navigate('EditCaretakerScreen', { itemId: name })
+          }
+        />
+      )}
     </View>
   );
 };
 
-export default UserCard;
+export default ElderlyCard;
 
 const styles = StyleSheet.create({
   card: {
