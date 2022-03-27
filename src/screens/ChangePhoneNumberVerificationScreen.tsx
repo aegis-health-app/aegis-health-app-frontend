@@ -40,10 +40,16 @@ const ChangePhoneNumberVerificationScreen = ({
     return errors['verificationCode']?.message;
   };
 
-  const onFormSubmit = (data) => {
-    console.log({ data });
+  const onFormSubmit = () => {
+    console.log('submit verification code');
+    //@ts-ignore
+    const otp = watch('otp');
+    const payload = {
+      newPhone: phoneNumber,
+      enteredPin: otp
+    };
     client
-      .put('/setting/changePhoneNumber')
+      .put('/setting/changePhoneNumber', payload)
       .then(() => {
         console.log('show success message');
       })
@@ -63,7 +69,7 @@ const ChangePhoneNumberVerificationScreen = ({
           </Text>
         </View>
         <Divider my={1} />
-        {/* Input new phone number */}
+        {/* Input verification code */}
         <View style={styles.title}>
           <Text fontSize="xl" fontWeight={'md'}>
             {t('changePhoneNumber.enterYourVerificationCode')}
@@ -88,14 +94,11 @@ const ChangePhoneNumberVerificationScreen = ({
           <Button
             w="100%"
             backgroundColor={
-              // @ts-ignore
-              !shouldDisable(errors) && watch('otp')?.length === 6
-                ? 'primary.500'
-                : 'muted.300'
+              !shouldDisable(errors) ? 'primary.500' : 'muted.300'
             }
             colorScheme={'primary'}
             variant="solid"
-            onPress={handleSubmit(onFormSubmit)}>
+            onPress={() => onFormSubmit()}>
             {t('changePhoneNumber.submit')}
           </Button>
           {/* Resend verification code button */}
