@@ -19,13 +19,13 @@ const EditCaretakerScreen = ({route}:NativeStackScreenProps<RootStackParamList, 
     <KeyboardAvoidingView>
       <ScrollView>
         <View bgColor="#FAFAFA">
-          <ProfileInfoCard fname={info["fname"]} lname={info["lname"]} gender="Female" bdate="08/02/1917" phone="090909090"/>
+          <ProfileInfoCard fullName={info["fullName"]} gender={info["gender"]} bdate={info["bdate"]} phone={info["phone"]} imageId={info["imageId"]}/>
           <Divider />
           <View paddingX={5}>
             <InputBox name={t('userForm.editName')} />
           </View>
           <Divider />
-          <RemButton fname={info["fname"]} lname={info["lname"]} cid={info["cid"]}/>
+          <RemButton fullName={info["fullName"]} cid={info["cid"]}/>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

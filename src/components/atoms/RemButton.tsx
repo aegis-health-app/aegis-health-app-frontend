@@ -9,12 +9,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 
 type remButtonProps = {
-  fname: string;
-  lname: string;
+  fullName: string
   cid: string;
 };
 
-const RemButton = ({ fname, lname, cid }: remButtonProps) => {
+const RemButton = ({ fullName, cid }: remButtonProps) => {
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -55,7 +55,7 @@ const RemButton = ({ fname, lname, cid }: remButtonProps) => {
           <AlertDialog.Body>
             <Text>
               {t('userLink.removeAlertBody1')}
-              {fname} {lname}
+              {fullName}
               {t('userLink.removeAlertBody2')}
             </Text>
           </AlertDialog.Body>

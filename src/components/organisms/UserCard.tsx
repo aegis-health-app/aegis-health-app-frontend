@@ -4,25 +4,34 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
+import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
+
+const ProfilePic = require('../../assets/images/profile.png');
 
 type UserCardProps = {
   name: string;
+  fullName: string;
   imageId: string;
+  userIsElderly: boolean;
   uid?: number;
+  gender: 'F' | 'M';
+  bdate: string;
+  phone?: string | '';
 };
 
-const UserCard = ({ name, imageId, uid }: UserCardProps) => {
+const UserCard = ({ name, fullName, imageId, userIsElderly, gender, bdate, uid, phone }: UserCardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
 
   function handlePressTakeCare() {
+    console.log('clicked');
     if (uid !== undefined) {
-      navigation.navigate('TakeCareElderlyScreen', {
-        uid: uid
-      });
+      // navigation.navigate('TakeCareElderlyScreen', {
+      //   uid: uid
+      // });
     }
   }
 
@@ -39,7 +48,7 @@ const UserCard = ({ name, imageId, uid }: UserCardProps) => {
       <>
         <Text>{uid}</Text>
         <Image
-          source={{ uri: imageId }}
+          source={imageId? imageId: ProfilePic}
           style={styles.image}
           borderRadius={10}
           marginRight={3}
@@ -49,7 +58,21 @@ const UserCard = ({ name, imageId, uid }: UserCardProps) => {
           {name}
         </Text>
       </>
-      <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
+      {userIsElderly ? (
+        <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
+      ) : (
+        <EditButton
+          onPress={() =>
+            navigation.navigate('EditCaretakerScreen', { info: {
+              "fullName": fullName,
+              "gender": gender,
+              "bdate": bdate,
+              "phone": phone,
+              "imageId": imageId
+            }})
+          }
+        />
+      )}
     </View>
   );
 };

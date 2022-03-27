@@ -1,31 +1,34 @@
 import { View, Box, Image, Text } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSettings } from '../../hooks/useSettings';
+import { getFormattedDate } from '../../utils/getFormattedDate';
 
-const CaretakerPic = require('../../assets/images/Caretaker.png');
+const ProfilePic = require('../../assets/images/profile.png');
 
 type ProfileInfoCardProps = {
-  fname: string;
-  lname: string
+  fullName: string;
   gender: string;
   bdate: string;
-  phone: string;
+  phone?: string | '';
+  imageId: string;
 };
 
 const ProfileInfoCard = ({
-  fname,
-  lname,
+  fullName,
   gender,
   bdate,
-  phone
+  phone,
+  imageId
 }: ProfileInfoCardProps) => {
   const { t } = useTranslation();
+  const { language } = useSettings();
 
   return (
     <Box>
       <Box alignItems="center" my="5">
         <Image
-          source={CaretakerPic}
+          source={imageId ? { uri: imageId } : ProfilePic}
           w={160}
           h={160}
           borderRadius={10}
@@ -58,7 +61,7 @@ const ProfileInfoCard = ({
         <View flexDir="column" ml="6">
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              {fname} {lname}
+              {fullName}
             </Text>
           </View>
           <View>
@@ -68,7 +71,7 @@ const ProfileInfoCard = ({
           </View>
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
-              {bdate}
+              {getFormattedDate(new Date(bdate), language)}
             </Text>
           </View>
           <View>
