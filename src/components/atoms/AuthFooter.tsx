@@ -27,7 +27,7 @@ const AuthFooter: React.FC<TextInputProps> = ({ page, ...props }) => {
       <Pressable
         onPress={() =>
           navigation.replace(
-            page === AuthType.SIGNUP ? 'SignInScreen' : 'SignUpScreen'
+            page === AuthType.SIGNUP ? 'SignInScreen' : 'PlanSelectionScreen'
           )
         }>
         <Text color="blue.600">
