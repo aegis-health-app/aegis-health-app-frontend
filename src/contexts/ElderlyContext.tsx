@@ -13,8 +13,8 @@ export interface ElderlyContextProps {
   setElderlyProfile: (val: ElderlyHomeProfile) => void;
   moduleList: Module[];
   setModuleList: (val: Module[]) => void;
-  elderlyCode: ElderlyLinkCode;
-  setElderlyCode: (val: ElderlyLinkCode) => void;
+  elderlyCode: string;
+  setElderlyCode: (val: string) => void;
   caretakerList: User[];
   setCaretakerList: (val: User[]) => void;
 }
@@ -24,7 +24,7 @@ export const ElderlyContext = createContext({} as ElderlyContextProps);
 const ElderlyContextProvider = ({ ...props }) => {
   const [elderlyProfile, setElderlyProfile] = useState<ElderlyHomeProfile>();
   const [moduleList, setModuleList] = useState<Module[]>([]); // available modules and its name
-  const [elderlyCode, setElderlyCode] = useState<ElderlyLinkCode>({"code": ''});
+  const [elderlyCode, setElderlyCode] = useState<string>('');
   const [caretakerList, setCaretakerList] = useState<User[]>([]); // list all caretaker's data
 
   //If the user is elderly, get moduleIds and all available modules from the backend.
