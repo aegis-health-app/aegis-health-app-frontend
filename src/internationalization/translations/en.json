@@ -207,7 +207,8 @@
     "isRequired": "{{name}} cannot be left blank",
     "invalid": "Invalid {{name}}",
     "passwordNotMatched": "Password must match",
-    "samePasswordWarning": "New password cannot be the same as the old password"
+    "samePasswordWarning": "New password cannot be the same as the old password",
+    "wrongCredentials": "Incorrect phone number / password"
   },
   "cameraPermissions": {
     "title": "Need Camera Permission",
