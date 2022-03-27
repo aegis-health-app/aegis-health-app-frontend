@@ -24,28 +24,18 @@ import useDimensions from '../hooks/useDimensions';
 const ProfilePic = require('../assets/images/sompoch.png');
 
 const ElderlyHomeScreen = () => {
-  const { canStart, start, stop, eventEmitter, tourKey } = useTourGuideController('home');
+  const { canStart, start, eventEmitter, tourKey } =
+    useTourGuideController('home');
   const { showHomeTourguide, setShowHomeTourguide } =
     useContext(TourguideContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
-  const guideStepCount = 7;
-  let stepCount = 0;
-
-  const handleOnStop = () => (stepCount = 0);
-  const handleOnStepChange = () => {
-    stepCount++;
-    if (stepCount > guideStepCount && stop) {
-      stop();
-      stepCount = 0;
-    }
-  };
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
-      const result = await AsyncStorage.getItem('viewedHomeTourguide');
+      const result = await AsyncStorage.getItem('viewedElderlyHomeTourguide');
       return result ? JSON.parse(result) : false;
     };
     const shouldShow = !(await fetchData());
@@ -59,11 +49,7 @@ const ElderlyHomeScreen = () => {
   useEffect(() => {
     eventEmitter?.on('stop', async () => {
       setShowHomeTourguide(false);
-      await AsyncStorage.setItem('viewedHomeTourguide', 'true');
-      handleOnStop();
-    });
-    eventEmitter?.on('stepChange', () => {
-      handleOnStepChange();
+      await AsyncStorage.setItem('viewedElderlyHomeTourguide', 'true');
     });
   }, [eventEmitter]);
 
