@@ -25,8 +25,8 @@ const ConfirmConnectScreen = ({
   const handlePress = async () => {
     await client
       .post('/user/relationship', {
-        eid: elderlyInfo['info']['uid'],
-        cid: null
+        "eid": elderlyInfo['info']['uid'],
+        "cid": null
       })
       .catch((err) => {
         console.log({ err });
