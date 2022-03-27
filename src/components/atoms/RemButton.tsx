@@ -7,13 +7,16 @@ import { UserContext } from '../../contexts/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
+import { ElderlyContext } from '../../contexts/ElderlyContext';
 
 type remButtonProps = {
   fullName: string
-  cid: string;
+  cid: number;
 };
 
 const RemButton = ({ fullName, cid }: remButtonProps) => {
+
+  const { caretakerList, setCaretakerList } = useContext(ElderlyContext)
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
