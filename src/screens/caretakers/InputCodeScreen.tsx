@@ -1,5 +1,5 @@
 import { View, Text, Button } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
@@ -9,6 +9,7 @@ import { useForm, useFormState } from 'react-hook-form';
 import * as Yup from 'yup';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
 import { client } from '../../config/axiosConfig';
+import { ElderlyLinkResponse } from '../../dto/modules/modules.dto';
 
 const InputCodeScreen = () => {
   const { t } = useTranslation();
@@ -33,16 +34,15 @@ const InputCodeScreen = () => {
 
   const handleSubmit = async () => {
     const enteredCode = watchElderlyCode['elderlyCode'];
-    await client
-      .get(`/link/elderly/${enteredCode}`)
-      .then(({ data }) => {
-        navigation.navigate('ConfirmConnectScreen', { info: data });
-        setIsCodeValid(true);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setIsCodeValid(false);
+    try {
+      const { data } = await client.get(`/link/elderly/${enteredCode}`);
+      navigation.navigate('ConfirmConnectScreen', {
+        info: data as ElderlyLinkResponse
       });
+      setIsCodeValid(true);
+    } catch (err) {
+      setIsCodeValid(false);
+    }
   };
 
   return (

@@ -23,20 +23,17 @@ const CaretakerHomeScreen = () => {
           alignItems="center"
           justifyContent="flex-start"
           paddingTop={6}
-          paddingX={4}
-          w="full"
-          minWidth="96">
+          paddingX={4}>
           <ProfileSection />
           <Divider />
           <UpComingAlert />
-          {/* <ScrollView
+          <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
-            width="100%" 
-  bgColor="red.100"> */}
-          <ElderlyInCareList />
-          {/* </ScrollView> */}
+            width="100%">
+            <ElderlyInCareList />
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>

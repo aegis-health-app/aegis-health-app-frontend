@@ -29,16 +29,17 @@ const PictureSelection: React.FC<PictureSelectionProps> = ({
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
   const takePicture = async () => {
-    requestCameraPermission().then(async () => {
-      const result: ImagePickerResponse = await launchCamera(
-        CameraPhotoOptions
-      );
+    try {
+      await requestCameraPermission();
+      const result = await launchCamera(CameraPhotoOptions);
       if (isIndependent) {
         setNewProfileImage(result);
       } else if (setDependentImage) {
         setDependentImage(result);
       }
-    });
+    } catch (err) {
+      // error handling
+    }
   };
 
   const selectPictureFromDevice = async () => {

@@ -19,7 +19,6 @@ const UserCard = ({ name, imageId, uid }: UserCardProps) => {
   const { t } = useTranslation();
 
   function handlePressTakeCare() {
-    console.log('clicked');
     if (uid !== undefined) {
       navigation.navigate('TakeCareElderlyScreen', {
         uid: uid
