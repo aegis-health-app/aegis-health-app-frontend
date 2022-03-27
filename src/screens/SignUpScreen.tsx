@@ -82,7 +82,7 @@ const informationList: InformationList[][] = [
   ]
 ];
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ route }) => {
   const {
     control,
     formState: { errors },
@@ -135,14 +135,15 @@ const SignUpScreen = () => {
       }
       if (signUpStage === 2) setSignUpStage((prev) => prev + 1);
       if (signUpStage === 3) {
-        const payload = {
+        const { isElderly } = route?.params ?? true;
+        const payload: SignUpPayload = {
           imageid: '',
           fname: name,
           lname: lastName,
           dname: displayName,
           bday: date.toISOString().substring(0, 10),
           gender: gender,
-          isElderly: true,
+          isElderly,
           healthCondition: healthIssues,
           bloodType: bloodType === 'N/A' ? '' : bloodType,
           personalMedication: personalMedicine,
@@ -178,7 +179,7 @@ const SignUpScreen = () => {
         } else navigation.replace('TabNavigation');
       }
     },
-    [signUpStage, newProfileImage, navigation, setSignUpStage, client]
+    [signUpStage, newProfileImage, navigation, setSignUpStage, client, route]
   );
 
   return (
