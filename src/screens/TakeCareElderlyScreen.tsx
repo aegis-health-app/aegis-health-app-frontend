@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Image, Text, View, ScrollView, Switch } from 'native-base';
+import { Text, View, Switch } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getCaretakingElderlyByEid } from '../utils/caretaker/profile';
 import { useTranslation } from 'react-i18next';
-import images from '../assets/images';
 import BasicProfile from '../components/molecules/BasicProfile';
 import HealthProfile from '../components/molecules/HealthProfile';
 import { TouchableOpacity } from 'react-native';
@@ -21,7 +20,7 @@ const TakeCareElderlyScreen = ({
   const { uid } = route.params;
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
-  const { basicProfile, healthProfile } = useProfileInfo();
+  const { elderlyBasicProfile, elderlyHealthProfile } = useProfileInfo(elderly);
 
   useAsyncEffect(async () => {
     const _elderly = await getCaretakingElderlyByEid(uid);
@@ -31,7 +30,7 @@ const TakeCareElderlyScreen = ({
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <View flex={1} px={4}>
-        <BasicProfile data={basicProfile} />
+        <BasicProfile data={elderlyBasicProfile} />
         <View>
           <View flexDir="row" justifyContent="space-between">
             <Text bold fontSize="lg">
@@ -45,11 +44,12 @@ const TakeCareElderlyScreen = ({
             </Text>
           </TouchableOpacity>
         </View>
-        <HealthProfile data={healthProfile} />
-        {elderly && [] > 0 ? (
+
+        <HealthProfile data={elderlyHealthProfile} />
+        {elderly && elderly.listModuleid.length > 0 ? (
           <ModulePickerList data={elderly?.listModuleid} />
         ) : (
-          <View h="80" alignItems="center" justifyContent="center">
+          <View h="80" alignItems="center" mt={6}>
             <View w="full">
               <Text fontSize="2xl" fontWeight="600">
                 {t('modules.modules')}
@@ -58,7 +58,7 @@ const TakeCareElderlyScreen = ({
                 {t('modules.chooseModule')}
               </Text>
             </View>
-            <View justifyContent="center" bgColor="red.100">
+            <View mt="24">
               <Text fontSize="md" color="muted.500">
                 {t('modules.elderlyNoModule')}
               </Text>
