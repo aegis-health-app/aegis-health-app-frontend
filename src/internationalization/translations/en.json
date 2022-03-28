@@ -13,7 +13,9 @@
     "viewElderly": "View your elderly here",
     "addElderlyButton": "Add an Elderly",
     "noElderlyInCare": "No elderly under your care",
-    "takeCare": "Take Care"
+    "takeCare": "Take Care",
+    "enableEmotion": "Enable Emotion Tracking",
+    "emotionHist": "View emotion History"
   },
   "setting": {
     "settings": "Settings",
@@ -108,7 +110,9 @@
     "memory": "Memory Recall",
     "healthRecord": "Health Records",
     "healthBlogs": "Health Blogs",
-    "selectModules": "Select Modules"
+    "selectModules": "Select Modules",
+    "chooseModule": "Choose module",
+    "elderlyNoModule": "This elderly did not turn on any feature yet."
   },
   "moduleSelection": {
     "removeConfirmationText": "Are you sure you want to remove this module?",
