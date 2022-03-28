@@ -3,13 +3,13 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
-// import { useTranslation } from 'react-i18next';
 import ForgotPasswordStage1 from '../components/molecules/ForgotPasswordStage1';
 import ForgotPasswordStage2 from '../components/molecules/ForgotPasswordStage2';
 import ForgotPasswordStage3 from '../components/molecules/ForgotPasswordStage3';
 import { client } from '../config/axiosConfig';
 import { UserContext } from '../contexts/UserContext';
 import useDimensions from '../hooks/useDimensions';
+import { verifyOTP } from '../utils/auth';
 
 enum stages {
   first = 1,
@@ -24,10 +24,9 @@ const ForgotPasswordScreen = () => {
     handleSubmit,
     watch
   } = useForm();
-  // const { t } = useTranslation();
   const { ScreenHeight } = useDimensions();
   const [stage, setStage] = useState(stages.first);
-  const [otpToken, setOtpToken] = useState();
+  const [otpToken, setOtpToken] = useState('');
   const [number, setNumber] = useState();
 
   const continueToNextStage = useCallback(
@@ -45,11 +44,7 @@ const ForgotPasswordScreen = () => {
       } else if (stage === stages.second) {
         try {
           const { otp } = data;
-          const payload = {
-            token: otpToken,
-            pin: otp
-          };
-          const res = await client.post('/otp/verifyOtp', payload);
+          const res = await verifyOTP(otpToken, otp);
           console.log(res.data);
           if (res.data.status === 'success') {
             setStage(stages.third);

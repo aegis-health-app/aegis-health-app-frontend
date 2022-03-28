@@ -7,7 +7,6 @@ type OTPTimerButtonProps = {
 };
 
 const OTPTimerButton = ({ onPress }: OTPTimerButtonProps) => {
-  // timer copied from Linkedin -----
   const [basis, setBasis] = useState<number>();
   const [timer, setTimer] = useState<number>();
   const [timerDisp, setTimerDisp] = useState<number>(0);
@@ -41,7 +40,6 @@ const OTPTimerButton = ({ onPress }: OTPTimerButtonProps) => {
       setTimerDisp(0);
     }
   }, [timerDisp]);
-  // ----------
 
   if (timerDisp === 0) {
     return (
