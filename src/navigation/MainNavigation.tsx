@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,7 +43,8 @@ const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
   const { setShowSettingsTourguide } = useContext(TourguideContext);
-  const { user } = useContext(UserContext);
+  const { user, userToken } = useContext(UserContext);
+  const [showNav, setShowNav] = useState<boolean>(true);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -53,6 +54,14 @@ const MainNavigation = () => {
     }
   };
 
+  useEffect(() => {
+    setShowNav(false);
+    setTimeout(() => {
+      setShowNav(true);
+    }, 0);
+  }, [userToken]);
+
+  if (!showNav) return null;
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
