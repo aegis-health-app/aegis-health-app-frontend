@@ -41,7 +41,9 @@ const ForgotPasswordStage1 = ({
       />
       <Spacer />
       <Spacer />
-      {watch('phoneNumber')?.match(/^0[0-9]{9}$/) ? (
+      {watch('phoneNumber')?.match(
+        /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/
+      ) ? (
         <Button w="full" onPress={handleSubmit(continueToNextStage)}>
           {t('auth.continue')}
         </Button>
