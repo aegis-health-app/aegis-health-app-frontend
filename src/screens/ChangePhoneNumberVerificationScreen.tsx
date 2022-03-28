@@ -43,22 +43,18 @@ const ChangePhoneNumberVerificationScreen = ({
     return errors['verificationCode']?.message;
   };
 
-  const onFormSubmit = (data) => {
-    const { otp } = data;
+  const onFormSubmit = async (input) => {
+    const { otp } = input;
     const payload = {
       newPhone: phoneNumber,
       enteredPin: otp
     };
-    console.log(payload);
-    client
-      .put('/setting/changePhoneNumber', payload)
-      .then(() => {
-        setShowSuccessAlert(true);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setShowErrorAlert(true);
-      });
+    try {
+      const { data } = await client.put('/setting/changePhoneNumber', payload);
+      if (data) setShowSuccessAlert(true);
+    } catch (err) {
+      setShowErrorAlert(true);
+    }
   };
 
   return (
