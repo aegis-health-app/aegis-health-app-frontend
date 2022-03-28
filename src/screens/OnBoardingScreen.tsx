@@ -7,12 +7,19 @@ import OnBoardingLanguageSelector from '../components/molecules/OnBoardingLangua
 import { useTranslation } from 'react-i18next';
 import OnBoardingItem from '../components/organisms/OnBoardingItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+import useAsyncEffect from '../hooks/useAsyncEffect';
 
 const OnBoardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
   const slidesRef = useRef(null);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -88,6 +95,16 @@ const OnBoardingScreen = () => {
     scrollTo(currentIndex);
   }, [currentIndex]);
 
+  useAsyncEffect(async () => {
+    const viewed = await AsyncStorage.getItem('viewedOnboarding');
+    if (viewed && JSON.parse(viewed)) {
+      navigation.navigate('SignInScreen');
+    } else {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  if (!showOnboarding) return null;
   return (
     <View flex={1} justifyContent="center" alignItems="center">
       <Image
@@ -139,7 +156,14 @@ const OnBoardingScreen = () => {
       )}
       {currentIndex === onBoardingSlides.length - 1 && (
         <View px={6} mb={10}>
-          <Button colorScheme="primary" width="80" size="lg">
+          <Button
+            colorScheme="primary"
+            width="80"
+            size="lg"
+            onPress={async () => {
+              navigation.navigate('SignInScreen');
+              AsyncStorage.setItem('viewedOnboarding', 'true');
+            }}>
             <Text bold fontWeight="600" fontSize="lg" color="#fff">
               {t('onBoarding.startButton')}
             </Text>

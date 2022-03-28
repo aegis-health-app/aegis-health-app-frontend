@@ -28,7 +28,6 @@ import {
 } from '../utils/permission';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
-import { getUser } from '../utils/user/user';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -118,7 +117,7 @@ const ProfileEditScreen = () => {
         type: profileImage.type
       });
       try {
-        const { data } = await client.post(`/user/profile/image`, formData);
+        const { data } = await client.post('/user/profile/image', formData);
         if (data) getUserProfile();
       } catch (error) {
         setShowImageUploadError(true);
@@ -128,7 +127,7 @@ const ProfileEditScreen = () => {
 
   const updateUserProfile = async (payload) => {
     try {
-      await client.patch('/user', payload);
+      await client.patch('/user/profile', payload);
       setShowSuccessAlert(true);
       getUserProfile();
     } catch (err) {

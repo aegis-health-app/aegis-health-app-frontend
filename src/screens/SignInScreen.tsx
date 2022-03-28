@@ -10,7 +10,7 @@ import {
   Text,
   VStack
 } from 'native-base';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -21,11 +21,9 @@ import images from '../assets/images';
 import useDimensions from '../hooks/useDimensions';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
 import { signIn } from '../utils/auth';
 import { useAuthentication } from '../hooks/useAuthentication';
+import { UserContext } from '../contexts/UserContext';
 
 const SignInScreen = () => {
   const {
@@ -38,9 +36,7 @@ const SignInScreen = () => {
   const { ScreenWidth } = useDimensions();
   const { t } = useTranslation();
   const { setToken } = useAuthentication();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+  const { getUserProfile } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const onFormSubmit = useCallback(async (data) => {
@@ -48,7 +44,7 @@ const SignInScreen = () => {
     const signInResponse = await signIn(phoneNumber, password);
     if (signInResponse?.data?.token) {
       setToken(signInResponse.data.token);
-      navigation.replace('TabNavigation');
+      await getUserProfile();
     } else {
       console.log(signInResponse);
       setError('phoneNumber', {

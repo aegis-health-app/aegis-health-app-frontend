@@ -17,6 +17,7 @@ import useAsyncEffect from '../hooks/useAsyncEffect';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import { UserContext } from '../contexts/UserContext';
 
 const SettingScreen = () => {
   const { language, changeLanguage, isSoundEffectOn, setIsSoundEffectOn } =
@@ -34,6 +35,7 @@ const SettingScreen = () => {
   const [renderTourguide, setRenderTourguide] = useState(true);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { setUser } = useContext(UserContext);
   const guideStepCount = 4;
   let stepCount = 0;
 
@@ -205,8 +207,16 @@ const SettingScreen = () => {
         </TourGuideZone>
       )}
       <Spacer />
-      {/* Signou */}
-      <Button size="lg" variant="outline" colorScheme="secondary">
+      {/* Signout */}
+      <Button
+        size="lg"
+        variant="outline"
+        colorScheme="secondary"
+        onPress={() => {
+          AsyncStorage.setItem('token', '');
+          setUser(undefined);
+          navigation.replace('SignInScreen');
+        }}>
         {t('setting.signOut')}
       </Button>
       {renderTourguide && (
