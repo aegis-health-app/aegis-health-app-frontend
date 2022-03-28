@@ -13,10 +13,11 @@ type AlertProps = {
   close: () => void;
   type: AlertType;
   message: string;
+  customString?: string;
 };
 
 const Alert = (props: AlertProps) => {
-  const { isOpen, close, type, message } = props;
+  const { isOpen, close, type, message, customString } = props;
 
   const getMessage = (): AlertMessage | undefined => {
     return AlertMessages[message];
@@ -44,7 +45,9 @@ const Alert = (props: AlertProps) => {
       <AlertDialog.Content>
         <AlertDialog.CloseButton />
         <AlertDialog.Header>{getMessage()?.header}</AlertDialog.Header>
-        <AlertDialog.Body>{getMessage()?.body}</AlertDialog.Body>
+        <AlertDialog.Body>
+          {getMessage()?.body} {customString}
+        </AlertDialog.Body>
         <AlertDialog.Footer>
           <Button.Group space={2}>
             <Button

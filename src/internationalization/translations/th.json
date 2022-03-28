@@ -276,5 +276,17 @@
     "enterYourVerificationCode":"กรอกรหัสยืนยัน",
     "verificationCodeSentTo":"โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่",
     "submit":"ดำเนินการต่อ"
+  },
+  "changePhoneNumberSuccess":{
+    "header": "สำเร็จ",
+    "body": "หมายเลขโทรศัพท์ของคุณได้ถูกเปลี่ยนเป็น ",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "changePhoneNumberError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถยืนยันหมายเลขโทรศัพท์ของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
   }
 }

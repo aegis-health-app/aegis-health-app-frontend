@@ -37,5 +37,17 @@ export const AlertMessages = {
     body: i18n.t('uploadImageError.body'),
     primaryButton: i18n.t('uploadImageError.primaryButton'),
     secondaryButton: i18n.t('uploadImageError.secondaryButton')
+  },
+  changePhoneNumberSuccess: {
+    header: i18n.t('changePhoneNumberSuccess.header'),
+    body: i18n.t('changePhoneNumberSuccess.body'),
+    primaryButton: i18n.t('changePhoneNumberSuccess.primaryButton'),
+    secondaryButton: i18n.t('changePhoneNumberSuccess.secondaryButton')
+  },
+  changePhoneNumberError: {
+    header: i18n.t('changePhoneNumberError.header'),
+    body: i18n.t('changePhoneNumberError.body'),
+    primaryButton: i18n.t('changePhoneNumberError.primaryButton'),
+    secondaryButton: i18n.t('changePhoneNumberError.secondaryButton')
   }
 };

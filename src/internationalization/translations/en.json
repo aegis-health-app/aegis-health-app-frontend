@@ -276,5 +276,17 @@
     "enterYourVerificationCode":"Enter Your Verification Code",
     "verificationCodeSentTo":"Enter the verification code sent to",
     "submit":"Submit"
+  },
+  "changePhoneNumberSuccess":{
+    "header": "Success",
+    "body": "Your phone number has been changed to ",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "changePhoneNumberError":{
+    "header": "Error",
+    "body": "Unable to change your phone number. Please try again later.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
   }
 }
