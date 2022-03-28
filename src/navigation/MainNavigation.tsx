@@ -279,6 +279,16 @@ const MainNavigation = () => {
                 headerShown: true
               }}
             />
+            <Stack.Screen
+              name="CustomHealthRecordingScreen"
+              component={CustomHealthRecordingScreen}
+              options={{
+                title: t('healthRecording.createRecordings'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerShown: true
+              }}
+            />
           </>
         ) : (
           <>
