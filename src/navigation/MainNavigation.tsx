@@ -33,6 +33,7 @@ import ChangePhoneNumberVerificationScreen from '../screens/ChangePhoneNumberVer
 import { UserContext } from '../contexts/UserContext';
 import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
 import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
+import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -257,6 +258,16 @@ const MainNavigation = () => {
                 title: 'Profile',
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+              }}
+            />
+            <Stack.Screen
+              name="CustomHealthRecordingScreen"
+              component={CustomHealthRecordingScreen}
+              options={{
+                title: t('healthRecording.createRecordings'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerShown: true
               }}
             />
           </>
