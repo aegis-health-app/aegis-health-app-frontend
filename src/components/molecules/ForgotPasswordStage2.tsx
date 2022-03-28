@@ -1,7 +1,5 @@
-import { Box, Button, VStack } from 'native-base';
-import React, { useState, useEffect } from 'react';
-
-import AuthFooter, { AuthType } from '../atoms/AuthFooter';
+import { Button, VStack } from 'native-base';
+import React from 'react';
 import FormHeader from '../atoms/FormHeader';
 import FormTitle from '../atoms/FormTitle';
 import FormDescription from '../atoms/FormDescription';
@@ -15,20 +13,18 @@ type ForgotPasswordProps = {
   control: any;
   errors: any;
   watch: any;
-  setStage: any;
+  handleSubmit: any;
+  continueToNextStage: any;
+  resendOtp: any;
 };
-
-enum stages {
-  first = 1,
-  second = 2,
-  third = 3
-}
 
 const ForgotPasswordStage2 = ({
   control,
   errors,
   watch,
-  setStage
+  handleSubmit,
+  continueToNextStage,
+  resendOtp
 }: ForgotPasswordProps) => {
   const { t } = useTranslation();
 
@@ -50,13 +46,11 @@ const ForgotPasswordStage2 = ({
         isRequired
       />
       <Spacer />
-      <Button w="full" onPress={() => setStage(stages.third)}>
+      <Button w="full" onPress={handleSubmit(continueToNextStage)}>
         {t('auth.continue')}
       </Button>
       <Spacer />
-      <OTPTimerButton onPress={() => console.log('Sending OTP')} />
-      <Box flex={1} />
-      <AuthFooter page={AuthType.SIGNUP} />
+      <OTPTimerButton onPress={resendOtp} />
     </VStack>
   );
 };

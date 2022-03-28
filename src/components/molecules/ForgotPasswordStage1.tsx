@@ -1,7 +1,5 @@
-import { Box, Button, VStack } from 'native-base';
+import { Button, VStack } from 'native-base';
 import React from 'react';
-
-import AuthFooter, { AuthType } from '../atoms/AuthFooter';
 import FormHeader from '../atoms/FormHeader';
 import FormTitle from '../atoms/FormTitle';
 import FormDescription from '../atoms/FormDescription';
@@ -14,20 +12,16 @@ type ForgotPasswordProps = {
   control: any;
   errors: any;
   watch: any;
-  setStage: any;
+  handleSubmit: any;
+  continueToNextStage: any;
 };
-
-enum stages {
-  first = 1,
-  second = 2,
-  third = 3
-}
 
 const ForgotPasswordStage1 = ({
   control,
   errors,
   watch,
-  setStage
+  handleSubmit,
+  continueToNextStage
 }: ForgotPasswordProps) => {
   const { t } = useTranslation();
   return (
@@ -47,8 +41,10 @@ const ForgotPasswordStage1 = ({
       />
       <Spacer />
       <Spacer />
-      {watch('phoneNumber')?.match(/^0[0-9]{9}$/) ? (
-        <Button w="full" onPress={() => setStage(stages.second)}>
+      {watch('phoneNumber')?.match(
+        /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/
+      ) ? (
+        <Button w="full" onPress={handleSubmit(continueToNextStage)}>
           {t('auth.continue')}
         </Button>
       ) : (
@@ -56,8 +52,6 @@ const ForgotPasswordStage1 = ({
           {t('auth.continue')}
         </Button>
       )}
-      <Box flex={1} />
-      <AuthFooter page={AuthType.SIGNUP} />
     </VStack>
   );
 };

@@ -35,6 +35,9 @@ const ModulePickerList = () => {
         <Button onPress={() => navigation.navigate('PlanSelectionScreen')}>
           Dummy Sign Up Page
         </Button>
+        <Button onPress={() => navigation.navigate('ForgotPasswordScreen')}>
+          Dummy FP Page
+        </Button>
       </HStack>
     </View>
   );
