@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import { Image, Text, View } from 'native-base';
+import { Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import EditButton from '../components/atoms/EditButton';
 import BasicProfile from '../components/molecules/BasicProfile';
@@ -14,9 +14,6 @@ import { UserContext } from '../contexts/UserContext';
 import { ProfileItem } from '../interfaces/User';
 import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from '../hooks/useSettings';
-
-// Temporary profile image
-const ProfilePic = require('../assets/images/profile.png');
 
 const ProfileScreen = () => {
   const { t } = useTranslation();
@@ -84,16 +81,7 @@ const ProfileScreen = () => {
         </Text>
         <EditButton onPress={() => navigation.navigate('ProfileEditScreen')} />
       </View>
-      <Spacer />
-      <View display="flex" flexDir="row" justifyContent="center">
-        <Image
-          source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
-          width="32"
-          height="32"
-          borderRadius={4}
-          alt="Profile Picture"
-        />
-      </View>
+
       <Spacer />
       <BasicProfile data={basicProfile} />
       <Divider />

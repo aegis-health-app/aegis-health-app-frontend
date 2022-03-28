@@ -1,39 +1,66 @@
-import React from 'react';
-import { FlatList, Text, View } from 'native-base';
+import React, { useContext } from 'react';
+import { FlatList, Text, View, Image } from 'native-base';
 import { StyleSheet } from 'react-native';
 import Spacer from '../atoms/Spacer';
 import { ProfileItem } from '../../interfaces/User';
+import images from '../../assets/images';
+import { UserContext } from '../../contexts/UserContext';
 
-const ProfileInfoItem = ({ label, value }: ProfileItem) => (
-  <View>
-    <View style={styles.profileInfoItemRow}>
-      <View style={styles.profileInfoItemLabel}>
-        <Text fontSize="md" color="muted.500">
-          {label}
-        </Text>
+const ProfileInfoItem = ({ label, value }: ProfileItem) => {
+  return (
+    <View>
+      <View style={styles.profileInfoItemRow}>
+        <View w="1/2">
+          <Text fontSize="md" color="muted.500">
+            {label}
+          </Text>
+        </View>
+        <View style={styles.profileInfoItemValue}>
+          <Text fontSize="md">{value}</Text>
+        </View>
       </View>
-      <View style={styles.profileInfoItemValue}>
-        <Text fontSize="md">{value}</Text>
-      </View>
+      <Spacer h={8} />
     </View>
-    <Spacer h={8} />
-  </View>
-);
+  );
+};
 
 type BasicProfileProps = {
   data: ProfileItem[];
 };
 
 const BasicProfile = ({ data }: BasicProfileProps) => {
+  const { user } = useContext(UserContext);
+
   return (
-    <FlatList
-      data={data}
-      renderItem={({ item }) => (
-        <ProfileInfoItem label={item.label} value={item.value} />
-      )}
-      keyExtractor={(item) => item.label}
-      scrollEnabled={false}
-    />
+    <>
+      <View
+        display="flex"
+        flexDir="row"
+        alignItems="center"
+        justifyContent="center"
+        width="full"
+        height="32"
+        p={2}>
+        <Image
+          source={
+            user?.imageid ? { uri: user?.imageid } : images.picturePlaceholder
+          }
+          width="32"
+          height="32"
+          borderRadius={4}
+          alt="Profile Picture"
+        />
+      </View>
+      <Spacer />
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <ProfileInfoItem label={item.label} value={item.value} />
+        )}
+        keyExtractor={(item) => item.label}
+        scrollEnabled={false}
+      />
+    </>
   );
 };
 
