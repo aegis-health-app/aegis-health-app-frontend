@@ -290,6 +290,19 @@
     "secondaryButton": ""
   },
   "healthRecording":{
-    "createRecordings": "Create recordings"
+    "createRecordings": "Create recordings",
+    "generalInformation": "General Information",
+    "title": "Title",
+    "image": "Image",
+    "noImageText": "No Image Selected",
+    "takeAPicture": "Take a Picture",
+    "browse": "Browse",
+    "dataField": "Data Field",
+    "fieldName": "Field Name",
+    "unit": "Unit",
+    "addField": "Add More Field",
+    "titleBlankError": "Title cannot be left blank",
+    "fieldBlankError": "This field cannot be left blank",
+    "create": "Create"
   }
 }
