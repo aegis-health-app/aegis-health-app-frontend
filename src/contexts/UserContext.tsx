@@ -6,7 +6,7 @@ import { User } from './../dto/modules/user.dto';
 
 export interface UserContextProps {
   user: User | undefined;
-  setUser: (value: User) => void;
+  setUser: (value: User | undefined) => void;
   isElderly: boolean | undefined;
   userToken: string;
   getUserProfile: () => Promise<void>;

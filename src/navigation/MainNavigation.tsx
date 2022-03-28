@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -38,7 +38,8 @@ const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
   const { setShowSettingsTourguide } = useContext(TourguideContext);
-  const { user } = useContext(UserContext);
+  const { user, userToken } = useContext(UserContext);
+  const [showNav, setShowNav] = useState<boolean>(true);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -48,6 +49,14 @@ const MainNavigation = () => {
     }
   };
 
+  useEffect(() => {
+    setShowNav(false);
+    setTimeout(() => {
+      setShowNav(true);
+    }, 0);
+  }, [userToken]);
+
+  if (!showNav) return null;
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
@@ -257,6 +266,23 @@ const MainNavigation = () => {
               name="OnBoardingScreen"
               component={OnBoardingScreen}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignInScreen"
+              component={SignInScreen}
+              options={{
+                title: 'Sign In',
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="SignUpScreen"
+              component={SignUpScreen}
+              initialParams={{ isElderly: true }}
+              options={{
+                title: 'Sign Up',
+                headerShown: false
+              }}
             />
           </>
         )}

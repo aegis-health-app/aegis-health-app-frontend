@@ -26,7 +26,7 @@ export const AlertMessages = {
     primaryButton: i18n.t('updateProfileSuccess.primaryButton'),
     secondaryButton: i18n.t('updateProfileSuccess.secondaryButton')
   },
-  updateProileError: {
+  updateProfileError: {
     header: i18n.t('updateProfileError.header'),
     body: i18n.t('updateProfileError.body'),
     primaryButton: i18n.t('updateProfileError.primaryButton'),
