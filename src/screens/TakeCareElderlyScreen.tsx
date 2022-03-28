@@ -12,10 +12,10 @@ import { TouchableOpacity } from 'react-native';
 import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useProfileInfo } from './../hooks/useProfileInfo';
+import Spacer from '../components/atoms/Spacer';
 
 const TakeCareElderlyScreen = ({
-  route,
-  navigation
+  route
 }: NativeStackScreenProps<RootStackParamList, 'TakeCareElderlyScreen'>) => {
   const { uid } = route.params;
   const [elderly, setElderly] = useState<Elderly>();
@@ -29,8 +29,11 @@ const TakeCareElderlyScreen = ({
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
-      <View flex={1} px={4}>
+      <View px={4}>
         <BasicProfile data={elderlyBasicProfile} />
+      </View>
+      <Spacer />
+      <View px={4}>
         <View>
           <View flexDir="row" justifyContent="space-between">
             <Text bold fontSize="lg">
@@ -44,8 +47,8 @@ const TakeCareElderlyScreen = ({
             </Text>
           </TouchableOpacity>
         </View>
-
         <HealthProfile data={elderlyHealthProfile} />
+        <Spacer />
         {elderly && elderly.listModuleid.length > 0 ? (
           <ModulePickerList data={elderly?.listModuleid} />
         ) : (
