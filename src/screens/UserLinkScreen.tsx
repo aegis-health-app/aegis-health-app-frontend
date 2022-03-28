@@ -9,9 +9,9 @@ import UserCard from '../components/organisms/CaretakerCard';
 import { ElderlyContext } from '../contexts/ElderlyContext';
 
 const UserLinkScreen = () => {
-  // todo: connect with backend's data
+  
   const {caretakerList, setCaretakerList} = useContext(ElderlyContext);
-  console.log(caretakerList);
+  
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (

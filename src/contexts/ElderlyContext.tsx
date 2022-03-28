@@ -6,7 +6,7 @@ import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getElderlyCode } from '../utils/elderly/code';
 import { getCaretakerList } from '../utils/elderly/caretakerList';
 import { User } from '../dto/modules/user.dto';
-import { ElderlyLinkCode } from '../dto/modules/code.dto';
+import { getDisplayName } from '../utils/elderly/displayNames';
 
 export interface ElderlyContextProps {
   elderlyProfile: ElderlyHomeProfile | undefined;
@@ -27,14 +27,15 @@ const ElderlyContextProvider = ({ ...props }) => {
   const [elderlyCode, setElderlyCode] = useState<string>('');
   const [caretakerList, setCaretakerList] = useState<User[]>([]); // list all caretaker's data
 
+
   //If the user is elderly, get moduleIds and all available modules from the backend.
   useAsyncEffect(async () => {
     const _elderlyProfile = await getElderlyProfile();
     const _elderlyCode = await getElderlyCode();
     const _caretakerList = await getCaretakerList();
 
-    setElderlyCode(_elderlyCode)
-    setCaretakerList(_caretakerList)
+    setElderlyCode(_elderlyCode);
+    setCaretakerList(_caretakerList);
 
     if (_elderlyProfile.listModuleid) {
       _elderlyProfile.listModuleid = [0, ..._elderlyProfile?.listModuleid, 100];

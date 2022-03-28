@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, View, Text, Button } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
+import { getDisplayName } from '../../utils/elderly/displayNames';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -35,6 +37,23 @@ const UserCard = ({
 
   const { t } = useTranslation();
 
+  const isFocused = useIsFocused();
+
+  const [displayName, setDisplayName] = useState<string>('');
+
+  useAsyncEffect(async () => {
+    setDisplayName(await getDisplayName(uid));
+  }, [isFocused]);
+
+  useEffect(() => {
+    console.log(displayName);
+  }, [displayName]);
+
+  const handleDisplay = () => {
+    if (displayName == '') return name;
+    return displayName;
+  };
+
   return (
     <View
       flexDir="row"
@@ -55,20 +74,20 @@ const UserCard = ({
           alt="Profile Picture"
         />
         <Text flex={1} flexWrap="wrap" fontSize="lg" numberOfLines={1}>
-          {name}
+          {handleDisplay()}
         </Text>
       </>
       <EditButton
         onPress={() =>
           navigation.navigate('EditCaretakerScreen', {
-              info: {
+            info: {
               fullName: fullName,
               gender: gender,
               bdate: bdate,
               phone: phone,
               imageId: imageId,
               cid: uid
-              }
+            }
           })
         }
       />
