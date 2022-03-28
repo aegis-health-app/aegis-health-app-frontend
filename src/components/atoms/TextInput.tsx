@@ -10,7 +10,7 @@ export enum TextInputValidationType {
 }
 
 type TextInputProps = {
-  label: string;
+  label?: string;
   name: string;
   hasRequiredStar?: boolean;
   errorMessage?: string;
