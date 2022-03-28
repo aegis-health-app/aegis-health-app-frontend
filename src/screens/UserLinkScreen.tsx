@@ -43,11 +43,16 @@ const UserLinkScreen = () => {
       <AddButton />
 
       {/* Placeholder Navigation */}
-      <View flexDir="row" justifyContent="center">
+      <View flexDir="column" justifyContent="center" alignItems="center">
         <Button
           width="90%"
           onPress={() => navigation.navigate('ConnectElderlyScreen')}>
           Go to Caretaker's Page
+        </Button>
+        <Button
+          width="90%"
+          onPress={() => navigation.navigate('CustomHealthRecordingScreen')}>
+          Go to Custom Health Recording's Screen
         </Button>
       </View>
     </View>

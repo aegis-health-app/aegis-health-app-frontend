@@ -288,5 +288,8 @@
     "body": "ไม่สามารถยืนยันหมายเลขโทรศัพท์ของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
+  },
+  "healthRecording":{
+    "createRecordings": "สร้างข้อมูลใหม่"
   }
 }

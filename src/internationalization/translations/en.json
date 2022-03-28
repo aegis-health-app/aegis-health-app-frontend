@@ -288,5 +288,8 @@
     "body": "Unable to change your phone number. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
+  },
+  "healthRecording":{
+    "createRecordings": "Create recordings"
   }
 }
