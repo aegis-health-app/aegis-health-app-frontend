@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Image, View, Text, Button } from 'native-base';
+import React, { useState } from 'react';
+import { Image, View, Text } from 'native-base';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
