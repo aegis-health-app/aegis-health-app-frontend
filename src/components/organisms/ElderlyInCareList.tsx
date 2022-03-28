@@ -19,7 +19,7 @@ const ElderlyInCareList = () => {
   }, [caretakerHomeProfile]);
 
   return (
-    <View flex={1} w={ScreenWidth - 32} mt={4} minH="96">
+    <View flex={1} w={ScreenWidth - 32} mt={4} minH="80">
       <Text fontSize="2xl" fontWeight="600">
         {t('home.myElderly')}
       </Text>
