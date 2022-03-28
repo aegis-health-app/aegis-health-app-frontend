@@ -57,15 +57,8 @@ const ElderlyCard = ({
           {name}
         </Text>
       </>
-      {userIsElderly ? (
-        <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
-      ) : (
-        <EditButton
-          onPress={() =>
-            navigation.navigate('EditCaretakerScreen', { itemId: name })
-          }
-        />
-      )}
+
+      <Button onPress={handlePressTakeCare}>{t('home.takeCare')}</Button>
     </View>
   );
 };

@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { ElderlyContext } from '../../contexts/ElderlyContext';
+import { removeDisplayName } from '../../utils/elderly/displayNames'
 
 type remButtonProps = {
   fullName: string
@@ -33,6 +34,7 @@ const RemButton = ({ fullName, cid }: remButtonProps) => {
   const { user } = useContext(UserContext);
 
   async function handlePressDelete() {
+    await removeDisplayName(cid)
     await client.delete('/user/relationship', { data: { eid: user?.uid, cid: cid } })
       .then(() => {
         setCaretakerList(caretakerList.filter(ele => ele.uid !== cid))

@@ -4,9 +4,10 @@ import React from 'react';
 type InputBoxProps = {
   name: string;
   placeholder?: string;
+  onChangeText?: any;
 };
 
-const InputBox = ({ name }: InputBoxProps) => {
+const InputBox = ({ name, onChangeText }: InputBoxProps) => {
   return (
     <View>
       <Box flexDir="row">
@@ -22,6 +23,7 @@ const InputBox = ({ name }: InputBoxProps) => {
           size="xl"
           fontSize="sm"
           padding={3}
+          onChangeText={onChangeText}
         />
       </Box>
     </View>
