@@ -45,10 +45,6 @@ const UserCard = ({
     setDisplayName(await getDisplayName(uid));
   }, [isFocused]);
 
-  useEffect(() => {
-    console.log(displayName);
-  }, [displayName]);
-
   const handleDisplay = () => {
     if (displayName == '') return name;
     return displayName;
