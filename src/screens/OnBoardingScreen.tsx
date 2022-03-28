@@ -162,7 +162,7 @@ const OnBoardingScreen = () => {
             size="lg"
             onPress={async () => {
               navigation.navigate('SignInScreen');
-              AsyncStorage.setItem('viewedOnboarding', 'true');
+              await AsyncStorage.setItem('viewedOnboarding', 'true');
             }}>
             <Text bold fontWeight="600" fontSize="lg" color="#fff">
               {t('onBoarding.startButton')}
