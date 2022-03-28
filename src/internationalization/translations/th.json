@@ -290,6 +290,19 @@
     "secondaryButton": ""
   },
   "healthRecording":{
-    "createRecordings": "สร้างข้อมูลใหม่"
+    "createRecordings": "สร้างข้อมูลใหม่",
+    "generalInformation": "ข้อมูลทั่วไป",
+    "title": "ชื่อข้อมูล",
+    "image": "รูปภาพ",
+    "noImageText": "ไม่มีรูปภาพ",
+    "takeAPicture": "ถ่ายรูปใหม่",
+    "browse": "เลือกจากอุปกรณ์ของคุณ",
+    "dataField": "การบันทึกข้อมูล",
+    "fieldName": "ชื่อข้อมูลช่องที่",
+    "unit": "หน่วย",
+    "addField": "เพิ่มช่องข้อมูล",
+    "titleBlankError": "กรุณากรอกชื่อข้อมูล",
+    "fieldBlankError": "กรุณากรอกข้อมูล",
+    "create": "สร้าง"
   }
 }
