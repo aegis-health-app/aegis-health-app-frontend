@@ -28,49 +28,50 @@ export const useProfileInfo = (profile: Elderly | Caretaker | undefined) => {
 
   useEffect(() => {
     if (!user) return;
+    const currentPorfile = profile ?? user;
 
     const basic = [
       {
         label: t('profile.name'),
-        value: `${user.fname} ${user.lname}`
+        value: `${currentPorfile.fname} ${currentPorfile.lname}`
       },
       {
         label: t('profile.displayName'),
-        value: user.dname
+        value: currentPorfile.dname
       },
       {
         label: t('profile.birthGender'),
-        value: user.gender
+        value: currentPorfile.gender
       },
       {
         label: t('profile.birthDate'),
-        value: getFormattedDate(new Date(user.bday), language)
+        value: getFormattedDate(new Date(currentPorfile.bday), language)
       },
       {
         label: t('profile.phoneNumber'),
-        value: user.phone ?? ''
+        value: currentPorfile.phone ?? ''
       }
     ];
     const health = [
       {
         label: t('profile.healthIssues'),
-        value: user.healthCondition ?? ''
+        value: currentPorfile.healthCondition ?? ''
       },
       {
         label: t('profile.personalMedicine'),
-        value: user.personalMedication ?? ''
+        value: currentPorfile.personalMedication ?? ''
       },
       {
         label: t('profile.allergens'),
-        value: user.allergy ?? ''
+        value: currentPorfile.allergy ?? ''
       },
       {
         label: t('profile.previousVaccinations'),
-        value: user.vaccine ?? ''
+        value: currentPorfile.vaccine ?? ''
       },
       {
         label: t('profile.bloodType'),
-        value: user.bloodType ?? 'N/A'
+        value: currentPorfile.bloodType ?? 'N/A'
       }
     ];
 
@@ -78,13 +79,13 @@ export const useProfileInfo = (profile: Elderly | Caretaker | undefined) => {
     if (profile && !user.isElderly) {
       setElderlyBasicProfile(basic);
       setElderlyHealthProfile(health);
-      return () => {};
+      return;
     }
     // user is elderly, show caretaker profile in ManageCaretakerScreen
     if (profile && user.isElderly) {
       setCaretakerBasicProfile(basic);
       setCaretakerHealthProfile(health);
-      return () => {};
+      return;
     }
     setBasicProfile(basic);
     setHealthProfile(health);
