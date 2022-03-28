@@ -35,7 +35,8 @@ const ChangePhoneNumberVerificationScreen = ({
   const {
     control,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    watch
   } = useForm({ resolver, mode: 'onChange' });
 
   const shouldDisable = (errors) => {
@@ -52,7 +53,6 @@ const ChangePhoneNumberVerificationScreen = ({
     client
       .put('/setting/changePhoneNumber', payload)
       .then(() => {
-        console.log('show success alert');
         setShowSuccessAlert(true);
       })
       .catch((err) => {
@@ -67,7 +67,7 @@ const ChangePhoneNumberVerificationScreen = ({
         isOpen={showErrorAlert}
         close={() => setShowErrorAlert(false)}
         type={AlertType.ERROR}
-        message="changePasswordError"
+        message="changePhoneNumberError"
       />
       <Alert
         isOpen={showSuccessAlert}
@@ -76,7 +76,8 @@ const ChangePhoneNumberVerificationScreen = ({
           navigation.navigate('SettingScreen');
         }}
         type={AlertType.SUCCESS}
-        message="changePasswordSuccess"
+        message="changePhoneNumberSuccess"
+        customString={phoneNumber}
       />
       <View style={styles.pageContainer}>
         <View>
@@ -103,14 +104,16 @@ const ChangePhoneNumberVerificationScreen = ({
           control={control}
           isRequired
         />
-        <Text>{JSON.stringify(errors)}</Text>
         <Spacer />
         <VStack space={4}>
           {/* Continue button */}
           <Button
             w="100%"
             backgroundColor={
-              !shouldDisable(errors) ? 'primary.500' : 'muted.300'
+              //@ts-ignore
+              !shouldDisable(errors) && watch('otp')
+                ? 'primary.500'
+                : 'muted.300'
             }
             colorScheme={'primary'}
             variant="solid"
