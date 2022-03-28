@@ -13,7 +13,9 @@
     "viewElderly": "สามารถดูรายชื่อผู้สูงอายุได้ตรงนี้",
     "addElderlyButton": "เพิ่มผู้สูงอายุ",
     "noElderlyInCare": "คุณยังไม่ผู้สูงอายุในการดูแล",
-    "takeCare": "ดูแล"
+    "takeCare": "ดูแล",
+    "enableEmotion": "เปิดใช้งานการติดตามสภาวะอารมณ์",
+    "emotionHist": "ดูประวัติสภาวะอารมณ์"
   },
   "setting": {
     "settings": "ตั้งค่า",
@@ -108,7 +110,9 @@
     "memory": "ย้อนความหลัง",
     "healthRecord": "บันทึกข้อมูลสุขภาพ",
     "healthBlogs": "บล็อกสุขภาพ",
-    "selectModules": "เลือกฟีเจอร์"
+    "selectModules": "เลือกฟีเจอร์",
+    "chooseModule": "เลือกดูฟีเจอร์",
+    "elderlyNoModule": "ผู้สูงอายุยังไม่ได้เปิดการใช้ฟีเจอร์"
   },
   "moduleSelection": {
     "removeConfirmationText": "คุณต้องการที่จะลบฟีเจอร์นี้หรือไม่",
