@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, View, Switch } from 'native-base';
+import { Text, View, Switch, ScrollView } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
@@ -28,47 +28,54 @@ const TakeCareElderlyScreen = ({
   }, [uid]);
 
   return (
-    <SafeAreaView edges={['right', 'top', 'left']}>
-      <View px={4}>
-        <BasicProfile data={elderlyBasicProfile} />
-      </View>
-      <Spacer />
-      <View px={4}>
-        <View>
-          <View flexDir="row" justifyContent="space-between">
-            <Text bold fontSize="lg">
-              {t('home.enableEmotion')}
-            </Text>
-            <Switch defaultIsChecked colorScheme="primary" />
-          </View>
-          <TouchableOpacity>
-            <Text fontSize="md" color="primary.500" underline>
-              {t('home.emotionHist')}
-            </Text>
-          </TouchableOpacity>
+    <SafeAreaView edges={['right', 'top', 'left']} flex={1}>
+      <ScrollView nestedScrollEnabled>
+        <View px={4}>
+          <BasicProfile data={elderlyBasicProfile} />
         </View>
-        <HealthProfile data={elderlyHealthProfile} />
         <Spacer />
-        {elderly && elderly.listModuleid.length > 0 ? (
-          <ModulePickerList data={elderly?.listModuleid} />
-        ) : (
-          <View h="80" alignItems="center" mt={6}>
-            <View w="full">
-              <Text fontSize="2xl" fontWeight="600">
-                {t('modules.modules')}
+        <View px={4}>
+          <View mb={4}>
+            <View flexDir="row" justifyContent="space-between">
+              <Text bold fontSize="lg">
+                {t('home.enableEmotion')}
               </Text>
-              <Text fontSize="md" color="gray.500">
-                {t('modules.chooseModule')}
-              </Text>
+              <Switch defaultIsChecked colorScheme="primary" />
             </View>
-            <View mt="24">
-              <Text fontSize="md" color="muted.500">
-                {t('modules.elderlyNoModule')}
+            <TouchableOpacity>
+              <Text fontSize="md" color="primary.500" underline>
+                {t('home.emotionHist')}
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
-        )}
-      </View>
+          <HealthProfile data={elderlyHealthProfile} />
+          <Spacer />
+          {elderly && elderly.listModuleid.length > 0 ? (
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              scrollEnabled={false}>
+              <ModulePickerList data={elderly?.listModuleid} />
+            </ScrollView>
+          ) : (
+            <View h="80" alignItems="center" mt={6}>
+              <View w="full">
+                <Text fontSize="2xl" fontWeight="600">
+                  {t('modules.modules')}
+                </Text>
+                <Text fontSize="md" color="gray.500">
+                  {t('modules.chooseModule')}
+                </Text>
+              </View>
+              <View mt="24">
+                <Text fontSize="md" color="muted.500">
+                  {t('modules.elderlyNoModule')}
+                </Text>
+              </View>
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

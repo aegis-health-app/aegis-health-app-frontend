@@ -12,7 +12,7 @@ const HealthInfoItem = ({ label, value }: ProfileItem) => (
         </Text>
       </View>
       <View w="full">
-        <Text fontSize="md">{value}</Text>
+        <Text fontSize="md">{value === '' ? '-' : value}</Text>
       </View>
     </View>
     <Spacer h={8} />
