@@ -1,20 +1,34 @@
 import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../contexts/UserContext';
+import { Caretaker, Elderly } from '../dto/modules/user.dto';
 import { ProfileItem } from '../interfaces/User';
 import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from './useSettings';
 
-export const useProfileInfo = () => {
+export const useProfileInfo = (profile: Elderly | Caretaker) => {
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
   const [basicProfile, setBasicProfile] = useState<ProfileItem[]>([]);
   const [healthProfile, setHealthProfile] = useState<ProfileItem[]>([]);
+  const [elderlyBasicProfile, setElderlyBasicProfile] = useState<ProfileItem[]>(
+    []
+  );
+  const [elderlyHealthProfile, setElderlyHealthProfile] = useState<
+    ProfileItem[]
+  >([]);
+  const [caretakerBasicProfile, setCaretakerBasicProfile] = useState<
+    ProfileItem[]
+  >([]);
+  const [caretakerHealthProfile, setCaretakerHealthProfile] = useState<
+    ProfileItem[]
+  >([]);
+
   const { language } = useSettings();
 
   useEffect(() => {
     if (!user) return;
-    setBasicProfile([
+    const basic = [
       {
         label: t('profile.name'),
         value: `${user.fname} ${user.lname}`
@@ -35,8 +49,8 @@ export const useProfileInfo = () => {
         label: t('profile.phoneNumber'),
         value: user.phone ?? ''
       }
-    ]);
-    setHealthProfile([
+    ];
+    const health = [
       {
         label: t('profile.healthIssues'),
         value: user.healthCondition ?? ''
@@ -57,8 +71,25 @@ export const useProfileInfo = () => {
         label: t('profile.bloodType'),
         value: user.bloodType ?? 'N/A'
       }
-    ]);
+    ];
+    if (profile && user.isElderly) {
+      setElderlyBasicProfile(basic);
+      setElderlyHealthProfile(health);
+    }
+    if (profile && !user.isElderly) {
+      setCaretakerBasicProfile(basic);
+      setCaretakerHealthProfile(health);
+    }
+    setBasicProfile(basic);
+    setHealthProfile(health);
   }, [user]);
 
-  return { basicProfile, healthProfile };
+  return {
+    basicProfile,
+    healthProfile,
+    elderlyBasicProfile,
+    elderlyHealthProfile,
+    caretakerBasicProfile,
+    caretakerHealthProfile
+  };
 };
