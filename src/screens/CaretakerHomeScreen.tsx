@@ -27,8 +27,9 @@ import {
 import { RootStackParamList } from '../navigation/types';
 import UpComingAlert from './../components/organisms/UpComingAlert';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { UserContext } from '../contexts/UserContext';
 
-const ProfilePic = require('../assets/images/sompoch.png');
+const ProfilePic = require('../assets/images/profile.png');
 
 const CaretakerHomeScreen = () => {
   const { canStart, start, eventEmitter, tourKey } =
@@ -38,6 +39,7 @@ const CaretakerHomeScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
+  const { user } = useContext(UserContext);
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -99,7 +101,7 @@ const CaretakerHomeScreen = () => {
                   />
                   <View>
                     <Text fontSize="xl" fontWeight="600">
-                      Name
+                      {`${user?.fname} ${user?.lname}`}
                     </Text>
                     <Text fontSize="sm" fontWeight="400" color="gray.500">
                       {t('home.profileTouchIndicator')}
