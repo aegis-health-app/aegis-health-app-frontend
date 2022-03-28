@@ -6,7 +6,7 @@ import { ProfileItem } from '../interfaces/User';
 import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from './useSettings';
 
-export const useProfileInfo = (profile: Elderly | Caretaker) => {
+export const useProfileInfo = (profile: Elderly | Caretaker | undefined) => {
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
   const [basicProfile, setBasicProfile] = useState<ProfileItem[]>([]);
@@ -28,6 +28,7 @@ export const useProfileInfo = (profile: Elderly | Caretaker) => {
 
   useEffect(() => {
     if (!user) return;
+
     const basic = [
       {
         label: t('profile.name'),
@@ -72,17 +73,22 @@ export const useProfileInfo = (profile: Elderly | Caretaker) => {
         value: user.bloodType ?? 'N/A'
       }
     ];
-    if (profile && user.isElderly) {
+
+    // user is caretaker, show elderly's profile in TakeCareElderlyScreen
+    if (profile && !user.isElderly) {
       setElderlyBasicProfile(basic);
       setElderlyHealthProfile(health);
+      return () => {};
     }
-    if (profile && !user.isElderly) {
+    // user is elderly, show caretaker profile in ManageCaretakerScreen
+    if (profile && user.isElderly) {
       setCaretakerBasicProfile(basic);
       setCaretakerHealthProfile(health);
+      return () => {};
     }
     setBasicProfile(basic);
     setHealthProfile(health);
-  }, [user]);
+  }, [user, profile]);
 
   return {
     basicProfile,
