@@ -61,7 +61,6 @@ const ChangePhoneNumberVerificationScreen = ({
     client
       .put('/setting/changePhoneNumber', payload)
       .then(() => {
-        console.log('show success alert');
         setShowSuccessAlert(true);
       })
       .catch((err) => {
@@ -78,10 +77,14 @@ const ChangePhoneNumberVerificationScreen = ({
         close={() => setShowErrorAlert(false)}
         type={AlertType.ERROR}
 <<<<<<< HEAD
+<<<<<<< HEAD
         message="changePhoneNumberError"
 =======
         message="changePasswordError"
 >>>>>>> 61de8ac (feat: setup alert after change phone number)
+=======
+        message="changePhoneNumberError"
+>>>>>>> 5e866f6 (feat: add alert message)
       />
       <Alert
         isOpen={showSuccessAlert}
@@ -91,11 +94,16 @@ const ChangePhoneNumberVerificationScreen = ({
         }}
         type={AlertType.SUCCESS}
 <<<<<<< HEAD
+<<<<<<< HEAD
         message="changePhoneNumberSuccess"
         customString={phoneNumber}
 =======
         message="changePasswordSuccess"
 >>>>>>> 61de8ac (feat: setup alert after change phone number)
+=======
+        message="changePhoneNumberSuccess"
+        customString={phoneNumber}
+>>>>>>> 5e866f6 (feat: add alert message)
       />
       <View style={styles.pageContainer}>
         <View>
@@ -123,9 +131,12 @@ const ChangePhoneNumberVerificationScreen = ({
           isRequired
         />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <Text>{JSON.stringify(errors)}</Text>
 >>>>>>> 61de8ac (feat: setup alert after change phone number)
+=======
+>>>>>>> 5e866f6 (feat: add alert message)
         <Spacer />
         <VStack space={4}>
           {/* Continue button */}
