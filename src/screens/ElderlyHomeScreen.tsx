@@ -20,8 +20,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../hooks/useDimensions';
+import { UserContext } from '../contexts/UserContext';
 
-const ProfilePic = require('../assets/images/sompoch.png');
+const ProfilePic = require('../assets/images/profile.png');
 
 const ElderlyHomeScreen = () => {
   const { canStart, start, eventEmitter, tourKey } =
@@ -32,6 +33,7 @@ const ElderlyHomeScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
+  const { user } = useContext(UserContext);
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -85,7 +87,7 @@ const ElderlyHomeScreen = () => {
                   />
                   <View>
                     <Text fontSize="xl" fontWeight="600">
-                      Name
+                      {`${user?.fname} ${user?.lname}`}
                     </Text>
                     <Text fontSize="sm" fontWeight="400" color="gray.500">
                       {t('home.profileTouchIndicator')}
