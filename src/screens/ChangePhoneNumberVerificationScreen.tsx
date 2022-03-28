@@ -49,25 +49,12 @@ const ChangePhoneNumberVerificationScreen = ({
       newPhone: phoneNumber,
       enteredPin: otp
     };
-<<<<<<< HEAD
     try {
       const { data } = await client.put('/setting/changePhoneNumber', payload);
       if (data) setShowSuccessAlert(true);
     } catch (err) {
       setShowErrorAlert(true);
     }
-=======
-    console.log(payload);
-    client
-      .put('/setting/changePhoneNumber', payload)
-      .then(() => {
-        setShowSuccessAlert(true);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setShowErrorAlert(true);
-      });
->>>>>>> 61de8ac (feat: setup alert after change phone number)
   };
 
   return (
@@ -76,15 +63,7 @@ const ChangePhoneNumberVerificationScreen = ({
         isOpen={showErrorAlert}
         close={() => setShowErrorAlert(false)}
         type={AlertType.ERROR}
-<<<<<<< HEAD
-<<<<<<< HEAD
         message="changePhoneNumberError"
-=======
-        message="changePasswordError"
->>>>>>> 61de8ac (feat: setup alert after change phone number)
-=======
-        message="changePhoneNumberError"
->>>>>>> 5e866f6 (feat: add alert message)
       />
       <Alert
         isOpen={showSuccessAlert}
@@ -93,17 +72,8 @@ const ChangePhoneNumberVerificationScreen = ({
           navigation.navigate('SettingScreen');
         }}
         type={AlertType.SUCCESS}
-<<<<<<< HEAD
-<<<<<<< HEAD
         message="changePhoneNumberSuccess"
         customString={phoneNumber}
-=======
-        message="changePasswordSuccess"
->>>>>>> 61de8ac (feat: setup alert after change phone number)
-=======
-        message="changePhoneNumberSuccess"
-        customString={phoneNumber}
->>>>>>> 5e866f6 (feat: add alert message)
       />
       <View style={styles.pageContainer}>
         <View>
@@ -130,13 +100,6 @@ const ChangePhoneNumberVerificationScreen = ({
           control={control}
           isRequired
         />
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        <Text>{JSON.stringify(errors)}</Text>
->>>>>>> 61de8ac (feat: setup alert after change phone number)
-=======
->>>>>>> 5e866f6 (feat: add alert message)
         <Spacer />
         <VStack space={4}>
           {/* Continue button */}
