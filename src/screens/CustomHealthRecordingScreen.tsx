@@ -125,6 +125,19 @@ const CustomHealthRecordingScreen = () => {
     return false;
   };
 
+  const handleDefaultValue = (id: number) => {
+    return dict[fieldNumber[id + 1]];
+  };
+
+  const handleFieldChange = (fieldData: Fields, index) => {
+    const list = [...fieldList];
+    list[index] = fieldData;
+    setFieldList(list);
+  };
+
+  useEffect(() => {
+    console.log(dict);
+  });
   return (
     <View flex={1}>
       <SafeAreaView edges={['left', 'top', 'right']}>
