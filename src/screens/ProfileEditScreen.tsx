@@ -107,14 +107,12 @@ const ProfileEditScreen = () => {
     if (!newProfileImage?.assets) return;
     const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
-    if (profileImage.uri && user) {
+    if (profileImage.base64 && user) {
       formData.append('file', {
-        uri:
-          Platform.OS === 'android'
-            ? profileImage.uri
-            : profileImage.uri.replace('file://', ''),
+        base64: profileImage.base64,
         name: profileImage.fileName,
-        type: profileImage.type
+        type: profileImage.type,
+        size: profileImage.fileSize
       });
       try {
         const { data } = await client.post('/user/profile/image', formData);
