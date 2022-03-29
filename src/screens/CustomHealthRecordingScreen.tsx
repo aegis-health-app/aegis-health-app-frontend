@@ -1,4 +1,4 @@
-import { Box, Button, Image, ScrollView, Text, View } from 'native-base';
+import { Box, Button, Icon, Image, ScrollView, Text, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,10 +20,22 @@ import DataFieldInput from '../components/molecules/DataFieldInput';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet } from 'react-native';
+
+interface Fields {
+  fieldName: string;
+  unit: string;
+}
+
+interface dictOfFields {
+  [id: number]: Fields;
+}
 
 const CustomHealthRecordingScreen = () => {
   const [customImage, setCustomImage] = useState<ImagePickerResponse>();
   const [fieldNumber, setFieldNumber] = useState<number>(0);
+  const [dict, setDict] = useState<dictOfFields>();
   const inputSchema = Yup.object({
     title: Yup.string().required(i18n.t('healthRecording.titleBlankError')),
     fieldName: Yup.string().required(i18n.t('healthRecording.fieldBlankError')),
@@ -40,6 +52,8 @@ const CustomHealthRecordingScreen = () => {
     resolver: useYupValidationResolver(inputSchema),
     mode: 'onTouched'
   });
+
+  const watchInputs = watch();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -81,6 +95,10 @@ const CustomHealthRecordingScreen = () => {
       </Text>
     );
   };
+
+  // const handleChange = (index: number, val: Fields) => {
+  //   setDict({...dict, id:index, field: val})
+  // }
 
   return (
     <SafeAreaView edges={['left', 'top', 'right']}>
@@ -125,8 +143,31 @@ const CustomHealthRecordingScreen = () => {
           </View>
           {/* Data Field Inputs Part */}
           <View>
-            <DataFieldInput />
-            {Array.from(Array(fieldNumber)).map((x, index) => <DataFieldInput key={index} hasX={true}/>)}
+            <DataFieldInput
+              id={1}
+              onChange={(val: Fields) => setDict({ ...dict, 1: val })}
+            />
+            {Array.from(Array(fieldNumber)).map((x, index) => (
+              <View key={index} flexDir="row">
+                <DataFieldInput
+                  id={index + 2}
+                  key={index}
+                  hasX={true}
+                  onChange={(val: Fields) =>
+                    setDict({ ...dict, [index + 2]: val })
+                  }
+                />
+                <Icon
+                  style={styles.icon}
+                  ml={3}
+                  as={MaterialIcons}
+                  name="close"
+                  size="6"
+                  color="muted.600"
+                  onPress={() => console.log('todo: delete')}
+                />
+              </View>
+            ))}
           </View>
           <View mt={6}>
             <Button
@@ -141,12 +182,16 @@ const CustomHealthRecordingScreen = () => {
                 _text: { color: '#7CC2FF' }
               }}
               onPress={() => {
-                  setFieldNumber(fieldNumber + 1)
-                  console.log(fieldNumber)
+                setFieldNumber(fieldNumber + 1);
+                console.log(fieldNumber);
               }}>
               {t('healthRecording.addField')}
             </Button>
           </View>
+          {/* <Button onPress={() => setDict({...dict, 1: {fieldName: 'hi', unit:'banana'}})}>add 1</Button>
+          <Button onPress={() => setDict({...dict, 2: {fieldName: 'ju', unit:'apple'}})}>add 2</Button>
+          <Button onPress={() => setDict({...dict, 1: {fieldName: 'changed', unit:'changed'}})}>change 1</Button> */}
+          <Button onPress={() => console.log(dict)}>log</Button>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -154,3 +199,9 @@ const CustomHealthRecordingScreen = () => {
 };
 
 export default CustomHealthRecordingScreen;
+
+const styles = StyleSheet.create({
+  icon: {
+    marginTop: 55
+  }
+});

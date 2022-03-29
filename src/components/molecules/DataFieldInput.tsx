@@ -7,12 +7,15 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet } from 'react-native';
 
 type DataFieldInputProps = {
+    id: number
     hasX?: boolean
+    onChange: (val: any) => void;
 };
 
-const DataFieldInput = ({hasX}: DataFieldInputProps) => {
+const DataFieldInput = ({id, hasX, onChange}: DataFieldInputProps) => {
     const inputSchema = Yup.object({
         title: Yup.string().required(i18n.t('healthRecording.titleBlankError')),
         fieldName: Yup.string().required(i18n.t('healthRecording.fieldBlankError')),
@@ -29,20 +32,24 @@ const DataFieldInput = ({hasX}: DataFieldInputProps) => {
         resolver: useYupValidationResolver(inputSchema),
         mode: 'onTouched'
       });
+
+      const watchForms = watch()
   return (
     <View mt={2} flexDir="row">
-    <View width="50%">
+    <View width="48">
       <Text fontSize={16} color="#52525B">
-        {t('healthRecording.fieldName')}
+        {t('healthRecording.fieldName')} {id}
       </Text>
       <TextInput
         placeholder={t('healthRecording.fieldName')}
         name="fieldName"
         control={control}
         errors={errors}
+        onEndEditing={() => onChange({fieldName: watchForms['fieldName'], unit: watchForms['unit']})}
+        // onChangeText={() => onChange(watchForms['fieldName'])}
       />
     </View>
-    <View ml={4} width="35%">
+    <View ml={4} style={styles.unitInput}>
       <Text fontSize={16} color="#52525B">
         {t('healthRecording.unit')}
       </Text>
@@ -51,12 +58,18 @@ const DataFieldInput = ({hasX}: DataFieldInputProps) => {
         name="unit"
         control={control}
         errors={errors}
+        onEndEditing={() => onChange({fieldName: watchForms['fieldName'], unit: watchForms['unit']})}
       />
     </View>
-    {hasX? <Icon mt={12} ml={3} as={MaterialIcons} name="close" size="6" color="muted.600" onPress={() => console.log('todo: delete')}/>: null}
   </View>
 
   );
 };
 
 export default DataFieldInput;
+
+const styles = StyleSheet.create({
+  unitInput: {
+    width: 115
+  },
+});
