@@ -105,17 +105,16 @@ const ProfileEditScreen = () => {
 
   const uploadNewProfileImage = async () => {
     if (!newProfileImage?.assets) return;
-    const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
+    const imagePayload = {
+      base64: profileImage.base64,
+      name: profileImage.fileName,
+      type: profileImage.type,
+      size: profileImage.fileSize
+    };
     if (profileImage.base64 && user) {
-      formData.append('file', {
-        base64: profileImage.base64,
-        name: profileImage.fileName,
-        type: profileImage.type,
-        size: profileImage.fileSize
-      });
       try {
-        const { data } = await client.post('/user/profile/image', formData);
+        const { data } = await client.post('/user/profile/image', imagePayload);
         if (data) getUserProfile();
       } catch (error) {
         setShowImageUploadError(true);
