@@ -25,6 +25,8 @@ const UserContextProvider = ({ ...props }) => {
     if (_user) {
       setUser(_user);
     }
+    // for debug, remove later!
+    console.log({ _user });
   };
 
   useEffect(() => {
