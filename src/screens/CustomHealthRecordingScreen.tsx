@@ -131,13 +131,29 @@ const CustomHealthRecordingScreen = () => {
 
   const handleFieldChange = (fieldData: Fields, index) => {
     const list = [...fieldList];
-    list[index] = fieldData;
+    list[index] = { fieldName: e, unit: list[index].unit };
     setFieldList(list);
   };
 
-  useEffect(() => {
-    console.log(dict);
-  });
+  const handleUnitChange = (e: string, index: number) => {
+    const list = [...fieldList];
+    list[index] = { fieldName: list[index].fieldName, unit: e };
+    setFieldList(list);
+  };
+
+  const handleButtonState = () => {
+    if (
+      watchInputs['title'] == '' ||
+      watchInputs['title'] == null ||
+      fieldList.filter((e) => e.fieldName == '').length > 0 ||
+      fieldList.filter((e) => e.unit == '').length > 0 ||
+      fieldList.filter((e) => e.fieldName == undefined).length > 0 ||
+      fieldList.filter((e) => e.unit == undefined).length > 0
+    )
+      return true;
+    return false;
+  };
+
   return (
     <View flex={1}>
       <SafeAreaView edges={['left', 'top', 'right']}>
@@ -339,5 +355,8 @@ export default CustomHealthRecordingScreen;
 const styles = StyleSheet.create({
   icon: {
     marginTop: 55
+  },
+  unitInput: {
+    width: 115
   }
 });
