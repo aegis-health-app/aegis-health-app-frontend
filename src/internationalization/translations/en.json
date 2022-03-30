@@ -305,6 +305,13 @@
     "addField": "Add More Field",
     "titleBlankError": "Title cannot be left blank",
     "fieldBlankError": "This field cannot be left blank",
-    "create": "Create"
+    "create": "Create",
+    "addEntry": "Add Entry",
+    "enterValue": "Enter Value",
+    "date": "Date",
+    "time": "Time",
+    "recordHistory": "Record History",
+    "viewAnalytics": "View Analytics",
+    "noData": "There is not data"
   }
 }
