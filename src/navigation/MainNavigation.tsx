@@ -217,23 +217,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="SignInScreen"
-              component={SignInScreen}
-              options={{
-                title: 'Sign In',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
-              name="SignUpScreen"
-              component={SignUpScreen}
-              initialParams={{ isElderly: true }}
-              options={{
-                title: 'Sign Up',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
               name="ForgotPasswordScreen"
               component={ForgotPasswordScreen}
               options={{
@@ -300,8 +283,9 @@ const MainNavigation = () => {
               name="SignInScreen"
               component={SignInScreen}
               options={{
-                title: 'Sign In',
-                headerShown: false
+                title: t('auth.signIn'),
+                headerShown: true,
+                headerTitleAlign: 'center'
               }}
             />
             <Stack.Screen
@@ -317,7 +301,15 @@ const MainNavigation = () => {
               component={SignUpScreen}
               initialParams={{ isElderly: true }}
               options={{
-                title: 'Sign Up',
+                title: t('auth.signUp'),
+                headerShown: true,
+                headerTitleAlign: 'center'
+              }}
+            />
+            <Stack.Screen
+              name="PlanSelectionScreen"
+              component={PlanSelectionScreen}
+              options={{
                 headerShown: false
               }}
             />
