@@ -45,9 +45,10 @@ interface dictOfFields {
 const CustomHealthRecordingScreen = () => {
   const [customImage, setCustomImage] = useState<ImagePickerResponse>();
   const [fieldNumber, setFieldNumber] = useState<number[]>([1]);
-  const [fieldCount, setFieldCount] = useState<number>(1);
   const [dict, setDict] = useState<dictOfFields>({});
-  const [fieldList, setFieldList] = useState<Fields[]>([{ fieldName: undefined, unit: undefined }]);
+  const [fieldList, setFieldList] = useState<Fields[]>([
+    { fieldName: undefined, unit: undefined }
+  ]);
   const inputSchema = Yup.object({
     title: Yup.string().required(i18n.t('healthRecording.titleBlankError')),
     fieldName: Yup.string().required(i18n.t('healthRecording.fieldBlankError')),
@@ -109,23 +110,14 @@ const CustomHealthRecordingScreen = () => {
     );
   };
 
-  const handleRemove = (id: number) => {
-    console.log(id);
-    setFieldNumber(fieldNumber.filter((ele) => ele !== id));
-  };
-
   const handleFieldRemove = (id: number) => {
     const list = [...fieldList];
     list.splice(id, 1);
     setFieldList(list);
-  }
+  };
 
   const handleFieldAdd = () => {
     setFieldList([...fieldList, { fieldName: undefined, unit: undefined }]);
-  };
-
-  const handleDefaultValue = (id: number) => {
-    return dict[fieldNumber[id + 1]];
   };
 
   const handleFieldChange = (fieldData: Fields, index) => {
@@ -187,23 +179,21 @@ const CustomHealthRecordingScreen = () => {
                     id={fieldNumber[index + 1]}
                     hasX={true}
                     defaultValue={field}
-                    onChange={(val: Fields) =>
-                      handleFieldChange(val, index)
-                    }
+                    onChange={(val: Fields) => handleFieldChange(val, index)}
                   />
-                  { fieldList.length !== 1 ?
-                  <Icon
-                    style={styles.icon}
-                    ml={3}
-                    as={MaterialIcons}
-                    name="close"
-                    size="6"
-                    color="muted.600"
-                    onPress={() => {
-                      handleFieldRemove(fieldNumber[index + 1]);
-                    }}
-                  />:null
-}
+                  {fieldList.length !== 1 ? (
+                    <Icon
+                      style={styles.icon}
+                      ml={3}
+                      as={MaterialIcons}
+                      name="close"
+                      size="6"
+                      color="muted.600"
+                      onPress={() => {
+                        handleFieldRemove(fieldNumber[index + 1]);
+                      }}
+                    />
+                  ) : null}
                 </View>
               ))}
             </View>
@@ -220,7 +210,7 @@ const CustomHealthRecordingScreen = () => {
                   _text: { color: '#7CC2FF' }
                 }}
                 onPress={() => {
-                  handleFieldAdd()
+                  handleFieldAdd();
                 }}>
                 {t('healthRecording.addField')}
               </Button>
