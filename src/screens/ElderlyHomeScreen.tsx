@@ -1,6 +1,18 @@
-import { Fab, Icon, ScrollView, Text, View, Image } from 'native-base';
+import {
+  Fab,
+  Icon,
+  ScrollView,
+  Text,
+  View,
+  Image,
+  Modal,
+  FormControl,
+  Input,
+  Button,
+  Spacer
+} from 'native-base';
 import Divider from '../components/atoms/Divider';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UpComingAlert from './../components/organisms/UpComingAlert';
 import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,7 +25,7 @@ import {
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TourguideContext } from '../contexts/TourguideContext';
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -22,6 +34,8 @@ import { useTranslation } from 'react-i18next';
 import useDimensions from '../hooks/useDimensions';
 import { UserContext } from '../contexts/UserContext';
 import FallbackImage from '../components/molecules/FallbackImage';
+import EmotionCard from '../components/organisms/EmotionCard';
+import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -35,6 +49,7 @@ const ElderlyHomeScreen = () => {
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
   const { user } = useContext(UserContext);
+  const [showModal, setShowModal] = useState(false);
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -56,9 +71,51 @@ const ElderlyHomeScreen = () => {
     });
   }, [eventEmitter]);
 
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
+
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <ScrollView nestedScrollEnabled h="100%">
+        {/* Emotion card */}
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+          <Modal.Content maxWidth="400px">
+            <Modal.CloseButton />
+            <Modal.Header alignItems={'center'}>Good morning</Modal.Header>
+            <Modal.Body>
+              <View style={styles.pictureArea}>
+                <Image source={require('../assets/images/tempMonday.png')} />
+              </View>
+              <Text fontSize="lg" fontWeight="400">
+                How are you feeling today?
+              </Text>
+            </Modal.Body>
+            <Modal.Footer>
+              <View style={styles.emotionPicker}>
+                <TouchableOpacity
+                  style={styles.emotionButton}
+                  onPress={() => setShowModal(false)}>
+                  <Image
+                    source={require('../assets/images/emotionHappy.png')}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.emotionButton}
+                  onPress={() => setShowModal(false)}>
+                  <Image
+                    source={require('../assets/images/emotionNeutral.png')}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.emotionButton}
+                  onPress={() => setShowModal(false)}>
+                  <Image source={require('../assets/images/emotionSad.png')} />
+                </TouchableOpacity>
+              </View>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
         <View
           flex={1}
           alignItems="center"
@@ -192,3 +249,23 @@ const ElderlyHomeScreen = () => {
 };
 
 export default ElderlyHomeScreen;
+
+const styles = StyleSheet.create({
+  emotionPicker: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'flex-start',
+    flexDirection: 'row'
+  },
+  emotionButton: {
+    backgroundColor: '#fafafa',
+    borderRadius: 20,
+    padding: 10,
+    margin: 8
+  },
+  pictureArea: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 12
+  }
+});
