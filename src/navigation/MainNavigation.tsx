@@ -11,7 +11,7 @@ import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
 import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
-import HealthRecordScreen from '../screens/HealthRecordScreen';
+import HealthRecordScreen from '../screens/healthRecord/HealthRecordScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -34,6 +34,7 @@ import { UserContext } from '../contexts/UserContext';
 import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
 import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
 import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
+import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -174,7 +175,21 @@ const MainNavigation = () => {
             <Stack.Screen
               name="HealthRecordScreen"
               component={HealthRecordScreen}
-              options={{ headerShown: false }}
+              options={{
+                title: t('modules.healthRecord'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
+            />
+            <Stack.Screen
+              name="AddHealthEntryScreen"
+              component={AddHealthEntry}
+              initialParams={{ recordTitle: '' }}
+              options={{
+                title: t(''),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
             />
             <Stack.Screen
               name="HealthBlogScreen"
@@ -244,14 +259,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
               name="TakeCareElderlyScreen"
               component={TakeCareElderlyScreen}
               options={{
@@ -292,6 +299,14 @@ const MainNavigation = () => {
               initialParams={{ isElderly: true }}
               options={{
                 title: 'Sign Up',
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="PlanSelectionScreen"
+              component={PlanSelectionScreen}
+              options={{
+                title: 'Plan Selection',
                 headerShown: false
               }}
             />

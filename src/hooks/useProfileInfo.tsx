@@ -6,7 +6,7 @@ import { ProfileItem } from '../interfaces/User';
 import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from './useSettings';
 
-export const useProfileInfo = (profile: Elderly | Caretaker | undefined) => {
+export const useProfileInfo = (profile?: Elderly | Caretaker | undefined) => {
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
   const [basicProfile, setBasicProfile] = useState<ProfileItem[]>([]);

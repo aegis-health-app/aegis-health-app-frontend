@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Button } from 'native-base';
+import { View, ScrollView } from 'native-base';
 import RemButton from '../components/atoms/RemButton';
 import Divider from '../components/atoms/Divider';
 import InputBox from '../components/atoms/Input';

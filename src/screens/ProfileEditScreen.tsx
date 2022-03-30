@@ -7,9 +7,7 @@ import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
 import { userProfileSchema } from '../interfaces/User';
 import Divider from '../components/atoms/Divider';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import { LANGUAGES, useSettings } from '../hooks/useSettings';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
@@ -28,6 +26,7 @@ import {
 } from '../utils/permission';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
+import DatePicker from '../components/molecules/DatePicker';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -35,7 +34,6 @@ const ProfilePic = require('../assets/images/profile.png');
 const ProfileEditScreen = () => {
   const { t } = useTranslation();
   const { user, getUserProfile } = useContext(UserContext);
-  const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
@@ -56,13 +54,10 @@ const ProfileEditScreen = () => {
   });
 
   const [date, setDate] = useState(new Date(700938977));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
 
-  const onDateChange = (event, selectedDate: Date | undefined) => {
+  const onDateChange = (event, selectedDate?: Date | undefined) => {
     if (!selectedDate) return;
     const currentDate = selectedDate.getTime() + 7 * 60 * 60 * 1000;
-    setShow(false);
     setDate(new Date(currentDate));
     if (user) {
       setInitialValues({
@@ -70,21 +65,6 @@ const ProfileEditScreen = () => {
         bday: currentDate.toString()
       });
     }
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const getFormattedDate = (tempDate: Date) => {
-    const momentDate = moment(tempDate, 'MM/DD/YYYY');
-    if (language === LANGUAGES.THAI) momentDate.add(543, 'years');
-    return momentDate.format('MM/DD/YYYY');
   };
 
   const takePicture = async () => {
@@ -143,9 +123,7 @@ const ProfileEditScreen = () => {
     data = {
       ...data,
       gender: initialValues?.gender || GenderEnum.male,
-      bday: initialValues?.bday
-        ? moment(initialValues?.bday, 'YYYY-MM-DD')
-        : date.toLocaleDateString('en-us'),
+      bday: moment(date ?? initialValues?.bday, 'YYYY/MM/DD HH:mm:ss'),
       bloodType: initialValues?.bloodType
     };
 
@@ -292,33 +270,7 @@ const ProfileEditScreen = () => {
           <Spacer />
 
           {/* Birthdate */}
-          <Text fontSize={16} mb={2}>
-            {t('profile.birthDate')}
-          </Text>
-          {(Platform.OS === 'ios' || show) && (
-            <View style={styles.profileInfoItemRow}>
-              {Platform.OS === 'ios' && (
-                <Text w={100}>{getFormattedDate(date)}</Text>
-              )}
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                onChange={onDateChange}
-                mode={mode as any}
-                style={Platform.OS === 'ios' ? { width: 124 } : null}
-              />
-            </View>
-          )}
-          <View>
-            {Platform.OS === 'android' && (
-              <View style={styles.profileInfoItemRow}>
-                <Text w={100}>{getFormattedDate(date)}</Text>
-                <Button onPress={() => showDatepicker()}>
-                  {t('userForm.editBirthdate')}
-                </Button>
-              </View>
-            )}
-          </View>
+          <DatePicker date={date} onDateChange={onDateChange} />
           <Spacer />
 
           {/* Health Issues */}
