@@ -1,14 +1,5 @@
-import {
-  Box,
-  Button,
-  FlatList,
-  Icon,
-  Image,
-  ScrollView,
-  Text,
-  View
-} from 'native-base';
-import React, { useEffect, useState } from 'react';
+import { Button, Icon, Image, ScrollView, Text, View } from 'native-base';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -25,7 +16,6 @@ import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
-import DataFieldInput from '../components/molecules/DataFieldInput';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
@@ -33,26 +23,24 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
 import useKeyboardOpen from '../hooks/useKeyboardOpen';
 
-export interface Fields {
+interface Fields {
   fieldName: string | undefined;
   unit: string | undefined;
 }
 
-interface dictOfFields {
-  [id: number]: Fields;
+interface UpdateHealthRecordDTO {
+  hrName: string;
+  imageid: null;
+  listField: Fields[];
 }
 
 const CustomHealthRecordingScreen = () => {
   const [customImage, setCustomImage] = useState<ImagePickerResponse>();
-  const [fieldNumber, setFieldNumber] = useState<number[]>([1]);
-  const [dict, setDict] = useState<dictOfFields>({});
   const [fieldList, setFieldList] = useState<Fields[]>([
     { fieldName: undefined, unit: undefined }
   ]);
   const inputSchema = Yup.object({
-    title: Yup.string().required(i18n.t('healthRecording.titleBlankError')),
-    fieldName: Yup.string().required(i18n.t('healthRecording.fieldBlankError')),
-    unit: Yup.string().required('')
+    title: Yup.string().required(i18n.t('healthRecording.titleBlankError'))
   });
 
   const { t } = useTranslation();
@@ -61,11 +49,7 @@ const CustomHealthRecordingScreen = () => {
     control,
     formState: { errors },
     watch,
-    reset
-  } = useForm({
-    resolver: useYupValidationResolver(inputSchema),
-    mode: 'onTouched'
-  });
+  } = useForm({ resolver: useYupValidationResolver(inputSchema), mode: 'all' });
 
   const watchInputs = watch();
   const navigation =
@@ -120,15 +104,25 @@ const CustomHealthRecordingScreen = () => {
     setFieldList([...fieldList, { fieldName: undefined, unit: undefined }]);
   };
 
-  const handleFieldChange = (fieldData: Fields, index) => {
+  const handleFieldNameChange = (e: string, index: number) => {
     const list = [...fieldList];
-    list[index] = fieldData;
+    list[index] = { fieldName: e, unit: list[index].unit };
     setFieldList(list);
   };
 
-  useEffect(() => {
-    console.log(dict);
-  });
+  const handleUnitChange = (e: string, index: number) => {
+    const list = [...fieldList];
+    list[index] = { fieldName: list[index].fieldName, unit: e };
+    setFieldList(list);
+  };
+
+  const handleButtonState = () => {
+    if (watchInputs['title'] == '' || watchInputs['title'] == null || 
+    fieldList.filter(e => e.fieldName == "").length > 0 || fieldList.filter(e => e.unit == "").length > 0 ||
+    fieldList.filter(e => e.fieldName == undefined).length > 0 || fieldList.filter(e => e.unit == undefined).length > 0) return true;
+    return false;
+  };
+
   return (
     <View flex={1}>
       <SafeAreaView edges={['left', 'top', 'right']}>
@@ -141,13 +135,15 @@ const CustomHealthRecordingScreen = () => {
             </View>
             <View mt={3}>
               <Text fontSize={16} color="#52525B">
-                {t('healthRecording.title')}
+                {t('healthRecording.title')} 
               </Text>
               <TextInput
                 placeholder={t('healthRecording.title')}
                 name="title"
                 control={control}
                 errors={errors}
+                isRequired
+                errorMessage={t('healthRecording.titleBlankError')}
               />
             </View>
             {/* Image Part */}
@@ -173,14 +169,68 @@ const CustomHealthRecordingScreen = () => {
             </View>
             {/* Data Field Inputs Part */}
             <View>
-              {fieldList.map((field, index) => (
+              {fieldList.map((field: Fields, index: number) => (
                 <View key={index} flexDir="row">
-                  <DataFieldInput
-                    id={fieldNumber[index + 1]}
-                    hasX={true}
-                    defaultValue={field}
-                    onChange={(val: Fields) => handleFieldChange(val, index)}
-                  />
+                  <View mt={2} flexDir="row">
+                    <View width="48">
+                      <Text fontSize={16} color="#52525B">
+                        {t('healthRecording.fieldName')} {index + 1} {field.fieldName == '' ? (
+                        <Text color="red.500" fontSize="12">
+                          *
+                        </Text>
+                      ) : null}
+                      </Text>
+                      <TextInput
+                        placeholder={t('healthRecording.fieldName')}
+                        name={`fieldName_${index}`}
+                        control={control}
+                        errors={errors}
+                        value={field.fieldName}
+                        onChangeText={(e: string) => {
+                          handleFieldNameChange(e, index);
+                        }}
+                        onEndEditing={() => field.fieldName == undefined? handleFieldNameChange('', index): undefined}
+                        borderColor={
+                          field.fieldName == ''
+                            ? 'red.500'
+                            : '#ACB5BD'
+                        }
+                      />
+                      {field.fieldName == '' ? (
+                        <Text color="red.500" fontSize="12">
+                          {t('healthRecording.fieldBlankError')}
+                        </Text>
+                      ) : null}
+                    </View>
+                    <View ml={4} style={styles.unitInput}>
+                      <Text fontSize={16} color="#52525B">
+                        {t('healthRecording.unit')} {field.unit == '' ? (
+                        <Text color="red.500" fontSize="12">
+                          *
+                        </Text>
+                      ) : null}
+                      </Text>
+                      <TextInput
+                        placeholder={t('healthRecording.unit')}
+                        name={`unit_${index}`}
+                        control={control}
+                        errors={errors}
+                        value={field.unit}
+                        onChangeText={(e: string) => handleUnitChange(e, index)}
+                        onEndEditing={() => field.unit == undefined? handleUnitChange('', index): undefined}
+                        borderColor={
+                          field.unit == ''
+                            ? 'red.500'
+                            : '#ACB5BD'
+                        }
+                      />
+                      {field.unit == '' ? (
+                        <Text color="red.500" fontSize="12">
+                          {t('healthRecording.fieldBlankError')}
+                        </Text>
+                      ) : null}
+                    </View>
+                  </View>
                   {fieldList.length !== 1 ? (
                     <Icon
                       style={styles.icon}
@@ -190,7 +240,7 @@ const CustomHealthRecordingScreen = () => {
                       size="6"
                       color="muted.600"
                       onPress={() => {
-                        handleFieldRemove(fieldNumber[index + 1]);
+                        handleFieldRemove(index);
                       }}
                     />
                   ) : null}
@@ -229,7 +279,13 @@ const CustomHealthRecordingScreen = () => {
             isDisabled={true}
             mx={4}
             mt={3}
-            onPress={() => console.log(dict)}>
+            onPress={() => {
+              console.log({
+                hrName: watchInputs['title'],
+                imageid: null,
+                listField: fieldList
+              });
+            }}>
             {t('healthRecording.create')}
           </Button>
         </View>
@@ -243,8 +299,13 @@ const CustomHealthRecordingScreen = () => {
           <Button
             mx={4}
             mt={4}
+            isDisabled={handleButtonState()}
             onPress={() => {
-              console.log(fieldList);
+              console.log({
+                hrName: watchInputs['title'],
+                imageid: null,
+                listField: fieldList
+              } as UpdateHealthRecordDTO);
             }}>
             {t('healthRecording.create')}
           </Button>
@@ -259,5 +320,8 @@ export default CustomHealthRecordingScreen;
 const styles = StyleSheet.create({
   icon: {
     marginTop: 55
+  },
+  unitInput: {
+    width: 115
   }
 });
