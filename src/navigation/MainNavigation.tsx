@@ -36,6 +36,7 @@ import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
 import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
 import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
+import ElderlyEmotionHistory from './../screens/ElderlyEmotionHistory';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -145,7 +146,7 @@ const MainNavigation = () => {
               options={{
                 title: t('profile.myCaretaker'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
               }}
             />
@@ -155,7 +156,7 @@ const MainNavigation = () => {
               options={{
                 title: t('userLink.headerElderly'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen
@@ -230,7 +231,7 @@ const MainNavigation = () => {
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen
@@ -239,7 +240,7 @@ const MainNavigation = () => {
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 animation: 'none'
               }}
             />
@@ -249,16 +250,25 @@ const MainNavigation = () => {
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen
               name="TakeCareElderlyScreen"
               component={TakeCareElderlyScreen}
               options={{
-                title: 'Profile',
+                title: t('profile.profile'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
+            />
+            <Stack.Screen
+              name="ElderlyEmotionHistory"
+              component={ElderlyEmotionHistory}
+              options={{
+                title: t('home.emotionHist'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen

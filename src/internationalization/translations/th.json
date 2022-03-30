@@ -112,7 +112,8 @@
     "healthBlogs": "บล็อกสุขภาพ",
     "selectModules": "เลือกฟีเจอร์",
     "chooseModule": "เลือกดูฟีเจอร์",
-    "elderlyNoModule": "ผู้สูงอายุยังไม่ได้เปิดการใช้ฟีเจอร์"
+    "elderlyNoModule": "ผู้สูงอายุยังไม่ได้เปิดการใช้ฟีเจอร์",
+    "emotionTracking": "การติดตามสภาวะอารมณ์"
   },
   "moduleSelection": {
     "removeConfirmationText": "คุณต้องการที่จะลบฟีเจอร์นี้หรือไม่",

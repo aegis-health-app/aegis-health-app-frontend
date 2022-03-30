@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationProp
+} from '@react-navigation/native-stack';
 import { Text, View, Switch, ScrollView } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
@@ -15,11 +18,14 @@ import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
+import { useNavigation } from '@react-navigation/native';
 
 const TakeCareElderlyScreen = ({
   route
 }: NativeStackScreenProps<RootStackParamList, 'TakeCareElderlyScreen'>) => {
   const { uid } = route.params;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
   const { elderlyBasicProfile, elderlyHealthProfile } = useProfileInfo(elderly);
@@ -48,7 +54,8 @@ const TakeCareElderlyScreen = ({
               </Text>
               <Switch defaultIsChecked colorScheme="primary" />
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ElderlyEmotionHistory')}>
               <Text fontSize="md" color="primary.500" underline>
                 {t('home.emotionHist')}
               </Text>
