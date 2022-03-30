@@ -31,6 +31,12 @@ const DatePicker = (props: DatePickerProps) => {
 
   return (
     <View w="100%">
+<<<<<<< HEAD
+=======
+      <Text fontSize={16} mb={2}>
+        {t('profile.birthDate')}
+      </Text>
+>>>>>>> 6da2aba (feat: add entry screen UI)
       {(Platform.OS === 'ios' || show) && (
         <View flexDir="row" justifyContent="space-between" alignItems="center">
           {Platform.OS === 'ios' && (
@@ -40,7 +46,11 @@ const DatePicker = (props: DatePickerProps) => {
             testID="dateTimePicker"
             value={date}
             onChange={onDateChange}
+<<<<<<< HEAD
             mode={mode as AndroidNativeProps['mode']}
+=======
+            mode={mode as any}
+>>>>>>> 6da2aba (feat: add entry screen UI)
             style={Platform.OS === 'ios' ? { width: 124 } : null}
           />
         </View>
