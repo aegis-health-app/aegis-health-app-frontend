@@ -112,7 +112,8 @@
     "healthBlogs": "Health Blogs",
     "selectModules": "Select Modules",
     "chooseModule": "Choose module",
-    "elderlyNoModule": "This elderly did not turn on any feature yet."
+    "elderlyNoModule": "This elderly did not turn on any feature yet.",
+    "emotionTracking": "Emotion tracking"
   },
   "moduleSelection": {
     "removeConfirmationText": "Are you sure you want to remove this module?",
