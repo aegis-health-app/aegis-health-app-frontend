@@ -316,8 +316,12 @@
     "noData": "There is no data",
     "generalInfo": "General Information",
     "of": "of",
-    "title": "Title",
     "save": "Save",
     "deleteRecording": "Delete Recording"
+  },
+  "emotionalRecord": {
+    "of": "of",
+    "date": "Date",
+    "emotion":"Emotion"
   }
 }
