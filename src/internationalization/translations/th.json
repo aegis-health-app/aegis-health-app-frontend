@@ -353,5 +353,10 @@
     "of": "จาก",
     "save": "บันทึก",
     "deleteRecording": "ลบการจดบันทึกนี้"
+  },
+  "emotionalRecord": {
+    "of": "จาก",
+    "date": "วันที่",
+    "emotion":"อารมณ์"
   }
 }
