@@ -7,7 +7,7 @@ type TextInputProps = {
 
 const TextInput: React.FC<TextInputProps> = ({ headerText, ...props }) => {
   return (
-    <Text fontSize={18} {...props}>
+    <Text fontSize={18} {...props} padding={0.5}>
       {headerText}
     </Text>
   );
