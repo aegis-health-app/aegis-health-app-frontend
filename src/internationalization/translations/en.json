@@ -268,31 +268,31 @@
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "changePhoneNumber":{
+  "changePhoneNumber": {
     "blankPhoneNumberWarning": "Phone Number cannot be left blank",
     "invalidPhoneNumberWarning": "Please input a valid phone number",
-    "changePhoneNumber":"Change Phone Number",
-    "enterPhoneNumber":"Enter Your New Phone Number",
-    "enterPhoneNumberDescription":"We will send 6 digits code to your phone for the verification.",
-    "phoneNumber":"Phone Number",
-    "continue":"Continue",
-    "enterYourVerificationCode":"Enter Your Verification Code",
-    "verificationCodeSentTo":"Enter the verification code sent to",
-    "submit":"Submit"
+    "changePhoneNumber": "Change Phone Number",
+    "enterPhoneNumber": "Enter Your New Phone Number",
+    "enterPhoneNumberDescription": "We will send 6 digits code to your phone for the verification.",
+    "phoneNumber": "Phone Number",
+    "continue": "Continue",
+    "enterYourVerificationCode": "Enter Your Verification Code",
+    "verificationCodeSentTo": "Enter the verification code sent to",
+    "submit": "Submit"
   },
-  "changePhoneNumberSuccess":{
+  "changePhoneNumberSuccess": {
     "header": "Success",
     "body": "Your phone number has been changed to ",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "changePhoneNumberError":{
+  "changePhoneNumberError": {
     "header": "Error",
     "body": "Unable to change your phone number. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "healthRecording":{
+  "healthRecording": {
     "createRecordings": "Create recordings",
     "generalInformation": "General Information",
     "title": "Title",
@@ -322,7 +322,7 @@
   "emotionalRecord": {
     "of": "of",
     "date": "Date",
-    "emotion":"Emotion",
+    "emotion": "Emotion",
     "HAPPY": "Feels happy",
     "NEUTRAL": "Feels neutral",
     "BAD": "Feels bad",
@@ -331,7 +331,7 @@
     "switchLast": "This is your last time to toggle emotion switch for today",
     "switchDisabled": "You cannot toggle emotion switch anymore for today"
   },
-  "emotionTrackingCard":{
+  "emotionTrackingCard": {
     "Monday": "Happy Monday",
     "Tuesday": "Happy Tuesday",
     "Wednesday": "Happy Wednesday",
@@ -339,6 +339,34 @@
     "Friday": "Happy Friday",
     "Saturday": "Happy Saturday",
     "Sunday": "Happy Sunday",
-    "howAreYouFeelingToday" :"How are you feeling today?"
+    "howAreYouFeelingToday": "How are you feeling today?",
+    "emotion": "Emotion",
+    "switchLast": "This is your last time to toggle emotion switch for today",
+    "switchDisabled": "You cannot toggle emotion switch anymore for today",
+    "create": "Create"
+  },
+  "healthRecordings": {
+    "header": "Health Recordings",
+    "addRecording": "add more data"
+  },
+  "healthRecordingsTutorial": {
+    "step1": "Press “Add more data” to create a new health recording from our featured template or your own custom template.",
+    "step2": "Click on the Health Recording card to view the details and past records."
+  },
+  "healthRecordingsCreate": {
+    "header": "Create Recordings",
+    "selectTemplate": "Select template",
+    "advanced": "Advanced"
+  },
+  "healthRecordingsTemplates": {
+    "bloodPressure": "Blood Pressure",
+    "bloodSugarLevel": "Blood Sugar Level",
+    "heartRate": "Heart Rate",
+    "fever": "Fever",
+    "hdlldl": "HDL LDL",
+    "headache": "Headache",
+    "constipation": "Constipation",
+    "anorexia": "Anorexia",
+    "insomnia": "Insomnia"
   }
 }
