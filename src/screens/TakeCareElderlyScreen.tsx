@@ -18,14 +18,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
 import {
   getIsEmotionTrackingOn,
   sendEmotionTrackerOff,
   sendEmotionTrackerOn
 } from '../utils/caretaker/switch';
-=======
->>>>>>> dd9a2dd (feat: update navigation and header fontWeight)
 
 const TakeCareElderlyScreen = ({
   route
@@ -33,10 +30,6 @@ const TakeCareElderlyScreen = ({
   const { uid } = route.params;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-<<<<<<< HEAD
-
-=======
->>>>>>> dd9a2dd (feat: update navigation and header fontWeight)
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
   const { elderlyBasicProfile } = useProfileInfo(elderly);
