@@ -24,7 +24,7 @@ const CaretakerContextProvider = ({ ...props }) => {
     if (_caretakerHomeProfile) {
       setCaretakerHomeProfile(_caretakerHomeProfile);
     }
-  }, []);
+  }, [user]);
 
   const value = {
     caretakerHomeProfile,
