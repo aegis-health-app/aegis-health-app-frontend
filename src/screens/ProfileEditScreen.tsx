@@ -18,12 +18,9 @@ import { User, BloodType, GenderEnum } from '../dto/modules/user.dto';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
 import DatePicker from '../components/molecules/DatePicker';
-<<<<<<< HEAD
 import { useImageSelection } from '../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import FallbackImage from '../components/molecules/FallbackImage';
-=======
->>>>>>> 6da2aba (feat: add entry screen UI)
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
