@@ -3,7 +3,7 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp
 } from '@react-navigation/native-stack';
-import { Text, View, Switch, ScrollView } from 'native-base';
+import { Text, View, Switch, ScrollView, useToast } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
@@ -19,6 +19,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
+import {
+  clearSwitchState,
+  getSwitchState,
+  saveSwitchState
+} from '../utils/caretaker/switch';
 
 const TakeCareElderlyScreen = ({
   route
@@ -29,11 +34,40 @@ const TakeCareElderlyScreen = ({
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
   const { elderlyBasicProfile, elderlyHealthProfile } = useProfileInfo(elderly);
+  const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
+
+  const toast = useToast();
 
   useAsyncEffect(async () => {
     const _elderly = await getCaretakingElderlyByEid(uid);
     setElderly(_elderly);
   }, [uid]);
+
+  useAsyncEffect(async () => {
+    const now = new Date();
+    await clearSwitchState(now);
+    await getSwitchState();
+  }, []);
+
+  async function handleToggle() {
+    const now = new Date();
+    setIsEmotionTrackerOn((prev) => !prev);
+
+    if (isEmotionTrackerOn === true) {
+      const result = await saveSwitchState(now);
+      if (result === 3) {
+        toast.show({
+          title: 'This is your last time to toggle emotion switch for today.',
+          status: 'warning'
+        });
+      } else if (result === 4) {
+        toast.show({
+          title: 'You cannot toggle emotion switch anymore for today.',
+          status: 'warning'
+        });
+      }
+    }
+  }
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
@@ -52,7 +86,12 @@ const TakeCareElderlyScreen = ({
               <Text bold fontSize="lg">
                 {t('home.enableEmotion')}
               </Text>
-              <Switch defaultIsChecked colorScheme="primary" />
+              <Switch
+                defaultIsChecked
+                colorScheme="primary"
+                isChecked={isEmotionTrackerOn}
+                onToggle={handleToggle}
+              />
             </View>
             <TouchableOpacity
               onPress={() => navigation.navigate('ElderlyEmotionHistory')}>
