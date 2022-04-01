@@ -244,14 +244,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
               name="TakeCareElderlyScreen"
               component={TakeCareElderlyScreen}
               options={{
@@ -283,6 +275,14 @@ const MainNavigation = () => {
               component={SignInScreen}
               options={{
                 title: 'Sign In',
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="PlanSelectionScreen"
+              component={PlanSelectionScreen}
+              options={{
+                title: 'Plan Selection',
                 headerShown: false
               }}
             />
