@@ -339,7 +339,6 @@
     "Friday": "Happy Friday",
     "Saturday": "Happy Saturday",
     "Sunday": "Happy Sunday",
-<<<<<<< HEAD
     "howAreYouFeelingToday" :"How are you feeling today?",
     "create": "Create",
     "addEntry": "Add Entry",
@@ -354,8 +353,5 @@
     "title": "Title",
     "save": "Save",
     "deleteRecording": "Delete Recording"
-=======
-    "howAreYouFeelingToday" :"How are you feeling today?"
->>>>>>> a18c8dd (feat: add translation to emotion card.)
   }
 }
