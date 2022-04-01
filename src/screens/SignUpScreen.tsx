@@ -4,15 +4,12 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
 import FormHeader from '../components/atoms/FormHeader';
-import TextInput, {
-  TextInputValidationType
-} from '../components/atoms/TextInput';
+import { TextInputValidationType } from '../components/atoms/TextInput';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../hooks/useDimensions';
 import { View } from 'react-native';
 import Divider from '../components/atoms/Divider';
 import FormDescription from '../components/atoms/FormDescription';
-import ControlledRadioGroup from '../components/molecules/ControlledRadioGroup';
 import PictureSelection from '../components/organisms/PictureSelection';
 import SignUpStageOne from '../components/organisms/SignUpStageOne';
 import SignUpStageTwo from '../components/organisms/SignUpStageTwo';
@@ -24,15 +21,14 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { UserContext } from '../contexts/UserContext';
 import { requestOTP, signUp, SignUpPayload, verifyOTP } from '../utils/auth';
+import SignUpStageThree from '../components/organisms/SignUpStageThree';
 
-interface InformationList {
+export interface InformationList {
   label: string;
   placeholder?: string;
   name: string;
   type: string;
 }
-
-const bloodTypes = ['N/A', 'A', 'B', 'O', 'AB'];
 
 const informationList: InformationList[][] = [
   [
@@ -243,36 +239,13 @@ const SignUpScreen = ({ route }) => {
           )}
 
           {signUpStage === 3 && (
-            <View>
-              <FormHeader headerText={t('auth.healthInfo')} my={2} size={20} />
-              {informationList[2].map((info: InformationList) => (
-                <Box mb={6} key={`${info.label}-${info.name}`}>
-                  {['text', 'phone', 'name'].includes(info.type) && (
-                    <TextInput
-                      label={`${t(info.label)} `}
-                      placeholder={t(info.placeholder || info.label)}
-                      name={info.name}
-                      control={control}
-                      errors={errors}
-                    />
-                  )}
-
-                  {info.type === 'bloodGroup' && (
-                    <ControlledRadioGroup
-                      label={`${t(info.label)} `}
-                      choices={bloodTypes}
-                      defaultValue={bloodTypes[0]}
-                      name={info.name}
-                      control={control}
-                      errors={errors}
-                    />
-                  )}
-                </Box>
-              ))}
-              <Button w="full" onPress={handleSubmit(continueToNextStage)}>
-                {t('auth.continue')}
-              </Button>
-            </View>
+            <SignUpStageThree
+              control={control}
+              errors={errors}
+              handleSubmit={handleSubmit}
+              informationList={informationList}
+              continueToNextStage={continueToNextStage}
+            />
           )}
 
           {signUpStage === 4 && (
