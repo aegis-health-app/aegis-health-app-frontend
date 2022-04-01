@@ -3,15 +3,17 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps
 } from '@react-navigation/native-stack';
-import { Button, ScrollView, View } from 'native-base';
+import { Button, ScrollView, Text, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import Divider from '../../components/atoms/Divider';
 import Spacer from '../../components/atoms/Spacer';
 import TextInput from '../../components/atoms/TextInput';
 import DatePicker from '../../components/molecules/DatePicker';
 import TimePicker from '../../components/molecules/TimePicker';
 import { RootStackParamList } from '../../navigation/types';
+import HealthDataTable from './HealthDataTable';
 import HealthRecordInfoSection from './HealthRecordInfoSection';
 
 const AddHealthEntry = ({
@@ -78,6 +80,13 @@ const AddHealthEntry = ({
         <Button onPress={handleSubmit(onFormSubmit)}>
           {t('healthRecording.enterValue')}
         </Button>
+        <Spacer />
+        <Divider />
+        <Text fontSize="lg">{t('healthRecording.recordHistory')}</Text>
+        <Spacer />
+        <Button variant="outline">{t('healthRecording.viewAnalytics')}</Button>
+        <Spacer />
+        <HealthDataTable />
       </View>
     </ScrollView>
   );
