@@ -293,6 +293,12 @@
     "primaryButton": "OK",
     "secondaryButton": ""
   },
+  "emergency": {
+    "header": "Emergency",
+    "emerButtonText": "SOS",
+    "callToAction": "Press to Report an Emergency Case",
+    "callToActionDesc": "After pressing the SOS button, we will contact all \nyour caretakersabout your emergency."
+  },
   "healthRecording": {
     "createRecordings": "Create recordings",
     "generalInformation": "General Information",
