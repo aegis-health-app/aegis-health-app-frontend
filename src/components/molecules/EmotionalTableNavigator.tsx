@@ -29,7 +29,6 @@ const EmotionalTableNavigator = ({
   const { t } = useTranslation();
 
   return (
-<<<<<<< HEAD
     <View alignSelf="flex-end" alignItems="center" w="40">
       <HStack space={2}>
         <View w={8}>
@@ -57,30 +56,6 @@ const EmotionalTableNavigator = ({
             />
           )}
         </View>
-=======
-    <View alignSelf="flex-end" alignItems="center" mx={4} mb={4}>
-      <HStack space={2}>
-        {currIndex > 1 && (
-          <Icon
-            onPress={handlePressBack}
-            as={MaterialIcons}
-            name="keyboard-arrow-left"
-            size={8}
-            color="black"
-          />
-        )}
-        <Text fontSize="lg">{currIndex}</Text>
-        <Text fontSize="lg">{t('emotionalRecord.of')}</Text>
-        <Text fontSize="lg">{maxIndex}</Text>
-        {currIndex !== maxIndex && (
-          <Icon
-            as={MaterialIcons}
-            name="keyboard-arrow-right"
-            size={8}
-            color="black"
-          />
-        )}
->>>>>>> 15fa944 (feat: create UI & mock data for emotion history)
       </HStack>
     </View>
   );
