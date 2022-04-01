@@ -15,18 +15,11 @@ import { useForm } from 'react-hook-form';
 import TextInput from '../components/atoms/TextInput';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { User, BloodType, GenderEnum } from '../dto/modules/user.dto';
-import {
-  launchCamera,
-  launchImageLibrary,
-  ImagePickerResponse
-} from 'react-native-image-picker';
-import {
-  CameraPhotoOptions,
-  requestCameraPermission
-} from '../utils/permission';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
 import DatePicker from '../components/molecules/DatePicker';
+import { useImageSelection } from '../hooks/useImageSelection';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -36,6 +29,8 @@ const ProfileEditScreen = () => {
   const { user, getUserProfile } = useContext(UserContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { takePicture, selectPictureFromDevice } = useImageSelection();
+
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
   const [initialValues, setInitialValues] = useState<User | undefined>(user);
   const [showImageUploadError, setShowImageUploadError] =
@@ -67,19 +62,7 @@ const ProfileEditScreen = () => {
     }
   };
 
-  const takePicture = async () => {
-    requestCameraPermission().then(async () => {
-      const result: ImagePickerResponse = await launchCamera(
-        CameraPhotoOptions
-      );
-      setNewProfileImage(result);
-    });
-  };
-
-  const selectPictureFromDevice = async () => {
-    const result: ImagePickerResponse = await launchImageLibrary(
-      CameraPhotoOptions
-    );
+  const onNewPictureObtained = (result: ImagePickerResponse) => {
     setNewProfileImage(result);
   };
 
@@ -179,11 +162,13 @@ const ProfileEditScreen = () => {
         </View>
         <Spacer />
         <View justifyContent="center" alignItems="center">
-          <Button width={48} onPress={() => takePicture()}>
+          <Button width={48} onPress={() => takePicture(onNewPictureObtained)}>
             {t('userForm.takePic')}
           </Button>
           <Spacer />
-          <Button width={48} onPress={() => selectPictureFromDevice()}>
+          <Button
+            width={48}
+            onPress={() => selectPictureFromDevice(onNewPictureObtained)}>
             {t('userForm.fromDevice')}
           </Button>
           <Spacer />

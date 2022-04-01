@@ -22,6 +22,7 @@ export type RootStackParamList = {
   ReminderScreen: undefined;
   HealthRecordScreen: undefined;
   AddHealthEntryScreen: { recordTitle: string };
+  EditHealthEntryScreen: { recordTitle: string };
   MemoryScreen: undefined;
   EmotionalTrackingScreen: undefined;
   EditCaretakerScreen: { info: CaretakerInfoView };

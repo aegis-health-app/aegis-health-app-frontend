@@ -28,7 +28,6 @@ const SettingScreen = () => {
   const {
     canStart, // a boolean indicate if you can start tour guide
     start, // a function to start the tourguide
-    stop, // a function  to stopping it
     eventEmitter, // an object for listening some events
     tourKey
   } = useTourGuideController('setting');
@@ -36,18 +35,6 @@ const SettingScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { setUser } = useContext(UserContext);
-  const guideStepCount = 4;
-  let stepCount = 0;
-
-  const handleOnStop = () => (stepCount = 0);
-  const handleOnStepChange = () => {
-    stepCount++;
-    if (stepCount > guideStepCount && stop) {
-      stop();
-      stepCount = 0;
-    }
-  };
-
   /*
     This useEffect will determine whether the tourguide should be shown
     The guide should be shown automatically only on the first open of the page
@@ -79,10 +66,6 @@ const SettingScreen = () => {
     eventEmitter?.on('stop', async () => {
       setShowSettingsTourguide(false);
       await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
-      handleOnStop();
-    });
-    eventEmitter?.on('stepChange', () => {
-      handleOnStepChange();
     });
   }, [eventEmitter]);
 

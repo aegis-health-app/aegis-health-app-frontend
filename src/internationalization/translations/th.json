@@ -303,6 +303,17 @@
     "addField": "เพิ่มช่องข้อมูล",
     "titleBlankError": "กรุณากรอกชื่อข้อมูล",
     "fieldBlankError": "กรุณากรอกข้อมูล",
-    "create": "สร้าง"
+    "create": "สร้าง",
+    "addEntry": "เพิ่มข้อมูล",
+    "enterValue": "กรอกข้อมูล",
+    "date": "วันที่",
+    "time": "เวลา",
+    "recordHistory": "ข้อมูลที่บันทึกไว้",
+    "viewAnalytics": "ดูการวิเคราะห์",
+    "noData": "ไม่มีการบันทึก",
+    "generalInfo": "ข้อมูลทั่วไป",
+    "of": "จาก",
+    "save": "บันทึก",
+    "deleteRecording": "ลบการจดบันทึกนี้"
   }
 }

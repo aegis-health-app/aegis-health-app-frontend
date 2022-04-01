@@ -2,9 +2,9 @@ import { Button, Text, View } from 'native-base';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { useSettings } from '../../hooks/useSettings';
-import { getFormattedDate } from '../../utils/getFormattedDate';
+import DateTimePicker, {
+  AndroidNativeProps
+} from '@react-native-community/datetimepicker';
 import moment from 'moment';
 
 type TimePickerProps = {
@@ -15,7 +15,6 @@ type TimePickerProps = {
 const TimePicker = (props: TimePickerProps) => {
   const { date, onDateChange } = props;
   const { t } = useTranslation();
-  const { language } = useSettings();
   const [mode, setMode] = useState('time');
   const [show, setShow] = useState(false);
 
@@ -30,9 +29,6 @@ const TimePicker = (props: TimePickerProps) => {
 
   return (
     <View w="100%">
-      <Text fontSize={16} mb={2}>
-        {t('profile.birthDate')}
-      </Text>
       {(Platform.OS === 'ios' || show) && (
         <View flexDir="row" justifyContent="space-between" alignItems="center">
           {Platform.OS === 'ios' && (
@@ -42,7 +38,7 @@ const TimePicker = (props: TimePickerProps) => {
             testID="dateTimePicker"
             value={date}
             onChange={onDateChange}
-            mode={mode as any}
+            mode={mode as AndroidNativeProps['mode']}
             style={Platform.OS === 'ios' ? { width: 124 } : null}
           />
         </View>
@@ -53,9 +49,9 @@ const TimePicker = (props: TimePickerProps) => {
             flexDir="row"
             justifyContent="space-between"
             alignItems="center">
-            <Text w={100}>{getFormattedDate(date, language)}</Text>
+            <Text w={100}>{`${moment(date).format('LT')}`}</Text>
             <Button onPress={() => showDatepicker()}>
-              {t('userForm.editBirthdate')}
+              {t('userForm.editTime')}
             </Button>
           </View>
         )}
