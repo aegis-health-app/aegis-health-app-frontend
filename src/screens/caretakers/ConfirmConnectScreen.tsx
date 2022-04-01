@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
 import FallbackImage from '../../components/molecules/FallbackImage';
+import { Elderly } from './../../dto/modules/user.dto';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -24,6 +26,8 @@ const ConfirmConnectScreen = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { user } = useContext(UserContext);
+  const { caretakerHomeProfile, setCaretakerHomeProfile } =
+    useContext(CaretakerContext);
 
   //TODO: error handling
   const handlePress = async () => {
@@ -32,7 +36,13 @@ const ConfirmConnectScreen = ({
         eid: info.uid,
         cid: user?.uid
       });
-      // const elderlyResult = data as Elderly;
+      const elderlyResult = data as Elderly;
+      if (elderlyResult && caretakerHomeProfile?.listElderly) {
+        setCaretakerHomeProfile({
+          ...caretakerHomeProfile,
+          listElderly: [...caretakerHomeProfile.listElderly, elderlyResult]
+        });
+      }
       navigation.navigate('ConnectElderlyScreen');
     } catch (err) {
       // show toast to display error
