@@ -182,7 +182,9 @@
     "header": "Connect",
     "headerElderly": "Connect",
     "edit": "Edit",
-    "invalidCode": "Invalid code. Please try again later."
+    "invalidCode": "Invalid code. Please try again later.",
+    "editButtonTutorial": "Press “Edit” to make changes to the caretaker’s information on your device.",
+    "addButtonTutorial": "Press the “Add caretaker” button to add more caretakers."
   },
   "auth": {
     "password": "Password",
