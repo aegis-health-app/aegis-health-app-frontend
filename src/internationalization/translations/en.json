@@ -339,6 +339,19 @@
     "Friday": "Happy Friday",
     "Saturday": "Happy Saturday",
     "Sunday": "Happy Sunday",
-    "howAreYouFeelingToday" :"How are you feeling today?"
+    "howAreYouFeelingToday" :"How are you feeling today?",
+    "create": "Create",
+    "addEntry": "Add Entry",
+    "enterValue": "Enter Value",
+    "date": "Date",
+    "time": "Time",
+    "recordHistory": "Record History",
+    "viewAnalytics": "View Analytics",
+    "noData": "There is no data",
+    "generalInfo": "General Information",
+    "of": "of",
+    "title": "Title",
+    "save": "Save",
+    "deleteRecording": "Delete Recording"
   }
 }
