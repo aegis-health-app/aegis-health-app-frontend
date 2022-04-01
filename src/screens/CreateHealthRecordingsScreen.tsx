@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, VStack } from 'native-base';
+import { ChevronDownIcon, ScrollView, View, VStack } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -71,12 +71,13 @@ const CreateHealthRecordingsScreen = () => {
               handlePress={() => console.log('card pressed')}
             />
           ))}
-          <TouchableOpacity onPress={() => console.log('advanced')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CustomHealthRecordingScreen')}>
             <View style={styles.advanced} mt={4} py={2}>
               <FormSubHeader
                 headerText={t('healthRecordingsCreate.advanced')}
               />
-              <FormSubHeader headerText={'arrow'} />
+              <ChevronDownIcon name="chevron-down" size="9" />
             </View>
           </TouchableOpacity>
         </VStack>
