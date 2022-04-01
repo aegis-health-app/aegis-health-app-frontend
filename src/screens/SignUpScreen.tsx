@@ -93,7 +93,7 @@ const SignUpScreen = ({ route }) => {
   const { setToken } = useAuthentication();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { user } = useContext(UserContext);
+  const { user, getUserProfile } = useContext(UserContext);
 
   const [signUpStage, setSignUpStage] = useState<number>(1);
   const [otpToken, setOTPToken] = useState<string>('');
@@ -192,9 +192,9 @@ const SignUpScreen = ({ route }) => {
             imageid: imageUploadResponse.data.imageUrl
           });
           if (patchResponse.data) {
-            navigation.replace('TabNavigation');
+            await getUserProfile();
           }
-        } else navigation.replace('TabNavigation');
+        } else await getUserProfile();
       }
     },
     [
