@@ -56,7 +56,6 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",
-    "jest": "^26.6.3",
     "lint-staged": "^12.3.4",
     "metro-react-native-babel-preset": "^0.66.2",
     "prettier": "^2.5.1",
@@ -65,17 +64,6 @@
   },
   "resolutions": {
     "@types/react": "^17"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
