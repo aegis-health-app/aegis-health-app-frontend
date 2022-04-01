@@ -50,18 +50,7 @@ const HealthRecordingsScreen = () => {
     stop, // a function  to stopping it
     eventEmitter, // an object for listening some events
     tourKey
-  } = useTourGuideController('setting');
-  const guideStepCount = 2;
-  let stepCount = 0;
-
-  const handleOnStop = () => (stepCount = 0);
-  const handleOnStepChange = () => {
-    stepCount++;
-    if (stepCount > guideStepCount && stop) {
-      stop();
-      stepCount = 0;
-    }
-  };
+  } = useTourGuideController();
 
   /*
   This useEffect will determine whether the tourguide should be shown
@@ -96,10 +85,6 @@ const HealthRecordingsScreen = () => {
     eventEmitter?.on('stop', async () => {
       setShowHealthRecordingsTourguide(false);
       await AsyncStorage.setItem('viewedHealthRecordingsTourguide', 'true');
-      handleOnStop();
-    });
-    eventEmitter?.on('stepChange', () => {
-      handleOnStepChange();
     });
   }, [eventEmitter]);
 
