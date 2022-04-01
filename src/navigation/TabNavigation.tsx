@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ElderlyHomeScreen from '../screens/ElderlyHomeScreen';
 import UserLinkScreen from './../screens/UserLinkScreen';
@@ -6,10 +6,13 @@ import IonIcons from 'react-native-vector-icons/Ionicons';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTranslation } from 'react-i18next';
+import { TouchableOpacity } from 'react-native';
+import { TourguideContext } from '../contexts/TourguideContext';
 
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
   const { t } = useTranslation();
+  const { setShowElderlyLinkTourguide } = useContext(TourguideContext)
 
   return (
     <Tab.Navigator
@@ -49,6 +52,8 @@ const TabNavigation = () => {
           headerTitleStyle: { fontSize: 20, fontWeight: '800' },
           headerStyle: { height: 70 },
           headerRight: () => (
+            <TouchableOpacity
+                    onPress={() => setShowElderlyLinkTourguide(true)}>
             <Icon
               as={Feather}
               name="help-circle"
@@ -56,6 +61,7 @@ const TabNavigation = () => {
               color="#F97316"
               mr="4"
             />
+            </TouchableOpacity>
           )
         }}
       />

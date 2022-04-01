@@ -9,6 +9,8 @@ export interface TourguideContextStruct {
   setElderlyshowElderlyHomeTourguide: (value: boolean) => void;
   showCaretakerHomeTourguide: boolean;
   setShowCaretakerHomeTourguide: (value: boolean) => void;
+  showElderlyLinkTourguide: boolean;
+  setShowElderlyLinkTourguide: (value: boolean) => void;
 }
 
 export const TourguideContext = createContext({} as TourguideContextStruct);
@@ -19,6 +21,7 @@ const TourguideContextProvider = ({ ...props }) => {
     useState(false);
   const [showCaretakerHomeTourguide, setShowCaretakerHomeTourguide] =
     useState(false);
+  const [showElderlyLinkTourguide, setShowElderlyLinkTourguide] = useState(false);
 
   const value = {
     showSettingsTourguide,
@@ -26,7 +29,9 @@ const TourguideContextProvider = ({ ...props }) => {
     showElderlyHomeTourguide,
     setElderlyshowElderlyHomeTourguide,
     showCaretakerHomeTourguide,
-    setShowCaretakerHomeTourguide
+    setShowCaretakerHomeTourguide,
+    showElderlyLinkTourguide,
+    setShowElderlyLinkTourguide
   };
   return <TourguideContext.Provider value={value} {...props} />;
 };
