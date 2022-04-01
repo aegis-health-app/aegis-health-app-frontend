@@ -58,7 +58,7 @@ const ProfileInfoCard = ({
             </Text>
           </View>
         </View>
-        <View flexDir="column" ml="0">
+        <View flexDir="column">
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
               {fullName}

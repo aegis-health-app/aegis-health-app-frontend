@@ -321,7 +321,4 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 55
   },
-  unitInput: {
-    width: 115
-  }
 });

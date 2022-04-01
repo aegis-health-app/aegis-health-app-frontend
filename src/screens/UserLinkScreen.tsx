@@ -71,7 +71,7 @@ const UserLinkScreen = () => {
           isTourGuide
           top={21}
           right={24.5}
-          width={ScreenWidth / 6}
+          width={83}
           height={40}
           text={t('homeElderlyTutorial.step5')}
         />
