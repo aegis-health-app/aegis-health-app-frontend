@@ -2,7 +2,9 @@ import { Button, Text, View } from 'native-base';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, {
+  AndroidNativeProps
+} from '@react-native-community/datetimepicker';
 import { useSettings } from '../../hooks/useSettings';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 
@@ -29,9 +31,6 @@ const DatePicker = (props: DatePickerProps) => {
 
   return (
     <View w="100%">
-      <Text fontSize={16} mb={2}>
-        {t('profile.birthDate')}
-      </Text>
       {(Platform.OS === 'ios' || show) && (
         <View flexDir="row" justifyContent="space-between" alignItems="center">
           {Platform.OS === 'ios' && (
@@ -41,7 +40,7 @@ const DatePicker = (props: DatePickerProps) => {
             testID="dateTimePicker"
             value={date}
             onChange={onDateChange}
-            mode={mode as any}
+            mode={mode as AndroidNativeProps['mode']}
             style={Platform.OS === 'ios' ? { width: 124 } : null}
           />
         </View>

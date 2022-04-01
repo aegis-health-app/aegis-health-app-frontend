@@ -22,7 +22,9 @@ const HealthRecordInfoSection = () => {
         </Text>
         <EditButton
           onPress={() => {
-            navigation.navigate('ProfileEditScreen');
+            navigation.navigate('EditHealthEntryScreen', {
+              recordTitle: 'Blood Pressure'
+            });
           }}
         />
       </View>

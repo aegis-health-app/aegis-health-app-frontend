@@ -35,6 +35,7 @@ import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
 import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
 import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
 import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
+import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -184,6 +185,16 @@ const MainNavigation = () => {
             <Stack.Screen
               name="AddHealthEntryScreen"
               component={AddHealthEntry}
+              initialParams={{ recordTitle: '' }}
+              options={{
+                title: t(''),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
+            />
+            <Stack.Screen
+              name="EditHealthEntryScreen"
+              component={EditHealthEntryScreen}
               initialParams={{ recordTitle: '' }}
               options={{
                 title: t(''),
