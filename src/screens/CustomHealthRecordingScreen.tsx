@@ -172,7 +172,7 @@ const CustomHealthRecordingScreen = () => {
               {fieldList.map((field: Fields, index: number) => (
                 <View key={index} flexDir="row">
                   <View mt={2} flexDir="row">
-                    <View width="48">
+                    <View width="52.5%">
                       <Text fontSize={16} color="#52525B">
                         {t('healthRecording.fieldName')} {index + 1} {field.fieldName == '' ? (
                         <Text color="red.500" fontSize="12">
@@ -202,7 +202,7 @@ const CustomHealthRecordingScreen = () => {
                         </Text>
                       ) : null}
                     </View>
-                    <View ml={4} style={styles.unitInput}>
+                    <View ml={4} width="37.5%">
                       <Text fontSize={16} color="#52525B">
                         {t('healthRecording.unit')} {field.unit == '' ? (
                         <Text color="red.500" fontSize="12">
@@ -234,7 +234,7 @@ const CustomHealthRecordingScreen = () => {
                   {fieldList.length !== 1 ? (
                     <Icon
                       style={styles.icon}
-                      ml={3}
+                      ml={-2}
                       as={MaterialIcons}
                       name="close"
                       size="6"

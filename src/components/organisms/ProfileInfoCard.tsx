@@ -36,7 +36,7 @@ const ProfileInfoCard = ({
         />
       </Box>
       <View flexDir="row">
-        <View flexDir="column">
+        <View flexDir="column" width="45%">
           <View>
             <Text ml="5" color="gray.600" fontSize={16}>
               {t('profile.name')}
@@ -58,7 +58,7 @@ const ProfileInfoCard = ({
             </Text>
           </View>
         </View>
-        <View flexDir="column" ml="6">
+        <View flexDir="column" ml="0">
           <View>
             <Text color="black" fontWeight="bold" fontSize={16}>
               {fullName}

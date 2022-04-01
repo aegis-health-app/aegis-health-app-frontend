@@ -50,7 +50,7 @@ const ConnectElderlyScreen = () => {
           {t('userLink.enterCode')}
         </Button>
       </Button.Group>
-      <View mt="16">
+      <View mt="16.5%">
         <QRCodeScanner
           customMarker={
             <Box
