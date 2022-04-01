@@ -293,6 +293,12 @@
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
+  "emergency": {
+    "header": "แจ้งเหตุฉุกเฉิน",
+    "emerButtonText": "ฉุกเฉิน",
+    "callToAction": "กดเพื่อแจ้งเหตุฉุกเฉิน",
+    "callToActionDesc": "หลังจากกดปุ่มฉุกเฉิน\n เราจะแจ้งไปยังผู้ดูแลของคุณทุกคน"
+  },
   "healthRecording": {
     "createRecordings": "สร้างข้อมูลใหม่",
     "generalInformation": "ข้อมูลทั่วไป",
