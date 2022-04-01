@@ -162,7 +162,11 @@ const MainNavigation = () => {
             <Stack.Screen
               name="EmergencyScreen"
               component={EmergencyScreen}
-              options={{ headerShown: false }}
+              options={{
+                title: t('emergency.header'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+              }}
             />
             <Stack.Screen
               name="ReminderScreen"
