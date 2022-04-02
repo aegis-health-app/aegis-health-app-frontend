@@ -100,8 +100,6 @@ const TakeCareElderlyScreen = ({
               </Text>
             </TouchableOpacity>
           </View>
-          <HealthProfile data={elderlyHealthProfile} />
-          <Spacer />
           {elderly && elderly.listModuleid.length > 0 ? (
             <ScrollView
               horizontal
