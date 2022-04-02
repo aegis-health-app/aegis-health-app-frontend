@@ -80,7 +80,7 @@ const ElderlyHomeScreen = () => {
       setShowEmotionCard(true);
       console.log('else if', { showEmotionCard });
     } else {
-      console.log('2date', emotionDate, todayDate);
+      console.log('2date', { emotionDate }, { todayDate });
       setShowEmotionCard(true);
       console.log('else ', { showEmotionCard });
     }
@@ -93,7 +93,7 @@ const ElderlyHomeScreen = () => {
         <EmotionCard
           showEmotionCard={showEmotionCard}
           close={() => setShowEmotionCard(false)}
-          message="changePasswordError"
+          message={moment().format('dddd')}
         />
         <View
           flex={1}
