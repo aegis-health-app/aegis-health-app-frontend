@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
-import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../../hooks/useDimensions';
+
+// const ProfilePic = require('../../assets/images/profile.png');
 
 type ElderlyCardProps = {
   name: string;
@@ -15,12 +16,7 @@ type ElderlyCardProps = {
   uid?: number;
 };
 
-const ElderlyCard = ({
-  name,
-  imageId,
-  userIsElderly,
-  uid
-}: ElderlyCardProps) => {
+const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 

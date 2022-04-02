@@ -3,7 +3,9 @@ import React, { useCallback, useState } from 'react';
 import { Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import EditButton from '../components/atoms/EditButton';
-import BasicProfile from '../components/molecules/BasicProfile';
+import BasicProfile, {
+  BasicProfileMode
+} from '../components/molecules/BasicProfile';
 import Divider from '../components/atoms/Divider';
 import HealthProfile from '../components/molecules/HealthProfile';
 import { useTranslation } from 'react-i18next';
@@ -39,7 +41,7 @@ const ProfileScreen = () => {
       </View>
 
       <Spacer />
-      <BasicProfile data={basicProfile} />
+      <BasicProfile data={basicProfile} mode={BasicProfileMode.SELF} />
       <Divider />
       <HealthProfile data={healthProfile} />
       <Spacer />

@@ -6,7 +6,9 @@ import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getCaretakingElderlyByEid } from '../utils/caretaker/profile';
 import { useTranslation } from 'react-i18next';
-import BasicProfile from '../components/molecules/BasicProfile';
+import BasicProfile, {
+  BasicProfileMode
+} from '../components/molecules/BasicProfile';
 import HealthProfile from '../components/molecules/HealthProfile';
 import { TouchableOpacity } from 'react-native';
 import ModulePickerList from './../components/organisms/ModulePickerList';
@@ -28,10 +30,14 @@ const TakeCareElderlyScreen = ({
   }, [uid]);
 
   return (
-    <SafeAreaView edges={['right', 'top', 'left']} flex={1}>
+    <SafeAreaView edges={['right', 'top', 'left']}>
       <ScrollView nestedScrollEnabled>
         <View px={4}>
-          <BasicProfile data={elderlyBasicProfile} />
+          <BasicProfile
+            data={elderlyBasicProfile}
+            image={elderly?.imageid}
+            mode={BasicProfileMode.OTHER}
+          />
         </View>
         <Spacer />
         <View px={4}>

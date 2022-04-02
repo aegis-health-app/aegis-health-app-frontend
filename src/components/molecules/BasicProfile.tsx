@@ -24,12 +24,28 @@ const ProfileInfoItem = ({ label, value }: ProfileItem) => {
   );
 };
 
+export enum BasicProfileMode {
+  SELF = 'SELF',
+  OTHER = 'OTHER'
+}
+
 type BasicProfileProps = {
   data: ProfileItem[];
+  image?: string;
+  mode: BasicProfileMode;
 };
 
-const BasicProfile = ({ data }: BasicProfileProps) => {
+const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
   const { user } = useContext(UserContext);
+  const getImage = () => {
+    console.log(image);
+    if (mode === 'SELF')
+      return user?.imageid ? { uri: user?.imageid } : images.picturePlaceholder;
+    else {
+      if (image) return { uri: image };
+      if (image === '') return { uri: '' };
+    }
+  };
 
   return (
     <>
@@ -42,13 +58,11 @@ const BasicProfile = ({ data }: BasicProfileProps) => {
         height="32"
         p={2}>
         <Image
-          source={
-            user?.imageid ? { uri: user?.imageid } : images.picturePlaceholder
-          }
+          source={getImage()}
           width="32"
           height="32"
           borderRadius={4}
-          alt="Profile Picture"
+          alt="Profile"
         />
       </View>
       <Spacer />
