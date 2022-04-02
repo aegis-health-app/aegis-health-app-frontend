@@ -296,6 +296,34 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
+              name="HealthRecordingsScreen"
+              component={HealthRecordingsScreen}
+              options={{
+                headerTitle: t('healthRecordings.header'),
+                headerShown: true,
+                headerShadowVisible: false,
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => setShowHealthRecordingsTourguide(true)}>
+                    <Icon
+                      as={Feather}
+                      name="help-circle"
+                      size="7"
+                      color="#F97316"
+                    />
+                  </TouchableOpacity>
+                )
+              }}
+            />
+            <Stack.Screen
+              name="CreateHealthRecordingsScreen"
+              component={CreateHealthRecordingsScreen}
+              options={{
+                headerTitle: t('healthRecordingsCreate.header'),
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
               name="CustomHealthRecordingScreen"
               component={CustomHealthRecordingScreen}
               options={{
