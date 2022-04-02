@@ -28,6 +28,7 @@ import { RootStackParamList } from '../navigation/types';
 import UpComingAlert from './../components/organisms/UpComingAlert';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { UserContext } from '../contexts/UserContext';
+import FallbackImage from '../components/molecules/FallbackImage';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -97,6 +98,7 @@ const CaretakerHomeScreen = () => {
                     height="12"
                     borderRadius={4}
                     marginRight={4}
+                    fallbackElement={FallbackImage}
                     alt="Profile Picture"
                   />
                   <View>

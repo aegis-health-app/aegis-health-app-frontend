@@ -21,6 +21,7 @@ import { RootStackParamList } from '../navigation/types';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../hooks/useDimensions';
 import { UserContext } from '../contexts/UserContext';
+import FallbackImage from '../components/molecules/FallbackImage';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -83,6 +84,7 @@ const ElderlyHomeScreen = () => {
                     height="12"
                     borderRadius={4}
                     marginRight={4}
+                    fallbackElement={FallbackImage}
                     alt="Profile Picture"
                   />
                   <View>

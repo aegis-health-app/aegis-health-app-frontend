@@ -6,8 +6,7 @@ import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../../hooks/useDimensions';
-
-// const ProfilePic = require('../../assets/images/profile.png');
+import FallbackImage from '../molecules/FallbackImage';
 
 type ElderlyCardProps = {
   name: string;
@@ -47,6 +46,7 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
           style={styles.image}
           borderRadius={10}
           marginRight={3}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
         <Text flex={1} flexWrap="wrap" fontSize="lg" numberOfLines={1}>

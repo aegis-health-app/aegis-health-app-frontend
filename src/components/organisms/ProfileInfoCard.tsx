@@ -3,12 +3,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../hooks/useSettings';
 import { getFormattedDate } from '../../utils/getFormattedDate';
+import FallbackImage from '../molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
 type ProfileInfoCardProps = {
   fullName: string;
-  gender: 'F'|'M';
+  gender: 'F' | 'M';
   bdate: string;
   phone?: string;
   imageId: string;
@@ -32,6 +33,7 @@ const ProfileInfoCard = ({
           w={160}
           h={160}
           borderRadius={10}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
       </Box>

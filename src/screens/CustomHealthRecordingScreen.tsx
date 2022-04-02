@@ -16,12 +16,10 @@ import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
 import useKeyboardOpen from '../hooks/useKeyboardOpen';
+import FallbackImage from '../components/molecules/FallbackImage';
 
 interface Fields {
   fieldName: string | undefined;
@@ -48,13 +46,10 @@ const CustomHealthRecordingScreen = () => {
   const {
     control,
     formState: { errors },
-    watch,
+    watch
   } = useForm({ resolver: useYupValidationResolver(inputSchema), mode: 'all' });
 
   const watchInputs = watch();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
   const takePicture = async () => {
     requestCameraPermission().then(async () => {
       const result: ImagePickerResponse = await launchCamera(
@@ -84,6 +79,7 @@ const CustomHealthRecordingScreen = () => {
           width="100%"
           height={48}
           borderRadius={4}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
       );
@@ -117,9 +113,15 @@ const CustomHealthRecordingScreen = () => {
   };
 
   const handleButtonState = () => {
-    if (watchInputs['title'] == '' || watchInputs['title'] == null || 
-    fieldList.filter(e => e.fieldName == "").length > 0 || fieldList.filter(e => e.unit == "").length > 0 ||
-    fieldList.filter(e => e.fieldName == undefined).length > 0 || fieldList.filter(e => e.unit == undefined).length > 0) return true;
+    if (
+      watchInputs.title === '' ||
+      watchInputs.title === null ||
+      fieldList.filter((e) => e.fieldName === '').length > 0 ||
+      fieldList.filter((e) => e.unit === '').length > 0 ||
+      fieldList.filter((e) => e.fieldName === undefined).length > 0 ||
+      fieldList.filter((e) => e.unit === undefined).length > 0
+    )
+      return true;
     return false;
   };
 
@@ -135,7 +137,7 @@ const CustomHealthRecordingScreen = () => {
             </View>
             <View mt={3}>
               <Text fontSize={16} color="#52525B">
-                {t('healthRecording.title')} 
+                {t('healthRecording.title')}
               </Text>
               <TextInput
                 placeholder={t('healthRecording.title')}
@@ -174,11 +176,12 @@ const CustomHealthRecordingScreen = () => {
                   <View mt={2} flexDir="row">
                     <View width="52.5%">
                       <Text fontSize={16} color="#52525B">
-                        {t('healthRecording.fieldName')} {index + 1} {field.fieldName == '' ? (
-                        <Text color="red.500" fontSize="12">
-                          *
-                        </Text>
-                      ) : null}
+                        {t('healthRecording.fieldName')} {index + 1}{' '}
+                        {field.fieldName === '' ? (
+                          <Text color="red.500" fontSize="12">
+                            *
+                          </Text>
+                        ) : null}
                       </Text>
                       <TextInput
                         placeholder={t('healthRecording.fieldName')}
@@ -189,14 +192,16 @@ const CustomHealthRecordingScreen = () => {
                         onChangeText={(e: string) => {
                           handleFieldNameChange(e, index);
                         }}
-                        onEndEditing={() => field.fieldName == undefined? handleFieldNameChange('', index): undefined}
+                        onEndEditing={() =>
+                          field.fieldName === undefined
+                            ? handleFieldNameChange('', index)
+                            : undefined
+                        }
                         borderColor={
-                          field.fieldName == ''
-                            ? 'red.500'
-                            : '#ACB5BD'
+                          field.fieldName === '' ? 'red.500' : '#ACB5BD'
                         }
                       />
-                      {field.fieldName == '' ? (
+                      {field.fieldName === '' ? (
                         <Text color="red.500" fontSize="12">
                           {t('healthRecording.fieldBlankError')}
                         </Text>
@@ -204,11 +209,12 @@ const CustomHealthRecordingScreen = () => {
                     </View>
                     <View ml={4} width="37.5%">
                       <Text fontSize={16} color="#52525B">
-                        {t('healthRecording.unit')} {field.unit == '' ? (
-                        <Text color="red.500" fontSize="12">
-                          *
-                        </Text>
-                      ) : null}
+                        {t('healthRecording.unit')}{' '}
+                        {field.unit === '' ? (
+                          <Text color="red.500" fontSize="12">
+                            *
+                          </Text>
+                        ) : null}
                       </Text>
                       <TextInput
                         placeholder={t('healthRecording.unit')}
@@ -217,14 +223,14 @@ const CustomHealthRecordingScreen = () => {
                         errors={errors}
                         value={field.unit}
                         onChangeText={(e: string) => handleUnitChange(e, index)}
-                        onEndEditing={() => field.unit == undefined? handleUnitChange('', index): undefined}
-                        borderColor={
-                          field.unit == ''
-                            ? 'red.500'
-                            : '#ACB5BD'
+                        onEndEditing={() =>
+                          field.unit === undefined
+                            ? handleUnitChange('', index)
+                            : undefined
                         }
+                        borderColor={field.unit === '' ? 'red.500' : '#ACB5BD'}
                       />
-                      {field.unit == '' ? (
+                      {field.unit === '' ? (
                         <Text color="red.500" fontSize="12">
                           {t('healthRecording.fieldBlankError')}
                         </Text>
@@ -281,7 +287,7 @@ const CustomHealthRecordingScreen = () => {
             mt={3}
             onPress={() => {
               console.log({
-                hrName: watchInputs['title'],
+                hrName: watchInputs.title,
                 imageid: null,
                 listField: fieldList
               });
@@ -302,7 +308,7 @@ const CustomHealthRecordingScreen = () => {
             isDisabled={handleButtonState()}
             onPress={() => {
               console.log({
-                hrName: watchInputs['title'],
+                hrName: watchInputs.title,
                 imageid: null,
                 listField: fieldList
               } as UpdateHealthRecordDTO);
@@ -320,5 +326,5 @@ export default CustomHealthRecordingScreen;
 const styles = StyleSheet.create({
   icon: {
     marginTop: 55
-  },
+  }
 });

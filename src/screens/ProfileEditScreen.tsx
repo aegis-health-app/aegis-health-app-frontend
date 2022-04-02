@@ -20,6 +20,7 @@ import Alert, { AlertType } from '../components/organisms/Alert';
 import DatePicker from '../components/molecules/DatePicker';
 import { useImageSelection } from '../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
+import FallbackImage from '../components/molecules/FallbackImage';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/profile.png');
@@ -152,6 +153,7 @@ const ProfileEditScreen = () => {
             width="32"
             height="32"
             borderRadius={4}
+            fallbackElement={FallbackImage}
             alt="Profile Picture"
           />
         </View>

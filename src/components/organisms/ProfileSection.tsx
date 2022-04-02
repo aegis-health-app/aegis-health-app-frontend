@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
+import FallbackImage from '../molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -30,6 +31,7 @@ const ProfileSection = () => {
             height="12"
             borderRadius={4}
             marginRight={4}
+            fallbackElement={FallbackImage}
             alt="Profile Picture"
           />
           <View>

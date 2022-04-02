@@ -12,6 +12,7 @@ import {
 } from '../../utils/permission';
 import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
+import FallbackImage from '../molecules/FallbackImage';
 
 interface PictureSelectionProps {
   isIndependent?: boolean;
@@ -71,6 +72,7 @@ const PictureSelection: React.FC<PictureSelectionProps> = ({
           width="32"
           height="32"
           borderRadius={4}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
       </View>
