@@ -355,5 +355,5 @@ export default CustomHealthRecordingScreen;
 const styles = StyleSheet.create({
   icon: {
     marginTop: 55
-  },
+  }
 });
