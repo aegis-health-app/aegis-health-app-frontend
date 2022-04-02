@@ -19,23 +19,38 @@ const EmotionCard = (props: EmotionCardProps) => {
     console.log('emotion sent');
     await AsyncStorage.setItem(
       'emotionDate',
-      JSON.stringify({ lastEdit: moment().format('L') })
+      JSON.stringify(moment().format('L'))
     );
+    const savedEmotionDate = await AsyncStorage.getItem('emotionDate');
+    const emotionDate = JSON.parse(savedEmotionDate);
+    console.log('saved emotion date', { emotionDate });
     close();
   };
-  const [emotionDate, setEmotionDate] = useState(new Date().getDate());
+  const imagePath = '../../assets/images/temp' + message + '.png';
+  const date = JSON.stringify(message);
+  console.log(date);
+  const getImageSource = () => {
+    const imagePath = '../../assets/images/temp' + message + '.png';
+    const date = JSON.stringify(message);
+    console.log(date);
+    return;
+  };
   return (
     <Modal isOpen={showEmotionCard} onClose={close}>
       <Modal.Content maxWidth="400px">
         <Modal.CloseButton />
-        <Modal.Header alignItems={'center'}>Good morning</Modal.Header>
+        <Modal.Header style={styles.header}>
+          <Text fontSize={'lg'} fontWeight={'bold'}>
+            {t('emotionTrackingCard.' + message)}
+          </Text>
+        </Modal.Header>
         <Modal.Body>
           <View style={styles.pictureArea}>
-            <Image source={require('../../assets/images/tempMonday.png')} />
+            <Text>{imagePath}</Text>
+            <Image source={require('../../assets/images/tempSaturday.png')} />
           </View>
           <Text fontSize="lg" fontWeight="400">
-            {emotionDate}
-            How are you feeling today?
+            {t('emotionTrackingCard.howAreYouFeelingToday')}
           </Text>
         </Modal.Body>
         <Modal.Footer>
@@ -83,5 +98,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 12
+  },
+  header: {
+    alignContent: 'center',
+    alignItems: 'center',
+    fontSize: 'xl'
   }
 });
