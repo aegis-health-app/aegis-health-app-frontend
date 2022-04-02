@@ -3,4 +3,4 @@ export interface EmotionalHistory {
   emotion: Emotion;
 }
 
-export type Emotion = 'N/A' | 'HAPPY' | 'NEUTRAL' | 'BAD';
+export type Emotion = 'NA' | 'HAPPY' | 'NEUTRAL' | 'BAD';
