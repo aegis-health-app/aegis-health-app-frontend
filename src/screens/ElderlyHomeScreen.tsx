@@ -72,17 +72,24 @@ const ElderlyHomeScreen = () => {
     });
   }, [eventEmitter]);
 
+  const getEmotionDate = async () => {
+    const emotionDate = await AsyncStorage.getItem('emotionDate');
+    const result = emotionDate ? JSON.parse(emotionDate) : new Date(0);
+    console.log('result' + result);
+    return result;
+  };
+
   useAsyncEffect(async () => {
-    const emotionDate = moment(await AsyncStorage.getItem('emotionDate'));
+    const emotionDate = moment(await getEmotionDate());
     const todayDate = moment().format('L');
-    console.log('check emotion date');
-    if (emotionDate.diff(todayDate, 'days')) {
+    console.log('emotion date' + emotionDate);
+    if (emotionDate.isSame(todayDate, 'day')) {
+      // change from ture to false
       setShowEmotionCard(true);
-      console.log('else if', { showEmotionCard });
+      console.log('emotion date is the same as today date');
     } else {
-      console.log('2date', { emotionDate }, { todayDate });
+      console.log('emotion date is not the same as today date');
       setShowEmotionCard(true);
-      console.log('else ', { showEmotionCard });
     }
   }, []);
 
