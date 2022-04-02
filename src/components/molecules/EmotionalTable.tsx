@@ -6,24 +6,17 @@ import EmotionalTableNavigator from './EmotionalTableNavigator';
 import EmotionalHistoryItem from './../atoms/EmotionalHistoryItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const EmotionalTable = () => {
+type EmotionalTableProps = {
+  data: EmotionalHistory[];
+};
+
+const EmotionalTable = ({ data }: EmotionalTableProps) => {
   const { height, width } = useWindowDimensions();
-  const [hist, setHist] = useState<EmotionalHistory[]>([]);
   const [currIndex, setCurrIndex] = useState(1);
   const [histLength, setHistLength] = useState(0);
   const [maxPageIndex, setMaxPageIndex] = useState(1);
 
   useEffect(() => {
-    const data: EmotionalHistory[] = [
-      { date: new Date(0), emotion: 'NEUTRAL' },
-      { date: new Date(0), emotion: 'N/A' },
-      { date: new Date(), emotion: 'HAPPY' },
-      { date: new Date(), emotion: 'HAPPY' },
-      { date: new Date(), emotion: 'BAD' },
-      { date: new Date(0), emotion: 'NEUTRAL' },
-      { date: new Date(0), emotion: 'NEUTRAL' }
-    ];
-    setHist(data);
     setHistLength(data.length);
     setMaxPageIndex(Math.ceil(data.length / 7));
   }, []);
@@ -45,7 +38,7 @@ const EmotionalTable = () => {
             </View>
           </HStack>
           {/* Note: only show 7 items in a page */}
-          {hist.map((val, key) => {
+          {data.map((val, key) => {
             return (
               <EmotionalHistoryItem
                 key={key}

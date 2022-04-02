@@ -13,7 +13,6 @@ interface SwitchState {
 
 export async function getSwitchState(): Promise<SwitchState> {
   const result = await AsyncStorage.getItem('emotionTrackingSwitch');
-  console.log(JSON.parse(result));
   return result
     ? (JSON.parse(result) as SwitchState)
     : { lastEdit: null, amount: 0 };
