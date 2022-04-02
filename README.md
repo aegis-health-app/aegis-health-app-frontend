@@ -139,3 +139,16 @@ const {
 </TourGuideZone>
 
 ```
+
+## Send image to the back-end
+
+```ts
+const imagePayload = {
+  base64: profileImage.base64,
+  name: profileImage.fileName,
+  type: profileImage.type,
+  size: profileImage.fileSize
+};
+
+// then send this as the body
+```
