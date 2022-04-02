@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import { useEffect } from 'react';
+import emotionCardImage from '../../assets/images/emotionCardImage';
 
 type EmotionCardProps = {
   showEmotionCard: boolean;
@@ -15,25 +16,39 @@ type EmotionCardProps = {
 const EmotionCard = (props: EmotionCardProps) => {
   const { showEmotionCard, close, message } = props;
   const { t } = useTranslation();
+  /**
+   * This function save the date that the elderly submit the emotion to the Async storage and close the card
+   */
   const handleEmotionSubmit = async () => {
     console.log('emotion sent');
     await AsyncStorage.setItem(
       'emotionDate',
       JSON.stringify(moment().format('L'))
     );
-    const savedEmotionDate = await AsyncStorage.getItem('emotionDate');
-    const emotionDate = JSON.parse(savedEmotionDate);
-    console.log('saved emotion date', { emotionDate });
     close();
   };
-  const imagePath = '../../assets/images/temp' + message + '.png';
-  const date = JSON.stringify(message);
-  console.log(date);
-  const getImageSource = () => {
-    const imagePath = '../../assets/images/temp' + message + '.png';
-    const date = JSON.stringify(message);
-    console.log(date);
-    return;
+  /**
+   * This function get the greeting image according to the day of the week.
+   * @param date The day of the week
+   * @returns image path inside assets
+   */
+  const getImageSource = (date) => {
+    switch (date) {
+      case 'Monday':
+        return emotionCardImage.Monday;
+      case 'Tuesday':
+        return emotionCardImage.Tuesday;
+      case 'Wednesday':
+        return emotionCardImage.Wednesday;
+      case 'Thursday':
+        return emotionCardImage.Thursday;
+      case 'Friday':
+        return emotionCardImage.Friday;
+      case 'Saturday':
+        return emotionCardImage.Saturday;
+      default:
+        return emotionCardImage.Sunday;
+    }
   };
   return (
     <Modal isOpen={showEmotionCard} onClose={close}>
@@ -46,8 +61,11 @@ const EmotionCard = (props: EmotionCardProps) => {
         </Modal.Header>
         <Modal.Body>
           <View style={styles.pictureArea}>
-            <Text>{imagePath}</Text>
-            <Image source={require('../../assets/images/tempSaturday.png')} />
+            <Image
+              // width={'24'}
+              // height={'36'}
+              source={getImageSource(message)}
+            />
           </View>
           <Text fontSize="lg" fontWeight="400">
             {t('emotionTrackingCard.howAreYouFeelingToday')}
