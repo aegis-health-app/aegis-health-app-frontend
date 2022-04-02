@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { Button, Image, Radio, ScrollView, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
@@ -30,14 +30,6 @@ const ProfileEditScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
-
-  const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
-  const [initialValues, setInitialValues] = useState<User | undefined>(user);
-  const [showImageUploadError, setShowImageUploadError] =
-    useState<boolean>(false);
-  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
-
   const resolver = useYupValidationResolver(userProfileSchema);
   const {
     control,
@@ -48,6 +40,12 @@ const ProfileEditScreen = () => {
     mode: 'onTouched'
   });
 
+  const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
+  const [initialValues, setInitialValues] = useState<User | undefined>(user);
+  const [showImageUploadError, setShowImageUploadError] =
+    useState<boolean>(false);
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const [date, setDate] = useState(new Date(700938977));
 
   const onDateChange = (event, selectedDate?: Date | undefined) => {
@@ -68,19 +66,16 @@ const ProfileEditScreen = () => {
 
   const uploadNewProfileImage = async () => {
     if (!newProfileImage?.assets) return;
-    const formData = new FormData();
     const profileImage = newProfileImage.assets[0];
-    if (profileImage.uri && user) {
-      formData.append('file', {
-        uri:
-          Platform.OS === 'android'
-            ? profileImage.uri
-            : profileImage.uri.replace('file://', ''),
-        name: profileImage.fileName,
-        type: profileImage.type
-      });
+    const imagePayload = {
+      base64: profileImage.base64,
+      name: profileImage.fileName,
+      type: profileImage.type,
+      size: profileImage.fileSize
+    };
+    if (profileImage.base64 && user) {
       try {
-        const { data } = await client.post('/user/profile/image', formData);
+        const { data } = await client.post('/user/profile/image', imagePayload);
         if (data) getUserProfile();
       } catch (error) {
         setShowImageUploadError(true);
