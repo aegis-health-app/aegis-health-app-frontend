@@ -36,6 +36,7 @@ import { UserContext } from '../contexts/UserContext';
 import FallbackImage from '../components/molecules/FallbackImage';
 import EmotionCard from '../components/organisms/EmotionCard';
 import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
+import moment from 'moment';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -49,7 +50,7 @@ const ElderlyHomeScreen = () => {
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
   const { user } = useContext(UserContext);
-  const [showModal, setShowModal] = useState(false);
+  const [showEmotionCard, setShowEmotionCard] = useState<boolean>(false);
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -71,51 +72,29 @@ const ElderlyHomeScreen = () => {
     });
   }, [eventEmitter]);
 
-  useEffect(() => {
-    setShowModal(true);
+  useAsyncEffect(async () => {
+    const emotionDate = moment(await AsyncStorage.getItem('emotionDate'));
+    const todayDate = moment().format('L');
+    console.log('check emotion date');
+    if (emotionDate.diff(todayDate, 'days')) {
+      setShowEmotionCard(true);
+      console.log('else if', { showEmotionCard });
+    } else {
+      console.log('2date', emotionDate, todayDate);
+      setShowEmotionCard(true);
+      console.log('else ', { showEmotionCard });
+    }
   }, []);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <ScrollView nestedScrollEnabled h="100%">
         {/* Emotion card */}
-        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-          <Modal.Content maxWidth="400px">
-            <Modal.CloseButton />
-            <Modal.Header alignItems={'center'}>Good morning</Modal.Header>
-            <Modal.Body>
-              <View style={styles.pictureArea}>
-                <Image source={require('../assets/images/tempMonday.png')} />
-              </View>
-              <Text fontSize="lg" fontWeight="400">
-                How are you feeling today?
-              </Text>
-            </Modal.Body>
-            <Modal.Footer>
-              <View style={styles.emotionPicker}>
-                <TouchableOpacity
-                  style={styles.emotionButton}
-                  onPress={() => setShowModal(false)}>
-                  <Image
-                    source={require('../assets/images/emotionHappy.png')}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.emotionButton}
-                  onPress={() => setShowModal(false)}>
-                  <Image
-                    source={require('../assets/images/emotionNeutral.png')}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.emotionButton}
-                  onPress={() => setShowModal(false)}>
-                  <Image source={require('../assets/images/emotionSad.png')} />
-                </TouchableOpacity>
-              </View>
-            </Modal.Footer>
-          </Modal.Content>
-        </Modal>
+        <EmotionCard
+          showEmotionCard={showEmotionCard}
+          close={() => setShowEmotionCard(false)}
+          message="changePasswordError"
+        />
         <View
           flex={1}
           alignItems="center"
@@ -249,23 +228,3 @@ const ElderlyHomeScreen = () => {
 };
 
 export default ElderlyHomeScreen;
-
-const styles = StyleSheet.create({
-  emotionPicker: {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'flex-start',
-    flexDirection: 'row'
-  },
-  emotionButton: {
-    backgroundColor: '#fafafa',
-    borderRadius: 20,
-    padding: 10,
-    margin: 8
-  },
-  pictureArea: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 12
-  }
-});
