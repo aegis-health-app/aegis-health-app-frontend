@@ -1,55 +1,62 @@
-import { View, Text } from 'native-base';
+import { View } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
 import { EmotionalHistory } from './../dto/modules/emotionRecord';
-import { ChartConfig } from 'react-native-chart-kit/dist/HelperTypes';
-import { getNumberOfDaysBetweenMonth } from './../utils/caretaker/emotionHeatmap';
+import {
+  getEmotionAsHeatmapFrequency,
+  getNumberOfDaysBetweenMonth
+} from './../utils/caretaker/emotionHeatmap';
+import moment from 'moment';
 
 const ElderlyEmotionHistory = () => {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const [hist, setHist] = useState<EmotionalHistory[]>([]);
 
   useEffect(() => {
     const data: EmotionalHistory[] = [
-      { date: new Date(0), emotion: 'NEUTRAL' },
-      { date: new Date(0), emotion: 'N/A' },
-      { date: new Date(), emotion: 'HAPPY' },
-      { date: new Date(), emotion: 'HAPPY' },
-      { date: new Date(), emotion: 'BAD' },
-      { date: new Date(0), emotion: 'NEUTRAL' },
-      { date: new Date(100000000), emotion: 'NEUTRAL' }
+      { date: moment().subtract(50, 'days').toDate(), emotion: 'NEUTRAL' },
+      { date: moment().subtract(14, 'days').toDate(), emotion: 'NA' },
+      { date: moment().subtract(3, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(20, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(10, 'days').toDate(), emotion: 'BAD' },
+      { date: moment().subtract(40, 'days').toDate(), emotion: 'NEUTRAL' },
+      { date: moment().subtract(80, 'days').toDate(), emotion: 'NEUTRAL' }
     ];
 
     setHist(data);
   }, []);
 
-  const CONFIG: ChartConfig = {
+  const CONFIG = {
     backgroundGradientFrom: '#fff',
     backgroundGradientFromOpacity: 0,
     backgroundGradientTo: '#fff',
     backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
+    color: (opacity = 1) => `rgba(29, 132, 223, ${opacity})`
   };
 
   return (
     <View flex={1}>
-      <Text>Graph</Text>
       <View alignItems="center" justifyContent="center">
-        {hist.length > 0 && (
-          <ContributionGraph
-            values={hist}
-            endDate={new Date()}
-            numDays={getNumberOfDaysBetweenMonth(1)}
-            width={width}
-            height={220}
-            chartConfig={CONFIG}
-          />
-        )}
+        <View w="96" bgColor="#fff" rounded="lg" alignItems="center" my={4}>
+          {hist.length > 0 && (
+            <ContributionGraph
+              values={getEmotionAsHeatmapFrequency(hist)}
+              endDate={new Date()}
+              numDays={getNumberOfDaysBetweenMonth(3)}
+              width={width}
+              height={height / 3}
+              chartConfig={CONFIG}
+              squareSize={24}
+              gutterSize={4}
+              showOutOfRangeDays={true}
+              onDayPress={(val) => {
+                console.log(val);
+              }}
+            />
+          )}
+        </View>
       </View>
 
       <EmotionalTable data={hist} />
