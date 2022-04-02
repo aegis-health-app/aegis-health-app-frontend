@@ -1,11 +1,12 @@
-import { Image, Modal, Text, View } from 'native-base';
-import React, { useState } from 'react';
+import { Icon, Image, Modal, Text, View } from 'native-base';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
-import { useEffect } from 'react';
 import emotionCardImage from '../../assets/images/emotionCardImage';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type EmotionCardProps = {
   showEmotionCard: boolean;
@@ -20,7 +21,6 @@ const EmotionCard = (props: EmotionCardProps) => {
    * This function save the date that the elderly submit the emotion to the Async storage and close the card
    */
   const handleEmotionSubmit = async () => {
-    console.log('emotion sent');
     await AsyncStorage.setItem(
       'emotionDate',
       JSON.stringify(moment().format('L'))
@@ -76,19 +76,35 @@ const EmotionCard = (props: EmotionCardProps) => {
             <TouchableOpacity
               style={styles.emotionButton}
               onPress={handleEmotionSubmit}>
-              <Image source={require('../../assets/images/emotionHappy.png')} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.emotionButton}
-              onPress={handleEmotionSubmit}>
-              <Image
-                source={require('../../assets/images/emotionNeutral.png')}
+              {/* <Image source={require('../../assets/images/emotionHappy.png')} /> */}
+              <Icon
+                as={MaterialCommunityIcons}
+                name="emoticon-happy-outline"
+                size="12"
+                color="black"
               />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.emotionButton}
               onPress={handleEmotionSubmit}>
-              <Image source={require('../../assets/images/emotionSad.png')} />
+              {/* <Image source={require('../../assets/images/emotionNeutral.png')}/> */}
+              <Icon
+                as={MaterialCommunityIcons}
+                name="emoticon-neutral-outline"
+                size="12"
+                color="black"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.emotionButton}
+              onPress={handleEmotionSubmit}>
+              {/* <Image source={require('../../assets/images/emotionSad.png')} /> */}
+              <Icon
+                as={MaterialCommunityIcons}
+                name="emoticon-sad-outline"
+                size="12"
+                color="black"
+              />
             </TouchableOpacity>
           </View>
         </Modal.Footer>
