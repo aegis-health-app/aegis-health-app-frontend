@@ -40,6 +40,7 @@ import moment from 'moment';
 import FallbackImage from '../components/molecules/FallbackImage';
 import EmotionCard from '../components/organisms/EmotionCard';
 import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
+import moment from 'moment';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -238,23 +239,3 @@ const ElderlyHomeScreen = () => {
 };
 
 export default ElderlyHomeScreen;
-
-const styles = StyleSheet.create({
-  emotionPicker: {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'flex-start',
-    flexDirection: 'row'
-  },
-  emotionButton: {
-    backgroundColor: '#fafafa',
-    borderRadius: 20,
-    padding: 10,
-    margin: 8
-  },
-  pictureArea: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 12
-  }
-});
