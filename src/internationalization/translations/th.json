@@ -340,6 +340,7 @@
     "Friday": "สวัสดีวันศุกร์",
     "Saturday": "สวัสดีวันเสาร์",
     "Sunday": "สวัสดีวันอาทิตย์",
+<<<<<<< HEAD
     "howAreYouFeelingToday" :"วันนี้คุณรู้สึกอย่างไร?",
     "create": "สร้าง",
     "addEntry": "เพิ่มข้อมูล",
@@ -353,5 +354,8 @@
     "of": "จาก",
     "save": "บันทึก",
     "deleteRecording": "ลบการจดบันทึกนี้"
+=======
+    "howAreYouFeelingToday" :"วันนี้คุณรู้สึกอย่างไร?"
+>>>>>>> a18c8dd (feat: add translation to emotion card.)
   }
 }
