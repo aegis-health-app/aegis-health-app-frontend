@@ -1,26 +1,58 @@
 import { View, Text } from 'native-base';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
-import CalendarHeatmap from 'react-native-calendar-heatmap';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
+import { EmotionalHistory } from './../dto/modules/emotionRecord';
+import { ChartConfig } from 'react-native-chart-kit/dist/HelperTypes';
+import { getNumberOfDaysBetweenMonth } from './../utils/caretaker/emotionHeatmap';
 
 const ElderlyEmotionHistory = () => {
   const { width } = useWindowDimensions();
+  const [hist, setHist] = useState<EmotionalHistory[]>([]);
+
+  useEffect(() => {
+    const data: EmotionalHistory[] = [
+      { date: new Date(0), emotion: 'NEUTRAL' },
+      { date: new Date(0), emotion: 'N/A' },
+      { date: new Date(), emotion: 'HAPPY' },
+      { date: new Date(), emotion: 'HAPPY' },
+      { date: new Date(), emotion: 'BAD' },
+      { date: new Date(0), emotion: 'NEUTRAL' },
+      { date: new Date(100000000), emotion: 'NEUTRAL' }
+    ];
+
+    setHist(data);
+  }, []);
+
+  const CONFIG: ChartConfig = {
+    backgroundGradientFrom: '#fff',
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: '#fff',
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+  };
 
   return (
     <View flex={1}>
       <Text>Graph</Text>
-      <CalendarHeatmap
-        endDate={new Date('2016-04-01')}
-        numDays={100}
-        values={[
-          { date: '2016-01-01' },
-          { date: '2016-01-22' },
-          { date: '2016-01-30' }
-        ]}
-      />
-      <EmotionalTable />
+      <View alignItems="center" justifyContent="center">
+        {hist.length > 0 && (
+          <ContributionGraph
+            values={hist}
+            endDate={new Date()}
+            numDays={getNumberOfDaysBetweenMonth(1)}
+            width={width}
+            height={220}
+            chartConfig={CONFIG}
+          />
+        )}
+      </View>
+
+      <EmotionalTable data={hist} />
     </View>
   );
 };
