@@ -25,6 +25,9 @@ const EmotionCard = (props: EmotionCardProps) => {
       'emotionDate',
       JSON.stringify(moment().format('L'))
     );
+    const savedEmotionDate = await AsyncStorage.getItem('emotionDate');
+    const emotionDate = JSON.parse(savedEmotionDate);
+    console.log('saved emotion date', { emotionDate });
     close();
   };
   /**
@@ -49,6 +52,14 @@ const EmotionCard = (props: EmotionCardProps) => {
       default:
         return emotionCardImage.Sunday;
     }
+  const imagePath = '../../assets/images/temp' + message + '.png';
+  const date = JSON.stringify(message);
+  console.log(date);
+  const getImageSource = () => {
+    const imagePath = '../../assets/images/temp' + message + '.png';
+    const date = JSON.stringify(message);
+    console.log(date);
+    return;
   };
   return (
     <Modal isOpen={showEmotionCard} onClose={close}>
