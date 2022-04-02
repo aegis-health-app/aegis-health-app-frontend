@@ -78,7 +78,7 @@ const ElderlyHomeScreen = () => {
                 onPress={() => navigation.navigate('ProfileScreen')}>
                 <View flexDir="row">
                   <Image
-                    source={ProfilePic}
+                    source={user ? { uri: user.imageid } : ProfilePic}
                     width="12"
                     height="12"
                     borderRadius={4}

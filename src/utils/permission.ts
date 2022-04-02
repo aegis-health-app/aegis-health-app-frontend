@@ -3,7 +3,8 @@ import { CameraOptions } from 'react-native-image-picker';
 import i18n from '../internationalization/i18n.config';
 
 export const CameraPhotoOptions: CameraOptions = {
-  mediaType: 'photo'
+  mediaType: 'photo',
+  includeBase64: true
 };
 
 export const requestCameraPermission = async () => {

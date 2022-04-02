@@ -46,7 +46,7 @@ const Alert = (props: AlertProps) => {
         <AlertDialog.CloseButton />
         <AlertDialog.Header>{getMessage()?.header}</AlertDialog.Header>
         <AlertDialog.Body>
-          {`${getMessage()?.body} ${customString}`}
+          {`${getMessage()?.body} ${customString ?? ''}`}
         </AlertDialog.Body>
         <AlertDialog.Footer>
           <Button.Group space={2}>

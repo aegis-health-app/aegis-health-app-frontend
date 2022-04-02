@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
 import EditButton from '../components/atoms/EditButton';
@@ -7,7 +7,7 @@ import BasicProfile from '../components/molecules/BasicProfile';
 import Divider from '../components/atoms/Divider';
 import HealthProfile from '../components/molecules/HealthProfile';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useProfileInfo } from '../hooks/useProfileInfo';
@@ -17,7 +17,18 @@ const ProfileScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { basicProfile, healthProfile } = useProfileInfo();
+  const [showProfile, setShowProfile] = useState(true);
 
+  useFocusEffect(
+    useCallback(() => {
+      setShowProfile(false);
+      setTimeout(() => {
+        setShowProfile(true);
+      }, 0);
+    }, [])
+  );
+
+  if (!showProfile) return null;
   return (
     <View style={styles.pageContainer}>
       <View style={styles.profileInfoItemRow}>
