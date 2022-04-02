@@ -5,6 +5,7 @@ import Spacer from '../atoms/Spacer';
 import { ProfileItem } from '../../interfaces/User';
 import images from '../../assets/images';
 import { UserContext } from '../../contexts/UserContext';
+import FallbackImage from './FallbackImage';
 
 const ProfileInfoItem = ({ label, value }: ProfileItem) => {
   return (
@@ -62,7 +63,8 @@ const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
           width="32"
           height="32"
           borderRadius={4}
-          alt="Profile"
+          fallbackElement={FallbackImage}
+          alt="Profile Picture"
         />
       </View>
       <Spacer />

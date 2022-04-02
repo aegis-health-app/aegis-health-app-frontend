@@ -9,7 +9,7 @@ import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
-import { Elderly } from './../../dto/modules/user.dto';
+import FallbackImage from '../../components/molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -28,7 +28,7 @@ const ConfirmConnectScreen = ({
   //TODO: error handling
   const handlePress = async () => {
     try {
-      const { data } = await client.post('/user/relationship', {
+      await client.post('/user/relationship', {
         eid: info.uid,
         cid: user?.uid
       });
@@ -53,6 +53,7 @@ const ConfirmConnectScreen = ({
           w={160}
           h={160}
           borderRadius={10}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
         <Text mt="2" fontWeight="600" fontSize="2xl">
