@@ -358,6 +358,17 @@
     "date": "Date",
     "emotion":"Emotion",
     "switchLast": "This is your last time to toggle emotion switch for today",
-    "switchDisabled": "You cannot toggle emotion switch anymore for today"
+    "switchDisabled": "You cannot toggle emotion switch anymore for today",
+    "create": "Create"
+  },
+  "emotionTrackingCard":{
+    "Monday": "Happy Monday",
+    "Tuesday": "Happy Tuesday",
+    "Wednesday": "Happy Wednesday",
+    "Thursday": "Happy Thursday",
+    "Friday": "Happy Friday",
+    "Saturday": "Happy Saturday",
+    "Sunday": "Happy Sunday",
+    "howAreYouFeelingToday" :"How are you feeling today?"
   }
 }

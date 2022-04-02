@@ -67,6 +67,15 @@ const EmotionCard = (props: EmotionCardProps) => {
         return emotionCardImage.Sunday;
     }
   };
+  const imagePath = '../../assets/images/temp' + message + '.png';
+  const date = JSON.stringify(message);
+  console.log(date);
+  const getImageSource = () => {
+    const imagePath = '../../assets/images/temp' + message + '.png';
+    const date = JSON.stringify(message);
+    console.log(date);
+    return;
+  };
   return (
     <Modal isOpen={showEmotionCard} onClose={() => handleEmotionSubmit('NA')}>
       <Modal.Content maxWidth="400px">
