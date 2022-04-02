@@ -1,22 +1,5 @@
 import moment from 'moment';
-
-/**
- * This function return
- * @param from
- * @param to
- * @returns
- */
-export function getNumDaysInChart(_from: Date | undefined) {
-  if (_from !== undefined) {
-    const from = moment(_from);
-    const to = moment(_from).add(3, 'months');
-    return to.diff(from, 'days');
-  }
-
-  const now = moment();
-  const future = moment(now).add(3, 'months');
-  return future.diff(now, 'days');
-}
+import { EmotionalHistory } from './../../dto/modules/emotionRecord';
 
 /**
  * This function returns the number of day between month depending on diff params.
@@ -29,4 +12,42 @@ export function getNumberOfDaysBetweenMonth(diff: number): number {
   const now = moment();
   const to = moment().add(diff, 'months');
   return moment.duration(to.diff(now)).asDays();
+}
+
+export interface EmotionalHistoryFrequency {
+  date: Date;
+  count: number;
+}
+
+export enum EmotionFrequencyEnum {
+  NA = 2,
+  BAD = 3,
+  NEUTRAL = 5,
+  HAPPY = 10
+}
+
+/**
+ * This function returns Emotion as number of frequency.
+ */
+export function getEmotionAsHeatmapFrequency(
+  data: EmotionalHistory[]
+): EmotionalHistoryFrequency[] {
+  const freq: EmotionalHistoryFrequency[] = [];
+  if (data.length === 0) return freq;
+
+  data.forEach((val) => {
+    const { date, emotion } = val;
+
+    if (emotion === 'BAD') {
+      freq.push({ date: date, count: EmotionFrequencyEnum.BAD });
+    } else if (emotion === 'NEUTRAL') {
+      freq.push({ date: date, count: EmotionFrequencyEnum.NEUTRAL });
+    } else if (emotion === 'HAPPY') {
+      freq.push({ date: date, count: EmotionFrequencyEnum.HAPPY });
+    } else {
+      freq.push({ date: date, count: EmotionFrequencyEnum.NA });
+    }
+  });
+
+  return freq;
 }
