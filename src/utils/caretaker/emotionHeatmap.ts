@@ -11,6 +11,7 @@ export function getNumberOfDaysBetweenMonth(diff: number): number {
 
   const now = moment();
   const to = moment().add(diff, 'months');
+  console.log(moment.duration(to.diff(now)).asDays());
   return moment.duration(to.diff(now)).asDays();
 }
 

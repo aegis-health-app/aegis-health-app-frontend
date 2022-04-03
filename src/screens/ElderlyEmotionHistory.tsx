@@ -1,12 +1,12 @@
-import { View } from 'native-base';
+import { View, useToast } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
 import { EmotionalHistory } from './../dto/modules/emotionRecord';
 import {
-  getEmotionAsHeatmapFrequency,
-  getNumberOfDaysBetweenMonth
+  EmotionalHistoryFrequency,
+  getEmotionAsHeatmapFrequency
 } from './../utils/caretaker/emotionHeatmap';
 import moment from 'moment';
 
@@ -14,15 +14,26 @@ const ElderlyEmotionHistory = () => {
   const { width, height } = useWindowDimensions();
   const [hist, setHist] = useState<EmotionalHistory[]>([]);
 
+  const toast = useToast();
+  function handleDayPress(val: EmotionalHistoryFrequency) {
+    toast.show({ title: JSON.stringify(val) });
+  }
+
   useEffect(() => {
     const data: EmotionalHistory[] = [
-      { date: moment().subtract(50, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(14, 'days').toDate(), emotion: 'NA' },
-      { date: moment().subtract(3, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(20, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(10, 'days').toDate(), emotion: 'BAD' },
-      { date: moment().subtract(40, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(80, 'days').toDate(), emotion: 'NEUTRAL' }
+      { date: moment().subtract(20, 'days').toDate(), emotion: 'NEUTRAL' },
+      { date: moment().subtract(19, 'days').toDate(), emotion: 'NA' },
+      { date: moment().subtract(18, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(17, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(16, 'days').toDate(), emotion: 'BAD' },
+      { date: moment().subtract(15, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(14, 'days').toDate(), emotion: 'NEUTRAL' },
+      { date: moment().subtract(13, 'days').toDate(), emotion: 'BAD' },
+      { date: moment().subtract(12, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(11, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(10, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(9, 'days').toDate(), emotion: 'HAPPY' },
+      { date: moment().subtract(8, 'days').toDate(), emotion: 'HAPPY' }
     ];
 
     setHist(data);
@@ -39,26 +50,31 @@ const ElderlyEmotionHistory = () => {
   return (
     <View flex={1}>
       <View alignItems="center" justifyContent="center">
-        <View w="96" bgColor="#fff" rounded="lg" alignItems="center" my={4}>
+        <View
+          w="96"
+          bgColor="#fff"
+          rounded="lg"
+          alignItems="center"
+          justifyContent="center"
+          my={4}>
           {hist.length > 0 && (
             <ContributionGraph
               values={getEmotionAsHeatmapFrequency(hist)}
               endDate={new Date()}
-              numDays={getNumberOfDaysBetweenMonth(3)}
+              numDays={76}
               width={width}
               height={height / 3}
               chartConfig={CONFIG}
-              squareSize={24}
+              squareSize={25}
               gutterSize={4}
               showOutOfRangeDays={true}
               onDayPress={(val) => {
-                console.log(val);
+                handleDayPress(val);
               }}
             />
           )}
         </View>
       </View>
-
       <EmotionalTable data={hist} />
     </View>
   );
