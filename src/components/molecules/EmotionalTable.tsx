@@ -12,14 +12,34 @@ type EmotionalTableProps = {
 
 const EmotionalTable = ({ data }: EmotionalTableProps) => {
   const { height, width } = useWindowDimensions();
-  const [currIndex, setCurrIndex] = useState(1);
-  const [histLength, setHistLength] = useState(0);
+
+  const [hist, setHist] = useState<EmotionalHistory[]>([]);
+
+  const [from, setFrom] = useState(1);
+  const [to, setTo] = useState(7);
+
+  const [currPageIndex, setCurrPageIndex] = useState(1);
   const [maxPageIndex, setMaxPageIndex] = useState(1);
 
   useEffect(() => {
-    setHistLength(data.length);
+    setHist(data.slice(from, to));
     setMaxPageIndex(Math.ceil(data.length / 7));
-  }, []);
+  }, [data]);
+
+  useEffect(() => {
+    if (from > 1) {
+      setFrom(from * currPageIndex);
+    }
+    setTo(from + 7);
+    setHist(data.slice(from, to));
+    console.log({ hist });
+  }, [currPageIndex]);
+
+  useEffect(() => {
+    console.log(`Page ${currPageIndex}/${maxPageIndex}`);
+
+    console.log({ to });
+  }, [currPageIndex]);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
@@ -38,7 +58,7 @@ const EmotionalTable = ({ data }: EmotionalTableProps) => {
             </View>
           </HStack>
           {/* Note: only show 7 items in a page */}
-          {data.map((val, key) => {
+          {hist.map((val, key) => {
             return (
               <EmotionalHistoryItem
                 key={key}
@@ -48,9 +68,9 @@ const EmotionalTable = ({ data }: EmotionalTableProps) => {
             );
           })}
           <EmotionalTableNavigator
-            currIndex={currIndex}
-            setCurrIndex={setCurrIndex}
-            maxIndex={maxPageIndex}
+            currPageIndex={currPageIndex}
+            setCurrPageIndex={setCurrPageIndex}
+            maxPageIndex={maxPageIndex}
           />
         </View>
       </ScrollView>

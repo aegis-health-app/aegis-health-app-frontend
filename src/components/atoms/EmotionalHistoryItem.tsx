@@ -1,7 +1,7 @@
 import { Text, Icon, HStack, View, Divider } from 'native-base';
 import React from 'react';
 import { Emotion } from '../../dto/modules/emotionRecord';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useWindowDimensions } from 'react-native';
 
@@ -14,14 +14,35 @@ const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
 
   function EmotionIcon() {
     if (emotion === 'BAD') {
-      return <Icon as={Fontisto} name="frowning" size="9" color="black" />;
+      return (
+        <Icon
+          as={MaterialCommunityIcons}
+          name="emoticon-sad-outline"
+          size="12"
+          color="black"
+        />
+      );
     } else if (emotion === 'HAPPY') {
-      return <Icon as={Fontisto} name="smiley" size="9" color="black" />;
+      return (
+        <Icon
+          as={MaterialCommunityIcons}
+          name="emoticon-happy-outline"
+          size="12"
+          color="black"
+        />
+      );
     } else if (emotion === 'NEUTRAL') {
-      return <Icon as={Fontisto} name="neutral" size="9" color="black" />;
+      return (
+        <Icon
+          as={MaterialCommunityIcons}
+          name="emoticon-neutral-outline"
+          size="12"
+          color="black"
+        />
+      );
     } else {
       return (
-        <Text fontWeight="semibold" fontSize="xl">
+        <Text fontWeight="bold" fontSize="2xl">
           N/A
         </Text>
       );

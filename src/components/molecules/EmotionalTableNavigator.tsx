@@ -4,49 +4,65 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  currIndex: number;
-  setCurrIndex: (val: number) => void;
-  maxIndex: number;
+  currPageIndex: number;
+  setCurrPageIndex: (val: number) => void;
+  maxPageIndex: number;
 };
 
 const EmotionalTableNavigator = ({
-  currIndex,
-  setCurrIndex,
-  maxIndex
+  currPageIndex,
+  setCurrPageIndex,
+  maxPageIndex
 }: Props) => {
   function handlePressBack() {
-    if (currIndex <= 1) {
+    if (currPageIndex <= 1) {
       return;
     }
 
-    setCurrIndex(currIndex - 1);
+    setCurrPageIndex(currPageIndex - 1);
+  }
+
+  function handlePressNext() {
+    if (currPageIndex < maxPageIndex) {
+      setCurrPageIndex(currPageIndex + 1);
+    }
   }
 
   const { t } = useTranslation();
 
   return (
-    <View alignSelf="flex-end" alignItems="center" mx={4} mb={4}>
+    <View
+      alignSelf="flex-end"
+      alignItems="center"
+      mb={4}
+      w="40"
+      bgColor="amber.300">
       <HStack space={2}>
-        {currIndex > 1 && (
-          <Icon
-            onPress={handlePressBack}
-            as={MaterialIcons}
-            name="keyboard-arrow-left"
-            size={8}
-            color="black"
-          />
-        )}
-        <Text fontSize="lg">{currIndex}</Text>
+        <View w={8}>
+          {currPageIndex > 1 && (
+            <Icon
+              onPress={handlePressBack}
+              as={MaterialIcons}
+              name="keyboard-arrow-left"
+              size={8}
+              color="black"
+            />
+          )}
+        </View>
+        <Text fontSize="lg">{currPageIndex}</Text>
         <Text fontSize="lg">{t('emotionalRecord.of')}</Text>
-        <Text fontSize="lg">{maxIndex}</Text>
-        {currIndex !== maxIndex && (
-          <Icon
-            as={MaterialIcons}
-            name="keyboard-arrow-right"
-            size={8}
-            color="black"
-          />
-        )}
+        <Text fontSize="lg">{maxPageIndex}</Text>
+        <View w={8}>
+          {currPageIndex !== maxPageIndex && (
+            <Icon
+              onPress={handlePressNext}
+              as={MaterialIcons}
+              name="keyboard-arrow-right"
+              size={8}
+              color="black"
+            />
+          )}
+        </View>
       </HStack>
     </View>
   );
