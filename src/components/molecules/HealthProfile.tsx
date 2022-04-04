@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text, View } from 'native-base';
+import { Text, View } from 'native-base';
 import Spacer from '../atoms/Spacer';
 import { ProfileItem } from '../../interfaces/User';
 
@@ -25,14 +25,13 @@ type HealthProfileProps = {
 
 const HealthProfile = ({ data }: HealthProfileProps) => {
   return (
-    <FlatList
-      data={data}
-      renderItem={({ item }) => (
-        <HealthInfoItem label={item.label} value={item.value} />
-      )}
-      keyExtractor={(item) => item.label}
-      scrollEnabled={false}
-    />
+    <View>
+      {data.map((item, key) => {
+        return (
+          <HealthInfoItem label={item.label} value={item.value} key={key} />
+        );
+      })}
+    </View>
   );
 };
 
