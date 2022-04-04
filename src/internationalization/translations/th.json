@@ -102,6 +102,8 @@
   "modules": {
     "notification": "การแจ้งเตือน",
     "viewAll": "ดูทั้งหมด",
+    "viewCard": "ดู",
+    "sender": "จาก: {{name}}",
     "iDidIt": "ฉันทำแล้ว",
     "dismiss": "ปิด",
     "modules": "ฟีเจอร์",
@@ -302,7 +304,9 @@
     "reportCompleteDesc": "ผู้ดูแลของคุณได้รับการแจ้งเตือนแล้ว\n โปรดรอการติดต่อจากผู้ดูแล",
     "callPolice": "โทรติดต่อตำรวจ 191",
     "callAmbulance": "โทรติดต่อหน่วยแพทย์ 1669",
-    "IAmOK": "ฉันสบายดีแล้ว ยกเลิกการแจ้งเหตุฉุกเฉิน"
+    "IAmOK": "ฉันสบายดีแล้ว ยกเลิกการแจ้งเหตุฉุกเฉิน",
+    "alertTitle": "ฉุกเฉิน",
+    "alertDescription": "{{name}} แจ้งเหตุฉุกเฉิน"
   },
   "healthRecording": {
     "createRecordings": "สร้างข้อมูลใหม่",

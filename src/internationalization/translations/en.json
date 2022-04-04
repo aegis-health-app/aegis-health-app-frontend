@@ -102,6 +102,8 @@
   "modules": {
     "notification": "Notification",
     "viewAll": "View All",
+    "viewCard": "View",
+    "sender": "From: {{name}}",
     "iDidIt": "I did it",
     "dismiss": "Dismiss",
     "modules": "Modules",
@@ -302,7 +304,9 @@
     "reportCompleteDesc": "Your caretaker(s) have been notified.\n Please stand by.",
     "callPolice": "Call police 191",
     "callAmbulance": "Call medical service 1669",
-    "IAmOK": "I am fine, stop the emergency report."
+    "IAmOK": "I am fine, stop the emergency report.",
+    "alertTitle": "Emergency",
+    "alertDescription": "{{name}} has an emergency"
   },
   "healthRecording": {
     "createRecordings": "Create recordings",
