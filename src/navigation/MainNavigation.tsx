@@ -391,14 +391,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
               name="SignUpScreen"
               component={SignUpScreen}
               initialParams={{ isElderly: true }}
