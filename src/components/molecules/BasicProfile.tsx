@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { FlatList, Text, View, Image } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Text, View, Image } from 'native-base';
 import Spacer from '../atoms/Spacer';
 import { ProfileItem } from '../../interfaces/User';
 import images from '../../assets/images';
@@ -10,13 +9,13 @@ import FallbackImage from './FallbackImage';
 const ProfileInfoItem = ({ label, value }: ProfileItem) => {
   return (
     <View>
-      <View style={styles.profileInfoItemRow}>
+      <View flexDir="row" justifyContent="space-between">
         <View w="1/2">
           <Text fontSize="md" color="muted.500">
             {label}
           </Text>
         </View>
-        <View style={styles.profileInfoItemValue}>
+        <View w="full">
           <Text fontSize="md">{value}</Text>
         </View>
       </View>
@@ -67,39 +66,14 @@ const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
         />
       </View>
       <Spacer />
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <ProfileInfoItem label={item.label} value={item.value} />
-        )}
-        keyExtractor={(item) => item.label}
-        scrollEnabled={false}
-      />
+
+      {data.map((item, key) => {
+        return (
+          <ProfileInfoItem key={key} label={item.label} value={item.value} />
+        );
+      })}
     </>
   );
 };
 
 export default BasicProfile;
-
-const styles = StyleSheet.create({
-  pageContainer: {
-    padding: 16
-  },
-  profileInfoItemRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  profileInfoItemLabel: {
-    width: 150
-  },
-  profileInfoItemValue: {
-    width: '100%'
-  },
-  toggleButtonsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    minWidth: 80
-  }
-});
