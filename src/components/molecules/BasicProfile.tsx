@@ -39,7 +39,6 @@ type BasicProfileProps = {
 const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
   const { user } = useContext(UserContext);
   const getImage = () => {
-    console.log(image);
     if (mode === 'SELF')
       return user?.imageid ? { uri: user?.imageid } : images.picturePlaceholder;
     else {
