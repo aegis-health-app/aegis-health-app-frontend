@@ -316,21 +316,6 @@ const MainNavigation = () => {
                 headerTitleAlign: 'center'
               }}
             />
-            <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
           </>
         )}
       </Stack.Navigator>
