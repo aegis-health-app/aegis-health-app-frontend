@@ -83,12 +83,12 @@ const TakeCareElderlyScreen = ({
       const result = await saveSwitchState(now);
       if (result === 3) {
         toast.show({
-          title: 'This is your last time to toggle emotion switch for today.',
+          title: t('emotionalRecord.switchLast'),
           status: 'warning'
         });
       } else if (result === 4) {
         toast.show({
-          title: 'You cannot toggle emotion switch anymore for today.',
+          title: t('emotionalRecord.switchDisabled'),
           status: 'warning'
         });
       }
