@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { HStack, Text, View } from 'native-base';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 import { useTranslation } from 'react-i18next';
-import { UserContext } from '../../contexts/UserContext';
 import { TouchableOpacity } from 'react-native';
+import EmergencyAlertCard from '../molecules/EmergencyAlertCard';
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
 
   return (
     <View w="full" mt={6}>
@@ -28,6 +27,12 @@ const UpComingAlert = () => {
       </HStack>
       <ModuleAlertCard
         moduleName="Lorem Ipsum"
+        title="Lorem Ipsum"
+        description="Lorem Ipsum"
+        time={new Date()}
+      />
+      <EmergencyAlertCard
+        sender="Lorem Ipsum"
         title="Lorem Ipsum"
         description="Lorem Ipsum"
         time={new Date()}
