@@ -67,14 +67,11 @@ const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
         />
       </View>
       <Spacer />
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <ProfileInfoItem label={item.label} value={item.value} />
-        )}
-        keyExtractor={(item) => item.label}
-        scrollEnabled={false}
-      />
+      {data.map((item, key) => {
+        return (
+          <ProfileInfoItem key={key} label={item.label} value={item.value} />
+        );
+      })}
     </>
   );
 };
