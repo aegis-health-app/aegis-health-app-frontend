@@ -70,6 +70,9 @@ const theme = extendTheme({
     },
     danger: {
       500: '#c2410c'
+    },
+    aegis: {
+      danger: '#FF5C5C'
     }
   }
 });
