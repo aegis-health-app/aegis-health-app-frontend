@@ -16,7 +16,7 @@ const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
 
   return (
     <View>
-      <VStack px="4" py="2" backgroundColor="#FF5C5C" style={styles.card}>
+      <VStack px="4" py="2" backgroundColor="aegis.danger" style={styles.card}>
         <HStack justifyContent="space-between">
           <Text fontSize="16" color="#E4E4E7">
             {t('modules.sender', { name: sender })}
