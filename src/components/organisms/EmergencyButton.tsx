@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Button, Center, Container, Text } from 'native-base';
 import useDimensions from '../../hooks/useDimensions';
 
 const EmergencyButton = ({ isEmergency, setEmergency }) => {
   const { ScreenWidth } = useDimensions();
+
+  const buttonSize = useMemo(() => ScreenWidth * 0.7, [ScreenWidth]);
 
   return (
     <Center>
@@ -11,15 +13,15 @@ const EmergencyButton = ({ isEmergency, setEmergency }) => {
         borderRadius={999}
         background="red.300"
         p={4}
-        width={ScreenWidth * 0.8}
-        height={ScreenWidth * 0.8}>
+        width={buttonSize}
+        height={buttonSize}>
         <Center>
           <Container
             borderRadius={999}
             background="red.400"
             p={4}
-            minWidth={ScreenWidth * 0.8 - 32}
-            height={ScreenWidth * 0.8 - 32}>
+            minWidth={buttonSize - 32}
+            height={buttonSize - 32}>
             <Button
               onPress={() => setEmergency(true)}
               background={'red.600'}
@@ -28,8 +30,8 @@ const EmergencyButton = ({ isEmergency, setEmergency }) => {
               _hover={{ background: 'red.500' }}
               _pressed={{ background: 'red.500' }}
               borderRadius={999}
-              minWidth={ScreenWidth * 0.8 - 64}
-              height={ScreenWidth * 0.8 - 64}>
+              minWidth={buttonSize - 64}
+              height={buttonSize - 64}>
               <Text fontSize="8xl" color={isEmergency ? 'red.600' : 'white'}>
                 SOS
               </Text>
