@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import BasicProfile, {
   BasicProfileMode
 } from '../components/molecules/BasicProfile';
-import HealthProfile from '../components/molecules/HealthProfile';
 import { TouchableOpacity } from 'react-native';
 import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -57,12 +56,12 @@ const TakeCareElderlyScreen = ({
       const result = await saveSwitchState(now);
       if (result === 3) {
         toast.show({
-          title: 'This is your last time to toggle emotion switch for today.',
+          title: t('emotionalRecord.switchLast'),
           status: 'warning'
         });
       } else if (result === 4) {
         toast.show({
-          title: 'You cannot toggle emotion switch anymore for today.',
+          title: t('emotionalRecord.switchDisabled'),
           status: 'warning'
         });
       }
