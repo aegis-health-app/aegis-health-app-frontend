@@ -297,7 +297,12 @@
     "header": "Emergency",
     "emerButtonText": "SOS",
     "callToAction": "Press to Report an Emergency Case",
-    "callToActionDesc": "After pressing the SOS button, we will contact all \nyour caretakersabout your emergency."
+    "callToActionDesc": "After pressing the SOS button, we will contact all \nyour caretakersabout your emergency.",
+    "reportComplete": "Emergency Reported",
+    "reportCompleteDesc": "Your caretaker(s) have been notified.\n Please stand by.",
+    "callPolice": "Call police 191",
+    "callAmbulance": "Call medical service 1669",
+    "IAmOK": "I am fine, stop the emergency report."
   },
   "healthRecording": {
     "createRecordings": "Create recordings",

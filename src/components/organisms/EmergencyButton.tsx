@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Button, Center, Container, Text } from 'native-base';
 import useDimensions from '../../hooks/useDimensions';
 
-const EmergencyButton = ({ isEmergency, setEmergency }) => {
+const EmergencyButton = ({ isEmergency, reportEmergency }) => {
   const { ScreenWidth } = useDimensions();
 
   const buttonSize = useMemo(() => ScreenWidth * 0.7, [ScreenWidth]);
@@ -23,7 +23,7 @@ const EmergencyButton = ({ isEmergency, setEmergency }) => {
             minWidth={buttonSize - 32}
             height={buttonSize - 32}>
             <Button
-              onPress={() => setEmergency(true)}
+              onPress={() => reportEmergency()}
               background={'red.600'}
               isDisabled={isEmergency}
               _disabled={{ background: 'white', opacity: 100 }}
