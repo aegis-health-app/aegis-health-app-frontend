@@ -38,9 +38,6 @@ import EmotionCard from '../components/organisms/EmotionCard';
 import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 import moment from 'moment';
 import FallbackImage from '../components/molecules/FallbackImage';
-import EmotionCard from '../components/organisms/EmotionCard';
-import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
-import moment from 'moment';
 
 const ProfilePic = require('../assets/images/profile.png');
 
