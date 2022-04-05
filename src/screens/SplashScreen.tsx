@@ -2,37 +2,34 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Center, Image, View } from 'native-base';
-import React, { useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import React from 'react';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
+import { getUser } from '../utils/user/user';
 
 const aegisLogo = require('../assets/images/aegis_logo.png');
 
 const SplashScreen = () => {
-  const { user, userToken } = useContext(UserContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useAsyncEffect(async () => {
     const viewed = await AsyncStorage.getItem('viewedOnboarding');
-    console.log(!viewed);
-    if (!viewed) {
-      navigation.replace('OnBoardingScreen');
-      return;
-    }
-
-    if (userToken && !user) {
+    try {
+      const _user = await getUser();
+      if (!viewed) {
+        navigation.replace('OnBoardingScreen');
+        return;
+      }
+      if (!_user) {
+        navigation.replace('SignInScreen');
+        return;
+      }
+    } catch (error) {
       navigation.replace('SignInScreen');
       return;
-    } else if (!userToken) {
-      navigation.replace('SignInScreen');
-      return;
     }
-    if (userToken && user && user.isElderly)
-      navigation.replace('TabNavigation');
-    else navigation.replace('CaretakerHomeScreen');
-  }, [user]);
+  }, []);
 
   return (
     <View flex={1} justifyContent="center">
