@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -37,13 +37,13 @@ import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen'
 import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
 import ElderlyEmotionHistory from './../screens/ElderlyEmotionHistory';
+import SplashScreen from '../screens/SplashScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
   const { setShowSettingsTourguide } = useContext(TourguideContext);
-  const { user, userToken } = useContext(UserContext);
-  const [showNav, setShowNav] = useState<boolean>(true);
+  const { user } = useContext(UserContext);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -53,34 +53,23 @@ const MainNavigation = () => {
     }
   };
 
-  useEffect(() => {
-    setShowNav(false);
-    setTimeout(() => {
-      setShowNav(true);
-    }, 0);
-  }, [userToken]);
-
-  if (!showNav) return null;
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
         {user ? (
           <>
-            {user?.isElderly ? (
-              <Stack.Screen
-                name="TabNavigation"
-                component={TabNavigation}
-                options={{ headerShown: false }}
-              />
-            ) : (
-              <Stack.Screen
-                name="CaretakerHomeScreen"
-                component={CaretakerHomeScreen}
-                options={{
-                  headerShown: false
-                }}
-              />
-            )}
+            <Stack.Screen
+              name="TabNavigation"
+              component={TabNavigation}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CaretakerHomeScreen"
+              component={CaretakerHomeScreen}
+              options={{
+                headerShown: false
+              }}
+            />
             <Stack.Screen
               name="SettingScreen"
               component={SettingScreen}
@@ -285,6 +274,11 @@ const MainNavigation = () => {
         ) : (
           <>
             <Stack.Screen
+              name="SplashScreen"
+              component={SplashScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="OnBoardingScreen"
               component={OnBoardingScreen}
               options={{ headerShown: false }}
@@ -294,7 +288,7 @@ const MainNavigation = () => {
               component={SignInScreen}
               options={{
                 title: t('auth.signIn'),
-                headerShown: true,
+                headerShown: false,
                 headerTitleAlign: 'center'
               }}
             />
