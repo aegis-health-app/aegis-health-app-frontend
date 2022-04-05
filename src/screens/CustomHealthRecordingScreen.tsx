@@ -1,5 +1,5 @@
 import { Button, Icon, Image, ScrollView, Text, View } from 'native-base';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,15 +20,26 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
 import useKeyboardOpen from '../hooks/useKeyboardOpen';
 import FallbackImage from '../components/molecules/FallbackImage';
+import Alert, { AlertType } from '../components/organisms/Alert';
+import { RootStackParamList } from '../navigation/types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { UserContext } from '../contexts/UserContext';
 
 interface Fields {
   fieldName: string | undefined;
   unit: string | undefined;
 }
 
+interface UploadImageDTO {
+  base64: string | undefined;
+  name: string | undefined;
+  type: string | undefined;
+  size: number | undefined;
+}
 interface UpdateHealthRecordDTO {
   hrName: string;
-  imageid: null;
+  imageid: UploadImageDTO | null;
   listField: Fields[];
 }
 
@@ -37,9 +48,18 @@ const CustomHealthRecordingScreen = () => {
   const [fieldList, setFieldList] = useState<Fields[]>([
     { fieldName: undefined, unit: undefined }
   ]);
+  const [showImageUploadError, setShowImageUploadError] =
+    useState<boolean>(false);
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const inputSchema = Yup.object({
     title: Yup.string().required(i18n.t('healthRecording.titleBlankError'))
   });
+
+  const { user } = useContext(UserContext);
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
 
@@ -125,9 +145,55 @@ const CustomHealthRecordingScreen = () => {
     return false;
   };
 
+  const handleSubmit = () => {
+    const uploadImage = customImage
+      ? customImage.assets
+        ? customImage.assets[0]
+        : undefined
+      : undefined;
+
+      // TODO: POST REQUEST LATER (DIFFERENT ENDPOINTS FOR ELDERLY & CARETAKERS)
+    console.log(user?.isElderly)
+    console.log({
+      hrName: watchInputs.title,
+      imageid: uploadImage
+        ? {
+            base64: uploadImage.base64,
+            name: uploadImage.fileName,
+            type: uploadImage.type,
+            size: uploadImage.fileSize
+          }
+        : null,
+      listField: fieldList
+    } as UpdateHealthRecordDTO);
+
+    setShowSuccessAlert(true);
+  };
   return (
     <View flex={1}>
       <SafeAreaView edges={['left', 'top', 'right']}>
+        <Alert
+          isOpen={showImageUploadError}
+          close={() => setShowImageUploadError(false)}
+          type={AlertType.ERROR}
+          message="uploadImageError"
+        />
+        <Alert
+          isOpen={showErrorAlert}
+          close={() => setShowErrorAlert(false)}
+          type={AlertType.ERROR}
+          message="updateProfileError"
+        />
+        <Alert
+          isOpen={showSuccessAlert}
+          close={() => {
+            setShowSuccessAlert(false);
+            // change navigation later
+            // if (!showImageUploadError) navigation.navigate('UserLinkScreen');
+          }}
+          type={AlertType.SUCCESS}
+          message="updateProfileSuccess"
+        />
         <ScrollView height="85%">
           <View mx={4} flexDir="column">
             <View mt={4}>
@@ -306,13 +372,7 @@ const CustomHealthRecordingScreen = () => {
             mx={4}
             mt={4}
             isDisabled={handleButtonState()}
-            onPress={() => {
-              console.log({
-                hrName: watchInputs.title,
-                imageid: null,
-                listField: fieldList
-              } as UpdateHealthRecordDTO);
-            }}>
+            onPress={() => handleSubmit()}>
             {t('healthRecording.create')}
           </Button>
         </View>
