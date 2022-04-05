@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import emotionCardImage from '../../assets/images/emotionCardImage';
-import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { client } from '../../config/axiosConfig';
 
 type EmotionCardProps = {
   showEmotionCard: boolean;
@@ -18,17 +18,31 @@ const EmotionCard = (props: EmotionCardProps) => {
   const { showEmotionCard, close, message } = props;
   const { t } = useTranslation();
   /**
-   * This function save the date that the elderly submit the emotion to the Async storage and close the card
+   * This function save the date that the elderly submit the emotion to the Async storage,
+   * send the emotion to backend, and close the card.
+   * @param emotion Emotion that user select from the emotion card.
    */
-  const handleEmotionSubmit = async () => {
+  const handleEmotionSubmit = async (emotion) => {
+    await sendPayload(emotion);
     await AsyncStorage.setItem(
       'emotionDate',
       JSON.stringify(moment().format('L'))
     );
     const savedEmotionDate = await AsyncStorage.getItem('emotionDate');
     const emotionDate = JSON.parse(savedEmotionDate);
-    console.log('saved emotion date', { emotionDate });
+    console.log('saved emotion date', { emotionDate }, emotion);
     close();
+  };
+  const sendPayload = async (emotion) => {
+    const payload = {
+      emotionLevel: emotion
+    };
+    try {
+      const { data } = await client.post('/emotion-tracking', payload);
+      if (data) console.log('emotion sent: ' + emotion);
+    } catch (err) {
+      console.log('Unsuccessful emotion sent: ' + emotion);
+    }
   };
   /**
    * This function get the greeting image according to the day of the week.
@@ -52,17 +66,9 @@ const EmotionCard = (props: EmotionCardProps) => {
       default:
         return emotionCardImage.Sunday;
     }
-  const imagePath = '../../assets/images/temp' + message + '.png';
-  const date = JSON.stringify(message);
-  console.log(date);
-  const getImageSource = () => {
-    const imagePath = '../../assets/images/temp' + message + '.png';
-    const date = JSON.stringify(message);
-    console.log(date);
-    return;
   };
   return (
-    <Modal isOpen={showEmotionCard} onClose={close}>
+    <Modal isOpen={showEmotionCard} onClose={() => handleEmotionSubmit('NA')}>
       <Modal.Content maxWidth="400px">
         <Modal.CloseButton />
         <Modal.Header style={styles.header}>
@@ -72,11 +78,11 @@ const EmotionCard = (props: EmotionCardProps) => {
         </Modal.Header>
         <Modal.Body>
           <View style={styles.pictureArea}>
-            <Image
+            {/* <Image
               // width={'24'}
               // height={'36'}
               source={getImageSource(message)}
-            />
+            /> */}
           </View>
           <Text fontSize="lg" fontWeight="400">
             {t('emotionTrackingCard.howAreYouFeelingToday')}
@@ -86,7 +92,7 @@ const EmotionCard = (props: EmotionCardProps) => {
           <View style={styles.emotionPicker}>
             <TouchableOpacity
               style={styles.emotionButton}
-              onPress={handleEmotionSubmit}>
+              onPress={() => handleEmotionSubmit('HAPPY')}>
               {/* <Image source={require('../../assets/images/emotionHappy.png')} /> */}
               <Icon
                 as={MaterialCommunityIcons}
@@ -97,7 +103,7 @@ const EmotionCard = (props: EmotionCardProps) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.emotionButton}
-              onPress={handleEmotionSubmit}>
+              onPress={() => handleEmotionSubmit('NEUTRAL')}>
               {/* <Image source={require('../../assets/images/emotionNeutral.png')}/> */}
               <Icon
                 as={MaterialCommunityIcons}
@@ -108,7 +114,7 @@ const EmotionCard = (props: EmotionCardProps) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.emotionButton}
-              onPress={handleEmotionSubmit}>
+              onPress={() => handleEmotionSubmit('BAD')}>
               {/* <Image source={require('../../assets/images/emotionSad.png')} /> */}
               <Icon
                 as={MaterialCommunityIcons}
