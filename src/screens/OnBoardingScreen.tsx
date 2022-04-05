@@ -10,7 +10,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-import useAsyncEffect from '../hooks/useAsyncEffect';
 
 const OnBoardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +18,6 @@ const OnBoardingScreen = () => {
   const slidesRef = useRef(null);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -84,7 +82,7 @@ const OnBoardingScreen = () => {
       slidesRef.current.scrollToIndex({ index: index });
     } else {
       try {
-        await AsyncStorage.setItem('@viewedOnboarding', 'true');
+        await AsyncStorage.setItem('viewedOnboarding', 'true');
       } catch (error) {
         console.log('Error @setItem: ', error);
       }
@@ -95,16 +93,16 @@ const OnBoardingScreen = () => {
     scrollTo(currentIndex);
   }, [currentIndex]);
 
-  useAsyncEffect(async () => {
-    const viewed = await AsyncStorage.getItem('viewedOnboarding');
-    if (viewed && JSON.parse(viewed)) {
-      navigation.navigate('SignInScreen');
-    } else {
-      setShowOnboarding(true);
-    }
-  }, []);
+  // useAsyncEffect(async () => {
+  //   const viewed = await AsyncStorage.getItem('viewedOnboarding');
+  //   if (viewed && JSON.parse(viewed)) {
+  //     navigation.replace('SignInScreen');
+  //   } else {
+  //     setShowOnboarding(true);
+  //   }
+  // }, []);
 
-  if (!showOnboarding) return null;
+  // if (!showOnboarding) return null;
   return (
     <View flex={1} justifyContent="center" alignItems="center">
       <Image

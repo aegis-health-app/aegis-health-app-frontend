@@ -35,6 +35,11 @@ const SettingScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { setUser } = useContext(UserContext);
+
+  const signOut = async () => {
+    await AsyncStorage.setItem('token', '');
+    setUser(undefined);
+  };
   /*
     This useEffect will determine whether the tourguide should be shown
     The guide should be shown automatically only on the first open of the page
@@ -195,11 +200,7 @@ const SettingScreen = () => {
         size="lg"
         variant="outline"
         colorScheme="secondary"
-        onPress={() => {
-          AsyncStorage.setItem('token', '');
-          setUser(undefined);
-          navigation.replace('SignInScreen');
-        }}>
+        onPress={signOut}>
         {t('setting.signOut')}
       </Button>
       {renderTourguide && (
