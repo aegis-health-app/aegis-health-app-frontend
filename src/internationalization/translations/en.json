@@ -323,7 +323,7 @@
     "of": "of",
     "date": "Date",
     "emotion":"Emotion",
-    "switchLast": "This is your last time to toggle emotion switch for today",
-    "switchDisabled": "You cannot toggle emotion switch anymore for today"
+    "switchOnError": "Emotional Tracking switch cannot be opened. Please try again.",
+    "switchOffError": "Emotional Tracking switch cannot be closed. Please try again."
   }
 }
