@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
-import { EmotionalHistory } from './../dto/modules/emotionRecord';
+import { EmotionalHistory } from '../dto/modules/emotionRecord';
 import {
   EmotionalHistoryFrequency,
   getEmotionAsHeatmapFrequency
-} from './../utils/caretaker/emotionHeatmap';
+} from '../utils/caretaker/emotionTracker';
 import moment from 'moment';
 
-const ElderlyEmotionHistory = () => {
+const ElderlyEmotionHistoryScreen = () => {
   const { width, height } = useWindowDimensions();
   const [hist, setHist] = useState<EmotionalHistory[]>([]);
 
@@ -20,21 +20,21 @@ const ElderlyEmotionHistory = () => {
   }
 
   useEffect(() => {
-    const data: EmotionalHistory[] = [
-      { date: moment().subtract(20, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(19, 'days').toDate(), emotion: 'NA' },
-      { date: moment().subtract(18, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(17, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(16, 'days').toDate(), emotion: 'BAD' },
-      { date: moment().subtract(15, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(14, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(13, 'days').toDate(), emotion: 'BAD' },
-      { date: moment().subtract(12, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(11, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(10, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(9, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(8, 'days').toDate(), emotion: 'HAPPY' }
-    ];
+    // const data: EmotionalHistory[] = [
+    //   { date: moment().subtract(20, 'days').toDate(), emotion: 'NEUTRAL' },
+    //   { date: moment().subtract(19, 'days').toDate(), emotion: 'NA' },
+    //   { date: moment().subtract(18, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(17, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(16, 'days').toDate(), emotion: 'BAD' },
+    //   { date: moment().subtract(15, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(14, 'days').toDate(), emotion: 'NEUTRAL' },
+    //   { date: moment().subtract(13, 'days').toDate(), emotion: 'BAD' },
+    //   { date: moment().subtract(12, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(11, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(10, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(9, 'days').toDate(), emotion: 'HAPPY' },
+    //   { date: moment().subtract(8, 'days').toDate(), emotion: 'HAPPY' }
+    // ];
 
     setHist(data);
   }, []);
@@ -71,4 +71,4 @@ const ElderlyEmotionHistory = () => {
   );
 };
 
-export default ElderlyEmotionHistory;
+export default ElderlyEmotionHistoryScreen;
