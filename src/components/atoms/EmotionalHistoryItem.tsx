@@ -1,19 +1,22 @@
 import { Text, Icon, HStack, View, Divider } from 'native-base';
 import React from 'react';
-import { Emotion } from '../../dto/modules/emotionRecord';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import { useWindowDimensions } from 'react-native';
+import { Emotion } from '../../dto/modules/emotionTracking.dto';
 
 type EmotionalHistoryItemProps = {
   date: Date;
-  emotion: Emotion;
+  emotionalLevel: Emotion;
 };
-const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
+const EmotionalHistoryItem = ({
+  date,
+  emotionalLevel
+}: EmotionalHistoryItemProps) => {
   const { width } = useWindowDimensions();
 
   function EmotionIcon() {
-    if (emotion === 'BAD') {
+    if (emotionalLevel === 'BAD') {
       return (
         <Icon
           as={MaterialCommunityIcons}
@@ -22,7 +25,7 @@ const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
           color="black"
         />
       );
-    } else if (emotion === 'HAPPY') {
+    } else if (emotionalLevel === 'HAPPY') {
       return (
         <Icon
           as={MaterialCommunityIcons}
@@ -31,7 +34,7 @@ const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
           color="black"
         />
       );
-    } else if (emotion === 'NEUTRAL') {
+    } else if (emotionalLevel === 'NEUTRAL') {
       return (
         <Icon
           as={MaterialCommunityIcons}
@@ -40,12 +43,14 @@ const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
           color="black"
         />
       );
-    } else {
+    } else if (emotionalLevel === 'NA') {
       return (
         <Text fontWeight="bold" fontSize="2xl">
           N/A
         </Text>
       );
+    } else {
+      return null;
     }
   }
 

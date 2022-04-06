@@ -1,43 +1,43 @@
-import { View, useToast, ScrollView } from 'native-base';
-import React, { useState, useEffect } from 'react';
+import { View, useToast, ScrollView, Text } from 'native-base';
+import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
-import { EmotionalHistory } from '../dto/modules/emotionRecord';
+import { EmotionHistory } from '../dto/modules/emotionTracking.dto';
 import {
   EmotionalHistoryFrequency,
-  getEmotionAsHeatmapFrequency
+  getEmotionAsHeatmapFrequency,
+  getEmotionHistory
 } from '../utils/caretaker/emotionTracker';
-import moment from 'moment';
+import useAsyncEffect from './../hooks/useAsyncEffect';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
-const ElderlyEmotionHistoryScreen = () => {
+const ElderlyEmotionHistoryScreen = ({
+  route,
+  navigation
+}: NativeStackScreenProps<
+  RootStackParamList,
+  'ElderlyEmotionHistoryScreen'
+>) => {
+  const { uid } = route.params;
+
   const { width, height } = useWindowDimensions();
-  const [hist, setHist] = useState<EmotionalHistory[]>([]);
+  const [hist, setHist] = useState<EmotionHistory[]>([]);
+  const [histCount, setHistCount] = useState(0);
 
   const toast = useToast();
   function handleDayPress(val: EmotionalHistoryFrequency) {
     toast.show({ title: JSON.stringify(val) });
   }
 
-  useEffect(() => {
-    // const data: EmotionalHistory[] = [
-    //   { date: moment().subtract(20, 'days').toDate(), emotion: 'NEUTRAL' },
-    //   { date: moment().subtract(19, 'days').toDate(), emotion: 'NA' },
-    //   { date: moment().subtract(18, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(17, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(16, 'days').toDate(), emotion: 'BAD' },
-    //   { date: moment().subtract(15, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(14, 'days').toDate(), emotion: 'NEUTRAL' },
-    //   { date: moment().subtract(13, 'days').toDate(), emotion: 'BAD' },
-    //   { date: moment().subtract(12, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(11, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(10, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(9, 'days').toDate(), emotion: 'HAPPY' },
-    //   { date: moment().subtract(8, 'days').toDate(), emotion: 'HAPPY' }
-    // ];
-
-    setHist(data);
-  }, []);
+  useAsyncEffect(async () => {
+    const data = await getEmotionHistory(uid);
+    if (data.count && data.records) {
+      setHist(data.records);
+      setHistCount(data.count);
+    }
+  }, [uid]);
 
   const CONFIG = {
     backgroundGradientFrom: '#fff',
@@ -50,6 +50,7 @@ const ElderlyEmotionHistoryScreen = () => {
   return (
     <ScrollView>
       <View mb={4} alignItems="center">
+        <Text>{JSON.stringify(hist)}</Text>
         {hist.length > 0 && (
           <ContributionGraph
             values={getEmotionAsHeatmapFrequency(hist)}
@@ -66,7 +67,7 @@ const ElderlyEmotionHistoryScreen = () => {
           />
         )}
       </View>
-      <EmotionalTable data={hist} />
+      <EmotionalTable data={hist} histCount={histCount} />
     </ScrollView>
   );
 };

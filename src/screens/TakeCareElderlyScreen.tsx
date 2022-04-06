@@ -81,7 +81,9 @@ const TakeCareElderlyScreen = ({
               />
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('ElderlyEmotionHistory')}>
+              onPress={() =>
+                navigation.navigate('ElderlyEmotionHistoryScreen', { uid: uid })
+              }>
               <Text fontSize="md" color="primary.500" underline>
                 {t('home.emotionHist')}
               </Text>
