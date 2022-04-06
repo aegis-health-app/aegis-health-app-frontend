@@ -61,7 +61,8 @@
     "skip": "ข้าม",
     "finish": "เสร็จสิ้น",
     "remove": "ลบ",
-    "maybeLater": "ดำเนินการในภายหลัง"
+    "maybeLater": "ดำเนินการในภายหลัง",
+    "close": "ปิด"
   },
   "userForm": {
     "editProfile": "แก้ไขข้อมูล",
@@ -241,6 +242,13 @@
     "buttonNegative": "ยกเลิก",
     "buttonPositive": "ตกลง"
   },
+  "locationPermissions": {
+    "title": "โปรดอนุญาตการเข้าถึงตำแหน่งของอุปกรณ์นี้",
+    "message": "แอปพลิเคชันนี้ต้องการเข้าถึงตำแหน่งของอุปกรณ์ของคุณเพื่อการใช้งานระบบแจ้งเหตุฉุกเฉิน",
+    "buttonNeutral": "ไว้ทีหลัง",
+    "buttonNegative": "ยกเลิก",
+    "buttonPositive": "ตกลง"
+  },
   "changePasswordSuccess": {
     "header": "สำเร็จ",
     "body": "รหัสผ่านของคุณได้ถูกเปลี่ยนเรียบร้อยแล้ว",
@@ -306,7 +314,14 @@
     "callAmbulance": "โทรติดต่อหน่วยแพทย์ 1669",
     "IAmOK": "ฉันสบายดีแล้ว ยกเลิกการแจ้งเหตุฉุกเฉิน",
     "alertTitle": "ฉุกเฉิน",
-    "alertDescription": "{{name}} แจ้งเหตุฉุกเฉิน"
+    "alertDescription": "{{name}} แจ้งเหตุฉุกเฉิน",
+    "senderName": "ชื่อ",
+    "location": "ตำแหน่ง",
+    "date": "วันที่",
+    "time": "เวลา",
+    "phone": "หมายเลขโทรศัพท์",
+    "openInMaps": "เปิดในแอปพลิเคชันแผนที่ ",
+    "callSender": "โทรหา {{name}}"
   },
   "healthRecording": {
     "createRecordings": "สร้างข้อมูลใหม่",
