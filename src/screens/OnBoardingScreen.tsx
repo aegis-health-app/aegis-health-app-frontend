@@ -93,16 +93,6 @@ const OnBoardingScreen = () => {
     scrollTo(currentIndex);
   }, [currentIndex]);
 
-  // useAsyncEffect(async () => {
-  //   const viewed = await AsyncStorage.getItem('viewedOnboarding');
-  //   if (viewed && JSON.parse(viewed)) {
-  //     navigation.replace('SignInScreen');
-  //   } else {
-  //     setShowOnboarding(true);
-  //   }
-  // }, []);
-
-  // if (!showOnboarding) return null;
   return (
     <View flex={1} justifyContent="center" alignItems="center">
       <Image
