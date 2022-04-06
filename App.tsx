@@ -10,6 +10,8 @@ import ElderlyContextProvider from './src/contexts/ElderlyContext';
 import CaretakerContextProvider from './src/contexts/CaretakerContext';
 import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
 import HealthRecordContextProvider from './src/contexts/HealthRecordContext';
+import { requestLocationPermission } from './src/utils/permission';
+import useAsyncEffect from './src/hooks/useAsyncEffect';
 
 const theme = extendTheme({
   main: {},
@@ -85,6 +87,10 @@ const App = () => {
     skip: t('misc.skip'),
     finish: t('misc.finish')
   };
+
+  useAsyncEffect(async () => {
+    await requestLocationPermission();
+  }, []);
 
   return (
     <SafeAreaProvider>
