@@ -36,8 +36,8 @@ import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
 import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
 import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
-import ElderlyEmotionHistory from './../screens/ElderlyEmotionHistory';
 import SplashScreen from '../screens/SplashScreen';
+import ElderlyEmotionHistoryScreen from './../screens/ElderlyEmotionHistoryScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -252,8 +252,8 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="ElderlyEmotionHistory"
-              component={ElderlyEmotionHistory}
+              name="ElderlyEmotionHistoryScreen"
+              component={ElderlyEmotionHistoryScreen}
               options={{
                 title: t('home.emotionHist'),
                 headerTitleAlign: 'center',
