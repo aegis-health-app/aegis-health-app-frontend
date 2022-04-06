@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, HStack, Text } from 'native-base';
 import { useWindowDimensions } from 'react-native';
-import { EmotionalHistory } from './../../dto/modules/emotionRecord';
+import { EmotionHistory } from '../../dto/modules/emotionTracking.dto';
 import EmotionalTableNavigator from './EmotionalTableNavigator';
 import EmotionalHistoryItem from './../atoms/EmotionalHistoryItem';
 
 type EmotionalTableProps = {
-  data: EmotionalHistory[];
+  data: EmotionHistory[];
+  histCount: number;
 };
 
 const EmotionalTable = ({ data }: EmotionalTableProps) => {
   const { height, width } = useWindowDimensions();
 
-  const [hist, setHist] = useState<EmotionalHistory[]>([]);
+  const [hist, setHist] = useState<EmotionHistory[]>([]);
 
   const [from, setFrom] = useState(0);
   const [to, setTo] = useState(1);
@@ -53,7 +54,7 @@ const EmotionalTable = ({ data }: EmotionalTableProps) => {
           <EmotionalHistoryItem
             key={key}
             date={val.date}
-            emotion={val.emotion}
+            emotionalLevel={val.emotionalLevel}
           />
         );
       })}

@@ -5,7 +5,7 @@ export interface EmotionTrackingState {
 export type Emotion = 'NA' | 'HAPPY' | 'NEUTRAL' | 'BAD';
 export interface EmotionHistory {
   date: Date;
-  emotionLevel: Emotion;
+  emotionalLevel: Emotion;
 }
 
 export interface EmotionHistoryResponse {
