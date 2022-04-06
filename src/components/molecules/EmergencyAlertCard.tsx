@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { View, Text, Divider, VStack, HStack } from 'native-base';
+import { View, Text, Divider, VStack, HStack, Pressable } from 'native-base';
 import moment from 'moment';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+import { Geolocation } from '../../utils/geolocation';
 
 type EmergencyAlertCardProps = {
   sender: string;
@@ -11,8 +15,36 @@ type EmergencyAlertCardProps = {
   description: string | undefined;
 };
 
+export interface EmergencyData {
+  elderlyImageId: string;
+  elderlyName: string;
+  location: Geolocation;
+  timestamp: Date;
+  elderlyPhone: string;
+}
+
+const mockEmergencyInfo = {
+  name: 'That dude',
+  address:
+    'some random location too long to describe in a single screen of Aegis mobile application',
+  location: {
+    latitude: 13.0,
+    longtitude: 25.0
+  },
+  date: moment(new Date(2022, 8, 12)).format('DD MMM YYYY'),
+  time: moment(new Date(2022, 8, 12)).format('hh:mm:ss'),
+  phone: '0855555555'
+};
+
 const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
   const { t } = useTranslation();
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const showEmergencyInfoScreen = useCallback(() => {
+    navigation.push('EmergencyInfoScreen', { info: mockEmergencyInfo });
+  }, []);
 
   return (
     <View>
@@ -34,14 +66,21 @@ const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
           </Text>
         </View>
         <HStack justifyContent="space-between" mt={4} mb={1}>
-          <View flex={2} alignItems="center">
-            <Text fontSize="lg" color="#fff">
-              {t('modules.viewCard')}
-            </Text>
-          </View>
+          <Pressable
+            flex={2}
+            alignItems="center"
+            onPress={showEmergencyInfoScreen}>
+            {({ isPressed }) => (
+              <Text
+                fontSize={isPressed ? 'md' : 'lg'}
+                color={isPressed ? '#fff' : '#E4E4E7'}>
+                {t('modules.viewCard')}
+              </Text>
+            )}
+          </Pressable>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
           <View flex={2} alignItems="center">
-            <Text fontSize="lg" color="#fff">
+            <Text fontSize="lg" color="#E4E4E7">
               {t('modules.dismiss')}
             </Text>
           </View>
