@@ -7,6 +7,8 @@ import moment from 'moment';
 import emotionCardImage from '../../assets/images/emotionCardImage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { client } from '../../config/axiosConfig';
+import { useSettings } from '../../hooks/useSettings';
+import { getEmotionCardImage } from '../../utils/elderly/getEmotionCardImage';
 
 type EmotionCardProps = {
   showEmotionCard: boolean;
@@ -17,6 +19,7 @@ type EmotionCardProps = {
 const EmotionCard = (props: EmotionCardProps) => {
   const { showEmotionCard, close, message } = props;
   const { t } = useTranslation();
+  const { language } = useSettings();
   /**
    * This function save the date that the elderly submit the emotion to the Async storage,
    * send the emotion to backend, and close the card.
@@ -50,22 +53,7 @@ const EmotionCard = (props: EmotionCardProps) => {
    * @returns image path inside assets
    */
   const getImageSource = (date) => {
-    switch (date) {
-      case 'Monday':
-        return emotionCardImage.Monday;
-      case 'Tuesday':
-        return emotionCardImage.Tuesday;
-      case 'Wednesday':
-        return emotionCardImage.Wednesday;
-      case 'Thursday':
-        return emotionCardImage.Thursday;
-      case 'Friday':
-        return emotionCardImage.Friday;
-      case 'Saturday':
-        return emotionCardImage.Saturday;
-      default:
-        return emotionCardImage.Sunday;
-    }
+    return getEmotionCardImage(date, language);
   };
   const imagePath = '../../assets/images/temp' + message + '.png';
   const date = JSON.stringify(message);
@@ -87,11 +75,11 @@ const EmotionCard = (props: EmotionCardProps) => {
         </Modal.Header>
         <Modal.Body>
           <View style={styles.pictureArea}>
-            {/* <Image
-              // width={'24'}
-              // height={'36'}
+            <Image
+              width={'240 px'}
+              height={'320 px'}
               source={getImageSource(message)}
-            /> */}
+            />
           </View>
           <Text fontSize="lg" fontWeight="400">
             {t('emotionTrackingCard.howAreYouFeelingToday')}
@@ -102,7 +90,6 @@ const EmotionCard = (props: EmotionCardProps) => {
             <TouchableOpacity
               style={styles.emotionButton}
               onPress={() => handleEmotionSubmit('HAPPY')}>
-              {/* <Image source={require('../../assets/images/emotionHappy.png')} /> */}
               <Icon
                 as={MaterialCommunityIcons}
                 name="emoticon-happy-outline"
@@ -113,7 +100,6 @@ const EmotionCard = (props: EmotionCardProps) => {
             <TouchableOpacity
               style={styles.emotionButton}
               onPress={() => handleEmotionSubmit('NEUTRAL')}>
-              {/* <Image source={require('../../assets/images/emotionNeutral.png')}/> */}
               <Icon
                 as={MaterialCommunityIcons}
                 name="emoticon-neutral-outline"
@@ -124,7 +110,6 @@ const EmotionCard = (props: EmotionCardProps) => {
             <TouchableOpacity
               style={styles.emotionButton}
               onPress={() => handleEmotionSubmit('BAD')}>
-              {/* <Image source={require('../../assets/images/emotionSad.png')} /> */}
               <Icon
                 as={MaterialCommunityIcons}
                 name="emoticon-sad-outline"
