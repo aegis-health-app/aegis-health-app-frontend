@@ -61,7 +61,8 @@
     "skip": "Skip",
     "finish": "Finish",
     "remove": "Remove",
-    "maybeLater": "Maybe Later"
+    "maybeLater": "Maybe Later",
+    "close": "Close"
   },
   "userForm": {
     "editProfile": "Edit Profile",
@@ -241,6 +242,13 @@
     "buttonNegative": "Cancel",
     "buttonPositive": "OK"
   },
+  "locationPermissions": {
+    "title": "Need Location Permission",
+    "message": "This application needs access to your location for emergency module.",
+    "buttonNeutral": "Ask Me Later",
+    "buttonNegative": "Cancel",
+    "buttonPositive": "OK"
+  },
   "changePasswordSuccess": {
     "header": "Success",
     "body": "Your password has been changed successfully.",
@@ -306,7 +314,14 @@
     "callAmbulance": "Call medical service 1669",
     "IAmOK": "I am fine, stop the emergency report.",
     "alertTitle": "Emergency",
-    "alertDescription": "{{name}} has an emergency"
+    "alertDescription": "{{name}} has an emergency",
+    "senderName": "Name",
+    "location": "Location",
+    "date": "Date",
+    "time": "Time",
+    "phone": "Phone Number",
+    "openInMaps": "Open in Maps ",
+    "callSender": "Call {{name}}"
   },
   "healthRecording": {
     "createRecordings": "Create recordings",
