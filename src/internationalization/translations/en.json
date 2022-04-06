@@ -323,7 +323,5 @@
     "of": "of",
     "date": "Date",
     "emotion":"Emotion",
-    "switchOnError": "Emotional Tracking switch cannot be opened. Please try again.",
-    "switchOffError": "Emotional Tracking switch cannot be closed. Please try again."
   }
 }

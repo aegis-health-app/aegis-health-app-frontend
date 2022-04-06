@@ -3,7 +3,7 @@ import {
   NativeStackScreenProps,
   NativeStackNavigationProp
 } from '@react-navigation/native-stack';
-import { Text, View, Switch, ScrollView, useToast } from 'native-base';
+import { Text, View, Switch, ScrollView } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
@@ -19,6 +19,7 @@ import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import {
+  getIsEmotionTrackingOn,
   sendEmotionTrackerOff,
   sendEmotionTrackerOn
 } from '../utils/caretaker/switch';
@@ -35,36 +36,25 @@ const TakeCareElderlyScreen = ({
   const { elderlyBasicProfile } = useProfileInfo(elderly);
   const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
 
-  const toast = useToast();
-
   useAsyncEffect(async () => {
     const _elderly = await getCaretakingElderlyByEid(uid);
     setElderly(_elderly);
+
+    const { isEnabled } = await getIsEmotionTrackingOn(uid);
+    setIsEmotionTrackerOn(isEnabled);
   }, [uid]);
 
   async function handleToggle() {
     setIsEmotionTrackerOn((prev) => !prev);
-
-    if (isEmotionTrackerOn) {
-      const { status } = await sendEmotionTrackerOn(uid);
-      if (status !== 201) {
-        toast.show({
-          title: t('emotionalRecord.switchOnError')
-        });
-
-        setIsEmotionTrackerOn(false);
-      }
-    } else {
-      const { status } = await sendEmotionTrackerOff(uid);
-      if (status !== 201) {
-        toast.show({
-          title: t('emotionalRecord.switchOffError')
-        });
-
-        setIsEmotionTrackerOn(true);
-      }
-    }
   }
+
+  useAsyncEffect(async () => {
+    if (isEmotionTrackerOn) {
+      await sendEmotionTrackerOn(uid);
+    } else {
+      await sendEmotionTrackerOff(uid);
+    }
+  }, [isEmotionTrackerOn]);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
