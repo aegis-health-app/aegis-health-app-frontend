@@ -4,6 +4,8 @@ import EmergencyButton from '../components/organisms/EmergencyButton';
 import { Center, VStack, Text, Button, Icon, Box } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { getCurrentLocation } from '../utils/geolocation';
+import { openDialScreen } from '../utils/phone';
 
 const EmergencyScreen = () => {
   const { t } = useTranslation();
@@ -11,15 +13,15 @@ const EmergencyScreen = () => {
   const [isEmergency, setEmergency] = useState<boolean>(false);
 
   const callPolice = useCallback(() => {
-    //Navigate to phone screen
+    openDialScreen('191');
   }, []);
 
   const callAmbulance = useCallback(() => {
-    //Navigate to phone screen but for ambulance
+    openDialScreen('1669');
   }, []);
 
-  const reportEmergency = useCallback(() => {
-    //report stuff
+  const reportEmergency = useCallback(async () => {
+    await getCurrentLocation();
     setEmergency(true);
   }, [setEmergency]);
 
