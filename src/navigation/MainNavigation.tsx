@@ -45,12 +45,16 @@ import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen'
 import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
 
+import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
-  const { setShowSettingsTourguide, setShowHealthRecordingsTourguide, setShowMemoryPracticeQuestionsTourguide } =
-    useContext(TourguideContext);
+  const {
+    setShowSettingsTourguide,
+    setShowHealthRecordingsTourguide,
+    setShowMemoryPracticeQuestionsTourguide
+  } = useContext(TourguideContext);
   const { user } = useContext(UserContext);
 
   const navigationTheme = {
@@ -317,6 +321,11 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
+              name="EmergencyInfoScreen"
+              component={EmergencyInfoScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="ViewQuestionPoolScreen"
               component={ViewQuestionPoolScreen}
               options={{
@@ -336,14 +345,16 @@ const MainNavigation = () => {
                 headerShown: true,
                 headerRight: () => (
                   <TouchableOpacity
-                          onPress={() => setShowMemoryPracticeQuestionsTourguide(true)}>
-                  <Icon
-                    as={Feather}
-                    name="help-circle"
-                    size="7"
-                    color="#F97316"
-                    mr="4"
-                  />
+                    onPress={() =>
+                      setShowMemoryPracticeQuestionsTourguide(true)
+                    }>
+                    <Icon
+                      as={Feather}
+                      name="help-circle"
+                      size="7"
+                      color="#F97316"
+                      mr="4"
+                    />
                   </TouchableOpacity>
                 )
               }}
@@ -398,6 +409,14 @@ const MainNavigation = () => {
                 title: t('auth.signUp'),
                 headerShown: true,
                 headerTitleAlign: 'center'
+              }}
+            />
+            <Stack.Screen
+              name="PlanSelectionScreen"
+              component={PlanSelectionScreen}
+              options={{
+                title: 'Plan Selection',
+                headerShown: false
               }}
             />
           </>
