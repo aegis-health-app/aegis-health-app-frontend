@@ -1,4 +1,4 @@
-import { View, useToast } from 'native-base';
+import { View, useToast, ScrollView } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
@@ -48,35 +48,26 @@ const ElderlyEmotionHistory = () => {
   };
 
   return (
-    <View flex={1}>
-      <View alignItems="center" justifyContent="center">
-        <View
-          w="96"
-          bgColor="#fff"
-          rounded="lg"
-          alignItems="center"
-          justifyContent="center"
-          my={4}>
-          {hist.length > 0 && (
-            <ContributionGraph
-              values={getEmotionAsHeatmapFrequency(hist)}
-              endDate={new Date()}
-              numDays={76}
-              width={width}
-              height={height / 3}
-              chartConfig={CONFIG}
-              squareSize={25}
-              gutterSize={4}
-              showOutOfRangeDays={true}
-              onDayPress={(val) => {
-                handleDayPress(val);
-              }}
-            />
-          )}
-        </View>
+    <ScrollView>
+      <View mb={4} alignItems="center">
+        {hist.length > 0 && (
+          <ContributionGraph
+            values={getEmotionAsHeatmapFrequency(hist)}
+            endDate={new Date()}
+            numDays={76}
+            width={width - 20}
+            height={height / 3}
+            chartConfig={CONFIG}
+            squareSize={24}
+            gutterSize={2}
+            onDayPress={(val) => {
+              handleDayPress(val);
+            }}
+          />
+        )}
       </View>
       <EmotionalTable data={hist} />
-    </View>
+    </ScrollView>
   );
 };
 
