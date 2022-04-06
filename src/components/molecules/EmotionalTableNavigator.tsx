@@ -31,12 +31,7 @@ const EmotionalTableNavigator = ({
   const { t } = useTranslation();
 
   return (
-    <View
-      alignSelf="flex-end"
-      alignItems="center"
-      mb={4}
-      w="40"
-      bgColor="amber.300">
+    <View alignSelf="flex-end" alignItems="center" my={2} w="40">
       <HStack space={2}>
         <View w={8}>
           {currPageIndex > 1 && (

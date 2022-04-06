@@ -57,7 +57,7 @@ const EmotionalHistoryItem = ({ date, emotion }: EmotionalHistoryItemProps) => {
         alignItems="center"
         justifyContent="space-between">
         <View w={width / 2} alignItems="center">
-          <Text fontSize="md">{moment(date).format('D/M/yyyy')}</Text>
+          <Text fontSize="md">{moment(date).format('L')}</Text>
         </View>
         <View
           w={width / 2}
