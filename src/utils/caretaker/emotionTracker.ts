@@ -1,5 +1,9 @@
 import moment from 'moment';
-import { EmotionalHistory } from './../../dto/modules/emotionRecord';
+import {
+  EmotionHistory,
+  EmotionHistoryResponse
+} from '../../dto/modules/emotionTracking.dto';
+import { client } from './../../config/axiosConfig';
 
 /**
  * This function returns the number of day between month depending on diff params.
@@ -30,19 +34,19 @@ export enum EmotionFrequencyEnum {
  * This function returns Emotion as number of frequency.
  */
 export function getEmotionAsHeatmapFrequency(
-  data: EmotionalHistory[]
+  data: EmotionHistory[]
 ): EmotionalHistoryFrequency[] {
   const freq: EmotionalHistoryFrequency[] = [];
   if (data.length === 0) return freq;
 
   data.forEach((val) => {
-    const { date, emotion } = val;
+    const { date, emotionLevel } = val;
 
-    if (emotion === 'BAD') {
+    if (emotionLevel === 'BAD') {
       freq.push({ date: date, count: EmotionFrequencyEnum.BAD });
-    } else if (emotion === 'NEUTRAL') {
+    } else if (emotionLevel === 'NEUTRAL') {
       freq.push({ date: date, count: EmotionFrequencyEnum.NEUTRAL });
-    } else if (emotion === 'HAPPY') {
+    } else if (emotionLevel === 'HAPPY') {
       freq.push({ date: date, count: EmotionFrequencyEnum.HAPPY });
     } else {
       freq.push({ date: date, count: EmotionFrequencyEnum.NA });
@@ -50,4 +54,11 @@ export function getEmotionAsHeatmapFrequency(
   });
 
   return freq;
+}
+
+export async function getEmotionHistory(
+  uid: number
+): Promise<EmotionHistoryResponse> {
+  const { data } = await client.get(`/emotion-tracking/${uid}/history`);
+  return data as EmotionHistoryResponse;
 }
