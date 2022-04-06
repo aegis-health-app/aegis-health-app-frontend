@@ -25,7 +25,7 @@ import {
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TourguideContext } from '../contexts/TourguideContext';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -37,7 +37,7 @@ import FallbackImage from '../components/molecules/FallbackImage';
 import EmotionCard from '../components/organisms/EmotionCard';
 import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 import moment from 'moment';
-import FallbackImage from '../components/molecules/FallbackImage';
+import { getIsEmotionTrackingOn } from '../utils/caretaker/switch';
 
 const ProfilePic = require('../assets/images/profile.png');
 
@@ -76,23 +76,32 @@ const ElderlyHomeScreen = () => {
   const getEmotionDate = async () => {
     const emotionDate = await AsyncStorage.getItem('emotionDate');
     const result = emotionDate ? JSON.parse(emotionDate) : new Date(0);
-    console.log('result' + result);
     return result;
   };
 
   useAsyncEffect(async () => {
     const emotionDate = moment(await getEmotionDate());
     const todayDate = moment().format('L');
-    console.log('emotion date' + emotionDate);
+    console.log('emotion date: ' + emotionDate);
+    // Add condition to check if the emotion tracking is enable.
+    if (!user) {
+      return;
+    }
+    const uid = user?.uid;
+    console.log('uid is: ', uid);
+    // const isEmotionTrackingOn = await getIsEmotionTrackingOn(uid);
+    // console.log('is emotion tracking on: ', isEmotionTrackingOn);
     if (emotionDate.isSame(todayDate, 'day')) {
-      // change from ture to false
+      console.log(
+        'emotion date is the same as today date or the caretaker disable the function.'
+      );
+      //If want to view the card change from false to true. And don't forget to change back.
       setShowEmotionCard(true);
-      console.log('emotion date is the same as today date');
     } else {
       console.log('emotion date is not the same as today date');
       setShowEmotionCard(true);
     }
-  }, []);
+  }, [user]);
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
