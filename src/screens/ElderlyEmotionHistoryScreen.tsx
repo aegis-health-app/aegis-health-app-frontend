@@ -1,4 +1,4 @@
-import { View, useToast, ScrollView, Text } from 'native-base';
+import { View, useToast, ScrollView } from 'native-base';
 import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
@@ -50,7 +50,6 @@ const ElderlyEmotionHistoryScreen = ({
   return (
     <ScrollView>
       <View mb={4} alignItems="center">
-        <Text>{JSON.stringify(hist)}</Text>
         {hist.length > 0 && (
           <ContributionGraph
             values={getEmotionAsHeatmapFrequency(hist)}

@@ -24,7 +24,7 @@ export interface EmotionalHistoryFrequency {
 }
 
 export enum EmotionFrequencyEnum {
-  NA = 2,
+  NA = 1,
   BAD = 3,
   NEUTRAL = 5,
   HAPPY = 10
@@ -40,13 +40,13 @@ export function getEmotionAsHeatmapFrequency(
   if (data.length === 0) return freq;
 
   data.forEach((val) => {
-    const { date, emotionLevel } = val;
+    const { date, emotionalLevel } = val;
 
-    if (emotionLevel === 'BAD') {
+    if (emotionalLevel === 'BAD') {
       freq.push({ date: date, count: EmotionFrequencyEnum.BAD });
-    } else if (emotionLevel === 'NEUTRAL') {
+    } else if (emotionalLevel === 'NEUTRAL') {
       freq.push({ date: date, count: EmotionFrequencyEnum.NEUTRAL });
-    } else if (emotionLevel === 'HAPPY') {
+    } else if (emotionalLevel === 'HAPPY') {
       freq.push({ date: date, count: EmotionFrequencyEnum.HAPPY });
     } else {
       freq.push({ date: date, count: EmotionFrequencyEnum.NA });
