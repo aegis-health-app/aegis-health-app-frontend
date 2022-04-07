@@ -162,7 +162,7 @@ const CustomHealthRecordingScreen = () => {
             type: uploadImage.type,
             size: uploadImage.fileSize
           }
-        : {},
+        : null,
       listField: fieldList
     } as UpdateHealthRecordDTO;
 
@@ -193,23 +193,23 @@ const CustomHealthRecordingScreen = () => {
           isOpen={showImageUploadError}
           close={() => setShowImageUploadError(false)}
           type={AlertType.ERROR}
-          message="uploadImageError"
+          message="addCustomHealthRecordingError"
         />
         <Alert
           isOpen={showErrorAlert}
           close={() => setShowErrorAlert(false)}
           type={AlertType.ERROR}
-          message="updateProfileError"
+          message="addCustomHealthRecordingError"
         />
         <Alert
           isOpen={showSuccessAlert}
           close={() => {
             setShowSuccessAlert(false);
             // change navigation later
-            // if (!showImageUploadError) navigation.navigate('UserLinkScreen');
+            if (!showImageUploadError) navigation.navigate('UserLinkScreen');
           }}
           type={AlertType.SUCCESS}
-          message="updateProfileSuccess"
+          message="addCustomHealthRecordingSuccess"
         />
         <ScrollView height="85%">
           <View mx={4} flexDir="column">

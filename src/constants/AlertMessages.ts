@@ -103,5 +103,17 @@ export const AlertMessages = {
     body: i18n.t('updateHealthDataCoverImageError.body'),
     primaryButton: i18n.t('updateHealthDataCoverImageError.primaryButton'),
     secondaryButton: i18n.t('updateHealthDataCoverImageError.secondaryButton')
-  }
+  },
+  addCustomHealthRecordingSuccess: {
+    header: i18n.t('addCustomHealthRecordingSuccess.header'),
+    body: i18n.t('addCustomHealthRecordingSuccess.body'),
+    primaryButton: i18n.t('addCustomHealthRecordingSuccess.primaryButton'),
+    secondaryButton: i18n.t('addCustomHealthRecordingSuccess.secondaryButton')
+  },
+  addCustomHealthRecordingError: {
+    header: i18n.t('addCustomHealthRecordingError.header'),
+    body: i18n.t('addCustomHealthRecordingError.body'),
+    primaryButton: i18n.t('addCustomHealthRecordingError.primaryButton'),
+    secondaryButton: i18n.t('addCustomHealthRecordingError.secondaryButton')
+  },
 };

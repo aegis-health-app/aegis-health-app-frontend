@@ -422,6 +422,17 @@
   "updateHealthDataCoverImageError":{
     "header": "Error",
     "body": "Unable to update your health record cover image. Please try again later.",
+    "insomnia": "Insomnia"
+  },
+  "addCustomHealthRecordingSuccess": {
+    "header": "Success",
+    "body": "Your health record has successfully been created.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "addCustomHealthRecordingError": {
+    "header": "Error",
+    "body": "Cannot create a health record at this moment. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
   }
