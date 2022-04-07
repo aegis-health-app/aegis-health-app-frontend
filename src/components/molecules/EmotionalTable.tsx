@@ -14,21 +14,17 @@ const EmotionalTable = ({ data, histCount }: EmotionalTableProps) => {
   const { height, width } = useWindowDimensions();
 
   const [hist, setHist] = useState<EmotionHistory[]>([]);
-
   const [currPageIndex, setCurrPageIndex] = useState(0);
   const [maxPageIndex, setMaxPageIndex] = useState(0);
 
   const NUM_ROWS = 7;
 
   useEffect(() => {
-    setHist(data.slice(0, NUM_ROWS));
     setMaxPageIndex(Math.ceil(histCount / NUM_ROWS));
   }, [data, histCount]);
 
-  //TODO: request data from back-end when currPageIndex changes
-  // (0 1 2 3 4 5 6) (7 8 9 10 11 12 13) 14 15 16
+  // Display emotional history by page index
   useEffect(() => {
-    console.log({ histCount });
     if (currPageIndex === 0) {
       // page 1
       setHist(data.slice(0, 7));
