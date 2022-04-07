@@ -340,18 +340,6 @@
     "Friday": "สวัสดีวันศุกร์",
     "Saturday": "สวัสดีวันเสาร์",
     "Sunday": "สวัสดีวันอาทิตย์",
-    "howAreYouFeelingToday" :"วันนี้คุณรู้สึกอย่างไร?",
-    "create": "สร้าง",
-    "addEntry": "เพิ่มข้อมูล",
-    "enterValue": "กรอกข้อมูล",
-    "date": "วันที่",
-    "time": "เวลา",
-    "recordHistory": "ข้อมูลที่บันทึกไว้",
-    "viewAnalytics": "ดูการวิเคราะห์",
-    "noData": "ไม่มีการบันทึก",
-    "generalInfo": "ข้อมูลทั่วไป",
-    "of": "จาก",
-    "save": "บันทึก",
-    "deleteRecording": "ลบการจดบันทึกนี้"
+    "howAreYouFeelingToday" :"วันนี้คุณรู้สึกอย่างไร?"
   }
 }
