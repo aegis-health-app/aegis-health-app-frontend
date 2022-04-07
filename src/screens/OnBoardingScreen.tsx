@@ -10,10 +10,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-<<<<<<< HEAD
-=======
-import useAsyncEffect from '../hooks/useAsyncEffect';
->>>>>>> f2ca12f (feat: complete signin and signout auth flow)
 
 const OnBoardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,10 +18,6 @@ const OnBoardingScreen = () => {
   const slidesRef = useRef(null);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-<<<<<<< HEAD
-=======
-  const [showOnboarding, setShowOnboarding] = useState(false);
->>>>>>> f2ca12f (feat: complete signin and signout auth flow)
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -101,16 +93,6 @@ const OnBoardingScreen = () => {
     scrollTo(currentIndex);
   }, [currentIndex]);
 
-  useAsyncEffect(async () => {
-    const viewed = await AsyncStorage.getItem('viewedOnboarding');
-    if (viewed && JSON.parse(viewed)) {
-      navigation.navigate('SignInScreen');
-    } else {
-      setShowOnboarding(true);
-    }
-  }, []);
-
-  if (!showOnboarding) return null;
   return (
     <View flex={1} justifyContent="center" alignItems="center">
       <Image

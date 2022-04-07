@@ -31,11 +31,18 @@ const DatePicker = (props: DatePickerProps) => {
 
   return (
     <View w="100%">
-      <Text fontSize={16} mb={2}>
-        {t('profile.birthDate')}
-      </Text>
+      {(Platform.OS === 'ios' || show) && (
+        <View flexDir="row" justifyContent="space-between" alignItems="center">
+          {Platform.OS === 'ios' && (
+            <Text w={100}>{getFormattedDate(date, language)}</Text>
+          )}
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            onChange={onDateChange}
             mode={mode as AndroidNativeProps['mode']}
             style={Platform.OS === 'ios' ? { width: 124 } : null}
+          />
         </View>
       )}
       <View>

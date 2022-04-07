@@ -19,15 +19,9 @@ import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import {
-<<<<<<< HEAD
   getIsEmotionTrackingOn,
   sendEmotionTrackerOff,
   sendEmotionTrackerOn
-=======
-  clearSwitchState,
-  getSwitchState,
-  saveSwitchState
->>>>>>> 535c4b0 (feat: add emotional tracking switch state checker & limit)
 } from '../utils/caretaker/switch';
 
 const TakeCareElderlyScreen = ({
@@ -38,15 +32,8 @@ const TakeCareElderlyScreen = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
-<<<<<<< HEAD
   const { elderlyBasicProfile } = useProfileInfo(elderly);
   const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
-=======
-  const { elderlyBasicProfile, elderlyHealthProfile } = useProfileInfo(elderly);
-  const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
-
-  const toast = useToast();
->>>>>>> 535c4b0 (feat: add emotional tracking switch state checker & limit)
 
   useAsyncEffect(async () => {
     const _elderly = await getCaretakingElderlyByEid(uid);
@@ -56,7 +43,6 @@ const TakeCareElderlyScreen = ({
     setIsEmotionTrackerOn(isEnabled);
   }, [uid]);
 
-<<<<<<< HEAD
   async function handleToggle() {
     setIsEmotionTrackerOn((prev) => !prev);
   }
@@ -68,33 +54,6 @@ const TakeCareElderlyScreen = ({
       await sendEmotionTrackerOff(uid);
     }
   }, [isEmotionTrackerOn]);
-=======
-  useAsyncEffect(async () => {
-    const now = new Date();
-    await clearSwitchState(now);
-    await getSwitchState();
-  }, []);
-
-  async function handleToggle() {
-    const now = new Date();
-    setIsEmotionTrackerOn((prev) => !prev);
-
-    if (isEmotionTrackerOn === true) {
-      const result = await saveSwitchState(now);
-      if (result === 3) {
-        toast.show({
-          title: t('emotionalRecord.switchLast'),
-          status: 'warning'
-        });
-      } else if (result === 4) {
-        toast.show({
-          title: t('emotionalRecord.switchDisabled'),
-          status: 'warning'
-        });
-      }
-    }
-  }
->>>>>>> 535c4b0 (feat: add emotional tracking switch state checker & limit)
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>

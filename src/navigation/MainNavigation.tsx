@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,8 +43,7 @@ const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
   const { setShowSettingsTourguide } = useContext(TourguideContext);
-  const { user, userToken } = useContext(UserContext);
-  const [showNav, setShowNav] = useState<boolean>(true);
+  const { user } = useContext(UserContext);
 
   const navigationTheme = {
     ...DefaultTheme,
@@ -54,14 +53,6 @@ const MainNavigation = () => {
     }
   };
 
-  useEffect(() => {
-    setShowNav(false);
-    setTimeout(() => {
-      setShowNav(true);
-    }, 0);
-  }, [userToken]);
-
-  if (!showNav) return null;
   return (
     <NavigationContainer theme={navigationTheme}>
       <Stack.Navigator>
@@ -279,16 +270,6 @@ const MainNavigation = () => {
                 headerShown: true
               }}
             />
-            <Stack.Screen
-              name="CustomHealthRecordingScreen"
-              component={CustomHealthRecordingScreen}
-              options={{
-                title: t('healthRecording.createRecordings'),
-                headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
-                headerShown: true
-              }}
-            />
           </>
         ) : (
           <>
@@ -320,14 +301,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
               name="SignUpScreen"
               component={SignUpScreen}
               initialParams={{ isElderly: true }}
@@ -335,22 +308,6 @@ const MainNavigation = () => {
                 title: t('auth.signUp'),
                 headerShown: true,
                 headerTitleAlign: 'center'
-              }}
-            />
-            <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
-              }}
-            />
-            <Stack.Screen
-              name="PlanSelectionScreen"
-              component={PlanSelectionScreen}
-              options={{
-                title: 'Plan Selection',
-                headerShown: false
               }}
             />
           </>
