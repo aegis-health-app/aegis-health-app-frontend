@@ -19,4 +19,18 @@ const FallbackImage = (
   </View>
 );
 
+export const FallbackImageLarge = (
+  <View>
+    <Image
+      source={ProfilePic}
+      width={160}
+      height={160}
+      borderRadius={10}
+      marginRight={3}
+      alt="fallbackImageLarge"
+    />
+  </View>
+);
 export default FallbackImage;
+;
+
