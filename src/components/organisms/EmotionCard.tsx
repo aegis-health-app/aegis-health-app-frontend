@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import moment from 'moment';
-import emotionCardImage from '../../assets/images/emotionCardImage';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { client } from '../../config/axiosConfig';
 import { useSettings } from '../../hooks/useSettings';
@@ -31,9 +30,6 @@ const EmotionCard = (props: EmotionCardProps) => {
       'emotionDate',
       JSON.stringify(moment().format('L'))
     );
-    const savedEmotionDate = await AsyncStorage.getItem('emotionDate');
-    const emotionDate = JSON.parse(savedEmotionDate);
-    console.log('saved emotion date', { emotionDate }, emotion);
     close();
   };
   const sendPayload = async (emotion) => {
@@ -54,15 +50,6 @@ const EmotionCard = (props: EmotionCardProps) => {
    */
   const getImageSource = (date) => {
     return getEmotionCardImage(date, language);
-  };
-  const imagePath = '../../assets/images/temp' + message + '.png';
-  const date = JSON.stringify(message);
-  console.log(date);
-  const getImageSource = () => {
-    const imagePath = '../../assets/images/temp' + message + '.png';
-    const date = JSON.stringify(message);
-    console.log(date);
-    return;
   };
   return (
     <Modal isOpen={showEmotionCard} onClose={() => handleEmotionSubmit('NA')}>

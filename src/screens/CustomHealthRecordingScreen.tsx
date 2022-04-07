@@ -125,35 +125,6 @@ const CustomHealthRecordingScreen = () => {
     return false;
   };
 
-  const handleDefaultValue = (id: number) => {
-    return dict[fieldNumber[id + 1]];
-  };
-
-  const handleFieldChange = (fieldData: Fields, index) => {
-    const list = [...fieldList];
-    list[index] = { fieldName: e, unit: list[index].unit };
-    setFieldList(list);
-  };
-
-  const handleUnitChange = (e: string, index: number) => {
-    const list = [...fieldList];
-    list[index] = { fieldName: list[index].fieldName, unit: e };
-    setFieldList(list);
-  };
-
-  const handleButtonState = () => {
-    if (
-      watchInputs['title'] == '' ||
-      watchInputs['title'] == null ||
-      fieldList.filter((e) => e.fieldName == '').length > 0 ||
-      fieldList.filter((e) => e.unit == '').length > 0 ||
-      fieldList.filter((e) => e.fieldName == undefined).length > 0 ||
-      fieldList.filter((e) => e.unit == undefined).length > 0
-    )
-      return true;
-    return false;
-  };
-
   return (
     <View flex={1}>
       <SafeAreaView edges={['left', 'top', 'right']}>
