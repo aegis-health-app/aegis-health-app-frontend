@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import moment from 'moment';
 import { useWindowDimensions } from 'react-native';
 import { Emotion } from '../../dto/modules/emotionTracking.dto';
+import { useTranslation } from 'react-i18next';
 
 type EmotionalHistoryItemProps = {
   date: Date;
@@ -14,6 +15,7 @@ const EmotionalHistoryItem = ({
   emotionalLevel
 }: EmotionalHistoryItemProps) => {
   const { width } = useWindowDimensions();
+  const { t } = useTranslation();
 
   function EmotionIcon() {
     if (emotionalLevel === 'BAD') {
@@ -46,7 +48,7 @@ const EmotionalHistoryItem = ({
     } else if (emotionalLevel === 'NA') {
       return (
         <Text fontWeight="bold" fontSize="2xl">
-          N/A
+          {t('emotionalRecord.NA')}
         </Text>
       );
     } else {

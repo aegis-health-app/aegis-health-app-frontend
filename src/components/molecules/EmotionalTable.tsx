@@ -4,6 +4,7 @@ import { useWindowDimensions } from 'react-native';
 import { EmotionHistory } from '../../dto/modules/emotionTracking.dto';
 import EmotionalTableNavigator from './EmotionalTableNavigator';
 import EmotionalHistoryItem from './../atoms/EmotionalHistoryItem';
+import { useTranslation } from 'react-i18next';
 
 type EmotionalTableProps = {
   data: EmotionHistory[];
@@ -11,6 +12,7 @@ type EmotionalTableProps = {
 };
 
 const EmotionalTable = ({ data, histCount }: EmotionalTableProps) => {
+  const { t } = useTranslation();
   const { height, width } = useWindowDimensions();
 
   const [hist, setHist] = useState<EmotionHistory[]>([]);
@@ -41,12 +43,12 @@ const EmotionalTable = ({ data, histCount }: EmotionalTableProps) => {
       <HStack w={width} justifyContent="space-around">
         <View w={width / 2} alignItems="center">
           <Text fontSize="lg" fontWeight="600">
-            Date
+            {t('emotionalRecord.date')}
           </Text>
         </View>
         <View w={width / 2} alignItems="center">
           <Text fontSize="lg" fontWeight="600">
-            Emotion
+            {t('emotionalRecord.emotion')}
           </Text>
         </View>
       </HStack>
