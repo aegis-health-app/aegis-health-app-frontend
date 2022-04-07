@@ -25,6 +25,7 @@ import { RootStackParamList } from '../navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { UserContext } from '../contexts/UserContext';
+import { client } from '../config/axiosConfig';
 
 interface Fields {
   fieldName: string | undefined;
@@ -39,7 +40,7 @@ interface UploadImageDTO {
 }
 interface UpdateHealthRecordDTO {
   hrName: string;
-  imageid: UploadImageDTO | null;
+  imageid: UploadImageDTO | object;
   listField: Fields[];
 }
 
@@ -145,16 +146,14 @@ const CustomHealthRecordingScreen = () => {
     return false;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const uploadImage = customImage
       ? customImage.assets
         ? customImage.assets[0]
         : undefined
       : undefined;
 
-      // TODO: POST REQUEST LATER (DIFFERENT ENDPOINTS FOR ELDERLY & CARETAKERS)
-    console.log(user?.isElderly)
-    console.log({
+    const payload = {
       hrName: watchInputs.title,
       imageid: uploadImage
         ? {
@@ -163,11 +162,29 @@ const CustomHealthRecordingScreen = () => {
             type: uploadImage.type,
             size: uploadImage.fileSize
           }
-        : null,
+        : {},
       listField: fieldList
-    } as UpdateHealthRecordDTO);
+    } as UpdateHealthRecordDTO;
 
-    setShowSuccessAlert(true);
+    // TODO: POST REQUEST LATER (DIFFERENT ENDPOINTS FOR ELDERLY & CARETAKERS)
+    if (user?.isElderly) {
+      try {
+        await client.post('/healthRecord/add/elderly', payload);
+        setShowSuccessAlert(true);
+      } catch (err) {
+        console.log(err);
+        setShowErrorAlert(true);
+      }
+    }
+    if (!user?.isElderly) {
+      try {
+        await client.post('/healthRecord/add/caretaker', payload);
+        setShowSuccessAlert(true);
+      } catch (err) {
+        console.log(err);
+        setShowErrorAlert(true);
+      }
+    }
   };
   return (
     <View flex={1}>
