@@ -1,4 +1,4 @@
-import { View, useToast, ScrollView } from 'native-base';
+import { View, useToast, ScrollView, Spinner } from 'native-base';
 import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
@@ -14,8 +14,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 
 const ElderlyEmotionHistoryScreen = ({
-  route,
-  navigation
+  route
 }: NativeStackScreenProps<
   RootStackParamList,
   'ElderlyEmotionHistoryScreen'
@@ -50,23 +49,29 @@ const ElderlyEmotionHistoryScreen = ({
   return (
     <ScrollView>
       <View mb={2} alignItems="center">
-        {hist.length > 0 && (
-          <ContributionGraph
-            values={getEmotionAsHeatmapFrequency(hist)}
-            endDate={new Date()}
-            numDays={76}
-            width={width - 20}
-            height={height / 3}
-            chartConfig={CONFIG}
-            squareSize={24}
-            gutterSize={2}
-            onDayPress={(val) => {
-              handleDayPress(val);
-            }}
-          />
+        {histCount > 0 ? (
+          <View>
+            <ContributionGraph
+              values={getEmotionAsHeatmapFrequency(hist)}
+              endDate={new Date()}
+              numDays={76}
+              width={width - 20}
+              height={height / 3}
+              chartConfig={CONFIG}
+              squareSize={24}
+              gutterSize={2}
+              onDayPress={(val) => {
+                handleDayPress(val);
+              }}
+            />
+            <EmotionalTable data={hist} histCount={histCount} />
+          </View>
+        ) : (
+          <View height="96" justifyContent="center" alignItems="center">
+            <Spinner size="lg" />
+          </View>
         )}
       </View>
-      <EmotionalTable data={hist} histCount={histCount} />
     </ScrollView>
   );
 };
