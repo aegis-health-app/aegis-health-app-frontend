@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native-stack';
 import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Divider from '../../components/atoms/Divider';
@@ -14,6 +14,9 @@ import Spacer from '../../components/atoms/Spacer';
 import TextInput from '../../components/atoms/TextInput';
 import DatePicker from '../../components/molecules/DatePicker';
 import TimePicker from '../../components/molecules/TimePicker';
+import { client } from '../../config/axiosConfig';
+import { HealthRecordContext } from '../../contexts/HealthRecordContext';
+import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
 import HealthDataTable, { TableMode } from './HealthDataTable';
 
@@ -29,10 +32,25 @@ const AddHealthEntry = ({
   const {
     control,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
+    watch
   } = useForm({ mode: 'onTouched' });
+  const { user } = useContext(UserContext);
+  const { getHealthRecordTable, healthTable } = useContext(HealthRecordContext);
 
   const [date, setDate] = useState(new Date());
+
+  const shouldDisableSubmission = () => {
+    const fieldValues = watch();
+    let shouldDisable = true;
+    for (const key in fieldValues) {
+      if (fieldValues[key]) {
+        shouldDisable = false;
+        break;
+      }
+    }
+    return shouldDisable;
+  };
 
   const onDateChange = (event, selectedDate?: Date | undefined) => {
     if (!selectedDate) return;
@@ -40,19 +58,36 @@ const AddHealthEntry = ({
     setDate(new Date(currentDate));
   };
 
-  const onFormSubmit = (data) => {
-    const fields = Object.keys(data).map((key) => {
+  const onFormSubmit = async (value) => {
+    if (!user) return;
+    // temp value for testing
+    const tempElderlyId = '2';
+    const tempHrName = 'ความดัน';
+
+    const fields = Object.keys(value).map((key) => {
       return {
         columnName: key,
-        value: data[key]
+        value: value[key]
       };
     });
     const payload = {
+      hrName: tempHrName,
       timestamp: moment(date, 'YYYY/MM/DD HH:mm:ss'),
       data: fields
     };
-    // TODO: send payload to backend
-    console.log(payload);
+    try {
+      console.log(payload);
+      const { data } = await client.post(
+        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
+          user.isElderly ? '' : tempElderlyId
+        }`,
+        payload
+      );
+      if (data) getHealthRecordTable();
+    } catch (error) {
+      // TODO: Add error alert
+      console.log(error);
+    }
   };
 
   const onTimeChange = (event, selectedTime: Date | undefined) => {
@@ -63,6 +98,7 @@ const AddHealthEntry = ({
 
   useEffect(() => {
     navigation.setOptions({ title: recordTitle });
+    getHealthRecordTable();
   }, []);
 
   return (
@@ -75,7 +111,8 @@ const AddHealthEntry = ({
           <EditButton
             onPress={() => {
               navigation.navigate('EditHealthEntryScreen', {
-                recordTitle: 'Blood Pressure'
+                recordTitle: 'Blood Pressure',
+                healthData: healthTable
               });
             }}
           />
@@ -99,23 +136,18 @@ const AddHealthEntry = ({
           />
         </View>
         <Spacer />
-        <View minH={20}>
-          <TextInput
-            label={'fieldname'}
-            placeholder={t('healthRecording.enterValue')}
-            name="field1"
-            control={control}
-            errors={errors}
-          />
-        </View>
-        <Spacer />
-        <TextInput
-          label={'fieldname'}
-          placeholder={t('healthRecording.enterValue')}
-          name="field2"
-          control={control}
-          errors={errors}
-        />
+        {healthTable?.columnNames.map((column, index) => (
+          <View minH={20} key={index}>
+            <TextInput
+              keyboardType="numeric"
+              label={column}
+              placeholder={t('healthRecording.enterValue')}
+              name={column}
+              control={control}
+              errors={errors}
+            />
+          </View>
+        ))}
         <Spacer />
         <Text fontSize={16} mb={2}>
           {t('healthRecording.date')}
@@ -127,7 +159,9 @@ const AddHealthEntry = ({
         </Text>
         <TimePicker date={date} onDateChange={onTimeChange} />
         <Spacer />
-        <Button onPress={handleSubmit(onFormSubmit)}>
+        <Button
+          onPress={handleSubmit(onFormSubmit)}
+          isDisabled={shouldDisableSubmission()}>
           {t('healthRecording.enterValue')}
         </Button>
         <Spacer />
@@ -136,7 +170,7 @@ const AddHealthEntry = ({
         <Spacer />
         <Button variant="outline">{t('healthRecording.viewAnalytics')}</Button>
         <Spacer />
-        <HealthDataTable mode={TableMode.VIEW} />
+        <HealthDataTable mode={TableMode.VIEW} healthData={healthTable} />
         <Spacer />
       </View>
     </ScrollView>

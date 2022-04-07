@@ -27,6 +27,7 @@ const UserContextProvider = ({ ...props }) => {
     }
     // for debug, remove later!
     console.log({ _user });
+    console.log(userToken);
   };
 
   useEffect(() => {
