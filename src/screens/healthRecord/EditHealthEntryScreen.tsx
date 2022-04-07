@@ -3,13 +3,16 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps
 } from '@react-navigation/native-stack';
+import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import Spacer from '../../components/atoms/Spacer';
-import TextInput from '../../components/atoms/TextInput';
+import { client } from '../../config/axiosConfig';
+import { HealthRecordContext } from '../../contexts/HealthRecordContext';
+import { UserContext } from '../../contexts/UserContext';
 import useDimensions from '../../hooks/useDimensions';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import { RootStackParamList } from '../../navigation/types';
@@ -22,13 +25,11 @@ const EditHealthEntryScreen = ({
 }: NativeStackScreenProps<RootStackParamList, 'EditHealthEntryScreen'>) => {
   const { recordTitle } = route.params;
   const { t } = useTranslation();
+  const { user } = useContext(UserContext);
+  const { getHealthRecordTable } = useContext(HealthRecordContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const {
-    control,
-    formState: { errors },
-    handleSubmit
-  } = useForm({ mode: 'onTouched' });
+  const { handleSubmit } = useForm({ mode: 'onTouched' });
   const { ScreenWidth } = useDimensions();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
 
@@ -53,8 +54,33 @@ const EditHealthEntryScreen = ({
   };
 
   const onDeleteRow = async (dateTime: string) => {
+    if (!user) return;
     // TODO: Delete health record row
-    console.log({ dateTime });
+    // temporary values
+    const _hrname = 'ความดัน';
+    const _elderlyId = '2';
+
+    const payload = {
+      hrName: _hrname,
+      timestamp: moment(dateTime, 'YYYY/MM/DD HH:mm:ss')
+    };
+    try {
+      console.log(
+        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
+          user.isElderly ? '' : _elderlyId
+        }`
+      );
+      const { data } = await client.delete(
+        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}${
+          user.isElderly ? '' : _elderlyId
+        }`,
+        { data: payload }
+      );
+      if (data) getHealthRecordTable();
+    } catch (error) {
+      // TODO: Alert message
+      console.log(error);
+    }
   };
 
   const onNewPictureObtained = (result: ImagePickerResponse) => {
@@ -72,14 +98,11 @@ const EditHealthEntryScreen = ({
           {t('healthRecording.generalInfo')}
         </Text>
         <Spacer />
-        <View minH={20}>
-          <TextInput
-            label={t('healthRecording.title')}
-            placeholder={t('healthRecording.title')}
-            name="field1"
-            control={control}
-            errors={errors}
-          />
+        <View>
+          <Text fontSize="lg" fontWeight="bold">
+            {t('healthRecording.title')}
+          </Text>
+          <Text>{route.params.healthData?.tableName}</Text>
         </View>
         <Spacer />
         <View
@@ -118,7 +141,11 @@ const EditHealthEntryScreen = ({
         </View>
         <Spacer />
 
-        <HealthDataTable mode={TableMode.EDIT} onDeleteRow={onDeleteRow} />
+        <HealthDataTable
+          mode={TableMode.EDIT}
+          onDeleteRow={onDeleteRow}
+          healthData={route.params.healthData}
+        />
         <Spacer />
         <Button onPress={handleSubmit(onFormSubmit)}>
           {t('healthRecording.save')}

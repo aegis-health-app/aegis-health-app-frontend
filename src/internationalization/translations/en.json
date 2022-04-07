@@ -367,6 +367,7 @@
     "headache": "Headache",
     "constipation": "Constipation",
     "anorexia": "Anorexia",
-    "insomnia": "Insomnia"
+    "insomnia": "Insomnia",
+    "none": "No emotion record for today."
   }
 }

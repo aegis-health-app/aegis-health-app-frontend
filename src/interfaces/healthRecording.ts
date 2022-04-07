@@ -3,6 +3,7 @@ export interface HealthRecording {
   imageid: string;
   uid: number;
 }
+import { ImagePayload } from './image';
 
 export interface HealthRecordingDataRow {
   dateTime: string;
@@ -14,4 +15,9 @@ export interface HealthRecordingData {
   columnNames: string[];
   units: string[];
   data: HealthRecordingDataRow[];
+}
+
+export interface EditHealthRecord {
+  hrName: string;
+  image: ImagePayload;
 }
