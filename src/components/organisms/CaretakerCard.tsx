@@ -8,7 +8,7 @@ import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
 import { getDisplayName } from '../../utils/elderly/displayNames';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
-import FallbackImage from '../molecules/FallbackImage';
+import { FallbackImageMedium } from '../molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -68,7 +68,7 @@ const UserCard = ({
           style={styles.image}
           borderRadius={10}
           marginRight={3}
-          fallbackElement={FallbackImage}
+          fallbackElement={FallbackImageMedium}
           alt="Profile Picture"
         />
         <Text flex={1} flexWrap="wrap" fontSize="lg" numberOfLines={1}>
