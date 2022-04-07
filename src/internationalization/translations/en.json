@@ -323,5 +323,10 @@
     "of": "of",
     "date": "Date",
     "emotion":"Emotion",
+    "HAPPY": "Feels happy",
+    "NEUTRAL": "Feels neutral",
+    "BAD": "Feels bad",
+    "NA": "N/A",
+    "none": "No emotion record for today.",
   }
 }

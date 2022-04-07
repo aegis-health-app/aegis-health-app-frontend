@@ -12,6 +12,7 @@ import {
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import { getEmotionFromHeatmapFrequency } from './../utils/caretaker/emotionTracker';
 
 const ElderlyEmotionHistoryScreen = ({
   route
@@ -27,7 +28,8 @@ const ElderlyEmotionHistoryScreen = ({
 
   const toast = useToast();
   function handleDayPress(val: EmotionalHistoryFrequency) {
-    toast.show({ title: JSON.stringify(val) });
+    const message = getEmotionFromHeatmapFrequency(val.date, val.count);
+    toast.show({ title: message });
   }
 
   useAsyncEffect(async () => {

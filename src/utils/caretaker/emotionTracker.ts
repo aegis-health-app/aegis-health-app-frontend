@@ -4,6 +4,7 @@ import {
   EmotionHistoryResponse
 } from '../../dto/modules/emotionTracking.dto';
 import { client } from './../../config/axiosConfig';
+import i18n from '../../internationalization/i18n.config';
 
 /**
  * This function returns the number of day between month depending on diff params.
@@ -54,6 +55,25 @@ export function getEmotionAsHeatmapFrequency(
   });
 
   return freq;
+}
+
+export function getEmotionFromHeatmapFrequency(
+  date: Date,
+  freq: number
+): string {
+  const displayDate = moment(date).format('L');
+
+  if (freq === EmotionFrequencyEnum.BAD) {
+    return `${displayDate}: ${i18n.t('emotionalRecord.BAD')}`;
+  } else if (freq === EmotionFrequencyEnum.NEUTRAL) {
+    return `${displayDate}: ${i18n.t('emotionalRecord.NEUTRAL')}`;
+  } else if (freq === EmotionFrequencyEnum.NA) {
+    return `${displayDate}: ${i18n.t('emotionalRecord.NA')}`;
+  } else if (freq === EmotionFrequencyEnum.HAPPY) {
+    return `${displayDate}: ${i18n.t('emotionalRecord.HAPPY')}`;
+  } else {
+    return `${displayDate}: ${i18n.t('emotionalRecord.none')}`;
+  }
 }
 
 export async function getEmotionHistory(
