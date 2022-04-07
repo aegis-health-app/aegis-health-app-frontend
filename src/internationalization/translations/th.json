@@ -422,6 +422,17 @@
   "updateHealthDataCoverImageError":{
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถบันทึกรูปหน้าปกของคุณ กรุณาลองใหม่อีกครั้ง",
+    "insomnia": "นอนไม่หลับ"
+  },
+  "addCustomHealthRecordingSuccess": {
+    "header": "สำเร็จ",
+    "body": "บันทึกข้อมูลของคุณถูกสร้างเรียบร้อยแล้ว",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "addCustomHealthRecordingError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถสร้างบันทึกข้อมูลของคุณได้ กรุณาลองอีกครั้ง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   }
