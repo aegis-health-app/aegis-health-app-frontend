@@ -82,23 +82,15 @@ const ElderlyHomeScreen = () => {
   useAsyncEffect(async () => {
     const emotionDate = moment(await getEmotionDate());
     const todayDate = moment().format('L');
-    console.log('emotion date: ' + emotionDate);
-    // Add condition to check if the emotion tracking is enable.
     if (!user) {
       return;
     }
     const uid = user?.uid;
-    console.log('uid is: ', uid);
-    // const isEmotionTrackingOn = await getIsEmotionTrackingOn(uid);
-    // console.log('is emotion tracking on: ', isEmotionTrackingOn);
-    if (emotionDate.isSame(todayDate, 'day')) {
-      console.log(
-        'emotion date is the same as today date or the caretaker disable the function.'
-      );
-      //If want to view the card change from false to true. And don't forget to change back.
-      setShowEmotionCard(true);
+    const emotionTracking = await getIsEmotionTrackingOn(uid);
+    const isEmotionTrackingOn = emotionTracking.isEnabled;
+    if (emotionDate.isSame(todayDate, 'day') || !isEmotionTrackingOn) {
+      setShowEmotionCard(false);
     } else {
-      console.log('emotion date is not the same as today date');
       setShowEmotionCard(true);
     }
   }, [user]);
