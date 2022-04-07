@@ -28,7 +28,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { client } from '../../config/axiosConfig';
 
 interface Fields {
-  fieldName: string | undefined;
+  name: string | undefined;
   unit: string | undefined;
 }
 
@@ -40,14 +40,14 @@ interface UploadImageDTO {
 }
 interface UpdateHealthRecordDTO {
   hrName: string;
-  imageid?: UploadImageDTO | object;
+  picture?: UploadImageDTO | object;
   listField: Fields[];
 }
 
 const CustomHealthRecordingScreen = () => {
   const [customImage, setCustomImage] = useState<ImagePickerResponse>();
   const [fieldList, setFieldList] = useState<Fields[]>([
-    { fieldName: undefined, unit: undefined }
+    { name: undefined, unit: undefined }
   ]);
   const [showImageUploadError, setShowImageUploadError] =
     useState<boolean>(false);
@@ -118,18 +118,18 @@ const CustomHealthRecordingScreen = () => {
   };
 
   const handleFieldAdd = () => {
-    setFieldList([...fieldList, { fieldName: undefined, unit: undefined }]);
+    setFieldList([...fieldList, { name: undefined, unit: undefined }]);
   };
 
   const handleFieldNameChange = (e: string, index: number) => {
     const list = [...fieldList];
-    list[index] = { fieldName: e, unit: list[index].unit };
+    list[index] = { name: e, unit: list[index].unit };
     setFieldList(list);
   };
 
   const handleUnitChange = (e: string, index: number) => {
     const list = [...fieldList];
-    list[index] = { fieldName: list[index].fieldName, unit: e };
+    list[index] = { name: list[index].name, unit: e };
     setFieldList(list);
   };
 
@@ -137,9 +137,9 @@ const CustomHealthRecordingScreen = () => {
     if (
       watchInputs.title === '' ||
       watchInputs.title === null ||
-      fieldList.filter((e) => e.fieldName === '').length > 0 ||
+      fieldList.filter((e) => e.name === '').length > 0 ||
       fieldList.filter((e) => e.unit === '').length > 0 ||
-      fieldList.filter((e) => e.fieldName === undefined).length > 0 ||
+      fieldList.filter((e) => e.name === undefined).length > 0 ||
       fieldList.filter((e) => e.unit === undefined).length > 0
     )
       return true;
@@ -155,7 +155,7 @@ const CustomHealthRecordingScreen = () => {
 
     const payload = {
       hrName: watchInputs.title, 
-      imageid: uploadImage
+      picture: uploadImage
         ? {
             base64: uploadImage.base64,
             name: uploadImage.fileName,
@@ -259,7 +259,7 @@ const CustomHealthRecordingScreen = () => {
                     <View width="52.5%">
                       <Text fontSize={16} color="#52525B">
                         {t('healthRecording.fieldName')} {index + 1}{' '}
-                        {field.fieldName === '' ? (
+                        {field.name === '' ? (
                           <Text color="red.500" fontSize="12">
                             *
                           </Text>
@@ -270,20 +270,20 @@ const CustomHealthRecordingScreen = () => {
                         name={`fieldName_${index}`}
                         control={control}
                         errors={errors}
-                        value={field.fieldName}
+                        value={field.name}
                         onChangeText={(e: string) => {
                           handleFieldNameChange(e, index);
                         }}
                         onEndEditing={() =>
-                          field.fieldName === undefined
+                          field.name === undefined
                             ? handleFieldNameChange('', index)
                             : undefined
                         }
                         borderColor={
-                          field.fieldName === '' ? 'red.500' : '#ACB5BD'
+                          field.name === '' ? 'red.500' : '#ACB5BD'
                         }
                       />
-                      {field.fieldName === '' ? (
+                      {field.name === '' ? (
                         <Text color="red.500" fontSize="12">
                           {t('healthRecording.fieldBlankError')}
                         </Text>
