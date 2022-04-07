@@ -49,7 +49,7 @@ const ElderlyEmotionHistoryScreen = ({
 
   return (
     <ScrollView>
-      <View mb={4} alignItems="center">
+      <View mb={2} alignItems="center">
         {hist.length > 0 && (
           <ContributionGraph
             values={getEmotionAsHeatmapFrequency(hist)}

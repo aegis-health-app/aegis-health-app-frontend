@@ -10,32 +10,38 @@ type EmotionalTableProps = {
   histCount: number;
 };
 
-const EmotionalTable = ({ data }: EmotionalTableProps) => {
+const EmotionalTable = ({ data, histCount }: EmotionalTableProps) => {
   const { height, width } = useWindowDimensions();
 
   const [hist, setHist] = useState<EmotionHistory[]>([]);
 
-  const [from, setFrom] = useState(0);
-  const [to, setTo] = useState(1);
-
-  const [currPageIndex, setCurrPageIndex] = useState(1);
-  const [maxPageIndex, setMaxPageIndex] = useState(1);
+  const [currPageIndex, setCurrPageIndex] = useState(0);
+  const [maxPageIndex, setMaxPageIndex] = useState(0);
 
   const NUM_ROWS = 7;
 
   useEffect(() => {
     setHist(data.slice(0, NUM_ROWS));
-    setMaxPageIndex(Math.ceil(data.length / NUM_ROWS));
-    setTo(from + 7);
-  }, [data]);
+    setMaxPageIndex(Math.ceil(histCount / NUM_ROWS));
+  }, [data, histCount]);
 
   //TODO: request data from back-end when currPageIndex changes
+  // (0 1 2 3 4 5 6) (7 8 9 10 11 12 13) 14 15 16
   useEffect(() => {
-    setHist(data.slice(from, to));
+    console.log({ histCount });
+    if (currPageIndex === 0) {
+      // page 1
+      setHist(data.slice(0, 7));
+    } else if (currPageIndex === maxPageIndex) {
+      // last page
+      setHist(data.slice(currPageIndex * 7, histCount));
+    } else {
+      setHist(data.slice(currPageIndex * 7, (currPageIndex + 1) * 7));
+    }
   }, [currPageIndex]);
 
   return (
-    <View flex={1} w="full" minH={height / 2}>
+    <View w="full">
       <HStack w={width} justifyContent="space-around">
         <View w={width / 2} alignItems="center">
           <Text fontSize="lg" fontWeight="600">
@@ -48,16 +54,18 @@ const EmotionalTable = ({ data }: EmotionalTableProps) => {
           </Text>
         </View>
       </HStack>
-      {/* Note: only show 7 items in a page */}
-      {data.map((val, key) => {
-        return (
-          <EmotionalHistoryItem
-            key={key}
-            date={val.date}
-            emotionalLevel={val.emotionalLevel}
-          />
-        );
-      })}
+      <View height={height / 2}>
+        {/* Note: only show 7 items in a page */}
+        {hist.map((val, key) => {
+          return (
+            <EmotionalHistoryItem
+              key={key}
+              date={val.date}
+              emotionalLevel={val.emotionalLevel}
+            />
+          );
+        })}
+      </View>
       <EmotionalTableNavigator
         currPageIndex={currPageIndex}
         setCurrPageIndex={setCurrPageIndex}
