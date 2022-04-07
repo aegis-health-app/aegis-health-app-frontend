@@ -59,7 +59,7 @@ const ConfirmConnectScreen = ({
         </Text>
         <Image
           mt="10"
-          source={info.imageid ? info.imageid : ProfilePic}
+          source={info.imageid ? {uri:info.imageid}: ProfilePic}
           w={160}
           h={160}
           borderRadius={10}

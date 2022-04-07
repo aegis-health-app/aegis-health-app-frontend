@@ -8,6 +8,7 @@ import EditButton from '../atoms/EditButton';
 import { useTranslation } from 'react-i18next';
 import { getDisplayName } from '../../utils/elderly/displayNames';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
+import FallbackImage from '../molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -63,10 +64,11 @@ const UserCard = ({
       <>
         <Text>{userIsElderly ? uid : ''}</Text>
         <Image
-          source={imageId ? imageId : ProfilePic}
+          source={imageId ? { uri: imageId } : ProfilePic}
           style={styles.image}
           borderRadius={10}
           marginRight={3}
+          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
         <Text flex={1} flexWrap="wrap" fontSize="lg" numberOfLines={1}>
