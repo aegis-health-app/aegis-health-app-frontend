@@ -3,14 +3,14 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import TextInput from '../components/atoms/TextInput';
+import TextInput from '../../components/atoms/TextInput';
 import * as Yup from 'yup';
-import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
-import i18n from '../internationalization/i18n.config';
+import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
+import i18n from '../../internationalization/i18n.config';
 import {
   CameraPhotoOptions,
   requestCameraPermission
-} from '../utils/permission';
+} from '../../utils/permission';
 import {
   ImagePickerResponse,
   launchCamera,
@@ -18,14 +18,14 @@ import {
 } from 'react-native-image-picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { StyleSheet } from 'react-native';
-import useKeyboardOpen from '../hooks/useKeyboardOpen';
-import FallbackImage from '../components/molecules/FallbackImage';
-import Alert, { AlertType } from '../components/organisms/Alert';
-import { RootStackParamList } from '../navigation/types';
+import useKeyboardOpen from '../../hooks/useKeyboardOpen';
+import FallbackImage from '../../components/molecules/FallbackImage';
+import Alert, { AlertType } from '../../components/organisms/Alert';
+import { RootStackParamList } from '../../navigation/types';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { UserContext } from '../contexts/UserContext';
-import { client } from '../config/axiosConfig';
+import { UserContext } from '../../contexts/UserContext';
+import { client } from '../../config/axiosConfig';
 
 interface Fields {
   fieldName: string | undefined;
@@ -40,7 +40,7 @@ interface UploadImageDTO {
 }
 interface UpdateHealthRecordDTO {
   hrName: string;
-  imageid: UploadImageDTO | object;
+  imageid?: UploadImageDTO | object;
   listField: Fields[];
 }
 
@@ -154,7 +154,7 @@ const CustomHealthRecordingScreen = () => {
       : undefined;
 
     const payload = {
-      hrName: watchInputs.title,
+      hrName: watchInputs.title, 
       imageid: uploadImage
         ? {
             base64: uploadImage.base64,
@@ -162,11 +162,10 @@ const CustomHealthRecordingScreen = () => {
             type: uploadImage.type,
             size: uploadImage.fileSize
           }
-        : null,
+        : undefined,
       listField: fieldList
-    } as UpdateHealthRecordDTO;
+    } as UpdateHealthRecordDTO 
 
-    // TODO: POST REQUEST LATER (DIFFERENT ENDPOINTS FOR ELDERLY & CARETAKERS)
     if (user?.isElderly) {
       try {
         await client.post('/healthRecord/add/elderly', payload);

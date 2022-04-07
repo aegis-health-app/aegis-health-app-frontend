@@ -33,7 +33,7 @@ import ChangePhoneNumberVerificationScreen from '../screens/ChangePhoneNumberVer
 import { UserContext } from '../contexts/UserContext';
 import CaretakerHomeScreen from './../screens/CaretakerHomeScreen';
 import TakeCareElderlyScreen from './../screens/TakeCareElderlyScreen';
-import CustomHealthRecordingScreen from '../screens/CustomHealthRecordingScreen';
+import CustomHealthRecordingScreen from '../screens/healthRecord/CustomHealthRecordingScreen';
 import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
 import SplashScreen from '../screens/SplashScreen';
