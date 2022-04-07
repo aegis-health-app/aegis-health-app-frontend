@@ -15,11 +15,9 @@ const EmotionalTableNavigator = ({
   maxPageIndex
 }: Props) => {
   function handlePressBack() {
-    if (currPageIndex <= 1) {
-      return;
+    if (currPageIndex > 0) {
+      setCurrPageIndex(currPageIndex - 1);
     }
-
-    setCurrPageIndex(currPageIndex - 1);
   }
 
   function handlePressNext() {
@@ -31,10 +29,10 @@ const EmotionalTableNavigator = ({
   const { t } = useTranslation();
 
   return (
-    <View alignSelf="flex-end" alignItems="center" my={2} w="40">
+    <View alignSelf="flex-end" alignItems="center" w="40">
       <HStack space={2}>
         <View w={8}>
-          {currPageIndex > 1 && (
+          {currPageIndex > 0 && (
             <Icon
               onPress={handlePressBack}
               as={MaterialIcons}
@@ -44,11 +42,11 @@ const EmotionalTableNavigator = ({
             />
           )}
         </View>
-        <Text fontSize="lg">{currPageIndex}</Text>
+        <Text fontSize="lg">{currPageIndex + 1}</Text>
         <Text fontSize="lg">{t('emotionalRecord.of')}</Text>
         <Text fontSize="lg">{maxPageIndex}</Text>
         <View w={8}>
-          {currPageIndex !== maxPageIndex && (
+          {currPageIndex + 1 !== maxPageIndex && (
             <Icon
               onPress={handlePressNext}
               as={MaterialIcons}
