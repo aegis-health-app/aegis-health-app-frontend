@@ -9,7 +9,7 @@ import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
-import FallbackImage from '../../components/molecules/FallbackImage';
+import { FallbackImageLarge } from '../../components/molecules/FallbackImage';
 import { Elderly } from './../../dto/modules/user.dto';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 
@@ -63,7 +63,7 @@ const ConfirmConnectScreen = ({
           w={160}
           h={160}
           borderRadius={10}
-          fallbackElement={FallbackImage}
+          fallbackElement={FallbackImageLarge}
           alt="Profile Picture"
         />
         <Text mt="2" fontWeight="600" fontSize="2xl">

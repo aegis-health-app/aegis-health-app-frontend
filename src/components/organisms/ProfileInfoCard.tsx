@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettings } from '../../hooks/useSettings';
 import { getFormattedDate } from '../../utils/getFormattedDate';
-import FallbackImage from '../molecules/FallbackImage';
+import { FallbackImageLarge } from '../molecules/FallbackImage';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -33,7 +33,7 @@ const ProfileInfoCard = ({
           w={160}
           h={160}
           borderRadius={10}
-          fallbackElement={FallbackImage}
+          fallbackElement={FallbackImageLarge}
           alt="Profile Picture"
         />
       </Box>
