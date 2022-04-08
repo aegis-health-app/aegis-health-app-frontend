@@ -154,7 +154,7 @@ const CustomHealthRecordingScreen = () => {
       : undefined;
 
     const payload = {
-      hrName: watchInputs.title, 
+      hrName: watchInputs.title,
       picture: uploadImage
         ? {
             base64: uploadImage.base64,
@@ -164,7 +164,7 @@ const CustomHealthRecordingScreen = () => {
           }
         : undefined,
       listField: fieldList
-    } as UpdateHealthRecordDTO 
+    } as UpdateHealthRecordDTO;
 
     if (user?.isElderly) {
       try {
@@ -279,9 +279,7 @@ const CustomHealthRecordingScreen = () => {
                             ? handleFieldNameChange('', index)
                             : undefined
                         }
-                        borderColor={
-                          field.name === '' ? 'red.500' : '#ACB5BD'
-                        }
+                        borderColor={field.name === '' ? 'red.500' : '#ACB5BD'}
                       />
                       {field.name === '' ? (
                         <Text color="red.500" fontSize="12">
@@ -363,17 +361,7 @@ const CustomHealthRecordingScreen = () => {
           width="100%"
           position="absolute"
           bgColor="white">
-          <Button
-            isDisabled={true}
-            mx={4}
-            mt={3}
-            onPress={() => {
-              console.log({
-                hrName: watchInputs.title,
-                imageid: null,
-                listField: fieldList
-              });
-            }}>
+          <Button isDisabled={true} mx={4} mt={3}>
             {t('healthRecording.create')}
           </Button>
         </View>
