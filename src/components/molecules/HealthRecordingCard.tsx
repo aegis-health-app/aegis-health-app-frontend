@@ -1,18 +1,19 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View, Image } from 'native-base';
 import React from 'react';
+import images from '../../assets/images';
 
 type HealthRecordingCardType = {
   backgroundColor: string;
-  image: any; // FIXME: what is the type of the image?
-  header: string;
+  image: string;
+  hrName: string;
   handlePress: () => void;
 };
 
 const HealthRecordingCard = ({
   backgroundColor,
   image,
-  header,
+  hrName,
   handlePress
 }: HealthRecordingCardType) => {
   return (
@@ -23,8 +24,9 @@ const HealthRecordingCard = ({
         mt={4}
         w="full">
         <Image
-          source={image}
-          alt="Plan Selection Image"
+          source={{ uri: image }}
+          fallbackSource={images.healthRecording}
+          alt="health recording image"
           width={100}
           height={100}
           resizeMode="contain"
@@ -33,7 +35,7 @@ const HealthRecordingCard = ({
         <View>
           {/* TODO: Return fontSize based on isElderly hook */}
           <Text padding="1" ml={2}>
-            <Text style={styles.headerText}>{header}</Text>
+            <Text style={styles.headerText}>{hrName}</Text>
           </Text>
         </View>
       </View>
