@@ -7,6 +7,8 @@ import { UserContext } from './UserContext';
 export interface CaretakerContextProps {
   caretakerHomeProfile: CaretakerHomeProfile | undefined;
   setCaretakerHomeProfile: (val: CaretakerHomeProfile) => void;
+  currentElderlyUid: number | undefined;
+  setCurrentElderlyUid: (val: number) => void;
 }
 
 export const CaretakerContext = createContext({} as CaretakerContextProps);
@@ -16,6 +18,8 @@ const CaretakerContextProvider = ({ ...props }) => {
     useState<CaretakerHomeProfile>();
 
   const { user } = useContext(UserContext);
+
+  const [currentElderlyUid, setCurrentElderlyUid] = useState<number>();
 
   useAsyncEffect(async () => {
     if (!user || user?.isElderly === true) return;
@@ -28,7 +32,9 @@ const CaretakerContextProvider = ({ ...props }) => {
 
   const value = {
     caretakerHomeProfile,
-    setCaretakerHomeProfile
+    setCaretakerHomeProfile,
+    currentElderlyUid,
+    setCurrentElderlyUid
   };
 
   return <CaretakerContext.Provider value={value} {...props} />;

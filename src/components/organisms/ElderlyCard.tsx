@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, View, Text, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -7,6 +7,7 @@ import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import useDimensions from '../../hooks/useDimensions';
 import FallbackImage from '../molecules/FallbackImage';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
 
 type ElderlyCardProps = {
   name: string;
@@ -22,11 +23,12 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
   const { t } = useTranslation();
   const { ScreenWidth } = useDimensions();
 
+  const { setCurrentElderlyUid } = useContext(CaretakerContext);
+
   function handlePressTakeCare() {
     if (uid !== undefined) {
-      navigation.navigate('TakeCareElderlyScreen', {
-        uid: uid
-      });
+      navigation.navigate('TakeCareElderlyScreen');
+      setCurrentElderlyUid(uid);
     }
   }
 
