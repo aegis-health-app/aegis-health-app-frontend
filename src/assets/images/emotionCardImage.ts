@@ -1,20 +1,20 @@
 const emotionCardImage = {
   //English picture
-  MondayEn: require('./tempMonday.png'),
-  TuesdayEn: require('./tempMonday.png'),
-  WednesdayEn: require('./tempMonday.png'),
-  ThursdayEn: require('./tempMonday.png'),
-  FridayEn: require('./tempMonday.png'),
-  SaturdayEn: require('./tempMonday.png'),
-  SundayEn: require('./tempMonday.png'),
+  MondayEn: require('./mondayEn.jpg'),
+  TuesdayEn: require('./tuesdayEn.jpg'),
+  WednesdayEn: require('./wednesdayEn.jpg'),
+  ThursdayEn: require('./thursdayEn.jpg'),
+  FridayEn: require('./fridayEn.jpg'),
+  SaturdayEn: require('./saturdayEn.jpg'),
+  SundayEn: require('./sundayEn.jpg'),
   //Thai picture
-  MondayTh: require('./tempMonday.png'),
-  TuesdayTh: require('./tempMonday.png'),
-  WednesdayTh: require('./tempMonday.png'),
-  ThursdayTh: require('./tempMonday.png'),
-  FridayTh: require('./tempMonday.png'),
-  SaturdayTh: require('./tempMonday.png'),
-  SundayTh: require('./tempMonday.png')
+  MondayTh: require('./mondayTh.jpg'),
+  TuesdayTh: require('./tuesdayTh.jpg'),
+  WednesdayTh: require('./wednesdayTh.jpg'),
+  ThursdayTh: require('./thursdayTh.jpg'),
+  FridayTh: require('./fridayTh.jpg'),
+  SaturdayTh: require('./saturdayTh.jpg'),
+  SundayTh: require('./sundayTh.jpg')
 };
 
 export default emotionCardImage;
