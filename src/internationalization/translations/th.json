@@ -4,7 +4,8 @@
     "enterOTP": "กรุณากรอกรหัสยืนยันของคุณ",
     "enterOTPDesc": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ ",
     "phonePlaceholder": "0xxxxxxxxx",
-    "resendOTP": "ส่งรหัสยืนยันอีกครั้ง"
+    "resendOTP": "ส่งรหัสยืนยันอีกครั้ง",
+    "tryAgainLater": "กรุณาลองใหม่อีกครั้ง"
   },
   "home": {
     "settingButton": "ตั้งค่า",
@@ -367,6 +368,61 @@
     "headache": "ปวดหัว",
     "constipation": "ท้องผูก",
     "anorexia": "เบื่ออาหาร",
-    "insomnia": "นอนไม่หลับ"
+    "insomnia": "นอนไม่หลับ",
+    "none": "ไม่มีการบันทึกสภาวะอารมณ์"
+  },
+  "addHealthDataSuccess":{
+    "header": "สำเร็จ",
+    "body": "ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "addHealthDataError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถบันทึกข้อมูลของคุณได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "duplicateHealthDataError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "มีข้อมูลถูกบันทึกในเวลาที่เลือกไว้ กรุณาเลือกเวลาใหม่",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "confirmDeleteHealthRecordingAlert":{
+    "header": "การยืนยัน",
+    "body": "คุณแน่ใจหรือไม่ที่จะลบการจดบันทึกนี้",
+    "primaryButton": "ลบ",
+    "secondaryButton": "ยกเลิก"
+  },
+  "confirmDeleteHealthDataRowAlert":{
+    "header": "การยืนยัน",
+    "body": "คุณแน่ใจหรือไม่ที่จะลบข้อมูลวันที่ ",
+    "primaryButton": "ลบ",
+    "secondaryButton": "ยกเลิก"
+  },
+  "deleteHealthRecordingError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถลบการจดบันทึกนี้ได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "deleteHealthDataRowError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถที่จะลบข้อมูลวันที่ ",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "updateHealthDataCoverImageSuccess":{
+    "header": "สำเร็จ",
+    "body": "รูปหน้าปกของคุณถูกบันทึกเรียบร้อยแล้ว",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "updateHealthDataCoverImageError":{
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถบันทึกรูปหน้าปกของคุณ กรุณาลองใหม่อีกครั้ง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
   }
 }

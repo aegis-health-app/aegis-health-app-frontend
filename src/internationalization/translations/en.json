@@ -4,7 +4,8 @@
     "enterOTP": "Enter Your Verification Code",
     "enterOTPDesc": "Enter the verification code sent to ",
     "phonePlaceholder": "0xxxxxxxxx",
-    "resendOTP": "Resend Verification Code"
+    "resendOTP": "Resend Verification Code",
+    "tryAgainLater": "Please try again later."
   },
   "home": {
     "settingButton": "Settings",
@@ -252,7 +253,7 @@
   },
   "updateProfileSuccess": {
     "header": "Success",
-    "body": "Your personal inforamtion has been updated",
+    "body": "Your personal information has been updated",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
@@ -369,5 +370,59 @@
     "anorexia": "Anorexia",
     "insomnia": "Insomnia",
     "none": "No emotion record for today."
+  },
+  "addHealthDataSuccess":{
+    "header": "Success",
+    "body": "Your health record has successfully been added.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "addHealthDataError":{
+    "header": "Error",
+    "body": "Cannot record your data at this moment. Please try again later.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "duplicateHealthDataError":{
+    "header": "Error",
+    "body": "A health record already exists at the selected time. Please select a new time.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "confirmDeleteHealthRecordingAlert":{
+    "header": "Confirmation",
+    "body": "Are you sure you want to deletydispe this recording?",
+    "primaryButton": "Delete",
+    "secondaryButton": "Cancel"
+  },
+  "confirmDeleteHealthDataRowAlert":{
+    "header": "Confirmation",
+    "body": "Are you sure you want the data on ",
+    "primaryButton": "Delete",
+    "secondaryButton": "Cancel"
+  },
+  "deleteHealthRecordingError":{
+    "header": "Error",
+    "body": "Unable to delete this health record. Please try again later.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "deleteHealthDataRowError":{
+    "header": "Error",
+    "body": "Unable to delete the data on ",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateHealthDataCoverImageSuccess":{
+    "header": "Success",
+    "body": "Health record cover image has been successfully updated.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateHealthDataCoverImageError":{
+    "header": "Error",
+    "body": "Unable to update your health record cover image. Please try again later.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
   }
 }

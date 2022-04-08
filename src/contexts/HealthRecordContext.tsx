@@ -33,6 +33,7 @@ const HealthRecordProvider = ({ ...props }) => {
         }${tempHrName}`
       );
       const _data = { ...data, data: data.data.reverse() };
+      console.log(_data);
       setHealthTable(_data);
     } catch (error) {
       // TODO: Add error alert

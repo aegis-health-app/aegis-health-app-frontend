@@ -49,5 +49,59 @@ export const AlertMessages = {
     body: i18n.t('changePhoneNumberError.body'),
     primaryButton: i18n.t('changePhoneNumberError.primaryButton'),
     secondaryButton: i18n.t('changePhoneNumberError.secondaryButton')
+  },
+  addHealthDataSuccess: {
+    header: i18n.t('addHealthDataSuccess.header'),
+    body: i18n.t('addHealthDataSuccess.body'),
+    primaryButton: i18n.t('addHealthDataSuccess.primaryButton'),
+    secondaryButton: i18n.t('addHealthDataSuccess.secondaryButton')
+  },
+  addHealthDataError: {
+    header: i18n.t('addHealthDataError.header'),
+    body: i18n.t('addHealthDataError.body'),
+    primaryButton: i18n.t('addHealthDataError.primaryButton'),
+    secondaryButton: i18n.t('addHealthDataError.secondaryButton')
+  },
+  duplicateHealthDataError: {
+    header: i18n.t('duplicateHealthDataError.header'),
+    body: i18n.t('duplicateHealthDataError.body'),
+    primaryButton: i18n.t('duplicateHealthDataError.primaryButton'),
+    secondaryButton: i18n.t('duplicateHealthDataError.secondaryButton')
+  },
+  confirmDeleteHealthRecordingAlert: {
+    header: i18n.t('confirmDeleteHealthRecordingAlert.header'),
+    body: i18n.t('confirmDeleteHealthRecordingAlert.body'),
+    primaryButton: i18n.t('confirmDeleteHealthRecordingAlert.primaryButton'),
+    secondaryButton: i18n.t('confirmDeleteHealthRecordingAlert.secondaryButton')
+  },
+  confirmDeleteHealthDataRowAlert: {
+    header: i18n.t('confirmDeleteHealthDataRowAlert.header'),
+    body: i18n.t('confirmDeleteHealthDataRowAlert.body'),
+    primaryButton: i18n.t('confirmDeleteHealthDataRowAlert.primaryButton'),
+    secondaryButton: i18n.t('confirmDeleteHealthDataRowAlert.secondaryButton')
+  },
+  deleteHealthRecordingError: {
+    header: i18n.t('deleteHealthRecordingError.header'),
+    body: i18n.t('deleteHealthRecordingError.body'),
+    primaryButton: i18n.t('deleteHealthRecordingError.primaryButton'),
+    secondaryButton: i18n.t('deleteHealthRecordingError.secondaryButton')
+  },
+  deleteHealthDataRowError: {
+    header: i18n.t('deleteHealthDataRowError.header'),
+    body: i18n.t('deleteHealthDataRowError.body'),
+    primaryButton: i18n.t('deleteHealthDataRowError.primaryButton'),
+    secondaryButton: i18n.t('deleteHealthDataRowError.secondaryButton')
+  },
+  updateHealthDataCoverImageSuccess: {
+    header: i18n.t('updateHealthDataCoverImageSuccess.header'),
+    body: i18n.t('updateHealthDataCoverImageSuccess.body'),
+    primaryButton: i18n.t('updateHealthDataCoverImageSuccess.primaryButton'),
+    secondaryButton: i18n.t('updateHealthDataCoverImageSuccess.secondaryButton')
+  },
+  updateHealthDataCoverImageError: {
+    header: i18n.t('updateHealthDataCoverImageError.header'),
+    body: i18n.t('updateHealthDataCoverImageError.body'),
+    primaryButton: i18n.t('updateHealthDataCoverImageError.primaryButton'),
+    secondaryButton: i18n.t('updateHealthDataCoverImageError.secondaryButton')
   }
 };
