@@ -21,7 +21,14 @@ const UserManageCard = ({ image, name }: UserManageCardProps) => {
       justifyContent="space-between"
       alignItems="center"
       style={styles.card}>
-      <Image source={image} width="12" height="12" borderRadius="2" mr={4} />
+      <Image
+        source={image}
+        width="12"
+        height="12"
+        borderRadius="2"
+        mr={4}
+        alt="User"
+      />
       <View flex={1}>
         <Text fontSize="md" numberOfLines={1}>
           {name}

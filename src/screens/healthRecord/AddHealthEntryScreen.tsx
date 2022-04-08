@@ -77,9 +77,10 @@ const AddHealthEntry = ({
         value: value[key]
       };
     });
+    console.log(moment(date, 'YYYY/MM/DD HH:mm').startOf('minute'));
     const payload = {
       hrName: tempHrName,
-      timestamp: moment(date, 'YYYY/MM/DD HH:mm:ss'),
+      timestamp: moment(date, 'YYYY/MM/DD HH:mm').startOf('minute'),
       data: fields
     };
     try {
