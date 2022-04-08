@@ -88,6 +88,7 @@ const ElderlyHomeScreen = () => {
     const uid = user?.uid;
     const emotionTracking = await getIsEmotionTrackingOn(uid);
     const isEmotionTrackingOn = emotionTracking.isEnabled;
+    console.log(isEmotionTrackingOn);
     if (emotionDate.isSame(todayDate, 'day') || !isEmotionTrackingOn) {
       setShowEmotionCard(false);
     } else {

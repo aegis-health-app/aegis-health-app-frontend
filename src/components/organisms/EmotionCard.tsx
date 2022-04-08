@@ -37,11 +37,8 @@ const EmotionCard = (props: EmotionCardProps) => {
       emotionLevel: emotion
     };
     try {
-      const { data } = await client.post('/emotion-tracking', payload);
-      if (data) console.log('emotion sent: ' + emotion);
-    } catch (err) {
-      console.log('Unsuccessful emotion sent: ' + emotion);
-    }
+      await client.post('/emotion-tracking', payload);
+    } catch (err) {}
   };
   /**
    * This function get the greeting image according to the day of the week.
@@ -61,7 +58,7 @@ const EmotionCard = (props: EmotionCardProps) => {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <View style={styles.pictureArea}>
+          <View margin={'12px'} alignItems={'center'}>
             <Image
               width={'240 px'}
               height={'320 px'}
@@ -125,11 +122,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     margin: 8
-  },
-  pictureArea: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 12
   },
   header: {
     alignContent: 'center',
