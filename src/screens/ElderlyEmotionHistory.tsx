@@ -1,43 +1,44 @@
-import { View, useToast } from 'native-base';
-import React, { useState, useEffect } from 'react';
+import { View, useToast, ScrollView, Spinner } from 'native-base';
+import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import EmotionalTable from '../components/molecules/EmotionalTable';
-import { EmotionalHistory } from './../dto/modules/emotionRecord';
+import { EmotionHistory } from '../dto/modules/emotionTracking.dto';
 import {
   EmotionalHistoryFrequency,
-  getEmotionAsHeatmapFrequency
-} from './../utils/caretaker/emotionHeatmap';
-import moment from 'moment';
+  getEmotionAsHeatmapFrequency,
+  getEmotionHistory
+} from '../utils/caretaker/emotionTracker';
+import useAsyncEffect from './../hooks/useAsyncEffect';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+import { getEmotionFromHeatmapFrequency } from './../utils/caretaker/emotionTracker';
 
-const ElderlyEmotionHistory = () => {
+const ElderlyEmotionHistoryScreen = ({
+  route
+}: NativeStackScreenProps<
+  RootStackParamList,
+  'ElderlyEmotionHistoryScreen'
+>) => {
+  const { uid } = route.params;
+
   const { width, height } = useWindowDimensions();
-  const [hist, setHist] = useState<EmotionalHistory[]>([]);
+  const [hist, setHist] = useState<EmotionHistory[]>([]);
+  const [histCount, setHistCount] = useState(0);
 
   const toast = useToast();
   function handleDayPress(val: EmotionalHistoryFrequency) {
-    toast.show({ title: JSON.stringify(val) });
+    const message = getEmotionFromHeatmapFrequency(val.date, val.count);
+    toast.show({ title: message });
   }
 
-  useEffect(() => {
-    const data: EmotionalHistory[] = [
-      { date: moment().subtract(20, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(19, 'days').toDate(), emotion: 'NA' },
-      { date: moment().subtract(18, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(17, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(16, 'days').toDate(), emotion: 'BAD' },
-      { date: moment().subtract(15, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(14, 'days').toDate(), emotion: 'NEUTRAL' },
-      { date: moment().subtract(13, 'days').toDate(), emotion: 'BAD' },
-      { date: moment().subtract(12, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(11, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(10, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(9, 'days').toDate(), emotion: 'HAPPY' },
-      { date: moment().subtract(8, 'days').toDate(), emotion: 'HAPPY' }
-    ];
-
-    setHist(data);
-  }, []);
+  useAsyncEffect(async () => {
+    const data = await getEmotionHistory(uid);
+    if (data.count && data.records) {
+      setHist(data.records);
+      setHistCount(data.count);
+    }
+  }, [uid]);
 
   const CONFIG = {
     backgroundGradientFrom: '#fff',
@@ -48,36 +49,33 @@ const ElderlyEmotionHistory = () => {
   };
 
   return (
-    <View flex={1}>
-      <View alignItems="center" justifyContent="center">
-        <View
-          w="96"
-          bgColor="#fff"
-          rounded="lg"
-          alignItems="center"
-          justifyContent="center"
-          my={4}>
-          {hist.length > 0 && (
+    <ScrollView>
+      <View mb={2} alignItems="center">
+        {histCount > 0 ? (
+          <View>
             <ContributionGraph
               values={getEmotionAsHeatmapFrequency(hist)}
               endDate={new Date()}
               numDays={76}
-              width={width}
+              width={width - 20}
               height={height / 3}
               chartConfig={CONFIG}
-              squareSize={25}
-              gutterSize={4}
-              showOutOfRangeDays={true}
+              squareSize={24}
+              gutterSize={2}
               onDayPress={(val) => {
                 handleDayPress(val);
               }}
             />
-          )}
-        </View>
+            <EmotionalTable data={hist} histCount={histCount} />
+          </View>
+        ) : (
+          <View height="96" justifyContent="center" alignItems="center">
+            <Spinner size="lg" />
+          </View>
+        )}
       </View>
-      <EmotionalTable data={hist} />
-    </View>
+    </ScrollView>
   );
 };
 
-export default ElderlyEmotionHistory;
+export default ElderlyEmotionHistoryScreen;
