@@ -8,8 +8,6 @@ import { useTranslation } from 'react-i18next';
 import useDimensions from '../../hooks/useDimensions';
 import FallbackImage from '../molecules/FallbackImage';
 
-// const ProfilePic = require('../../assets/images/profile.png');
-
 type ElderlyCardProps = {
   name: string;
   imageId: string;
