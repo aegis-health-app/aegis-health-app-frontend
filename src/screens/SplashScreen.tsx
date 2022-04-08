@@ -34,7 +34,7 @@ const SplashScreen = () => {
   return (
     <View flex={1} justifyContent="center">
       <Center>
-        <Image source={aegisLogo} height="12" width="24" />
+        <Image source={aegisLogo} height="12" width="24" alt="Aegis Logo" />
       </Center>
     </View>
   );

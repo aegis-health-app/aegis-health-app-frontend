@@ -34,7 +34,7 @@ const EditHealthEntryScreen = ({
   const { ScreenWidth } = useDimensions();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
 
-  // states
+  // States
   const [newHealthRecordCover, setNewHealthRecordCover] =
     useState<ImagePickerResponse>();
   const [showFailedDeleteRow, setShowFailedDeleteRow] = useState(false);
@@ -89,13 +89,8 @@ const EditHealthEntryScreen = ({
         }`,
         { data: payload }
       );
-      if (data) {
-        getHealthRecordTable();
-        setShowFailedDeleteRow(true);
-      }
+      if (data) getHealthRecordTable();
     } catch (error) {
-      // TODO: Alert message
-      console.log(error);
       setShowFailedDeleteRow(true);
     }
   };
@@ -121,8 +116,7 @@ const EditHealthEntryScreen = ({
         setShowSuccessImageUpdate(true);
       }
     } catch (error) {
-      // TODO: Alert message
-      setShowFailedDeleteRow(true);
+      setShowFailedImageUpdate(true);
     }
   };
 
@@ -171,6 +165,7 @@ const EditHealthEntryScreen = ({
         close={() => setShowFailedDeleteRow(false)}
         type={AlertType.ERROR}
         message="deleteHealthDataRowError"
+        customString={moment(tempDatetime).format('DD/MM/YYYY HH:MM:SS')}
       />
       <Alert
         isOpen={showFailedDeleteRecord}
@@ -182,13 +177,13 @@ const EditHealthEntryScreen = ({
         isOpen={showSuccessImageUpdate}
         close={() => setShowSuccessImageUpdate(false)}
         type={AlertType.SUCCESS}
-        message="deleteHealthRecordingError"
+        message="updateHealthDataCoverImageSuccess"
       />
       <Alert
         isOpen={showFailedImageUpdate}
         close={() => setShowFailedImageUpdate(false)}
         type={AlertType.ERROR}
-        message="deleteHealthRecordingError"
+        message="updateHealthDataCoverImageError"
       />
       <View p={4}>
         <Text fontSize="xl" fontWeight="700">
