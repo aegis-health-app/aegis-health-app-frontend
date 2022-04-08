@@ -58,18 +58,21 @@ const MainNavigation = () => {
       <Stack.Navigator>
         {user ? (
           <>
-            <Stack.Screen
-              name="TabNavigation"
-              component={TabNavigation}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="CaretakerHomeScreen"
-              component={CaretakerHomeScreen}
-              options={{
-                headerShown: false
-              }}
-            />
+            {user?.isElderly ? (
+              <Stack.Screen
+                name="TabNavigation"
+                component={TabNavigation}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              <Stack.Screen
+                name="CaretakerHomeScreen"
+                component={CaretakerHomeScreen}
+                options={{
+                  headerShown: false
+                }}
+              />
+            )}
             <Stack.Screen
               name="SettingScreen"
               component={SettingScreen}
