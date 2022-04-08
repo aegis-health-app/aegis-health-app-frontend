@@ -18,7 +18,7 @@ export enum TableMode {
 type HealthDataTableProps = {
   healthData?: HealthRecordingData;
   mode: TableMode;
-  onDeleteRow?: (value: string) => Promise<void>;
+  onDeleteRow?: (value: string) => void;
 };
 
 const HealthDataTable = (props: HealthDataTableProps) => {
@@ -112,9 +112,10 @@ const HealthDataTable = (props: HealthDataTableProps) => {
             page={page}
             numberOfPages={Math.ceil(healthData.data.length / 5)}
             onPageChange={(pageIndex) => setPage(pageIndex)}
-            label={`${(page + 1) % 5} - ${((page + 1) % 5) + 4} ${t('of')} ${
+            label={`${page * 5 + 1} - ${Math.min(
+              page * 5 + 1 + 4,
               healthData.data.length
-            }`}
+            )} ${t('of')} ${healthData.data.length}`}
             numberOfItemsPerPage={5}
           />
         )}

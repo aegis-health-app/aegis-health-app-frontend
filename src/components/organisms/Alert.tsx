@@ -11,13 +11,14 @@ export enum AlertType {
 type AlertProps = {
   isOpen: boolean;
   close: () => void;
+  cancel?: () => void;
   type: AlertType;
   message: string;
   customString?: string;
 };
 
 const Alert = (props: AlertProps) => {
-  const { isOpen, close, type, message, customString } = props;
+  const { isOpen, close, cancel, type, message, customString } = props;
 
   const getMessage = (): AlertMessage | undefined => {
     return AlertMessages[message];
@@ -41,7 +42,7 @@ const Alert = (props: AlertProps) => {
     <AlertDialog
       leastDestructiveRef={cancelRef}
       isOpen={isOpen}
-      onClose={close}>
+      onClose={cancel ?? close}>
       <AlertDialog.Content>
         <AlertDialog.CloseButton />
         <AlertDialog.Header>{getMessage()?.header}</AlertDialog.Header>
@@ -53,7 +54,7 @@ const Alert = (props: AlertProps) => {
             <Button
               variant="unstyled"
               colorScheme="coolGray"
-              onPress={close}
+              onPress={cancel}
               ref={cancelRef}>
               {getMessage()?.secondaryButton}
             </Button>

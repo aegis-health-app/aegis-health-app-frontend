@@ -10,10 +10,12 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Divider from '../../components/atoms/Divider';
 import EditButton from '../../components/atoms/EditButton';
+import KeyboardAvoidingView from '../../components/atoms/KeyboardAvoidingView';
 import Spacer from '../../components/atoms/Spacer';
 import TextInput from '../../components/atoms/TextInput';
 import DatePicker from '../../components/molecules/DatePicker';
 import TimePicker from '../../components/molecules/TimePicker';
+import Alert, { AlertType } from '../../components/organisms/Alert';
 import { client } from '../../config/axiosConfig';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -26,6 +28,8 @@ const AddHealthEntry = ({
   route
 }: NativeStackScreenProps<RootStackParamList, 'AddHealthEntryScreen'>) => {
   const { recordTitle } = route.params;
+  const { user } = useContext(UserContext);
+  const { getHealthRecordTable, healthTable } = useContext(HealthRecordContext);
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -33,12 +37,15 @@ const AddHealthEntry = ({
     control,
     formState: { errors },
     handleSubmit,
-    watch
+    watch,
+    reset
   } = useForm({ mode: 'onTouched' });
-  const { user } = useContext(UserContext);
-  const { getHealthRecordTable, healthTable } = useContext(HealthRecordContext);
 
+  // States
   const [date, setDate] = useState(new Date());
+  const [showSuccessAdd, setShowSuccessAdd] = useState<boolean>(false);
+  const [showFailedAdd, setShowFailedAdd] = useState<boolean>(false);
+  const [showDuplicateAdd, setShowDuplicateAdd] = useState<boolean>(false);
 
   const shouldDisableSubmission = () => {
     const fieldValues = watch();
@@ -83,10 +90,15 @@ const AddHealthEntry = ({
         }`,
         payload
       );
-      if (data) getHealthRecordTable();
+      if (data) {
+        reset();
+        getHealthRecordTable();
+        setShowSuccessAdd(true);
+      }
     } catch (error) {
-      // TODO: Add error alert
-      console.log(error);
+      // @ts-ignore
+      if (error.response.status === 409) setShowDuplicateAdd(true);
+      else setShowFailedAdd(true);
     }
   };
 
@@ -102,78 +114,100 @@ const AddHealthEntry = ({
   }, []);
 
   return (
-    <ScrollView>
-      <View p={4}>
-        <View flexDir="row" justifyContent="space-between">
-          <Text fontSize="xl" fontWeight="700">
-            {t('healthRecording.addEntry')}
-          </Text>
-          <EditButton
-            onPress={() => {
-              navigation.navigate('EditHealthEntryScreen', {
-                recordTitle: 'Blood Pressure',
-                healthData: healthTable
-              });
-            }}
-          />
-        </View>
-        <Spacer />
-        <View
-          display="flex"
-          flexDir="row"
-          alignItems="center"
-          justifyContent="center"
-          width="full"
-          height={200}
-          background="red.100">
-          <Image
-            source={tempHealthRecordCover}
-            borderRadius={4}
-            alt="Profile Picture"
-            resizeMode="cover"
-            height="100%"
-            width="100%"
-          />
-        </View>
-        <Spacer />
-        {healthTable?.columnNames.map((column, index) => (
-          <View minH={20} key={index}>
-            <TextInput
-              keyboardType="numeric"
-              label={column}
-              placeholder={t('healthRecording.enterValue')}
-              name={column}
-              control={control}
-              errors={errors}
+    <KeyboardAvoidingView>
+      <Alert
+        isOpen={showSuccessAdd}
+        close={() => setShowSuccessAdd(false)}
+        type={AlertType.SUCCESS}
+        message="addHealthDataSuccess"
+      />
+      <Alert
+        isOpen={showFailedAdd}
+        close={() => setShowFailedAdd(false)}
+        type={AlertType.ERROR}
+        message="addHealthDataError"
+      />
+      <Alert
+        isOpen={showDuplicateAdd}
+        close={() => setShowDuplicateAdd(false)}
+        type={AlertType.ERROR}
+        message="duplicateHealthDataError"
+      />
+      <ScrollView>
+        <View p={4}>
+          <View flexDir="row" justifyContent="space-between">
+            <Text fontSize="xl" fontWeight="700">
+              {t('healthRecording.addEntry')}
+            </Text>
+            <EditButton
+              onPress={() => {
+                navigation.navigate('EditHealthEntryScreen', {
+                  recordTitle: 'Blood Pressure',
+                  healthData: healthTable
+                });
+              }}
             />
           </View>
-        ))}
-        <Spacer />
-        <Text fontSize={16} mb={2}>
-          {t('healthRecording.date')}
-        </Text>
-        <DatePicker date={date} onDateChange={onDateChange} />
-        <Spacer />
-        <Text fontSize={16} mb={2}>
-          {t('healthRecording.time')}
-        </Text>
-        <TimePicker date={date} onDateChange={onTimeChange} />
-        <Spacer />
-        <Button
-          onPress={handleSubmit(onFormSubmit)}
-          isDisabled={shouldDisableSubmission()}>
-          {t('healthRecording.enterValue')}
-        </Button>
-        <Spacer />
-        <Divider />
-        <Text fontSize="lg">{t('healthRecording.recordHistory')}</Text>
-        <Spacer />
-        <Button variant="outline">{t('healthRecording.viewAnalytics')}</Button>
-        <Spacer />
-        <HealthDataTable mode={TableMode.VIEW} healthData={healthTable} />
-        <Spacer />
-      </View>
-    </ScrollView>
+          <Spacer />
+          <View
+            display="flex"
+            flexDir="row"
+            alignItems="center"
+            justifyContent="center"
+            width="full"
+            height={200}
+            background="red.100">
+            <Image
+              source={tempHealthRecordCover}
+              borderRadius={4}
+              alt="Profile Picture"
+              resizeMode="cover"
+              height="100%"
+              width="100%"
+            />
+          </View>
+          <Spacer />
+          {healthTable?.columnNames.map((column, index) => (
+            <View minH={20} key={index}>
+              <TextInput
+                keyboardType="numeric"
+                label={column}
+                placeholder={t('healthRecording.enterValue')}
+                name={column}
+                control={control}
+                errors={errors}
+              />
+            </View>
+          ))}
+          <Spacer />
+          <Text fontSize={16} mb={2}>
+            {t('healthRecording.date')}
+          </Text>
+          <DatePicker date={date} onDateChange={onDateChange} />
+          <Spacer />
+          <Text fontSize={16} mb={2}>
+            {t('healthRecording.time')}
+          </Text>
+          <TimePicker date={date} onDateChange={onTimeChange} />
+          <Spacer />
+          <Button
+            onPress={handleSubmit(onFormSubmit)}
+            isDisabled={shouldDisableSubmission()}>
+            {t('healthRecording.enterValue')}
+          </Button>
+          <Spacer />
+          <Divider />
+          <Text fontSize="lg">{t('healthRecording.recordHistory')}</Text>
+          <Spacer />
+          <Button variant="outline">
+            {t('healthRecording.viewAnalytics')}
+          </Button>
+          <Spacer />
+          <HealthDataTable mode={TableMode.VIEW} healthData={healthTable} />
+          <Spacer />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -17,7 +17,7 @@ export interface HealthRecordingData {
   data: HealthRecordingDataRow[];
 }
 
-export interface EditHealthRecord {
+export interface EditHealthRecordImage {
   hrName: string;
   image: ImagePayload;
 }
