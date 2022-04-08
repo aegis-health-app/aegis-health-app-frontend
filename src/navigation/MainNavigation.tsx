@@ -46,8 +46,7 @@ const MainNavigation = () => {
   const { t } = useTranslation();
   const { setShowSettingsTourguide, setShowHealthRecordingsTourguide } =
     useContext(TourguideContext);
-  const { user, userToken } = useContext(UserContext);
-  const [showNav, setShowNav] = useState<boolean>(true);
+  const { user } = useContext(UserContext);
 
   const navigationTheme = {
     ...DefaultTheme,
