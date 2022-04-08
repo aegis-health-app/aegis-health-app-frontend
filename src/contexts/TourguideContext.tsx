@@ -23,7 +23,8 @@ const TourguideContextProvider = ({ ...props }) => {
     useState(false);
   const [showCaretakerHomeTourguide, setShowCaretakerHomeTourguide] =
     useState(false);
-  const [showElderlyLinkTourguide, setShowElderlyLinkTourguide] = useState(false);
+  const [showElderlyLinkTourguide, setShowElderlyLinkTourguide] =
+    useState(false);
   const [showHealthRecordingsTourguide, setShowHealthRecordingsTourguide] =
     useState(false);
 
@@ -35,7 +36,7 @@ const TourguideContextProvider = ({ ...props }) => {
     showCaretakerHomeTourguide,
     setShowCaretakerHomeTourguide,
     showElderlyLinkTourguide,
-    setShowElderlyLinkTourguide
+    setShowElderlyLinkTourguide,
     showHealthRecordingsTourguide,
     setShowHealthRecordingsTourguide
   };
