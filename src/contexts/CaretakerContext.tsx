@@ -14,11 +14,9 @@ export interface CaretakerContextProps {
 export const CaretakerContext = createContext({} as CaretakerContextProps);
 
 const CaretakerContextProvider = ({ ...props }) => {
+  const { user } = useContext(UserContext);
   const [caretakerHomeProfile, setCaretakerHomeProfile] =
     useState<CaretakerHomeProfile>();
-
-  const { user } = useContext(UserContext);
-
   const [currentElderlyUid, setCurrentElderlyUid] = useState<number>();
 
   useAsyncEffect(async () => {

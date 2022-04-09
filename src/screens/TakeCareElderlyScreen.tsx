@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Text, View, Switch, ScrollView, useToast } from 'native-base';
+import { Text, View, Switch, ScrollView } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
@@ -45,6 +45,7 @@ const TakeCareElderlyScreen = () => {
   }
 
   useAsyncEffect(async () => {
+    if (!uid) return;
     if (isEmotionTrackerOn) {
       await sendEmotionTrackerOn(uid);
     } else {
@@ -78,6 +79,7 @@ const TakeCareElderlyScreen = () => {
             </View>
             <TouchableOpacity
               onPress={() =>
+                uid &&
                 navigation.navigate('ElderlyEmotionHistoryScreen', { uid: uid })
               }>
               <Text fontSize="md" color="primary.500" underline>

@@ -1,11 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps
-} from '@react-navigation/native-stack';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Divider from '../../components/atoms/Divider';
@@ -24,12 +21,16 @@ import HealthDataTable, { TableMode } from './HealthDataTable';
 
 const tempHealthRecordCover = require('../../assets/images/profile.png');
 
-const AddHealthEntry = ({
-  route
-}: NativeStackScreenProps<RootStackParamList, 'AddHealthEntryScreen'>) => {
-  const { recordTitle } = route.params;
+const AddHealthEntry = () => {
   const { user } = useContext(UserContext);
-  const { getHealthRecordTable, healthTable } = useContext(HealthRecordContext);
+  const {
+    getHealthRecordTable,
+    healthTable,
+    currentHrName,
+    currentElderlyUid,
+    currentHrImage,
+    healthRecordTemplates
+  } = useContext(HealthRecordContext);
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -46,6 +47,7 @@ const AddHealthEntry = ({
   const [showSuccessAdd, setShowSuccessAdd] = useState<boolean>(false);
   const [showFailedAdd, setShowFailedAdd] = useState<boolean>(false);
   const [showDuplicateAdd, setShowDuplicateAdd] = useState<boolean>(false);
+  const [showScreen, setShowScreen] = useState<boolean>(false);
 
   const shouldDisableSubmission = () => {
     const fieldValues = watch();
@@ -59,6 +61,15 @@ const AddHealthEntry = ({
     return shouldDisable;
   };
 
+  const getImage = () => {
+    // healthRecordTemplates
+    const recording = healthRecordTemplates.find((template) => {
+      return template.hrName === currentHrName;
+    });
+    if (recording) return { uri: recording.imageid };
+    currentHrImage ? { uri: currentHrImage } : tempHealthRecordCover;
+  };
+
   const onDateChange = (event, selectedDate?: Date | undefined) => {
     if (!selectedDate) return;
     const currentDate = selectedDate.getTime() + 7 * 60 * 60 * 1000;
@@ -67,27 +78,21 @@ const AddHealthEntry = ({
 
   const onFormSubmit = async (value) => {
     if (!user) return;
-    // temp value for testing
-    const tempElderlyId = '2';
-    const tempHrName = 'ความดัน';
-
     const fields = Object.keys(value).map((key) => {
       return {
         columnName: key,
         value: value[key]
       };
     });
-    console.log(moment(date, 'YYYY/MM/DD HH:mm').startOf('minute'));
     const payload = {
-      hrName: tempHrName,
+      hrName: currentHrName,
       timestamp: moment(date, 'YYYY/MM/DD HH:mm').startOf('minute'),
       data: fields
     };
     try {
-      console.log(payload);
       const { data } = await client.post(
         `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
-          user.isElderly ? '' : tempElderlyId
+          user.isElderly ? '' : currentElderlyUid
         }`,
         payload
       );
@@ -110,10 +115,20 @@ const AddHealthEntry = ({
   };
 
   useEffect(() => {
-    navigation.setOptions({ title: recordTitle });
+    navigation.setOptions({ title: currentHrName });
     getHealthRecordTable();
   }, []);
 
+  useFocusEffect(
+    useCallback(() => {
+      setShowScreen(false);
+      setTimeout(() => {
+        setShowScreen(true);
+      }, 0);
+    }, [])
+  );
+
+  if (!showScreen) return null;
   return (
     <KeyboardAvoidingView>
       <Alert
@@ -157,11 +172,11 @@ const AddHealthEntry = ({
             justifyContent="center"
             width="full"
             height={200}
-            background="red.100">
+            background="muted.200">
             <Image
-              source={tempHealthRecordCover}
+              source={getImage()}
               borderRadius={4}
-              alt="Profile Picture"
+              alt="No Image"
               resizeMode="cover"
               height="100%"
               width="100%"

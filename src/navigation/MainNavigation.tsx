@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -181,7 +181,6 @@ const MainNavigation = () => {
             <Stack.Screen
               name="AddHealthEntryScreen"
               component={AddHealthEntry}
-              initialParams={{ recordTitle: '' }}
               options={{
                 title: t(''),
                 headerTitleAlign: 'center',
