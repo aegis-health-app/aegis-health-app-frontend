@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { CheckIcon, Select, View, VStack, Text } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +13,7 @@ import {
   timeFrameOption
 } from '../../constants/HealthRecordingConstants';
 import { HealthRecordAnalytic } from '../../interfaces/healthRecording';
+import { getPeriodLable } from '../../utils/module/healthRecord';
 
 type Props = {
   hrName: string;
@@ -41,14 +41,10 @@ const HealthRecordChart = (props: Props) => {
       );
       const data = result.data as HealthRecordAnalytic;
       setData(data);
-      setLabels(
-        data.data.map((label) => {
-          return moment(label.dateTime).format('M/D');
-        })
-      );
       const datapoints = data.data.map((item) => {
         return item.value;
       });
+      if (datapoints && timeFrame) setLabels(getPeriodLable(data.data));
       setDatasets([{ data: datapoints }]);
     } catch (error) {
       console.log(error);
