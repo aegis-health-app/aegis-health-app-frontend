@@ -51,4 +51,5 @@ export type RootStackParamList = {
   PlanSelectionScreen: undefined;
   // Unauthorized
   OnBoardingScreen: undefined;
+  HealthRecordAnalyticsScreen: undefined;
 };

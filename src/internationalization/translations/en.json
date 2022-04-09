@@ -318,7 +318,8 @@
     "generalInfo": "General Information",
     "of": "of",
     "save": "Save",
-    "deleteRecording": "Delete Recording"
+    "deleteRecording": "Delete Recording",
+    "analytics": "Analytics"
   },
   "emotionalRecord": {
     "of": "of",

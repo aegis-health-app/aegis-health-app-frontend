@@ -318,7 +318,8 @@
     "generalInfo": "ข้อมูลทั่วไป",
     "of": "จาก",
     "save": "บันทึก",
-    "deleteRecording": "ลบการจดบันทึกนี้"
+    "deleteRecording": "ลบการจดบันทึกนี้",
+    "analytics": "วิเคราะห์ข้อมูล"
   },
   "emotionalRecord": {
     "of": "จาก",
