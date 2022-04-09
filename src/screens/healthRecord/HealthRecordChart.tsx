@@ -35,20 +35,16 @@ const HealthRecordChart = (props: Props) => {
     columnName: string,
     timeFrame: string
   ) => {
-    try {
-      const result = await client.get(
-        `healthRecord/analytics/${hrName}/${columnName}/${timeFrame}`
-      );
-      const data = result.data as HealthRecordAnalytic;
-      setData(data);
-      const datapoints = data.data.map((item) => {
-        return item.value;
-      });
-      if (datapoints && timeFrame) setLabels(getPeriodLable(data.data));
-      setDatasets([{ data: datapoints }]);
-    } catch (error) {
-      console.log(error);
-    }
+    const result = await client.get(
+      `healthRecord/analytics/${hrName}/${columnName}/${timeFrame}`
+    );
+    const data = result.data as HealthRecordAnalytic;
+    setData(data);
+    const datapoints = data.data.map((item) => {
+      return item.value;
+    });
+    if (datapoints && timeFrame) setLabels(getPeriodLable(data.data));
+    setDatasets([{ data: datapoints }]);
   };
 
   useEffect(() => {

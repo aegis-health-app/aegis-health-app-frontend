@@ -449,7 +449,7 @@
   },
   "analytics": {
     "value": "Value",
-    "max": "max",
+    "max": "Max",
     "min": "Min",
     "mean": "Mean",
     "week": "Week",
