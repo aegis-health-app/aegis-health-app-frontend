@@ -269,9 +269,11 @@ const MainNavigation = () => {
               name="HealthRecordingsScreen"
               component={HealthRecordingsScreen}
               options={{
-                headerTitle: t('healthRecordings.header'),
+                title: t('healthRecordings.header'),
                 headerShown: true,
                 headerShadowVisible: false,
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerRight: () => (
                   <TouchableOpacity
                     onPress={() => setShowHealthRecordingsTourguide(true)}>
@@ -289,8 +291,10 @@ const MainNavigation = () => {
               name="CreateHealthRecordingsScreen"
               component={CreateHealthRecordingsScreen}
               options={{
-                headerTitle: t('healthRecordingsCreate.header'),
-                headerShown: true
+                title: t('healthRecordingsCreate.header'),
+                headerShown: true,
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
               }}
             />
             <Stack.Screen
@@ -299,7 +303,7 @@ const MainNavigation = () => {
               options={{
                 title: t('healthRecording.createRecordings'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
               }}
             />

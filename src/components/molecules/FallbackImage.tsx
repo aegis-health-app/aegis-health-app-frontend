@@ -8,15 +8,6 @@ const FallbackImage = (
       source={ProfilePic}
       width={50}
       height={50}
-<<<<<<< HEAD
-      borderRadius={10}
-      marginRight={3}
-<<<<<<< HEAD
-      alt="Fallback Image"
-=======
-      alt="fallbackImage"
->>>>>>> 5cd283f (fix: image handling & added alt to FallbackImage)
-=======
       borderRadius={10}
       marginRight={3}
       alt="Fallback Image"
@@ -33,7 +24,6 @@ export const FallbackImageMedium = (
       borderRadius={10}
       marginRight={3}
       alt="Fallback Image Medium"
->>>>>>> 1eec0e5 (fix: fixed FallbackImage sizes)
     />
   </View>
 );

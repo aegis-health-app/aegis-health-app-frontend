@@ -124,7 +124,7 @@ const HealthRecordingsScreen = () => {
           </Button>
         </TourGuideZone>
       </View>
-      <ScrollView flex={1}>
+      <ScrollView flex={1} mx={4}>
         {myTemplates.map((template, i) => (
           <>
             {i === 0 ? (

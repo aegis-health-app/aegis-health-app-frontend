@@ -202,7 +202,7 @@ const CustomHealthRecordingScreen = () => {
           close={() => {
             setShowSuccessAlert(false);
             // change navigation later
-            if (!showImageUploadError) navigation.navigate('UserLinkScreen');
+            if (!showImageUploadError) navigation.navigate('HealthRecordingsScreen');
           }}
           type={AlertType.SUCCESS}
           message="addCustomHealthRecordingSuccess"
