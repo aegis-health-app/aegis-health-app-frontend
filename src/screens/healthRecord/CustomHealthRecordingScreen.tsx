@@ -147,11 +147,8 @@ const CustomHealthRecordingScreen = () => {
   };
 
   const handleSubmit = async () => {
-    const uploadImage = customImage
-      ? customImage.assets
-        ? customImage.assets[0]
-        : undefined
-      : undefined;
+    const uploadImage =
+      customImage && customImage.assets ? customImage.assets[0] : undefined;
 
     const payload = {
       hrName: watchInputs.title,
