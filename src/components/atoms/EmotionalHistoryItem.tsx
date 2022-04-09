@@ -64,7 +64,7 @@ const EmotionalHistoryItem = ({
         alignItems="center"
         justifyContent="space-between">
         <View w={width / 2} alignItems="center">
-          <Text fontSize="md">{moment(date).format('L')}</Text>
+          <Text fontSize="md">{moment(date).format('DD/MM/YYYY')}</Text>
         </View>
         <View
           w={width / 2}

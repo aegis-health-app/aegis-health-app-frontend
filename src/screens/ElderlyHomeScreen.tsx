@@ -1,16 +1,4 @@
-import {
-  Fab,
-  Icon,
-  ScrollView,
-  Text,
-  View,
-  Image,
-  Modal,
-  FormControl,
-  Input,
-  Button,
-  Spacer
-} from 'native-base';
+import { Fab, Icon, ScrollView, Text, View, Image } from 'native-base';
 import Divider from '../components/atoms/Divider';
 import React, { useContext, useEffect, useState } from 'react';
 import UpComingAlert from './../components/organisms/UpComingAlert';
@@ -35,7 +23,6 @@ import useDimensions from '../hooks/useDimensions';
 import { UserContext } from '../contexts/UserContext';
 import FallbackImage from '../components/molecules/FallbackImage';
 import EmotionCard from '../components/organisms/EmotionCard';
-import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 import moment from 'moment';
 import { getIsEmotionTrackingOn } from '../utils/caretaker/switch';
 
@@ -81,7 +68,7 @@ const ElderlyHomeScreen = () => {
 
   useAsyncEffect(async () => {
     const emotionDate = moment(await getEmotionDate());
-    const todayDate = moment().format('L');
+    const todayDate = moment().format('DD/MM/YYYY');
     if (!user) {
       return;
     }
