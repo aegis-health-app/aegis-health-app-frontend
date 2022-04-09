@@ -1,5 +1,6 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { AxiosError } from 'axios';
 import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
@@ -42,7 +43,6 @@ const AddHealthEntry = () => {
     reset
   } = useForm({ mode: 'onTouched' });
 
-  // States
   const [date, setDate] = useState(new Date());
   const [showSuccessAdd, setShowSuccessAdd] = useState<boolean>(false);
   const [showFailedAdd, setShowFailedAdd] = useState<boolean>(false);
@@ -102,8 +102,9 @@ const AddHealthEntry = () => {
         setShowSuccessAdd(true);
       }
     } catch (error) {
-      // @ts-ignore
-      if (error.response.status === 409) setShowDuplicateAdd(true);
+      const err = error as AxiosError;
+      if (!err || !err.response) return;
+      if (err.response.status === 409) setShowDuplicateAdd(true);
       else setShowFailedAdd(true);
     }
   };
