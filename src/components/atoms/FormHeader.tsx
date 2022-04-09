@@ -12,7 +12,7 @@ const TextInput: React.FC<TextInputProps> = ({
   ...props
 }) => {
   return (
-    <Text fontSize={size || 24} fontWeight="medium" {...props}>
+    <Text fontSize={size || 24} fontWeight="medium" padding={0.5} {...props}>
       {headerText}
     </Text>
   );

@@ -186,7 +186,6 @@
     "invalidCode": "มีบางอย่างผิดพลาด โปรดลองใหม่อีกครั้งในภายหลัง",
     "editButtonTutorial": "กดปุ่ม “แก้ไข” เพื่อแก้ไขข้อมูลของผู้ดูแลที่อยู่ในเครื่องของคุณ",
     "addButtonTutorial": "กดปุ่ม “เพิ่มผู้ดูแล” เพื่อเพิ่มผู้ดูแล"
-
   },
   "auth": {
     "password": "รหัสผ่าน",
@@ -269,31 +268,31 @@
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "changePhoneNumber":{
+  "changePhoneNumber": {
     "blankPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์",
     "invalidPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง",
-    "changePhoneNumber":"เปลี่ยนหมายเลขโทรศัพท์",
-    "enterPhoneNumber":"กรอกหมายเลขโทรศัพท์ใหม่",
-    "enterPhoneNumberDescription":"เราจะส่งรหัสยืนยันตัวตน 6 หลักไปให้คุณทางข้อความ",
-    "phoneNumber":"เบอร์โทรศัพท์ใหม่",
-    "continue":"ดำเนินการต่อ",
-    "enterYourVerificationCode":"กรอกรหัสยืนยัน",
-    "verificationCodeSentTo":"โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่",
-    "submit":"ดำเนินการต่อ"
+    "changePhoneNumber": "เปลี่ยนหมายเลขโทรศัพท์",
+    "enterPhoneNumber": "กรอกหมายเลขโทรศัพท์ใหม่",
+    "enterPhoneNumberDescription": "เราจะส่งรหัสยืนยันตัวตน 6 หลักไปให้คุณทางข้อความ",
+    "phoneNumber": "เบอร์โทรศัพท์ใหม่",
+    "continue": "ดำเนินการต่อ",
+    "enterYourVerificationCode": "กรอกรหัสยืนยัน",
+    "verificationCodeSentTo": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่",
+    "submit": "ดำเนินการต่อ"
   },
-  "changePhoneNumberSuccess":{
+  "changePhoneNumberSuccess": {
     "header": "สำเร็จ",
     "body": "หมายเลขโทรศัพท์ของคุณได้ถูกเปลี่ยนเป็น ",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "changePhoneNumberError":{
+  "changePhoneNumberError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถยืนยันหมายเลขโทรศัพท์ของคุณได้ กรุณาลองใหม่อีกครั้งในภายหลัง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "healthRecording":{
+  "healthRecording": {
     "createRecordings": "สร้างข้อมูลใหม่",
     "generalInformation": "ข้อมูลทั่วไป",
     "title": "ชื่อข้อมูล",
@@ -323,7 +322,7 @@
   "emotionalRecord": {
     "of": "จาก",
     "date": "วันที่",
-    "emotion":"อารมณ์",
+    "emotion": "อารมณ์",
     "HAPPY": "อารมณ์ดี",
     "NEUTRAL": "ปกติ",
     "BAD": "อารมณ์ไม่ดี",
@@ -332,7 +331,7 @@
     "switchLast": "นี่เป็นครั้งสุดท้ายที่จะสามารถตั้งค่าการติดตามอารมณ์สำหรับวันนี้",
     "switchDisabled": "คุณไม่สามารถเปลี่ยนการตั้งค่าการติดตามอารมณ์สำหรับวันนี้ได้แล้ว"
   },
-  "emotionTrackingCard":{
+  "emotionTrackingCard": {
     "Monday": "สวัสดีวันจันทร์",
     "Tuesday": "สวัสดีวันอังคาร",
     "Wednesday": "สวัสดีวันพุธ",
@@ -340,6 +339,34 @@
     "Friday": "สวัสดีวันศุกร์",
     "Saturday": "สวัสดีวันเสาร์",
     "Sunday": "สวัสดีวันอาทิตย์",
-    "howAreYouFeelingToday" :"วันนี้คุณรู้สึกอย่างไร?"
+    "howAreYouFeelingToday": "วันนี้คุณรู้สึกอย่างไร?",
+    "emotion": "อารมณ์",
+    "switchLast": "นี่เป็นครั้งสุดท้ายที่จะสามารถตั้งค่าการติดตามอารมณ์สำหรับวันนี้",
+    "switchDisabled": "คุณไม่สามารถเปลี่ยนการตั้งค่าการติดตามอารมณ์สำหรับวันนี้ได้แล้ว",
+    "create": "สร้าง"
+  },
+  "healthRecordings": {
+    "header": "บันทึกข้อมูลสุขภาพ",
+    "addRecording": "เพิ่มข้อมูลใหม่"
+  },
+  "healthRecordingsTutorial": {
+    "step1": "กดปุ่ม “เพิ่มประเภทข้อมูลใหม่” เพื่อสร้างประเภทข้อมูลใหม่จากรูปแบบที่เรามีไว้ให้หรือคุณสามารถสร้างรูปแบบของข้อมูลเองได้",
+    "step2": "กดที่แต่ละการ์ดเพื่อดูรายละเอียดและข้อมูลที่บันทึกไว้"
+  },
+  "healthRecordingsCreate": {
+    "header": "สร้างข้อมูลใหม่",
+    "selectTemplate": "เลือกรูปแบบ",
+    "advanced": "ขั้นสูง"
+  },
+  "healthRecordingsTemplates": {
+    "bloodPressure": "ความดันโลหิต",
+    "bloodSugarLevel": "ระดับน้ำตาลในเลือด",
+    "heartRate": "อัตราการเต้นของหัวใจ",
+    "fever": "อุณหภูมิร่างกาย",
+    "hdlldl": "ไขมันดี ไขมันเลว",
+    "headache": "ปวดหัว",
+    "constipation": "ท้องผูก",
+    "anorexia": "เบื่ออาหาร",
+    "insomnia": "นอนไม่หลับ"
   }
 }

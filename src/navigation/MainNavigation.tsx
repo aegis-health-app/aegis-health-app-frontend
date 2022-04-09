@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { RootStackParamList } from './types';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -38,11 +38,14 @@ import AddHealthEntry from '../screens/healthRecord/AddHealthEntryScreen';
 import EditHealthEntryScreen from '../screens/healthRecord/EditHealthEntryScreen';
 import SplashScreen from '../screens/SplashScreen';
 import ElderlyEmotionHistoryScreen from './../screens/ElderlyEmotionHistoryScreen';
+import HealthRecordingsScreen from '../screens/HealthRecordingsScreen';
+import CreateHealthRecordingsScreen from '../screens/CreateHealthRecordingsScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
-  const { setShowSettingsTourguide } = useContext(TourguideContext);
+  const { setShowSettingsTourguide, setShowHealthRecordingsTourguide } =
+    useContext(TourguideContext);
   const { user } = useContext(UserContext);
 
   const navigationTheme = {
@@ -261,6 +264,34 @@ const MainNavigation = () => {
                 title: t('home.emotionHist'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
+            />
+            <Stack.Screen
+              name="HealthRecordingsScreen"
+              component={HealthRecordingsScreen}
+              options={{
+                headerTitle: t('healthRecordings.header'),
+                headerShown: true,
+                headerShadowVisible: false,
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => setShowHealthRecordingsTourguide(true)}>
+                    <Icon
+                      as={Feather}
+                      name="help-circle"
+                      size="7"
+                      color="#F97316"
+                    />
+                  </TouchableOpacity>
+                )
+              }}
+            />
+            <Stack.Screen
+              name="CreateHealthRecordingsScreen"
+              component={CreateHealthRecordingsScreen}
+              options={{
+                headerTitle: t('healthRecordingsCreate.header'),
+                headerShown: true
               }}
             />
             <Stack.Screen

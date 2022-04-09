@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import {
-  NativeStackScreenProps,
-  NativeStackNavigationProp
-} from '@react-navigation/native-stack';
+import React, { useContext, useState } from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Text, View, Switch, ScrollView, useToast } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
@@ -23,19 +20,19 @@ import {
   sendEmotionTrackerOff,
   sendEmotionTrackerOn
 } from '../utils/caretaker/switch';
+import { CaretakerContext } from '../contexts/CaretakerContext';
 
-const TakeCareElderlyScreen = ({
-  route
-}: NativeStackScreenProps<RootStackParamList, 'TakeCareElderlyScreen'>) => {
-  const { uid } = route.params;
+const TakeCareElderlyScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
   const { elderlyBasicProfile } = useProfileInfo(elderly);
   const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
+  const { currentElderlyUid: uid } = useContext(CaretakerContext);
 
   useAsyncEffect(async () => {
+    if (!uid) return;
     const _elderly = await getCaretakingElderlyByEid(uid);
     setElderly(_elderly);
 

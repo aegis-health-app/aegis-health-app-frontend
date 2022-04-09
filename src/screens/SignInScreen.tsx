@@ -46,7 +46,6 @@ const SignInScreen = () => {
       setToken(signInResponse.data.token);
       await getUserProfile();
     } else {
-      console.log(signInResponse);
       setError('phoneNumber', {
         type: 'manual',
         message: t('error.wrongCredentials')

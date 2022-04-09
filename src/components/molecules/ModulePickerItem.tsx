@@ -60,7 +60,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.healthRecord')}
-          handlePress={() => navigation.navigate('HealthRecordScreen')}
+          handlePress={() => navigation.navigate('HealthRecordingsScreen')}
         />
       );
     } else if (mid === 3) {

@@ -33,9 +33,12 @@ export type RootStackParamList = {
   ConnectElderlyScreen: undefined;
   InputCodeScreen: undefined;
   ConfirmConnectScreen: { info: ElderlyLinkResponse };
-  TakeCareElderlyScreen: { uid: number };
+  TakeCareElderlyScreen: undefined;
   CustomHealthRecordingScreen: undefined;
   ElderlyEmotionHistoryScreen: { uid: number };
+  ElderlyEmotionHistory: undefined;
+  HealthRecordingsScreen: undefined;
+  CreateHealthRecordingsScreen: undefined;
 
   SignInScreen: undefined;
   SignUpScreen: { isElderly: boolean };

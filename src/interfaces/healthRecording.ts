@@ -1,3 +1,9 @@
+export interface HealthRecording {
+  hrName: string;
+  imageid: string;
+  uid: number;
+}
+
 export interface HealthRecordingDataRow {
   dateTime: string;
   values: string[];
