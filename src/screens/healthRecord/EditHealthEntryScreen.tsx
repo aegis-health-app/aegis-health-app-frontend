@@ -26,7 +26,14 @@ const EditHealthEntryScreen = ({
 }: NativeStackScreenProps<RootStackParamList, 'EditHealthEntryScreen'>) => {
   const { recordTitle } = route.params;
   const { user } = useContext(UserContext);
-  const { getHealthRecordTable, healthTable } = useContext(HealthRecordContext);
+  const {
+    getHealthRecordTable,
+    healthTable,
+    currentHrImage,
+    currentHrName,
+    currentElderlyUid,
+    setCurrentHrImage
+  } = useContext(HealthRecordContext);
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -48,22 +55,17 @@ const EditHealthEntryScreen = ({
   const getImage = () => {
     if (newHealthRecordCover && newHealthRecordCover.assets)
       return { uri: newHealthRecordCover.assets[0].uri };
-    // TODO: Update with initial image when available
-    // if (user?.imageid) return { uri: user.imageid };
+    if (currentHrImage) return { uri: currentHrImage };
     return tempHealthRecordCover;
   };
 
   const deleteHealthRecord = async () => {
     if (!user) return;
-    // TODO: Delete health record
-    // temporary values
-    const _hrname = 'ความดัน';
-
     try {
       await client.delete(
         `/healthRecord/delete/${
           user?.isElderly ? 'elderly' : 'caretaker'
-        }/${_hrname}`
+        }/${currentHrName}`
       );
     } catch (error) {
       setShowFailedDeleteRecord(true);
@@ -72,20 +74,14 @@ const EditHealthEntryScreen = ({
 
   const deleteRow = async (dateTime?: string) => {
     if (!user || !dateTime) return;
-    // TODO: Delete health record row
-    // temporary values
-    const _hrname = 'ความดัน';
-    const _elderlyId = '2';
-
     const payload = {
-      hrName: _hrname,
+      hrName: currentHrName,
       timestamp: moment(dateTime, 'YYYY/MM/DD HH:mm:ss').toString()
     };
     try {
-      console.log(dateTime);
       const { data } = await client.delete(
         `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}${
-          user.isElderly ? '' : _elderlyId
+          user.isElderly ? '' : currentElderlyUid
         }`,
         { data: payload }
       );
@@ -97,12 +93,9 @@ const EditHealthEntryScreen = ({
 
   const updateImage = async () => {
     if (!newHealthRecordCover || !newHealthRecordCover.assets) return;
-    // temporary value
-    const _hrName = 'ความดัน';
-
     const newImage = newHealthRecordCover.assets[0];
     const payload = {
-      hrName: _hrName,
+      hrName: currentHrName,
       image: {
         base64: newImage.base64,
         name: newImage.fileName,
@@ -114,6 +107,8 @@ const EditHealthEntryScreen = ({
       const { data } = await client.put('/healthRecord/elderly', payload);
       if (data) {
         setShowSuccessImageUpdate(true);
+        getHealthRecordTable();
+        setCurrentHrImage(data);
       }
     } catch (error) {
       setShowFailedImageUpdate(true);

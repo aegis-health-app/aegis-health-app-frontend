@@ -11,7 +11,7 @@ import { HealthRecording } from '../interfaces/HealthRecording';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { UserContext } from '../contexts/UserContext';
 import { client } from '../config/axiosConfig';
-import { CaretakerContext } from '../contexts/CaretakerContext';
+import { HealthRecordContext } from '../contexts/HealthRecordContext';
 
 const CreateHealthRecordingsScreen = () => {
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ const CreateHealthRecordingsScreen = () => {
   const { user } = useContext(UserContext);
   const [templates, setTemplates] = useState<HealthRecording[]>([]);
 
-  const { currentElderlyUid } = useContext(CaretakerContext);
+  const { currentElderlyUid } = useContext(HealthRecordContext);
 
   useAsyncEffect(async () => {
     const fetchData = async () => {

@@ -22,7 +22,7 @@ export type RootStackParamList = {
   EmergencyScreen: undefined;
   ReminderScreen: undefined;
   HealthRecordScreen: undefined;
-  AddHealthEntryScreen: { recordTitle: string };
+  AddHealthEntryScreen: undefined;
   EditHealthEntryScreen: {
     recordTitle: string;
     healthData?: HealthRecordingData;

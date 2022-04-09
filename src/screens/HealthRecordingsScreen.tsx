@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Button, ScrollView, View, VStack } from 'native-base';
 import { useTranslation } from 'react-i18next';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import HealthRecordingCard from '../components/molecules/HealthRecordingCard';
@@ -16,7 +16,7 @@ import {
 import { client } from '../config/axiosConfig';
 import { UserContext } from '../contexts/UserContext';
 import { HealthRecording } from '../interfaces/healthRecording';
-import { CaretakerContext } from '../contexts/CaretakerContext';
+import { HealthRecordContext } from '../contexts/HealthRecordContext';
 
 const HealthRecordingsScreen = () => {
   const { t } = useTranslation();
@@ -24,15 +24,23 @@ const HealthRecordingsScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { user } = useContext(UserContext);
   const [myTemplates, setMyTemplates] = useState<HealthRecording[]>([]);
+  const [showScreen, setShowScreen] = useState<boolean>(true);
 
-  const { currentElderlyUid } = useContext(CaretakerContext);
+  const {
+    currentElderlyUid,
+    setCurrentHrName,
+    setCurrentHrImage,
+    setHealthRecordTemplates
+  } = useContext(HealthRecordContext);
 
   useAsyncEffect(async () => {
+    if (!user) return;
     const fetchData = async () => {
       if (user?.isElderly) {
         try {
-          const res = await client.get('/healthrecord/getAll/elderly');
+          const res = await client.post('/healthRecord/getAll/elderly');
           setMyTemplates(res.data.listHealthRecord);
+          setHealthRecordTemplates(res.data.listHealthRecord);
         } catch (err) {
           console.log(err);
         }
@@ -42,10 +50,11 @@ const HealthRecordingsScreen = () => {
             elderlyuid: currentElderlyUid
           };
           const res = await client.post(
-            '/healthrecord/getAll/caretaker',
+            '/healthRecord/getAll/caretaker',
             payload
           );
           setMyTemplates(res.data.listHealthRecord);
+          setHealthRecordTemplates(res.data.listHealthRecord);
         } catch (err) {
           console.log(err);
         }
@@ -83,7 +92,16 @@ const HealthRecordingsScreen = () => {
     });
   }, [eventEmitter]);
 
-  // -----------------------
+  useFocusEffect(
+    useCallback(() => {
+      setShowScreen(false);
+      setTimeout(() => {
+        setShowScreen(true);
+      }, 0);
+    }, [])
+  );
+
+  if (!showScreen) return null;
 
   return (
     <>
@@ -122,7 +140,9 @@ const HealthRecordingsScreen = () => {
                   hrName={template.hrName}
                   handlePress={() => {
                     stop();
-                    console.log('card pressed');
+                    setCurrentHrName(template.hrName);
+                    setCurrentHrImage(template.imageid);
+                    navigation.navigate('AddHealthEntryScreen');
                   }}
                 />
               </TourGuideZone>
@@ -132,7 +152,11 @@ const HealthRecordingsScreen = () => {
                 backgroundColor="#fff"
                 image={template.imageid}
                 hrName={t(template.hrName)}
-                handlePress={() => console.log('card pressed')}
+                handlePress={() => {
+                  setCurrentHrName(template.hrName);
+                  setCurrentHrImage(template.imageid);
+                  navigation.navigate('AddHealthEntryScreen');
+                }}
               />
             )}
           </>
