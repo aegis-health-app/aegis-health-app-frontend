@@ -40,22 +40,15 @@ const HealthRecordProvider = ({ ...props }) => {
   const getHealthRecordTable = async () => {
     if (!user) return;
 
-    // temp dummy hrName
-    try {
-      const tempHrName = currentHrName;
-      const tempElderlyUid = currentElderlyUid;
-      const { data } = await client.get(
-        `healthRecord/table/${
-          user.isElderly ? '' : `${tempElderlyUid}/`
-        }${tempHrName}`
-      );
-      const _data = { ...data, data: data.data.reverse() };
-      console.log(_data);
-      setHealthTable(_data);
-    } catch (error) {
-      // TODO: Add error alert
-      console.log(error);
-    }
+    const tempHrName = currentHrName;
+    const tempElderlyUid = currentElderlyUid;
+    const { data } = await client.get(
+      `healthRecord/table/${
+        user.isElderly ? '' : `${tempElderlyUid}/`
+      }${tempHrName}`
+    );
+    const _data = { ...data, data: data.data.reverse() };
+    setHealthTable(_data);
   };
 
   const value = {

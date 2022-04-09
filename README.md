@@ -152,3 +152,28 @@ const imagePayload = {
 
 // then send this as the body
 ```
+
+## useFocusEffect
+This hook will run whenever that screen is visited (focused).
+
+Example usage
+
+```ts
+const SomeScreen = () => {
+  const [showScreen, setShowScreen] = useState<boolean>(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      setShowScreen(false);
+      setTimeout(() => {
+        setShowScreen(true);
+      }, 0);
+    }, [])
+  );
+
+  if (!showScreen) return null;
+  return (
+    // JSX here
+  )
+}
+```

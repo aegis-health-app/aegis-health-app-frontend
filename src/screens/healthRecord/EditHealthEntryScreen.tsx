@@ -41,7 +41,6 @@ const EditHealthEntryScreen = ({
   const { ScreenWidth } = useDimensions();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
 
-  // States
   const [newHealthRecordCover, setNewHealthRecordCover] =
     useState<ImagePickerResponse>();
   const [showFailedDeleteRow, setShowFailedDeleteRow] = useState(false);

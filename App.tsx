@@ -9,7 +9,7 @@ import UserContextProvider from './src/contexts/UserContext';
 import ElderlyContextProvider from './src/contexts/ElderlyContext';
 import CaretakerContextProvider from './src/contexts/CaretakerContext';
 import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
-import HaelthRecordContextProvider from './src/contexts/HealthRecordContext';
+import HealthRecordContextProvider from './src/contexts/HealthRecordContext';
 
 const theme = extendTheme({
   main: {},
@@ -89,7 +89,7 @@ const App = () => {
         <UserContextProvider>
           <ElderlyContextProvider>
             <CaretakerContextProvider>
-              <HaelthRecordContextProvider>
+              <HealthRecordContextProvider>
                 <TourGuideProvider
                   {...{
                     borderRadius: 4,
@@ -100,7 +100,7 @@ const App = () => {
                     <MainNavigation />
                   </NativeBaseProvider>
                 </TourGuideProvider>
-              </HaelthRecordContextProvider>
+              </HealthRecordContextProvider>
             </CaretakerContextProvider>
           </ElderlyContextProvider>
         </UserContextProvider>
