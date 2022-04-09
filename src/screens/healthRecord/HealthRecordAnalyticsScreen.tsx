@@ -9,13 +9,12 @@ import { RootStackParamList } from '../../navigation/types';
 import HealthRecordChart from './HealthRecordChart';
 
 const HealthRecordAnalyticsScreen = () => {
-  const { currentHrName } = useContext(HealthRecordContext);
+  const { currentHrName, healthTable } = useContext(HealthRecordContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     navigation.setOptions({ title: currentHrName });
-    // getData();
   }, []);
 
   return (
@@ -23,12 +22,15 @@ const HealthRecordAnalyticsScreen = () => {
       <ScrollView>
         <Spacer />
         <View>
-          <HealthRecordChart
-            hrName="ความดัน"
-            columnName="Lower"
-            timeFrame="YEAR"
-          />
+          {healthTable?.columnNames.map((column, index) => (
+            <HealthRecordChart
+              key={index}
+              hrName={healthTable.tableName}
+              columnName={column}
+            />
+          ))}
         </View>
+        <Spacer />
       </ScrollView>
     </SafeAreaView>
   );

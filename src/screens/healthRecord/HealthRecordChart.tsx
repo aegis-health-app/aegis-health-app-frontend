@@ -1,13 +1,16 @@
 import moment from 'moment';
-import { CheckIcon, HStack, Select, View, VStack } from 'native-base';
+import { CheckIcon, Select, View, VStack, Text } from 'native-base';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Dimensions, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { Dataset } from 'react-native-chart-kit/dist/HelperTypes';
-import { Text } from 'react-native-svg';
+import { DataTable } from 'react-native-paper';
+import Spacer from '../../components/atoms/Spacer';
 import { client } from '../../config/axiosConfig';
 import {
   chartConfig,
+  TimeFrame,
   timeFrameOption
 } from '../../constants/HealthRecordingConstants';
 import { HealthRecordAnalytic } from '../../interfaces/healthRecording';
@@ -15,17 +18,17 @@ import { HealthRecordAnalytic } from '../../interfaces/healthRecording';
 type Props = {
   hrName: string;
   columnName: string;
-  timeFrame: string;
 };
 
 const HealthRecordChart = (props: Props) => {
-  const { hrName, columnName, timeFrame } = props;
+  const { hrName, columnName } = props;
   const screenWidth = Dimensions.get('window').width;
+  const { t } = useTranslation();
 
-  const [service, setService] = useState('');
   const [labels, setLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<Dataset[]>();
   const [data, setData] = useState<HealthRecordAnalytic>();
+  const [timeFrame, setTimeFrame] = useState<TimeFrame>(TimeFrame.WEEK);
 
   const getData = async (
     hrName: string,
@@ -35,7 +38,7 @@ const HealthRecordChart = (props: Props) => {
     try {
       const result = await client.get(
         `healthRecord/analytics/${hrName}/${columnName}/${timeFrame}`
-      ); //ความดัน/Lower/year
+      );
       const data = result.data as HealthRecordAnalytic;
       setData(data);
       setLabels(
@@ -64,10 +67,10 @@ const HealthRecordChart = (props: Props) => {
             justifyContent="space-between"
             width="full"
             flexDirection="row">
-            <Text fontSize="lg">Filler</Text>
+            <Text fontSize="lg">{columnName}</Text>
             <View width="1/4">
               <Select
-                selectedValue={service}
+                selectedValue={timeFrame}
                 accessibilityLabel="Choose Service"
                 placeholder="Year"
                 _selectedItem={{
@@ -75,7 +78,9 @@ const HealthRecordChart = (props: Props) => {
                   endIcon: <CheckIcon size="5" />
                 }}
                 mt={1}
-                onValueChange={(itemValue) => setService(itemValue)}>
+                onValueChange={(itemValue) =>
+                  setTimeFrame(itemValue as TimeFrame)
+                }>
                 {timeFrameOption.map((option, index) => {
                   return (
                     <Select.Item
@@ -87,39 +92,38 @@ const HealthRecordChart = (props: Props) => {
                 })}
               </Select>
             </View>
-            {/* </Box> */}
           </View>
         </View>
         {datasets && (
-          <View>
+          <View mx={4}>
             <LineChart
+              style={{ ...styles.card, paddingVertical: 4 }}
               data={{ labels: labels, datasets: datasets }}
-              width={screenWidth - 16}
+              width={screenWidth - 32}
               height={220}
               chartConfig={chartConfig}
             />
-            <Text>asdf</Text>
           </View>
         )}
-
-        <VStack w="full" space={1} bg="amber.100" height={300}>
-          <View style={styles.wrapper}>
-            <HStack justifyContent="space-evenly">
-              <Text>Value</Text>
-              <Text>Max</Text>
-              <Text>Min</Text>
-              <Text>Mean</Text>
-            </HStack>
-          </View>
-          {/* <Divider my={0} bgColor='#000' /> */}
-          <HStack justifyContent="space-evenly">
-            <Text>{data?.columnName}</Text>
-            <Text>{data?.analyticData?.max}</Text>
-            <Text>{data?.analyticData?.mean}</Text>
-            <Text>{data?.analyticData?.min}</Text>
-          </HStack>
-        </VStack>
       </VStack>
+      <Spacer />
+      <View style={styles.card} bgColor="white" mx={4}>
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title>{t('analytics.value')}</DataTable.Title>
+            <DataTable.Title>{t('analytics.max')}</DataTable.Title>
+            <DataTable.Title>{t('analytics.mean')}</DataTable.Title>
+            <DataTable.Title>{t('analytics.min')}</DataTable.Title>
+          </DataTable.Header>
+          <DataTable.Row>
+            <DataTable.Cell>{data?.columnName}</DataTable.Cell>
+            <DataTable.Cell>{data?.analyticData?.max}</DataTable.Cell>
+            <DataTable.Cell>{data?.analyticData?.mean}</DataTable.Cell>
+            <DataTable.Cell>{data?.analyticData?.min}</DataTable.Cell>
+          </DataTable.Row>
+        </DataTable>
+      </View>
+      <Spacer />
     </View>
   );
 };
@@ -136,5 +140,16 @@ const styles = StyleSheet.create({
   wrapper: {
     borderBottomColor: 'black',
     borderBottomWidth: 2
+  },
+  card: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    borderRadius: 6
   }
 });
