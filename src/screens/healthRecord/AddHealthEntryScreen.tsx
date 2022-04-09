@@ -86,7 +86,7 @@ const AddHealthEntry = () => {
     });
     const payload = {
       hrName: currentHrName,
-      timestamp: moment(date, 'YYYY/MM/DD HH:mm').startOf('minute'),
+      timestamp: moment(date, 'YYYY/MM/DD HH:mm').add(7, 'h').startOf('minute'),
       data: fields
     };
     try {
@@ -216,7 +216,9 @@ const AddHealthEntry = () => {
           <Divider />
           <Text fontSize="lg">{t('healthRecording.recordHistory')}</Text>
           <Spacer />
-          <Button variant="outline">
+          <Button
+            variant="outline"
+            onPress={() => navigation.navigate('HealthRecordAnalyticsScreen')}>
             {t('healthRecording.viewAnalytics')}
           </Button>
           <Spacer />

@@ -21,3 +21,20 @@ export interface EditHealthRecordImage {
   hrName: string;
   image: ImagePayload;
 }
+
+export interface HealthRecordAnalytic {
+  tableName: string;
+  columnName: string;
+  unit: string;
+  analyticData: {
+    mean: number;
+    max: number;
+    min: number;
+  };
+  data: HealthRecordData[];
+}
+
+export interface HealthRecordData {
+  dateTime: string;
+  value: number;
+}

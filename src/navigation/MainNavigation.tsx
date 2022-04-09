@@ -40,6 +40,7 @@ import SplashScreen from '../screens/SplashScreen';
 import ElderlyEmotionHistoryScreen from './../screens/ElderlyEmotionHistoryScreen';
 import HealthRecordingsScreen from '../screens/HealthRecordingsScreen';
 import CreateHealthRecordingsScreen from '../screens/CreateHealthRecordingsScreen';
+import HealthRecordAnalyticsScreen from '../screens/healthRecord/HealthRecordAnalyticsScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -304,6 +305,16 @@ const MainNavigation = () => {
                 title: t('healthRecording.createRecordings'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="HealthRecordAnalyticsScreen"
+              component={HealthRecordAnalyticsScreen}
+              options={{
+                title: t('healthRecording.analytics'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '800' },
                 headerShown: true
               }}
             />
