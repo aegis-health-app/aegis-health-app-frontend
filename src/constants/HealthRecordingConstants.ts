@@ -1,27 +1,38 @@
+import i18n from '../internationalization/i18n.config';
+
+export enum TimeFrame {
+  WEEK = 'week',
+  TWO_WEEKS = '2week',
+  MONTH = 'month',
+  THREE_MONTHS = '3months',
+  YEAR = 'year',
+  ALL_TIME = 'allTime'
+}
+
 export const timeFrameOption = [
   {
-    label: 'Week',
-    value: 'WEEK'
+    label: i18n.t('analytics.week'),
+    value: 'week'
   },
   {
-    label: '2 Weeks',
-    value: '2 WEEKS'
+    label: i18n.t('analytics.2week'),
+    value: '2week'
   },
   {
-    label: '1 Month',
-    value: '1 MONTHS'
+    label: i18n.t('analytics.1month'),
+    value: 'month'
   },
   {
-    label: '3 Months',
-    value: '3 MONTHS'
+    label: i18n.t('analytics.3month'),
+    value: '3months'
   },
   {
-    label: 'Year',
-    value: 'YEAR'
+    label: i18n.t('analytics.year'),
+    value: 'year'
   },
   {
-    label: 'All Time',
-    value: 'ALL TIME'
+    label: i18n.t('analytics.allTime'),
+    value: 'allTime'
   }
 ];
 

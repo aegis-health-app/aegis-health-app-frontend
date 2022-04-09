@@ -437,5 +437,26 @@
     "body": "Cannot create a health record at this moment. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
+  },
+  "days": {
+    "mon":"MON", 
+    "tue":"TUE",
+    "wed":"WED",
+    "thu":"THU",
+    "fri":"FRI",
+    "sat":"SAT",
+    "sun":"SUN"
+  },
+  "analytics": {
+    "value": "Value",
+    "max": "max",
+    "min": "Min",
+    "mean": "Mean",
+    "week": "Week",
+    "2week": "2 Weeks",
+    "1month": "1 Month",
+    "3month": "3 Months",
+    "year": "Year",
+    "allTime": "All Time"
   }
 }
