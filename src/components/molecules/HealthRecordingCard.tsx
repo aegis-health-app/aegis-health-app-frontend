@@ -23,26 +23,14 @@ const HealthRecordingCard = ({
         backgroundColor={backgroundColor}
         mt={4}
         w="full">
-        {image ? (
-          <Image
-            source={image ? { uri: image } : images.healthRecording}
-            // fallbackSource={}
-            alt="health recording image"
-            width={100}
-            height={100}
-            resizeMode="contain"
-            mr={3}
-          />
-        ) : (
-          <Image
-            alt="Fallback image"
-            source={images.healthRecording}
-            width={100}
-            height={100}
-            resizeMode="contain"
-            mr={3}
-          />
-        )}
+        <Image
+          source={image ? { uri: image } : images.healthRecording}
+          alt="health recording image"
+          width={100}
+          height={100}
+          resizeMode="contain"
+          mr={3}
+        />
         <View>
           {/* TODO: Return fontSize based on isElderly hook */}
           <Text padding="1" ml={2}>
