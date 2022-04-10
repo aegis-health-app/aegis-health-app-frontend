@@ -27,6 +27,7 @@ const HealthRecordAnalyticsScreen = () => {
               key={index}
               hrName={healthTable.tableName}
               columnName={column}
+              unit={healthTable.units[index]}
             />
           ))}
         </View>

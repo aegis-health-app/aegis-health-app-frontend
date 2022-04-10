@@ -41,7 +41,7 @@ const HealthDataTable = (props: HealthDataTableProps) => {
         <View minWidth="100%" height={300}>
           <DataTable>
             <View>
-              <DataTable.Header>
+              <DataTable.Header style={{ height: 60 }}>
                 {mode === TableMode.EDIT && <View width={12} />}
                 <View width={90}>
                   <DataTable.Title>{t('healthRecording.date')}</DataTable.Title>
@@ -51,7 +51,10 @@ const HealthDataTable = (props: HealthDataTableProps) => {
                   healthData.columnNames.map((column, index) => (
                     <View width={82} key={index}>
                       <DataTable.Title numeric key={index}>
-                        {column}
+                        <View>
+                          <Text>{column}</Text>
+                          <Text color="muted.500">{`(${healthData.units[index]})`}</Text>
+                        </View>
                       </DataTable.Title>
                     </View>
                   ))}
