@@ -23,7 +23,7 @@ export interface EmergencyData {
   elderlyPhone: string;
 }
 
-const mockEmergencyInfo = {
+export const mockEmergencyInfo = {
   name: 'That dude',
   address:
     'some random location too long to describe in a single screen of Aegis mobile application',
