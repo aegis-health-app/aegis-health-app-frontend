@@ -188,7 +188,7 @@ const AddHealthEntry = () => {
             <View minH={20} key={index}>
               <TextInput
                 keyboardType="numeric"
-                label={column}
+                label={`${column} (${healthTable.units[index]})`}
                 placeholder={t('healthRecording.enterValue')}
                 name={column}
                 control={control}

@@ -18,10 +18,11 @@ import { getPeriodLable } from '../../utils/module/healthRecord';
 type Props = {
   hrName: string;
   columnName: string;
+  unit: string;
 };
 
 const HealthRecordChart = (props: Props) => {
-  const { hrName, columnName } = props;
+  const { hrName, columnName, unit } = props;
   const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
 
@@ -59,7 +60,13 @@ const HealthRecordChart = (props: Props) => {
             justifyContent="space-between"
             width="full"
             flexDirection="row">
-            <Text fontSize="lg">{columnName}</Text>
+            <View
+              flexDirection="row"
+              justifyItems="flex-end"
+              alignItems="flex-end">
+              <Text fontSize="lg">{columnName}</Text>
+              <Text fontSize="md" color="muted.500">{` (${unit})`}</Text>
+            </View>
             <View width="1/4">
               <Select
                 selectedValue={timeFrame}
