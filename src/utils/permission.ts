@@ -41,7 +41,7 @@ export const requestLocationPermission = async () => {
           message: i18n.t('locationPermissions.message'),
           buttonNeutral: i18n.t('locationPermissions.buttonNeutral'),
           buttonNegative: i18n.t('locationPermissions.buttonNegative'),
-          buttonPositive: i18n.t('cameraPermissions.buttonPositive')
+          buttonPositive: i18n.t('locationPermissions.buttonPositive')
         }
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
