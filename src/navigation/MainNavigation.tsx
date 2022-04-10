@@ -46,6 +46,7 @@ import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
 
 import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
+import withEmergency from '../screens/WithEmergency';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -79,7 +80,7 @@ const MainNavigation = () => {
             ) : (
               <Stack.Screen
                 name="CaretakerHomeScreen"
-                component={CaretakerHomeScreen}
+                component={withEmergency(CaretakerHomeScreen)}
                 options={{
                   headerShown: false
                 }}
