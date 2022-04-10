@@ -63,6 +63,7 @@ const EmotionCard = (props: EmotionCardProps) => {
               width={'240 px'}
               height={'320 px'}
               source={getImageSource(message)}
+              alt="Emotion"
             />
           </View>
           <Text fontSize="lg" fontWeight="400">

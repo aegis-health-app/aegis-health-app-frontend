@@ -5,7 +5,6 @@ import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
  */
 
 import { CaretakerInfoView } from '../dto/modules/user.dto';
-import { HealthRecordingData } from '../interfaces/healthRecording';
 
 export type RootStackParamList = {
   //Authorized Screens
@@ -21,12 +20,8 @@ export type RootStackParamList = {
   ProfileEditScreen: undefined;
   EmergencyScreen: undefined;
   ReminderScreen: undefined;
-  HealthRecordScreen: undefined;
   AddHealthEntryScreen: undefined;
-  EditHealthEntryScreen: {
-    recordTitle: string;
-    healthData?: HealthRecordingData;
-  };
+  EditHealthEntryScreen: undefined;
   MemoryScreen: undefined;
   EmotionalTrackingScreen: undefined;
   EditCaretakerScreen: { info: CaretakerInfoView };

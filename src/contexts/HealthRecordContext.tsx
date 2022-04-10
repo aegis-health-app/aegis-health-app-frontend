@@ -20,6 +20,9 @@ export interface HealthRecordContextStruct {
   setCurrentHrImage: (val: string) => void;
   healthRecordTemplates: HealthRecording[];
   setHealthRecordTemplates: (value: HealthRecording[]) => void;
+  myTemplates: HealthRecording[];
+  setMyTemplates: (value: HealthRecording[]) => void;
+  fetchHealthRecordings: () => Promise<void>;
 }
 
 export const HealthRecordContext = createContext(
@@ -36,6 +39,7 @@ const HealthRecordProvider = ({ ...props }) => {
   const [healthRecordTemplates, setHealthRecordTemplates] = useState<
     HealthRecording[]
   >([]);
+  const [myTemplates, setMyTemplates] = useState<HealthRecording[]>([]);
 
   const getHealthRecordTable = async () => {
     if (!user) return;
@@ -51,6 +55,32 @@ const HealthRecordProvider = ({ ...props }) => {
     setHealthTable(_data);
   };
 
+  const fetchHealthRecordings = async () => {
+    if (user?.isElderly) {
+      try {
+        const res = await client.post('/healthRecord/getAll/elderly');
+        setMyTemplates(res.data.listHealthRecord);
+        setHealthRecordTemplates(res.data.listHealthRecord);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        const payload = {
+          elderlyuid: currentElderlyUid
+        };
+        const res = await client.post(
+          '/healthRecord/getAll/caretaker',
+          payload
+        );
+        setMyTemplates(res.data.listHealthRecord);
+        setHealthRecordTemplates(res.data.listHealthRecord);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   const value = {
     getHealthRecordTable,
     healthTable,
@@ -62,7 +92,10 @@ const HealthRecordProvider = ({ ...props }) => {
     currentHrImage,
     setCurrentHrImage,
     healthRecordTemplates,
-    setHealthRecordTemplates
+    setHealthRecordTemplates,
+    myTemplates,
+    setMyTemplates,
+    fetchHealthRecordings
   };
   return <HealthRecordContext.Provider value={value} {...props} />;
 };

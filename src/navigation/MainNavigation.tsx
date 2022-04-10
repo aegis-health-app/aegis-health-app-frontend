@@ -11,7 +11,6 @@ import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
 import ReminderScreen from './../screens/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
-import HealthRecordScreen from '../screens/healthRecord/HealthRecordScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -171,15 +170,6 @@ const MainNavigation = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="HealthRecordScreen"
-              component={HealthRecordScreen}
-              options={{
-                title: t('modules.healthRecord'),
-                headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
-              }}
-            />
-            <Stack.Screen
               name="AddHealthEntryScreen"
               component={AddHealthEntry}
               options={{
@@ -191,7 +181,6 @@ const MainNavigation = () => {
             <Stack.Screen
               name="EditHealthEntryScreen"
               component={EditHealthEntryScreen}
-              initialParams={{ recordTitle: '' }}
               options={{
                 title: t(''),
                 headerTitleAlign: 'center',
@@ -295,7 +284,7 @@ const MainNavigation = () => {
                 title: t('healthRecordingsCreate.header'),
                 headerShown: true,
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen

@@ -20,8 +20,6 @@ import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
 import HealthDataTable, { TableMode } from './HealthDataTable';
 
-const tempHealthRecordCover = require('../../assets/images/profile.png');
-
 const AddHealthEntry = () => {
   const { user } = useContext(UserContext);
   const {
@@ -62,12 +60,12 @@ const AddHealthEntry = () => {
   };
 
   const getImage = () => {
-    // healthRecordTemplates
     const recording = healthRecordTemplates.find((template) => {
       return template.hrName === currentHrName;
     });
-    if (recording) return { uri: recording.imageid };
-    currentHrImage ? { uri: currentHrImage } : tempHealthRecordCover;
+    if (recording && recording.imageid) return { uri: recording.imageid };
+    if (recording && recording.imageid === null) return undefined;
+    currentHrImage ? { uri: currentHrImage } : undefined;
   };
 
   const onDateChange = (event, selectedDate?: Date | undefined) => {
@@ -158,10 +156,7 @@ const AddHealthEntry = () => {
             </Text>
             <EditButton
               onPress={() => {
-                navigation.navigate('EditHealthEntryScreen', {
-                  recordTitle: 'Blood Pressure',
-                  healthData: healthTable
-                });
+                navigation.navigate('EditHealthEntryScreen');
               }}
             />
           </View>
@@ -177,7 +172,7 @@ const AddHealthEntry = () => {
             <Image
               source={getImage()}
               borderRadius={4}
-              alt="No Image"
+              alt={t('healthRecording.noImageText')}
               resizeMode="cover"
               height="100%"
               width="100%"
