@@ -323,6 +323,12 @@
     "openInMaps": "Open in Maps ",
     "callSender": "Call {{name}}"
   },
+  "emergencyNotification": {
+    "header": "Alert",
+    "body": "{{name}} has an emergency",
+    "primaryButton": "View",
+    "secondaryButton": "Close"
+  },
   "healthRecording": {
     "createRecordings": "Create recordings",
     "generalInformation": "General Information",
