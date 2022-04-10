@@ -33,7 +33,8 @@ export const mockEmergencyInfo = {
   },
   date: moment(new Date(2022, 8, 12)).format('DD MMM YYYY'),
   time: moment(new Date(2022, 8, 12)).format('hh:mm:ss'),
-  phone: '0855555555'
+  phone: '0855555555',
+  elderlyImageId: 'abcdef'
 };
 
 const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
