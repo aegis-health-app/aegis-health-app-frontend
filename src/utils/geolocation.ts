@@ -22,23 +22,21 @@ export const openMapApp: (location: Geolocation) => void = ({
   Linking.openURL(url);
 };
 
-export const getCurrentLocation = async () => {
-  console.log(
-    'location permission',
-    PermissionsAndroid.check(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-    )
-  );
+export const getCurrentLocation = async (successFunction) => {
   const granted = await requestLocationPermission();
-  if (granted === PermissionsAndroid.RESULTS.GRANTED)
+  let coords;
+  if (granted === PermissionsAndroid.RESULTS.GRANTED) {
     Geolocation.getCurrentPosition(
-      (position) => {
-        console.log(position);
+      async (position) => {
+        coords = position.coords;
+        const { latitude, longitude: longtitude } = coords;
+        const result = await successFunction({ latitude, longtitude });
+        return result;
       },
       (error) => {
-        // See error code charts below.
         console.log(error.code, error.message);
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     );
+  } else return coords;
 };
