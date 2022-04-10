@@ -28,6 +28,7 @@ export type EmergencyInfo = {
   date: string;
   time: string;
   phone: string;
+  elderlyImageId: string;
 };
 
 const emergencyInfoList = [
