@@ -41,5 +41,3 @@ export const FallbackImageLarge = (
   </View>
 );
 export default FallbackImage;
-;
-

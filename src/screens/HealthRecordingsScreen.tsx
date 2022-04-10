@@ -13,9 +13,8 @@ import {
   TourGuideZone,
   useTourGuideController
 } from '../library/rn-multiple-tourguide';
-import { client } from '../config/axiosConfig';
 import { UserContext } from '../contexts/UserContext';
-import { HealthRecording } from '../interfaces/healthRecording';
+// import { HealthRecording } from '../interfaces/healthRecording';
 import { HealthRecordContext } from '../contexts/HealthRecordContext';
 
 const HealthRecordingsScreen = () => {
@@ -23,44 +22,18 @@ const HealthRecordingsScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { user } = useContext(UserContext);
-  const [myTemplates, setMyTemplates] = useState<HealthRecording[]>([]);
   const [showScreen, setShowScreen] = useState<boolean>(true);
 
   const {
-    currentElderlyUid,
     setCurrentHrName,
     setCurrentHrImage,
-    setHealthRecordTemplates
+    myTemplates,
+    fetchHealthRecordings
   } = useContext(HealthRecordContext);
 
   useAsyncEffect(async () => {
     if (!user) return;
-    const fetchData = async () => {
-      if (user?.isElderly) {
-        try {
-          const res = await client.post('/healthRecord/getAll/elderly');
-          setMyTemplates(res.data.listHealthRecord);
-          setHealthRecordTemplates(res.data.listHealthRecord);
-        } catch (err) {
-          console.log(err);
-        }
-      } else {
-        try {
-          const payload = {
-            elderlyuid: currentElderlyUid
-          };
-          const res = await client.post(
-            '/healthRecord/getAll/caretaker',
-            payload
-          );
-          setMyTemplates(res.data.listHealthRecord);
-          setHealthRecordTemplates(res.data.listHealthRecord);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    };
-    fetchData();
+    fetchHealthRecordings();
   }, [user]);
 
   // tour guide copied and modified from settings screen

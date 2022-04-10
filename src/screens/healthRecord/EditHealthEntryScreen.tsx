@@ -1,8 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps
-} from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
 import React, { useContext, useEffect, useState } from 'react';
@@ -19,12 +16,7 @@ import { useImageSelection } from '../../hooks/useImageSelection';
 import { RootStackParamList } from '../../navigation/types';
 import HealthDataTable, { TableMode } from './HealthDataTable';
 
-const tempHealthRecordCover = require('../../assets/images/profile.png');
-
-const EditHealthEntryScreen = ({
-  route
-}: NativeStackScreenProps<RootStackParamList, 'EditHealthEntryScreen'>) => {
-  const { recordTitle } = route.params;
+const EditHealthEntryScreen = () => {
   const { user } = useContext(UserContext);
   const {
     getHealthRecordTable,
@@ -32,7 +24,8 @@ const EditHealthEntryScreen = ({
     currentHrImage,
     currentHrName,
     currentElderlyUid,
-    setCurrentHrImage
+    setCurrentHrImage,
+    fetchHealthRecordings
   } = useContext(HealthRecordContext);
   const { t } = useTranslation();
   const navigation =
@@ -52,20 +45,25 @@ const EditHealthEntryScreen = ({
   const [tempDatetime, setTempDatetime] = useState<string>();
 
   const getImage = () => {
+    console.log(currentHrImage);
     if (newHealthRecordCover && newHealthRecordCover.assets)
       return { uri: newHealthRecordCover.assets[0].uri };
     if (currentHrImage) return { uri: currentHrImage };
-    return tempHealthRecordCover;
+    return undefined;
   };
 
   const deleteHealthRecord = async () => {
     if (!user) return;
     try {
-      await client.delete(
+      const { data } = await client.delete(
         `/healthRecord/delete/${
           user?.isElderly ? 'elderly' : 'caretaker'
         }/${currentHrName}`
       );
+      if (data) {
+        fetchHealthRecordings();
+        navigation.navigate('HealthRecordingsScreen');
+      }
     } catch (error) {
       setShowFailedDeleteRecord(true);
     }
@@ -93,6 +91,7 @@ const EditHealthEntryScreen = ({
   const updateImage = async () => {
     if (!newHealthRecordCover || !newHealthRecordCover.assets) return;
     const newImage = newHealthRecordCover.assets[0];
+    console.log(currentHrName);
     const payload = {
       hrName: currentHrName,
       image: {
@@ -107,6 +106,7 @@ const EditHealthEntryScreen = ({
       if (data) {
         setShowSuccessImageUpdate(true);
         getHealthRecordTable();
+        fetchHealthRecordings();
         setCurrentHrImage(data);
       }
     } catch (error) {
@@ -128,7 +128,7 @@ const EditHealthEntryScreen = ({
   };
 
   useEffect(() => {
-    navigation.setOptions({ title: recordTitle });
+    navigation.setOptions({ title: currentHrName });
   }, []);
 
   return (
@@ -187,7 +187,7 @@ const EditHealthEntryScreen = ({
         <View>
           <Text>{t('healthRecording.title')}</Text>
           <Text fontSize="md" fontWeight="bold">
-            {route.params.healthData?.tableName}
+            {currentHrName}
           </Text>
         </View>
         <Spacer />
@@ -198,11 +198,11 @@ const EditHealthEntryScreen = ({
           justifyContent="center"
           width="full"
           height={200}
-          background="red.100">
+          background="muted.200">
           <Image
             source={getImage()}
             borderRadius={4}
-            alt="Profile Picture"
+            alt={t('healthRecording.noImageText')}
             resizeMode="cover"
             height="100%"
             width="100%"

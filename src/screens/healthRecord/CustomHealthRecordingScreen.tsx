@@ -26,6 +26,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { UserContext } from '../../contexts/UserContext';
 import { client } from '../../config/axiosConfig';
+import { HealthRecordContext } from '../../contexts/HealthRecordContext';
 
 interface Fields {
   name: string | undefined;
@@ -58,6 +59,7 @@ const CustomHealthRecordingScreen = () => {
   });
 
   const { user } = useContext(UserContext);
+  const { fetchHealthRecordings } = useContext(HealthRecordContext);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -135,8 +137,8 @@ const CustomHealthRecordingScreen = () => {
 
   const handleButtonState = () => {
     if (
-      watchInputs.title === '' ||
-      watchInputs.title === null ||
+      // @ts-ignore
+      !watchInputs.title ||
       fieldList.filter((e) => e.name === '').length > 0 ||
       fieldList.filter((e) => e.unit === '').length > 0 ||
       fieldList.filter((e) => e.name === undefined).length > 0 ||
@@ -149,17 +151,17 @@ const CustomHealthRecordingScreen = () => {
   const handleSubmit = async () => {
     const uploadImage =
       customImage && customImage.assets ? customImage.assets[0] : undefined;
+    const imagePayload = {
+      base64: uploadImage?.base64,
+      name: uploadImage?.fileName,
+      type: uploadImage?.type,
+      size: uploadImage?.fileSize
+    };
 
     const payload = {
+      // @ts-ignore
       hrName: watchInputs.title,
-      picture: uploadImage
-        ? {
-            base64: uploadImage.base64,
-            name: uploadImage.fileName,
-            type: uploadImage.type,
-            size: uploadImage.fileSize
-          }
-        : undefined,
+      picture: uploadImage ? imagePayload : undefined,
       listField: fieldList
     } as UpdateHealthRecordDTO;
 
@@ -167,6 +169,7 @@ const CustomHealthRecordingScreen = () => {
       try {
         await client.post('/healthRecord/add/elderly', payload);
         setShowSuccessAlert(true);
+        fetchHealthRecordings();
       } catch (err) {
         console.log(err);
         setShowErrorAlert(true);
@@ -176,6 +179,7 @@ const CustomHealthRecordingScreen = () => {
       try {
         await client.post('/healthRecord/add/caretaker', payload);
         setShowSuccessAlert(true);
+        fetchHealthRecordings();
       } catch (err) {
         console.log(err);
         setShowErrorAlert(true);
@@ -202,7 +206,8 @@ const CustomHealthRecordingScreen = () => {
           close={() => {
             setShowSuccessAlert(false);
             // change navigation later
-            if (!showImageUploadError) navigation.navigate('HealthRecordingsScreen');
+            if (!showImageUploadError)
+              navigation.navigate('HealthRecordingsScreen');
           }}
           type={AlertType.SUCCESS}
           message="addCustomHealthRecordingSuccess"
