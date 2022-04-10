@@ -323,6 +323,12 @@
     "openInMaps": "เปิดในแอปพลิเคชันแผนที่ ",
     "callSender": "โทรหา {{name}}"
   },
+  "emergencyNotification": {
+    "header": "ฉุกเฉิน",
+    "body": "'{{name}}' มีเหตุฉุกเฉิน",
+    "primaryButton": "ดู",
+    "secondaryButton": "ปิด"
+  },
   "healthRecording": {
     "createRecordings": "สร้างข้อมูลใหม่",
     "generalInformation": "ข้อมูลทั่วไป",

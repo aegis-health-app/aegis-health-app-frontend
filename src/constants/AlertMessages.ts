@@ -116,4 +116,10 @@ export const AlertMessages = {
     primaryButton: i18n.t('addCustomHealthRecordingError.primaryButton'),
     secondaryButton: i18n.t('addCustomHealthRecordingError.secondaryButton')
   },
+  emergencyNotification: {
+    header: i18n.t('emergencyNotification.header'),
+    body: i18n.t('emergencyNotification.body'),
+    primaryButton: i18n.t('emergencyNotification.primaryButton'),
+    secondaryButton: i18n.t('emergencyNotification.secondaryButton')
+  }
 };
