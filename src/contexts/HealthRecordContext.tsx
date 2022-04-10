@@ -57,27 +57,14 @@ const HealthRecordProvider = ({ ...props }) => {
 
   const fetchHealthRecordings = async () => {
     if (user?.isElderly) {
-      try {
-        const res = await client.post('/healthRecord/getAll/elderly');
-        setMyTemplates(res.data.listHealthRecord);
-        setHealthRecordTemplates(res.data.listHealthRecord);
-      } catch (err) {
-        console.log(err);
-      }
+      const res = await client.post('/healthRecord/getAll/elderly');
+      setMyTemplates(res.data.listHealthRecord);
+      setHealthRecordTemplates(res.data.listHealthRecord);
     } else {
-      try {
-        const payload = {
-          elderlyuid: currentElderlyUid
-        };
-        const res = await client.post(
-          '/healthRecord/getAll/caretaker',
-          payload
-        );
-        setMyTemplates(res.data.listHealthRecord);
-        setHealthRecordTemplates(res.data.listHealthRecord);
-      } catch (err) {
-        console.log(err);
-      }
+      const payload = { elderlyuid: currentElderlyUid };
+      const res = await client.post('/healthRecord/getAll/caretaker', payload);
+      setMyTemplates(res.data.listHealthRecord);
+      setHealthRecordTemplates(res.data.listHealthRecord);
     }
   };
 
