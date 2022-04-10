@@ -1,6 +1,8 @@
-import React, { useState, useEffect, createContext } from 'react';
+import { firebase } from '@react-native-firebase/messaging';
+import React, { useState, useEffect, createContext, useCallback } from 'react';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { useAuthentication } from '../hooks/useAuthentication';
+import { registerFCMToken } from '../utils/user/notification';
 import { getUser } from '../utils/user/user';
 import { User } from './../dto/modules/user.dto';
 
@@ -30,8 +32,15 @@ const UserContextProvider = ({ ...props }) => {
     console.log(userToken);
   };
 
+  const registerForNotification = useCallback(async () => {
+    const defaultAppMessaging = firebase.messaging();
+    const FCMToken = await defaultAppMessaging.getToken();
+    const result = await registerFCMToken(FCMToken);
+  }, []);
+
   useEffect(() => {
     getUserProfile();
+    registerForNotification();
   }, [userToken]);
 
   useEffect(() => {
