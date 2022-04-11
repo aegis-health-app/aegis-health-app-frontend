@@ -15,14 +15,12 @@ export enum AlertType {
 type EmergencyAlertProps = {
   isOpen: boolean;
   close: () => void;
-  cancel?: () => void;
   emergencyInfo: EmergencyInfo;
 };
 
 const EmergencyAlert: React.FC<EmergencyAlertProps> = ({
   isOpen,
   close,
-  cancel,
   emergencyInfo
 }) => {
   const { t } = useTranslation();
@@ -31,6 +29,7 @@ const EmergencyAlert: React.FC<EmergencyAlertProps> = ({
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const showEmergencyInfoScreen = useCallback(() => {
+    close();
     navigation.push('EmergencyInfoScreen', { info: emergencyInfo });
   }, [emergencyInfo]);
 
@@ -39,7 +38,7 @@ const EmergencyAlert: React.FC<EmergencyAlertProps> = ({
     <AlertDialog
       leastDestructiveRef={cancelRef}
       isOpen={isOpen}
-      onClose={cancel ?? close}>
+      onClose={close}>
       <AlertDialog.Content>
         <AlertDialog.CloseButton />
         <AlertDialog.Header background="aegis.danger">
@@ -53,7 +52,7 @@ const EmergencyAlert: React.FC<EmergencyAlertProps> = ({
             <Button
               variant="unstyled"
               colorScheme="coolGray"
-              onPress={cancel}
+              onPress={close}
               ref={cancelRef}>
               {t('emergencyNotification.secondaryButton')}
             </Button>
