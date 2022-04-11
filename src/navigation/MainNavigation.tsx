@@ -88,7 +88,7 @@ const MainNavigation = () => {
             )}
             <Stack.Screen
               name="SettingScreen"
-              component={SettingScreen}
+              component={withEmergency(SettingScreen)}
               options={{
                 headerTitle: t('home.settingButton'),
                 headerShown: true,
@@ -107,7 +107,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ProfileScreen"
-              component={ProfileScreen}
+              component={withEmergency(ProfileScreen)}
               options={{
                 headerTitle: t('profile.profile'),
                 headerShown: true
@@ -115,7 +115,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ChangeAccountPasswordScreen"
-              component={ChangeAccountPasswordScreen}
+              component={withEmergency(ChangeAccountPasswordScreen)}
               options={{
                 headerTitle: t('setting.changePhoneNumber'),
                 headerShown: false
@@ -123,7 +123,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ChangePhoneNumberScreen"
-              component={ChangePhoneNumberScreen}
+              component={withEmergency(ChangePhoneNumberScreen)}
               options={{
                 headerTitle: t('setting.changeAccPassword'),
                 headerShown: false
@@ -131,7 +131,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ChangePhoneNumberVerificationScreen"
-              component={ChangePhoneNumberVerificationScreen}
+              component={withEmergency(ChangePhoneNumberVerificationScreen)}
               options={{
                 headerTitle: t('setting.changeAccPassword'),
                 headerShown: false
@@ -139,7 +139,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ProfileEditScreen"
-              component={ProfileEditScreen}
+              component={withEmergency(ProfileEditScreen)}
               options={{
                 headerTitle: t('userForm.editProfile'),
                 headerShown: true
@@ -147,7 +147,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="EditCaretakerScreen"
-              component={EditCaretakerScreen}
+              component={withEmergency(EditCaretakerScreen)}
               options={{
                 title: t('profile.myCaretaker'),
                 headerTitleAlign: 'center',
@@ -157,7 +157,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ConnectCaretakerScreen"
-              component={ConnectCaretakerScreen}
+              component={withEmergency(ConnectCaretakerScreen)}
               options={{
                 title: t('userLink.headerElderly'),
                 headerTitleAlign: 'center',
@@ -175,17 +175,26 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ReminderScreen"
-              component={ReminderScreen}
+              component={withEmergency(ReminderScreen)}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MemoryScreen"
-              component={MemoryPracticeScreen}
+              component={withEmergency(MemoryPracticeScreen)}
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="HealthRecordScreen"
+              component={withEmergency(HealthRecordScreen)}
+              options={{
+                title: t('modules.healthRecord'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
+            />
+            <Stack.Screen
               name="AddHealthEntryScreen"
-              component={AddHealthEntry}
+              component={withEmergency(AddHealthEntry)}
               options={{
                 title: t(''),
                 headerTitleAlign: 'center',
@@ -194,7 +203,8 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="EditHealthEntryScreen"
-              component={EditHealthEntryScreen}
+              component={withEmergency(EditHealthEntryScreen)}
+              initialParams={{ recordTitle: '' }}
               options={{
                 title: t(''),
                 headerTitleAlign: 'center',
@@ -203,12 +213,12 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="HealthBlogScreen"
-              component={HealthBlogScreen}
+              component={withEmergency(HealthBlogScreen)}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ModuleManageScreen"
-              component={ModulePickerScreen}
+              component={withEmergency(ModulePickerScreen)}
               options={{
                 title: t('modules.selectModules'),
                 headerTitleAlign: 'center',
@@ -217,7 +227,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ForgotPasswordScreen"
-              component={ForgotPasswordScreen}
+              component={withEmergency(ForgotPasswordScreen)}
               options={{
                 title: 'Forgot Password',
                 headerShown: false
@@ -225,7 +235,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ConnectElderlyScreen"
-              component={ConnectElderlyScreen}
+              component={withEmergency(ConnectElderlyScreen)}
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
@@ -234,7 +244,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="InputCodeScreen"
-              component={InputCodeScreen}
+              component={withEmergency(InputCodeScreen)}
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
@@ -244,7 +254,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ConfirmConnectScreen"
-              component={ConfirmConnectScreen}
+              component={withEmergency(ConfirmConnectScreen)}
               options={{
                 title: t('userLink.header'),
                 headerTitleAlign: 'center',
@@ -253,7 +263,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="TakeCareElderlyScreen"
-              component={TakeCareElderlyScreen}
+              component={withEmergency(TakeCareElderlyScreen)}
               options={{
                 title: t('profile.profile'),
                 headerTitleAlign: 'center',
@@ -262,7 +272,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ElderlyEmotionHistoryScreen"
-              component={ElderlyEmotionHistoryScreen}
+              component={withEmergency(ElderlyEmotionHistoryScreen)}
               options={{
                 title: t('home.emotionHist'),
                 headerTitleAlign: 'center',
@@ -271,7 +281,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="HealthRecordingsScreen"
-              component={HealthRecordingsScreen}
+              component={withEmergency(HealthRecordingsScreen)}
               options={{
                 title: t('healthRecordings.header'),
                 headerShown: true,
@@ -293,7 +303,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="CreateHealthRecordingsScreen"
-              component={CreateHealthRecordingsScreen}
+              component={withEmergency(CreateHealthRecordingsScreen)}
               options={{
                 title: t('healthRecordingsCreate.header'),
                 headerShown: true,
@@ -303,7 +313,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="CustomHealthRecordingScreen"
-              component={CustomHealthRecordingScreen}
+              component={withEmergency(CustomHealthRecordingScreen)}
               options={{
                 title: t('healthRecording.createRecordings'),
                 headerTitleAlign: 'center',
@@ -323,7 +333,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="EmergencyInfoScreen"
-              component={EmergencyInfoScreen}
+              component={withEmergency(EmergencyInfoScreen)}
               options={{ headerShown: false }}
             />
             <Stack.Screen
