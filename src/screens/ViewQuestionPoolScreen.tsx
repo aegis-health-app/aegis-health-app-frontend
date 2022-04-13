@@ -1,20 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
-  Box,
   Button,
-  Icon,
-  Pressable,
   ScrollView,
   Text,
   View
 } from 'native-base';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { number } from 'yup';
 import ViewQuestionPoolCard from '../components/organisms/ViewQuestionPoolCard';
 import { RootStackParamList } from '../navigation/types';
 
