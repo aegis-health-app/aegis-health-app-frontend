@@ -108,6 +108,11 @@ const UserLinkScreen = () => {
           onPress={() => navigation.navigate('ConnectElderlyScreen')}>
           Go to Caretaker's Page
         </Button>
+        <Button
+          width="90%"
+          onPress={() => navigation.navigate('ViewQuestionPoolScreen')}>
+          View Question Pool Page
+        </Button>
       </View>
       <TourGuideZoneByPosition
         tourKey={tourKey}

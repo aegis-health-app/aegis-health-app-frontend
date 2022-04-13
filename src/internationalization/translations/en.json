@@ -458,5 +458,11 @@
     "3month": "3 Months",
     "year": "Year",
     "allTime": "All Time"
+  },
+  "viewQuestionPool": {
+    "questionPool": "Question Pool",
+    "questions": "Questions",
+    "totalSelected": "Total Selected",
+    "create": "Create Custom Question +"
   }
 }

@@ -47,4 +47,6 @@ export type RootStackParamList = {
   // Unauthorized
   OnBoardingScreen: undefined;
   HealthRecordAnalyticsScreen: undefined;
+
+  ViewQuestionPoolScreen: undefined;
 };
