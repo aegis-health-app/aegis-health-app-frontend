@@ -24,7 +24,8 @@ const HealthRecordingCard = ({
         mt={4}
         w="full">
         <Image
-          source={image ? { uri: image } : images.healthRecording}
+          source={{ uri: image }}
+          fallbackSource={images.healthRecording}
           alt="health recording image"
           width={100}
           height={100}
