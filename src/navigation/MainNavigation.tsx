@@ -41,6 +41,7 @@ import HealthRecordingsScreen from '../screens/HealthRecordingsScreen';
 import CreateHealthRecordingsScreen from '../screens/CreateHealthRecordingsScreen';
 import HealthRecordAnalyticsScreen from '../screens/healthRecord/HealthRecordAnalyticsScreen';
 import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
+import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -313,6 +314,16 @@ const MainNavigation = () => {
               component={ViewQuestionPoolScreen}
               options={{
                 title: t('viewQuestionPool.questionPool'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="ViewAssignedQuestionsScreen"
+              component={ViewAssignedQuestionsScreen}
+              options={{
+                title: t('viewAssignedQuestions.memoryPractice'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true

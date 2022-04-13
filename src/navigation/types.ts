@@ -49,4 +49,5 @@ export type RootStackParamList = {
   HealthRecordAnalyticsScreen: undefined;
 
   ViewQuestionPoolScreen: undefined;
+  ViewAssignedQuestionsScreen: undefined;
 };

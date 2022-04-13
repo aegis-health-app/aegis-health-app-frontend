@@ -464,5 +464,13 @@
     "questions": "คำถาม",
     "totalSelected": "จำนวนที่เลือกไว้",
     "create": "สร้างคำถามใหม่+"
+  },
+  "viewAssignedQuestions": {
+    "memoryPractice": "ทบทวนความจำ",
+    "assignedQuestions": "คำถามที่เลือก",
+    "for": "สำหรับ ",
+    "selectQuestionsButton": "เลือกคำถามจากทั้งหมด",
+    "viewHistoryButton": "ดูประวัติ",
+    "done": "เสร็จ"
   }
 }
