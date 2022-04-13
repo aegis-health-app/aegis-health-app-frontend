@@ -96,7 +96,7 @@ const CreateHealthRecordingsScreen = () => {
             <Button
               variant="outline"
               onPress={() => {
-                navigation.navigate('CreateHealthRecordingsScreen');
+                navigation.navigate('CustomHealthRecordingScreen');
               }}>
               <Text display="flex" color={'primary.500'} flexDirection="column">
                 {t('healthRecordingsCreate.createCustom')}
