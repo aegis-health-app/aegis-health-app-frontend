@@ -459,5 +459,11 @@
     "3month": "3 เดือน",
     "year": "1 ปี",
     "allTime": "ทั้งหมด"
+  },
+  "viewQuestionPool": {
+    "questionPool": "คำถามทั้งหมด",
+    "questions": "คำถาม",
+    "totalSelected": "จำนวนที่เลือกไว้",
+    "create": "สร้างคำถามใหม่+"
   }
 }
