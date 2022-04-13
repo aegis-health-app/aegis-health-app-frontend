@@ -44,9 +44,10 @@ import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
-
 import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
 import withEmergency from '../screens/WithEmergency';
+import CreateReminderScreen from '../screens/CreateReminderScreen';
+import EditReminderScreen from '../screens/EditReminderScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -375,6 +376,16 @@ const MainNavigation = () => {
               component={ViewHistoryDetailsScreen}
               options={{
                 title: t('viewHistory.result'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+               <Stack.Screen
+              name="EditReminderScreen"
+              component={EditReminderScreen}
+              options={{
+                title: t('reminder.editReminder'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true

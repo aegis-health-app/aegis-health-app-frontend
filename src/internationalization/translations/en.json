@@ -526,5 +526,26 @@
     "incorrect": "Incorrect",
     "totalScore": "Total Score",
     "answer": "Answer:"
+  },
+  "reminder": {
+    "createReminder": "Create Reminder",
+    "editReminder": "Edit Reminder",
+    "create": "Create",
+    "edit": "Edit"
+  },
+  "reminderForm": {
+    "title": "Title",
+    "date": "Date",
+    "time": "Time",
+    "notifyMyCaretakers": "Notify My Caretakers",
+    "advance": "Advance",
+    "generalInformation": "General Information",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "repeat": "Repeat",
+    "note": "Note",
+    "description": "Description",
+    "images": "Images",
+    "noImageSelected": "No Image Selected"
   }
 }

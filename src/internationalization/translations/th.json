@@ -526,5 +526,26 @@
     "incorrect": "ไม่ถูกต้อง",
     "totalScore": "คะแนนรวม",
     "answer": "คำตอบ:"
+  },
+  "reminder": {
+    "createReminder": "สร้างการเตือน",
+    "editReminder": "แก้ไชการเตือน",
+    "create": "สร้าง",
+    "edit": "แก้ไช"
+  },
+  "reminderForm": {
+    "title": "ชื่อการเตือนความจำ",
+    "date": "วันที่",
+    "time": "เวลา",
+    "notifyMyCaretakers": "แจ้งผู้ดูแล",
+    "advance": "การตั้งค่าขั้นสูง",
+    "generalInformation": "ข้อมูลทั่วไป",
+    "selectDate": "เลือกวันที่",
+    "selectTime": "เลือกเวลา",
+    "repeat": "ตั้งเตือนซำ้",
+    "note": "คำอธิบาย",
+    "description": "คำอธิบาย",
+    "images": "รูปภาพ",
+    "noImageSelected": "ไม่มีรูปภาพที่เลือกไว้"
   }
 }

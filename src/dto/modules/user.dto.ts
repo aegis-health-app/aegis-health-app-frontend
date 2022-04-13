@@ -42,3 +42,12 @@ export interface CaretakerInfoView {
     imageId: string;
     cid: number;
 }
+
+export interface ReminderInfo {
+  title: string;
+  dateTime: Date;
+  notifyMyCaretaker: boolean;
+  repetition: string;
+  note: string;
+  images: string[]
+}
