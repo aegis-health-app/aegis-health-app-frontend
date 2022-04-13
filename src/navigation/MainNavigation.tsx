@@ -43,10 +43,11 @@ import HealthRecordAnalyticsScreen from '../screens/healthRecord/HealthRecordAna
 import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 
+
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
   const { t } = useTranslation();
-  const { setShowSettingsTourguide, setShowHealthRecordingsTourguide } =
+  const { setShowSettingsTourguide, setShowHealthRecordingsTourguide, setShowMemoryPracticeQuestionsTourguide } =
     useContext(TourguideContext);
   const { user } = useContext(UserContext);
 
@@ -326,7 +327,19 @@ const MainNavigation = () => {
                 title: t('viewAssignedQuestions.memoryPractice'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
-                headerShown: true
+                headerShown: true,
+                headerRight: () => (
+                  <TouchableOpacity
+                          onPress={() => setShowMemoryPracticeQuestionsTourguide(true)}>
+                  <Icon
+                    as={Feather}
+                    name="help-circle"
+                    size="7"
+                    color="#F97316"
+                    mr="4"
+                  />
+                  </TouchableOpacity>
+                )
               }}
             />
           </>

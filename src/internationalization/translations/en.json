@@ -472,5 +472,11 @@
     "selectQuestionsButton": "Select Questions from Pool",
     "viewHistoryButton": "View History",
     "done": "Done"
+  },
+  "viewAssignedQuestionsTutorial": {
+    "step1": "Press the “Edit” button to edit the order of the questiosn or remove questions.",
+    "step2": "These are your assigned questions for your elderly.",
+    "step3": "Press the “Select Question from Pool” button to go to the question pool and select the questions you would like to assign to your elderly.",
+    "step4": "Press “View History” button to view the records and analytic."
   }
 }

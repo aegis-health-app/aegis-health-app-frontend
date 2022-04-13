@@ -36,13 +36,13 @@ const ViewQuestionPoolCard = ({
             {question}
           </Text>
         </>
-        <Icon
+        {/* <Icon
           as={MaterialIcons}
           name="mode-edit"
           size="5"
           color="muted.600"
           onPress={() => console.log('navigate to edit')}
-        />
+        /> */}
       </View>
   );
 };
