@@ -349,7 +349,7 @@
   },
   "healthRecordings": {
     "header": "Health Recordings",
-    "addRecording": "add more data"
+    "addRecording": "Add More Data"
   },
   "healthRecordingsTutorial": {
     "step1": "Press “Add more data” to create a new health recording from our featured template or your own custom template.",
@@ -358,7 +358,8 @@
   "healthRecordingsCreate": {
     "header": "Create Recordings",
     "selectTemplate": "Select template",
-    "advanced": "Advanced"
+    "advanced": "Advanced",
+    "createCustom": "Create a Custom Recording"
   },
   "healthRecordingsTemplates": {
     "bloodPressure": "Blood Pressure",
@@ -372,55 +373,55 @@
     "insomnia": "Insomnia",
     "none": "No emotion record for today."
   },
-  "addHealthDataSuccess":{
+  "addHealthDataSuccess": {
     "header": "Success",
     "body": "Your health record has successfully been added.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "addHealthDataError":{
+  "addHealthDataError": {
     "header": "Error",
     "body": "Cannot record your data at this moment. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "duplicateHealthDataError":{
+  "duplicateHealthDataError": {
     "header": "Error",
     "body": "A health record already exists at the selected time. Please select a new time.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "confirmDeleteHealthRecordingAlert":{
+  "confirmDeleteHealthRecordingAlert": {
     "header": "Confirmation",
     "body": "Are you sure you want to deletydispe this recording?",
     "primaryButton": "Delete",
     "secondaryButton": "Cancel"
   },
-  "confirmDeleteHealthDataRowAlert":{
+  "confirmDeleteHealthDataRowAlert": {
     "header": "Confirmation",
     "body": "Are you sure you want the data on ",
     "primaryButton": "Delete",
     "secondaryButton": "Cancel"
   },
-  "deleteHealthRecordingError":{
+  "deleteHealthRecordingError": {
     "header": "Error",
     "body": "Unable to delete this health record. Please try again later.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "deleteHealthDataRowError":{
+  "deleteHealthDataRowError": {
     "header": "Error",
     "body": "Unable to delete the data on ",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "updateHealthDataCoverImageSuccess":{
+  "updateHealthDataCoverImageSuccess": {
     "header": "Success",
     "body": "Health record cover image has been successfully updated.",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
-  "updateHealthDataCoverImageError":{
+  "updateHealthDataCoverImageError": {
     "header": "Error",
     "body": "Unable to update your health record cover image. Please try again later.",
     "primaryButton": "OK",
@@ -439,13 +440,13 @@
     "secondaryButton": ""
   },
   "days": {
-    "mon":"MON", 
-    "tue":"TUE",
-    "wed":"WED",
-    "thu":"THU",
-    "fri":"FRI",
-    "sat":"SAT",
-    "sun":"SUN"
+    "mon": "MON",
+    "tue": "TUE",
+    "wed": "WED",
+    "thu": "THU",
+    "fri": "FRI",
+    "sat": "SAT",
+    "sun": "SUN"
   },
   "analytics": {
     "value": "Value",

@@ -358,7 +358,8 @@
   "healthRecordingsCreate": {
     "header": "สร้างข้อมูลใหม่",
     "selectTemplate": "เลือกรูปแบบ",
-    "advanced": "ขั้นสูง"
+    "advanced": "ขั้นสูง",
+    "createCustom": "สร้างบันทึกข้อมูล"
   },
   "healthRecordingsTemplates": {
     "bloodPressure": "ความดันโลหิต",
@@ -372,55 +373,55 @@
     "insomnia": "นอนไม่หลับ",
     "none": "ไม่มีการบันทึกสภาวะอารมณ์"
   },
-  "addHealthDataSuccess":{
+  "addHealthDataSuccess": {
     "header": "สำเร็จ",
     "body": "ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "addHealthDataError":{
+  "addHealthDataError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถบันทึกข้อมูลของคุณได้ กรุณาลองอีกครั้ง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "duplicateHealthDataError":{
+  "duplicateHealthDataError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "มีข้อมูลถูกบันทึกในเวลาที่เลือกไว้ กรุณาเลือกเวลาใหม่",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "confirmDeleteHealthRecordingAlert":{
+  "confirmDeleteHealthRecordingAlert": {
     "header": "การยืนยัน",
     "body": "คุณแน่ใจหรือไม่ที่จะลบการจดบันทึกนี้",
     "primaryButton": "ลบ",
     "secondaryButton": "ยกเลิก"
   },
-  "confirmDeleteHealthDataRowAlert":{
+  "confirmDeleteHealthDataRowAlert": {
     "header": "การยืนยัน",
     "body": "คุณแน่ใจหรือไม่ที่จะลบข้อมูลวันที่ ",
     "primaryButton": "ลบ",
     "secondaryButton": "ยกเลิก"
   },
-  "deleteHealthRecordingError":{
+  "deleteHealthRecordingError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถลบการจดบันทึกนี้ได้ กรุณาลองอีกครั้ง",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "deleteHealthDataRowError":{
+  "deleteHealthDataRowError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถที่จะลบข้อมูลวันที่ ",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "updateHealthDataCoverImageSuccess":{
+  "updateHealthDataCoverImageSuccess": {
     "header": "สำเร็จ",
     "body": "รูปหน้าปกของคุณถูกบันทึกเรียบร้อยแล้ว",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
-  "updateHealthDataCoverImageError":{
+  "updateHealthDataCoverImageError": {
     "header": "เกิดข้อผิดพลาด",
     "body": "ไม่สามารถบันทึกรูปหน้าปกของคุณ กรุณาลองใหม่อีกครั้ง",
     "primaryButton": "ตกลง",
@@ -439,13 +440,13 @@
     "secondaryButton": ""
   },
   "days": {
-    "mon":"จ.", 
-    "tue":"อ.",
-    "wed":"พ.",
-    "thu":"พฤ.",
-    "fri":"ศ.",
-    "sat":"ส.",
-    "sun":"อา."
+    "mon": "จ.",
+    "tue": "อ.",
+    "wed": "พ.",
+    "thu": "พฤ.",
+    "fri": "ศ.",
+    "sat": "ส.",
+    "sun": "อา."
   },
   "analytics": {
     "value": "ค่า",
