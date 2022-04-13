@@ -1,11 +1,21 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Button, ScrollView, Text, View } from 'native-base';
-import React, { useCallback, useState } from 'react';
+import { Button, Icon, ScrollView, Text, View } from 'native-base';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Animated, StyleSheet } from 'react-native';
 import EditButton from '../components/atoms/EditButton';
 import ViewAssignedQuestionsCard from '../components/organisms/ViewAssignedQuestionsCard';
 import { RootStackParamList } from '../navigation/types';
+import Entypo from 'react-native-vector-icons/Entypo';
+import { TourguideContext } from '../contexts/TourguideContext';
+import {
+  TourGuideZone,
+  TourGuideZoneByPosition,
+  useTourGuideController
+} from '../library/rn-multiple-tourguide';
+import useAsyncEffect from '../hooks/useAsyncEffect';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface QuestionCard {
   question: string;
@@ -16,6 +26,37 @@ const ViewAsssignedQuestionsScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const { canStart, start, stop, eventEmitter, tourKey } =
+    useTourGuideController('memoryPracticeQuestions');
+  const {
+    showMemoryPracticeQuestionsTourguide,
+    setShowMemoryPracticeQuestionsTourguide
+  } = useContext(TourguideContext);
+
+  useAsyncEffect(async () => {
+    const fetchData = async () => {
+      const result = await AsyncStorage.getItem(
+        'viewedMemoryPracticeQuestionsTourguide'
+      );
+      return result ? JSON.parse(result) : false;
+    };
+    const shouldShow = !(await fetchData());
+    setShowMemoryPracticeQuestionsTourguide(shouldShow);
+  }, [AsyncStorage, showMemoryPracticeQuestionsTourguide]);
+
+  useEffect(() => {
+    if (canStart && showMemoryPracticeQuestionsTourguide && start) start();
+  }, [canStart, showMemoryPracticeQuestionsTourguide]);
+
+  useEffect(() => {
+    eventEmitter?.on('stop', async () => {
+      setShowMemoryPracticeQuestionsTourguide(false);
+      await AsyncStorage.setItem(
+        'viewedMemoryPracticeQuestionsTourguide',
+        'true'
+      );
+    });
+  }, [eventEmitter]);
   //get backend question pool
   const [selectedQuestions, setSelectedQuestions] = useState<QuestionCard[]>([
     { question: 'What did you eat this morning?' },
@@ -29,7 +70,7 @@ const ViewAsssignedQuestionsScreen = () => {
 
   const [editState, setEditState] = useState<boolean>(false);
 
-  const totalChange = useCallback(() => {
+  useEffect(() => {
     setTotalSelected(selectedQuestions.length);
   }, [selectedQuestions]);
 
@@ -37,6 +78,71 @@ const ViewAsssignedQuestionsScreen = () => {
   const handleSubmit = () => {
     console.log(selectedQuestions);
   };
+
+  const handleDelete = (id: number) => {
+    setSelectedQuestions(
+      selectedQuestions.filter((ele, index) => index !== id)
+    );
+  };
+  const spinValue = new Animated.Value(0);
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(spinValue, {
+          toValue: 0,
+          duration: 50,
+          useNativeDriver: true
+        }),
+        Animated.timing(spinValue, {
+          toValue: 1,
+          duration: 50,
+          useNativeDriver: true
+        }),
+        Animated.timing(spinValue, {
+          toValue: 2,
+          duration: 50,
+          useNativeDriver: true
+        }),
+        Animated.timing(spinValue, {
+          toValue: 3,
+          duration: 50,
+          useNativeDriver: true
+        }),
+        Animated.timing(spinValue, {
+          toValue: 4,
+          duration: 50,
+          useNativeDriver: true
+        }),
+        Animated.timing(spinValue, {
+          toValue: 5,
+          duration: 50,
+          useNativeDriver: true
+        })
+      ])
+    ).start();
+  }, [spinValue]);
+
+  const spin1 = spinValue.interpolate({
+    inputRange: [0, 1, 2, 3, 4, 5],
+    outputRange: ['0deg', '-0.35deg', '0.35deg', '0deg', '-0.35deg', '0.35deg']
+  });
+  const spin2 = spinValue.interpolate({
+    inputRange: [0, 1, 2, 3, 4, 5],
+    outputRange: ['0.35deg', '0deg', '-0.35deg', '0.35deg', '0deg', '-0.35deg']
+  });
+  const spin3 = spinValue.interpolate({
+    inputRange: [0, 1, 2, 3, 4, 5],
+    outputRange: ['-0.35deg', '0.35deg', '0deg', '-0.35deg', '0.35deg', '0deg']
+  });
+  const handleSpin = (index: number) => {
+    const rndInt = index % 3;
+    if (rndInt == 0) return spin1;
+    if (rndInt == 1) return spin2;
+    if (rndInt == 2) return spin2;
+    return spin1;
+  };
+
   return (
     <View flex={1}>
       <View mx={4} width="100%">
@@ -50,15 +156,6 @@ const ViewAsssignedQuestionsScreen = () => {
             {t('viewAssignedQuestions.assignedQuestions')}
           </Text>
           {editState ? (
-            <EditButton
-              h="8"
-              alignText="15%"
-              onPress={() => {
-                console.log('edit');
-                setEditState(!editState);
-              }}
-            />
-          ) : (
             <Button
               h="8"
               borderRadius="md"
@@ -67,6 +164,20 @@ const ViewAsssignedQuestionsScreen = () => {
                 {t('viewAssignedQuestions.done')}
               </Text>
             </Button>
+          ) : (
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={1}
+              shape="rectangle"
+              text={t('viewAssignedQuestionsTutorial.step1')}>
+              <EditButton
+                h="8"
+                alignText="15%"
+                onPress={() => {
+                  setEditState(!editState);
+                }}
+              />
+            </TourGuideZone>
           )}
         </View>
         <View mt={2} flexDir="row">
@@ -90,11 +201,81 @@ const ViewAsssignedQuestionsScreen = () => {
           </Text>
         </View>
         <ScrollView pt={4}>
-          {selectedQuestions.map((data, index: number) => (
-            <View key={index}>
-              <ViewAssignedQuestionsCard question={data.question} />
-            </View>
-          ))}
+          {selectedQuestions.length !== 0 ? (
+            <TourGuideZone
+              tourKey={tourKey}
+              zone={2}
+              shape="rectangle"
+              text={t('homeElderlyTutorial.step2')}>
+              {selectedQuestions.map((data: QuestionCard, index: number) => (
+                <View key={index}>
+                  <Animated.View
+                    style={
+                      editState
+                        ? [
+                            ,
+                            {
+                              transform: [
+                                {
+                                  rotate: handleSpin(index)
+                                }
+                              ]
+                            }
+                          ]
+                        : null
+                    }>
+                    <View flexDir="row">
+                      <ViewAssignedQuestionsCard question={data.question} />
+                      {editState ? (
+                        <Icon
+                          ml="-3"
+                          as={Entypo}
+                          name="circle-with-cross"
+                          size="5"
+                          color="muted.600"
+                          onPress={() => handleDelete(index)}
+                        />
+                      ) : null}
+                    </View>
+                  </Animated.View>
+                </View>
+              ))}
+            </TourGuideZone>
+          ) : (
+            selectedQuestions.map((data: QuestionCard, index: number) => (
+              <View key={index}>
+                <Animated.View
+                  style={
+                    editState
+                      ? [
+                          ,
+                          {
+                            transform: [
+                              {
+                                rotate: handleSpin(index)
+                              }
+                            ]
+                          }
+                        ]
+                      : null
+                  }>
+                  <View flexDir="row">
+                    <ViewAssignedQuestionsCard question={data.question} />
+                    {editState ? (
+                      <Icon
+                        ml="-3"
+                        as={Entypo}
+                        name="circle-with-cross"
+                        size="5"
+                        color="muted.600"
+                        onPress={() => handleDelete(index)}
+                      />
+                    ) : null}
+                  </View>
+                </Animated.View>
+              </View>
+            ))
+          )}
         </ScrollView>
       </View>
       <View
@@ -103,23 +284,38 @@ const ViewAsssignedQuestionsScreen = () => {
         width="100%"
         position="absolute"
         bgColor="white">
-        <Button mx={4} mt={4} onPress={() => handleSubmit()}>
-          {t('viewAssignedQuestions.selectQuestionsButton')}
-        </Button>
-        <Button
-          borderWidth="1"
-          borderColor="#F97316"
-          backgroundColor="#FAFAFA"
-          _text={{ color: '#F97316' }}
-          _pressed={{
-            borderColor: '#F94000',
-            _text: { color: '#F94000' }
-          }}
-          mx={4}
-          mt={2}
-          onPress={() => handleSubmit()}>
-          {t('viewAssignedQuestions.viewHistoryButton')}
-        </Button>
+        <TourGuideZone
+          tourKey={tourKey}
+          zone={3}
+          shape="rectangle"
+          text={t('viewAssignedQuestionsTutorial.step3')}>
+          <Button
+            mx={4}
+            mt={4}
+            onPress={() => navigation.navigate('ViewQuestionPoolScreen')}>
+            {t('viewAssignedQuestions.selectQuestionsButton')}
+          </Button>
+        </TourGuideZone>
+        <TourGuideZone
+          tourKey={tourKey}
+          zone={4}
+          shape="rectangle"
+          text={t('viewAssignedQuestionsTutorial.step4')}>
+          <Button
+            borderWidth="1"
+            borderColor="#F97316"
+            backgroundColor="#FAFAFA"
+            _text={{ color: '#F97316' }}
+            _pressed={{
+              borderColor: '#F94000',
+              _text: { color: '#F94000' }
+            }}
+            mx={4}
+            mt={2}
+            onPress={() => handleSubmit()}>
+            {t('viewAssignedQuestions.viewHistoryButton')}
+          </Button>
+        </TourGuideZone>
       </View>
     </View>
   );
