@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Button, ScrollView, View, VStack } from 'native-base';
+import { AddIcon, Button, ScrollView, Text, View, VStack } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -77,7 +77,7 @@ const HealthRecordingsScreen = () => {
   if (!showScreen) return null;
 
   return (
-    <>
+    <View flex={1} mb={4}>
       <View
         style={styles.buttonContainer}
         backgroundColor="#fff"
@@ -93,7 +93,10 @@ const HealthRecordingsScreen = () => {
               stop();
               navigation.navigate('CreateHealthRecordingsScreen');
             }}>
-            {t('healthRecordings.addRecording')}
+            <Text display="flex" flexDirection="column" color="white">
+              {t('healthRecordings.addRecording')}{' '}
+              <AddIcon size="3" color="white" />
+            </Text>
           </Button>
         </TourGuideZone>
       </View>
@@ -138,7 +141,7 @@ const HealthRecordingsScreen = () => {
           {myTemplates.map}
         </VStack>
       </ScrollView>
-    </>
+    </View>
   );
 };
 
