@@ -4,7 +4,7 @@ import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
  * Note: The screen name and its param type are defined here.
  */
 
-import { CaretakerInfoView } from '../dto/modules/user.dto';
+import { CaretakerInfoView, ReminderInfo } from '../dto/modules/user.dto';
 import { HealthRecordingData } from '../interfaces/healthRecording';
 import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 
@@ -55,4 +55,7 @@ export type RootStackParamList = {
   ViewAssignedQuestionsScreen: undefined;
   ViewHistoryScreen: undefined;
   ViewHistoryDetailsScreen: undefined;
+  
+  CreateReminderScreen: undefined;
+  EditReminderScreen: { info: ReminderInfo };
 };
