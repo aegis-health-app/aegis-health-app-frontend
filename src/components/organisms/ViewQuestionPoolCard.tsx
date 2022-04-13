@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Icon, Box, Pressable } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -22,10 +18,6 @@ const ViewQuestionPoolCard = ({
   isFull
 }: QuestionCardProps) => {
   const [selected, setSelected] = useState<boolean>(isSelected);
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     onSelect(selected);

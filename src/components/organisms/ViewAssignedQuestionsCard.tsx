@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Icon, Box, Pressable } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
+import React from 'react';
+import { View, Text} from 'native-base';
 import { StyleSheet } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type QuestionCardProps = {
   question: string;
@@ -14,10 +9,6 @@ type QuestionCardProps = {
 const ViewQuestionPoolCard = ({
   question,
 }: QuestionCardProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const { t } = useTranslation();
 
   return (
       <View
@@ -36,13 +27,6 @@ const ViewQuestionPoolCard = ({
             {question}
           </Text>
         </>
-        {/* <Icon
-          as={MaterialIcons}
-          name="mode-edit"
-          size="5"
-          color="muted.600"
-          onPress={() => console.log('navigate to edit')}
-        /> */}
       </View>
   );
 };

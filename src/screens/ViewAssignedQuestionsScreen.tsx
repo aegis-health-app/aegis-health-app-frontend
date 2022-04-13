@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Icon, ScrollView, Text, View } from 'native-base';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Animated, StyleSheet } from 'react-native';
+import { Animated } from 'react-native';
 import EditButton from '../components/atoms/EditButton';
 import ViewAssignedQuestionsCard from '../components/organisms/ViewAssignedQuestionsCard';
 import { RootStackParamList } from '../navigation/types';
@@ -11,7 +11,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { TourguideContext } from '../contexts/TourguideContext';
 import {
   TourGuideZone,
-  TourGuideZoneByPosition,
   useTourGuideController
 } from '../library/rn-multiple-tourguide';
 import useAsyncEffect from '../hooks/useAsyncEffect';
