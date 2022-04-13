@@ -465,5 +465,13 @@
     "questions": "Questions",
     "totalSelected": "Total Selected",
     "create": "Create Custom Question +"
+  },
+  "viewAssignedQuestions": {
+    "memoryPractice": "Memory Practice",
+    "assignedQuestions": "Assigned Questions",
+    "for": "For ",
+    "selectQuestionsButton": "Select Questions from Pool",
+    "viewHistoryButton": "View History",
+    "done": "Done"
   }
 }

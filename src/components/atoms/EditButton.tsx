@@ -7,10 +7,11 @@ type EditButtonProps = {
   w?: string;
   h?: string;
   p?: number;
+  alignText?: string;
   onPress: () => void;
 };
 
-const EditButton = ({ w, h, p, onPress }: EditButtonProps) => {
+const EditButton = ({ w, h, p, alignText, onPress }: EditButtonProps) => {
   const { t } = useTranslation();
   return (
     <Button
@@ -29,7 +30,7 @@ const EditButton = ({ w, h, p, onPress }: EditButtonProps) => {
       _pressed={{
         bg: 'gray.400'
       }}>
-      <Text>{t('userLink.edit')}</Text>
+      <Text bottom={alignText}>{t('userLink.edit')}</Text>
     </Button>
   );
 };

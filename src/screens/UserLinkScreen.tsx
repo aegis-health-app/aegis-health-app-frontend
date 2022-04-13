@@ -113,6 +113,11 @@ const UserLinkScreen = () => {
           onPress={() => navigation.navigate('ViewQuestionPoolScreen')}>
           View Question Pool Page
         </Button>
+        <Button
+          width="90%"
+          onPress={() => navigation.navigate('ViewAssignedQuestionsScreen')}>
+          View Assigned Questions Page
+        </Button>
       </View>
       <TourGuideZoneByPosition
         tourKey={tourKey}

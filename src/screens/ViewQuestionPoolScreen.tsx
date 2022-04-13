@@ -1,11 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {
-  Button,
-  ScrollView,
-  Text,
-  View
-} from 'native-base';
+import { Button, ScrollView, Text, View } from 'native-base';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ViewQuestionPoolCard from '../components/organisms/ViewQuestionPoolCard';
@@ -25,13 +20,13 @@ const ViewQuestionPoolScreen = () => {
   const [questionPool, setQuestionPool] = useState<QuestionCard[]>([
     { question: 'What did you eat this morning?', isSelected: false },
     { question: 'What did you eat this afternoon?', isSelected: true },
-    { question: 'What will you eat tonight?', isSelected: true }
+    { question: 'What will you eat tonight?', isSelected: true },
   ]);
 
   const [totalSelected, setTotalSelected] = useState<number>(
     questionPool.filter((item) => item.isSelected == true).length
   );
-
+  
   const totalChange = useCallback(() => {
     setTotalSelected(
       questionPool.filter((item) => item.isSelected == true).length
@@ -66,6 +61,7 @@ const ViewQuestionPoolScreen = () => {
           {questionPool.map((data, index: number) => (
             <View key={index}>
               <ViewQuestionPoolCard
+                isFull={totalSelected >= 10 && !data.isSelected}
                 question={data.question}
                 isSelected={data.isSelected}
                 onSelect={(val) => {

@@ -6,36 +6,20 @@ import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 type QuestionCardProps = {
   question: string;
-  isSelected: boolean;
-  onSelect: any;
-  isFull: boolean;
 };
 
 const ViewQuestionPoolCard = ({
   question,
-  isSelected,
-  onSelect,
-  isFull
 }: QuestionCardProps) => {
-  const [selected, setSelected] = useState<boolean>(isSelected);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    onSelect(selected);
-  }, [selected]);
   return (
-    <Pressable
-      disabled={isFull}
-      onPress={() => {
-        setSelected(!selected);
-      }}>
       <View
         flexDir="row"
         my={1.5}
@@ -46,29 +30,8 @@ const ViewQuestionPoolCard = ({
         px={2}
         py={3.5}
         style={styles.card}
-        bgColor={selected ? '#C1E2FF' : 'white'}>
+        bgColor='white'>
         <>
-          <Pressable
-            onPress={() => {
-              setSelected(!selected);
-            }}>
-            {selected ? (
-              <Icon
-                as={AntDesign}
-                name="checksquare"
-                size="5"
-                color="#005DB4"></Icon>
-            ) : (
-              <Box
-                width="5"
-                height="5"
-                bgColor="white"
-                borderColor="#D4D4D4"
-                borderRadius={3}
-                borderWidth={2}
-              />
-            )}
-          </Pressable>
           <Text ml="2" flex={1} flexWrap="wrap" fontSize="15" numberOfLines={1}>
             {question}
           </Text>
@@ -81,7 +44,6 @@ const ViewQuestionPoolCard = ({
           onPress={() => console.log('navigate to edit')}
         />
       </View>
-    </Pressable>
   );
 };
 
