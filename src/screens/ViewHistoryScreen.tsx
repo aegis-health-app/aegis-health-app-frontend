@@ -1,11 +1,7 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Button, ScrollView, Text, View } from 'native-base';
-import React, { useCallback, useState } from 'react';
+import { ScrollView, Text, View } from 'native-base';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ViewHistoryCard from '../components/organisms/HistoryCard';
-import ViewQuestionPoolCard from '../components/organisms/ViewQuestionPoolCard';
-import { RootStackParamList } from '../navigation/types';
 
 interface HistoryCard {
   date: string | Date;
@@ -15,8 +11,6 @@ interface HistoryCard {
 
 const ViewHistoryScreen = () => {
   const { t } = useTranslation();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   //get backend question pool
   const [historyList, setHistoryList] = useState<HistoryCard[]>([

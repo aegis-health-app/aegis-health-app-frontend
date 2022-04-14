@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Icon, Box, Pressable } from 'native-base';
+import React from 'react';
+import { View, Text, Pressable } from 'native-base';
 import { StyleSheet } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 import { useSettings } from '../../hooks/useSettings';
 import { useTranslation } from 'react-i18next';
+import { RootStackParamList } from '../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 type HistoryCardProps = {
   date: string | Date;
@@ -16,8 +17,7 @@ type HistoryCardProps = {
 const ViewHistoryCard = ({ date, time, score }: HistoryCardProps) => {
   const { language } = useSettings();
   const { t } = useTranslation();
-
-  const scoreSplit = score.split('/')
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleScore = () => {
     const scoreSplit = score.split('/')
@@ -27,7 +27,7 @@ const ViewHistoryCard = ({ date, time, score }: HistoryCardProps) => {
   return (
     <Pressable
       onPress={() => {
-        console.log('view details');
+        navigation.navigate('ViewHistoryDetailsScreen')
       }}>
       <View
         flexDir="column"

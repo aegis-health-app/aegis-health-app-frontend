@@ -488,6 +488,7 @@
     "question": "คำถามที่ ",
     "correct": "ถูกต้อง",
     "incorrect": "ไม่ถูกต้อง",
-    "totalScore": "คะแนนรวม"
+    "totalScore": "คะแนนรวม",
+    "answer": "คำตอบ:"
   }
 }
