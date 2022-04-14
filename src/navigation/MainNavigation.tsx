@@ -42,6 +42,7 @@ import CreateHealthRecordingsScreen from '../screens/CreateHealthRecordingsScree
 import HealthRecordAnalyticsScreen from '../screens/healthRecord/HealthRecordAnalyticsScreen';
 import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
+import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 
 
 const MainNavigation = () => {
@@ -340,6 +341,16 @@ const MainNavigation = () => {
                   />
                   </TouchableOpacity>
                 )
+              }}
+            />
+            <Stack.Screen
+              name="ViewHistoryScreen"
+              component={ViewHistoryScreen}
+              options={{
+                title: t('viewHistory.analytic'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
               }}
             />
           </>

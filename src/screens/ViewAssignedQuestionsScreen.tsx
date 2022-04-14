@@ -311,7 +311,7 @@ const ViewAsssignedQuestionsScreen = () => {
             }}
             mx={4}
             mt={2}
-            onPress={() => handleSubmit()}>
+            onPress={() => navigation.navigate('ViewHistoryScreen')}>
             {t('viewAssignedQuestions.viewHistoryButton')}
           </Button>
         </TourGuideZone>

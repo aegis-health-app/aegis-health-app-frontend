@@ -50,4 +50,5 @@ export type RootStackParamList = {
 
   ViewQuestionPoolScreen: undefined;
   ViewAssignedQuestionsScreen: undefined;
+  ViewHistoryScreen: undefined;
 };
