@@ -487,6 +487,7 @@
     "question": "Question ",
     "correct": "Correct",
     "incorrect": "Incorrect",
-    "totalScore": "Total Score"
+    "totalScore": "Total Score",
+    "answer": "Answer:"
   }
 }

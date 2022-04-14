@@ -43,6 +43,7 @@ import HealthRecordAnalyticsScreen from '../screens/healthRecord/HealthRecordAna
 import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 import ViewHistoryScreen from '../screens/ViewHistoryScreen';
+import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
 
 
 const MainNavigation = () => {
@@ -348,6 +349,16 @@ const MainNavigation = () => {
               component={ViewHistoryScreen}
               options={{
                 title: t('viewHistory.analytic'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="ViewHistoryDetailsScreen"
+              component={ViewHistoryDetailsScreen}
+              options={{
+                title: t('viewHistory.result'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
