@@ -533,7 +533,9 @@
     "create": "สร้าง",
     "edit": "แก้ไช",
     "addANewReminder": "เพิ่มกาารเตือนความจำ +",
-    "editAReminder": "แก้ไขการเตือนความจำ"
+    "editAReminder": "แก้ไขการเตือนความจำ",
+    "saveReminder": "บันทึกการเตือนความจำ",
+    "deleteReminder": "ลบการเตือนความจำ"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
@@ -549,5 +551,13 @@
     "description": "คำอธิบาย",
     "images": "รูปภาพ",
     "noImageSelected": "ไม่มีรูปภาพที่เลือกไว้"
+  },
+  "reminderRepeatitionPattern": {
+    "doesNotRepeat": "ไม่แจ้งซำ้",
+    "everyday": "ทุกวัน",
+    "everyweek": "ทุกสัปดาห์",
+    "everymonth": "ทุกเดือน",
+    "everyyear": "ทุกปี",
+    "custom": "กำหนดเอง"
   }
 }

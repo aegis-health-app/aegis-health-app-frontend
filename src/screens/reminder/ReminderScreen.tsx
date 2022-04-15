@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Button, Spacer } from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import { ImagePickerResponse } from 'react-native-image-picker';
 

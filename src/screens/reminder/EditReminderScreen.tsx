@@ -1,13 +1,13 @@
 import { Button, View } from 'native-base';
 import React, { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import ReminderForm from '../components/organisms/ReminderForm';
-import useKeyboardOpen from '../hooks/useKeyboardOpen';
+import ReminderForm from '../../components/organisms/ReminderForm';
+import useKeyboardOpen from '../../hooks/useKeyboardOpen';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import { RootStackParamList } from '../../navigation/types';
 import { ImagePickerResponse } from 'react-native-image-picker';
 
 const EditReminderScreen = ({

@@ -1,34 +1,18 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  StyleSheet,
-  Platform,
-  LayoutAnimation,
-  UIManager,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import TextInput from '../atoms/TextInput';
 import { useSettings } from '../../hooks/useSettings';
-import {
-  Button,
-  HStack,
-  Text,
-  ScrollView,
-  View,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  Image
-} from 'native-base';
+import { Button, HStack, Text, ScrollView, View, Image } from 'native-base';
 import Spacer from '../atoms/Spacer';
-import DatePicker from '../molecules/DatePicker';
-import TimePicker from '../molecules/TimePicker';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import RadioButtonGroup from '../molecules/RadioButtonGroup';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
+import ExpansibleToggle from '../atoms/ExpansibleToggle';
+import { ReminderRepeatitionPattern } from '../../constants/ReminderRepeatitionConstants';
 const ReminderForm = ({
   control,
   errors,
@@ -62,8 +46,6 @@ const ReminderForm = ({
 
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [mode, setMode] = useState('date');
-  const [expandAdvanceFields, setExpandAdvanceFields] =
-    useState<boolean>(false);
 
   const onNewPictureUpload = (picture: ImagePickerResponse) => {
     setImage(picture);
@@ -71,8 +53,6 @@ const ReminderForm = ({
 
   const getImage = () => {
     if (image && image.assets) return { uri: image.assets[0].uri };
-    // if (currentHrImage) return { uri: currentHrImage };
-    // return tempHealthRecordCover;
   };
 
   const onDateTimeChange = (event, selectedDate?: Date | undefined) => {
@@ -100,42 +80,6 @@ const ReminderForm = ({
     setShowDateTimePicker(true);
     setMode('time');
   };
-
-  const changeLayout = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    setExpandAdvanceFields(!expandAdvanceFields);
-  };
-
-  if (Platform.OS === 'android') {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
-
-  const repeatitionPattern = [
-    {
-      value: 'doesNotRepeat',
-      display: 'Does Not Repeat'
-    },
-    {
-      value: 'everyday',
-      display: 'Every day'
-    },
-    {
-      value: 'everyweek',
-      display: 'Every Week'
-    },
-    {
-      value: 'everymonth',
-      display: 'Every Month'
-    },
-    {
-      value: 'everyyear',
-      display: 'Every Year'
-    },
-    {
-      value: 'custom',
-      display: 'Custom'
-    }
-  ];
 
   return (
     <>
@@ -228,91 +172,70 @@ const ReminderForm = ({
               </Button>
             </View>
           </View>
-          <View style={styles.btnTextHolder}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => changeLayout()}
-              style={{ ...styles.itemRow, paddingVertical: 10 }}>
-              <Text fontSize={18} fontWeight="bold" mb={2}>
-                {t('reminderForm.advance')}
+          <ExpansibleToggle title="Advance">
+            <View>
+              <Text fontSize={16} mb={2}>
+                {t('reminderForm.repeat')}
               </Text>
-              {expandAdvanceFields ? (
-                <ChevronUpIcon name="chevron-up" size="9" />
-              ) : (
-                <ChevronDownIcon name="chevron-down" size="9" />
-              )}
-            </TouchableOpacity>
-            <View
-              style={{
-                height: expandAdvanceFields ? undefined : 0,
-                overflow: 'hidden'
-              }}>
-              <View>
-                <Text fontSize={16} mb={2}>
-                  {t('reminderForm.repeat')}
-                </Text>
-                <RadioButtonGroup
-                  selections={repeatitionPattern}
-                  value={repeatition}
-                  setValue={setRepeatition}
-                />
-              </View>
-              <Spacer />
-              <View>
-                <TextInput
-                  label={t('reminderForm.note')}
-                  placeholder={t('reminderForm.description')}
-                  name="note"
-                  control={control}
-                  errors={errors}
-                  type={'text'}
-                  defaultValue={note}
-                />
-              </View>
-              <Spacer />
-              <View>
-                <Text fontSize={16} mb={2}>
-                  {t('reminderForm.images')}
-                </Text>
-                {image && image.assets ? (
-                  <View
-                    display="flex"
-                    flexDir="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    width="full"
-                    height={200}
-                    background="red.100"
-                    marginBottom={6}>
-                    <Image
-                      source={getImage()}
-                      borderRadius={4}
-                      alt="Profile Picture"
-                      resizeMode="cover"
-                      height="100%"
-                      width="100%"
-                    />
-                  </View>
-                ) : (
-                  <Text fontSize={16} mb={2}>
-                    {t('reminderForm.noImageSelected')}
-                  </Text>
-                )}
-                <View style={styles.itemRow}>
-                  <Button
-                    w="48%"
-                    onPress={() => takePicture(onNewPictureUpload)}>
-                    Take a Picture
-                  </Button>
-                  <Button
-                    w="48%"
-                    onPress={() => selectPictureFromDevice(onNewPictureUpload)}>
-                    From my Device
-                  </Button>
+              <RadioButtonGroup
+                selections={ReminderRepeatitionPattern}
+                value={repeatition}
+                setValue={setRepeatition}
+              />
+            </View>
+            <Spacer />
+            <View>
+              <TextInput
+                label={t('reminderForm.note')}
+                placeholder={t('reminderForm.description')}
+                name="note"
+                control={control}
+                errors={errors}
+                type={'text'}
+                defaultValue={note}
+              />
+            </View>
+            <Spacer />
+            <View>
+              <Text fontSize={16} mb={2}>
+                {t('reminderForm.images')}
+              </Text>
+              {image && image.assets ? (
+                <View
+                  display="flex"
+                  flexDir="row"
+                  alignItems="center"
+                  justifyContent="center"
+                  width="full"
+                  height={200}
+                  background="red.100"
+                  marginBottom={6}>
+                  <Image
+                    source={getImage()}
+                    borderRadius={4}
+                    alt="Profile Picture"
+                    resizeMode="cover"
+                    height="100%"
+                    width="100%"
+                  />
                 </View>
+              ) : (
+                <Text fontSize={16} mb={2}>
+                  {t('reminderForm.noImageSelected')}
+                </Text>
+              )}
+              <View style={styles.itemRow}>
+                <Button w="48%" onPress={() => takePicture(onNewPictureUpload)}>
+                  Take a Picture
+                </Button>
+                <Button
+                  w="48%"
+                  onPress={() => selectPictureFromDevice(onNewPictureUpload)}>
+                  From my Device
+                </Button>
               </View>
             </View>
-          </View>
+          </ExpansibleToggle>
         </View>
       </ScrollView>
     </>
@@ -341,15 +264,5 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  btnTextHolder: {
-    //   borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)'
-  },
-  expansionBtn: {
-    paddingVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: '100%'
   }
 });

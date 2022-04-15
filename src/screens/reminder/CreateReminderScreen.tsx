@@ -1,8 +1,8 @@
 import { Button, View } from 'native-base';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import ReminderForm from '../components/organisms/ReminderForm';
-import useKeyboardOpen from '../hooks/useKeyboardOpen';
+import ReminderForm from '../../components/organisms/ReminderForm';
+import useKeyboardOpen from '../../hooks/useKeyboardOpen';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
