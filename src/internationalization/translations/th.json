@@ -531,7 +531,9 @@
     "createReminder": "สร้างการเตือน",
     "editReminder": "แก้ไชการเตือน",
     "create": "สร้าง",
-    "edit": "แก้ไช"
+    "edit": "แก้ไช",
+    "addANewReminder": "เพิ่มกาารเตือนความจำ +",
+    "editAReminder": "แก้ไขการเตือนความจำ"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",

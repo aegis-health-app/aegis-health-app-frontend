@@ -10,7 +10,16 @@ import {
 } from 'react-native';
 import TextInput from '../atoms/TextInput';
 import { useSettings } from '../../hooks/useSettings';
-import { Button, HStack, Text, ScrollView, View } from 'native-base';
+import {
+  Button,
+  HStack,
+  Text,
+  ScrollView,
+  View,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  Image
+} from 'native-base';
 import Spacer from '../atoms/Spacer';
 import DatePicker from '../molecules/DatePicker';
 import TimePicker from '../molecules/TimePicker';
@@ -18,15 +27,15 @@ import { getFormattedDate } from '../../utils/getFormattedDate';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import RadioButtonGroup from '../molecules/RadioButtonGroup';
-import InputField from '../atoms/InputField';
-
+import { useImageSelection } from '../../hooks/useImageSelection';
+import { ImagePickerResponse } from 'react-native-image-picker';
 const ReminderForm = ({
   control,
   errors,
   date,
   setDate,
-  images,
-  setImages,
+  image,
+  setImage,
   notifyMyCaretakers,
   setNotifyMyCaretaker,
   repeatition,
@@ -38,8 +47,8 @@ const ReminderForm = ({
   errors: any;
   date: Date;
   setDate: (date: Date) => void;
-  images: string[];
-  setImages: (images: string[]) => void;
+  image?: ImagePickerResponse;
+  setImage: (image: ImagePickerResponse) => void;
   notifyMyCaretakers: boolean;
   setNotifyMyCaretaker: (value: boolean) => void;
   repeatition: string;
@@ -49,11 +58,22 @@ const ReminderForm = ({
 }) => {
   const { t } = useTranslation();
   const { language } = useSettings();
+  const { takePicture, selectPictureFromDevice } = useImageSelection();
 
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [mode, setMode] = useState('date');
   const [expandAdvanceFields, setExpandAdvanceFields] =
     useState<boolean>(false);
+
+  const onNewPictureUpload = (picture: ImagePickerResponse) => {
+    setImage(picture);
+  };
+
+  const getImage = () => {
+    if (image && image.assets) return { uri: image.assets[0].uri };
+    // if (currentHrImage) return { uri: currentHrImage };
+    // return tempHealthRecordCover;
+  };
 
   const onDateTimeChange = (event, selectedDate?: Date | undefined) => {
     if (!selectedDate) return;
@@ -122,7 +142,7 @@ const ReminderForm = ({
       <ScrollView>
         <View p={4} marginBottom={12}>
           <View style={styles.title}>
-            <Text fontSize="xl" fontWeight={'md'}>
+            <Text fontSize="xl" fontWeight={'bold'}>
               {t('reminderForm.generalInformation')}
             </Text>
           </View>
@@ -136,6 +156,10 @@ const ReminderForm = ({
               errors={errors}
               type={'text'}
               defaultValue={title}
+              isRequired={true}
+              errorMessage={t('error.isRequired', {
+                name: t('reminderForm.title')
+              })}
             />
           </View>
           <View>
@@ -146,7 +170,9 @@ const ReminderForm = ({
             {(Platform.OS === 'ios' || showDateTimePicker) && (
               <HStack justifyContent="space-between" alignItems="center">
                 {Platform.OS === 'ios' && (
-                  <Text w={100}>{getFormattedDate(date, language)}</Text>
+                  <Text fontSize={16} fontWeight="900" w={100}>
+                    {getFormattedDate(date, language)}
+                  </Text>
                 )}
                 <DateTimePicker
                   testID="dateTimePicker"
@@ -159,7 +185,9 @@ const ReminderForm = ({
             )}
             {Platform.OS === 'android' && (
               <HStack justifyContent="space-between" alignItems="center">
-                <Text w={100}>{getFormattedDate(date, language)}</Text>
+                <Text fontSize={16} fontWeight="900" w={100}>
+                  {getFormattedDate(date, language)}
+                </Text>
                 <Button variant="outline" onPress={() => showDatePicker()}>
                   {t('reminderForm.selectDate')}
                 </Button>
@@ -204,10 +232,15 @@ const ReminderForm = ({
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => changeLayout()}
-              style={styles.Btn}>
-              <Text fontSize={16} mb={2}>
+              style={{ ...styles.itemRow, paddingVertical: 10 }}>
+              <Text fontSize={18} fontWeight="bold" mb={2}>
                 {t('reminderForm.advance')}
               </Text>
+              {expandAdvanceFields ? (
+                <ChevronUpIcon name="chevron-up" size="9" />
+              ) : (
+                <ChevronDownIcon name="chevron-down" size="9" />
+              )}
             </TouchableOpacity>
             <View
               style={{
@@ -241,16 +274,41 @@ const ReminderForm = ({
                 <Text fontSize={16} mb={2}>
                   {t('reminderForm.images')}
                 </Text>
-                {images && images.length ? (
-                  images
+                {image && image.assets ? (
+                  <View
+                    display="flex"
+                    flexDir="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    width="full"
+                    height={200}
+                    background="red.100"
+                    marginBottom={6}>
+                    <Image
+                      source={getImage()}
+                      borderRadius={4}
+                      alt="Profile Picture"
+                      resizeMode="cover"
+                      height="100%"
+                      width="100%"
+                    />
+                  </View>
                 ) : (
                   <Text fontSize={16} mb={2}>
                     {t('reminderForm.noImageSelected')}
                   </Text>
                 )}
                 <View style={styles.itemRow}>
-                  <Button w="48%">Take a Picture</Button>
-                  <Button w="48%">From my Device</Button>
+                  <Button
+                    w="48%"
+                    onPress={() => takePicture(onNewPictureUpload)}>
+                    Take a Picture
+                  </Button>
+                  <Button
+                    w="48%"
+                    onPress={() => selectPictureFromDevice(onNewPictureUpload)}>
+                    From my Device
+                  </Button>
                 </View>
               </View>
             </View>
@@ -287,5 +345,11 @@ const styles = StyleSheet.create({
   btnTextHolder: {
     //   borderWidth: 1, borderColor: 'rgba(0,0,0,0.5)'
   },
-  Btn: { paddingVertical: 10 }
+  expansionBtn: {
+    paddingVertical: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%'
+  }
 });

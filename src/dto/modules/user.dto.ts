@@ -1,3 +1,4 @@
+import { ImagePickerResponse } from 'react-native-image-picker';
 import { ModuleId } from './modules.dto';
 
 export type BloodType = 'N/A' | 'A' | 'B' | 'O' | 'AB' | string;
@@ -35,12 +36,12 @@ export interface Elderly extends User {
 }
 
 export interface CaretakerInfoView {
-    fullName: string;
-    gender: 'F' | 'M';
-    bdate: string;
-    phone?: string;
-    imageId: string;
-    cid: number;
+  fullName: string;
+  gender: 'F' | 'M';
+  bdate: string;
+  phone?: string;
+  imageId: string;
+  cid: number;
 }
 
 export interface ReminderInfo {
@@ -49,5 +50,5 @@ export interface ReminderInfo {
   notifyMyCaretaker: boolean;
   repetition: string;
   note: string;
-  images: string[]
+  image?: ImagePickerResponse;
 }

@@ -531,7 +531,11 @@
     "createReminder": "Create Reminder",
     "editReminder": "Edit Reminder",
     "create": "Create",
-    "edit": "Edit"
+    "edit": "Edit",
+    "addANewReminder": "Add a new reminder +",
+    "editAReminder": "Edit a reminder",
+    "saveReminder": "Save Reminder",
+    "deleteReminder": "Delete Reminder"
   },
   "reminderForm": {
     "title": "Title",

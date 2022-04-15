@@ -6,6 +6,7 @@ import useKeyboardOpen from '../hooks/useKeyboardOpen';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
+import { ImagePickerResponse } from 'react-native-image-picker';
 
 const CreateReminderScreen = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const CreateReminderScreen = () => {
   const watchInputs = watch();
 
   const [date, setDate] = useState<Date>(new Date());
-  const [images, setImages] = useState<string[]>([]);
+  const [image, setImage] = useState<ImagePickerResponse>();
   const [notifyMyCaretakers, setNotifyMyCaretaker] = useState<boolean>(true);
   const [repeatition, setRepeatition] = useState<string>('doesNotRepeat');
 
@@ -33,9 +34,10 @@ const CreateReminderScreen = () => {
       ...data,
       date: moment(date).add(7, 'h'),
       notifyMyCaretakers: notifyMyCaretakers,
-      images: images,
+      image: image,
       repeatition: repeatition
     };
+    console.log(response)
     return; response
   };
   return (
@@ -46,8 +48,8 @@ const CreateReminderScreen = () => {
           errors={errors}
           date={date}
           setDate={setDate}
-          images={images}
-          setImages={setImages}
+          image={image}
+          setImage={setImage}
           notifyMyCaretakers={notifyMyCaretakers}
           setNotifyMyCaretaker={setNotifyMyCaretaker}
           repeatition={repeatition}
@@ -64,7 +66,7 @@ const CreateReminderScreen = () => {
           bgColor="white"
           marginTop="10%">
           <Button isDisabled={true} mx={4} mt={4}>
-            {t('healthRecording.create')}
+            {t('reminder.saveReminder')}
           </Button>
         </View>
       ) : (
@@ -80,7 +82,7 @@ const CreateReminderScreen = () => {
             mt={4}
             isDisabled={handleButtonState()}
             onPress={handleSubmit(onSubmit)}>
-            {t('reminderForm.create')}
+            {t('reminder.saveReminder')}
           </Button>
         </View>
       )}

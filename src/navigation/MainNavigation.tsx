@@ -170,6 +170,13 @@ const MainNavigation = () => {
               component={EmergencyScreen}
               options={{
                 title: t('emergency.header'),
+              }}
+            />
+            <Stack.Screen
+              name="ReminderScreen"
+              component={ReminderScreen}
+              options={{ 
+                title: t('modules.reminder'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' }
               }}
