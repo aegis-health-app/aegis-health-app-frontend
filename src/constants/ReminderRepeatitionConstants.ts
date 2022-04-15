@@ -1,28 +1,26 @@
-import i18n from '../internationalization/i18n.config';
-
 export const ReminderRepeatitionPattern = [
   {
-    label: i18n.t('reminderRepeatitionPattern.doesNotRepeat'),
+    label: 'doesNotRepeat',
     value: 'doesNotRepeat'
   },
   {
-    label: i18n.t('reminderRepeatitionPattern.everyday'),
+    label: 'everyday',
     value: 'everyday'
   },
   {
-    label: i18n.t('reminderRepeatitionPattern.everyweek'),
+    label: 'everyweek',
     value: 'everyweek'
   },
   {
-    label: i18n.t('reminderRepeatitionPattern.everymonth'),
+    label: 'everymonth',
     value: 'everymonth'
   },
   {
-    label: i18n.t('reminderRepeatitionPattern.everyyear'),
+    label: 'everyyear',
     value: 'everyyear'
   },
   {
-    label: i18n.t('reminderRepeatitionPattern.custom'),
+    label: 'custom',
     value: 'custom'
   }
 ];
