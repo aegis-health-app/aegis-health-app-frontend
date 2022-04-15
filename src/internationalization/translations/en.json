@@ -551,5 +551,13 @@
     "description": "Description",
     "images": "Images",
     "noImageSelected": "No Image Selected"
+  },
+  "reminderRepeatitionPattern": {
+    "doesNotRepeat": "Does Not Repeat",
+    "everyday": "Every day",
+    "everyweek": "Every Week",
+    "everymonth": "Every Month",
+    "everyyear": "Every Year",
+    "custom": "Custom"
   }
 }

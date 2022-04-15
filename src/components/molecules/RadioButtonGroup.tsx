@@ -3,7 +3,7 @@ import { Radio, Text } from 'native-base';
 
 interface SelectionInterface {
   value: string;
-  display: string;
+  label: string;
 }
 
 const RadioButtonGroup = ({
@@ -26,7 +26,7 @@ const RadioButtonGroup = ({
             return (
               <Radio value={selection.value} m="1" key={selection.value}>
                 <Text fontSize={16} m={2}>
-                  {selection.display}
+                  {selection.label}
                 </Text>
               </Radio>
             );

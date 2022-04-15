@@ -9,7 +9,7 @@ import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
-import ReminderScreen from './../screens/ReminderScreen';
+import ReminderScreen from '../screens/reminder/ReminderScreen';
 import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
@@ -46,8 +46,8 @@ import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
 import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
 import withEmergency from '../screens/WithEmergency';
-import CreateReminderScreen from '../screens/CreateReminderScreen';
-import EditReminderScreen from '../screens/EditReminderScreen';
+import CreateReminderScreen from '../screens/reminder/CreateReminderScreen';
+import EditReminderScreen from '../screens/reminder/EditReminderScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
