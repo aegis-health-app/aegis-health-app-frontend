@@ -172,13 +172,15 @@ const ReminderForm = ({
               </Button>
             </View>
           </View>
-          <ExpansibleToggle title="Advance">
+          <ExpansibleToggle title={t('reminderForm.advance')}>
             <View>
               <Text fontSize={16} mb={2}>
                 {t('reminderForm.repeat')}
               </Text>
               <RadioButtonGroup
-                selections={ReminderRepeatitionPattern}
+                selections={ReminderRepeatitionPattern.map((r) => {
+                  return { label: t(`reminderRepeatitionPattern.${r.label}`), value: r.value };
+                })}
                 value={repeatition}
                 setValue={setRepeatition}
               />
