@@ -581,5 +581,19 @@
     "body": "Elderly has been added.",
     "primaryButton": "OK",
     "secondaryButton": ""
+  },
+  "createMemoryRecall": {
+    "header": "Create question",
+    "question": "Question Title",
+    "title": "Title",
+    "image": "Image",
+    "imageHelperText": "No Image Selected",
+    "takePhoto": "Take a picture",
+    "browse": "Browse",
+    "questionType": "Question Type",
+    "multipleChoice": "Multiple Choice",
+    "shortAnswer": "Short answer",
+    "selectChoice": "Please select the correct choice",
+    "choice": "Choice"
   }
 }
