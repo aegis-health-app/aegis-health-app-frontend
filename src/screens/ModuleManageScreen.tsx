@@ -50,7 +50,7 @@ const ModuleManageScreen = () => {
             />
           }
           title={t('modules.memory')}
-          description={t('46')}
+          description={t('moduleSelection.memoryDesc')}
         />
         <ManageModuleCard
           moduleId={4}

@@ -125,6 +125,7 @@
   "moduleSelection": {
     "removeConfirmationText": "Are you sure you want to remove this module?",
     "reminderDesc": "Create reminder for yourself or share them with caretakers.",
+    "memoryDesc": "Bring back good memories between elderies and caretakers through a caretaker-curated quiz game.",
     "trackDesc": "Keep track of your health over time and view your trends.",
     "healthBlogDsc": "Stay up to date with accurate heath information.",
     "add": "Add",

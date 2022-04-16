@@ -9,8 +9,8 @@ import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
-import ReminderScreen from '../screens/reminder/ReminderScreen';
-import MemoryPracticeScreen from '../screens/MemoryPracticeScreen';
+import ReminderScreen from './../screens/ReminderScreen';
+import MemoryRecallScreen from '../screens/MemoryRecallScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -169,13 +169,13 @@ const MainNavigation = () => {
               name="EmergencyScreen"
               component={EmergencyScreen}
               options={{
-                title: t('emergency.header'),
+                title: t('emergency.header')
               }}
             />
             <Stack.Screen
               name="ReminderScreen"
               component={ReminderScreen}
-              options={{ 
+              options={{
                 title: t('modules.reminder'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '800' }
@@ -183,8 +183,12 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="MemoryScreen"
-              component={withEmergency(MemoryPracticeScreen)}
-              options={{ headerShown: false }}
+              component={MemoryRecallScreen}
+              options={{
+                title: t('modules.memory'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+              }}
             />
             <Stack.Screen
               name="AddHealthEntryScreen"
