@@ -40,6 +40,7 @@ export type RootStackParamList = {
   ElderlyEmotionHistory: undefined;
   HealthRecordingsScreen: undefined;
   CreateHealthRecordingsScreen: undefined;
+  CreateMemoryRecallQuestionsScreen: undefined;
 
   SignInScreen: undefined;
   SignUpScreen: { isElderly: boolean };

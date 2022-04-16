@@ -581,5 +581,19 @@
     "body": "การเชื่อมต่อสำเร็จ",
     "primaryButton": "ตกลง",
     "secondaryButton": ""
+  },
+  "createMemoryRecall": {
+    "header": "สร้างคำถาม",
+    "question": "คำถาม",
+    "title": "คำถามของฉัน",
+    "image": "รูปภาพ",
+    "imageHelperText": "ไม่มีรูปภาพ",
+    "takePhoto": "ถ่ายรูป",
+    "browse": "เลือกจากอุปกรณ์ของคุณ",
+    "questionType": "ประเภทของคำถาม",
+    "multipleChoice": "ปรนัย",
+    "shortAnswer": "อัตนัย",
+    "selectChoice": "โปรดเลือกตัวเลือกที่ถูกต้อง",
+    "choice": "ตัวเลือก"
   }
 }
