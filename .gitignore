@@ -8,3 +8,6 @@ ios
 .env.development
 
 yarn-error.log
+
+.idea
+android/app/src/main/jni

@@ -529,9 +529,9 @@
   },
   "reminder": {
     "createReminder": "สร้างการเตือน",
-    "editReminder": "แก้ไชการเตือน",
+    "editReminder": "แก้ไขการเตือน",
     "create": "สร้าง",
-    "edit": "แก้ไช",
+    "edit": "แก้ไข",
     "addANewReminder": "เพิ่มกาารเตือนความจำ +",
     "editAReminder": "แก้ไขการเตือนความจำ",
     "saveReminder": "บันทึกการเตือนความจำ",

@@ -25,7 +25,7 @@ const CreateReminderScreen = () => {
   const [repeatition, setRepeatition] = useState<string>('doesNotRepeat');
 
   const handleButtonState = () => {
-    if (watchInputs.title || watchInputs.title === '') return false;
+    if (watchInputs.title || watchInputs.title === '') return true;
     return false;
   };
 
