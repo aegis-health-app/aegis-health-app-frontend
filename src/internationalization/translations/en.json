@@ -535,7 +535,11 @@
     "addANewReminder": "Add a new reminder +",
     "editAReminder": "Edit a reminder",
     "saveReminder": "Save Reminder",
-    "deleteReminder": "Delete Reminder"
+    "deleteReminder": "Delete Reminder",
+    "confirmation": "Confirmation",
+    "deleteConfirmationDesc": "Are you sure you want to delete this reminder? All of the recurring reminder will be deleted.",
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "reminderForm": {
     "title": "Title",

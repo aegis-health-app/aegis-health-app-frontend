@@ -1,5 +1,5 @@
-import { Button, View } from 'native-base';
-import React, { useState } from 'react';
+import { AlertDialog, Button, View } from 'native-base';
+import React, { useRef, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import ReminderForm from '../../components/organisms/ReminderForm';
 import useKeyboardOpen from '../../hooks/useKeyboardOpen';
@@ -22,6 +22,7 @@ const EditReminderScreen = ({
     watch
   } = useForm({ mode: 'onTouched' });
   const watchInputs = watch();
+  const cancelRef = useRef(null);
 
   //   const [title, setTitle] = useState<string>("hello")
   const [date, setDate] = useState<Date>(info.dateTime);
@@ -30,6 +31,7 @@ const EditReminderScreen = ({
     info.notifyMyCaretaker
   );
   const [repeatition, setRepeatition] = useState<string>(info.repetition);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
 
   const handleButtonState = () => {
     if (watchInputs.title || watchInputs.title === '') return true;
@@ -48,6 +50,38 @@ const EditReminderScreen = ({
   };
   return (
     <>
+      <AlertDialog
+        leastDestructiveRef={cancelRef}
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(!dialogOpen)}>
+        <AlertDialog.Content>
+          <AlertDialog.CloseButton />
+          <AlertDialog.Header>
+            {t('reminder.confirmation')}
+          </AlertDialog.Header>
+          <AlertDialog.Body>
+            {t('reminder.deleteConfirmationDesc')}
+          </AlertDialog.Body>
+          <AlertDialog.Footer>
+            <Button.Group space={2}>
+              <Button
+                variant="ghost"
+                colorScheme="muted"
+                onPress={() => setDialogOpen(false)}
+                ref={cancelRef}>
+                {t('reminder.cancel')}
+              </Button>
+              <Button
+                colorScheme="danger"
+                // onPress={handlePressRemove}
+                onPress={()=>{}}
+                ref={cancelRef}>
+                {t('reminder.delete')}
+              </Button>
+            </Button.Group>
+          </AlertDialog.Footer>
+        </AlertDialog.Content>
+      </AlertDialog>
       <View style={styles.container}>
         <ReminderForm
           control={control}
@@ -97,7 +131,7 @@ const EditReminderScreen = ({
             mt={4}
             variant="outline"
             colorScheme="secondary"
-            onPress={handleSubmit(onSubmit)}>
+            onPress={() => setDialogOpen(true)}>
             {t('reminder.deleteReminder')}
           </Button>
         </View>
