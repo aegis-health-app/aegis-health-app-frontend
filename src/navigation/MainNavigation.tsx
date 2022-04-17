@@ -61,7 +61,8 @@ const MainNavigation = () => {
     setShowSettingsTourguide,
     setShowHealthRecordingsTourguide,
     setShowMemoryPracticeQuestionsTourguide,
-    setShowRemindersTourguide
+    setShowRemindersTourguide,
+    setShowMemoryRecallTourguide
   } = useContext(TourguideContext);
   const { user } = useContext(UserContext);
 
@@ -204,18 +205,29 @@ const MainNavigation = () => {
               name="RemindersCompletedScreen"
               component={RemindersCompletedScreen}
               options={{
-                title: t('reminders.completedHeader'),
-                headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+                title: t('reminders.completedHeader')
               }}
             />
             <Stack.Screen
               name="MemoryScreen"
               component={MemoryRecallScreen}
               options={{
-                title: t('modules.memory'),
+                title: t('viewAssignedQuestions.memoryPractice'),
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true,
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => setShowMemoryRecallTourguide(true)}>
+                    <Icon
+                      as={Feather}
+                      name="help-circle"
+                      size="7"
+                      color="#F97316"
+                      mr="4"
+                    />
+                  </TouchableOpacity>
+                )
               }}
             />
             <Stack.Screen
