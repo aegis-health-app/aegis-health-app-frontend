@@ -62,15 +62,6 @@ const ReminderForm = ({
     setDate && setDate(new Date(currentDate));
   };
 
-  // const onTimeChange = (event, selectedTime?: Date | undefined) => {
-  //   if (!selectedTime) return;
-  //   const currentDate = date.setTime(selectedTime.getTime());
-  //   setShowDateTimePicker(false);
-  //   setDate && setDate(new Date(currentDate));
-  //   console.log('time changed');
-  //   console.log(new Date(currentDate));
-  // };
-
   const showDatePicker = () => {
     setShowDateTimePicker(true);
     setMode('date');

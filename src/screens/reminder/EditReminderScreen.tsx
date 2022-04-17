@@ -32,7 +32,7 @@ const EditReminderScreen = ({
   const [repeatition, setRepeatition] = useState<string>(info.repetition);
 
   const handleButtonState = () => {
-    if (watchInputs.title || watchInputs.title === '') return false;
+    if (watchInputs.title || watchInputs.title === '') return true;
     return false;
   };
 
