@@ -535,7 +535,11 @@
     "addANewReminder": "เพิ่มกาารเตือนความจำ +",
     "editAReminder": "แก้ไขการเตือนความจำ",
     "saveReminder": "บันทึกการเตือนความจำ",
-    "deleteReminder": "ลบการเตือนความจำ"
+    "deleteReminder": "ลบการเตือนความจำ",
+    "confirmation": "ยืนยัน",
+    "deleteConfirmationDesc": "คุณต้องการลบการเตือนนี้หรือไม่ การตั้งเตือนซ้ำทุกครั้งจะถูกลบด้วย",
+    "delete": "ลบ",
+    "cancel": "ยกเลิก"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
