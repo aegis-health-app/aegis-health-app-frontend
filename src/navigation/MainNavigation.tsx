@@ -184,15 +184,6 @@ const MainNavigation = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="HealthRecordScreen"
-              component={withEmergency(HealthRecordScreen)}
-              options={{
-                title: t('modules.healthRecord'),
-                headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
-              }}
-            />
-            <Stack.Screen
               name="AddHealthEntryScreen"
               component={withEmergency(AddHealthEntry)}
               options={{
@@ -204,7 +195,6 @@ const MainNavigation = () => {
             <Stack.Screen
               name="EditHealthEntryScreen"
               component={withEmergency(EditHealthEntryScreen)}
-              initialParams={{ recordTitle: '' }}
               options={{
                 title: t(''),
                 headerTitleAlign: 'center',
