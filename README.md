@@ -87,6 +87,7 @@ Repository for Frontend codebase of Aegis Health App
   ```
 
 - useAuthentication: sets and gets the JSON Web Token
+
   ```
   const { getToken, setToken } = useAuthentication()
 
@@ -110,8 +111,8 @@ If you change the contents of `.env` and the content of the app doesn't follow, 
 - For implementation demo and prop descriptions, see this link
   - https://morioh.com/p/3444d39c7926
 
-
 Usage
+
 ```ts
 // setup
 const {
@@ -154,6 +155,7 @@ const imagePayload = {
 ```
 
 ## useFocusEffect
+
 This hook will run whenever that screen is visited (focused).
 
 Example usage
@@ -176,4 +178,41 @@ const SomeScreen = () => {
     // JSX here
   )
 }
+```
+
+## If your app build fails due to firebase
+
+Add classpath below to dependencies in `android/build.gradle `
+
+```
+  dependencies {
+        ...
+        classpath 'com.google.gms:google-services:4.3.10'
+        ...
+    }
+```
+
+Add the following to `android/app/build.gradle `
+
+```
+apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services' // <- Add this line
+
+
+dependencies {
+
+  ...
+
+  implementation 'com.google.firebase:firebase-core:16.0.1'
+  implementation 'com.google.firebase:firebase-messaging:17.0.0'
+  implementation platform('com.google.firebase:firebase-bom:29.2.1')
+  implementation 'com.google.firebase:firebase-analytics'
+
+  ...
+
+}
+
+...
+
+
 ```
