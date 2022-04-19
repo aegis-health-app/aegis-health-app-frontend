@@ -77,13 +77,15 @@ const MemoryRecallScreen = () => {
           zone={1}
           shape="rectangle"
           text={'Press the “Start Game” button to start the game.'}>
-          <Button
-            w="100%"
-            colorScheme="primary"
-            variant="solid"
-            onPress={() => navigation.goBack()}>
-            Start Game
-          </Button>
+          <View>
+            <Button
+              w="100%"
+              colorScheme="primary"
+              variant="solid"
+              onPress={() => navigation.navigate('MemoryRecallQuestionScreen')}>
+              Start Game
+            </Button>
+          </View>
         </TourGuideZone>
       </View>
       <View alignItems={'center'}>
