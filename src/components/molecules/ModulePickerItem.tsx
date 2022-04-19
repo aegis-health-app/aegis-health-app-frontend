@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import { Icon } from 'native-base';
 import { ModuleId } from '../../dto/modules/modules.dto';
 import ModulePickerCard from './ModulePickerCard';
@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import ManageModuleIcon from './../atoms/ManageModuleIcon';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { UserContext } from '../../contexts/UserContext';
 
 type ModulePickerItemProps = {
   mid: ModuleId;
@@ -18,6 +19,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
+  const { isElderly } = useContext(UserContext);
 
   function RenderModulePickerItemByMid() {
     if (mid === 0) {
@@ -60,7 +62,9 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.healthRecord')}
-          handlePress={() => navigation.navigate('HealthRecordingsScreen')}
+          handlePress={() => {
+            navigation.navigate('HealthRecordingsScreen');
+          }}
         />
       );
     } else if (mid === 3) {
@@ -76,7 +80,11 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.memory')}
-          handlePress={() => navigation.navigate('ViewAssignedQuestionsScreen')}
+          handlePress={() =>
+            isElderly === true
+              ? navigation.navigate('ViewAssignedQuestionsScreen')
+              : navigation.navigate('CreateMemoryRecallQuestionsScreen')
+          }
         />
       );
     } else if (mid === 4) {
