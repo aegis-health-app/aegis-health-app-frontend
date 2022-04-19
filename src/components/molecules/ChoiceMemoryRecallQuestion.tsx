@@ -1,4 +1,14 @@
-import { Box, Button, Image, Progress, Row, Text, View } from 'native-base';
+import {
+  Box,
+  Button,
+  HStack,
+  Image,
+  Progress,
+  Row,
+  Text,
+  View,
+  VStack
+} from 'native-base';
 import { flexbox } from 'native-base/lib/typescript/theme/styled-system';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -15,33 +25,80 @@ const ChoiceMemoryRecallQuestion = (props: ChoiceMemoryRecallQuestionProps) => {
   };
   const { questionNumber } = props;
   return (
-    <View padding={'16 px'}>
-      <View style={styles.progressBar}>
-        <Text fontWeight={'bold'}>
-          Question {questionNumber} of {questionNumber}
-        </Text>
-        <Button
-          h="full"
-          size="sm"
-          colorScheme="primary"
-          variant="outline"
-          onPress={() => console.log('skip')}>
-          Skip
-        </Button>
-        <Box w="90%" maxW="400">
-          <Progress value={45} mx="4" />
-        </Box>
-      </View>
+    <View justifyContent={'space-between'} height={'100%'} padding={'16 px'}>
       <View>
-        <Image
-          source={require('../../assets/images/tempMonday.png')}
-          // fallbackSource={images.healthRecording}
-          alt="temp image for memory recall question"
-          width={'100%'}
-          height={320}
-          resizeMode="contain"
-          mr={3}
-        />
+        <View style={styles.progressBar}>
+          <View bgColor={'red.300'}>
+            <Text fontSize={'md'} fontWeight={'bold'}>
+              Question {questionNumber} of {questionNumber}
+            </Text>
+
+            <Box w="90%" maxW="400">
+              <Progress value={45} mx="4" />
+            </Box>
+          </View>
+          <View>
+            <Button
+              size="sm"
+              colorScheme="primary"
+              variant="outline"
+              onPress={() => console.log('skip')}>
+              Skip
+            </Button>
+          </View>
+        </View>
+        <View>
+          <Image
+            source={require('../../assets/images/tempMonday.png')}
+            // fallbackSource={images.healthRecording}
+            alt="temp image for memory recall question"
+            width={'100%'}
+            height={200}
+            resizeMode="contain"
+            mr={3}
+          />
+        </View>
+        <View>
+          <Text fontSize={'lg'} fontWeight={'bold'}>
+            1. question place holder
+          </Text>
+          <Text fontSize={'sm'} color={'gray.500'}>
+            Select a choice:
+          </Text>
+        </View>
+        <View>
+          <Text>choices 1</Text>
+          <Text>choices 2</Text>
+          <Text>choices 3</Text>
+          <Text>choices 4</Text>
+        </View>
+      </View>
+      <View style={styles.buttonGroup}>
+        <VStack space={4}>
+          <HStack space={4} justifyContent="center" paddingX={12} marginTop={4}>
+            <Button
+              w={'170 px'}
+              colorScheme="primary"
+              variant="solid"
+              onPress={() => console.log('skip')}>
+              Back
+            </Button>
+            <Button
+              w={'170 px'}
+              colorScheme="primary"
+              variant="outline"
+              onPress={() => console.log('skip')}>
+              Check
+            </Button>
+          </HStack>
+          <Button
+            w="100%"
+            colorScheme="secondary"
+            variant="outline"
+            onPress={() => console.log('exit')}>
+            Exit game
+          </Button>
+        </VStack>
       </View>
     </View>
   );
@@ -52,6 +109,9 @@ export default ChoiceMemoryRecallQuestion;
 const styles = StyleSheet.create({
   progressBar: {
     flexDirection: 'row',
-    padding: 0
+    justifyContent: 'center'
+  },
+  buttonGroup: {
+    justifyContent: 'flex-end'
   }
 });
