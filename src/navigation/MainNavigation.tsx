@@ -44,6 +44,7 @@ import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
+import MemoryRecallQuestionScreen from '../screens/MemoryRecallQuestionScreen';
 import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
 import withEmergency from '../screens/WithEmergency';
 import CreateReminderScreen from '../screens/reminder/CreateReminderScreen';
@@ -212,7 +213,7 @@ const MainNavigation = () => {
               name="MemoryScreen"
               component={MemoryRecallScreen}
               options={{
-                title: t('viewAssignedQuestions.memoryPractice'),
+                title: 'Memory recall',
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true,
@@ -228,6 +229,16 @@ const MainNavigation = () => {
                     />
                   </TouchableOpacity>
                 )
+              }}
+            />
+            <Stack.Screen
+              name="MemoryRecallQuestionScreen"
+              component={MemoryRecallQuestionScreen}
+              options={{
+                title: 'Memory recall',
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
               }}
             />
             <Stack.Screen
