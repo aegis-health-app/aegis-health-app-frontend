@@ -28,7 +28,7 @@ const TakeCareElderlyScreen = () => {
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
   const { elderlyBasicProfile } = useProfileInfo(elderly);
-  const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState(false);
+  const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState<boolean>();
   const { currentElderlyUid: uid } = useContext(CaretakerContext);
 
   useAsyncEffect(async () => {
@@ -37,21 +37,20 @@ const TakeCareElderlyScreen = () => {
     setElderly(_elderly);
 
     const { isEnabled } = await getIsEmotionTrackingOn(uid);
+    console.log({ isEnabled });
     setIsEmotionTrackerOn(isEnabled);
   }, [uid]);
 
-  async function handleToggle() {
-    setIsEmotionTrackerOn((prev) => !prev);
-  }
-
-  useAsyncEffect(async () => {
+  async function onTrackerChange() {
     if (!uid) return;
-    if (isEmotionTrackerOn) {
-      await sendEmotionTrackerOn(uid);
-    } else {
+
+    setIsEmotionTrackerOn((prev) => !prev);
+    if (isEmotionTrackerOn === true) {
       await sendEmotionTrackerOff(uid);
+    } else {
+      await sendEmotionTrackerOn(uid);
     }
-  }, [isEmotionTrackerOn]);
+  }
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
@@ -74,7 +73,7 @@ const TakeCareElderlyScreen = () => {
                 defaultIsChecked
                 colorScheme="primary"
                 isChecked={isEmotionTrackerOn}
-                onToggle={handleToggle}
+                onToggle={onTrackerChange}
               />
             </View>
             <TouchableOpacity
