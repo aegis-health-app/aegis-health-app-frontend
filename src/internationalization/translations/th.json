@@ -325,7 +325,8 @@
     "time": "เวลา",
     "phone": "หมายเลขโทรศัพท์",
     "openInMaps": "เปิดในแอปพลิเคชันแผนที่ ",
-    "callSender": "โทรหา {{name}}"
+    "callSender": "โทรหา {{name}}",
+    "emergencyLocation": "สถานที่เกิดเหตุฉุกเฉิน"
   },
   "emergencyNotification": {
     "header": "ฉุกเฉิน",

@@ -2,6 +2,7 @@ import { Platform, Linking, PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import { requestLocationPermission } from './permission';
+import { t } from 'i18next';
 
 export interface Geolocation {
   latitude: number;
@@ -14,7 +15,7 @@ export const openMapApp: (location: Geolocation) => void = ({
 }) => {
   const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
   const latLng = `${latitude},${longtitude}`;
-  const label = 'Emergency Location';
+  const label = t('emergency.emergencyLocation');
   const url = Platform.select({
     ios: `${scheme}${label}@${latLng}`,
     android: `${scheme}${latLng}(${label})`

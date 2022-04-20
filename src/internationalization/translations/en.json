@@ -325,7 +325,8 @@
     "time": "Time",
     "phone": "Phone Number",
     "openInMaps": "Open in Maps ",
-    "callSender": "Call {{name}}"
+    "callSender": "Call {{name}}",
+    "emergencyLocation": "Emergency Location"
   },
   "emergencyNotification": {
     "header": "Alert",
