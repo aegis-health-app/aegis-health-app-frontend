@@ -3,23 +3,28 @@ import { Box, Button, Progress, Spacer, Text, View } from 'native-base';
 import { StyleSheet } from 'react-native';
 
 type MemoryRecallQuestionProgressProps = {
-  questionNumber: any;
+  questionNumber: number;
+  totalQuestion: number;
 };
 
 const MemoryRecallQuestionProgress = (
   props: MemoryRecallQuestionProgressProps
 ) => {
-  const { questionNumber } = props;
+  const { questionNumber, totalQuestion } = props;
+  const handleSkip = () => {
+    console.log('skipped');
+  };
+  const progress = (questionNumber / totalQuestion) * 100;
   return (
-    <View>
+    <View paddingX={'16 px'} paddingTop={'16 px'}>
       <View style={styles.progressBar}>
         <View w={'80%'} mr={'12 px'}>
           <Text fontSize={'md'} fontWeight={'bold'}>
-            Question {questionNumber} of {questionNumber}
+            Question {questionNumber} of {totalQuestion}
           </Text>
-          <Spacer height={1} />
+          <Spacer height={2} />
           <Box w="100%" maxW="400">
-            <Progress value={45} />
+            <Progress value={progress} />
           </Box>
         </View>
         <View>
@@ -27,7 +32,7 @@ const MemoryRecallQuestionProgress = (
             size="lg"
             colorScheme="primary"
             variant="outline"
-            onPress={() => console.log('skip')}>
+            onPress={() => handleSkip()}>
             Skip
           </Button>
         </View>

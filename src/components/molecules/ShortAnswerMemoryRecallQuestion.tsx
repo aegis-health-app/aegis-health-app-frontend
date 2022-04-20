@@ -8,7 +8,18 @@ import {
   changePasswordSchema
 } from '../../interfaces/Password';
 
-const ShortAnswerMemoryRecallQuestion = () => {
+import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
+import Spacer from '../atoms/Spacer';
+
+type Props = {
+  questionNumber: number;
+  mid: string;
+  question: string;
+  imageId: string;
+};
+
+const ShortAnswerMemoryRecallQuestion = (props: Props) => {
+  const { questionNumber, mid, question, imageId } = props;
   const resolver = useYupValidationResolver(changePasswordSchema);
   const {
     control,
@@ -28,20 +39,26 @@ const ShortAnswerMemoryRecallQuestion = () => {
           mr={3}
         />
       </View>
+      <Spacer />
       <View>
         <Text fontSize={'lg'} fontWeight={'bold'}>
-          1. question place holder
+          {questionNumber}.{question}
         </Text>
         <Text fontSize={'sm'} color={'gray.500'}>
           Type in your answer:
         </Text>
         <TextInput
           placeholder={'Type in your answer'}
-          name="newPassword"
+          name="shortAnswer"
           control={control}
           errors={errors}
         />
       </View>
+      <MemoryRecallAnswerButtons
+        questionNumber={questionNumber}
+        answer={'a'}
+        showAnswer={false}
+      />
     </View>
   );
 };
