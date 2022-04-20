@@ -1,3 +1,4 @@
+import { Vibration } from 'react-native';
 import { client } from '../../config/axiosConfig';
 import { reverseGeocode } from '../geolocation';
 
@@ -20,3 +21,13 @@ export const sendEmergencySignal = async ({ latitude, longtitude }) => {
 export const sendEmergencyCancel = async () => {
   return await client.get('notification/emergency/cancel');
 };
+
+export const startEmergencyVibration = () => {
+  const ONE_SECOND_IN_MS = 1000;
+
+  const PATTERN = [1 * ONE_SECOND_IN_MS, 1 * ONE_SECOND_IN_MS];
+
+  Vibration.vibrate(PATTERN, true);
+};
+
+export const cancelVibration = () => Vibration.cancel();
