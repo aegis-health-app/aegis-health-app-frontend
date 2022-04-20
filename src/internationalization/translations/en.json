@@ -593,7 +593,13 @@
     "questionType": "Question Type",
     "multipleChoice": "Multiple Choice",
     "shortAnswer": "Short answer",
+    "questionPool": "Question Pool",
+
     "selectChoice": "Please select the correct choice",
-    "choice": "Choice"
+    "choice": "Choice",
+
+    "questionRequired": "Question is required",
+    "choiceRequired": "All choices are required",
+    "answerRequired": "Please specify the correct answer"
   }
 }

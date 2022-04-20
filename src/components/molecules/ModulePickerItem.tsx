@@ -83,7 +83,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
           handlePress={() =>
             isElderly === true
               ? navigation.navigate('ViewAssignedQuestionsScreen')
-              : navigation.navigate('CreateMemoryRecallQuestionsScreen')
+              : navigation.navigate('QuestionPoolScreen')
           }
         />
       );

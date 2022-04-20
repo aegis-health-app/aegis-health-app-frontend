@@ -51,7 +51,11 @@ import CreateReminderScreen from '../screens/reminder/CreateReminderScreen';
 import EditReminderScreen from '../screens/reminder/EditReminderScreen';
 =======
 import CreateMemoryRecallQuestionsScreen from './../screens/CreateMemoryRecallQuestionsScreen';
+<<<<<<< HEAD
 >>>>>>> c677cff (feat: add UI for create memory recall questions screen)
+=======
+import QuestionPoolScreen from '../screens/QuestionPoolScreen';
+>>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -393,21 +397,31 @@ const MainNavigation = () => {
             />
             <Stack.Screen
 <<<<<<< HEAD
+<<<<<<< HEAD
               name="CreateReminderScreen"
               component={CreateReminderScreen}
               options={{
                 title: t('reminder.createReminder'),
+=======
+              name="QuestionPoolScreen"
+              component={QuestionPoolScreen}
+              options={{
+                title: t('createMemoryRecall.questionPool'),
+>>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
               }}
             />
             <Stack.Screen
+<<<<<<< HEAD
               name="EditReminderScreen"
               component={EditReminderScreen}
               options={{
                 title: t('reminder.editReminder'),
 =======
+=======
+>>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
               name="CreateMemoryRecallQuestionsScreen"
               component={CreateMemoryRecallQuestionsScreen}
               options={{
