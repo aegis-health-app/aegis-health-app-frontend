@@ -20,10 +20,10 @@ import Alert, { AlertType } from '../components/organisms/Alert';
 import DatePicker from '../components/molecules/DatePicker';
 import { useImageSelection } from '../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
-import FallbackImage, { FallbackImageLarge } from '../components/molecules/FallbackImage';
+import { FallbackImageLarge } from '../components/molecules/FallbackImage';
 
 // Temporary profile image
-const ProfilePic = require('../assets/images/profile.png');
+const ProfilePic = require('../assets/images/defaultProfile.png');
 
 const ProfileEditScreen = () => {
   const { t } = useTranslation();
