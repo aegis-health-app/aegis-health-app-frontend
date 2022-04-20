@@ -75,6 +75,8 @@
     "male": "Male",
     "female": "Female",
     "editBirthdate": "Edit Birthdate",
+    "editTime": "Edit Time",
+    "editDate": "Edit Date",
     "editName": "Edit Display Name"
   },
   "profile": {

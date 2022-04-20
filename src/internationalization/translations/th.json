@@ -75,6 +75,8 @@
     "male": "ชาย",
     "female": "หญิง",
     "editBirthdate": "แก้ไขวันเกิด",
+    "editTime": "แก้ไขเวลา",
+    "editDate": "แก้ไขวันที่",
     "editName": "เปลี่ยนชื่อผู้ใช้"
   },
   "profile": {

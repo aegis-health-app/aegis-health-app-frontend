@@ -9,6 +9,7 @@ import {
 } from '../../interfaces/healthRecording';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
+import useDimensions from '../../hooks/useDimensions';
 
 export enum TableMode {
   EDIT = 'EDIT',
@@ -23,6 +24,8 @@ type HealthDataTableProps = {
 
 const HealthDataTable = (props: HealthDataTableProps) => {
   const { healthData, mode, onDeleteRow } = props;
+  const { ScreenWidth } = useDimensions();
+
   const [page, setPage] = useState<number>(0);
   const [currentData, setCurrentData] = useState<HealthRecordingDataRow[]>([]);
 
@@ -38,7 +41,7 @@ const HealthDataTable = (props: HealthDataTableProps) => {
   return (
     <View>
       <ScrollView horizontal>
-        <View minWidth="100%" height={300}>
+        <View minWidth={ScreenWidth - 32} height={300}>
           <DataTable>
             <View>
               <DataTable.Header style={{ height: 60 }}>
