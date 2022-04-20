@@ -15,6 +15,7 @@ import DatePicker from '../../components/molecules/DatePicker';
 import TimePicker from '../../components/molecules/TimePicker';
 import Alert, { AlertType } from '../../components/organisms/Alert';
 import { client } from '../../config/axiosConfig';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
 import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
@@ -26,10 +27,10 @@ const AddHealthEntry = () => {
     getHealthRecordTable,
     healthTable,
     currentHrName,
-    currentElderlyUid,
     currentHrImage,
     healthRecordTemplates
   } = useContext(HealthRecordContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -63,7 +64,9 @@ const AddHealthEntry = () => {
     const recording = healthRecordTemplates.find((template) => {
       return template.hrName === currentHrName;
     });
-    if (recording && recording.imageid) return { uri: recording.imageid };
+    console.log({ currentHrName, recording });
+    if (recording && recording.imageid)
+      return { uri: recording.imageid + '?' + new Date() };
     if (recording && recording.imageid === null) return undefined;
     currentHrImage ? { uri: currentHrImage } : undefined;
   };
@@ -88,6 +91,11 @@ const AddHealthEntry = () => {
       data: fields
     };
     try {
+      console.log(
+        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
+          user.isElderly ? '' : currentElderlyUid
+        }`
+      );
       const { data } = await client.post(
         `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
           user.isElderly ? '' : currentElderlyUid
