@@ -55,7 +55,7 @@ export type RootStackParamList = {
   ViewAssignedQuestionsScreen: undefined;
   ViewHistoryScreen: undefined;
   ViewHistoryDetailsScreen: undefined;
-  
+
   CreateReminderScreen: undefined;
   EditReminderScreen: { info: ReminderInfo };
 };
