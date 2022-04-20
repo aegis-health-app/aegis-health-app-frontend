@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ViewHistoryCard from '../components/organisms/HistoryCard';
 
 interface HistoryCard {
-  date: string | Date;
-  time: string;
-  score: string;
+  timestamp: string | Date;
 }
 
 const ViewHistoryScreen = () => {
@@ -14,9 +12,9 @@ const ViewHistoryScreen = () => {
 
   //get backend question pool
   const [historyList, setHistoryList] = useState<HistoryCard[]>([
-    { date: '1970-01-09T00:00:00.000Z', time: '17:52', score: '3/4' },
-    { date: '1970-01-09T00:00:00.000Z', time: '17:52', score: '2/5' },
-    { date: '1970-01-09T00:00:00.000Z', time: '17:52', score: '8/10' }
+    { timestamp: '1970-01-09T01:49:29.000Z' },
+    { timestamp: '1970-01-09T00:00:00.000Z' },
+    { timestamp: '1970-01-09T00:00:00.000Z' }
   ]);
 
   return (
@@ -36,11 +34,7 @@ const ViewHistoryScreen = () => {
         <ScrollView>
           {historyList.map((data, index: number) => (
             <View key={index}>
-              <ViewHistoryCard
-                date={data.date}
-                time={data.time}
-                score={data.score}
-              />
+              <ViewHistoryCard date={data.timestamp} />
             </View>
           ))}
         </ScrollView>

@@ -11,9 +11,9 @@ type HistoryCardProps = {
   choice2?: string;
   choice3?: string;
   choice4?: string;
-  correct?: boolean;
-  selectedAnswer?: number;
-  answer?: number | string;
+  isCorrect?: boolean;
+  elderlyAnswer?: string;
+  correctAnswer?: string;
   index: number;
 };
 
@@ -24,9 +24,9 @@ const ViewHistoryDetailsCard = ({
   choice2,
   choice3,
   choice4,
-  correct,
-  selectedAnswer,
-  answer,
+  isCorrect,
+  elderlyAnswer,
+  correctAnswer,
   index
 }: HistoryCardProps) => {
   const { t } = useTranslation();
@@ -51,61 +51,69 @@ const ViewHistoryDetailsCard = ({
     if (choice1)
       return (
         <View>
-          {selectedAnswer == 1 ? (
-            <Text fontWeight="semibold">
-              {t('viewHistory.answer')}
-            </Text>
+          {elderlyAnswer == choice1 ? (
+            <Text fontWeight="semibold">{t('viewHistory.answer')}</Text>
           ) : null}
           <View
             pb="2"
             borderRadius="6"
             bgColor={
-              selectedAnswer == 1 ? (correct ? '#D1FAE5' : '#FFE4E6') : null
+              elderlyAnswer == choice1
+                ? isCorrect
+                  ? '#D1FAE5'
+                  : '#FFE4E6'
+                : null
             }>
             <Text mt="2" ml="2">
               {choice1}
             </Text>
           </View>
-          {selectedAnswer == 2 ? (
-            <Text fontWeight="semibold">
-              {t('viewHistory.answer')}
-            </Text>
+          {elderlyAnswer == choice2 ? (
+            <Text fontWeight="semibold">{t('viewHistory.answer')}</Text>
           ) : null}
           <View
             pb="2"
             borderRadius="6"
             bgColor={
-              selectedAnswer == 2 ? (correct ? '#D1FAE5' : '#FFE4E6') : null
+              elderlyAnswer == choice2
+                ? isCorrect
+                  ? '#D1FAE5'
+                  : '#FFE4E6'
+                : null
             }>
             <Text mt="2" ml="2">
               {choice2}
             </Text>
           </View>
-          {selectedAnswer == 3 ? (
-            <Text fontWeight="semibold">
-              {t('viewHistory.answer')}
-            </Text>
+          {elderlyAnswer == choice3 ? (
+            <Text fontWeight="semibold">{t('viewHistory.answer')}</Text>
           ) : null}
           <View
             pb="2"
             borderRadius="6"
             bgColor={
-              selectedAnswer == 3 ? (correct ? '#D1FAE5' : '#FFE4E6') : null
+              elderlyAnswer == choice3
+                ? isCorrect
+                  ? '#D1FAE5'
+                  : '#FFE4E6'
+                : null
             }>
             <Text mt="2" ml="2">
               {choice3}
             </Text>
           </View>
-          {selectedAnswer == 4 ? (
-            <Text fontWeight="semibold">
-              {t('viewHistory.answer')}
-            </Text>
+          {elderlyAnswer == choice4 ? (
+            <Text fontWeight="semibold">{t('viewHistory.answer')}</Text>
           ) : null}
           <View
             pb="2"
             borderRadius="6"
             bgColor={
-              selectedAnswer == 4 ? (correct ? '#D1FAE5' : '#FFE4E6') : null
+              elderlyAnswer == choice4
+                ? isCorrect
+                  ? '#D1FAE5'
+                  : '#FFE4E6'
+                : null
             }>
             <Text mt="2" ml="2">
               {choice4}
@@ -117,7 +125,7 @@ const ViewHistoryDetailsCard = ({
       <View>
         <Text fontWeight="semibold">{t('viewHistory.answer')}</Text>
         <Text mt="2" ml="2">
-          {answer}
+          {elderlyAnswer}
         </Text>
       </View>
     );
@@ -128,7 +136,7 @@ const ViewHistoryDetailsCard = ({
         <Text fontWeight="bold">
           {t('viewHistory.question')} {index + 1}
         </Text>
-        {correct || correct == undefined ? (
+        {isCorrect || isCorrect == undefined ? (
           <Text fontWeight="bold" color="#1D84DF">
             {t('viewHistory.correct')}
           </Text>
