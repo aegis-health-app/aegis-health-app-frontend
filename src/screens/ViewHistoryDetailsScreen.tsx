@@ -38,7 +38,7 @@ const ViewHistoryDetailsScreen = () => {
 
   //get backend question pool
   const [history, setHistory] = useState<HistoryCard>({
-    timestamp: '2022-04-20T10:14:41.057Z',
+    timestamp: '2022-04-19 22:08:54.799000',
     questions: [
       {
         imageUrl:
@@ -77,6 +77,11 @@ const ViewHistoryDetailsScreen = () => {
     ]
   });
 
+  const handleDateFormat = (date: string | Date) => {
+    const temp = date.toString().split(' ')
+    return `${temp[0]}T${temp[1].substring(0,11)}Z`
+  }
+
   return (
     <ScrollView>
       <View pb={2} mx={4} width="100%">
@@ -87,7 +92,7 @@ const ViewHistoryDetailsScreen = () => {
               alignItems="center"
               justifyContent="space-between">
               <Text fontWeight="bold" fontSize="17">
-                {getFormattedDateTime(new Date(history.timestamp), language)}
+                {getFormattedDateTime(new Date(handleDateFormat(history.timestamp)), language)}
               </Text>
             </View>
           </View>

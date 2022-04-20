@@ -12,10 +12,17 @@ const ViewHistoryScreen = () => {
 
   //get backend question pool
   const [historyList, setHistoryList] = useState<HistoryCard[]>([
-    { timestamp: '1970-01-09T01:49:29.000Z' },
-    { timestamp: '1970-01-09T00:00:00.000Z' },
-    { timestamp: '1970-01-09T00:00:00.000Z' }
+    { timestamp: '2022-04-19 22:08:54.799000' },
+    { timestamp: '2022-04-19 22:08:54.799000' },
+    { timestamp: '2022-04-19 22:08:54.799000' }
   ]);
+
+  const handleDateFormat = (date: string | Date) => {
+    const temp = date.toString().split(' ');
+    return `${temp[0]}T${temp[1].substring(0, 11)}Z`;
+  };
+
+  handleDateFormat(historyList[0].timestamp);
 
   return (
     <View flex={1}>
@@ -34,7 +41,7 @@ const ViewHistoryScreen = () => {
         <ScrollView>
           {historyList.map((data, index: number) => (
             <View key={index}>
-              <ViewHistoryCard date={data.timestamp} />
+              <ViewHistoryCard date={handleDateFormat(data.timestamp)} />
             </View>
           ))}
         </ScrollView>
