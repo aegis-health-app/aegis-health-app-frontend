@@ -12,13 +12,14 @@ import {
   View,
   VStack
 } from 'native-base';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import images from '../assets/images';
+import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
-import { Geolocation, openMapApp } from '../utils/geolocation';
+import { Geolocation, openMapApp, reverseGeocode } from '../utils/geolocation';
 import { openDialScreen } from '../utils/phone';
 
 export type EmergencyInfo = {
@@ -45,6 +46,17 @@ const EmergencyInfoScreen = ({ route }) => {
     () => route?.params.info,
     [route]
   );
+
+  const [address, setAddress] = useState<string>('');
+
+  useAsyncEffect(async () => {
+    const addressString = await reverseGeocode(
+      emergencyInfo.location.latitude,
+      emergencyInfo.location.longtitude
+    );
+
+    setAddress(addressString);
+  }, [emergencyInfo, reverseGeocode]);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -80,7 +92,11 @@ const EmergencyInfoScreen = ({ route }) => {
             <HStack w="full" key={info.label} mb={2}>
               <Text flex={1}>{info.label}</Text>
               <View flex={2}>
-                <Text bold>{emergencyInfo[info.value]}</Text>
+                <Text bold>
+                  {info.value === 'address'
+                    ? address
+                    : emergencyInfo[info.value]}
+                </Text>
                 {info.value === 'address' && (
                   <Pressable mt={2} onPress={openEmergencyLocation}>
                     <Text bold underline color="blue.500">
