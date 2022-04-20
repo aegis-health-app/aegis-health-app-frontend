@@ -9,7 +9,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { RootStackParamList } from '../../navigation/types';
 import FallbackImage from '../molecules/FallbackImage';
 
-const ProfilePic = require('../../assets/images/profile.png');
+const ProfilePic = require('../../assets/images/defaultProfile.png');
 
 const ProfileSection = () => {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ const ProfileSection = () => {
       <TouchableOpacity onPress={() => navigation.navigate('ProfileScreen')}>
         <View flexDir="row">
           <Image
-            source={user?.imageid ? { uri: user?.imageid } : ProfilePic}
+            source={user?.imageid ? { uri: user.imageid } : ProfilePic}
             width="12"
             height="12"
             borderRadius={4}

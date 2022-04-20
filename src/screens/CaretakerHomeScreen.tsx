@@ -30,7 +30,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { UserContext } from '../contexts/UserContext';
 import FallbackImage from '../components/molecules/FallbackImage';
 
-const ProfilePic = require('../assets/images/profile.png');
+const ProfilePic = require('../assets/images/defaultProfile.png');
 
 const CaretakerHomeScreen = () => {
   const { canStart, start, eventEmitter, tourKey } =
@@ -93,7 +93,7 @@ const CaretakerHomeScreen = () => {
                 onPress={() => navigation.navigate('ProfileScreen')}>
                 <View flexDir="row">
                   <Image
-                    source={user ? { uri: user.imageid } : ProfilePic}
+                    source={user?.imageid ? { uri: user.imageid } : ProfilePic}
                     width="12"
                     height="12"
                     borderRadius={4}
