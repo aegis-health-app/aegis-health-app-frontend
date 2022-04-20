@@ -411,11 +411,7 @@ const MainNavigation = () => {
               component={SplashScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="OnBoardingScreen"
-              component={OnBoardingScreen}
-              options={{ headerShown: false }}
-            />
+
             <Stack.Screen
               name="SignInScreen"
               component={SignInScreen}
@@ -450,6 +446,11 @@ const MainNavigation = () => {
                 title: 'Forgot Password',
                 headerShown: false
               }}
+            />
+            <Stack.Screen
+              name="OnBoardingScreen"
+              component={OnBoardingScreen}
+              options={{ headerShown: false }}
             />
           </>
         )}

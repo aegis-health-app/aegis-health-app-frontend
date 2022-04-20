@@ -47,13 +47,14 @@ const SettingScreen = () => {
     whether this specific tour guide has been viewed yet. If viewd, it returns true.
   */
   useAsyncEffect(async () => {
+    if (showSettingsTourguide) return;
     const fetchData = async () => {
       const result = await AsyncStorage.getItem('viewedSettingsTourguide');
       return result ? JSON.parse(result) : false;
     };
     const shouldShow = !(await fetchData());
     setShowSettingsTourguide(shouldShow);
-  }, [AsyncStorage, showSettingsTourguide]);
+  }, [AsyncStorage]);
 
   /*
     This useEffect will start the tour guide when the component is ready
@@ -73,6 +74,17 @@ const SettingScreen = () => {
       await AsyncStorage.setItem('viewedSettingsTourguide', 'true');
     });
   }, [eventEmitter]);
+
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    setShow(false);
+    setTimeout(() => {
+      setShow(true);
+    }, 0);
+  }, [showSettingsTourguide]);
+
+  if (!show) return null;
 
   return (
     <View style={styles.pageContainer}>

@@ -44,6 +44,7 @@ const HealthRecordingsScreen = () => {
     useTourGuideController();
 
   useAsyncEffect(async () => {
+    if (showHealthRecordingsTourguide) return;
     const fetchData = async () => {
       const result = await AsyncStorage.getItem(
         'viewedHealthRecordingsTourguide'
@@ -52,7 +53,7 @@ const HealthRecordingsScreen = () => {
     };
     const shouldShow = !(await fetchData());
     setShowHealthRecordingsTourguide(shouldShow);
-  }, [AsyncStorage, showHealthRecordingsTourguide]);
+  }, [AsyncStorage]);
 
   useEffect(() => {
     if (canStart && showHealthRecordingsTourguide && start) start();
@@ -74,7 +75,16 @@ const HealthRecordingsScreen = () => {
     }, [])
   );
 
-  if (!showScreen) return null;
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    setShow(false);
+    setTimeout(() => {
+      setShow(true);
+    }, 0);
+  }, [showHealthRecordingsTourguide]);
+
+  if (!show || !showScreen) return null;
 
   return (
     <View flex={1} mb={4}>
