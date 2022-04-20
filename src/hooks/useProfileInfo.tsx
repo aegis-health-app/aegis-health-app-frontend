@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../contexts/UserContext';
 import { Caretaker, Elderly } from '../dto/modules/user.dto';
-import { ProfileItem } from '../interfaces/User';
+import { ProfileItem } from './useUserValidation';
 import { getFormattedDate } from '../utils/getFormattedDate';
 import { useSettings } from './useSettings';
 

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { FlatList, Text, View, Image } from 'native-base';
+import { Text, View, Image } from 'native-base';
 import { StyleSheet } from 'react-native';
 import Spacer from '../atoms/Spacer';
-import { ProfileItem } from '../../interfaces/User';
+import { ProfileItem } from '../../hooks/useUserValidation';
 import images from '../../assets/images';
 import { UserContext } from '../../contexts/UserContext';
 import { FallbackImageLarge } from './FallbackImage';
