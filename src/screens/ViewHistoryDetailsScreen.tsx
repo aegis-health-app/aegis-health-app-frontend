@@ -7,25 +7,28 @@ import Divider from '../components/atoms/Divider';
 import ViewHistoryDetailsCard from '../components/organisms/HistoryDetailsCard';
 import { useSettings } from '../hooks/useSettings';
 import { RootStackParamList } from '../navigation/types';
-import { getFormattedDate } from '../utils/getFormattedDate';
+import {
+  getFormattedDate,
+  getFormattedDateTime
+} from '../utils/getFormattedDate';
 
 interface HistoryCard {
-  date: string | Date;
-  time: string;
-  score: string;
+  timestamp: string | Date;
   questions: Question[];
 }
 
 interface Question {
-  imageId: string | undefined;
+  imageUrl: string | undefined;
+  mid: number;
   question: string;
+  isMultipleChoice: boolean;
   choice1?: string;
   choice2?: string;
   choice3?: string;
   choice4?: string;
-  correct?: boolean;
-  answer?: number | string;
-  selectedAnswer?: number;
+  isCorrect?: boolean;
+  correctAnswer?: string;
+  elderlyAnswer?: string;
 }
 const ViewHistoryDetailsScreen = () => {
   const { t } = useTranslation();
@@ -35,67 +38,57 @@ const ViewHistoryDetailsScreen = () => {
 
   //get backend question pool
   const [history, setHistory] = useState<HistoryCard>({
-    date: '1970-01-09T00:00:00.000Z',
-    time: '17:52',
-    score: '3/4',
+    timestamp: '2022-04-20T10:14:41.057Z',
     questions: [
       {
-        imageId: 'https://storage.googleapis.com/aegis-user-profile/profile-35-8bea3a2b86e7b27f4fcaea795cf76f1d17748e39e4252baa1a3d90c5c3ac95b3.jpg',
+        imageUrl:
+          'https://storage.googleapis.com/aegis-user-profile/profile-35-8bea3a2b86e7b27f4fcaea795cf76f1d17748e39e4252baa1a3d90c5c3ac95b3.jpg',
+        mid: 0,
+        isMultipleChoice: true,
         question: 'What did you eat this morning?',
         choice1: 'Burger',
         choice2: 'Steak',
         choice3: 'Krapao',
         choice4: 'All of the above',
-        correct: true,
-        answer: 2,
-        selectedAnswer: 2
+        isCorrect: true,
+        correctAnswer: 'Steak',
+        elderlyAnswer: 'Steak'
       },
       {
-        imageId: undefined,
+        imageUrl: undefined,
+        mid: 0,
+        isMultipleChoice: true,
         question: 'What did you eat this afternoon?',
         choice1: 'Fries',
         choice2: 'Ice Cream',
         choice3: 'Dinner',
         choice4: 'All of the above',
-        correct: false,
-        answer: 1,
-        selectedAnswer: 3
+        isCorrect: false,
+        correctAnswer: 'Fries',
+        elderlyAnswer: 'Dinner'
       },
       {
-        imageId: undefined,
+        imageUrl: undefined,
+        mid: 0,
+        isMultipleChoice: false,
         question: 'What is your favourite subject?',
-        answer: 'ICE Capstone',
+        elderlyAnswer: 'ICE Capstone'
       }
     ]
   });
-
-  const handleScore = () => {
-    const scoreSplit = history.score.split('/')
-    if(parseInt(scoreSplit[0])/parseInt(scoreSplit[1]) < 0.5) return '#C2410C';
-    return '#005DB4'
-  }
 
   return (
     <ScrollView>
       <View pb={2} mx={4} width="100%">
         <View flexDir="row" mb="3">
-          <View
-            mt={4}
-            flexDir="row"
-            justifyContent="space-between"
-            alignItems="center"
-            width="92%">
-            <View flexDir="row" alignItems="center" justifyContent="space-between" width="41.5%">
+          <View mt={4} flexDir="row" alignItems="center" width="92%">
+            <View
+              flexDir="row"
+              alignItems="center"
+              justifyContent="space-between">
               <Text fontWeight="bold" fontSize="17">
-                {getFormattedDate(new Date(history.date), language)}
+                {getFormattedDateTime(new Date(history.timestamp), language)}
               </Text>
-              <Text fontWeight="bold" fontSize="17">{history.time}</Text>
-            </View>
-            <View flexDir="row" alignItems="center" justifyContent="space-between" width="30%">
-              <Text fontSize="14" color="#52525B">
-                {t('viewHistory.totalScore')}
-              </Text>
-              <Text fontWeight="bold" fontSize="17" color={handleScore()}>{history.score}</Text>
             </View>
           </View>
         </View>
@@ -105,16 +98,16 @@ const ViewHistoryDetailsScreen = () => {
               <ViewHistoryDetailsCard
                 index={index}
                 question={data.question}
-                imageId={data.imageId}
+                imageId={data.imageUrl}
                 choice1={data.choice1}
                 choice2={data.choice2}
                 choice3={data.choice3}
                 choice4={data.choice4}
-                correct={data.correct}
-                answer={data.answer}
-                selectedAnswer={data.selectedAnswer}
+                isCorrect={data.isCorrect}
+                correctAnswer={data.correctAnswer}
+                elderlyAnswer={data.elderlyAnswer}
               />
-              <Divider/>
+              <Divider />
             </View>
           ))}
         </View>
