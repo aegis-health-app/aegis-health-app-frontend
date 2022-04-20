@@ -36,6 +36,7 @@ export interface Elderly extends User {
 }
 
 export interface CaretakerInfoView {
+  name: string;
   fullName: string;
   gender: 'F' | 'M';
   bdate: string;

@@ -36,6 +36,7 @@ const EditCaretakerScreen = ({
             <InputBox
               name={t('userForm.editName')}
               onChangeText={handleChange}
+              defaultValue={info.name}
             />
           </View>
           <Divider />

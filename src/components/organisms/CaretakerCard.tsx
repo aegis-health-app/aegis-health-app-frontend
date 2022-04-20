@@ -5,7 +5,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import EditButton from '../atoms/EditButton';
-import { useTranslation } from 'react-i18next';
 import { getDisplayName } from '../../utils/elderly/displayNames';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { FallbackImageMedium } from '../molecules/FallbackImage';
@@ -36,8 +35,6 @@ const UserCard = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const { t } = useTranslation();
-
   const isFocused = useIsFocused();
 
   const [displayName, setDisplayName] = useState<string>('');
@@ -47,7 +44,7 @@ const UserCard = ({
   }, [isFocused]);
 
   const handleDisplay = () => {
-    if (displayName == '') return name;
+    if (displayName === '') return name;
     return displayName;
   };
 
@@ -79,6 +76,7 @@ const UserCard = ({
         onPress={() =>
           navigation.navigate('EditCaretakerScreen', {
             info: {
+              name: name,
               fullName: fullName,
               gender: gender,
               bdate: bdate,

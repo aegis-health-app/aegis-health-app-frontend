@@ -5,9 +5,10 @@ type InputBoxProps = {
   name: string;
   placeholder?: string;
   onChangeText?: any;
+  defaultValue?: string;
 };
 
-const InputBox = ({ name, onChangeText }: InputBoxProps) => {
+const InputBox = ({ name, onChangeText, defaultValue }: InputBoxProps) => {
   return (
     <View>
       <Box flexDir="row">
@@ -24,6 +25,7 @@ const InputBox = ({ name, onChangeText }: InputBoxProps) => {
           fontSize="sm"
           padding={3}
           onChangeText={onChangeText}
+          defaultValue={defaultValue ?? ''}
         />
       </Box>
     </View>
