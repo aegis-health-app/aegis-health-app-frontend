@@ -5,7 +5,6 @@ import Spacer from '../components/atoms/Spacer';
 import { useTranslation } from 'react-i18next';
 import KeyboardAvoidingView from '../components/atoms/KeyboardAvoidingView';
 import { UserContext } from '../contexts/UserContext';
-import { userProfileSchema } from '../interfaces/User';
 import Divider from '../components/atoms/Divider';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
@@ -21,6 +20,7 @@ import DatePicker from '../components/molecules/DatePicker';
 import { useImageSelection } from '../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { FallbackImageLarge } from '../components/molecules/FallbackImage';
+import { useUserValidation } from '../hooks/useUserValidation';
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/defaultProfile.png');
@@ -31,6 +31,7 @@ const ProfileEditScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
+  const userProfileSchema = useUserValidation;
   const resolver = useYupValidationResolver(userProfileSchema);
   const {
     control,

@@ -1,6 +1,9 @@
 import React from 'react';
 import { AlertDialog, Button } from 'native-base';
-import { AlertMessage, AlertMessages } from '../../constants/AlertMessages';
+import {
+  AlertMessage,
+  useAlertMessages
+} from '../../constants/useAlertMessages';
 
 export enum AlertType {
   ERROR = 'ERROR',
@@ -19,6 +22,7 @@ type AlertProps = {
 
 const Alert = (props: AlertProps) => {
   const { isOpen, close, cancel, type, message, customString } = props;
+  const AlertMessages = useAlertMessages();
 
   const getMessage = (): AlertMessage | undefined => {
     return AlertMessages[message];

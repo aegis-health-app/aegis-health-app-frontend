@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import TextInput from '../../components/atoms/TextInput';
 import * as Yup from 'yup';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
-import i18n from '../../internationalization/i18n.config';
 import {
   CameraPhotoOptions,
   requestCameraPermission
@@ -46,6 +45,7 @@ interface UpdateHealthRecordDTO {
 }
 
 const CustomHealthRecordingScreen = () => {
+  const { t } = useTranslation();
   const [customImage, setCustomImage] = useState<ImagePickerResponse>();
   const [fieldList, setFieldList] = useState<Fields[]>([
     { name: undefined, unit: undefined }
@@ -55,7 +55,7 @@ const CustomHealthRecordingScreen = () => {
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const inputSchema = Yup.object({
-    title: Yup.string().required(i18n.t('healthRecording.titleBlankError'))
+    title: Yup.string().required(t('healthRecording.titleBlankError'))
   });
 
   const { user } = useContext(UserContext);
@@ -63,8 +63,6 @@ const CustomHealthRecordingScreen = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const { t } = useTranslation();
 
   const {
     control,

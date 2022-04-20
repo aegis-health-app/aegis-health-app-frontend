@@ -8,16 +8,14 @@ import Spacer from '../components/atoms/Spacer';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-import {
-  ChangePasswordDto,
-  changePasswordSchema
-} from '../interfaces/Password';
+import { ChangePasswordDto } from '../hooks/usePassword';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import TextInput from '../components/atoms/TextInput';
 import { client } from '../config/axiosConfig';
 import Alert, { AlertType } from '../components/organisms/Alert';
+import { usePassword } from '../hooks/usePassword';
 
 const ChangeAccountPasswordScreen = () => {
   const [showOldPassword, setShowOldPassword] = useState<boolean>(false);
@@ -26,6 +24,7 @@ const ChangeAccountPasswordScreen = () => {
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
   const { t } = useTranslation();
+  const changePasswordSchema = usePassword();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const resolver = useYupValidationResolver(changePasswordSchema);

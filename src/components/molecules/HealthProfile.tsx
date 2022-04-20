@@ -1,7 +1,7 @@
 import React from 'react';
-import { FlatList, Text, View } from 'native-base';
+import { Text, View } from 'native-base';
 import Spacer from '../atoms/Spacer';
-import { ProfileItem } from '../../interfaces/User';
+import { ProfileItem } from '../../hooks/useUserValidation';
 
 const HealthInfoItem = ({ label, value }: ProfileItem) => (
   <View>

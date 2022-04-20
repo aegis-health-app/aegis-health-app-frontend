@@ -10,13 +10,14 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import TextInput from '../components/atoms/TextInput';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
-import { changePhoneNumberSchema } from '../dto/PhoneNumber';
+import { usePhoneNumber } from '../hooks/usePhoneNumber';
 import { useForm } from 'react-hook-form';
 
 // WORK IN PROGRESS
 
 const ChangePhoneNumberScreen = () => {
   const { t } = useTranslation();
+  const changePhoneNumberSchema = usePhoneNumber();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const resolver = useYupValidationResolver(changePhoneNumberSchema);
@@ -35,7 +36,7 @@ const ChangePhoneNumberScreen = () => {
   };
 
   const shouldDisable = (errors) => {
-    return errors['phoneNumber']?.message;
+    return errors.phoneNumber?.message;
   };
 
   return (
