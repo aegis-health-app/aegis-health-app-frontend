@@ -182,11 +182,6 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="ReminderScreen"
-              component={withEmergency(ReminderScreen)}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
               name="MemoryScreen"
               component={withEmergency(MemoryPracticeScreen)}
               options={{ headerShown: false }}
@@ -388,7 +383,17 @@ const MainNavigation = () => {
                 headerShown: true
               }}
             />
-               <Stack.Screen
+            <Stack.Screen
+              name="CreateReminderScreen"
+              component={CreateReminderScreen}
+              options={{
+                title: t('reminder.createReminder'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
               name="EditReminderScreen"
               component={EditReminderScreen}
               options={{
