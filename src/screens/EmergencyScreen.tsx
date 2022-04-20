@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { getCurrentLocation } from '../utils/geolocation';
 import { openDialScreen } from '../utils/phone';
-import { sendEmergencySignal } from '../utils/user/notification';
+import {
+  sendEmergencyCancel,
+  sendEmergencySignal
+} from '../utils/user/notification';
 
 const EmergencyScreen = () => {
   const { t } = useTranslation();
@@ -26,7 +29,8 @@ const EmergencyScreen = () => {
     setEmergency(true);
   }, [setEmergency]);
 
-  const cancelEmergency = useCallback(() => {
+  const cancelEmergency = useCallback(async () => {
+    await sendEmergencyCancel();
     setEmergency(false);
   }, [setEmergency]);
 

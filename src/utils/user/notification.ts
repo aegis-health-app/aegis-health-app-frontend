@@ -16,3 +16,7 @@ export const sendEmergencySignal = async ({ latitude, longtitude }) => {
     address
   });
 };
+
+export const sendEmergencyCancel = async () => {
+  return await client.get('notification/emergency/cancel');
+};
