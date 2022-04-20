@@ -10,10 +10,7 @@ import {
 } from 'native-base';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  MultipleChoiceValidationSchema,
-  ShortAnswerValidationSchema
-} from '../../dto/modules/memoryRecall';
+import { ShortAnswerValidationSchema } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
