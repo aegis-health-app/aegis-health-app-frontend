@@ -289,7 +289,8 @@
     "continue": "Continue",
     "enterYourVerificationCode": "Enter Your Verification Code",
     "verificationCodeSentTo": "Enter the verification code sent to",
-    "submit": "Submit"
+    "submit": "Submit",
+    "invalidOTP": "OTP must be exactly 6 characters"
   },
   "changePhoneNumberSuccess": {
     "header": "Success",
