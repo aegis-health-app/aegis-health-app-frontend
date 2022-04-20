@@ -15,12 +15,12 @@ const SplashScreen = () => {
 
   useAsyncEffect(async () => {
     const viewed = await AsyncStorage.getItem('viewedOnboarding');
+    if (!viewed) {
+      navigation.replace('OnBoardingScreen');
+      return;
+    }
     try {
       const _user = await getUser();
-      if (!viewed) {
-        navigation.replace('OnBoardingScreen');
-        return;
-      }
       if (!_user) {
         navigation.replace('SignInScreen');
         return;
