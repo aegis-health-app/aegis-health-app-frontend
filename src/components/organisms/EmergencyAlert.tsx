@@ -1,10 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { AlertDialog, Button, Text } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { EmergencyInfo } from '../../screens/EmergencyInfoScreen';
 import { useTranslation } from 'react-i18next';
+import {
+  cancelVibration,
+  startEmergencyVibration
+} from '../../utils/user/notification';
 
 export enum AlertType {
   ERROR = 'ERROR',
@@ -34,6 +38,12 @@ const EmergencyAlert: React.FC<EmergencyAlertProps> = ({
   }, [emergencyInfo]);
 
   const cancelRef = React.useRef(null);
+
+  useEffect(() => {
+    if (isOpen) startEmergencyVibration();
+    else cancelVibration();
+  }, [isOpen]);
+
   return (
     <AlertDialog
       leastDestructiveRef={cancelRef}
