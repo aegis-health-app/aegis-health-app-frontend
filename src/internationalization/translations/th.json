@@ -594,6 +594,11 @@
     "multipleChoice": "ปรนัย",
     "shortAnswer": "อัตนัย",
     "selectChoice": "โปรดเลือกตัวเลือกที่ถูกต้อง",
-    "choice": "ตัวเลือก"
+    "choice": "ตัวเลือก",
+    "questionPool": "คำถามทั้งหมด",
+
+    "questionRequired": "โปรดใส่คำถาม",
+    "choiceRequired": "โปรดสร้างตัวเลือกทุกตัว",
+    "answerRequired": "โปรดเลือกคำตอบที่ถูกต้อง"
   }
 }

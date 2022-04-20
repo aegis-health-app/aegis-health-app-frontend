@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogBox } from 'react-native';
 import { NativeBaseProvider, extendTheme } from 'native-base';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigation from './src/navigation/MainNavigation';
@@ -14,6 +15,10 @@ import { requestLocationPermission } from './src/utils/permission';
 import useAsyncEffect from './src/hooks/useAsyncEffect';
 import { useLanguage } from './src/internationalization/useLanguage';
 import { initGeocoding } from './src/utils/geolocation';
+
+LogBox.ignoreLogs([
+  'If you do not provide children, you must specify an aria-label for accessibility'
+]);
 
 const theme = extendTheme({
   main: {},
