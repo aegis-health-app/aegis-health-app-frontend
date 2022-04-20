@@ -4,7 +4,7 @@ import {
   NativeStackScreenProps
 } from '@react-navigation/native-stack';
 import { Button, Text, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -18,6 +18,7 @@ import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode'
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
 import Alert, { AlertType } from '../components/organisms/Alert';
+import { UserContext } from '../contexts/UserContext';
 
 const ChangePhoneNumberVerificationScreen = ({
   route
@@ -39,6 +40,7 @@ const ChangePhoneNumberVerificationScreen = ({
     watch
   } = useForm({ resolver, mode: 'onChange' });
 
+  const { getUserProfile } = useContext(UserContext);
   const shouldDisable = (errors) => {
     return errors['verificationCode']?.message;
   };
@@ -51,7 +53,10 @@ const ChangePhoneNumberVerificationScreen = ({
     };
     try {
       const { data } = await client.put('/setting/changePhoneNumber', payload);
-      if (data) setShowSuccessAlert(true);
+      if (data) {
+        getUserProfile();
+        setShowSuccessAlert(true);
+      }
     } catch (err) {
       setShowErrorAlert(true);
     }

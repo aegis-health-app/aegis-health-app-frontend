@@ -289,7 +289,8 @@
     "continue": "ดำเนินการต่อ",
     "enterYourVerificationCode": "กรอกรหัสยืนยัน",
     "verificationCodeSentTo": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่",
-    "submit": "ดำเนินการต่อ"
+    "submit": "ดำเนินการต่อ",
+    "invalidOTP": "รหัส OTP ต้องมี 6 หลัก"
   },
   "changePhoneNumberSuccess": {
     "header": "สำเร็จ",
