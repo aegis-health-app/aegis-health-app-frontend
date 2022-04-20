@@ -182,6 +182,8 @@ const SomeScreen = () => {
 
 ## If your app build fails due to firebase
 
+Add `google-services.json` which is provided privately to `android/app/`
+
 Add classpath below to dependencies in `android/build.gradle `
 
 ```
