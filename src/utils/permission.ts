@@ -2,7 +2,6 @@ import { PermissionsAndroid, Platform } from 'react-native';
 
 import { CameraOptions } from 'react-native-image-picker';
 import i18n from '../internationalization/i18n.config';
-import { initGeocoding } from './geolocation';
 
 export const CameraPhotoOptions: CameraOptions = {
   mediaType: 'photo',
@@ -48,7 +47,6 @@ export const requestLocationPermission = async () => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('You can use the location');
-        await initGeocoding();
         return granted;
       } else {
         console.log('location permission denied');
