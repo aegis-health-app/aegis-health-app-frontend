@@ -9,6 +9,7 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 import Spacer from '../../components/atoms/Spacer';
 import Alert, { AlertType } from '../../components/organisms/Alert';
 import { client } from '../../config/axiosConfig';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
 import { UserContext } from '../../contexts/UserContext';
 import useDimensions from '../../hooks/useDimensions';
@@ -23,10 +24,10 @@ const EditHealthEntryScreen = () => {
     healthTable,
     currentHrImage,
     currentHrName,
-    currentElderlyUid,
     setCurrentHrImage,
     fetchHealthRecordings
   } = useContext(HealthRecordContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -48,7 +49,7 @@ const EditHealthEntryScreen = () => {
     console.log(currentHrImage);
     if (newHealthRecordCover && newHealthRecordCover.assets)
       return { uri: newHealthRecordCover.assets[0].uri };
-    if (currentHrImage) return { uri: currentHrImage };
+    if (currentHrImage) return { uri: currentHrImage + '?' + new Date() };
     return undefined;
   };
 
@@ -102,7 +103,17 @@ const EditHealthEntryScreen = () => {
       }
     };
     try {
-      const { data } = await client.put('/healthRecord/elderly', payload);
+      console.log(
+        `/healthRecord/${user?.isElderly ? 'elderly' : 'caretaker'}${
+          user?.isElderly ? '' : currentElderlyUid
+        }`
+      );
+      const { data } = await client.put(
+        `/healthRecord${user?.isElderly ? '/elderly' : '/caretaker'}/${
+          user?.isElderly ? '' : currentElderlyUid
+        }`,
+        payload
+      );
       if (data) {
         setShowSuccessImageUpdate(true);
         getHealthRecordTable();

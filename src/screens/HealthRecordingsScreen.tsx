@@ -122,12 +122,12 @@ const HealthRecordingsScreen = () => {
                 <HealthRecordingCard
                   key={i}
                   backgroundColor="#fff"
-                  image={template.imageid}
+                  image={template.imageid + '?' + new Date()}
                   hrName={template.hrName}
                   handlePress={() => {
                     stop();
                     setCurrentHrName(template.hrName);
-                    setCurrentHrImage(template.imageid);
+                    setCurrentHrImage(template.imageid + '?' + new Date());
                     navigation.navigate('AddHealthEntryScreen');
                   }}
                 />
@@ -136,11 +136,11 @@ const HealthRecordingsScreen = () => {
               <HealthRecordingCard
                 key={i}
                 backgroundColor="#fff"
-                image={template.imageid}
+                image={template.imageid + '?' + new Date()}
                 hrName={t(template.hrName)}
                 handlePress={() => {
                   setCurrentHrName(template.hrName);
-                  setCurrentHrImage(template.imageid);
+                  setCurrentHrImage(template.imageid + '?' + new Date());
                   navigation.navigate('AddHealthEntryScreen');
                 }}
               />

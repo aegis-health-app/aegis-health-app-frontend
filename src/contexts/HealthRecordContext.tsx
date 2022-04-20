@@ -6,6 +6,7 @@ import {
   HealthRecording,
   HealthRecordingData
 } from '../interfaces/healthRecording';
+import { CaretakerContext } from './CaretakerContext';
 import { UserContext } from './UserContext';
 
 export interface HealthRecordContextStruct {
@@ -31,6 +32,7 @@ export const HealthRecordContext = createContext(
 
 const HealthRecordProvider = ({ ...props }) => {
   const { user } = useContext(UserContext);
+  const { currentElderlyUid: elderlyUid } = useContext(CaretakerContext);
 
   const [healthTable, setHealthTable] = useState<HealthRecordingData>();
   const [currentElderlyUid, setCurrentElderlyUid] = useState<number>();
@@ -45,7 +47,7 @@ const HealthRecordProvider = ({ ...props }) => {
     if (!user) return;
 
     const tempHrName = currentHrName;
-    const tempElderlyUid = currentElderlyUid;
+    const tempElderlyUid = elderlyUid;
     const { data } = await client.get(
       `healthRecord/table/${
         user.isElderly ? '' : `${tempElderlyUid}/`
@@ -53,6 +55,7 @@ const HealthRecordProvider = ({ ...props }) => {
     );
     const _data = { ...data, data: data.data.reverse() };
     setHealthTable(_data);
+    console.log(_data);
   };
 
   const fetchHealthRecordings = async () => {
@@ -61,7 +64,7 @@ const HealthRecordProvider = ({ ...props }) => {
       setMyTemplates(res.data.listHealthRecord);
       setHealthRecordTemplates(res.data.listHealthRecord);
     } else {
-      const payload = { elderlyuid: currentElderlyUid };
+      const payload = { elderlyuid: elderlyUid };
       const res = await client.post('/healthRecord/getAll/caretaker', payload);
       setMyTemplates(res.data.listHealthRecord);
       setHealthRecordTemplates(res.data.listHealthRecord);
