@@ -62,7 +62,6 @@ const MemoryRecallScreen = () => {
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
-      {/* <Spacer{'4','6'} /> */}
       <View alignItems={'center'} padding={'16'}>
         <Image
           width={'183 px'}
