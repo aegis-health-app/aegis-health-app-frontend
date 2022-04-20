@@ -68,7 +68,10 @@ const TextInput: React.FC<TextInputProps> = ({
         rules={{
           required: errorMessage,
           pattern: validationType && {
-            value: validationPatterns[validationType] || '',
+            value:
+              validationType === TextInputValidationType.PHONE
+                ? /^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/
+                : validationPatterns[validationType] || '',
             message: t('error.invalid', { name: label })
           }
         }}
