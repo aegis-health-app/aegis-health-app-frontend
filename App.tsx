@@ -12,6 +12,8 @@ import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
 import HealthRecordContextProvider from './src/contexts/HealthRecordContext';
 import { requestLocationPermission } from './src/utils/permission';
 import useAsyncEffect from './src/hooks/useAsyncEffect';
+import { useLanguage } from './src/internationalization/useLanguage';
+import { initGeocoding } from './src/utils/geolocation';
 
 const theme = extendTheme({
   main: {},
@@ -88,8 +90,11 @@ const App = () => {
     finish: t('misc.finish')
   };
 
+  const { language } = useLanguage();
+
   useAsyncEffect(async () => {
     await requestLocationPermission();
+    await initGeocoding(language());
   }, []);
 
   return (
