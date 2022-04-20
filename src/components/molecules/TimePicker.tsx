@@ -24,7 +24,7 @@ const TimePicker = (props: TimePickerProps) => {
   };
 
   const showDatepicker = () => {
-    showMode('date');
+    showMode('time');
   };
 
   return (
@@ -37,7 +37,10 @@ const TimePicker = (props: TimePickerProps) => {
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
-            onChange={onDateChange}
+            onChange={(event, selectedTime) => {
+              onDateChange(event, selectedTime);
+              setShow(false);
+            }}
             mode={mode as AndroidNativeProps['mode']}
             style={Platform.OS === 'ios' ? { width: 124 } : null}
           />

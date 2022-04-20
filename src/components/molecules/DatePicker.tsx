@@ -39,7 +39,10 @@ const DatePicker = (props: DatePickerProps) => {
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
-            onChange={onDateChange}
+            onChange={(event, selectedTime) => {
+              onDateChange(event, selectedTime);
+              setShow(false);
+            }}
             mode={mode as AndroidNativeProps['mode']}
             style={Platform.OS === 'ios' ? { width: 124 } : null}
           />
@@ -53,7 +56,7 @@ const DatePicker = (props: DatePickerProps) => {
             alignItems="center">
             <Text w={100}>{getFormattedDate(date, language)}</Text>
             <Button onPress={() => showDatepicker()}>
-              {t('userForm.editBirthdate')}
+              {t('userForm.editDate')}
             </Button>
           </View>
         )}
