@@ -3,6 +3,7 @@
     "otp": "รหัสยืนยัน",
     "enterOTP": "กรุณากรอกรหัสยืนยันของคุณ",
     "enterOTPDesc": "โปรดกรอกรหัสยืนยันที่ถูกส่งไปที่ ",
+    "incorrectOtp": "รหัสยืนยันของคุณไม่ถูกต้อง",
     "phonePlaceholder": "0xxxxxxxxx",
     "resendOTP": "ส่งรหัสยืนยันอีกครั้ง",
     "tryAgainLater": "กรุณาลองใหม่อีกครั้ง"
