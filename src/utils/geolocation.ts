@@ -42,8 +42,8 @@ export const getCurrentLocation = async (successFunction) => {
   } else return coords;
 };
 
-export const initGeocoding = () => {
-  Geocoder.init(process.env.GOOGLE_MAPS_API_KEY ?? '');
+export const initGeocoding = (language = 'en') => {
+  Geocoder.init(process.env.GOOGLE_MAPS_API_KEY ?? '', { language });
 };
 
 export const reverseGeocode = async (lat: number, lng: number) => {
