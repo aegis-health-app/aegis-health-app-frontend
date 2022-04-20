@@ -443,6 +443,14 @@ const MainNavigation = () => {
                 headerShown: false
               }}
             />
+            <Stack.Screen
+              name="ForgotPasswordScreen"
+              component={withEmergency(ForgotPasswordScreen)}
+              options={{
+                title: 'Forgot Password',
+                headerShown: false
+              }}
+            />
           </>
         )}
       </Stack.Navigator>
