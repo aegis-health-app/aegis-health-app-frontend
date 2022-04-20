@@ -24,6 +24,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { signIn } from '../utils/auth';
 import { useAuthentication } from '../hooks/useAuthentication';
 import { UserContext } from '../contexts/UserContext';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
 const SignInScreen = () => {
   const {
@@ -32,6 +35,8 @@ const SignInScreen = () => {
     handleSubmit,
     setError
   } = useForm();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { ScreenWidth } = useDimensions();
   const { t } = useTranslation();
@@ -56,6 +61,10 @@ const SignInScreen = () => {
       });
     }
   }, []);
+
+  const goToForgotPassword = () => {
+    navigation.navigate('ForgotPasswordScreen');
+  };
 
   return (
     <SafeAreaView>
@@ -112,7 +121,7 @@ const SignInScreen = () => {
               }
             />
           </Box>
-          <Pressable>
+          <Pressable onPress={goToForgotPassword}>
             <Text textAlign="right" color="blue.600" mb={2}>
               {t('auth.forgotPassword')}
             </Text>

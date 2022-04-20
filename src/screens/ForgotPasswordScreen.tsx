@@ -1,5 +1,6 @@
+import { t } from 'i18next';
 import { Box, ScrollView, VStack } from 'native-base';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AuthFooter, { AuthType } from '../components/atoms/AuthFooter';
@@ -7,7 +8,6 @@ import ForgotPasswordStage1 from '../components/molecules/ForgotPasswordStage1';
 import ForgotPasswordStage2 from '../components/molecules/ForgotPasswordStage2';
 import ForgotPasswordStage3 from '../components/molecules/ForgotPasswordStage3';
 import { client } from '../config/axiosConfig';
-import { UserContext } from '../contexts/UserContext';
 import useDimensions from '../hooks/useDimensions';
 import { verifyOTP } from '../utils/auth';
 
@@ -22,7 +22,8 @@ const ForgotPasswordScreen = () => {
     control,
     formState: { errors },
     handleSubmit,
-    watch
+    watch,
+    setError
   } = useForm();
   const { ScreenHeight } = useDimensions();
   const [stage, setStage] = useState(stages.first);
@@ -49,10 +50,16 @@ const ForgotPasswordScreen = () => {
           if (res.data.status === 'success') {
             setStage(stages.third);
           } else {
-            console.log('wrong pin');
+            setError('otp', {
+              type: 'custom',
+              message: t('general.incorrectOtp')
+            });
           }
         } catch (err) {
-          console.log(err);
+          setError('otp', {
+            type: 'custom',
+            message: t('general.incorrectOtp')
+          });
         }
       } else if (stage === stages.third) {
         // WIP: need to wait for backend api endpoint

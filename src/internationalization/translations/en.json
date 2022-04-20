@@ -3,6 +3,7 @@
     "otp": "Verification Code",
     "enterOTP": "Enter Your Verification Code",
     "enterOTPDesc": "Enter the verification code sent to ",
+    "incorrectOtp": "Incorrect verification code.",
     "phonePlaceholder": "0xxxxxxxxx",
     "resendOTP": "Resend Verification Code",
     "tryAgainLater": "Please try again later."
