@@ -52,4 +52,5 @@ export interface ReminderInfo {
   repetition: string;
   note: string;
   image?: ImagePickerResponse;
+  importanceLevel: string;
 }

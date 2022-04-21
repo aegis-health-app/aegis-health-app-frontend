@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import TextInput from '../atoms/TextInput';
+import DropDownSelect from '../atoms/DropDownSelect';
 import { useSettings } from '../../hooks/useSettings';
-import { Button, HStack, Text, ScrollView, View, Image } from 'native-base';
+import {
+  Button,
+  HStack,
+  Text,
+  ScrollView,
+  View,
+  Image,
+  QuestionIcon
+} from 'native-base';
 import Spacer from '../atoms/Spacer';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -13,6 +22,10 @@ import { useImageSelection } from '../../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import ExpansibleToggle from '../atoms/ExpansibleToggle';
 import { ReminderRepeatitionPattern } from '../../constants/ReminderRepeatitionConstants';
+import { UserContext } from '../../contexts/UserContext';
+import CustomRecurringModal from '../organisms/CustomRecurringModal';
+import ImportanceLevelInfoCard from './ImportanceLevelInfoCard';
+
 const ReminderForm = ({
   control,
   errors,
@@ -25,7 +38,9 @@ const ReminderForm = ({
   repeatition,
   setRepeatition,
   title,
-  note
+  note,
+  importanceLevel,
+  setImportanceLevel
 }: {
   control: any;
   errors: any;
@@ -39,13 +54,19 @@ const ReminderForm = ({
   setRepeatition: (repeatition: string) => void;
   title?: string;
   note?: string;
+  importanceLevel: string;
+  setImportanceLevel: (importanceLavel: string) => void;
 }) => {
   const { t } = useTranslation();
   const { language } = useSettings();
+  const { isElderly } = useContext(UserContext);
   const { takePicture, selectPictureFromDevice } = useImageSelection();
 
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [mode, setMode] = useState('date');
+  const [showCustomModal, setShowCustomModal] = useState<boolean>(false);
+  const [showImportanceLevelInfoModal, setShowImportanceLevelInfoModal] =
+    useState<boolean>(false);
 
   const onNewPictureUpload = (picture: ImagePickerResponse) => {
     setImage(picture);
@@ -72,10 +93,33 @@ const ReminderForm = ({
     setMode('time');
   };
 
+  const importantLevels = [
+    {
+      label: 'Low',
+      value: 'low'
+    },
+    { label: 'Medium', value: 'medium' },
+    { label: 'High', value: 'high' }
+  ];
+
+  useEffect(() => {
+    repeatition === 'custom' && setShowCustomModal(true);
+  }, [repeatition]);
+
   return (
     <>
       <ScrollView>
         <View p={4} marginBottom={12}>
+          <CustomRecurringModal
+            dialogOpen={showCustomModal}
+            setDialogOpen={setShowCustomModal}
+            defaultRepeatition={'doesNotRepeat'}
+            setRepeatition={setRepeatition}
+          />
+          <ImportanceLevelInfoCard
+            dialogOpen={showImportanceLevelInfoModal}
+            setDialogOpen={setShowImportanceLevelInfoModal}
+          />
           <View style={styles.title}>
             <Text fontSize="xl" fontWeight={'bold'}>
               {t('reminderForm.generalInformation')}
@@ -179,6 +223,30 @@ const ReminderForm = ({
                 setValue={setRepeatition}
               />
             </View>
+            {!isElderly ? (
+              <></>
+            ) : (
+              <>
+                <Spacer />
+                <View>
+                  <View style={styles.itemRow}>
+                    <Text fontSize={16} mb={2}>
+                      {t('reminderForm.importanceLevel')}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => setShowImportanceLevelInfoModal(true)}>
+                      <QuestionIcon name="question" size="6"/>
+                    </TouchableOpacity>
+                  </View>
+
+                  <DropDownSelect
+                    value={importanceLevel}
+                    items={importantLevels}
+                    setValue={setImportanceLevel}
+                  />
+                </View>
+              </>
+            )}
             <Spacer />
             <View>
               <TextInput
