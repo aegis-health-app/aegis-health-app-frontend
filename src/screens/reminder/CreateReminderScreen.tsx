@@ -23,9 +23,10 @@ const CreateReminderScreen = () => {
   const [image, setImage] = useState<ImagePickerResponse>();
   const [notifyMyCaretakers, setNotifyMyCaretaker] = useState<boolean>(true);
   const [repeatition, setRepeatition] = useState<string>('doesNotRepeat');
+  const [importanceLevel, setImportanceLevel] = useState<string>('low')
 
   const handleButtonState = () => {
-    if (watchInputs.title || watchInputs.title === '') return true;
+    if (!watchInputs.title || watchInputs.title === '') return true;
     return false;
   };
 
@@ -54,6 +55,8 @@ const CreateReminderScreen = () => {
           setNotifyMyCaretaker={setNotifyMyCaretaker}
           repeatition={repeatition}
           setRepeatition={setRepeatition}
+          importanceLevel={importanceLevel}
+          setImportanceLevel={setImportanceLevel}
         />
       </View>
 

@@ -16,10 +16,6 @@ export const ReminderRepeatitionPattern = [
     value: 'everymonth'
   },
   {
-    label: 'everyyear',
-    value: 'everyyear'
-  },
-  {
     label: 'custom',
     value: 'custom'
   }
