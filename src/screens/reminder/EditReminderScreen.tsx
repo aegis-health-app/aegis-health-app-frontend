@@ -31,6 +31,7 @@ const EditReminderScreen = ({
     info.notifyMyCaretaker
   );
   const [repeatition, setRepeatition] = useState<string>(info.repetition);
+  const [importanceLevel, setImportanceLevel] = useState<string>(info.importanceLevel);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false)
 
   const handleButtonState = () => {
@@ -96,6 +97,8 @@ const EditReminderScreen = ({
           setRepeatition={setRepeatition}
           title={info.title}
           note={info.note}
+          importanceLevel={importanceLevel}
+          setImportanceLevel={setImportanceLevel}
         />
       </View>
 
