@@ -126,6 +126,18 @@ export const useAlertMessages = () => {
       body: i18n.t('emergencyNotification.body'),
       primaryButton: i18n.t('emergencyNotification.primaryButton'),
       secondaryButton: i18n.t('emergencyNotification.secondaryButton')
+    },
+    connectElderlySuccess: {
+      header: i18n.t('connectElderlySuccess.header'),
+      body: i18n.t('connectElderlySuccess.body'),
+      primaryButton: i18n.t('connectElderlySuccess.primaryButton'),
+      secondaryButton: i18n.t('connectElderlySuccess.secondaryButton')
+    },
+    connectElderlyError: {
+      header: i18n.t('connectElderlyError.header'),
+      body: i18n.t('connectElderlyError.body'),
+      primaryButton: i18n.t('connectElderlyError.primaryButton'),
+      secondaryButton: i18n.t('connectElderlyError.secondaryButton')
     }
   };
   return AlertMessages;
