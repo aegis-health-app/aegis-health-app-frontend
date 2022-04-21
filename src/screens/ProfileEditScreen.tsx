@@ -31,7 +31,7 @@ const ProfileEditScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
-  const userProfileSchema = useUserValidation;
+  const userProfileSchema = useUserValidation();
   const resolver = useYupValidationResolver(userProfileSchema);
   const {
     control,
@@ -99,15 +99,14 @@ const ProfileEditScreen = () => {
   const submitUpdatedProfileInfo = async (payload) =>
     updateUserProfile(payload);
 
-  const onFormSubmit = async (data) => {
+  const onFormSubmit = (data) => {
     data = {
       ...data,
       gender: initialValues?.gender || GenderEnum.male,
       bday: moment(date ?? initialValues?.bday, 'YYYY/MM/DD HH:mm:ss'),
       bloodType: initialValues?.bloodType
     };
-
-    await submitUpdatedProfileInfo(data);
+    submitUpdatedProfileInfo(data);
     if (newProfileImage && newProfileImage?.assets) uploadNewProfileImage();
   };
 
