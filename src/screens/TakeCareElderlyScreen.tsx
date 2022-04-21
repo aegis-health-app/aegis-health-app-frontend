@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Text, View, Switch, ScrollView } from 'native-base';
+import { Text, View, Switch, ScrollView, Button } from 'native-base';
 import { RootStackParamList } from '../navigation/types';
 import { Elderly } from './../dto/modules/user.dto';
 import useAsyncEffect from './../hooks/useAsyncEffect';
-import { getCaretakingElderlyByEid } from '../utils/caretaker/profile';
+import {
+  getCaretakerHomeProfile,
+  getCaretakingElderlyByEid
+} from '../utils/caretaker/profile';
 import { useTranslation } from 'react-i18next';
 import BasicProfile, {
   BasicProfileMode
@@ -21,15 +24,20 @@ import {
   sendEmotionTrackerOn
 } from '../utils/caretaker/switch';
 import { CaretakerContext } from '../contexts/CaretakerContext';
+import { UserContext } from '../contexts/UserContext';
+import { client } from '../config/axiosConfig';
+import HealthProfile from '../components/molecules/HealthProfile';
 
 const TakeCareElderlyScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [elderly, setElderly] = useState<Elderly>();
   const { t } = useTranslation();
-  const { elderlyBasicProfile } = useProfileInfo(elderly);
+  const { elderlyBasicProfile, healthProfile } = useProfileInfo(elderly);
   const [isEmotionTrackerOn, setIsEmotionTrackerOn] = useState<boolean>();
-  const { currentElderlyUid: uid } = useContext(CaretakerContext);
+  const { currentElderlyUid: uid, setCaretakerHomeProfile } =
+    useContext(CaretakerContext);
+  const { user } = useContext(UserContext);
 
   useAsyncEffect(async () => {
     if (!uid) return;
@@ -51,6 +59,24 @@ const TakeCareElderlyScreen = () => {
     }
   }
 
+  async function onRemoveElderly() {
+    const eid = uid;
+    const cid = user?.uid;
+
+    if (eid && cid) {
+      const { status } = await client.delete('user/relationship', {
+        data: { eid: eid, cid: cid }
+      });
+      if (status === 200) {
+        const _caretakerHomeProfile = await getCaretakerHomeProfile();
+        if (_caretakerHomeProfile) {
+          setCaretakerHomeProfile(_caretakerHomeProfile);
+        }
+        navigation.goBack();
+      }
+    }
+  }
+
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <ScrollView nestedScrollEnabled>
@@ -60,6 +86,7 @@ const TakeCareElderlyScreen = () => {
             image={elderly?.imageid}
             mode={BasicProfileMode.OTHER}
           />
+          <HealthProfile data={healthProfile} />
         </View>
         <Spacer />
         <View px={4}>
@@ -109,6 +136,13 @@ const TakeCareElderlyScreen = () => {
               </View>
             </View>
           )}
+          <Button
+            colorScheme="error"
+            variant="outline"
+            mb={4}
+            onPress={onRemoveElderly}>
+            {t('modules.removeElderly')}
+          </Button>
         </View>
       </ScrollView>
     </SafeAreaView>
