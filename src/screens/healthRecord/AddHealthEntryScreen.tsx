@@ -64,7 +64,6 @@ const AddHealthEntry = () => {
     const recording = healthRecordTemplates.find((template) => {
       return template.hrName === currentHrName;
     });
-    console.log({ currentHrName, recording });
     if (recording && recording.imageid)
       return { uri: recording.imageid + '?' + new Date() };
     if (recording && recording.imageid === null) return undefined;
@@ -91,11 +90,6 @@ const AddHealthEntry = () => {
       data: fields
     };
     try {
-      console.log(
-        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
-          user.isElderly ? '' : currentElderlyUid
-        }`
-      );
       const { data } = await client.post(
         `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}/${
           user.isElderly ? '' : currentElderlyUid

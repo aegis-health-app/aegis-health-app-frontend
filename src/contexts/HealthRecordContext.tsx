@@ -55,7 +55,6 @@ const HealthRecordProvider = ({ ...props }) => {
     );
     const _data = { ...data, data: data.data.reverse() };
     setHealthTable(_data);
-    console.log(_data);
   };
 
   const fetchHealthRecordings = async () => {
