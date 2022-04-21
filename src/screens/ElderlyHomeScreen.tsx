@@ -68,7 +68,7 @@ const ElderlyHomeScreen = () => {
 
   useAsyncEffect(async () => {
     const emotionDate = moment(await getEmotionDate());
-    const todayDate = moment().format('DD/MM/YYYY');
+    const todayDate = moment().format('L');
     if (!user) {
       return;
     }
