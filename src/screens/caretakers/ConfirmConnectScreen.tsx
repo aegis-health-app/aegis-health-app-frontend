@@ -36,16 +36,10 @@ const ConfirmConnectScreen = ({
   //TODO: error handling
   const handlePress = async () => {
     try {
-      const elderlyResult = await client.post('/user/relationship', {
+      await client.post('/user/relationship', {
         eid: info.uid,
         cid: user?.uid
       }) as Elderly;
-      if (elderlyResult && caretakerHomeProfile?.listElderly) {
-        setCaretakerHomeProfile({
-          ...caretakerHomeProfile,
-          listElderly: [...caretakerHomeProfile.listElderly, elderlyResult]
-        });
-      }
       setShowSuccessAlert(true);
     } catch (err) {
       console.log(err)
