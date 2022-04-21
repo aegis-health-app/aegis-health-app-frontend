@@ -120,7 +120,8 @@
     "selectModules": "Select Modules",
     "chooseModule": "Choose module",
     "elderlyNoModule": "This elderly did not turn on any feature yet.",
-    "emotionTracking": "Emotion tracking"
+    "emotionTracking": "Emotion tracking",
+    "removeElderly": "Remove elderly"
   },
   "moduleSelection": {
     "removeConfirmationText": "Are you sure you want to remove this module?",
@@ -594,12 +595,15 @@
     "multipleChoice": "Multiple Choice",
     "shortAnswer": "Short answer",
     "questionPool": "Question Pool",
-
     "selectChoice": "Please select the correct choice",
     "choice": "Choice",
-
     "questionRequired": "Question is required",
     "choiceRequired": "All choices are required",
     "answerRequired": "Please specify the correct answer"
+  },
+  "questionPool": {
+    "questions": "Questions",
+    "totalSelected": "Total Selected",
+    "createCustom": "Create Custom Question"
   }
 }
