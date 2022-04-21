@@ -80,7 +80,7 @@ const TakeCareElderlyScreen = () => {
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
       <ScrollView nestedScrollEnabled>
-        <View px={4}>
+        <View px={4} pt={2}>
           <BasicProfile
             data={elderlyBasicProfile}
             image={elderly?.imageid}
