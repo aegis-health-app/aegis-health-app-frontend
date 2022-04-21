@@ -568,5 +568,17 @@
     "everymonth": "ทุกเดือน",
     "everyyear": "ทุกปี",
     "custom": "กำหนดเอง"
+  },
+  "connectElderlyError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถเชื่อมต่อได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
+  },
+  "connectElderlySuccess": {
+    "header": "สำเร็จ",
+    "body": "การเชื่อมต่อสำเร็จ",
+    "primaryButton": "ตกลง",
+    "secondaryButton": ""
   }
 }

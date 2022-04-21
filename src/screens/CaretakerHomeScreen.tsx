@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   View,
@@ -41,6 +41,7 @@ const CaretakerHomeScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
+  const isFocused = useIsFocused();
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
