@@ -568,5 +568,17 @@
     "everymonth": "Every Month",
     "everyyear": "Every Year",
     "custom": "Custom"
+  },
+  "connectElderlyError": {
+    "header": "Error",
+    "body": "Unable to connect to user. Connection may have already existed.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "connectElderlySuccess": {
+    "header": "Success",
+    "body": "Elderly has been added.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
   }
 }

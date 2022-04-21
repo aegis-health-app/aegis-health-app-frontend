@@ -5,12 +5,16 @@ import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { ElderlyInCare } from './../../dto/modules/caretaking.dto';
 import ElderlyCard from './ElderlyCard';
 import useDimensions from '../../hooks/useDimensions';
+import { useIsFocused } from '@react-navigation/native';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
+import { client } from '../../config/axiosConfig';
 
 const ElderlyInCareList = () => {
   const { t } = useTranslation();
   const { caretakerHomeProfile } = useContext(CaretakerContext);
   const [elderies, setElderies] = useState<ElderlyInCare[]>([]);
   const { ScreenWidth } = useDimensions();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     if (caretakerHomeProfile?.listElderly) {
@@ -18,6 +22,11 @@ const ElderlyInCareList = () => {
     }
   }, [caretakerHomeProfile]);
 
+  useAsyncEffect(async () => {
+    const data = await client.get('home/caretakerHome');
+    setElderies(data.data.listElderly)
+  }, [isFocused]);
+  
   return (
     <View flex={1} w={ScreenWidth - 32} mt={4} minH="80">
       <Text fontSize="2xl" fontWeight="600">

@@ -1,5 +1,5 @@
 import { Text, View, Image, Button } from 'native-base';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
@@ -12,6 +12,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { FallbackImageLarge } from '../../components/molecules/FallbackImage';
 import { Elderly } from './../../dto/modules/user.dto';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
+import Alert, { AlertType } from '../../components/organisms/Alert';
 
 const ProfilePic = require('../../assets/images/profile.png');
 
@@ -29,29 +30,47 @@ const ConfirmConnectScreen = ({
   const { caretakerHomeProfile, setCaretakerHomeProfile } =
     useContext(CaretakerContext);
 
+    const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+
   //TODO: error handling
   const handlePress = async () => {
     try {
-      await client.post('/user/relationship', {
+      const elderlyResult = await client.post('/user/relationship', {
         eid: info.uid,
         cid: user?.uid
-      });
-      const elderlyResult = data as Elderly;
+      }) as Elderly;
       if (elderlyResult && caretakerHomeProfile?.listElderly) {
         setCaretakerHomeProfile({
           ...caretakerHomeProfile,
           listElderly: [...caretakerHomeProfile.listElderly, elderlyResult]
         });
       }
-      navigation.navigate('ConnectElderlyScreen');
+      setShowSuccessAlert(true);
     } catch (err) {
-      // show toast to display error
+      console.log(err)
+      setShowErrorAlert(true);
     }
   };
 
   return (
     <View>
       <View flexDir="column" alignItems="center" my="10">
+      <Alert
+          isOpen={showErrorAlert}
+          close={() => setShowErrorAlert(false)}
+          type={AlertType.ERROR}
+          message="connectElderlyError"
+        />
+        <Alert
+          isOpen={showSuccessAlert}
+          close={() => {
+            setShowSuccessAlert(false);
+            navigation.navigate('CaretakerHomeScreen');
+          }}
+          type={AlertType.SUCCESS}
+          message="connectElderlySuccess"
+        />
         <Text fontWeight="600" fontSize="lg">
           {t('userLink.connectText1')}
           {info.fname} {info.lname}
