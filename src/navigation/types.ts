@@ -5,7 +5,6 @@ import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
  */
 
 import { CaretakerInfoView, ReminderInfo } from '../dto/modules/user.dto';
-import { HealthRecordingData } from '../interfaces/healthRecording';
 import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 
 export type RootStackParamList = {
