@@ -74,7 +74,7 @@ const EditHealthEntryScreen = () => {
     if (!user || !dateTime) return;
     const payload = {
       hrName: currentHrName,
-      timestamp: moment(dateTime, 'YYYY/MM/DD HH:mm:ss').toString()
+      timestamp: moment(tempDatetime).format('YYYY-MM-DD hh:mm:ss')
     };
     try {
       const { data } = await client.delete(
@@ -163,14 +163,14 @@ const EditHealthEntryScreen = () => {
         cancel={() => setShowDeleteRowConfirm(false)}
         type={AlertType.ERROR}
         message="confirmDeleteHealthDataRowAlert"
-        customString={`${moment(tempDatetime).format('DD/MM/YYYY HH:MM:SS')}?`}
+        customString={`${moment(tempDatetime).format('DD/MM/YYYY hh:mm:ss')}?`}
       />
       <Alert
         isOpen={showFailedDeleteRow}
         close={() => setShowFailedDeleteRow(false)}
         type={AlertType.ERROR}
         message="deleteHealthDataRowError"
-        customString={moment(tempDatetime).format('DD/MM/YYYY HH:MM:SS')}
+        customString={moment(tempDatetime).format('DD/MM/YYYY hh:mm:ss')}
       />
       <Alert
         isOpen={showFailedDeleteRecord}
@@ -180,7 +180,10 @@ const EditHealthEntryScreen = () => {
       />
       <Alert
         isOpen={showSuccessImageUpdate}
-        close={() => setShowSuccessImageUpdate(false)}
+        close={() => {
+          setShowSuccessImageUpdate(false);
+          navigation.navigate('AddHealthEntryScreen');
+        }}
         type={AlertType.SUCCESS}
         message="updateHealthDataCoverImageSuccess"
       />
