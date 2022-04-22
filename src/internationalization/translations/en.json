@@ -615,5 +615,24 @@
     "template1": "Pick the correct choice.",
     "template2": "How are you feeling today?",
     "selectQuestions": "Select Questions"
+  "reminders": {
+    "remindersHeader": "Reminders",
+    "completedHeader": "Completed",
+    "addReminder": "Add a new reminder",
+    "completedReminders": "View Completed Reminders",
+    "overdueActivities": "Overdue Activities",
+    "todayActivities": "Today's Activities",
+    "tomorrowActivities": "Tomorrow's Activities",
+    "markAsComplete": "Mark as Completed",
+    "markAsIncomplete": "Mark as Incomplete",
+    "delete": "Delete"
+  },
+  "remindersTutorial": {
+    "step1": "Press “Add a new reminder +” to add new reminder.",
+    "step2": "Press “View Completed Reminders” button to view the reminders that you have completed.",
+    "step3": "Press to hide or show the reminders in the section.",
+    "step4": "This is your reminder. Click the card to view the details, or mark as complete by tapping the “Mark as Complete” button.",
+    "step5": "Scroll down to view more reminders up to 1 months in advance",
+    "step6": "Press the help button to replay the guide."
   }
 }

@@ -30,7 +30,8 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             <Icon as={AntDesign} name="warning" size="10" color="red.500" />
           }
           label={t('modules.emergency')}
-          handlePress={() => navigation.navigate('EmergencyScreen')}
+          // don't forget to change
+          handlePress={() => navigation.navigate('RemindersScreen')}
         />
       );
     } else if (mid === 1) {
@@ -46,7 +47,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.reminder')}
-          handlePress={() => navigation.navigate('ReminderScreen')}
+          handlePress={() => navigation.navigate('RemindersScreen')}
         />
       );
     } else if (mid === 2) {

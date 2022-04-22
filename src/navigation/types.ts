@@ -26,6 +26,7 @@ export type RootStackParamList = {
   EmergencyScreen: undefined;
   EmergencyInfoScreen: { info: EmergencyInfo };
   ReminderScreen: undefined;
+  RemindersScreen: undefined;
   AddHealthEntryScreen: undefined;
   EditHealthEntryScreen: undefined;
   MemoryScreen: undefined;

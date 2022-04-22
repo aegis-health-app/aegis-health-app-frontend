@@ -51,6 +51,7 @@ import EditReminderScreen from '../screens/reminder/EditReminderScreen';
 import CreateMemoryRecallQuestionsScreen from './../screens/CreateMemoryRecallQuestionsScreen';
 import QuestionPoolScreen from '../screens/QuestionPoolScreen';
 import EditMemoryRecallQuestionsScreen from '../screens/EditMemoryRecallQuestionScreen';
+import RemindersScreen from '../screens/RemindersScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -58,7 +59,8 @@ const MainNavigation = () => {
   const {
     setShowSettingsTourguide,
     setShowHealthRecordingsTourguide,
-    setShowMemoryPracticeQuestionsTourguide
+    setShowMemoryPracticeQuestionsTourguide,
+    setShowRemindersTourguide
   } = useContext(TourguideContext);
   const { user } = useContext(UserContext);
 
@@ -176,12 +178,25 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-              name="ReminderScreen"
-              component={ReminderScreen}
+              name="RemindersScreen"
+              component={RemindersScreen}
               options={{
-                title: t('modules.reminder'),
+                title: t('reminders.remindersHeader'),
+                headerShown: true,
+                headerShadowVisible: false,
                 headerTitleAlign: 'center',
-                headerTitleStyle: { fontSize: 20, fontWeight: '800' }
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerRight: () => (
+                  <TouchableOpacity
+                    onPress={() => setShowRemindersTourguide(true)}>
+                    <Icon
+                      as={Feather}
+                      name="help-circle"
+                      size="7"
+                      color="#F97316"
+                    />
+                  </TouchableOpacity>
+                )
               }}
             />
             <Stack.Screen
