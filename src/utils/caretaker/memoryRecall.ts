@@ -21,6 +21,12 @@ export async function getQuestionDetails(eid: number, mid: string) {
   return data as QuestionDetails;
 }
 
-export async function sendCreatedQuestion(question: QuestionDetails) {
-  const result = await client.post('memoryPractice/createQuestion', question);
+export async function sendCreatedQuestion(
+  question: QuestionDetails,
+  eid: number
+) {
+  await client.post('memoryPractice/createQuestion', {
+    ...question,
+    elderlyuid: eid
+  });
 }

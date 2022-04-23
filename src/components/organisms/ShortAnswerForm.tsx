@@ -6,36 +6,78 @@ import {
   Input,
   HStack,
   Button,
-  Divider
+  Divider,
+  Image,
+  Spinner
 } from 'native-base';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ShortAnswerValidationSchema } from '../../dto/modules/memoryRecall';
+import {
+  FormState,
+  QuestionDetails,
+  ShortAnswerValidationSchema
+} from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import images from '../../assets/images';
 import { useFormik } from 'formik';
-import { QuestionInfo } from './../../dto/modules/memoryRecall';
+import { ImagePayload } from '../../interfaces/image';
+import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
+import { useNavigation } from '@react-navigation/native';
 
-type MultipleChoiceFormProps = {
-  questionInfo: QuestionInfo | undefined;
-  question: string | undefined;
+type ShortAnswerFormProps = {
+  formState: { question: string; image: ImagePayload | undefined };
+  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
   isMultipleChoice: boolean;
   setIsMultipleChoice: (val: boolean) => void;
+  edit: boolean;
 };
 
 const ShortAnswerForm = ({
-  questionInfo,
-  question,
+  formState,
+  setFormState,
   isMultipleChoice,
   setIsMultipleChoice
-}: MultipleChoiceFormProps) => {
+}: ShortAnswerFormProps) => {
   const { t } = useTranslation();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
-  const [image, setImage] = useState<ImagePickerResponse>();
+  const [image, setImage] = useState<ImagePayload>();
+  const [loading, setLoading] = useState(false);
+  const { currentElderlyUid } = useContext(CaretakerContext);
+  const navigation = useNavigation();
 
   const { width } = useWindowDimensions();
+
+  const { errors, setFieldValue, values, handleSubmit } = useFormik({
+    validationSchema: ShortAnswerValidationSchema,
+    initialValues: {
+      question: formState.question,
+      isMCQ: false
+    },
+    onSubmit: async (values) => {
+      if (currentElderlyUid === undefined) return;
+      setLoading(true);
+      const multipleChoiceQuestionPayload: QuestionDetails = {
+        ...values,
+        ...(image && {
+          image: {
+            base64: image.base64,
+            name: image.name,
+            type: image.type,
+            size: image.size
+          }
+        })
+      };
+      await sendCreatedQuestion(
+        multipleChoiceQuestionPayload,
+        currentElderlyUid
+      );
+      setLoading(false);
+      navigation.goBack();
+    }
+  });
 
   function handlePressChoiceTemplate(type: 'multiple' | 'short') {
     if (type === 'multiple') {
@@ -46,29 +88,41 @@ const ShortAnswerForm = ({
   }
 
   const getImage = () => {
-    if (image && image.assets) {
-      return { uri: image.assets[0].uri };
+    if (image) {
+      return { uri: image.uri };
     } else {
       return images.picturePlaceholder;
     }
   };
 
   async function onUploadImage(result: ImagePickerResponse) {
-    if (result) {
-      setImage(result);
+    if (
+      result &&
+      result.assets &&
+      result.assets[0].base64 &&
+      result.assets[0].fileName &&
+      result.assets[0].type &&
+      result.assets[0].fileSize
+    ) {
+      const _image = {
+        base64: result.assets[0].base64,
+        name: result.assets[0].fileName,
+        type: result.assets[0].type,
+        size: result.assets[0].fileSize,
+        uri: result.assets[0].uri
+      };
+      setImage(_image);
+      setFormState({
+        ...values,
+        image: image
+      });
     }
   }
 
-  const { errors, handleChange, values, handleSubmit } = useFormik({
-    validationSchema: ShortAnswerValidationSchema,
-    initialValues: {
-      question: questionInfo?.question ? questionInfo.question : question,
-      isMCQ: false
-    },
-    onSubmit: (values) => {
-      console.log(values);
-    }
-  });
+  function handleChangeQuestion(val: string) {
+    setFieldValue('question', val);
+    setFormState({ ...formState, question: val });
+  }
 
   return (
     <View px={4} py={4}>
@@ -78,7 +132,7 @@ const ShortAnswerForm = ({
           <Input
             placeholder={t('createMemoryRecall.title')}
             value={values.question}
-            onChangeText={handleChange('question')}
+            onChangeText={(val) => handleChangeQuestion(val)}
           />
           <FormControl.ErrorMessage>
             {errors.question ? errors.question : ''}
@@ -133,7 +187,13 @@ const ShortAnswerForm = ({
         </HStack>
 
         <Button w="full" onPress={handleSubmit}>
-          Create
+          {loading ? (
+            <Spinner color="white" />
+          ) : (
+            <Text fontSize="md" bold color="#fff">
+              {t('viewQuestionPool.create')}
+            </Text>
+          )}
         </Button>
       </VStack>
     </View>

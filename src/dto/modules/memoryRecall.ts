@@ -2,26 +2,29 @@ import * as Yup from 'yup';
 import i18n from '../../internationalization/i18n.config';
 import { ImagePayload } from './../../interfaces/image';
 
-export type MultipleChoiceAnswer = '1' | '2' | '3' | '4' | undefined;
-
 export interface QuestionDetails {
-  elderlyuid: number;
+  elderlyuid?: number;
   question: string;
-  imageid?: ImagePayload;
+  image?: ImagePayload | null;
   isMCQ: boolean;
   choice1?: string;
   choice2?: string;
   choice3?: string;
   choice4?: string;
-  correctAnswer?: MultipleChoiceAnswer;
+  correctAnswer?: string | undefined;
 }
 
 export interface QuestionInfo {
   mid: string;
   question: string;
   isSelected: boolean;
-  imageid?: ImagePayload;
+  imageid?: string;
   uid: number;
+}
+
+export interface FormState {
+  question: string;
+  image: ImagePayload | undefined;
 }
 
 export const ShortAnswerValidationSchema = Yup.object({

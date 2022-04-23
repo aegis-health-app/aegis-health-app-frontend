@@ -8,40 +8,85 @@ import {
   Button,
   Divider,
   Radio,
-  Image
+  Image,
+  Spinner
 } from 'native-base';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  FormState,
   MultipleChoiceValidationSchema,
-  MultipleChoiceAnswer,
-  QuestionDetails,
-  QuestionInfo
+  QuestionDetails
 } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import images from '../../assets/images';
 import { useFormik } from 'formik';
+import { ImagePayload } from '../../interfaces/image';
+import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
+import { useNavigation } from '@react-navigation/native';
 
 type MultipleChoiceFormProps = {
-  questionInfo: QuestionInfo | undefined;
-  question: string | undefined;
+  formState: { question: string; image: ImagePayload | undefined };
+  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
   isMultipleChoice: boolean;
   setIsMultipleChoice: (val: boolean) => void;
+  edit: boolean;
 };
 
 const MultipleChoiceForm = ({
-  questionInfo,
-  question,
+  formState,
+  setFormState,
   isMultipleChoice,
   setIsMultipleChoice
 }: MultipleChoiceFormProps) => {
   const { t } = useTranslation();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
-  const [image, setImage] = useState<ImagePickerResponse>();
+  const [image, setImage] = useState<ImagePayload>();
+  const [answer, setAnswer] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { currentElderlyUid } = useContext(CaretakerContext);
+  const navigation = useNavigation();
 
   const { width } = useWindowDimensions();
+
+  const { errors, handleChange, setFieldValue, values, handleSubmit } =
+    useFormik({
+      validationSchema: MultipleChoiceValidationSchema,
+      initialValues: {
+        question: formState.question,
+        isMCQ: true,
+        choice1: '',
+        choice2: '',
+        choice3: '',
+        choice4: '',
+        correctAnswer: undefined
+      },
+      onSubmit: async (values) => {
+        if (currentElderlyUid === undefined || !answer) return;
+        setLoading(true);
+        const multipleChoiceQuestionPayload: QuestionDetails = {
+          ...values,
+          correctAnswer: answer,
+          ...(image && {
+            image: {
+              base64: image.base64,
+              name: image.name,
+              type: image.type,
+              size: image.size
+            }
+          })
+        };
+        await sendCreatedQuestion(
+          multipleChoiceQuestionPayload,
+          currentElderlyUid
+        );
+        setLoading(false);
+        navigation.goBack();
+      }
+    });
 
   function handlePressChoiceTemplate(type: 'multiple' | 'short') {
     if (type === 'multiple') {
@@ -52,40 +97,57 @@ const MultipleChoiceForm = ({
   }
 
   const getImage = () => {
-    if (image && image.assets) {
-      return { uri: image.assets[0].uri };
+    if (image) {
+      return { uri: image.uri };
     } else {
       return images.picturePlaceholder;
     }
   };
 
   async function onUploadImage(result: ImagePickerResponse) {
-    if (result) {
-      setImage(result);
+    if (
+      result &&
+      result.assets &&
+      result.assets[0].base64 &&
+      result.assets[0].fileName &&
+      result.assets[0].type &&
+      result.assets[0].fileSize
+    ) {
+      const _image = {
+        base64: result.assets[0].base64,
+        name: result.assets[0].fileName,
+        type: result.assets[0].type,
+        size: result.assets[0].fileSize,
+        uri: result.assets[0].uri
+      };
+      setImage(_image);
+      setFormState({
+        ...values,
+        image: image
+      });
     }
   }
 
-  const { errors, handleChange, setFieldValue, values, handleSubmit } =
-    useFormik({
-      validationSchema: MultipleChoiceValidationSchema,
-      initialValues: {
-        question: questionInfo?.question ? questionInfo.question : question,
-        isMCQ: true,
-        choice1: '',
-        choice2: '',
-        choice3: '',
-        choice4: '',
-        correctAnswer: undefined
-      },
-      onSubmit: (values) => {
-        console.log(values);
-      }
-    });
+  useEffect(() => {
+    if (values.correctAnswer === '1') {
+      setAnswer(values.choice1);
+    } else if (values.correctAnswer === '2') {
+      setAnswer(values.choice2);
+    } else if (values.correctAnswer === '3') {
+      setAnswer(values.choice3);
+    } else if (values.correctAnswer === '4') {
+      setAnswer(values.choice4);
+    }
+  }, [values.correctAnswer]);
 
-  function handleChangeRadioAnswer(val: MultipleChoiceAnswer) {
+  function handleChangeRadioAnswer(val: string) {
     if (!val) return;
-
     setFieldValue('correctAnswer', val);
+  }
+
+  function handleChangeQuestion(val: string) {
+    setFieldValue('question', val);
+    setFormState({ ...formState, question: val });
   }
 
   return (
@@ -96,7 +158,7 @@ const MultipleChoiceForm = ({
           <Input
             placeholder={t('createMemoryRecall.title')}
             value={values.question}
-            onChangeText={handleChange('question')}
+            onChangeText={(val) => handleChangeQuestion(val)}
           />
           <FormControl.ErrorMessage>
             {errors.question ? errors.question : ''}
@@ -158,9 +220,7 @@ const MultipleChoiceForm = ({
             <Radio.Group
               name="Question radio"
               value={values.correctAnswer}
-              onChange={(val) =>
-                handleChangeRadioAnswer(val as MultipleChoiceAnswer)
-              }>
+              onChange={(val) => handleChangeRadioAnswer(val)}>
               <VStack h="48" justifyContent="space-evenly">
                 <Radio value="1" h="16" />
                 <Radio value="2" h="16" mt={1} />
@@ -217,7 +277,13 @@ const MultipleChoiceForm = ({
         </View>
 
         <Button w="full" onPress={handleSubmit}>
-          Create
+          {loading ? (
+            <Spinner color="white" />
+          ) : (
+            <Text fontSize="md" bold color="#fff">
+              {t('viewQuestionPool.create')}
+            </Text>
+          )}
         </Button>
       </VStack>
     </View>
