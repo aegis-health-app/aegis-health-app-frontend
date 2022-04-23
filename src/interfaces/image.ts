@@ -3,4 +3,5 @@ export interface ImagePayload {
   name: string;
   type: string;
   size: number;
+  uri?: string;
 }
