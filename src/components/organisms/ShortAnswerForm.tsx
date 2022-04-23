@@ -16,13 +16,18 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import images from '../../assets/images';
 import { useFormik } from 'formik';
+import { QuestionInfo } from './../../dto/modules/memoryRecall';
 
 type MultipleChoiceFormProps = {
+  questionInfo: QuestionInfo | undefined;
+  question: string | undefined;
   isMultipleChoice: boolean;
   setIsMultipleChoice: (val: boolean) => void;
 };
 
 const ShortAnswerForm = ({
+  questionInfo,
+  question,
   isMultipleChoice,
   setIsMultipleChoice
 }: MultipleChoiceFormProps) => {
@@ -57,7 +62,7 @@ const ShortAnswerForm = ({
   const { errors, handleChange, values, handleSubmit } = useFormik({
     validationSchema: ShortAnswerValidationSchema,
     initialValues: {
-      question: '',
+      question: questionInfo?.question ? questionInfo.question : question,
       isMCQ: false
     },
     onSubmit: (values) => {

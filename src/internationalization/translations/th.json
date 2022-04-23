@@ -604,6 +604,11 @@
   "questionPool": {
     "questions": "คำถาม",
     "totalSelected": "เลือกทั้งหมด",
-    "createCustom": "สร้างคำถามเอง"
+    "createCustom": "สร้างคำถามเอง",
+    "noQuestions": "คุณไม่มีคำถามที่เคยสร้าง",
+    "createQuestionHelper":"คุณสามารถสร้างคำถามเองหรือสร้างด้วยแบบคำถามของเราได้",
+    "createTemplate": "สร้างคำถามจากแบบ",
+    "template1": "จงเลือกคำตอบที่ถูกต้อง",
+    "template2": "วันนี้คุณรู้สึกอย่างไร?"
   }
 }
