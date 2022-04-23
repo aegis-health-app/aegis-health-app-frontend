@@ -1,42 +1,49 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, ScrollView, Text, View } from 'native-base';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ViewQuestionPoolCard from '../components/organisms/ViewQuestionPoolCard';
+import { client } from '../config/axiosConfig';
+import { CaretakerContext } from '../contexts/CaretakerContext';
+import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
+import { getQuestions } from '../utils/module/question';
 
-interface QuestionCard {
+export interface QuestionCard {
   question: string;
   isSelected: boolean;
+  uid: number;
+  mid: string;
+  imageid: string | null;
 }
 
 const ViewQuestionPoolScreen = () => {
   const { t } = useTranslation();
+  const isFocused = useIsFocused();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   //get backend question pool
-  const [questionPool, setQuestionPool] = useState<QuestionCard[]>([
-    { question: 'What did you eat this morning?', isSelected: false },
-    { question: 'What did you eat this afternoon?', isSelected: true },
-    { question: 'What will you eat tonight?', isSelected: true },
-  ]);
+  const [questionPool, setQuestionPool] = useState<QuestionCard[]>([]);
+
+  const { currentElderlyUid } = useContext(CaretakerContext);
+
+  useAsyncEffect(async () => {
+    const data = await getQuestions(currentElderlyUid as number);
+    setQuestionPool(data['questions']);
+  }, [isFocused]);
 
   const [totalSelected, setTotalSelected] = useState<number>(
     questionPool.filter((item) => item.isSelected == true).length
   );
-  
+
   const totalChange = useCallback(() => {
     setTotalSelected(
       questionPool.filter((item) => item.isSelected == true).length
     );
   }, [questionPool]);
 
-  //post to backend selected questions
-  const handleSubmit = () => {
-    console.log(questionPool.filter((item) => item.isSelected == true));
-  };
   return (
     <View flex={1}>
       <View mx={4} width="100%">
@@ -57,21 +64,32 @@ const ViewQuestionPoolScreen = () => {
             {totalSelected}/10
           </Text>
         </View>
-        <ScrollView>
+        <ScrollView mb={40}>
           {questionPool.map((data, index: number) => (
             <View key={index}>
               <ViewQuestionPoolCard
                 isFull={totalSelected >= 10 && !data.isSelected}
                 question={data.question}
                 isSelected={data.isSelected}
-                onSelect={(val) => {
+                onSelect={async (val) => {
                   const temp = questionPool;
                   temp[index] = {
                     question: data.question,
-                    isSelected: val
+                    isSelected: val,
+                    uid: data.uid,
+                    mid: data.mid,
+                    imageid: data.imageid
                   };
                   setQuestionPool(temp);
                   totalChange();
+                  try {
+                    await client.put(`/memoryPractice/editSelection/${val}`, {
+                      elderlyuid: data.uid,
+                      mid: `${data.mid}`
+                    });
+                  } catch (err) {
+                    throw Error('Cannot edit selection')
+                  }
                 }}
               />
             </View>
@@ -84,7 +102,7 @@ const ViewQuestionPoolScreen = () => {
         width="100%"
         position="absolute"
         bgColor="white">
-        <Button mx={4} mt={4} onPress={() => handleSubmit()}>
+        <Button mx={4} mt={4} onPress={() => console.log('navigate to create question')}>
           {t('viewQuestionPool.create')}
         </Button>
       </View>

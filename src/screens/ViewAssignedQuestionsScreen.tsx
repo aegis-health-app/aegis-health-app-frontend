@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Icon, ScrollView, Text, View } from 'native-base';
 import React, { useContext, useEffect, useState } from 'react';
@@ -15,10 +15,10 @@ import {
 } from '../library/rn-multiple-tourguide';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-interface QuestionCard {
-  question: string;
-}
+import { QuestionCard } from './ViewQuestionPoolScreen';
+import { getQuestions } from '../utils/module/question';
+import { CaretakerContext } from '../contexts/CaretakerContext';
+import { client } from '../config/axiosConfig';
 
 const ViewAsssignedQuestionsScreen = () => {
   const { t } = useTranslation();
@@ -57,11 +57,11 @@ const ViewAsssignedQuestionsScreen = () => {
     });
   }, [eventEmitter]);
   //get backend question pool
-  const [selectedQuestions, setSelectedQuestions] = useState<QuestionCard[]>([
-    { question: 'What did you eat this morning?' },
-    { question: 'What did you eat this afternoon?' },
-    { question: 'What will you eat tonight?' }
-  ]);
+
+  const { currentElderlyUid } = useContext(CaretakerContext)
+  const isFocused = useIsFocused();
+
+  const [selectedQuestions, setSelectedQuestions] = useState<QuestionCard[]>([]);
 
   const [totalSelected, setTotalSelected] = useState<number>(
     selectedQuestions.length
@@ -73,15 +73,24 @@ const ViewAsssignedQuestionsScreen = () => {
     setTotalSelected(selectedQuestions.length);
   }, [selectedQuestions]);
 
-  //post to backend selected questions
-  const handleSubmit = () => {
-    console.log(selectedQuestions);
-  };
+  useAsyncEffect(async () => {
+    const data = await getQuestions(currentElderlyUid as number);
+    const temp = data['questions'].filter((item) => item.isSelected == true)
+    setSelectedQuestions(temp);
+  }, [isFocused]);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     setSelectedQuestions(
       selectedQuestions.filter((ele, index) => index !== id)
     );
+    try {
+      await client.put(`/memoryPractice/editSelection/false`, {
+        elderlyuid: selectedQuestions[id].uid as number,
+        mid: `${selectedQuestions[id].mid}`
+      });
+    } catch (err) {
+      throw Error('Cannot remove question')
+    }
   };
   const spinValue = new Animated.Value(0);
 
@@ -199,7 +208,7 @@ const ViewAsssignedQuestionsScreen = () => {
             {totalSelected}/10
           </Text>
         </View>
-        <ScrollView pt={4}>
+        <ScrollView py={2} mb={'56'}>
           {selectedQuestions.length !== 0 ? (
             <TourGuideZone
               tourKey={tourKey}
