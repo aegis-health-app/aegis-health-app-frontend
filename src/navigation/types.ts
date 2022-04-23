@@ -53,7 +53,7 @@ export type RootStackParamList = {
   ViewQuestionPoolScreen: undefined;
   ViewAssignedQuestionsScreen: undefined;
   ViewHistoryScreen: undefined;
-  ViewHistoryDetailsScreen: undefined;
+  ViewHistoryDetailsScreen: { timestamp: string };
 
   CreateReminderScreen: undefined;
   EditReminderScreen: { info: ReminderInfo };

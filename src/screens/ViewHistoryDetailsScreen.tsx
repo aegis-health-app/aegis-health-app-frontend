@@ -1,24 +1,27 @@
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack';
 import { ScrollView, Text, View } from 'native-base';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Divider from '../components/atoms/Divider';
 import ViewHistoryDetailsCard from '../components/organisms/HistoryDetailsCard';
+import { CaretakerContext } from '../contexts/CaretakerContext';
+import useAsyncEffect from '../hooks/useAsyncEffect';
 import { useSettings } from '../hooks/useSettings';
 import { RootStackParamList } from '../navigation/types';
-import {
-  getFormattedDate,
-  getFormattedDateTime
-} from '../utils/getFormattedDate';
+import { getFormattedDateTime } from '../utils/getFormattedDate';
+import { getHistoryDetails } from '../utils/module/history';
 
-interface HistoryCard {
+export interface HistoryDetailsCard {
   timestamp: string | Date;
   questions: Question[];
 }
 
-interface Question {
-  imageUrl: string | undefined;
+export interface Question {
+  imageUrl: string | undefined | null;
   mid: number;
   question: string;
   isMultipleChoice: boolean;
@@ -30,57 +33,35 @@ interface Question {
   correctAnswer?: string;
   elderlyAnswer?: string;
 }
-const ViewHistoryDetailsScreen = () => {
+const ViewHistoryDetailsScreen = ({
+  route
+}: NativeStackScreenProps<RootStackParamList, 'ViewHistoryDetailsScreen'>) => {
+  const { timestamp } = route.params;
   const { t } = useTranslation();
   const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const isFocused = useIsFocused();
 
   //get backend question pool
-  const [history, setHistory] = useState<HistoryCard>({
-    timestamp: '2022-04-19 22:08:54.799000',
-    questions: [
-      {
-        imageUrl:
-          'https://storage.googleapis.com/aegis-user-profile/profile-35-8bea3a2b86e7b27f4fcaea795cf76f1d17748e39e4252baa1a3d90c5c3ac95b3.jpg',
-        mid: 0,
-        isMultipleChoice: true,
-        question: 'What did you eat this morning?',
-        choice1: 'Burger',
-        choice2: 'Steak',
-        choice3: 'Krapao',
-        choice4: 'All of the above',
-        isCorrect: true,
-        correctAnswer: 'Steak',
-        elderlyAnswer: 'Steak'
-      },
-      {
-        imageUrl: undefined,
-        mid: 0,
-        isMultipleChoice: true,
-        question: 'What did you eat this afternoon?',
-        choice1: 'Fries',
-        choice2: 'Ice Cream',
-        choice3: 'Dinner',
-        choice4: 'All of the above',
-        isCorrect: false,
-        correctAnswer: 'Fries',
-        elderlyAnswer: 'Dinner'
-      },
-      {
-        imageUrl: undefined,
-        mid: 0,
-        isMultipleChoice: false,
-        question: 'What is your favourite subject?',
-        elderlyAnswer: 'ICE Capstone'
-      }
-    ]
+  const [history, setHistory] = useState<HistoryDetailsCard>({
+    timestamp: timestamp,
+    questions: []
   });
 
+  const { currentElderlyUid } = useContext(CaretakerContext);
+  useAsyncEffect(async () => {
+    const data = await getHistoryDetails(
+      currentElderlyUid as number,
+      timestamp
+    );
+    setHistory(data);
+  }, [isFocused]);
+
   const handleDateFormat = (date: string | Date) => {
-    const temp = date.toString().split(' ')
-    return `${temp[0]}T${temp[1].substring(0,11)}Z`
-  }
+    const temp = date.toString().split(' ');
+    return `${temp[0]}T${temp[1].substring(0, 11)}Z`;
+  };
 
   return (
     <ScrollView>
@@ -92,7 +73,10 @@ const ViewHistoryDetailsScreen = () => {
               alignItems="center"
               justifyContent="space-between">
               <Text fontWeight="bold" fontSize="17">
-                {getFormattedDateTime(new Date(handleDateFormat(history.timestamp)), language)}
+                {getFormattedDateTime(
+                  new Date(handleDateFormat(history.timestamp)),
+                  language
+                )}
               </Text>
             </View>
           </View>
@@ -103,7 +87,7 @@ const ViewHistoryDetailsScreen = () => {
               <ViewHistoryDetailsCard
                 index={index}
                 question={data.question}
-                imageId={data.imageUrl}
+                imageId={data.imageUrl ? data.imageUrl : undefined}
                 choice1={data.choice1}
                 choice2={data.choice2}
                 choice3={data.choice3}

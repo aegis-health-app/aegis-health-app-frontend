@@ -76,7 +76,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.memory')}
-          handlePress={() => navigation.navigate('MemoryScreen')}
+          handlePress={() => navigation.navigate('ViewAssignedQuestionsScreen')}
         />
       );
     } else if (mid === 4) {

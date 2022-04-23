@@ -12,7 +12,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 
 type HistoryCardProps = {
-  date: string | Date;
+  date: string;
 };
 
 const ViewHistoryCard = ({ date }: HistoryCardProps) => {
@@ -21,10 +21,15 @@ const ViewHistoryCard = ({ date }: HistoryCardProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const handleDateFormat = (date: string | Date) => {
+    const temp = date.toString().split(' ');
+    return `${temp[0]}T${temp[1].substring(0, 11)}Z`;
+  };
+
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate('ViewHistoryDetailsScreen');
+        navigation.navigate('ViewHistoryDetailsScreen', { timestamp: date });
       }}>
       <View
         flexDir="column"
@@ -44,7 +49,7 @@ const ViewHistoryCard = ({ date }: HistoryCardProps) => {
               fontSize="15"
               fontWeight="bold"
               numberOfLines={1}>
-              {getFormattedDateLong(new Date(date), language)}
+              {getFormattedDateLong(new Date(handleDateFormat(date)), language)}
             </Text>
           </View>
           <View
@@ -52,7 +57,7 @@ const ViewHistoryCard = ({ date }: HistoryCardProps) => {
             justifyContent="space-between"
             alignItems="center">
             <Text mr="2" fontSize="15" fontWeight="bold">
-              {getFormattedTime(new Date(date))}
+              {getFormattedTime(new Date(handleDateFormat(date)))}
             </Text>
           </View>
         </View>

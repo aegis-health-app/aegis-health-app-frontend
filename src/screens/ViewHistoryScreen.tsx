@@ -1,28 +1,31 @@
+import { useIsFocused } from '@react-navigation/native';
 import { ScrollView, Text, View } from 'native-base';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ViewHistoryCard from '../components/organisms/HistoryCard';
+import { CaretakerContext } from '../contexts/CaretakerContext';
+import useAsyncEffect from '../hooks/useAsyncEffect';
+import { getHistory } from '../utils/module/history';
 
-interface HistoryCard {
-  timestamp: string | Date;
+export interface HistoryCard {
+  timestamps: string[];
 }
 
 const ViewHistoryScreen = () => {
   const { t } = useTranslation();
+  const isFocused = useIsFocused();
 
   //get backend question pool
-  const [historyList, setHistoryList] = useState<HistoryCard[]>([
-    { timestamp: '2022-04-19 22:08:54.799000' },
-    { timestamp: '2022-04-19 22:08:54.799000' },
-    { timestamp: '2022-04-19 22:08:54.799000' }
-  ]);
+  const [historyList, setHistoryList] = useState<HistoryCard>({
+    timestamps: []
+  });
 
-  const handleDateFormat = (date: string | Date) => {
-    const temp = date.toString().split(' ');
-    return `${temp[0]}T${temp[1].substring(0, 11)}Z`;
-  };
+  const { currentElderlyUid } = useContext(CaretakerContext);
 
-  handleDateFormat(historyList[0].timestamp);
+  useAsyncEffect(async () => {
+    const data = await getHistory(currentElderlyUid as number);
+    setHistoryList(data);
+  }, [isFocused]);
 
   return (
     <View flex={1}>
@@ -39,9 +42,9 @@ const ViewHistoryScreen = () => {
           </View>
         </View>
         <ScrollView>
-          {historyList.map((data, index: number) => (
+          {historyList.timestamps.map((data, index: number) => (
             <View key={index}>
-              <ViewHistoryCard date={handleDateFormat(data.timestamp)} />
+              <ViewHistoryCard date={data} />
             </View>
           ))}
         </ScrollView>
