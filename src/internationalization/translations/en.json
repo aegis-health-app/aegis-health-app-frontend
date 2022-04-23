@@ -604,6 +604,11 @@
   "questionPool": {
     "questions": "Questions",
     "totalSelected": "Total Selected",
-    "createCustom": "Create Custom Question"
+    "createCustom": "Create Custom Question",
+    "noQuestions": "You don't have any question yet.",
+    "createQuestionHelper":"Create a custom question or create a question from our template now!",
+    "createTemplate": "Create from template",
+    "template1": "Pick the correct choice.",
+    "template2": "How are you feeling today?"
   }
 }

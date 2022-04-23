@@ -1,11 +1,11 @@
 import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
+import { QuestionInfo } from './../dto/modules/memoryRecall';
+import { CaretakerInfoView, ReminderInfo } from '../dto/modules/user.dto';
+import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 
 /**
  * Note: The screen name and its param type are defined here.
  */
-
-import { CaretakerInfoView, ReminderInfo } from '../dto/modules/user.dto';
-import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 
 export type RootStackParamList = {
   //Authorized Screens
@@ -40,7 +40,9 @@ export type RootStackParamList = {
   ElderlyEmotionHistory: undefined;
   HealthRecordingsScreen: undefined;
   CreateHealthRecordingsScreen: undefined;
-  CreateMemoryRecallQuestionsScreen: undefined;
+  CreateMemoryRecallQuestionsScreen:
+    | { questionInfo: QuestionInfo }
+    | { question: string };
   QuestionPoolScreen: undefined;
 
   SignInScreen: undefined;

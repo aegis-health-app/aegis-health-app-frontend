@@ -14,7 +14,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   MultipleChoiceValidationSchema,
-  MultipleChoiceAnswer
+  MultipleChoiceAnswer,
+  QuestionDetails,
+  QuestionInfo
 } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
@@ -23,11 +25,15 @@ import images from '../../assets/images';
 import { useFormik } from 'formik';
 
 type MultipleChoiceFormProps = {
+  questionInfo: QuestionInfo | undefined;
+  question: string | undefined;
   isMultipleChoice: boolean;
   setIsMultipleChoice: (val: boolean) => void;
 };
 
 const MultipleChoiceForm = ({
+  questionInfo,
+  question,
   isMultipleChoice,
   setIsMultipleChoice
 }: MultipleChoiceFormProps) => {
@@ -63,7 +69,7 @@ const MultipleChoiceForm = ({
     useFormik({
       validationSchema: MultipleChoiceValidationSchema,
       initialValues: {
-        question: '',
+        question: questionInfo?.question ? questionInfo.question : question,
         isMCQ: true,
         choice1: '',
         choice2: '',
