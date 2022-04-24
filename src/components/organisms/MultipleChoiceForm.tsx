@@ -271,7 +271,7 @@ const MultipleChoiceForm = ({
             errors.choice3 ||
             errors.choice4) && (
             <Text color="error.500" mt={2}>
-              All choices are required
+              {t('createMemoryRecall.choiceMissing')}
             </Text>
           )}
           <Text color="error.500">{errors.correctAnswer}</Text>
