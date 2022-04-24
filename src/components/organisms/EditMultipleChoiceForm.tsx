@@ -11,40 +11,33 @@ import {
   Image,
   Spinner
 } from 'native-base';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  FormState,
   MultipleChoiceValidationSchema,
-  QuestionDetails
+  QuestionDetails,
+  QuestionDetailsResponse
 } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
-import images from '../../assets/images';
 import { useFormik } from 'formik';
 import { ImagePayload } from '../../interfaces/image';
-import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
+import { sendEditedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
+import images from '../../assets/images';
 
 type MultipleChoiceFormProps = {
-  formState: { question: string; image: ImagePayload | undefined };
-  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
-  isMultipleChoice: boolean;
-  setIsMultipleChoice: (val: boolean) => void;
+  question: QuestionDetailsResponse;
+  mid: string;
 };
 
-const MultipleChoiceForm = ({
-  formState,
-  setFormState,
-  isMultipleChoice,
-  setIsMultipleChoice
-}: MultipleChoiceFormProps) => {
+const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
   const { t } = useTranslation();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
   const [image, setImage] = useState<ImagePayload>();
-  const [answer, setAnswer] = useState('');
+
   const [loading, setLoading] = useState(false);
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
@@ -55,20 +48,19 @@ const MultipleChoiceForm = ({
     useFormik({
       validationSchema: MultipleChoiceValidationSchema,
       initialValues: {
-        question: formState.question,
+        question: question.question,
         isMCQ: true,
-        choice1: '',
-        choice2: '',
-        choice3: '',
-        choice4: '',
-        correctAnswer: undefined
+        choice1: question.choice1,
+        choice2: question.choice2,
+        choice3: question.choice3,
+        choice4: question.choice4,
+        correctAnswer: question.correctAnswer
       },
       onSubmit: async (values) => {
-        if (currentElderlyUid === undefined || !answer) return;
+        if (currentElderlyUid === undefined) return;
         setLoading(true);
         const multipleChoiceQuestionPayload: QuestionDetails = {
           ...values,
-          correctAnswer: answer,
           ...(image && {
             image: {
               base64: image.base64,
@@ -78,22 +70,15 @@ const MultipleChoiceForm = ({
             }
           })
         };
-        await sendCreatedQuestion(
+        await sendEditedQuestion(
           multipleChoiceQuestionPayload,
-          currentElderlyUid
+          currentElderlyUid,
+          mid
         );
         setLoading(false);
         navigation.goBack();
       }
     });
-
-  function handlePressChoiceTemplate(type: 'multiple' | 'short') {
-    if (type === 'multiple') {
-      setIsMultipleChoice(true);
-    } else if (type === 'short') {
-      setIsMultipleChoice(false);
-    }
-  }
 
   const getImage = () => {
     if (image) {
@@ -120,24 +105,8 @@ const MultipleChoiceForm = ({
         uri: result.assets[0].uri
       };
       setImage(_image);
-      setFormState({
-        ...values,
-        image: image
-      });
     }
   }
-
-  useEffect(() => {
-    if (values.correctAnswer === '1') {
-      setAnswer(values.choice1);
-    } else if (values.correctAnswer === '2') {
-      setAnswer(values.choice2);
-    } else if (values.correctAnswer === '3') {
-      setAnswer(values.choice3);
-    } else if (values.correctAnswer === '4') {
-      setAnswer(values.choice4);
-    }
-  }, [values.correctAnswer]);
 
   function handleChangeRadioAnswer(val: string) {
     if (!val) return;
@@ -146,7 +115,6 @@ const MultipleChoiceForm = ({
 
   function handleChangeQuestion(val: string) {
     setFieldValue('question', val);
-    setFormState({ ...formState, question: val });
   }
 
   return (
@@ -179,9 +147,13 @@ const MultipleChoiceForm = ({
               alt="Memory Recall Image"
             />
           ) : (
-            <Text fontSize="md" color="gray.400">
-              {t('createMemoryRecall.imageHelperText')}
-            </Text>
+            <Image
+              source={{ uri: question.imageid }}
+              width="48"
+              height="48"
+              borderRadius={4}
+              alt="Memory Recall Image"
+            />
           )}
         </View>
         <HStack w="full" justifyContent="space-between" mb={2} mt={4}>
@@ -197,16 +169,10 @@ const MultipleChoiceForm = ({
         <Divider />
         <Text bold>{t('createMemoryRecall.questionType')}</Text>
         <HStack justifyContent="space-between" my={2}>
-          <Button
-            w={width / 2.25}
-            variant={isMultipleChoice === true ? 'solid' : 'outline'}
-            onPress={() => handlePressChoiceTemplate('multiple')}>
+          <Button w={width / 2.25} variant="solid">
             {t('createMemoryRecall.multipleChoice')}
           </Button>
-          <Button
-            w={width / 2.25}
-            variant={isMultipleChoice === false ? 'solid' : 'outline'}
-            onPress={() => handlePressChoiceTemplate('short')}>
+          <Button w={width / 2.25} variant="outline" isDisabled>
             {t('createMemoryRecall.shortAnswer')}
           </Button>
         </HStack>
@@ -221,10 +187,22 @@ const MultipleChoiceForm = ({
               value={values.correctAnswer}
               onChange={(val) => handleChangeRadioAnswer(val)}>
               <VStack h="48" justifyContent="space-evenly">
-                <Radio value="1" h="16" />
-                <Radio value="2" h="16" mt={1} />
-                <Radio value="3" h="16" mt={2} />
-                <Radio value="4" h="16" mt={2} />
+                <Radio value={values.choice1 ? values.choice1 : '1'} h="16" />
+                <Radio
+                  value={values.choice2 ? values.choice2 : '2'}
+                  h="16"
+                  mt={1}
+                />
+                <Radio
+                  value={values.choice3 ? values.choice3 : '3'}
+                  h="16"
+                  mt={2}
+                />
+                <Radio
+                  value={values.choice4 ? values.choice4 : '4'}
+                  h="16"
+                  mt={2}
+                />
               </VStack>
             </Radio.Group>
             <VStack space={2}>
@@ -280,7 +258,7 @@ const MultipleChoiceForm = ({
             <Spinner color="white" />
           ) : (
             <Text fontSize="md" bold color="#fff">
-              {t('viewQuestionPool.create')}
+              {t('createMemoryRecall.editQuestion')}
             </Text>
           )}
         </Button>
@@ -289,4 +267,4 @@ const MultipleChoiceForm = ({
   );
 };
 
-export default MultipleChoiceForm;
+export default EditMultipleChoiceForm;

@@ -599,7 +599,9 @@
     "questionPool": "คำถามทั้งหมด",
     "questionRequired": "โปรดใส่คำถาม",
     "choiceRequired": "โปรดสร้างตัวเลือกทุกตัว",
-    "answerRequired": "โปรดเลือกคำตอบที่ถูกต้อง"
+    "answerRequired": "โปรดเลือกคำตอบที่ถูกต้อง",
+    "editMemoryScreen": "แก้ไขคำถาม",
+    "editQuestion": "แก้ไขคำถาม",
   },
   "questionPool": {
     "questions": "คำถาม",
@@ -609,6 +611,7 @@
     "createQuestionHelper":"คุณสามารถสร้างคำถามเองหรือสร้างด้วยแบบคำถามของเราได้",
     "createTemplate": "สร้างคำถามจากแบบ",
     "template1": "จงเลือกคำตอบที่ถูกต้อง",
-    "template2": "วันนี้คุณรู้สึกอย่างไร?"
+    "template2": "วันนี้คุณรู้สึกอย่างไร?",
+    "selectQuestions": "เลือกคำถาม"
   }
 }

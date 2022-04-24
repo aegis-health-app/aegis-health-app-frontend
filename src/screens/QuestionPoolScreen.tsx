@@ -1,6 +1,5 @@
 import {
   Button,
-  FlatList,
   HStack,
   Text,
   View,
@@ -10,8 +9,12 @@ import {
   VStack
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import React, { useState, useContext } from 'react';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import React, { useState, useContext, useEffect } from 'react';
+import {
+  NavigationProp,
+  useNavigation,
+  useIsFocused
+} from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -19,9 +22,9 @@ import { useTranslation } from 'react-i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { QuestionInfo } from './../dto/modules/memoryRecall';
-import useAsyncEffect from './../hooks/useAsyncEffect';
 import { getAllQuestions } from '../utils/caretaker/memoryRecall';
 import { CaretakerContext } from './../contexts/CaretakerContext';
+import useAsyncEffect from './../hooks/useAsyncEffect';
 
 const QuestionPoolScreen = () => {
   const { t } = useTranslation();
@@ -33,14 +36,28 @@ const QuestionPoolScreen = () => {
   const [selectedCount, setSelectedCount] = useState(0);
   const [questions, setQuestions] = useState<QuestionInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   useAsyncEffect(async () => {
-    if (!currentElderlyUid) return;
+    if (currentElderlyUid === undefined || isFocused === false) return;
+
     setIsLoading(true);
     const _questions = await getAllQuestions(currentElderlyUid);
     setQuestions(_questions);
     setIsLoading(false);
-  }, [currentElderlyUid]);
+  }, [currentElderlyUid, isFocused]);
+
+  useEffect(() => {
+    setSelectedCount(0);
+    let count = 0;
+    questions.forEach((question) => {
+      if (question.isSelected) {
+        count += 1;
+      }
+    });
+
+    setSelectedCount(count);
+  }, [questions]);
 
   return (
     <SafeAreaView>
@@ -104,14 +121,23 @@ const QuestionPoolScreen = () => {
               />
             </HStack>
           </VStack>
-
+          <Text fontSize="lg" bold mt={4} mb={2}>
+            {t('questionPool.selectQuestions')}
+          </Text>
           {questions.length > 0 ? (
-            <FlatList
-              data={questions}
-              renderItem={({ item }) => <QuestionPoolItem data={item} />}
-              keyExtractor={(_, key) => key.toString()}
-              showsVerticalScrollIndicator={false}
-            />
+            <>
+              {questions.map((item, key) => {
+                return (
+                  <QuestionPoolItem
+                    key={key}
+                    data={item}
+                    selectedCount={selectedCount}
+                    setSelectedCount={setSelectedCount}
+                    maxSelectedCount={MAX_SELECTION}
+                  />
+                );
+              })}
+            </>
           ) : (
             <View alignItems="center" justifyContent="center" h="64">
               {isLoading ? (
@@ -148,11 +174,23 @@ const QuestionPoolScreen = () => {
 
 type QuestionPoolItemProps = {
   data: QuestionInfo;
+  selectedCount: number;
+  setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
+  maxSelectedCount: number;
 };
 
-function QuestionPoolItem({ data }: QuestionPoolItemProps) {
+function QuestionPoolItem(props: QuestionPoolItemProps) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const [selected, isSelected] = useState(data.isSelected);
+  const [selected, setSelected] = useState(props.data.isSelected);
+
+  async function handleChangeSelected() {
+    if (props.selectedCount < props.maxSelectedCount && selected === false) {
+      // send on
+      // setSelected((prev) => !prev);
+    } else {
+      //send off
+    }
+  }
 
   return (
     <HStack
@@ -160,18 +198,21 @@ function QuestionPoolItem({ data }: QuestionPoolItemProps) {
       px={4}
       alignItems="center"
       justifyContent="space-between"
-      // bgColor={isSelected ? 'primary.100' : 'white'}
-      bgColor="white"
+      bgColor={selected ? 'primary.100' : 'white'}
       my={1}
       borderRadius="lg"
       style={styles.card}>
-      <Checkbox isChecked={selected} colorScheme="green">
-        {data.question}
+      <Checkbox
+        value="check"
+        isChecked={selected}
+        colorScheme="green"
+        onChange={handleChangeSelected}>
+        {props.data.question}
       </Checkbox>
       <Icon
         onPress={() =>
-          navigation.navigate('CreateMemoryRecallQuestionsScreen', {
-            questionInfo: data
+          navigation.navigate('EditMemoryRecallQuestionsScreen', {
+            data: props.data
           })
         }
         as={MaterialCommunityIcons}

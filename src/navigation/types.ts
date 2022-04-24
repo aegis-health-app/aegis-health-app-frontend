@@ -43,6 +43,7 @@ export type RootStackParamList = {
   CreateMemoryRecallQuestionsScreen:
     | { questionInfo: QuestionInfo }
     | { question: string };
+  EditMemoryRecallQuestionsScreen: { data: QuestionInfo };
   QuestionPoolScreen: undefined;
 
   SignInScreen: undefined;
