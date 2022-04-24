@@ -7,6 +7,12 @@ import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { mockEmergencyInfo } from '../components/molecules/EmergencyAlertCard';
 import EmergencyAlert from '../components/organisms/EmergencyAlert';
+import { NotificationType } from '../constants/NotificationType';
+import {
+  determineMessageType,
+  getNotificationFeed,
+  storeNotificationFeed
+} from '../utils/user/notification';
 import { EmergencyInfo } from './EmergencyInfoScreen';
 
 const withEmergency =
@@ -20,22 +26,25 @@ const withEmergency =
     const displayNotification = useCallback(
       (message: FirebaseMessagingTypes.RemoteMessage) => {
         const { data } = message;
+        const type = determineMessageType(data);
 
-        const emergencyPayload: EmergencyInfo = {
-          address: data?.address ?? '',
-          elderlyImageId: data?.elderlyImageId ?? '',
-          name: data?.elderlyName ?? '',
-          phone: data?.elderlyPhone ?? '',
-          location: {
-            latitude: parseFloat(data?.latitude ?? ''),
-            longtitude: parseFloat(data?.longtitude ?? '')
-          },
-          date: moment(data?.timestamp).format('DD MMM YYYY') ?? '',
-          time: moment(data?.timestamp).format('hh:mm:ss') ?? ''
-        };
+        if (type === NotificationType.EMERGENCY) {
+          const emergencyPayload: EmergencyInfo = {
+            address: data?.address ?? '',
+            elderlyImageId: data?.elderlyImageId ?? '',
+            name: data?.elderlyName ?? '',
+            phone: data?.elderlyPhone ?? '',
+            location: {
+              latitude: parseFloat(data?.latitude ?? ''),
+              longtitude: parseFloat(data?.longtitude ?? '')
+            },
+            date: moment(data?.timestamp).format('DD MMM YYYY') ?? '',
+            time: moment(data?.timestamp).format('hh:mm:ss') ?? ''
+          };
 
-        setEmergencyInfo(emergencyPayload);
-        setShowEmergencyAlert(true);
+          setEmergencyInfo(emergencyPayload);
+          setShowEmergencyAlert(true);
+        }
       },
       [setEmergencyInfo, setShowEmergencyAlert]
     );
