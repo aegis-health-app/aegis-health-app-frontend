@@ -9,9 +9,9 @@ import Spacer from '../../components/atoms/Spacer';
 import { client } from '../../config/axiosConfig';
 import {
   chartConfig,
-  TimeFrame,
-  timeFrameOption
+  TimeFrame
 } from '../../constants/HealthRecordingConstants';
+import { useTimeFrameOption } from '../../hooks/useTimeFrameOption';
 import { HealthRecordAnalytic } from '../../interfaces/healthRecording';
 import { getPeriodLable } from '../../utils/module/healthRecord';
 
@@ -25,6 +25,7 @@ const HealthRecordChart = (props: Props) => {
   const { hrName, columnName, unit } = props;
   const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
+  const timeFrameOption = useTimeFrameOption();
 
   const [labels, setLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<Dataset[]>();

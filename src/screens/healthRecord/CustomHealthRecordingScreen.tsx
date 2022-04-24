@@ -6,10 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import TextInput from '../../components/atoms/TextInput';
 import * as Yup from 'yup';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
-import {
-  CameraPhotoOptions,
-  requestCameraPermission
-} from '../../utils/permission';
+import { CameraPhotoOptions, usePermission } from '../../utils/usePermission';
 import {
   ImagePickerResponse,
   launchCamera,
@@ -60,6 +57,7 @@ const CustomHealthRecordingScreen = () => {
 
   const { user } = useContext(UserContext);
   const { fetchHealthRecordings } = useContext(HealthRecordContext);
+  const { requestCameraPermission } = usePermission();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
