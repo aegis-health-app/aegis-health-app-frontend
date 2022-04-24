@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HStack, Text, View } from 'native-base';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import EmergencyAlertCard from '../molecules/EmergencyAlertCard';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
+import {
+  EmergencyNoti,
+  getNotificationFeed,
+  Notification
+} from '../../utils/user/notification';
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
+
+  const [reminderList, setReminderList] = useState<Notification[]>([]);
+  const [emergencyList, setEmergencyList] = useState<EmergencyNoti[]>([]);
+
+  useAsyncEffect(async () => {
+    const feed = await getNotificationFeed();
+    setEmergencyList(feed.emergency as EmergencyNoti[]);
+    setReminderList(feed.reminder);
+  }, []);
 
   return (
     <View w="full" mt={6}>
@@ -25,18 +40,24 @@ const UpComingAlert = () => {
           </Text>
         </TouchableOpacity>
       </HStack>
-      <ModuleAlertCard
-        moduleName="Lorem Ipsum"
-        title="Lorem Ipsum"
-        description="Lorem Ipsum"
-        time={new Date()}
-      />
-      <EmergencyAlertCard
-        sender="Lorem Ipsum"
-        title="Lorem Ipsum"
-        description="Lorem Ipsum"
-        time={new Date()}
-      />
+      {emergencyList.length > 0 ? (
+        <EmergencyAlertCard
+          sender={emergencyList[0].name}
+          time={emergencyList[0].time}
+          notification={emergencyList[0]}
+        />
+      ) : (
+        <>
+          {reminderList.length > 0 && (
+            <ModuleAlertCard
+              moduleName="Lorem Ipsum"
+              title="Lorem Ipsum"
+              description="Lorem Ipsum"
+              time={new Date()}
+            />
+          )}
+        </>
+      )}
     </View>
   );
 };

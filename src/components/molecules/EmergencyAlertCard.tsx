@@ -6,13 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { Geolocation } from '../../hooks/useGeolocation';
+import { Geolocation } from '../../utils/geolocation';
+import { EmergencyNoti } from '../../utils/user/notification';
 
 type EmergencyAlertCardProps = {
   sender: string;
-  time: Date;
-  title: string;
-  description: string | undefined;
+  time: string;
+  notification: EmergencyNoti;
 };
 
 export interface EmergencyData {
@@ -37,14 +37,18 @@ export const mockEmergencyInfo = {
   elderlyImageId: 'abcdef'
 };
 
-const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
+const EmergencyAlertCard = ({
+  sender,
+  time,
+  notification
+}: EmergencyAlertCardProps) => {
   const { t } = useTranslation();
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const showEmergencyInfoScreen = useCallback(() => {
-    navigation.push('EmergencyInfoScreen', { info: mockEmergencyInfo });
+    navigation.push('EmergencyInfoScreen', { info: notification });
   }, []);
 
   return (
@@ -55,7 +59,7 @@ const EmergencyAlertCard = ({ sender, time }: EmergencyAlertCardProps) => {
             {t('modules.sender', { name: sender })}
           </Text>
           <Text fontSize="16" color="#E4E4E7">
-            {moment(time).format('hh:mm')}
+            {time.substring(0, 5)}
           </Text>
         </HStack>
         <View>
