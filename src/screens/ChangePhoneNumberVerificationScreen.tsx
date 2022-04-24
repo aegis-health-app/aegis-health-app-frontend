@@ -42,7 +42,7 @@ const ChangePhoneNumberVerificationScreen = ({
 
   const { getUserProfile } = useContext(UserContext);
   const shouldDisable = (errors) => {
-    return errors['verificationCode']?.message;
+    return errors.verificationCode?.message;
   };
 
   const onFormSubmit = async (input) => {
