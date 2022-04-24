@@ -19,14 +19,8 @@ import Alert, { AlertType } from '../components/organisms/Alert';
 import DatePicker from '../components/molecules/DatePicker';
 import { useImageSelection } from '../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
-<<<<<<< HEAD
 import { FallbackImageLarge } from '../components/molecules/FallbackImage';
 import { useUserValidation } from '../hooks/useUserValidation';
-=======
-import FallbackImage, {
-  FallbackImageLarge
-} from '../components/molecules/FallbackImage';
->>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
 
 // Temporary profile image
 const ProfilePic = require('../assets/images/defaultProfile.png');
