@@ -1,0 +1,5 @@
+export enum NotificationType {
+  EMERGENCY = 'EMERGENCY',
+  EMERGENCY_CANCEL = 'EMERGENCY_CANCEL',
+  REMINDER = 'REMINDER'
+}
