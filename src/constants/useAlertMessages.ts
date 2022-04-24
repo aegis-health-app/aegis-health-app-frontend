@@ -1,4 +1,4 @@
-import i18n from '../internationalization/i18n.config';
+import { useTranslation } from 'react-i18next';
 
 export interface AlertMessage {
   header: string;
@@ -8,136 +8,134 @@ export interface AlertMessage {
 }
 
 export const useAlertMessages = () => {
+  const { t } = useTranslation();
+
   const AlertMessages = {
     changePasswordSuccess: {
-      header: i18n.t('changePasswordSuccess.header'),
-      body: i18n.t('changePasswordSuccess.body'),
-      primaryButton: i18n.t('changePasswordSuccess.primaryButton'),
-      secondaryButton: i18n.t('changePasswordSuccess.secondaryButton')
+      header: t('changePasswordSuccess.header'),
+      body: t('changePasswordSuccess.body'),
+      primaryButton: t('changePasswordSuccess.primaryButton'),
+      secondaryButton: t('changePasswordSuccess.secondaryButton')
     },
     changePasswordError: {
-      header: i18n.t('changePasswordError.header'),
-      body: i18n.t('changePasswordError.body'),
-      primaryButton: i18n.t('changePasswordError.primaryButton'),
-      secondaryButton: i18n.t('changePasswordError.secondaryButton')
+      header: t('changePasswordError.header'),
+      body: t('changePasswordError.body'),
+      primaryButton: t('changePasswordError.primaryButton'),
+      secondaryButton: t('changePasswordError.secondaryButton')
     },
     updateProfileSuccess: {
-      header: i18n.t('updateProfileSuccess.header'),
-      body: i18n.t('updateProfileSuccess.body'),
-      primaryButton: i18n.t('updateProfileSuccess.primaryButton'),
-      secondaryButton: i18n.t('updateProfileSuccess.secondaryButton')
+      header: t('updateProfileSuccess.header'),
+      body: t('updateProfileSuccess.body'),
+      primaryButton: t('updateProfileSuccess.primaryButton'),
+      secondaryButton: t('updateProfileSuccess.secondaryButton')
     },
     updateProfileError: {
-      header: i18n.t('updateProfileError.header'),
-      body: i18n.t('updateProfileError.body'),
-      primaryButton: i18n.t('updateProfileError.primaryButton'),
-      secondaryButton: i18n.t('updateProfileError.secondaryButton')
+      header: t('updateProfileError.header'),
+      body: t('updateProfileError.body'),
+      primaryButton: t('updateProfileError.primaryButton'),
+      secondaryButton: t('updateProfileError.secondaryButton')
     },
     uploadImageError: {
-      header: i18n.t('uploadImageError.header'),
-      body: i18n.t('uploadImageError.body'),
-      primaryButton: i18n.t('uploadImageError.primaryButton'),
-      secondaryButton: i18n.t('uploadImageError.secondaryButton')
+      header: t('uploadImageError.header'),
+      body: t('uploadImageError.body'),
+      primaryButton: t('uploadImageError.primaryButton'),
+      secondaryButton: t('uploadImageError.secondaryButton')
     },
     changePhoneNumberSuccess: {
-      header: i18n.t('changePhoneNumberSuccess.header'),
-      body: i18n.t('changePhoneNumberSuccess.body'),
-      primaryButton: i18n.t('changePhoneNumberSuccess.primaryButton'),
-      secondaryButton: i18n.t('changePhoneNumberSuccess.secondaryButton')
+      header: t('changePhoneNumberSuccess.header'),
+      body: t('changePhoneNumberSuccess.body'),
+      primaryButton: t('changePhoneNumberSuccess.primaryButton'),
+      secondaryButton: t('changePhoneNumberSuccess.secondaryButton')
     },
     changePhoneNumberError: {
-      header: i18n.t('changePhoneNumberError.header'),
-      body: i18n.t('changePhoneNumberError.body'),
-      primaryButton: i18n.t('changePhoneNumberError.primaryButton'),
-      secondaryButton: i18n.t('changePhoneNumberError.secondaryButton')
+      header: t('changePhoneNumberError.header'),
+      body: t('changePhoneNumberError.body'),
+      primaryButton: t('changePhoneNumberError.primaryButton'),
+      secondaryButton: t('changePhoneNumberError.secondaryButton')
     },
     addHealthDataSuccess: {
-      header: i18n.t('addHealthDataSuccess.header'),
-      body: i18n.t('addHealthDataSuccess.body'),
-      primaryButton: i18n.t('addHealthDataSuccess.primaryButton'),
-      secondaryButton: i18n.t('addHealthDataSuccess.secondaryButton')
+      header: t('addHealthDataSuccess.header'),
+      body: t('addHealthDataSuccess.body'),
+      primaryButton: t('addHealthDataSuccess.primaryButton'),
+      secondaryButton: t('addHealthDataSuccess.secondaryButton')
     },
     addHealthDataError: {
-      header: i18n.t('addHealthDataError.header'),
-      body: i18n.t('addHealthDataError.body'),
-      primaryButton: i18n.t('addHealthDataError.primaryButton'),
-      secondaryButton: i18n.t('addHealthDataError.secondaryButton')
+      header: t('addHealthDataError.header'),
+      body: t('addHealthDataError.body'),
+      primaryButton: t('addHealthDataError.primaryButton'),
+      secondaryButton: t('addHealthDataError.secondaryButton')
     },
     duplicateHealthDataError: {
-      header: i18n.t('duplicateHealthDataError.header'),
-      body: i18n.t('duplicateHealthDataError.body'),
-      primaryButton: i18n.t('duplicateHealthDataError.primaryButton'),
-      secondaryButton: i18n.t('duplicateHealthDataError.secondaryButton')
+      header: t('duplicateHealthDataError.header'),
+      body: t('duplicateHealthDataError.body'),
+      primaryButton: t('duplicateHealthDataError.primaryButton'),
+      secondaryButton: t('duplicateHealthDataError.secondaryButton')
     },
     confirmDeleteHealthRecordingAlert: {
-      header: i18n.t('confirmDeleteHealthRecordingAlert.header'),
-      body: i18n.t('confirmDeleteHealthRecordingAlert.body'),
-      primaryButton: i18n.t('confirmDeleteHealthRecordingAlert.primaryButton'),
-      secondaryButton: i18n.t(
-        'confirmDeleteHealthRecordingAlert.secondaryButton'
-      )
+      header: t('confirmDeleteHealthRecordingAlert.header'),
+      body: t('confirmDeleteHealthRecordingAlert.body'),
+      primaryButton: t('confirmDeleteHealthRecordingAlert.primaryButton'),
+      secondaryButton: t('confirmDeleteHealthRecordingAlert.secondaryButton')
     },
     confirmDeleteHealthDataRowAlert: {
-      header: i18n.t('confirmDeleteHealthDataRowAlert.header'),
-      body: i18n.t('confirmDeleteHealthDataRowAlert.body'),
-      primaryButton: i18n.t('confirmDeleteHealthDataRowAlert.primaryButton'),
-      secondaryButton: i18n.t('confirmDeleteHealthDataRowAlert.secondaryButton')
+      header: t('confirmDeleteHealthDataRowAlert.header'),
+      body: t('confirmDeleteHealthDataRowAlert.body'),
+      primaryButton: t('confirmDeleteHealthDataRowAlert.primaryButton'),
+      secondaryButton: t('confirmDeleteHealthDataRowAlert.secondaryButton')
     },
     deleteHealthRecordingError: {
-      header: i18n.t('deleteHealthRecordingError.header'),
-      body: i18n.t('deleteHealthRecordingError.body'),
-      primaryButton: i18n.t('deleteHealthRecordingError.primaryButton'),
-      secondaryButton: i18n.t('deleteHealthRecordingError.secondaryButton')
+      header: t('deleteHealthRecordingError.header'),
+      body: t('deleteHealthRecordingError.body'),
+      primaryButton: t('deleteHealthRecordingError.primaryButton'),
+      secondaryButton: t('deleteHealthRecordingError.secondaryButton')
     },
     deleteHealthDataRowError: {
-      header: i18n.t('deleteHealthDataRowError.header'),
-      body: i18n.t('deleteHealthDataRowError.body'),
-      primaryButton: i18n.t('deleteHealthDataRowError.primaryButton'),
-      secondaryButton: i18n.t('deleteHealthDataRowError.secondaryButton')
+      header: t('deleteHealthDataRowError.header'),
+      body: t('deleteHealthDataRowError.body'),
+      primaryButton: t('deleteHealthDataRowError.primaryButton'),
+      secondaryButton: t('deleteHealthDataRowError.secondaryButton')
     },
     updateHealthDataCoverImageSuccess: {
-      header: i18n.t('updateHealthDataCoverImageSuccess.header'),
-      body: i18n.t('updateHealthDataCoverImageSuccess.body'),
-      primaryButton: i18n.t('updateHealthDataCoverImageSuccess.primaryButton'),
-      secondaryButton: i18n.t(
-        'updateHealthDataCoverImageSuccess.secondaryButton'
-      )
+      header: t('updateHealthDataCoverImageSuccess.header'),
+      body: t('updateHealthDataCoverImageSuccess.body'),
+      primaryButton: t('updateHealthDataCoverImageSuccess.primaryButton'),
+      secondaryButton: t('updateHealthDataCoverImageSuccess.secondaryButton')
     },
     updateHealthDataCoverImageError: {
-      header: i18n.t('updateHealthDataCoverImageError.header'),
-      body: i18n.t('updateHealthDataCoverImageError.body'),
-      primaryButton: i18n.t('updateHealthDataCoverImageError.primaryButton'),
-      secondaryButton: i18n.t('updateHealthDataCoverImageError.secondaryButton')
+      header: t('updateHealthDataCoverImageError.header'),
+      body: t('updateHealthDataCoverImageError.body'),
+      primaryButton: t('updateHealthDataCoverImageError.primaryButton'),
+      secondaryButton: t('updateHealthDataCoverImageError.secondaryButton')
     },
     addCustomHealthRecordingSuccess: {
-      header: i18n.t('addCustomHealthRecordingSuccess.header'),
-      body: i18n.t('addCustomHealthRecordingSuccess.body'),
-      primaryButton: i18n.t('addCustomHealthRecordingSuccess.primaryButton'),
-      secondaryButton: i18n.t('addCustomHealthRecordingSuccess.secondaryButton')
+      header: t('addCustomHealthRecordingSuccess.header'),
+      body: t('addCustomHealthRecordingSuccess.body'),
+      primaryButton: t('addCustomHealthRecordingSuccess.primaryButton'),
+      secondaryButton: t('addCustomHealthRecordingSuccess.secondaryButton')
     },
     addCustomHealthRecordingError: {
-      header: i18n.t('addCustomHealthRecordingError.header'),
-      body: i18n.t('addCustomHealthRecordingError.body'),
-      primaryButton: i18n.t('addCustomHealthRecordingError.primaryButton'),
-      secondaryButton: i18n.t('addCustomHealthRecordingError.secondaryButton')
+      header: t('addCustomHealthRecordingError.header'),
+      body: t('addCustomHealthRecordingError.body'),
+      primaryButton: t('addCustomHealthRecordingError.primaryButton'),
+      secondaryButton: t('addCustomHealthRecordingError.secondaryButton')
     },
     emergencyNotification: {
-      header: i18n.t('emergencyNotification.header'),
-      body: i18n.t('emergencyNotification.body'),
-      primaryButton: i18n.t('emergencyNotification.primaryButton'),
-      secondaryButton: i18n.t('emergencyNotification.secondaryButton')
+      header: t('emergencyNotification.header'),
+      body: t('emergencyNotification.body'),
+      primaryButton: t('emergencyNotification.primaryButton'),
+      secondaryButton: t('emergencyNotification.secondaryButton')
     },
     connectElderlySuccess: {
-      header: i18n.t('connectElderlySuccess.header'),
-      body: i18n.t('connectElderlySuccess.body'),
-      primaryButton: i18n.t('connectElderlySuccess.primaryButton'),
-      secondaryButton: i18n.t('connectElderlySuccess.secondaryButton')
+      header: t('connectElderlySuccess.header'),
+      body: t('connectElderlySuccess.body'),
+      primaryButton: t('connectElderlySuccess.primaryButton'),
+      secondaryButton: t('connectElderlySuccess.secondaryButton')
     },
     connectElderlyError: {
-      header: i18n.t('connectElderlyError.header'),
-      body: i18n.t('connectElderlyError.body'),
-      primaryButton: i18n.t('connectElderlyError.primaryButton'),
-      secondaryButton: i18n.t('connectElderlyError.secondaryButton')
+      header: t('connectElderlyError.header'),
+      body: t('connectElderlyError.body'),
+      primaryButton: t('connectElderlyError.primaryButton'),
+      secondaryButton: t('connectElderlyError.secondaryButton')
     }
   };
   return AlertMessages;
