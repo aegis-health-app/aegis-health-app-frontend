@@ -14,11 +14,11 @@ import OTPTimerButton from '../components/atoms/OTPTimerButton';
 import Spacer from '../components/atoms/Spacer';
 import ControlledOTPInput from '../components/molecules/ControlledOTPInput';
 import { client } from '../config/axiosConfig';
-import { phoneNumberVerificationCodeSchema } from '../dto/PhoneVerificationCode';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { RootStackParamList } from '../navigation/types';
 import Alert, { AlertType } from '../components/organisms/Alert';
 import { UserContext } from '../contexts/UserContext';
+import { usePhoneVerificationCode } from '../hooks/usePhoneVerificationCode';
 
 const ChangePhoneNumberVerificationScreen = ({
   route
@@ -30,6 +30,7 @@ const ChangePhoneNumberVerificationScreen = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { phoneNumber } = route.params;
+  const phoneNumberVerificationCodeSchema = usePhoneVerificationCode();
   const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);

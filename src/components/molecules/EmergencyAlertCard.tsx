@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { Geolocation } from '../../utils/geolocation';
+import { Geolocation } from '../../utils/useGeolocation';
 
 type EmergencyAlertCardProps = {
   sender: string;
