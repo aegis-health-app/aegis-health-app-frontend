@@ -6,7 +6,7 @@ import {
   launchImageLibrary,
   ImagePickerResponse
 } from 'react-native-image-picker';
-import { CameraPhotoOptions, usePermission } from '../../utils/usePermission';
+import { CameraPhotoOptions, usePermission } from '../../hooks/usePermission';
 import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
 import FallbackImage from '../molecules/FallbackImage';

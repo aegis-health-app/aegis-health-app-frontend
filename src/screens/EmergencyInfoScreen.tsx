@@ -19,7 +19,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import images from '../assets/images';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
-import { Geolocation, useGeolocation } from '../utils/useGeolocation';
+import { Geolocation, useGeolocation } from '../hooks/useGeolocation';
 import { openDialScreen } from '../utils/phone';
 
 export type EmergencyInfo = {

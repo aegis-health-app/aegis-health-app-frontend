@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import TextInput from '../../components/atoms/TextInput';
 import * as Yup from 'yup';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
-import { CameraPhotoOptions, usePermission } from '../../utils/usePermission';
+import { CameraPhotoOptions, usePermission } from '../../hooks/usePermission';
 import {
   ImagePickerResponse,
   launchCamera,

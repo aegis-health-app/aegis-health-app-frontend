@@ -9,7 +9,7 @@ import {
   sendEmergencyCancel,
   sendEmergencySignal
 } from '../utils/user/notification';
-import { useGeolocation } from '../utils/useGeolocation';
+import { useGeolocation } from '../hooks/useGeolocation';
 
 const EmergencyScreen = () => {
   const { t } = useTranslation();

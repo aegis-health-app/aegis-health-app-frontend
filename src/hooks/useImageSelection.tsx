@@ -3,7 +3,7 @@ import {
   launchCamera,
   launchImageLibrary
 } from 'react-native-image-picker';
-import { CameraPhotoOptions, usePermission } from '../utils/usePermission';
+import { CameraPhotoOptions, usePermission } from './usePermission';
 
 export const useImageSelection = () => {
   const { requestCameraPermission } = usePermission();
