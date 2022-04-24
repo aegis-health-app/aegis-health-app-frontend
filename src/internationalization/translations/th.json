@@ -602,6 +602,7 @@
     "answerRequired": "โปรดเลือกคำตอบที่ถูกต้อง",
     "editMemoryScreen": "แก้ไขคำถาม",
     "editQuestion": "แก้ไขคำถาม",
+    "choiceMissing": "โปรดใส่ตัวเลือกทั้งหมด"
   },
   "questionPool": {
     "questions": "คำถาม",
