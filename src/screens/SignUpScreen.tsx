@@ -1,4 +1,10 @@
-import { Box, Button, ScrollView, VStack } from 'native-base';
+import {
+  Box,
+  Button,
+  KeyboardAvoidingView,
+  ScrollView,
+  VStack
+} from 'native-base';
 import React, { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,6 +28,7 @@ import { RootStackParamList } from '../navigation/types';
 import { UserContext } from '../contexts/UserContext';
 import { requestOTP, signUp, SignUpPayload, verifyOTP } from '../utils/auth';
 import SignUpStageThree from '../components/organisms/SignUpStageThree';
+import Alert, { AlertType } from '../components/organisms/Alert';
 
 export interface InformationList {
   label: string;
@@ -102,10 +109,33 @@ const SignUpScreen = ({ route }) => {
   const [date, setDate] = useState(new Date(700938977));
 
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
+  const [showImageUploadError, setShowImageUploadError] =
+    useState<boolean>(false);
 
   const backToPreviousStage = useCallback(() => {
     if (signUpStage > 1) setSignUpStage((prev) => prev - 1);
   }, [signUpStage]);
+
+  const uploadNewProfileImage = useCallback(async () => {
+    if (!newProfileImage?.assets) return;
+    const profileImage = newProfileImage.assets[0];
+
+    const imagePayload = {
+      base64: profileImage.base64,
+      name: profileImage.fileName,
+      type: profileImage.type
+    };
+
+    if (profileImage.base64) {
+      console.log(user);
+      try {
+        const { data } = await client.post('/user/profile/image', imagePayload);
+        if (data) getUserProfile();
+      } catch (error) {
+        setShowImageUploadError(true);
+      }
+    }
+  }, [newProfileImage, setShowImageUploadError, user]);
 
   const continueToNextStage = useCallback(
     async (data) => {
@@ -179,21 +209,7 @@ const SignUpScreen = ({ route }) => {
       }
       if (signUpStage === 4) {
         if (newProfileImage) {
-          const formData = new FormData();
-          formData.append('file', newProfileImage);
-          const imageUploadResponse = await client.post(
-            `user/profile/${user?.uid}/image`,
-            formData,
-            {
-              headers: { 'Content-Type': 'multipart/form-data' }
-            }
-          );
-          const patchResponse = await client.patch('user', {
-            imageid: imageUploadResponse.data.imageUrl
-          });
-          if (patchResponse.data) {
-            await getUserProfile();
-          }
+          uploadNewProfileImage();
         } else await getUserProfile();
       }
     },
@@ -209,76 +225,84 @@ const SignUpScreen = ({ route }) => {
   );
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <VStack px={4} minH={ScreenHeight}>
-          <FormHeader headerText={t('auth.signUp')} mt={16} />
-          <Divider my={2} />
-          {signUpStage === 1 && (
-            <SignUpStageOne
-              informationList={informationList}
-              gender={gender}
-              setGender={setGender}
-              date={date}
-              setDate={setDate}
-              control={control}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              continueToNextStage={continueToNextStage}
-            />
-          )}
-          {signUpStage === 2 && (
-            <SignUpStageTwo
-              watch={watch}
-              control={control}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              backToPreviousStage={backToPreviousStage}
-              continueToNextStage={continueToNextStage}
-            />
-          )}
-
-          {signUpStage === 3 && (
-            <SignUpStageThree
-              control={control}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              informationList={informationList}
-              continueToNextStage={continueToNextStage}
-            />
-          )}
-
-          {signUpStage === 4 && (
-            <View>
-              <FormHeader
-                headerText={t('auth.uploadProfile')}
-                my={2}
-                size={20}
+    <KeyboardAvoidingView>
+      <Alert
+        isOpen={showImageUploadError}
+        close={() => setShowImageUploadError(false)}
+        type={AlertType.ERROR}
+        message="uploadImageError"
+      />
+      <SafeAreaView>
+        <ScrollView>
+          <VStack px={4} minH={ScreenHeight}>
+            <FormHeader headerText={t('auth.signUp')} mt={16} />
+            <Divider my={2} />
+            {signUpStage === 1 && (
+              <SignUpStageOne
+                informationList={informationList}
+                gender={gender}
+                setGender={setGender}
+                date={date}
+                setDate={setDate}
+                control={control}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                continueToNextStage={continueToNextStage}
               />
-              <FormDescription text={t('auth.uploadProfileDesc')} mb={6} />
-              <PictureSelection
-                isIndependent={false}
-                dependentImage={newProfileImage}
-                setDependentImage={setNewProfileImage}
+            )}
+            {signUpStage === 2 && (
+              <SignUpStageTwo
+                watch={watch}
+                control={control}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                backToPreviousStage={backToPreviousStage}
+                continueToNextStage={continueToNextStage}
               />
-            </View>
-          )}
+            )}
 
-          <Box flex={1} />
-          {signUpStage < 4 ? (
-            <AuthFooter page={AuthType.SIGNUP} />
-          ) : (
-            <Button
-              w="full"
-              onPress={handleSubmit(continueToNextStage)}
-              mb={4}
-              variant={newProfileImage ? 'solid' : 'outline'}>
-              {t(newProfileImage ? 'auth.continue' : 'misc.maybeLater')}
-            </Button>
-          )}
-        </VStack>
-      </ScrollView>
-    </SafeAreaView>
+            {signUpStage === 3 && (
+              <SignUpStageThree
+                control={control}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                informationList={informationList}
+                continueToNextStage={continueToNextStage}
+              />
+            )}
+
+            {signUpStage === 4 && (
+              <View>
+                <FormHeader
+                  headerText={t('auth.uploadProfile')}
+                  my={2}
+                  size={20}
+                />
+                <FormDescription text={t('auth.uploadProfileDesc')} mb={6} />
+                <PictureSelection
+                  isIndependent={false}
+                  dependentImage={newProfileImage}
+                  setDependentImage={setNewProfileImage}
+                />
+              </View>
+            )}
+
+            <Box flex={1} />
+            {signUpStage < 4 ? (
+              <AuthFooter page={AuthType.SIGNUP} />
+            ) : (
+              <Button
+                w="full"
+                onPress={handleSubmit(continueToNextStage)}
+                mb={4}
+                variant={newProfileImage ? 'solid' : 'outline'}>
+                {t(newProfileImage ? 'auth.continue' : 'misc.maybeLater')}
+              </Button>
+            )}
+          </VStack>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
