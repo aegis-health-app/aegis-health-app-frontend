@@ -6,7 +6,8 @@ import {
   Checkbox,
   Icon,
   Spinner,
-  VStack
+  VStack,
+  ScrollView
 } from 'native-base';
 import { StyleSheet } from 'react-native';
 import React, { useState, useContext, useEffect } from 'react';
@@ -22,7 +23,10 @@ import { useTranslation } from 'react-i18next';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { QuestionInfo } from './../dto/modules/memoryRecall';
-import { getAllQuestions } from '../utils/caretaker/memoryRecall';
+import {
+  changeSelectedStatus,
+  getAllQuestions
+} from '../utils/caretaker/memoryRecall';
 import { CaretakerContext } from './../contexts/CaretakerContext';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 
@@ -125,7 +129,7 @@ const QuestionPoolScreen = () => {
             {t('questionPool.selectQuestions')}
           </Text>
           {questions.length > 0 ? (
-            <>
+            <ScrollView>
               {questions.map((item, key) => {
                 return (
                   <QuestionPoolItem
@@ -134,10 +138,11 @@ const QuestionPoolScreen = () => {
                     selectedCount={selectedCount}
                     setSelectedCount={setSelectedCount}
                     maxSelectedCount={MAX_SELECTION}
+                    currentElderlyUid={currentElderlyUid}
                   />
                 );
               })}
-            </>
+            </ScrollView>
           ) : (
             <View alignItems="center" justifyContent="center" h="64">
               {isLoading ? (
@@ -177,6 +182,7 @@ type QuestionPoolItemProps = {
   selectedCount: number;
   setSelectedCount: React.Dispatch<React.SetStateAction<number>>;
   maxSelectedCount: number;
+  currentElderlyUid: number | undefined;
 };
 
 function QuestionPoolItem(props: QuestionPoolItemProps) {
@@ -184,11 +190,28 @@ function QuestionPoolItem(props: QuestionPoolItemProps) {
   const [selected, setSelected] = useState(props.data.isSelected);
 
   async function handleChangeSelected() {
+    if (props.currentElderlyUid === undefined || props.selectedCount === 0) {
+      return;
+    }
+
+    // select
     if (props.selectedCount < props.maxSelectedCount && selected === false) {
-      // send on
-      // setSelected((prev) => !prev);
+      await changeSelectedStatus(
+        props.data.mid,
+        props.currentElderlyUid,
+        'true'
+      );
+      setSelected((prev) => !prev);
+      props.setSelectedCount((prev) => prev + 1);
     } else {
-      //send off
+      // unselect
+      await changeSelectedStatus(
+        props.data.mid,
+        props.currentElderlyUid,
+        'false'
+      );
+      setSelected((prev) => !prev);
+      props.setSelectedCount((prev) => prev - 1);
     }
   }
 

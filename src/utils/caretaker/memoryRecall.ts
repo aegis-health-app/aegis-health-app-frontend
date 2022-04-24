@@ -32,13 +32,15 @@ export async function sendCreatedQuestion(
 }
 
 export async function changeSelectedStatus(
-  mid: number,
+  mid: string,
   eid: number,
-  isSelected: boolean
+  isSelected: string
 ) {
+  console.log({ mid });
+  console.log({ isSelected });
   await client.put(`memoryPractice/editSelection/${isSelected}`, {
     elderlyuid: eid,
-    mid: mid
+    mid: mid.toString()
   });
 }
 
