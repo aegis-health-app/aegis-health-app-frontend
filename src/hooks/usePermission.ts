@@ -1,7 +1,6 @@
+import { useTranslation } from 'react-i18next';
 import { PermissionsAndroid, Platform } from 'react-native';
-
 import { CameraOptions } from 'react-native-image-picker';
-import i18n from '../internationalization/i18n.config';
 
 export const CameraPhotoOptions: CameraOptions = {
   mediaType: 'photo',
@@ -9,17 +8,19 @@ export const CameraPhotoOptions: CameraOptions = {
 };
 
 export const usePermission = () => {
+  const { t } = useTranslation();
+
   const requestCameraPermission = async () => {
     if (Platform.OS === 'android') {
       try {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.CAMERA,
           {
-            title: i18n.t('cameraPermissions.title'),
-            message: i18n.t('cameraPermissions.message'),
-            buttonNeutral: i18n.t('cameraPermissions.buttonNeutral'),
-            buttonNegative: i18n.t('cameraPermissions.buttonNegative'),
-            buttonPositive: i18n.t('cameraPermissions.buttonPositive')
+            title: t('cameraPermissions.title'),
+            message: t('cameraPermissions.message'),
+            buttonNeutral: t('cameraPermissions.buttonNeutral'),
+            buttonNegative: t('cameraPermissions.buttonNegative'),
+            buttonPositive: t('cameraPermissions.buttonPositive')
           }
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -39,11 +40,11 @@ export const usePermission = () => {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
-            title: i18n.t('locationPermissions.title'),
-            message: i18n.t('locationPermissions.message'),
-            buttonNeutral: i18n.t('locationPermissions.buttonNeutral'),
-            buttonNegative: i18n.t('locationPermissions.buttonNegative'),
-            buttonPositive: i18n.t('locationPermissions.buttonPositive')
+            title: t('locationPermissions.title'),
+            message: t('locationPermissions.message'),
+            buttonNeutral: t('locationPermissions.buttonNeutral'),
+            buttonNegative: t('locationPermissions.buttonNegative'),
+            buttonPositive: t('locationPermissions.buttonPositive')
           }
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {

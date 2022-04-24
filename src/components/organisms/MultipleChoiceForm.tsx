@@ -13,11 +13,7 @@ import {
 } from 'native-base';
 import React, { useState, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  FormState,
-  MultipleChoiceValidationSchema,
-  QuestionDetails
-} from '../../dto/modules/memoryRecall';
+import { FormState, QuestionDetails } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
@@ -28,6 +24,7 @@ import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
 import FallbackImage from '../molecules/FallbackImage';
+import { useMultipleChoiceValidation } from '../../hooks/useMultipleChoiceValidation';
 
 type MultipleChoiceFormProps = {
   formState: { question: string; image: ImagePayload | undefined };
@@ -49,6 +46,7 @@ const MultipleChoiceForm = ({
   const [loading, setLoading] = useState(false);
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
+  const MultipleChoiceValidationSchema = useMultipleChoiceValidation();
 
   const { width } = useWindowDimensions();
 
