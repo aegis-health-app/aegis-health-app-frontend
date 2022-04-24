@@ -599,7 +599,9 @@
     "choice": "Choice",
     "questionRequired": "Question is required",
     "choiceRequired": "All choices are required",
-    "answerRequired": "Please specify the correct answer"
+    "answerRequired": "Please specify the correct answer",
+    "editMemoryScreen": "Edit Question",
+    "editQuestion": "Edit Question"
   },
   "questionPool": {
     "questions": "Questions",
@@ -609,6 +611,7 @@
     "createQuestionHelper":"Create a custom question or create a question from our template now!",
     "createTemplate": "Create from template",
     "template1": "Pick the correct choice.",
-    "template2": "How are you feeling today?"
+    "template2": "How are you feeling today?",
+    "selectQuestions": "Select Questions"
   }
 }

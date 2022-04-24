@@ -1,4 +1,4 @@
-import { ScrollView, Text } from 'native-base';
+import { ScrollView } from 'native-base';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MultipleChoiceForm from '../components/organisms/MultipleChoiceForm';
@@ -13,7 +13,7 @@ const CreateMemoryRecallQuestionsScreen = ({
   RootStackParamList,
   'CreateMemoryRecallQuestionsScreen'
 >) => {
-  const { questionInfo, question, edit } = route.params;
+  const { questionInfo, question } = route.params;
   const [isMultipleChoice, setIsMultipleChoice] = useState(true);
   const [formState, setFormState] = useState<FormState>({
     question: questionInfo ? questionInfo.question : question,
@@ -29,7 +29,6 @@ const CreateMemoryRecallQuestionsScreen = ({
             setFormState={setFormState}
             isMultipleChoice={isMultipleChoice}
             setIsMultipleChoice={setIsMultipleChoice}
-            edit={edit}
           />
         ) : (
           <ShortAnswerForm
@@ -37,7 +36,6 @@ const CreateMemoryRecallQuestionsScreen = ({
             setFormState={setFormState}
             isMultipleChoice={isMultipleChoice}
             setIsMultipleChoice={setIsMultipleChoice}
-            edit={edit}
           />
         )}
       </ScrollView>

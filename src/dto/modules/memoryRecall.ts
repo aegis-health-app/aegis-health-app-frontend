@@ -13,6 +13,17 @@ export interface QuestionDetails {
   choice4?: string;
   correctAnswer?: string | undefined;
 }
+export interface QuestionDetailsResponse {
+  elderlyuid?: number;
+  question: string;
+  imageid?: string;
+  isMCQ: boolean;
+  choice1?: string;
+  choice2?: string;
+  choice3?: string;
+  choice4?: string;
+  correctAnswer?: string;
+}
 
 export interface QuestionInfo {
   mid: string;

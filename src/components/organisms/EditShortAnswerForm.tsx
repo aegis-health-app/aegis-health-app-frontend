@@ -13,46 +13,40 @@ import {
 import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  FormState,
   QuestionDetails,
-  ShortAnswerValidationSchema
+  QuestionDetailsResponse
 } from '../../dto/modules/memoryRecall';
 import { useWindowDimensions } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import { useImageSelection } from '../../hooks/useImageSelection';
-import images from '../../assets/images';
 import { useFormik } from 'formik';
 import { ImagePayload } from '../../interfaces/image';
-import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
+import { sendEditedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
+import images from '../../assets/images';
+import { ShortAnswerValidationSchema } from './../../dto/modules/memoryRecall';
 
-type ShortAnswerFormProps = {
-  formState: { question: string; image: ImagePayload | undefined };
-  setFormState: React.Dispatch<React.SetStateAction<FormState>>;
-  isMultipleChoice: boolean;
-  setIsMultipleChoice: (val: boolean) => void;
+type EditShortAnswerFormProps = {
+  question: QuestionDetailsResponse;
+  mid: string;
 };
 
-const ShortAnswerForm = ({
-  formState,
-  setFormState,
-  isMultipleChoice,
-  setIsMultipleChoice
-}: ShortAnswerFormProps) => {
+const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
   const { t } = useTranslation();
   const { takePicture, selectPictureFromDevice } = useImageSelection();
   const [image, setImage] = useState<ImagePayload>();
+
   const [loading, setLoading] = useState(false);
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
 
   const { width } = useWindowDimensions();
 
-  const { errors, setFieldValue, values, handleSubmit } = useFormik({
+  const { errors, handleChange, values, handleSubmit } = useFormik({
     validationSchema: ShortAnswerValidationSchema,
     initialValues: {
-      question: formState.question,
+      question: question.question,
       isMCQ: false
     },
     onSubmit: async (values) => {
@@ -69,22 +63,15 @@ const ShortAnswerForm = ({
           }
         })
       };
-      await sendCreatedQuestion(
+      await sendEditedQuestion(
         multipleChoiceQuestionPayload,
-        currentElderlyUid
+        currentElderlyUid,
+        mid
       );
       setLoading(false);
       navigation.goBack();
     }
   });
-
-  function handlePressChoiceTemplate(type: 'multiple' | 'short') {
-    if (type === 'multiple') {
-      setIsMultipleChoice(true);
-    } else if (type === 'short') {
-      setIsMultipleChoice(false);
-    }
-  }
 
   const getImage = () => {
     if (image) {
@@ -111,16 +98,7 @@ const ShortAnswerForm = ({
         uri: result.assets[0].uri
       };
       setImage(_image);
-      setFormState({
-        ...values,
-        image: image
-      });
     }
-  }
-
-  function handleChangeQuestion(val: string) {
-    setFieldValue('question', val);
-    setFormState({ ...formState, question: val });
   }
 
   return (
@@ -131,7 +109,7 @@ const ShortAnswerForm = ({
           <Input
             placeholder={t('createMemoryRecall.title')}
             value={values.question}
-            onChangeText={(val) => handleChangeQuestion(val)}
+            onChangeText={handleChange('question')}
           />
           <FormControl.ErrorMessage>
             {errors.question ? errors.question : ''}
@@ -153,9 +131,13 @@ const ShortAnswerForm = ({
               alt="Memory Recall Image"
             />
           ) : (
-            <Text fontSize="md" color="gray.400">
-              {t('createMemoryRecall.imageHelperText')}
-            </Text>
+            <Image
+              source={{ uri: question.imageid }}
+              width="48"
+              height="48"
+              borderRadius={4}
+              alt="Memory Recall Image"
+            />
           )}
         </View>
         <HStack w="full" justifyContent="space-between" mb={2} mt={4}>
@@ -171,16 +153,10 @@ const ShortAnswerForm = ({
         <Divider />
         <Text bold>{t('createMemoryRecall.questionType')}</Text>
         <HStack justifyContent="space-between" my={2}>
-          <Button
-            w={width / 2.25}
-            variant={isMultipleChoice === true ? 'solid' : 'outline'}
-            onPress={() => handlePressChoiceTemplate('multiple')}>
+          <Button w={width / 2.25} variant="outline" isDisabled>
             {t('createMemoryRecall.multipleChoice')}
           </Button>
-          <Button
-            w={width / 2.25}
-            variant={isMultipleChoice === false ? 'solid' : 'outline'}
-            onPress={() => handlePressChoiceTemplate('short')}>
+          <Button w={width / 2.25} variant="solid">
             {t('createMemoryRecall.shortAnswer')}
           </Button>
         </HStack>
@@ -190,7 +166,7 @@ const ShortAnswerForm = ({
             <Spinner color="white" />
           ) : (
             <Text fontSize="md" bold color="#fff">
-              {t('viewQuestionPool.create')}
+              {t('createMemoryRecall.editQuestion')}
             </Text>
           )}
         </Button>
@@ -199,4 +175,4 @@ const ShortAnswerForm = ({
   );
 };
 
-export default ShortAnswerForm;
+export default EditShortAnswerForm;

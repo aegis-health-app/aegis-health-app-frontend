@@ -9,7 +9,7 @@ import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
-import ReminderScreen from './../screens/ReminderScreen';
+import ReminderScreen from '../screens/reminder/ReminderScreen';
 import MemoryRecallScreen from '../screens/MemoryRecallScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
@@ -44,18 +44,13 @@ import ViewQuestionPoolScreen from '../screens/ViewQuestionPoolScreen';
 import ViewAssignedQuestionsScreen from '../screens/ViewAssignedQuestionsScreen';
 import ViewHistoryScreen from '../screens/ViewHistoryScreen';
 import ViewHistoryDetailsScreen from '../screens/ViewHistoryDetailsScreen';
-<<<<<<< HEAD
 import EmergencyInfoScreen from '../screens/EmergencyInfoScreen';
 import withEmergency from '../screens/WithEmergency';
 import CreateReminderScreen from '../screens/reminder/CreateReminderScreen';
 import EditReminderScreen from '../screens/reminder/EditReminderScreen';
-=======
 import CreateMemoryRecallQuestionsScreen from './../screens/CreateMemoryRecallQuestionsScreen';
-<<<<<<< HEAD
->>>>>>> c677cff (feat: add UI for create memory recall questions screen)
-=======
 import QuestionPoolScreen from '../screens/QuestionPoolScreen';
->>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
+import EditMemoryRecallQuestionsScreen from '../screens/EditMemoryRecallQuestionScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -396,37 +391,49 @@ const MainNavigation = () => {
               }}
             />
             <Stack.Screen
-<<<<<<< HEAD
-<<<<<<< HEAD
               name="CreateReminderScreen"
               component={CreateReminderScreen}
               options={{
                 title: t('reminder.createReminder'),
-=======
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
               name="QuestionPoolScreen"
               component={QuestionPoolScreen}
               options={{
                 title: t('createMemoryRecall.questionPool'),
->>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
               }}
             />
             <Stack.Screen
-<<<<<<< HEAD
               name="EditReminderScreen"
               component={EditReminderScreen}
               options={{
                 title: t('reminder.editReminder'),
-=======
-=======
->>>>>>> 1fcf31b (feat: UI for question pool screen and create question screen)
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
               name="CreateMemoryRecallQuestionsScreen"
               component={CreateMemoryRecallQuestionsScreen}
               options={{
                 title: t('createMemoryRecall.header'),
->>>>>>> c677cff (feat: add UI for create memory recall questions screen)
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="EditMemoryRecallQuestionsScreen"
+              component={EditMemoryRecallQuestionsScreen}
+              options={{
+                title: t('createMemoryRecall.editMemoryScreen'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
