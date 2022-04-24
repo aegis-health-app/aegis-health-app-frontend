@@ -26,6 +26,7 @@ import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
 import images from '../../assets/images';
 import { ShortAnswerValidationSchema } from './../../dto/modules/memoryRecall';
+import FallbackImage from './../molecules/FallbackImage';
 
 type EditShortAnswerFormProps = {
   question: QuestionDetailsResponse;
@@ -129,6 +130,7 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
               height="48"
               borderRadius={4}
               alt="Memory Recall Image"
+              fallbackElement={FallbackImage}
             />
           ) : (
             <Image
@@ -137,6 +139,7 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
               height="48"
               borderRadius={4}
               alt="Memory Recall Image"
+              fallbackElement={FallbackImage}
             />
           )}
         </View>

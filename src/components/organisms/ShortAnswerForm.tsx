@@ -26,6 +26,7 @@ import { ImagePayload } from '../../interfaces/image';
 import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
+import FallbackImage from '../molecules/FallbackImage';
 
 type ShortAnswerFormProps = {
   formState: { question: string; image: ImagePayload | undefined };
@@ -150,6 +151,7 @@ const ShortAnswerForm = ({
               width="48"
               height="48"
               borderRadius={4}
+              fallbackElement={FallbackImage}
               alt="Memory Recall Image"
             />
           ) : (
