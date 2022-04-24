@@ -36,8 +36,6 @@ export async function changeSelectedStatus(
   eid: number,
   isSelected: string
 ) {
-  console.log({ mid });
-  console.log({ isSelected });
   await client.put(`memoryPractice/editSelection/${isSelected}`, {
     elderlyuid: eid,
     mid: mid.toString()
