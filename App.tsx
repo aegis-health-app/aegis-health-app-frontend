@@ -13,8 +13,8 @@ import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
 import HealthRecordContextProvider from './src/contexts/HealthRecordContext';
 import useAsyncEffect from './src/hooks/useAsyncEffect';
 import { useLanguage } from './src/internationalization/useLanguage';
-import { usePermission } from './src/utils/usePermission';
-import { useGeolocation } from './src/utils/useGeolocation';
+import { usePermission } from './src/hooks/usePermission';
+import { useGeolocation } from './src/hooks/useGeolocation';
 
 LogBox.ignoreLogs([
   'If you do not provide children, you must specify an aria-label for accessibility'
