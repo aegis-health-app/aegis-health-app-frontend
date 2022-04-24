@@ -27,6 +27,7 @@ import { ImagePayload } from '../../interfaces/image';
 import { sendCreatedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
+import FallbackImage from '../molecules/FallbackImage';
 
 type MultipleChoiceFormProps = {
   formState: { question: string; image: ImagePayload | undefined };
@@ -177,6 +178,7 @@ const MultipleChoiceForm = ({
               height="48"
               borderRadius={4}
               alt="Memory Recall Image"
+              fallbackElement={FallbackImage}
             />
           ) : (
             <Text fontSize="md" color="gray.400">

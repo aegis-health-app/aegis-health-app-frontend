@@ -27,6 +27,7 @@ import { sendEditedQuestion } from '../../utils/caretaker/memoryRecall';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
 import images from '../../assets/images';
+import FallbackImage from './../molecules/FallbackImage';
 
 type MultipleChoiceFormProps = {
   question: QuestionDetailsResponse;
@@ -145,6 +146,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
               height="48"
               borderRadius={4}
               alt="Memory Recall Image"
+              fallbackElement={FallbackImage}
             />
           ) : (
             <Image
@@ -153,6 +155,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
               height="48"
               borderRadius={4}
               alt="Memory Recall Image"
+              fallbackElement={FallbackImage}
             />
           )}
         </View>
