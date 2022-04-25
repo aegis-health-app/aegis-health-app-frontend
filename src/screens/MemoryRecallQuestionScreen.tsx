@@ -35,7 +35,7 @@ const MemoryRecallQuestionScreen = () => {
               questionNumber={questionNumber}
               mid={'22'}
               question={questionSet?.questions[questionNumber].question ?? ' '}
-              imageId={questionSet?.questions[questionNumber].imageId ?? ' '}
+              imageId={questionSet?.questions[questionNumber].imageid ?? ' '}
               choice1={
                 questionSet?.questions[questionNumber].multipleChoiceQuestion
                   .choice1

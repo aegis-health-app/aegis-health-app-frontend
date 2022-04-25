@@ -10,6 +10,7 @@ type Props = {
   answer: string;
   // shouldShowAnswer: boolean;
   questionType: string;
+  showAnswer: boolean;
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
   setShowBg: (val: boolean) => void;
@@ -19,20 +20,14 @@ const MemoryRecallAnswerButtons = (props: Props) => {
   const {
     questionNumber,
     answer,
-    questionType,
+
+    showAnswer,
     setQuestionNumber,
     totalQuestion,
     setShowBg
   } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [showAnswer, setShowAnswer] = useState<boolean>();
-  useEffect(() => {
-    const shouldShowAnswer = questionType === 'choice';
-    console.log('should show answer', shouldShowAnswer);
-    console.log(questionType);
-    shouldShowAnswer ? setShowAnswer(true) : setShowAnswer(false);
-  }, [questionNumber]);
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
     console.log('call handle exit');
@@ -51,7 +46,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleCheck = () => {
     console.log('handle check');
-    setShowAnswer(false);
+    // setShowAnswer(false);
     setShowBg(true);
   };
   /**
@@ -61,7 +56,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     // console.log('go next question');
     console.log('answer to send is: ', answer);
     setQuestionNumber(questionNumber + 1);
-    setShowAnswer(true);
+    // setShowAnswer(true);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     }
@@ -72,7 +67,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
         <HStack space={4} marginTop={4} justifyContent={'flex-start'}>
           <Button
             w={'170 px'}
-            backgroundColor={!canNotGoBack ? 'white' : 'muted.300'} //find the correct color for white
+            backgroundColor={!canNotGoBack ? null : 'muted.300'} //find the correct color for white
             disabled={canNotGoBack}
             colorScheme="primary"
             variant={!canNotGoBack ? 'outline' : 'solid'}
