@@ -58,10 +58,12 @@ const ViewAsssignedQuestionsScreen = () => {
   }, [eventEmitter]);
   //get backend question pool
 
-  const { currentElderlyUid } = useContext(CaretakerContext)
+  const { currentElderlyUid } = useContext(CaretakerContext);
   const isFocused = useIsFocused();
 
-  const [selectedQuestions, setSelectedQuestions] = useState<QuestionCard[]>([]);
+  const [selectedQuestions, setSelectedQuestions] = useState<QuestionCard[]>(
+    []
+  );
 
   const [totalSelected, setTotalSelected] = useState<number>(
     selectedQuestions.length
@@ -75,7 +77,7 @@ const ViewAsssignedQuestionsScreen = () => {
 
   useAsyncEffect(async () => {
     const data = await getQuestions(currentElderlyUid as number);
-    const temp = data['questions'].filter((item) => item.isSelected == true)
+    const temp = data['questions'].filter((item) => item.isSelected == true);
     setSelectedQuestions(temp);
   }, [isFocused]);
 
@@ -89,7 +91,7 @@ const ViewAsssignedQuestionsScreen = () => {
         mid: `${selectedQuestions[id].mid}`
       });
     } catch (err) {
-      throw Error('Cannot remove question')
+      throw Error('Cannot remove question');
     }
   };
   const spinValue = new Animated.Value(0);
@@ -300,7 +302,7 @@ const ViewAsssignedQuestionsScreen = () => {
           <Button
             mx={4}
             mt={4}
-            onPress={() => navigation.navigate('ViewQuestionPoolScreen')}>
+            onPress={() => navigation.navigate('QuestionPoolScreen')}>
             {t('viewAssignedQuestions.selectQuestionsButton')}
           </Button>
         </TourGuideZone>
