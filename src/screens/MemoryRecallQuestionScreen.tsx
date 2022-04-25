@@ -1,49 +1,71 @@
 import { View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { number } from 'yup';
 import MemoryRecallQuestionProgress from '../components/atoms/MemoryRecallQuestionProgress';
 import ChoiceMemoryRecallQuestion from '../components/molecules/ChoiceMemoryRecallQuestion';
 import ShortAnswerMemoryRecallQuestion from '../components/molecules/ShortAnswerMemoryRecallQuestion';
-import { client } from '../config/axiosConfig';
+import { MemoryRecallQuestionDto } from '../dto/modules/memoryRecallElderly.dto';
 import useAsyncEffect from '../hooks/useAsyncEffect';
+import { getMemoryRecallQuestionSet } from '../utils/elderly/memoryRecallElderly';
 
 const MemoryRecallQuestionScreen = () => {
-  const [questionType, setQuestionType] = useState('choice');
-  // useAsyncEffect = () => {
-  //   try {
-  //     const { data } = await client.get('/memoryRecall/getQuestionSet');
-  //   } catch (err) {
-  //     console.log('getting question set failed.');
-  //   }
-  // };
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [questionSet, setQuestionSet] = useState<MemoryRecallQuestionDto>();
+  useAsyncEffect(async () => {
+    const data = await getMemoryRecallQuestionSet();
+    console.log('question set ', data);
+    setQuestionSet(data);
+  }, []);
+  const totalQuestion: number = questionSet?.questions.length ?? 0;
   useEffect(() => {
-    console.log('use effect id called');
+    console.log(questionSet?.questions[questionNumber].isMultipleChoice);
   }, [questionNumber]);
-
+  console.log(questionSet);
   return (
     <SafeAreaView>
       <View>
         <View>
           <MemoryRecallQuestionProgress
-            questionNumber={questionNumber}
-            totalQuestion={5}
+            questionNumber={questionNumber + 1}
+            totalQuestion={totalQuestion}
+            setQuestionNumber={setQuestionNumber}
           />
-          {questionType === 'choice' ? (
+          {questionSet?.questions[questionNumber].isMultipleChoice ? (
             <ChoiceMemoryRecallQuestion
               questionNumber={questionNumber}
               mid={'22'}
-              question={'Where have you been?'}
-              imageId={'null'}
+              question={questionSet?.questions[questionNumber].question ?? ' '}
+              imageId={questionSet?.questions[questionNumber].imageId ?? ' '}
+              choice1={
+                questionSet?.questions[questionNumber].multipleChoiceQuestion
+                  .choice1
+              }
+              choice2={
+                questionSet?.questions[questionNumber].multipleChoiceQuestion
+                  .choice2
+              }
+              choice3={
+                questionSet?.questions[questionNumber].multipleChoiceQuestion
+                  .choice3
+              }
+              choice4={
+                questionSet?.questions[questionNumber].multipleChoiceQuestion
+                  .choice4
+              }
+              questionDetail={questionSet?.questions[questionNumber]}
+              correctAnswer={
+                questionSet?.questions[questionNumber].multipleChoiceQuestion
+                  .correctAnswer
+              }
               setQuestionNumber={setQuestionNumber}
             />
           ) : (
             <ShortAnswerMemoryRecallQuestion
               questionNumber={questionNumber}
               mid={'22'}
-              question={'Where have you been?'}
-              imageId={'null'}
+              question={questionSet?.questions[questionNumber].question ?? ' '}
+              imageId={questionSet?.questions[questionNumber].imageId ?? ' '}
+              setQuestionNumber={setQuestionNumber}
             />
           )}
         </View>

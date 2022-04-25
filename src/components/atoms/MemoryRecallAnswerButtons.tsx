@@ -1,5 +1,5 @@
 import { Button, HStack, View, VStack } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -9,27 +9,22 @@ import { Text } from 'react-native-svg';
 type Props = {
   questionNumber: number;
   answer: string;
-  showAnswer: boolean;
+  shouldShowAnswer: boolean;
   setQuestionNumber: (val: number) => void;
-  setShowAnswer: (val: boolean) => void;
+  // setShowAnswer: (val: boolean) => void;
 };
 
 const MemoryRecallAnswerButtons = (props: Props) => {
-  const {
-    questionNumber,
-    answer,
-    showAnswer,
-    setQuestionNumber,
-    setShowAnswer
-  } = props;
+  const { questionNumber, answer, shouldShowAnswer, setQuestionNumber } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [showAnswer, setShowAnswer] = useState(shouldShowAnswer);
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
     handleSubmit();
     navigation.navigate('MemoryScreen');
   };
-  const canNotGoBack = questionNumber === 1;
+  const canNotGoBack = questionNumber === 0;
   /**
    * This function submit all the answer to backend
    */
@@ -41,30 +36,30 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleCheck = () => {
     console.log('handle check');
-    setShowAnswer(true);
+    setShowAnswer(false);
   };
   /**
    * This function show the next question.
    */
   const goNextQuestion = () => {
     console.log('go next question');
+    console.log('answer to send is: ', answer);
     setQuestionNumber(questionNumber + 1);
+    setShowAnswer(true);
     //if it is the last question, call handle submit.
     // handleSubmit();
   };
-  console.log({ questionNumber });
-  console.log({ canNotGoBack });
   return (
     <View style={styles.buttonGroup}>
       <VStack space={4}>
         <HStack space={4} marginTop={4} justifyContent={'flex-start'}>
           <Button
             w={'170 px'}
-            backgroundColor={!canNotGoBack ? 'grey.100' : 'muted.300'}
+            backgroundColor={!canNotGoBack ? 'white' : 'muted.300'} //find the correct color for white
             disabled={canNotGoBack}
             colorScheme="primary"
             variant={!canNotGoBack ? 'outline' : 'solid'}
-            onPress={() => navigation.goBack()}>
+            onPress={() => setQuestionNumber(questionNumber - 1)}>
             Back
           </Button>
           {showAnswer ? (
@@ -72,16 +67,16 @@ const MemoryRecallAnswerButtons = (props: Props) => {
               w={'170 px'}
               colorScheme="primary"
               variant="solid"
-              onPress={() => goNextQuestion()}>
-              Next
+              onPress={() => handleCheck()}>
+              Check
             </Button>
           ) : (
             <Button
               w={'170 px'}
               colorScheme="primary"
               variant="solid"
-              onPress={() => handleCheck()}>
-              Check
+              onPress={() => goNextQuestion()}>
+              Next
             </Button>
           )}
         </HStack>

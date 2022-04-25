@@ -3,10 +3,7 @@ import React from 'react';
 import TextInput from '../atoms/TextInput';
 import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
-import {
-  ChangePasswordDto,
-  changePasswordSchema
-} from '../../interfaces/Password';
+import { changePasswordSchema } from '../../interfaces/Password';
 
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
@@ -16,10 +13,11 @@ type Props = {
   mid: string;
   question: string;
   imageId: string;
+  setQuestionNumber: (val: number) => void;
 };
 
 const ShortAnswerMemoryRecallQuestion = (props: Props) => {
-  const { questionNumber, mid, question, imageId } = props;
+  const { questionNumber, mid, question, imageId, setQuestionNumber } = props;
   const resolver = useYupValidationResolver(changePasswordSchema);
   const {
     control,
@@ -42,7 +40,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
       <Spacer />
       <View>
         <Text fontSize={'lg'} fontWeight={'bold'}>
-          {questionNumber}.{question}
+          {questionNumber + 1}.{question}
         </Text>
         <Text fontSize={'sm'} color={'gray.500'}>
           Type in your answer:
@@ -57,7 +55,8 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={'a'}
-        showAnswer={false}
+        shouldShowAnswer={false}
+        setQuestionNumber={setQuestionNumber}
       />
     </View>
   );
