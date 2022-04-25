@@ -5,16 +5,18 @@ import { StyleSheet } from 'react-native';
 type MemoryRecallQuestionProgressProps = {
   questionNumber: number;
   totalQuestion: number;
+  setQuestionNumber;
 };
 
 const MemoryRecallQuestionProgress = (
   props: MemoryRecallQuestionProgressProps
 ) => {
-  const { questionNumber, totalQuestion } = props;
+  const { questionNumber, totalQuestion, setQuestionNumber } = props;
   const handleSkip = () => {
-    console.log('skipped');
+    setQuestionNumber(questionNumber);
   };
   const progress = (questionNumber / totalQuestion) * 100;
+  console.log(progress);
   return (
     <View paddingX={'16 px'} paddingTop={'16 px'}>
       <View style={styles.progressBar}>
