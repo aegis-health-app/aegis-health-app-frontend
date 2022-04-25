@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { HStack, Text, View } from 'native-base';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native';
+import { AppState, TouchableOpacity } from 'react-native';
 import EmergencyAlertCard from '../molecules/EmergencyAlertCard';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import {
   EmergencyNoti,
   getNotificationFeed,
-  Notification
+  Notification,
+  storeNotificationFeed
 } from '../../utils/user/notification';
 
 const UpComingAlert = () => {
@@ -16,6 +17,27 @@ const UpComingAlert = () => {
 
   const [reminderList, setReminderList] = useState<Notification[]>([]);
   const [emergencyList, setEmergencyList] = useState<EmergencyNoti[]>([]);
+
+  const appState = useRef(AppState.currentState);
+  const [appStateVisible, setAppStateVisible] = useState(appState.current);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', (nextAppState) => {
+      if (
+        appState.current.match(/inactive|background/) &&
+        nextAppState === 'active'
+      ) {
+        //App has come to the foreground
+      }
+
+      appState.current = nextAppState;
+      setAppStateVisible(appState.current);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   useAsyncEffect(async () => {
     const feed = await getNotificationFeed();
