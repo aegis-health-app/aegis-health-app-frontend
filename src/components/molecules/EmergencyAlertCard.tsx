@@ -13,6 +13,7 @@ type EmergencyAlertCardProps = {
   sender: string;
   time: string;
   notification: EmergencyNoti;
+  dismissNotification: () => void;
 };
 
 export interface EmergencyData {
@@ -40,7 +41,8 @@ export const mockEmergencyInfo = {
 const EmergencyAlertCard = ({
   sender,
   time,
-  notification
+  notification,
+  dismissNotification
 }: EmergencyAlertCardProps) => {
   const { t } = useTranslation();
 
@@ -84,11 +86,15 @@ const EmergencyAlertCard = ({
             )}
           </Pressable>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
-          <View flex={2} alignItems="center">
-            <Text fontSize="lg" color="#E4E4E7">
-              {t('modules.dismiss')}
-            </Text>
-          </View>
+          <Pressable flex={2} alignItems="center" onPress={dismissNotification}>
+            {({ isPressed }) => (
+              <Text
+                fontSize={isPressed ? 'md' : 'lg'}
+                color={isPressed ? '#fff' : '#E4E4E7'}>
+                {t('modules.dismiss')}
+              </Text>
+            )}
+          </Pressable>
         </HStack>
       </VStack>
     </View>

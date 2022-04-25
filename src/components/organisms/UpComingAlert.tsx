@@ -43,7 +43,19 @@ const UpComingAlert = () => {
     const feed = await getNotificationFeed();
     setEmergencyList(feed.emergency as EmergencyNoti[]);
     setReminderList(feed.reminder);
-  }, []);
+  }, [appStateVisible]);
+
+  const dismissNotification = useCallback(async () => {
+    const feed = await getNotificationFeed();
+    if (feed.emergency.length > 0) feed.emergency.splice(0, 1);
+    else if (feed.reminder.length > 0) feed.reminder.splice(0, 1);
+
+    console.log(feed);
+    await storeNotificationFeed(feed);
+
+    setEmergencyList(feed.emergency as EmergencyNoti[]);
+    setReminderList(feed.reminder);
+  }, [setEmergencyList]);
 
   return (
     <View w="full" mt={6}>
@@ -67,6 +79,7 @@ const UpComingAlert = () => {
           sender={emergencyList[0].name}
           time={emergencyList[0].time}
           notification={emergencyList[0]}
+          dismissNotification={dismissNotification}
         />
       ) : (
         <>
