@@ -1,5 +1,5 @@
 import { Image, Text, View } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import TextInput from '../atoms/TextInput';
 import { useForm } from 'react-hook-form';
 import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
@@ -14,16 +14,26 @@ type Props = {
   question: string;
   imageId: string;
   setQuestionNumber: (val: number) => void;
+  totalQuestion: number;
 };
 
 const ShortAnswerMemoryRecallQuestion = (props: Props) => {
-  const { questionNumber, mid, question, imageId, setQuestionNumber } = props;
+  const {
+    questionNumber,
+    mid,
+    question,
+    imageId,
+    setQuestionNumber,
+    totalQuestion
+  } = props;
   const resolver = useYupValidationResolver(changePasswordSchema);
   const {
     control,
     formState: { errors },
-    handleSubmit
-  } = useForm({ resolver, mode: 'onTouched' });
+    handleSubmit,
+    getValues
+  } = useForm({ resolver, mode: 'onChange' });
+  const [showBg, setShowBg] = useState(false);
   return (
     <View padding={'16 px'}>
       <View>
@@ -52,11 +62,15 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
           errors={errors}
         />
       </View>
+
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={'a'}
-        shouldShowAnswer={false}
+        // shouldShowAnswer={false}
+        questionType={'short answer'}
         setQuestionNumber={setQuestionNumber}
+        totalQuestion={totalQuestion}
+        setShowBg={setShowBg}
       />
     </View>
   );
