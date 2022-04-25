@@ -52,12 +52,12 @@ const MemoryRecallQuestionScreen = () => {
                 questionSet?.questions[questionNumber].multipleChoiceQuestion
                   .choice4
               }
-              questionDetail={questionSet?.questions[questionNumber]}
               correctAnswer={
                 questionSet?.questions[questionNumber].multipleChoiceQuestion
                   .correctAnswer
               }
               setQuestionNumber={setQuestionNumber}
+              totalQuestion={totalQuestion}
             />
           ) : (
             <ShortAnswerMemoryRecallQuestion
@@ -66,6 +66,7 @@ const MemoryRecallQuestionScreen = () => {
               question={questionSet?.questions[questionNumber].question ?? ' '}
               imageId={questionSet?.questions[questionNumber].imageId ?? ' '}
               setQuestionNumber={setQuestionNumber}
+              totalQuestion={totalQuestion}
             />
           )}
         </View>

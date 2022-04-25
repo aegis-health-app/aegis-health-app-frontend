@@ -1,6 +1,9 @@
 import React from 'react';
 import { Box, Button, Progress, Spacer, Text, View } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
 
 type MemoryRecallQuestionProgressProps = {
   questionNumber: number;
@@ -12,8 +15,17 @@ const MemoryRecallQuestionProgress = (
   props: MemoryRecallQuestionProgressProps
 ) => {
   const { questionNumber, totalQuestion, setQuestionNumber } = props;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const handleSkip = () => {
     setQuestionNumber(questionNumber);
+    if (questionNumber === totalQuestion) {
+      handleSubmit();
+    }
+  };
+  const handleSubmit = () => {
+    console.log('call handle submit');
+    navigation.navigate('MemoryScreen');
   };
   const progress = (questionNumber / totalQuestion) * 100;
   console.log(progress);

@@ -2,7 +2,8 @@ import { Image, Radio, Text, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
-import { MemoryRecallQuestion } from '../../dto/modules/memoryRecallElderly.dto';
+import { StyleSheet } from 'react-native';
+import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 
 type Props = {
   questionNumber: number;
@@ -13,9 +14,9 @@ type Props = {
   choice2: string;
   choice3: string;
   choice4: string;
-  questionDetail: MemoryRecallQuestion;
   correctAnswer: string;
   setQuestionNumber: (val: number) => void;
+  totalQuestion: number;
 };
 
 const ChoiceMemoryRecallQuestion = (props: Props) => {
@@ -28,23 +29,24 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
     choice2,
     choice3,
     choice4,
-    questionDetail,
     correctAnswer,
-    setQuestionNumber
+    setQuestionNumber,
+    totalQuestion
   } = props;
   const [value, setValue] = useState('one');
   const [showChoice, setShowChoice] = useState(true);
+  const [showBg, setShowBg] = useState(false);
   useEffect(() => {
     setShowChoice(false);
     setTimeout(() => {
       setShowChoice(true);
     }, 0);
-  }, [questionNumber]);
+  }, [questionNumber, showBg]);
 
   return (
     <View padding={'16 px'} display={'flex'} justifyContent={'space-between'}>
       {/* Image */}
-      <View my={'24 px'}>
+      <View>
         <Image
           source={require('../../assets/images/tempMonday.png')}
           // fallbackSource={images.healthRecording}
@@ -68,23 +70,73 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
             <Radio.Group
               name="choices"
               value={value}
+              alignItems={'flex-start'}
+              justifyItems={'flex-start'}
               onChange={(nextValue) => {
                 console.log('value: ', nextValue);
                 setValue(nextValue);
                 console.log('set value', nextValue);
               }}>
-              <Radio value={choice1} my="1">
-                {questionDetail.multipleChoiceQuestion.choice1}
-              </Radio>
-              <Radio value={choice2} my="1">
-                {choice2}
-              </Radio>
-              <Radio value={choice3} my="1">
-                {choice3}
-              </Radio>
-              <Radio value={choice4} my="1">
-                {choice4}
-              </Radio>
+              <View
+                w={'100 %'}
+                backgroundColor={
+                  showBg
+                    ? getBackGroundColor(choice1, value, correctAnswer)
+                    : null
+                }
+                alignItems={'flex-start'}
+                marginY={'1'}
+                pl={2}
+                rounded={'lg'}>
+                <Radio value={choice1} my="1">
+                  {choice1}
+                </Radio>
+              </View>
+              <View
+                w={'100 %'}
+                backgroundColor={
+                  showBg
+                    ? getBackGroundColor(choice2, value, correctAnswer)
+                    : null
+                }
+                alignItems={'flex-start'}
+                marginY={'1'}
+                pl={2}
+                rounded={'lg'}>
+                <Radio value={choice2} my="1">
+                  {choice2}
+                </Radio>
+              </View>
+              <View
+                w={'100 %'}
+                backgroundColor={
+                  showBg
+                    ? getBackGroundColor(choice3, value, correctAnswer)
+                    : null
+                }
+                alignItems={'flex-start'}
+                marginY={'1'}
+                pl={2}
+                rounded={'lg'}>
+                <Radio value={choice3} my="1">
+                  {choice3}
+                </Radio>
+              </View>
+              <View
+                w={'100 %'}
+                backgroundColor={
+                  showBg
+                    ? getBackGroundColor(choice4, value, correctAnswer)
+                    : null
+                }
+                alignItems={'flex-start'}
+                marginY={'1'}
+                pl={2}
+                rounded={'lg'}>
+                <Radio value={choice4} my="1">
+                  {choice4}
+                </Radio>
+              </View>
             </Radio.Group>
           )}
         </View>
@@ -93,8 +145,11 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={value}
-        shouldShowAnswer={true}
+        // shouldShowAnswer={true}
+        questionType={'choice'}
         setQuestionNumber={setQuestionNumber}
+        totalQuestion={totalQuestion}
+        setShowBg={setShowBg}
       />
     </View>
   );

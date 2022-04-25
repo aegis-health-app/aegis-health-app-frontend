@@ -1,28 +1,42 @@
 import { Button, HStack, View, VStack } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
-import { Text } from 'react-native-svg';
 
 type Props = {
   questionNumber: number;
   answer: string;
-  shouldShowAnswer: boolean;
+  // shouldShowAnswer: boolean;
+  questionType: string;
   setQuestionNumber: (val: number) => void;
-  // setShowAnswer: (val: boolean) => void;
+  totalQuestion: number;
+  setShowBg: (val: boolean) => void;
 };
 
 const MemoryRecallAnswerButtons = (props: Props) => {
-  const { questionNumber, answer, shouldShowAnswer, setQuestionNumber } = props;
+  const {
+    questionNumber,
+    answer,
+    questionType,
+    setQuestionNumber,
+    totalQuestion,
+    setShowBg
+  } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [showAnswer, setShowAnswer] = useState(shouldShowAnswer);
+  const [showAnswer, setShowAnswer] = useState<boolean>();
+  useEffect(() => {
+    const shouldShowAnswer = questionType === 'choice';
+    console.log('should show answer', shouldShowAnswer);
+    console.log(questionType);
+    shouldShowAnswer ? setShowAnswer(true) : setShowAnswer(false);
+  }, [questionNumber]);
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
+    console.log('call handle exit');
     handleSubmit();
-    navigation.navigate('MemoryScreen');
   };
   const canNotGoBack = questionNumber === 0;
   /**
@@ -30,6 +44,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleSubmit = () => {
     console.log('call handle submit');
+    navigation.navigate('MemoryScreen');
   };
   /**
    * The function handle when user check their choice question and show whether it is correct.
@@ -37,17 +52,19 @@ const MemoryRecallAnswerButtons = (props: Props) => {
   const handleCheck = () => {
     console.log('handle check');
     setShowAnswer(false);
+    setShowBg(true);
   };
   /**
    * This function show the next question.
    */
   const goNextQuestion = () => {
-    console.log('go next question');
+    // console.log('go next question');
     console.log('answer to send is: ', answer);
     setQuestionNumber(questionNumber + 1);
     setShowAnswer(true);
-    //if it is the last question, call handle submit.
-    // handleSubmit();
+    if (questionNumber + 1 === totalQuestion) {
+      handleSubmit();
+    }
   };
   return (
     <View style={styles.buttonGroup}>
