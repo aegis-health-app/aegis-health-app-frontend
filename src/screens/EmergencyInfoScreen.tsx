@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { t } from 'i18next';
 import {
   Box,
   Button,
@@ -32,20 +31,23 @@ export type EmergencyInfo = {
   elderlyImageId: string;
 };
 
-const emergencyInfoList = [
-  { label: t('emergency.senderName'), value: 'name' },
-  { label: t('emergency.location'), value: 'address' },
-  { label: t('emergency.date'), value: 'date' },
-  { label: t('emergency.time'), value: 'time' },
-  { label: t('emergency.phone'), value: 'phone' }
-];
-
 const EmergencyInfoScreen = ({ route }) => {
   const { t } = useTranslation();
   const { openMapApp, reverseGeocode } = useGeolocation();
   const emergencyInfo = useMemo<EmergencyInfo>(
     () => route?.params.info,
     [route]
+  );
+
+  const emergencyInfoList = useMemo(
+    () => [
+      { label: t('emergency.senderName'), value: 'name' },
+      { label: t('emergency.location'), value: 'address' },
+      { label: t('emergency.date'), value: 'date' },
+      { label: t('emergency.time'), value: 'time' },
+      { label: t('emergency.phone'), value: 'phone' }
+    ],
+    []
   );
 
   const [address, setAddress] = useState<string>('');
