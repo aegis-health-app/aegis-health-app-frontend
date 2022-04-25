@@ -103,7 +103,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
           handlePress={() => navigation.navigate('HealthBlogScreen')}
         />
       );
-    } else {
+    } else if (mid === 100) {
       return (
         <ModulePickerCard
           backgroundColor="lightBlue.200"
@@ -112,6 +112,8 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
           handlePress={() => navigation.navigate('ModuleManageScreen')}
         />
       );
+    } else {
+      return <></>;
     }
   }
 
