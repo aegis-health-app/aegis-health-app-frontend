@@ -13,7 +13,6 @@ import BasicProfile, {
   BasicProfileMode
 } from '../components/molecules/BasicProfile';
 import { TouchableOpacity } from 'react-native';
-import ModulePickerList from './../components/organisms/ModulePickerList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useProfileInfo } from './../hooks/useProfileInfo';
 import Spacer from '../components/atoms/Spacer';
@@ -27,6 +26,7 @@ import { CaretakerContext } from '../contexts/CaretakerContext';
 import { UserContext } from '../contexts/UserContext';
 import { client } from '../config/axiosConfig';
 import HealthProfile from '../components/molecules/HealthProfile';
+import ModulePickerList from './../components/organisms/ModulePickerList';
 
 const TakeCareElderlyScreen = () => {
   const navigation =
