@@ -2,7 +2,6 @@ import { Image, Radio, Text, View } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
-import { StyleSheet } from 'react-native';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 
 type Props = {
@@ -42,13 +41,14 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       setShowChoice(true);
     }, 0);
   }, [questionNumber, showBg]);
+  console.log('image URL: ', imageId);
 
   return (
     <View padding={'16 px'} display={'flex'} justifyContent={'space-between'}>
       {/* Image */}
       <View>
         <Image
-          source={require('../../assets/images/tempMonday.png')}
+          source={{ uri: imageId }}
           // fallbackSource={images.healthRecording}
           alt="temp image for memory recall question"
           width={'100%'}
@@ -145,8 +145,8 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={value}
-        // shouldShowAnswer={true}
         questionType={'choice'}
+        showAnswer={true}
         setQuestionNumber={setQuestionNumber}
         totalQuestion={totalQuestion}
         setShowBg={setShowBg}

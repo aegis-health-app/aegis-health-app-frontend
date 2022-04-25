@@ -4,7 +4,7 @@ export interface MemoryRecallQuestionDto {
 export interface MemoryRecallQuestion {
   mid: number;
   question: string;
-  imageId: string;
+  imageid: string;
   multipleChoiceQuestion: {
     choice1: string;
     choice2: string;

@@ -38,7 +38,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     <View padding={'16 px'}>
       <View>
         <Image
-          source={require('../../assets/images/tempMonday.png')}
+          source={{ uri: imageId }}
           // fallbackSource={images.healthRecording}
           alt="temp image for memory recall question"
           width={'100%'}
@@ -50,7 +50,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
       <Spacer />
       <View>
         <Text fontSize={'lg'} fontWeight={'bold'}>
-          {questionNumber + 1}.{question}
+          {questionNumber + 1}. {question}
         </Text>
         <Text fontSize={'sm'} color={'gray.500'}>
           Type in your answer:
@@ -66,8 +66,8 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={'a'}
-        // shouldShowAnswer={false}
         questionType={'short answer'}
+        showAnswer={false}
         setQuestionNumber={setQuestionNumber}
         totalQuestion={totalQuestion}
         setShowBg={setShowBg}
