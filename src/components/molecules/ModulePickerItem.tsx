@@ -80,11 +80,11 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
             />
           }
           label={t('modules.memory')}
-          handlePress={() =>
-            isElderly === true
-              ? navigation.navigate('ViewAssignedQuestionsScreen')
-              : navigation.navigate('QuestionPoolScreen')
-          }
+          handlePress={() => {
+            isElderly
+              ? navigation.navigate('MemoryScreen')
+              : navigation.navigate('ViewAssignedQuestionsScreen');
+          }}
         />
       );
     } else if (mid === 4) {
