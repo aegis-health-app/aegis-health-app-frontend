@@ -4,30 +4,34 @@ import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
+import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 
 type Props = {
   questionNumber: number;
-  answer: string;
+  answer: Answer;
   // shouldShowAnswer: boolean;
   questionType: string;
   showAnswer: boolean;
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
   setShowBg: (val: boolean) => void;
+  setShortAnswer: (val: string) => void;
 };
 
 const MemoryRecallAnswerButtons = (props: Props) => {
   const {
     questionNumber,
     answer,
-
     showAnswer,
     setQuestionNumber,
     totalQuestion,
-    setShowBg
+    setShowBg,
+    setShortAnswer
   } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [answerArray, setAnswerArray] = useState<Answer[]>([]);
+  const [shouldShowAnswer, setShouldShowAnswer] = useState<boolean>(showAnswer);
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
     console.log('call handle exit');
@@ -46,17 +50,20 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleCheck = () => {
     console.log('handle check');
-    // setShowAnswer(false);
     setShowBg(true);
+    setShouldShowAnswer(false);
   };
   /**
    * This function show the next question.
    */
   const goNextQuestion = () => {
+    //add data to answer array
+    setAnswerArray((arr) => [...arr, answer]); //TODO: add answer for blank one
     // console.log('go next question');
     console.log('answer to send is: ', answer);
+    console.log('answer array is: ', answerArray);
+    setShortAnswer('');
     setQuestionNumber(questionNumber + 1);
-    // setShowAnswer(true);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     }
@@ -74,7 +81,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
             onPress={() => setQuestionNumber(questionNumber - 1)}>
             Back
           </Button>
-          {showAnswer ? (
+          {shouldShowAnswer ? (
             <Button
               w={'170 px'}
               colorScheme="primary"

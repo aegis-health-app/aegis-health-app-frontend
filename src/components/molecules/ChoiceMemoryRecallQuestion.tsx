@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
+import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 
 type Props = {
   questionNumber: number;
   mid: string;
   question: string;
-  imageId: string;
+  imageid: string;
   choice1: string;
   choice2: string;
   choice3: string;
@@ -23,7 +24,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
     questionNumber,
     mid,
     question,
-    imageId,
+    imageid,
     choice1,
     choice2,
     choice3,
@@ -35,20 +36,21 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
   const [value, setValue] = useState('one');
   const [showChoice, setShowChoice] = useState(true);
   const [showBg, setShowBg] = useState(false);
+  const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
+  const [shortAnswer, setShortAnswer] = useState('');
   useEffect(() => {
     setShowChoice(false);
     setTimeout(() => {
       setShowChoice(true);
     }, 0);
   }, [questionNumber, showBg]);
-  console.log('image URL: ', imageId);
 
   return (
     <View padding={'16 px'} display={'flex'} justifyContent={'space-between'}>
       {/* Image */}
       <View>
         <Image
-          source={{ uri: imageId }}
+          source={{ uri: imageid }}
           // fallbackSource={images.healthRecording}
           alt="temp image for memory recall question"
           width={'100%'}
@@ -64,7 +66,6 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
         <Text fontSize={'sm'} color={'gray.500'}>
           Select a choice:
         </Text>
-        {console.log(choice1, choice2, choice3, choice4)}
         <View minHeight={'160 px'}>
           {showChoice && (
             <Radio.Group
@@ -75,6 +76,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
               onChange={(nextValue) => {
                 console.log('value: ', nextValue);
                 setValue(nextValue);
+                setAnswer({ mid: mid, answer: value });
                 console.log('set value', nextValue);
               }}>
               <View
@@ -144,12 +146,13 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       {/* Buttons */}
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
-        answer={value}
+        answer={answer}
         questionType={'choice'}
         showAnswer={true}
         setQuestionNumber={setQuestionNumber}
         totalQuestion={totalQuestion}
         setShowBg={setShowBg}
+        setShortAnswer={setShortAnswer}
       />
     </View>
   );
