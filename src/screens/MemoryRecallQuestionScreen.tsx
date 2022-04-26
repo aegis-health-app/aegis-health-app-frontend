@@ -1,5 +1,5 @@
 import { View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MemoryRecallQuestionProgress from '../components/atoms/MemoryRecallQuestionProgress';
 import ChoiceMemoryRecallQuestion from '../components/molecules/ChoiceMemoryRecallQuestion';
@@ -17,10 +17,10 @@ const MemoryRecallQuestionScreen = () => {
     setQuestionSet(data);
   }, []);
   const totalQuestion: number = questionSet?.questions.length ?? 0;
-  useEffect(() => {
-    console.log(questionSet?.questions[questionNumber].isMultipleChoice);
-  }, [questionNumber]);
-  console.log(questionSet);
+  // useEffect(() => {
+  //   console.log(questionSet?.questions[questionNumber].isMultipleChoice);
+  // }, [questionNumber]);
+
   return (
     <SafeAreaView>
       <View>
@@ -33,9 +33,9 @@ const MemoryRecallQuestionScreen = () => {
           {questionSet?.questions[questionNumber].isMultipleChoice ? (
             <ChoiceMemoryRecallQuestion
               questionNumber={questionNumber}
-              mid={'22'}
+              mid={questionSet?.questions[questionNumber].mid}
               question={questionSet?.questions[questionNumber].question ?? ' '}
-              imageId={questionSet?.questions[questionNumber].imageid ?? ' '}
+              imageid={questionSet?.questions[questionNumber].imageid ?? ' '}
               choice1={
                 questionSet?.questions[questionNumber].multipleChoiceQuestion
                   .choice1
@@ -62,9 +62,9 @@ const MemoryRecallQuestionScreen = () => {
           ) : (
             <ShortAnswerMemoryRecallQuestion
               questionNumber={questionNumber}
-              mid={'22'}
+              mid={questionSet?.questions[questionNumber].mid ?? ' '}
               question={questionSet?.questions[questionNumber].question ?? ' '}
-              imageId={questionSet?.questions[questionNumber].imageId ?? ' '}
+              imageid={questionSet?.questions[questionNumber].imageid ?? ' '}
               setQuestionNumber={setQuestionNumber}
               totalQuestion={totalQuestion}
             />

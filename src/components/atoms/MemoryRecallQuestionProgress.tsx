@@ -24,11 +24,11 @@ const MemoryRecallQuestionProgress = (
     }
   };
   const handleSubmit = () => {
+    //TODO: Implement handle submit for skip button
     console.log('call handle submit');
     navigation.navigate('MemoryScreen');
   };
   const progress = (questionNumber / totalQuestion) * 100;
-  console.log(progress);
   return (
     <View paddingX={'16 px'} paddingTop={'16 px'}>
       <View style={styles.progressBar}>
