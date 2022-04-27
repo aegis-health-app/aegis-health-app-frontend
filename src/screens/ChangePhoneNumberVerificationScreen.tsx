@@ -29,7 +29,7 @@ const ChangePhoneNumberVerificationScreen = ({
   const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { phoneNumber } = route.params;
+  const { phoneNumber, otpToken, setOtpToken } = route.params;
   const phoneNumberVerificationCodeSchema = usePhoneVerificationCode();
   const resolver = useYupValidationResolver(phoneNumberVerificationCodeSchema);
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
@@ -50,7 +50,8 @@ const ChangePhoneNumberVerificationScreen = ({
     const { otp } = input;
     const payload = {
       newPhone: phoneNumber,
-      enteredPin: otp
+      enteredPin: otp,
+      token: otpToken
     };
     try {
       const { data } = await client.put('/setting/changePhoneNumber', payload);
@@ -61,6 +62,10 @@ const ChangePhoneNumberVerificationScreen = ({
     } catch (err) {
       setShowErrorAlert(true);
     }
+  };
+  const resendOtp = async () => {
+    const res = await client.get(`/otp/request/${phoneNumber}`);
+    setOtpToken(res.data.token);
   };
 
   return (
@@ -123,7 +128,7 @@ const ChangePhoneNumberVerificationScreen = ({
             {t('changePhoneNumber.submit')}
           </Button>
           {/* Resend verification code button */}
-          <OTPTimerButton onPress={() => console.log('Sending OTP')} />
+          <OTPTimerButton onPress={() => resendOtp()} />
           {/* Cancle button */}
           <Button
             w="100%"

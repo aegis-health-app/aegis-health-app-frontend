@@ -1,5 +1,5 @@
 import { Text, Button, VStack } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,11 +12,11 @@ import TextInput from '../components/atoms/TextInput';
 import { useYupValidationResolver } from '../hooks/useYupValidationResolver';
 import { usePhoneNumber } from '../hooks/usePhoneNumber';
 import { useForm } from 'react-hook-form';
-
-// WORK IN PROGRESS
+import { client } from '../config/axiosConfig';
 
 const ChangePhoneNumberScreen = () => {
   const { t } = useTranslation();
+  const [otpToken, setOtpToken] = useState('');
   const changePhoneNumberSchema = usePhoneNumber();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -28,11 +28,19 @@ const ChangePhoneNumberScreen = () => {
     getValues
   } = useForm({ resolver, mode: 'onChange' });
 
-  const onFormSubmit = (data) => {
+  const onFormSubmit = async (data) => {
+    try {
+      const { phoneNumber } = data;
+      const res = await client.get(`/otp/request/${phoneNumber}`);
+      setOtpToken(res.data.token);
+    } catch (err) {
+      console.log(err);
+    }
     navigation.navigate('ChangePhoneNumberVerificationScreen', {
-      phoneNumber: data.phoneNumber
+      phoneNumber: data.phoneNumber,
+      otpToken: otpToken,
+      setOtpToken: setOtpToken
     });
-    console.log('submit password change', data);
   };
 
   const shouldDisable = (errors) => {
