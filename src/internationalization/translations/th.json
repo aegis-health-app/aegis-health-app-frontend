@@ -725,5 +725,23 @@
     "body": "ไม่สามารถลบการแจ้งเตือนของคุณได้ กรุณาลองอีกครั้ง",
     "primaryButton": "รับทราบ",
     "secondaryButton": ""
+  },
+  "memoryRecallElderly":{
+    "memoryRecall": "ทบทวนความจำ",
+    "startGame": "เริ่มเกม",
+    "question": "คำถามที่",
+    "of": "จาก",
+    "skip": "ข้าม",
+    "selectAChoice": "เลือกตัวเลือก:",
+    "typeInYourAnswer": "กรุณากรอกคำตอบของคุณ:",
+    "answer": "คำตอบ",
+    "back": "ย้อนกลับ",
+    "check": "ตรวจคำตอบ",
+    "next": "ถัดไป",
+    "exitGame": "ออกจากเกม",
+    "nicelyDone": "ยอดเยี่ยม!",
+    "gameFinish": "คุณเล่นเกมนี้สำเร็จแล้ว",
+    "returnToHomeScreen": "กลับสู่หน้าหลัก",
+    "tourGuide1": "กดปุ่ม “เริ่มเกม” เพื่อเริ่มเล่นเกม"
   }
 }
