@@ -27,6 +27,7 @@ import { useNavigation } from '@react-navigation/native';
 import images from '../../assets/images';
 import { ShortAnswerValidationSchema } from './../../dto/modules/memoryRecall';
 import FallbackImage from './../molecules/FallbackImage';
+import { client } from './../../config/axiosConfig';
 
 type EditShortAnswerFormProps = {
   question: QuestionDetailsResponse;
@@ -102,6 +103,14 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
     }
   }
 
+  async function handleDelete() {
+    await client.delete('/memoryPractice/deleteQuestion', {
+      data: { elderlyuid: currentElderlyUid, mid: mid.toString() }
+    });
+
+    navigation.goBack();
+  }
+
   return (
     <View px={4} py={4}>
       <VStack space={2}>
@@ -172,6 +181,15 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
               {t('createMemoryRecall.editQuestion')}
             </Text>
           )}
+        </Button>
+        <Button
+          w="full"
+          onPress={handleDelete}
+          colorScheme="error"
+          variant="outline">
+          <Text fontSize="md" color="error.500">
+            {t('createMemoryRecall.deleteQuestion')}
+          </Text>
         </Button>
       </VStack>
     </View>

@@ -28,6 +28,7 @@ import { useNavigation } from '@react-navigation/native';
 import images from '../../assets/images';
 import FallbackImage from './../molecules/FallbackImage';
 import { useMultipleChoiceValidation } from '../../hooks/useMultipleChoiceValidation';
+import { client } from './../../config/axiosConfig';
 
 type MultipleChoiceFormProps = {
   question: QuestionDetailsResponse;
@@ -117,6 +118,14 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
 
   function handleChangeQuestion(val: string) {
     setFieldValue('question', val);
+  }
+
+  async function handleDelete() {
+    await client.delete('/memoryPractice/deleteQuestion', {
+      data: { elderlyuid: currentElderlyUid, mid: mid.toString() }
+    });
+
+    navigation.goBack();
   }
 
   return (
@@ -265,6 +274,15 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
               {t('createMemoryRecall.editQuestion')}
             </Text>
           )}
+        </Button>
+        <Button
+          w="full"
+          onPress={handleDelete}
+          colorScheme="error"
+          variant="outline">
+          <Text fontSize="md" color="error.500">
+            {t('createMemoryRecall.deleteQuestion')}
+          </Text>
         </Button>
       </VStack>
     </View>
