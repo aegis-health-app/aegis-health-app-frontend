@@ -19,7 +19,10 @@ import FallbackImage from '../../components/molecules/FallbackImage';
 import Alert, { AlertType } from '../../components/organisms/Alert';
 import { RootStackParamList } from '../../navigation/types';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack';
 import { UserContext } from '../../contexts/UserContext';
 import { client } from '../../config/axiosConfig';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
@@ -35,18 +38,31 @@ interface UploadImageDTO {
   type: string | undefined;
   size: number | undefined;
 }
+
 interface UpdateHealthRecordDTO {
   hrName: string;
   picture?: UploadImageDTO | object;
   listField: Fields[];
 }
 
-const CustomHealthRecordingScreen = () => {
+const CustomHealthRecordingScreen = ({
+  route
+}: NativeStackScreenProps<
+  RootStackParamList,
+  'CustomHealthRecordingScreen'
+>) => {
+  const {
+    info: { _title, _picture, _defaultPictureUri, _fieldList }
+  } = route?.params;
   const { t } = useTranslation();
-  const [customImage, setCustomImage] = useState<ImagePickerResponse>();
-  const [fieldList, setFieldList] = useState<Fields[]>([
-    { name: undefined, unit: undefined }
-  ]);
+
+  const [customImage, setCustomImage] = useState<
+    ImagePickerResponse | undefined
+  >(_picture);
+
+  const [fieldList, setFieldList] = useState<Fields[]>(
+    _fieldList || [{ name: undefined, unit: undefined }]
+  );
   const [showImageUploadError, setShowImageUploadError] =
     useState<boolean>(false);
   const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
@@ -94,7 +110,7 @@ const CustomHealthRecordingScreen = () => {
     if (customImage !== undefined && !customImage.didCancel)
       return (
         <Image
-          source={getImage()}
+          source={_picture ? { uri: _defaultPictureUri } : getImage()}
           width="100%"
           height={48}
           borderRadius={4}
@@ -156,10 +172,12 @@ const CustomHealthRecordingScreen = () => {
 
     const payload = {
       // @ts-ignore
-      hrName: watchInputs.title,
+      hrName: watchInputs.title ?? _title,
       picture: uploadImage ? imagePayload : undefined,
       listField: fieldList
     } as UpdateHealthRecordDTO;
+
+    console.log(payload);
 
     if (user?.isElderly) {
       try {
@@ -224,6 +242,7 @@ const CustomHealthRecordingScreen = () => {
                 name="title"
                 control={control}
                 errors={errors}
+                defaultValue={_title || ''}
                 isRequired
                 errorMessage={t('healthRecording.titleBlankError')}
               />
@@ -373,7 +392,7 @@ const CustomHealthRecordingScreen = () => {
           <Button
             mx={4}
             mt={4}
-            isDisabled={handleButtonState()}
+            isDisabled={_picture ? false : handleButtonState()}
             onPress={() => handleSubmit()}>
             {t('healthRecording.create')}
           </Button>
