@@ -601,7 +601,8 @@
     "choiceRequired": "โปรดสร้างตัวเลือกทุกตัว",
     "answerRequired": "โปรดเลือกคำตอบที่ถูกต้อง",
     "editMemoryScreen": "แก้ไขคำถาม",
-    "editQuestion": "แก้ไขคำถาม",
+    "editQuestion": "บันทึกคำถามนี้",
+    "deleteQuestion": "ลบคำถามนี้",
     "choiceMissing": "โปรดใส่ตัวเลือกทั้งหมด"
   },
   "questionPool": {

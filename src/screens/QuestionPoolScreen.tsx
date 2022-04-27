@@ -10,11 +10,12 @@ import {
   ScrollView
 } from 'native-base';
 import { StyleSheet } from 'react-native';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import {
   NavigationProp,
   useNavigation,
-  useIsFocused
+  useIsFocused,
+  useFocusEffect
 } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -40,16 +41,27 @@ const QuestionPoolScreen = () => {
   const [selectedCount, setSelectedCount] = useState(0);
   const [questions, setQuestions] = useState<QuestionInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showScreen, setShowScreen] = useState(true);
   const isFocused = useIsFocused();
 
   useAsyncEffect(async () => {
-    if (currentElderlyUid === undefined || isFocused === false) return;
+    console.log({ isFocused });
+    if (currentElderlyUid === undefined) return;
 
     setIsLoading(true);
     const _questions = await getAllQuestions(currentElderlyUid);
     setQuestions(_questions);
     setIsLoading(false);
   }, [currentElderlyUid, isFocused]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setShowScreen(false);
+      setTimeout(() => {
+        setShowScreen(true);
+      }, 0);
+    }, [isFocused])
+  );
 
   useEffect(() => {
     setSelectedCount(0);
@@ -130,18 +142,30 @@ const QuestionPoolScreen = () => {
           </Text>
           {questions.length > 0 ? (
             <ScrollView>
-              {questions.map((item, key) => {
-                return (
-                  <QuestionPoolItem
-                    key={key}
-                    data={item}
-                    selectedCount={selectedCount}
-                    setSelectedCount={setSelectedCount}
-                    maxSelectedCount={MAX_SELECTION}
-                    currentElderlyUid={currentElderlyUid}
-                  />
-                );
-              })}
+              {showScreen ? (
+                <>
+                  {questions.map((item, key) => {
+                    return (
+                      <QuestionPoolItem
+                        key={key}
+                        data={item}
+                        selectedCount={selectedCount}
+                        setSelectedCount={setSelectedCount}
+                        maxSelectedCount={MAX_SELECTION}
+                        currentElderlyUid={currentElderlyUid}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <View
+                  alignItems="center"
+                  justifyContent="center"
+                  w="full"
+                  h="48">
+                  <Spinner size="lg" />
+                </View>
+              )}
             </ScrollView>
           ) : (
             <View alignItems="center" justifyContent="center" h="64">

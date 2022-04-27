@@ -601,7 +601,8 @@
     "choiceRequired": "All choices are required",
     "answerRequired": "Please specify the correct answer",
     "editMemoryScreen": "Edit Question",
-    "editQuestion": "Edit Question",
+    "editQuestion": "Save",
+    "deleteQuestion": "Delete question",
     "choiceMissing": "All choices are required"
   },
   "questionPool": {
