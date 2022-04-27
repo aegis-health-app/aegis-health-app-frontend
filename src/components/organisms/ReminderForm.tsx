@@ -170,7 +170,10 @@ const ReminderForm = ({
               </Text>
               <RadioButtonGroup
                 selections={ReminderRepeatitionPattern.map((r) => {
-                  return { label: t(`reminderRepeatitionPattern.${r.label}`), value: r.value };
+                  return {
+                    label: t(`reminderRepeatitionPattern.${r.label}`),
+                    value: r.value
+                  };
                 })}
                 value={repeatition}
                 setValue={setRepeatition}
