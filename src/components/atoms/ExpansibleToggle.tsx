@@ -7,15 +7,20 @@ import {
   TouchableOpacity,
   UIManager
 } from 'react-native';
+import Divider from './Divider';
 
 const ExpansibleToggle = ({
   title,
+  expand,
+  divider,
   children
 }: {
   title: string;
+  expand?: boolean;
+  divider?: boolean;
   children?: JSX.Element | JSX.Element[];
 }) => {
-  const [expandFields, setExpandFields] = useState<boolean>(false);
+  const [expandFields, setExpandFields] = useState<boolean>(expand || false);
   const changeLayout = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setExpandFields(!expandFields);
@@ -29,7 +34,7 @@ const ExpansibleToggle = ({
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => changeLayout()}
-        style={{ ...styles.itemRow, paddingVertical: 10 }}>
+        style={{ ...styles.itemRow, paddingTop: 20 }}>
         <Text fontSize={18} fontWeight="bold" mb={2}>
           {title}
         </Text>
@@ -39,6 +44,7 @@ const ExpansibleToggle = ({
           <ChevronDownIcon name="chevron-down" size="9" />
         )}
       </TouchableOpacity>
+      {divider && <Divider mt={0} />}
       <View
         style={{
           height: expandFields ? undefined : 0,

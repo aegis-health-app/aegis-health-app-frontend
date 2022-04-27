@@ -3,11 +3,17 @@ import React from 'react';
 
 type DividerProps = {
   my?: number;
+  mt?: number;
 };
 
-const Divider = ({ my }: DividerProps) => {
+const Divider = ({ my, mt }: DividerProps) => {
   return (
-    <NativeBaseDivider backgroundColor="muted.300" my={my ?? 4} w="100%" />
+    <NativeBaseDivider
+      backgroundColor="muted.300"
+      my={my ?? 4}
+      mt={mt}
+      w="100%"
+    />
   );
 };
 

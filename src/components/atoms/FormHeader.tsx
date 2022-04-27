@@ -1,12 +1,12 @@
 import { ITextProps, Text } from 'native-base';
 import React from 'react';
 
-type TextInputProps = {
+type FormHeaderProps = {
   headerText: string;
   size?: number;
 } & ITextProps;
 
-const TextInput: React.FC<TextInputProps> = ({
+const FormHeader: React.FC<FormHeaderProps> = ({
   headerText,
   size,
   ...props
@@ -18,4 +18,4 @@ const TextInput: React.FC<TextInputProps> = ({
   );
 };
 
-export default TextInput;
+export default FormHeader;

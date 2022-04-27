@@ -1,11 +1,14 @@
 import { ITextProps, Text } from 'native-base';
 import React from 'react';
 
-type TextInputProps = {
+type FormSubHeaderProps = {
   headerText: string;
 } & ITextProps;
 
-const TextInput: React.FC<TextInputProps> = ({ headerText, ...props }) => {
+const FormSubHeader: React.FC<FormSubHeaderProps> = ({
+  headerText,
+  ...props
+}) => {
   return (
     <Text fontSize={18} {...props} padding={0.5}>
       {headerText}
@@ -13,4 +16,4 @@ const TextInput: React.FC<TextInputProps> = ({ headerText, ...props }) => {
   );
 };
 
-export default TextInput;
+export default FormSubHeader;
