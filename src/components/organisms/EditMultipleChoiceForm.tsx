@@ -14,7 +14,6 @@ import {
 import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  MultipleChoiceValidationSchema,
   QuestionDetails,
   QuestionDetailsResponse
 } from '../../dto/modules/memoryRecall';
@@ -28,6 +27,7 @@ import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { useNavigation } from '@react-navigation/native';
 import images from '../../assets/images';
 import FallbackImage from './../molecules/FallbackImage';
+import { useMultipleChoiceValidation } from '../../hooks/useMultipleChoiceValidation';
 
 type MultipleChoiceFormProps = {
   question: QuestionDetailsResponse;
@@ -42,6 +42,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
   const [loading, setLoading] = useState(false);
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
+  const MultipleChoiceValidationSchema = useMultipleChoiceValidation();
 
   const { width } = useWindowDimensions();
 

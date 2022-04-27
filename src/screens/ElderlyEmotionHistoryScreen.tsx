@@ -6,13 +6,11 @@ import EmotionalTable from '../components/molecules/EmotionalTable';
 import { EmotionHistory } from '../dto/modules/emotionTracking.dto';
 import {
   EmotionalHistoryFrequency,
-  getEmotionAsHeatmapFrequency,
-  getEmotionHistory
-} from '../utils/caretaker/emotionTracker';
+  useEmotionTracker
+} from '../hooks/useEmotionTracker';
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
-import { getEmotionFromHeatmapFrequency } from './../utils/caretaker/emotionTracker';
 
 const ElderlyEmotionHistoryScreen = ({
   route
@@ -21,7 +19,11 @@ const ElderlyEmotionHistoryScreen = ({
   'ElderlyEmotionHistoryScreen'
 >) => {
   const { uid } = route.params;
-
+  const {
+    getEmotionAsHeatmapFrequency,
+    getEmotionHistory,
+    getEmotionFromHeatmapFrequency
+  } = useEmotionTracker();
   const { width, height } = useWindowDimensions();
   const [hist, setHist] = useState<EmotionHistory[]>([]);
   const [histCount, setHistCount] = useState(0);

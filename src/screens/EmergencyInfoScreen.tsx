@@ -19,7 +19,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import images from '../assets/images';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
-import { Geolocation, openMapApp, reverseGeocode } from '../utils/geolocation';
+import { Geolocation, useGeolocation } from '../hooks/useGeolocation';
 import { openDialScreen } from '../utils/phone';
 
 export type EmergencyInfo = {
@@ -42,6 +42,7 @@ const emergencyInfoList = [
 
 const EmergencyInfoScreen = ({ route }) => {
   const { t } = useTranslation();
+  const { openMapApp, reverseGeocode } = useGeolocation();
   const emergencyInfo = useMemo<EmergencyInfo>(
     () => route?.params.info,
     [route]

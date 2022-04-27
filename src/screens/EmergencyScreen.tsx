@@ -4,15 +4,16 @@ import EmergencyButton from '../components/organisms/EmergencyButton';
 import { Center, VStack, Text, Button, Icon, Box } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getCurrentLocation } from '../utils/geolocation';
 import { openDialScreen } from '../utils/phone';
 import {
   sendEmergencyCancel,
   sendEmergencySignal
 } from '../utils/user/notification';
+import { useGeolocation } from '../hooks/useGeolocation';
 
 const EmergencyScreen = () => {
   const { t } = useTranslation();
+  const { getCurrentLocation } = useGeolocation();
 
   const [isEmergency, setEmergency] = useState<boolean>(false);
 

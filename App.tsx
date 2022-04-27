@@ -11,10 +11,10 @@ import ElderlyContextProvider from './src/contexts/ElderlyContext';
 import CaretakerContextProvider from './src/contexts/CaretakerContext';
 import { TourGuideProvider } from './src/library/rn-multiple-tourguide';
 import HealthRecordContextProvider from './src/contexts/HealthRecordContext';
-import { requestLocationPermission } from './src/utils/permission';
 import useAsyncEffect from './src/hooks/useAsyncEffect';
 import { useLanguage } from './src/internationalization/useLanguage';
-import { initGeocoding } from './src/utils/geolocation';
+import { usePermission } from './src/hooks/usePermission';
+import { useGeolocation } from './src/hooks/useGeolocation';
 
 LogBox.ignoreLogs([
   'If you do not provide children, you must specify an aria-label for accessibility'
@@ -88,6 +88,9 @@ const theme = extendTheme({
 
 const App = () => {
   const { t } = useTranslation();
+  const { requestLocationPermission } = usePermission();
+  const { initGeocoding } = useGeolocation();
+
   const tourGuideLabels = {
     previous: t('misc.previous'),
     next: t('misc.next'),

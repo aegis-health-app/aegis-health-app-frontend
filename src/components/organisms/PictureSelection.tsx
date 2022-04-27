@@ -6,10 +6,7 @@ import {
   launchImageLibrary,
   ImagePickerResponse
 } from 'react-native-image-picker';
-import {
-  CameraPhotoOptions,
-  requestCameraPermission
-} from '../../utils/permission';
+import { CameraPhotoOptions, usePermission } from '../../hooks/usePermission';
 import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
 import FallbackImage from '../molecules/FallbackImage';
@@ -27,6 +24,7 @@ const PictureSelection: React.FC<PictureSelectionProps> = ({
   dependentImage,
   setDependentImage
 }) => {
+  const { requestCameraPermission } = usePermission();
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
 
   const takePicture = async () => {
