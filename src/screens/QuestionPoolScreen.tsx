@@ -45,7 +45,6 @@ const QuestionPoolScreen = () => {
   const isFocused = useIsFocused();
 
   useAsyncEffect(async () => {
-    console.log({ isFocused });
     if (currentElderlyUid === undefined) return;
 
     setIsLoading(true);
