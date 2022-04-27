@@ -101,14 +101,6 @@ const UserLinkScreen = () => {
         text={t('homeElderlyTutorial.step1')}>
         <AddButton />
       </TourGuideZone>
-      {/* Placeholder Navigation */}
-      <View flexDir="column" justifyContent="center" alignItems="center">
-        <Button
-          width="90%"
-          onPress={() => navigation.navigate('ConnectElderlyScreen')}>
-          Go to Caretaker's Page
-        </Button>
-      </View>
       <TourGuideZoneByPosition
         tourKey={tourKey}
         zone={3}
