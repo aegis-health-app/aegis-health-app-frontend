@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
+import images from '../../assets/images';
 
 type Props = {
   questionNumber: number;
@@ -38,9 +39,10 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
   return (
     <View padding={'16 px'}>
       <View>
+        {/* TODO: check whether there is an image id or not */}
         <Image
           source={{ uri: imageid }}
-          // fallbackSource={images.healthRecording}
+          fallbackSource={images.healthRecording}
           alt="temp image for memory recall question"
           width={'100%'}
           height={200}

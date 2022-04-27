@@ -245,6 +245,12 @@ const MainNavigation = () => {
             <Stack.Screen
               name="MemoryRecallFinishScreen"
               component={MemoryRecallFinishScreen}
+              options={{
+                title: 'Complete!',
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: false
+              }}
             />
             <Stack.Screen
               name="AddHealthEntryScreen"

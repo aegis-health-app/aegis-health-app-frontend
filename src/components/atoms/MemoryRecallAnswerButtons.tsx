@@ -90,7 +90,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     } else {
       setQuestionNumber(questionNumber + 1);
     }
-    console.log('answer array90 is: ', answerArray);
+    console.log('answer array is: ', answerArray);
   };
 
   return (

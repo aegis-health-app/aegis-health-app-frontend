@@ -4,6 +4,7 @@ import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
+import images from '../../assets/images';
 
 type Props = {
   questionNumber: number;
@@ -55,7 +56,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       <View>
         <Image
           source={{ uri: imageid }}
-          // fallbackSource={images.healthRecording}
+          fallbackSource={images.healthRecording}
           alt="temp image for memory recall question"
           width={'100%'}
           height={200}
