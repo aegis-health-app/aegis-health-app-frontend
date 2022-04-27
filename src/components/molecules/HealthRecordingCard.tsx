@@ -29,7 +29,7 @@ const HealthRecordingCard = ({
           alt="health recording image"
           width={100}
           height={100}
-          resizeMode="contain"
+          resizeMode="cover"
           mr={3}
         />
         <View>

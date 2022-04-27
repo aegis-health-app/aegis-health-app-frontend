@@ -53,3 +53,8 @@ export const verifyOTP = async (token: string, otp: string) => {
   const payload = { token, pin: otp };
   return await client.post('/otp/verifyOtp', payload);
 };
+
+export const forgotPassword = async (phoneNo: string, newPassword: string) => {
+  const payload = { phoneNo, newPassword };
+  return await client.put('/user/forgotPassword', payload);
+};

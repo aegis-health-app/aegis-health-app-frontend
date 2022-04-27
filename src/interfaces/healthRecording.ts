@@ -1,8 +1,10 @@
 export interface HealthRecording {
   hrName: string;
   imageid: string;
-  uid: number;
+  uid?: number;
+  params?: CustomHealthRecordingTemplate;
 }
+import { CustomHealthRecordingTemplate } from '../dto/modules/healthRecording.dto';
 import { ImagePayload } from './image';
 
 export interface HealthRecordingDataRow {

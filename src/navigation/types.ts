@@ -6,6 +6,7 @@ import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 /**
  * Note: The screen name and its param type are defined here.
  */
+import { CustomHealthRecordingTemplate } from '../dto/modules/healthRecording.dto';
 
 export type RootStackParamList = {
   //Authorized Screens
@@ -26,6 +27,7 @@ export type RootStackParamList = {
   EmergencyScreen: undefined;
   EmergencyInfoScreen: { info: EmergencyInfo };
   ReminderScreen: undefined;
+  RemindersScreen: undefined;
   AddHealthEntryScreen: undefined;
   EditHealthEntryScreen: undefined;
   MemoryScreen: undefined;
@@ -39,7 +41,7 @@ export type RootStackParamList = {
   InputCodeScreen: undefined;
   ConfirmConnectScreen: { info: ElderlyLinkResponse };
   TakeCareElderlyScreen: undefined;
-  CustomHealthRecordingScreen: undefined;
+  CustomHealthRecordingScreen: { info: CustomHealthRecordingTemplate };
   ElderlyEmotionHistoryScreen: { uid: number };
   ElderlyEmotionHistory: undefined;
   HealthRecordingsScreen: undefined;
@@ -66,4 +68,5 @@ export type RootStackParamList = {
 
   CreateReminderScreen: undefined;
   EditReminderScreen: { info: ReminderInfo };
+  RemindersCompletedScreen: undefined;
 };

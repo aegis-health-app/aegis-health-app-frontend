@@ -8,25 +8,64 @@ import Spacer from '../atoms/Spacer';
 import { StyleSheet, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Divider from '../atoms/Divider';
+import Alert, { AlertType } from '../../components/organisms/Alert';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+import { forgotPassword } from '../../utils/auth';
+import { useForm } from 'react-hook-form';
+import { useYupValidationResolver } from '../../hooks/useYupValidationResolver';
+import { useForgotPassword } from '../../hooks/useForgotPassword';
 
 type ForgotPasswordProps = {
-  control: any;
-  errors: any;
-  watch: any;
-  handleSubmit: any;
+  phoneNumber: string;
 };
 
-const ForgotPasswordStage3 = ({
-  control,
-  errors,
-  watch,
-  handleSubmit
-}: ForgotPasswordProps) => {
+const ForgotPasswordStage3 = ({ phoneNumber }: ForgotPasswordProps) => {
+  const { t } = useTranslation();
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState<boolean>(false);
-  const { t } = useTranslation();
+  const [showErrorAlert, setShowErrorAlert] = useState<boolean>(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const forgotPasswordSchema = useForgotPassword();
+  const resolver = useYupValidationResolver(forgotPasswordSchema);
+  const {
+    control,
+    formState: { errors },
+    handleSubmit
+  } = useForm({ resolver, mode: 'onTouched' });
+
+  const onFormSubmit = async (data) => {
+    console.log('press');
+    const { newPassword } = data;
+    try {
+      await forgotPassword(phoneNumber, newPassword);
+      setShowSuccessAlert(true);
+    } catch (err) {
+      setShowErrorAlert(true);
+    }
+  };
+
   return (
     <VStack px={2}>
+      <Alert
+        isOpen={showErrorAlert}
+        close={() => setShowErrorAlert(false)}
+        type={AlertType.ERROR}
+        message="changePasswordError"
+      />
+      <Alert
+        isOpen={showSuccessAlert}
+        close={() => {
+          setShowSuccessAlert(false);
+          navigation.navigate('SignInScreen');
+        }}
+        type={AlertType.SUCCESS}
+        message="changePasswordSuccess"
+      />
       <FormHeader headerText={t('changePassword.changePassword')} mt={10} />
       <Divider />
       <FormTitle titleText={t('changePassword.header')} />
@@ -79,7 +118,7 @@ const ForgotPasswordStage3 = ({
         </View>
         <Spacer />
       </View>
-      <Button w="full" onPress={() => console.log('test')}>
+      <Button w="full" onPress={handleSubmit(onFormSubmit)}>
         {t('changePassword.changePassword')}
       </Button>
     </VStack>

@@ -9,7 +9,7 @@ import ForgotPasswordStage2 from '../components/molecules/ForgotPasswordStage2';
 import ForgotPasswordStage3 from '../components/molecules/ForgotPasswordStage3';
 import { client } from '../config/axiosConfig';
 import useDimensions from '../hooks/useDimensions';
-import { verifyOTP } from '../utils/auth';
+import { requestOTP, verifyOTP } from '../utils/auth';
 
 enum stages {
   first = 1,
@@ -25,17 +25,18 @@ const ForgotPasswordScreen = () => {
     watch,
     setError
   } = useForm();
+
   const { ScreenHeight } = useDimensions();
   const [stage, setStage] = useState(stages.first);
   const [otpToken, setOtpToken] = useState('');
-  const [number, setNumber] = useState();
+  const [number, setNumber] = useState<string>('');
 
   const continueToNextStage = useCallback(
     async (data) => {
       if (stage === stages.first) {
         try {
           const { phoneNumber } = data;
-          const res = await client.get(`/otp/request/${phoneNumber}`);
+          const res = await requestOTP(phoneNumber);
           setNumber(phoneNumber);
           setOtpToken(res.data.token);
           setStage(stages.second);
@@ -63,7 +64,7 @@ const ForgotPasswordScreen = () => {
         }
       } else if (stage === stages.third) {
         // WIP: need to wait for backend api endpoint
-        console.log('reset password');
+        // Moved this logic into stage3 file
       }
     },
     [stage]
@@ -96,12 +97,7 @@ const ForgotPasswordScreen = () => {
               resendOtp={resendOtp}
             />
           ) : (
-            <ForgotPasswordStage3
-              control={control}
-              errors={errors}
-              watch={watch}
-              handleSubmit={handleSubmit}
-            />
+            <ForgotPasswordStage3 phoneNumber={number} />
           )}
           <Box flex={1} />
           <AuthFooter page={AuthType.SIGNUP} />
