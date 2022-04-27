@@ -51,7 +51,8 @@ import EditReminderScreen from '../screens/reminder/EditReminderScreen';
 import CreateMemoryRecallQuestionsScreen from './../screens/CreateMemoryRecallQuestionsScreen';
 import QuestionPoolScreen from '../screens/QuestionPoolScreen';
 import EditMemoryRecallQuestionsScreen from '../screens/EditMemoryRecallQuestionScreen';
-import RemindersScreen from '../screens/RemindersScreen';
+import RemindersScreen from '../screens/reminder/RemindersScreen';
+import RemindersCompletedScreen from '../screens/reminder/RemindersCompletedScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -197,6 +198,15 @@ const MainNavigation = () => {
                     />
                   </TouchableOpacity>
                 )
+              }}
+            />
+            <Stack.Screen
+              name="RemindersCompletedScreen"
+              component={RemindersCompletedScreen}
+              options={{
+                title: t('reminders.completedHeader'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' }
               }}
             />
             <Stack.Screen
