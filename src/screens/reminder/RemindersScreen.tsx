@@ -3,17 +3,19 @@ import { AddIcon, Button, ScrollView, Text, View } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import useAsyncEffect from '../hooks/useAsyncEffect';
-import { TourguideContext } from '../contexts/TourguideContext';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
+import { TourguideContext } from '../../contexts/TourguideContext';
 import {
   TourGuideZone,
   useTourGuideController
-} from '../library/rn-multiple-tourguide';
-import { UserContext } from '../contexts/UserContext';
-import ReminderItem from '../components/molecules/ReminderItem';
+} from '../../library/rn-multiple-tourguide';
+import { UserContext } from '../../contexts/UserContext';
+import ReminderItem from '../../components/molecules/ReminderItem';
+import ExpansibleToggle from '../../components/atoms/ExpansibleToggle';
+import ReminderDayHeader from '../../components/atoms/ReminderDayHeader';
 
 const RemindersScreen = () => {
   const { t } = useTranslation();
@@ -113,6 +115,7 @@ const RemindersScreen = () => {
           <Button
             onPress={() => {
               stop();
+              navigation.navigate('CreateReminderScreen');
             }}>
             <Text display="flex" flexDirection="column" color="white">
               {t('reminders.addReminder')}
@@ -133,13 +136,20 @@ const RemindersScreen = () => {
               variant="outline"
               onPress={() => {
                 stop();
+                navigation.navigate('RemindersCompletedScreen');
               }}>
               {t('reminders.completedReminders')}
             </Button>
           </TourGuideZone>
         </View>
-        <ReminderItem />
-        <ReminderItem />
+        <ExpansibleToggle
+          title="Overdue Activities"
+          expand={true}
+          divider={true}>
+          <ReminderDayHeader day="monday" />
+          <ReminderItem />
+          <ReminderItem />
+        </ExpansibleToggle>
         {/* {reminders.map((reminder, i) => (
           <>
             {i === 0 ? (
