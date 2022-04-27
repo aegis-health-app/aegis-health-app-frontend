@@ -414,7 +414,15 @@
     "constipation": "Constipation",
     "anorexia": "Anorexia",
     "insomnia": "Insomnia",
-    "none": "No emotion record for today."
+    "none": "No emotion record for today.",
+    "temperature": "Temperature",
+    "celcius": "Celcius",
+    "systolic": "Systolic",
+    "diastolic": "Diastolic",
+    "mmhg": "mmHg",
+    "bpm": "BPM",
+    "fpg": "Fasting Plasma Glucose",
+    "mgPercent": "mg%"
   },
   "addHealthDataSuccess": {
     "header": "Success",
@@ -610,14 +618,17 @@
     "totalSelected": "Total Selected",
     "createCustom": "Create Custom Question",
     "noQuestions": "You don't have any question yet.",
-    "createQuestionHelper":"Create a custom question or create a question from our template now!",
+    "createQuestionHelper": "Create a custom question or create a question from our template now!",
     "createTemplate": "Create from template",
     "template1": "Pick the correct choice.",
     "template2": "How are you feeling today?",
     "selectQuestions": "Select Questions"
+  },
   "reminders": {
     "remindersHeader": "Reminders",
     "completedHeader": "Completed",
+    "completedTitle": "Completed Activities",
+    "completedDescription": "7 days of historical data",
     "addReminder": "Add a new reminder",
     "completedReminders": "View Completed Reminders",
     "overdueActivities": "Overdue Activities",

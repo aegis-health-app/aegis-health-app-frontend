@@ -414,7 +414,15 @@
     "constipation": "ท้องผูก",
     "anorexia": "เบื่ออาหาร",
     "insomnia": "นอนไม่หลับ",
-    "none": "ไม่มีการบันทึกสภาวะอารมณ์"
+    "none": "ไม่มีการบันทึกสภาวะอารมณ์",
+    "temperature": "อุณหภูมิ",
+    "celcius": "เซลเซียส",
+    "systolic": "Systolic",
+    "diastolic": "Diastolic",
+    "mmhg": "mmHg",
+    "bpm": "ครั้งต่อนาที",
+    "fpg": "ระดับน้ำตาลในเลือด",
+    "mgPercent": "มิลลิกรัมเปอร์เซนต์"
   },
   "addHealthDataSuccess": {
     "header": "สำเร็จ",
@@ -557,14 +565,14 @@
     "generalInformation": "ข้อมูลทั่วไป",
     "selectDate": "เลือกวันที่",
     "selectTime": "เลือกเวลา",
-    "repeat": "ตั้งเตือนซำ้",
+    "repeat": "ตั้งเตือนซ้ำ",
     "note": "คำอธิบาย",
     "description": "คำอธิบาย",
     "images": "รูปภาพ",
     "noImageSelected": "ไม่มีรูปภาพที่เลือกไว้"
   },
   "reminderRepeatitionPattern": {
-    "doesNotRepeat": "ไม่แจ้งซำ้",
+    "doesNotRepeat": "ไม่แจ้งซ้ำ",
     "everyday": "ทุกวัน",
     "everyweek": "ทุกสัปดาห์",
     "everymonth": "ทุกเดือน",
@@ -610,14 +618,17 @@
     "totalSelected": "เลือกทั้งหมด",
     "createCustom": "สร้างคำถามเอง",
     "noQuestions": "คุณไม่มีคำถามที่เคยสร้าง",
-    "createQuestionHelper":"คุณสามารถสร้างคำถามเองหรือสร้างด้วยแบบคำถามของเราได้",
+    "createQuestionHelper": "คุณสามารถสร้างคำถามเองหรือสร้างด้วยแบบคำถามของเราได้",
     "createTemplate": "สร้างคำถามจากแบบ",
     "template1": "จงเลือกคำตอบที่ถูกต้อง",
     "template2": "วันนี้คุณรู้สึกอย่างไร?",
     "selectQuestions": "เลือกคำถาม"
+  },
   "reminders": {
     "remindersHeader": "เตือนความจำ",
     "completedHeader": "สำเร็จแล้ว",
+    "completedTitle": "การตั้งเตือนที่สำเร็จแล้ว",
+    "completedDescription": "ข้อมูลย้อนหลัง 7 วัน",
     "addReminder": "เพิ่มการเตือนความจำใหม่",
     "completedReminders": "ดูการเตือนความจำที่สำเร็จแล้ว",
     "overdueActivities": "การตั้งเตือนเกินกำหนด",
