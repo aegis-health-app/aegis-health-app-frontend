@@ -54,6 +54,7 @@ import QuestionPoolScreen from '../screens/QuestionPoolScreen';
 import EditMemoryRecallQuestionsScreen from '../screens/EditMemoryRecallQuestionScreen';
 import RemindersScreen from '../screens/reminder/RemindersScreen';
 import RemindersCompletedScreen from '../screens/reminder/RemindersCompletedScreen';
+import MemoryRecallFinishScreen from '../screens/MemoryRecallFinishScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -240,6 +241,10 @@ const MainNavigation = () => {
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
               }}
+            />
+            <Stack.Screen
+              name="MemoryRecallFinishScreen"
+              component={MemoryRecallFinishScreen}
             />
             <Stack.Screen
               name="AddHealthEntryScreen"

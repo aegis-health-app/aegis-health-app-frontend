@@ -7,7 +7,7 @@ import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 
 type Props = {
   questionNumber: number;
-  mid: string;
+  mid: number;
   question: string;
   imageid: string;
   choice1: string;
@@ -17,6 +17,8 @@ type Props = {
   correctAnswer: string;
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
+  answerArray: Answer[];
+  setAnswerArray: (val: Answer[]) => void;
 };
 
 const ChoiceMemoryRecallQuestion = (props: Props) => {
@@ -31,7 +33,9 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
     choice4,
     correctAnswer,
     setQuestionNumber,
-    totalQuestion
+    totalQuestion,
+    answerArray,
+    setAnswerArray
   } = props;
   const [value, setValue] = useState('one');
   const [showChoice, setShowChoice] = useState(true);
@@ -147,12 +151,16 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={answer}
+        setAnswer={setAnswer}
         questionType={'choice'}
         showAnswer={true}
         setQuestionNumber={setQuestionNumber}
         totalQuestion={totalQuestion}
         setShowBg={setShowBg}
         setShortAnswer={setShortAnswer}
+        answerArray={answerArray}
+        setAnswerArray={setAnswerArray}
+        mid={mid}
       />
     </View>
   );

@@ -4,13 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import MemoryRecallQuestionProgress from '../components/atoms/MemoryRecallQuestionProgress';
 import ChoiceMemoryRecallQuestion from '../components/molecules/ChoiceMemoryRecallQuestion';
 import ShortAnswerMemoryRecallQuestion from '../components/molecules/ShortAnswerMemoryRecallQuestion';
-import { MemoryRecallQuestionDto } from '../dto/modules/memoryRecallElderly.dto';
+import {
+  Answer,
+  MemoryRecallQuestionDto
+} from '../dto/modules/memoryRecallElderly.dto';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { getMemoryRecallQuestionSet } from '../utils/elderly/memoryRecallElderly';
 
 const MemoryRecallQuestionScreen = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionSet, setQuestionSet] = useState<MemoryRecallQuestionDto>();
+  const [answerArray, setAnswerArray] = useState<Answer[]>([]);
   useAsyncEffect(async () => {
     const data = await getMemoryRecallQuestionSet();
     console.log('question set ', data);
@@ -29,6 +33,9 @@ const MemoryRecallQuestionScreen = () => {
             questionNumber={questionNumber + 1}
             totalQuestion={totalQuestion}
             setQuestionNumber={setQuestionNumber}
+            answerArray={answerArray}
+            setAnswerArray={setAnswerArray}
+            mid={questionSet?.questions[questionNumber].mid ?? 0}
           />
           {questionSet?.questions[questionNumber].isMultipleChoice ? (
             <ChoiceMemoryRecallQuestion
@@ -58,15 +65,19 @@ const MemoryRecallQuestionScreen = () => {
               }
               setQuestionNumber={setQuestionNumber}
               totalQuestion={totalQuestion}
+              answerArray={answerArray}
+              setAnswerArray={setAnswerArray}
             />
           ) : (
             <ShortAnswerMemoryRecallQuestion
               questionNumber={questionNumber}
-              mid={questionSet?.questions[questionNumber].mid ?? ' '}
+              mid={questionSet?.questions[questionNumber].mid ?? 0}
               question={questionSet?.questions[questionNumber].question ?? ' '}
               imageid={questionSet?.questions[questionNumber].imageid ?? ' '}
               setQuestionNumber={setQuestionNumber}
               totalQuestion={totalQuestion}
+              answerArray={answerArray}
+              setAnswerArray={setAnswerArray}
             />
           )}
         </View>

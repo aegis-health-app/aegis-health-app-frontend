@@ -2,7 +2,7 @@ export interface MemoryRecallQuestionDto {
   questions: MemoryRecallQuestion[];
 }
 export interface MemoryRecallQuestion {
-  mid: string;
+  mid: number;
   question: string;
   imageid: string;
   multipleChoiceQuestion: {
@@ -16,6 +16,6 @@ export interface MemoryRecallQuestion {
 }
 
 export interface Answer {
-  mid: string;
+  mid: number;
   answer: string;
 }

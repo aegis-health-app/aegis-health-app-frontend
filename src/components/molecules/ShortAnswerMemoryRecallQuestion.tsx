@@ -6,11 +6,13 @@ import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 
 type Props = {
   questionNumber: number;
-  mid: string;
+  mid: number;
   question: string;
   imageid: string;
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
+  answerArray: Answer[];
+  setAnswerArray: React.Dispatch<React.SetStateAction<Answer[]>>;
 };
 
 const ShortAnswerMemoryRecallQuestion = (props: Props) => {
@@ -20,7 +22,9 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     question,
     imageid,
     setQuestionNumber,
-    totalQuestion
+    totalQuestion,
+    answerArray,
+    setAnswerArray
   } = props;
   const [shortAnswer, setShortAnswer] = useState('');
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' }); //TODO: check why mid not called
@@ -29,7 +33,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     setShortAnswer(value);
     setAnswer({ mid: mid, answer: value });
   };
-  console.log('The answer is: ', answer);
+  // console.log('The answer is: ', answer);
 
   return (
     <View padding={'16 px'}>
@@ -63,12 +67,16 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={answer}
+        setAnswer={setAnswer}
         questionType={'short answer'}
         showAnswer={false}
         setQuestionNumber={setQuestionNumber}
         totalQuestion={totalQuestion}
         setShowBg={setShowBg}
         setShortAnswer={setShortAnswer}
+        answerArray={answerArray}
+        setAnswerArray={setAnswerArray}
+        mid={mid}
       />
     </View>
   );

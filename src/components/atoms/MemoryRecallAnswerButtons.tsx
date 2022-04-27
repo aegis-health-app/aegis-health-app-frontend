@@ -5,33 +5,43 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
+import { client } from '../../config/axiosConfig';
 
 type Props = {
   questionNumber: number;
   answer: Answer;
-  // shouldShowAnswer: boolean;
+  setAnswer: (val: Answer) => void;
   questionType: string;
   showAnswer: boolean;
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
   setShowBg: (val: boolean) => void;
   setShortAnswer: (val: string) => void;
+  answerArray: Answer[];
+  setAnswerArray: React.Dispatch<React.SetStateAction<Answer[]>>;
+  mid: number;
 };
 
 const MemoryRecallAnswerButtons = (props: Props) => {
   const {
     questionNumber,
     answer,
+    setAnswer,
     showAnswer,
     setQuestionNumber,
     totalQuestion,
     setShowBg,
-    setShortAnswer
+    setShortAnswer,
+    mid,
+    answerArray,
+    setAnswerArray
   } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [answerArray, setAnswerArray] = useState<Answer[]>([]);
+  //TODO: create at question page instead
+  // const [answerArray, setAnswerArray] = useState<Answer[]>([]);
   const [shouldShowAnswer, setShouldShowAnswer] = useState<boolean>(showAnswer);
+
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
     console.log('call handle exit');
@@ -41,9 +51,16 @@ const MemoryRecallAnswerButtons = (props: Props) => {
   /**
    * This function submit all the answer to backend
    */
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log('call handle submit');
-    navigation.navigate('MemoryScreen');
+    console.log('answer array before payload is: ', answerArray);
+    const payload = { answers: answerArray };
+    console.log('payload is: ');
+    console.log(payload);
+    await client.post('/memoryPractice/elderlyAnswers', payload);
+    console.log('answer submitted');
+
+    navigation.navigate('MemoryRecallFinishScreen');
   };
   /**
    * The function handle when user check their choice question and show whether it is correct.
@@ -58,16 +75,24 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const goNextQuestion = () => {
     //add data to answer array
+    // const answerTmp = answerArray;
+    // answerTmp.push(answer);
+    // setAnswerArray(answerTmp);
     setAnswerArray((arr) => [...arr, answer]); //TODO: add answer for blank one
     // console.log('go next question');
-    console.log('answer to send is: ', answer);
-    console.log('answer array is: ', answerArray);
+    // console.log('answer to send is: ', answer);
+    // console.log('answer array is: ', answerArray);
     setShortAnswer('');
-    setQuestionNumber(questionNumber + 1);
+    setAnswer({ mid: mid, answer: 'null' });
+    // setQuestionNumber(questionNumber + 1);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
+    } else {
+      setQuestionNumber(questionNumber + 1);
     }
+    console.log('answer array90 is: ', answerArray);
   };
+
   return (
     <View style={styles.buttonGroup}>
       <VStack space={4}>
