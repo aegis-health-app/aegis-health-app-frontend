@@ -75,15 +75,6 @@ const ConnectElderlyScreen = () => {
           zIndex="100">
           <Text>{t('userLink.cameraHelpText')}</Text>
         </View>
-        {/* remove later */}
-        <Button
-          position="absolute"
-          alignSelf="center"
-          bottom="-300"
-          width="90%"
-          onPress={() => handleRead('E3QW53')}>
-          test successful QR scan
-        </Button>
       </View>
     </View>
   );
