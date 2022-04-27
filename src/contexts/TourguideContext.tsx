@@ -13,7 +13,7 @@ export interface TourguideContextStruct {
   setShowElderlyLinkTourguide: (value: boolean) => void;
   showHealthRecordingsTourguide: boolean;
   setShowHealthRecordingsTourguide: (value: boolean) => void;
-  showMemoryPracticeQuestionsTourguide: boolean,
+  showMemoryPracticeQuestionsTourguide: boolean;
   setShowMemoryPracticeQuestionsTourguide: (value: boolean) => void;
   showRemindersTourguide: boolean;
   setShowRemindersTourguide: (value: boolean) => void;
@@ -49,7 +49,7 @@ const TourguideContextProvider = ({ ...props }) => {
     showHealthRecordingsTourguide,
     setShowHealthRecordingsTourguide,
     showMemoryPracticeQuestionsTourguide,
-    setShowMemoryPracticeQuestionsTourguide
+    setShowMemoryPracticeQuestionsTourguide,
     showRemindersTourguide,
     setShowRemindersTourguide
   };
