@@ -31,7 +31,7 @@ const ModulePickerItem = ({ mid }: ModulePickerItemProps) => {
           }
           label={t('modules.emergency')}
           // don't forget to change
-          handlePress={() => navigation.navigate('RemindersScreen')}
+          handlePress={() => navigation.navigate('EmergencyScreen')}
         />
       );
     } else if (mid === 1) {
