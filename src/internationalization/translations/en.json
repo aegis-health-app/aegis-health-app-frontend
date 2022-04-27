@@ -725,5 +725,23 @@
     "body": "Cannot delete reminder at the moment. Please try again later",
     "primaryButton": "OK",
     "secondaryButton": ""
+  },  
+  "memoryRecallElderly":{
+    "memoryRecall": "Memory Recall",
+    "startGame": "Start Game",
+    "question": "Question",
+    "of": "of",
+    "skip": "Skip",
+    "selectAChoice": "Select a choice:",
+    "typeInYourAnswer": "Type in your answer:",
+    "answer": "Answer",
+    "back": "Back",
+    "check": "Check",
+    "next": "Next",
+    "exitGame": "Exit Game",
+    "nicelyDone": "Nicely Done!",
+    "gameFinish": "You have finished the game.",
+    "returnToHomeScreen": "Return to home screen",
+    "tourGuide1": "Press the “Start Game” button to start the game."
   }
 }
