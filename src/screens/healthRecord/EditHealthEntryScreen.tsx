@@ -85,6 +85,7 @@ const EditHealthEntryScreen = () => {
         { data: payload }
       );
       if (data) getHealthRecordTable();
+      fetchHealthRecordings();
     } catch (error) {
       setShowFailedDeleteRow(true);
     }
@@ -206,23 +207,44 @@ const EditHealthEntryScreen = () => {
           </Text>
         </View>
         <Spacer />
-        <View
-          display="flex"
-          flexDir="row"
-          alignItems="center"
-          justifyContent="center"
-          width="full"
-          height={200}
-          background="muted.200">
-          <Image
-            source={getImage()}
-            borderRadius={4}
-            alt={t('healthRecording.noImageText')}
-            resizeMode="cover"
-            height="100%"
-            width="100%"
-          />
-        </View>
+        {newHealthRecordCover && newHealthRecordCover?.assets && (
+          <View
+            display="flex"
+            flexDir="row"
+            alignItems="center"
+            justifyContent="center"
+            width="full"
+            height={200}
+            background="muted.200">
+            <Image
+              source={{ uri: newHealthRecordCover.assets[0].uri }}
+              borderRadius={4}
+              alt={t('healthRecording.noImageText')}
+              resizeMode="cover"
+              height="100%"
+              width="100%"
+            />
+          </View>
+        )}
+        {!newHealthRecordCover && (
+          <View
+            display="flex"
+            flexDir="row"
+            alignItems="center"
+            justifyContent="center"
+            width="full"
+            height={200}
+            background="muted.200">
+            <Image
+              source={getImage()}
+              borderRadius={4}
+              alt={t('healthRecording.noImageText')}
+              resizeMode="cover"
+              height="100%"
+              width="100%"
+            />
+          </View>
+        )}
         <Spacer />
         <View
           flexDirection="row"

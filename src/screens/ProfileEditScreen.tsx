@@ -148,14 +148,26 @@ const ProfileEditScreen = () => {
         </View>
         <Spacer />
         <View display="flex" flexDir="row" justifyContent="center">
-          <Image
-            source={getImage()}
-            width="32"
-            height="32"
-            borderRadius={4}
-            fallbackElement={FallbackImageLarge}
-            alt="Profile Picture"
-          />
+          {newProfileImage && newProfileImage.assets && (
+            <Image
+              source={{ uri: newProfileImage.assets[0].uri }}
+              width="32"
+              height="32"
+              borderRadius={4}
+              fallbackElement={FallbackImageLarge}
+              alt="Profile Picture"
+            />
+          )}
+          {!newProfileImage && (
+            <Image
+              source={getImage()}
+              width="32"
+              height="32"
+              borderRadius={4}
+              fallbackElement={FallbackImageLarge}
+              alt="Profile Picture"
+            />
+          )}
         </View>
         <Spacer />
         <View justifyContent="center" alignItems="center">
