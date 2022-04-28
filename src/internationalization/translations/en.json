@@ -571,8 +571,10 @@
     "description": "Description",
     "images": "Images",
     "noImageSelected": "No Image Selected",
-    "repeatsEvery": "Repeats Every",
-    "repeatsOn": "Repeats On"
+    "yes": "Yes",
+    "no": "No",
+    "takeAPicture": "Take a Picture",
+    "fromMyDevice": "From My Device"
   },
   "reminderRepeatitionPattern": {
     "doesNotRepeat": "Does Not Repeat",
@@ -580,7 +582,20 @@
     "everyweek": "Every Week",
     "everymonth": "Every Month",
     "everyyear": "Every Year",
-    "custom": "Custom"
+    "custom": "Custom",
+    "customRecurringSetting": "Custom Recurring Setting",
+    "repeatsEvery": "Repeats Every",
+    "repeatsOn": "Repeats On",
+    "date": "Date",
+    "week": "Week",
+    "month": "Month",
+    "sa": "Sa",
+    "mo": "Mo",
+    "tu": "Tu",
+    "we": "We",
+    "th": "Th",
+    "fr": "Fr",
+    "su": "Su"
   },
   "connectElderlyError": {
     "header": "Error",
@@ -648,5 +663,19 @@
     "step4": "This is your reminder. Click the card to view the details, or mark as complete by tapping the “Mark as Complete” button.",
     "step5": "Scroll down to view more reminders up to 1 months in advance",
     "step6": "Press the help button to replay the guide."
+  },
+  "reminderImportanceLevel": {
+    "importanceLevel": "Importance Level",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "lowPriority": "Low Priority",
+    "mediumPriority": "Medium Priority",
+    "highPriority": "High Priority",
+    "alertAtSelectedTime": "Alert at the selected time",
+    "noNotificationRepeatition": "No notification repeatition",
+    "repeatNotification3Times": "Repeat notification 3 times with 10 minutes intervals",
+    "repeatNotificationUnitilComplete": "Repeat with 10 mintues interval until marked as completed",
+    "cancel": "Cancel"
   }
 }

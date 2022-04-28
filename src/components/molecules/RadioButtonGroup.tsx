@@ -13,7 +13,7 @@ const RadioButtonGroup = ({
 }: {
   selections: SelectionInterface[];
   value: string;
-  setValue: (value: string) => void;
+  setValue: (value: string | any) => void;
 }) => {
   return (
     <>

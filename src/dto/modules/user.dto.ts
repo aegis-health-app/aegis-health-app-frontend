@@ -1,4 +1,3 @@
-import { ImagePickerResponse } from 'react-native-image-picker';
 import { ModuleId } from './modules.dto';
 
 export type BloodType = 'N/A' | 'A' | 'B' | 'O' | 'AB' | string;
@@ -43,14 +42,4 @@ export interface CaretakerInfoView {
   phone?: string;
   imageId: string;
   cid: number;
-}
-
-export interface ReminderInfo {
-  title: string;
-  dateTime: Date;
-  notifyMyCaretaker: boolean;
-  repetition: string;
-  note: string;
-  image?: ImagePickerResponse;
-  importanceLevel: string;
 }

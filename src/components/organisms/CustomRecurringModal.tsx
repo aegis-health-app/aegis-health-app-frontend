@@ -3,6 +3,7 @@ import { AlertDialog, Button, Text, View } from 'native-base';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { RecurringInterval, RecursionPeriod } from '../../dto/modules/reminder.dto';
 import DropDownSelect from '../atoms/DropDownSelect';
 import Spacer from '../atoms/Spacer';
 
@@ -10,41 +11,54 @@ const CustomRecurringModal = ({
   dialogOpen = false,
   setDialogOpen,
   defaultRepeatition,
-  setRepeatition
+  setRepeatition,
+  repeatsEvery,
+  setRepeatsEvery,
+  repeatsOnWeekday = [],
+  setRepeatsOnWeekday,
+  repeatsOnDate = 1,
+  setRepeatsOnDate
 }: {
   dialogOpen: boolean;
   setDialogOpen: (dialogOpen: boolean) => void;
-  defaultRepeatition: string;
-  setRepeatition: (repeatition: string) => void;
+  defaultRepeatition: RecurringInterval;
+  setRepeatition: (repeatition: RecurringInterval) => void;
+  repeatsEvery: RecursionPeriod;
+  setRepeatsEvery: (repeatsEvery: RecursionPeriod) => void;
+  repeatsOnWeekday: number[];
+  setRepeatsOnWeekday: (repeatsOnWeekday: number[]) => void;
+  repeatsOnDate: number;
+  setRepeatsOnDate: (repeatsOnDate: number) => void;
 }) => {
   const { t } = useTranslation();
   const cancelRef = useRef(null);
+  console.log(repeatsEvery)
 
-  const [repeatEvery, setRepeatEvery] = useState<string>('week');
-  const [repeatsOnWeekday, setRepeatsOnWeekday] = useState<string[]>([]);
-  const [repeatsOnDate, setRepeatsOnDate] = useState<string>('1');
+  // const [repeatEvery, setRepeatEvery] = useState<string>('week');
+  // const [repeatsOnWeekday, setRepeatsOnWeekday] = useState<string[]>([]);
+  // const [repeatsOnDate, setRepeatsOnDate] = useState<string>('1');
   const [errorLog, setErrorLog] = useState('');
   const repeatEveryList = [
-    { value: 'week', label: 'Week' },
-    { value: 'month', label: 'Month' }
+    { value: RecursionPeriod.WEEK, label: 'Week' },
+    { value: RecursionPeriod.MONTH, label: 'Month' }
   ];
 
   const dateList = [...Array(31).keys()].map((x) => {
-    const num = (++x).toString();
+    const num = (++x);
     return {
-      label: num,
-      value: num
+      label: num.toString(),
+      value: num,
     };
   });
 
   const weekdayList = [
-    { value: 'saturday', label: 'Sa' },
-    { value: 'monday', label: 'Mo' },
-    { value: 'tuesday', label: 'Tu' },
-    { value: 'wednesday', label: 'We' },
-    { value: 'thursday', label: 'Th' },
-    { value: 'friday', label: 'Fr' },
-    { value: 'sunday', label: 'Su' }
+    { value: 7, label: t('reminderRepeatitionPattern.sa') },
+    { value: 1, label: t('reminderRepeatitionPattern.mo') },
+    { value: 2, label: t('reminderRepeatitionPattern.tu') },
+    { value: 3, label: t('reminderRepeatitionPattern.we') },
+    { value: 4, label: t('reminderRepeatitionPattern.th') },
+    { value: 5, label: t('reminderRepeatitionPattern.fr') },
+    { value: 6, label: t('reminderRepeatitionPattern.su') }
   ];
 
   const DateDisplay = () => {
@@ -52,7 +66,7 @@ const CustomRecurringModal = ({
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
-          {t('reminderForm.date')}
+          {t('reminderRepeatitionPattern.date')}
         </Text>
         <DropDownSelect
           value={repeatsOnDate}
@@ -75,7 +89,7 @@ const CustomRecurringModal = ({
   );
 
   const onOkButtonPressed = useCallback(() => {
-    if (repeatEvery === 'week') {
+    if (repeatsEvery === RecursionPeriod.WEEK) {
       if (!repeatsOnWeekday.length || !repeatsOnWeekday) {
         console.log('yes');
         setErrorLog('Please choose a week day');
@@ -86,17 +100,19 @@ const CustomRecurringModal = ({
         repeatsOn: repeatsOnWeekday
       };
       console.log(response);
+      setDialogOpen(false)
       return;
     }
-    if (repeatEvery === 'month') {
+    if (repeatsEvery === RecursionPeriod.MONTH) {
       const response = {
         repeatEvery: 'month',
         repeatsOn: repeatsOnDate
       };
       console.log(response);
+      setDialogOpen(false)
       return;
     }
-  }, [repeatEvery, repeatsOnDate, repeatsOnWeekday, setErrorLog]);
+  }, [repeatsEvery, repeatsOnDate, repeatsOnWeekday, setErrorLog]);
 
   const onCancelButtonPressed = useCallback(() => {
     setRepeatition(defaultRepeatition);
@@ -109,7 +125,7 @@ const CustomRecurringModal = ({
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
-          {t('reminderForm.repeatsOn')}
+          {t('reminderRepeatitionPattern.repeatsOn')}
         </Text>
         <View style={styles.itemRow}>
           {weekdayList.map((weekday) => {
@@ -132,7 +148,7 @@ const CustomRecurringModal = ({
                       ? styles.selectedButtonText
                       : styles.unselectedButtonText
                   ]}>
-                  {/* {t('reminderForm.repeatEvery')} */}
+                  {/* {t('reminderRepeatitionPattern.repeatsEvery')} */}
                   {weekday.label}
                 </Text>
               </TouchableOpacity>
@@ -149,18 +165,18 @@ const CustomRecurringModal = ({
     return (
       <View>
         <Text fontSize={16} mb={2}>
-          {t('reminderForm.repeatsEvery')}
+          {t('reminderRepeatitionPattern.repeatsEvery')}
         </Text>
         <DropDownSelect
-          value={repeatEvery}
+          value={repeatsEvery}
           defaultValue="week"
           items={repeatEveryList}
-          setValue={setRepeatEvery}
+          setValue={setRepeatsEvery}
           zIndex={5100}
         />
       </View>
     );
-  }, [repeatEvery, setRepeatEvery]);
+  }, [repeatsEvery, setRepeatsEvery]);
 
   return (
     <AlertDialog
@@ -170,13 +186,13 @@ const CustomRecurringModal = ({
       <AlertDialog.Content style={styles.container}>
         {/* <AlertDialog.CloseButton /> */}
         <AlertDialog.Header>
-          {t('reminder.customRecurringSetting')}
+          {t('reminderRepeatitionPattern.customRecurringSetting')}
         </AlertDialog.Header>
         <AlertDialog.Body>
           {/* {t('reminder.deleteConfirmationDesc')} */}
           <RepeatEveryDisplay />
           <Spacer />
-          {repeatEvery === 'week' ? <WeekDisplay /> : <DateDisplay />}
+          {repeatsEvery === RecursionPeriod.WEEK ? <WeekDisplay /> : <DateDisplay />}
         </AlertDialog.Body>
         <AlertDialog.Footer>
           <Button.Group space={2}>

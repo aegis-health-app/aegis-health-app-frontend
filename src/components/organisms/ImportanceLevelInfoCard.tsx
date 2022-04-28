@@ -15,27 +15,27 @@ const ImportanceLevelInfoCard = ({
 
   const importanceLevelInfos = [
     {
-      title: 'Low Priority',
+      title: t('reminderImportanceLevel.lowPriority'),
       icon: '--',
       descriptions: [
-        'Alert at the selected time',
-        'No notification repeatition'
+        t('reminderImportanceLevel.alertAtSelectedTime'),
+        t('reminderImportanceLevel.noNotificationRepeatition')
       ]
     },
     {
-      title: 'Medium Priority',
+      title: t('reminderImportanceLevel.mediumPriority'),
       icon: '!',
       descriptions: [
-        'Alert at the selected time',
-        'Repeat notification 3 times with 10 minutes interval'
+        t('reminderImportanceLevel.alertAtSelectedTime'),
+        t('reminderImportanceLevel.repeatNotification3Times')
       ]
     },
     {
-      title: 'High Priority',
+      title: t('reminderImportanceLevel.highPriority'),
       icon: '!!!',
       descriptions: [
-        'Alert at the selected time',
-        'Repeat with 10 minutes interval until marked as complete'
+        t('reminderImportanceLevel.alertAtSelectedTime'),
+        t('reminderImportanceLevel.repeatNotificationUnitilComplete')
       ]
     }
   ];
@@ -54,7 +54,10 @@ const ImportanceLevelInfoCard = ({
           <Text
             fontSize="xl"
             fontWeight={'bold'}
-            style={[styles.iconContainer, { color: 'orange' }]}>
+            style={[
+              styles.iconContainer,
+              { color: icon.includes('!') ? 'orange' : 'black' }
+            ]}>
             {icon}
           </Text>
           <Text fontSize="lg" fontWeight={'bold'}>
@@ -65,7 +68,7 @@ const ImportanceLevelInfoCard = ({
         {descriptions.map((description) => {
           return (
             <View style={styles.itemRow} key={`${title}-${description}`}>
-              <Text> - </Text>
+              <Text>             {'\u2022'}  </Text>
               <Text>{description}</Text>
             </View>
           );
@@ -81,7 +84,9 @@ const ImportanceLevelInfoCard = ({
       onClose={() => setDialogOpen(!dialogOpen)}>
       <AlertDialog.Content style={styles.container}>
         <AlertDialog.CloseButton />
-        <AlertDialog.Header>{t('reminder.importanceLevel')}</AlertDialog.Header>
+        <AlertDialog.Header>
+          {t('reminderImportanceLevel.importanceLevel')}
+        </AlertDialog.Header>
         <AlertDialog.Body>
           {importanceLevelInfos.map((importanceLevelInfo) => {
             return (
@@ -100,7 +105,7 @@ const ImportanceLevelInfoCard = ({
               colorScheme="orange"
               onPress={() => setDialogOpen(false)}
               ref={cancelRef}>
-              {t('reminder.cancel')}
+              {t('reminderImportanceLevel.cancel')}
             </Button>
           </Button.Group>
         </AlertDialog.Footer>

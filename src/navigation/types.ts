@@ -1,12 +1,13 @@
 import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
 import { QuestionInfo } from './../dto/modules/memoryRecall';
-import { CaretakerInfoView, ReminderInfo } from '../dto/modules/user.dto';
+import { CaretakerInfoView } from '../dto/modules/user.dto';
 import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
 
 /**
  * Note: The screen name and its param type are defined here.
  */
 import { CustomHealthRecordingTemplate } from '../dto/modules/healthRecording.dto';
+import { EditReminderInfo } from '../dto/modules/reminder.dto';
 
 export type RootStackParamList = {
   //Authorized Screens
@@ -67,6 +68,6 @@ export type RootStackParamList = {
   ViewHistoryDetailsScreen: { timestamp: string };
 
   CreateReminderScreen: undefined;
-  EditReminderScreen: { info: ReminderInfo };
   RemindersCompletedScreen: undefined;
+  EditReminderScreen: { info: EditReminderInfo };
 };

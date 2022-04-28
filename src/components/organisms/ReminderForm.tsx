@@ -25,6 +25,7 @@ import { ReminderRepeatitionPattern } from '../../constants/ReminderRepeatitionC
 import { UserContext } from '../../contexts/UserContext';
 import CustomRecurringModal from '../organisms/CustomRecurringModal';
 import ImportanceLevelInfoCard from './ImportanceLevelInfoCard';
+import { ImportanceLevel, RecurringInterval, RecursionPeriod } from '../../dto/modules/reminder.dto';
 
 const ReminderForm = ({
   control,
@@ -40,7 +41,13 @@ const ReminderForm = ({
   title,
   note,
   importanceLevel,
-  setImportanceLevel
+  setImportanceLevel,
+  repeatsEvery,
+  setRepeatsEvery,
+  repeatsOnWeekday,
+  setRepeatsOnWeekday,
+  repeatsOnDate,
+  setRepeatsOnDate
 }: {
   control: any;
   errors: any;
@@ -50,12 +57,18 @@ const ReminderForm = ({
   setImage: (image: ImagePickerResponse) => void;
   notifyMyCaretakers: boolean;
   setNotifyMyCaretaker: (value: boolean) => void;
-  repeatition: string;
-  setRepeatition: (repeatition: string) => void;
+  repeatition: RecurringInterval;
+  setRepeatition: (repeatition: RecurringInterval) => void;
   title?: string;
   note?: string;
-  importanceLevel: string;
-  setImportanceLevel: (importanceLavel: string) => void;
+  importanceLevel: ImportanceLevel;
+  setImportanceLevel: (importanceLavel: ImportanceLevel) => void;
+  repeatsEvery: RecursionPeriod;
+  setRepeatsEvery: (repeatsEvery: RecursionPeriod) => void;
+  repeatsOnWeekday: number[];
+  setRepeatsOnWeekday: (repeatsOnWeekday: number[]) => void;
+  repeatsOnDate: number;
+  setRepeatsOnDate: (repeatsOnDate: number) => void
 }) => {
   const { t } = useTranslation();
   const { language } = useSettings();
@@ -94,16 +107,13 @@ const ReminderForm = ({
   };
 
   const importantLevels = [
-    {
-      label: 'Low',
-      value: 'low'
-    },
-    { label: 'Medium', value: 'medium' },
-    { label: 'High', value: 'high' }
+    { label: t('reminderImportanceLevel.low'), value: ImportanceLevel.LOW },
+    { label: t('reminderImportanceLevel.medium'), value: ImportanceLevel.MEDIUM },
+    { label: t('reminderImportanceLevel.high'), value: ImportanceLevel.HIGH }
   ];
 
   useEffect(() => {
-    repeatition === 'custom' && setShowCustomModal(true);
+    repeatition === RecurringInterval.CUSTOM && setShowCustomModal(true);
   }, [repeatition]);
 
   return (
@@ -113,8 +123,14 @@ const ReminderForm = ({
           <CustomRecurringModal
             dialogOpen={showCustomModal}
             setDialogOpen={setShowCustomModal}
-            defaultRepeatition={'doesNotRepeat'}
+            defaultRepeatition={RecurringInterval.DOES_NOT_REPEAT}
             setRepeatition={setRepeatition}
+            repeatsEvery={repeatsEvery}
+            setRepeatsEvery={setRepeatsEvery}
+            repeatsOnDate={repeatsOnDate}
+            setRepeatsOnDate={setRepeatsOnDate}
+            repeatsOnWeekday={repeatsOnWeekday}
+            setRepeatsOnWeekday={setRepeatsOnWeekday}
           />
           <ImportanceLevelInfoCard
             dialogOpen={showImportanceLevelInfoModal}
@@ -197,13 +213,13 @@ const ReminderForm = ({
               <Button
                 variant={notifyMyCaretakers ? 'solid' : 'outline'}
                 onPress={() => setNotifyMyCaretaker(true)}>
-                Yes
+                {t('reminderForm.yes')}
               </Button>
               <Spacer />
               <Button
                 variant={notifyMyCaretakers ? 'outline' : 'solid'}
                 onPress={() => setNotifyMyCaretaker(false)}>
-                No
+                {t('reminderForm.no')}
               </Button>
             </View>
           </View>
@@ -231,11 +247,11 @@ const ReminderForm = ({
                 <View>
                   <View style={styles.itemRow}>
                     <Text fontSize={16} mb={2}>
-                      {t('reminderForm.importanceLevel')}
+                      {t('reminderImportanceLevel.importanceLevel')}
                     </Text>
                     <TouchableOpacity
                       onPress={() => setShowImportanceLevelInfoModal(true)}>
-                      <QuestionIcon name="question" size="6"/>
+                      <QuestionIcon name="question" size="6" />
                     </TouchableOpacity>
                   </View>
 
@@ -290,12 +306,12 @@ const ReminderForm = ({
               )}
               <View style={styles.itemRow}>
                 <Button w="48%" onPress={() => takePicture(onNewPictureUpload)}>
-                  Take a Picture
+                  {t('reminderForm.takeAPicture')}
                 </Button>
                 <Button
                   w="48%"
                   onPress={() => selectPictureFromDevice(onNewPictureUpload)}>
-                  From my Device
+                  {t('reminderForm.fromMyDevice')}
                 </Button>
               </View>
             </View>
