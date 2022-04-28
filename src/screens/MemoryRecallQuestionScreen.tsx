@@ -17,13 +17,9 @@ const MemoryRecallQuestionScreen = () => {
   const [answerArray, setAnswerArray] = useState<Answer[]>([]);
   useAsyncEffect(async () => {
     const data = await getMemoryRecallQuestionSet();
-    console.log('question set ', data);
     setQuestionSet(data);
   }, []);
   const totalQuestion: number = questionSet?.questions.length ?? 0;
-  // useEffect(() => {
-  //   console.log(questionSet?.questions[questionNumber].isMultipleChoice);
-  // }, [questionNumber]);
 
   return (
     <SafeAreaView>

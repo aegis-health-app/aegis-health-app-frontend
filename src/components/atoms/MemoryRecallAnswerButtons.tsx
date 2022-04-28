@@ -1,5 +1,5 @@
-import { Button, HStack, View, VStack, Text, useToast } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import { Button, HStack, View, VStack, useToast } from 'native-base';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -41,22 +41,9 @@ const MemoryRecallAnswerButtons = (props: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [shouldShowAnswer, setShouldShowAnswer] = useState<boolean>(showAnswer);
-  const [canCheck, setCanCheck] = useState<boolean>(answer.answer !== 'null');
-  const [renderButton, setRenderButton] = useState<boolean>(true);
-  useEffect(() => {
-    console.log('setcan check');
-    setRenderButton(false);
-    setTimeout(() => {
-      setRenderButton(true);
-    }, 0);
-    if (answer.answer !== 'null') {
-      console.log('set can check');
-      setCanCheck(true);
-    }
-  }, [answer]);
+
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
-    console.log('call handle exit');
     handleSubmit();
   };
   const canNotGoBack = questionNumber === 0;
@@ -64,8 +51,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    * This function submit all the answer to backend
    */
   const handleSubmit = async () => {
-    console.log('call handle submit');
-    console.log('answer array before payload is: ', answerArray);
     const payload = { answers: answerArray };
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
@@ -74,7 +59,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
       toast.show({
         title: t('memoryRecallElderly.failToSubmit')
       });
-      console.log('error from sending payload');
       navigation.navigate('MemoryRecallFinishScreen');
     }
   };
@@ -89,7 +73,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
       });
       return;
     }
-    console.log('handle check');
     setShowBg(true);
     setShouldShowAnswer(false);
   };
@@ -101,10 +84,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     const answerTmp = answerArray;
     answerTmp.push(answer);
     setAnswerArray(answerTmp);
-    //setAnswerArray((arr) => [...arr, answer]); //TODO: add answer for blank one
-    // console.log('go next question');
-    // console.log('answer to send is: ', answer);
-    // console.log('answer array is: ', answerArray);
     setShortAnswer('');
     setAnswer({ mid: mid, answer: 'null' });
     // setQuestionNumber(questionNumber + 1);
@@ -113,7 +92,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     } else {
       setQuestionNumber(questionNumber + 1);
     }
-    console.log('answer array is: ', answerArray);
   };
 
   return (
@@ -129,13 +107,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
             onPress={() => setQuestionNumber(questionNumber - 1)}>
             {t('memoryRecallElderly.back')}
           </Button>
-          {/* <Text>{JSON.stringify(answer.answer !== 'null')}</Text>
-          <Text>{JSON.stringify(canCheck)}</Text>
-          <Text>
-            {JSON.stringify(
-              answer.answer !== 'null' && canCheck ? 'primary' : 'muted.300'
-            )}
-          </Text> */}
           {shouldShowAnswer ? (
             <Button w={'170 px'} variant="solid" onPress={handleCheck}>
               {t('memoryRecallElderly.check')}

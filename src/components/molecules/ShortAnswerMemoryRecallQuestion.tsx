@@ -36,13 +36,11 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     setShortAnswer(value);
     setAnswer({ mid: mid, answer: value });
   };
-  // console.log('The answer is: ', answer);
 
   return (
     <View padding={'16 px'}>
       <View minHeight={'460 px'}>
         <View>
-          {/* TODO: check whether there is an image id or not */}
           <Image
             source={{ uri: imageid }}
             fallbackSource={images.healthRecording}
