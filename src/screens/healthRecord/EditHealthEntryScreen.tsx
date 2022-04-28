@@ -57,9 +57,10 @@ const EditHealthEntryScreen = () => {
     if (!user) return;
     try {
       const { data } = await client.delete(
-        `/healthRecord/delete/${
-          user?.isElderly ? 'elderly' : 'caretaker'
-        }/${currentHrName}`
+        `/healthRecord/delete${
+          user?.isElderly ? '/elderly' : '/caretaker'
+        }/${currentHrName}`,
+        { ...(!user.isElderly && { data: { elderlyuid: currentElderlyUid } }) }
       );
       if (data) {
         fetchHealthRecordings();
