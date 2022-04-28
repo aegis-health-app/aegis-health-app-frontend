@@ -15,13 +15,10 @@ export interface TourguideContextStruct {
   setShowHealthRecordingsTourguide: (value: boolean) => void;
   showMemoryPracticeQuestionsTourguide: boolean;
   setShowMemoryPracticeQuestionsTourguide: (value: boolean) => void;
-<<<<<<< HEAD
   showRemindersTourguide: boolean;
   setShowRemindersTourguide: (value: boolean) => void;
-=======
   showMemoryRecallTourguide: boolean;
   setShowMemoryRecallTourguide: (value: boolean) => void;
->>>>>>> 9e03aed (wip: UI for memory recall first page)
 }
 
 export const TourguideContext = createContext({} as TourguideContextStruct);
@@ -57,13 +54,10 @@ const TourguideContextProvider = ({ ...props }) => {
     setShowHealthRecordingsTourguide,
     showMemoryPracticeQuestionsTourguide,
     setShowMemoryPracticeQuestionsTourguide,
-<<<<<<< HEAD
     showRemindersTourguide,
-    setShowRemindersTourguide
-=======
+    setShowRemindersTourguide,
     showMemoryRecallTourguide,
     setShowMemoryRecallTourguide
->>>>>>> 9e03aed (wip: UI for memory recall first page)
   };
   return <TourguideContext.Provider value={value} {...props} />;
 };
