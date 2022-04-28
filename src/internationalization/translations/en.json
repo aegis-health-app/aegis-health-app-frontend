@@ -392,7 +392,7 @@
   },
   "healthRecordings": {
     "header": "Health Recordings",
-    "addRecording": "Add More Data"
+    "addRecording": "Add Health Recording"
   },
   "healthRecordingsTutorial": {
     "step1": "Press “Add more data” to create a new health recording from our featured template or your own custom template.",
