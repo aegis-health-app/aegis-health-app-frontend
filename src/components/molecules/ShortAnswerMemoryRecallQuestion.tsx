@@ -40,34 +40,35 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
 
   return (
     <View padding={'16 px'}>
-      <View>
-        {/* TODO: check whether there is an image id or not */}
-        <Image
-          source={{ uri: imageid }}
-          fallbackSource={images.healthRecording}
-          alt="temp image for memory recall question"
-          width={'100%'}
-          height={200}
-          resizeMode="contain"
-          mr={3}
-        />
-      </View>
-      <Spacer />
-      <View>
-        <Text fontSize={'lg'} fontWeight={'bold'}>
-          {questionNumber + 1}. {question} mid is: {mid}
-        </Text>
+      <View minHeight={'460 px'}>
+        <View>
+          {/* TODO: check whether there is an image id or not */}
+          <Image
+            source={{ uri: imageid }}
+            fallbackSource={images.healthRecording}
+            alt=" "
+            width={'100%'}
+            height={200}
+            resizeMode="contain"
+            mr={3}
+          />
+        </View>
         <Spacer />
-        <Text fontSize={'sm'} color={'gray.500'}>
-          {t('memoryRecallElderly.typeInYourAnswer')}
-        </Text>
-        <Input
-          value={shortAnswer}
-          onChangeText={handleChange}
-          placeholder={t('memoryRecallElderly.answer')}
-        />
+        <View>
+          <Text fontSize={'lg'} fontWeight={'bold'}>
+            {questionNumber + 1}. {question} mid is: {mid}
+          </Text>
+          <Spacer />
+          <Text fontSize={'sm'} color={'gray.500'}>
+            {t('memoryRecallElderly.typeInYourAnswer')}
+          </Text>
+          <Input
+            value={shortAnswer}
+            onChangeText={handleChange}
+            placeholder={t('memoryRecallElderly.answer')}
+          />
+        </View>
       </View>
-
       <MemoryRecallAnswerButtons
         questionNumber={questionNumber}
         answer={answer}

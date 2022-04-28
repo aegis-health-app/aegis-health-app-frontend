@@ -1,5 +1,13 @@
 import React from 'react';
-import { Box, Button, Progress, Spacer, Text, View } from 'native-base';
+import {
+  Box,
+  Button,
+  Progress,
+  Spacer,
+  Text,
+  useToast,
+  View
+} from 'native-base';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -29,35 +37,50 @@ const MemoryRecallQuestionProgress = (
     mid
   } = props;
   const { t } = useTranslation();
+  const toast = useToast();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  //Skip function
   const handleSkip = () => {
-    setQuestionNumber(questionNumber);
     const answer = { mid: mid, answer: 'skipped' };
-    setAnswerArray((arr) => [...arr, answer]);
-    if (questionNumber === totalQuestion) {
+    setQuestionNumber(questionNumber);
+    const answerTmp = answerArray;
+    answerTmp.push(answer);
+    setAnswerArray(answerTmp);
+    console.log('answer to send is: ', answer);
+    console.log('answer array is: ', answerArray);
+    // setAnswer({ mid: mid, answer: 'null' });
+    if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
+    } else {
+      setQuestionNumber(questionNumber + 1);
     }
   };
-  const handleSubmit = () => {
-    //TODO: Implement handle submit for skip button
-    console.log('call handle submit from skip');
+  const handleSubmit = async () => {
     const payload = { answer: answerArray };
+    console.log('payload is: ', payload);
+    // await client.post('/memoryPractice/elderlyAnswers', payload);
+    // navigation.navigate('MemoryRecallFinishScreen');
+
     try {
-      client.post('/memoryRractice/elderlyAnswers', payload);
-      console.log('answer submitted');
+      await client.post('/memoryPractice/elderlyAnswers', payload);
+      navigation.navigate('MemoryRecallFinishScreen');
     } catch (err) {
-      console.log(err);
+      console.log('error from sending payload');
+      toast.show({
+        title: t('memoryRecallElderly.failToSubmit')
+      });
+      navigation.navigate('MemoryRecallFinishScreen');
     }
-    navigation.navigate('MemoryScreen');
   };
-  const progress = (questionNumber / totalQuestion) * 100;
+  const questionProgress = questionNumber + 1;
+  const progress = (questionProgress / totalQuestion) * 100;
   return (
     <View paddingX={'16 px'} paddingTop={'16 px'}>
       <View style={styles.progressBar}>
         <View w={'80%'} mr={'12 px'}>
           <Text fontSize={'md'} fontWeight={'bold'}>
-            {t('memoryRecallElderly.question')} {questionNumber}
+            {t('memoryRecallElderly.question')} {questionNumber + 1}
             {t('memoryRecallElderly.of')} {totalQuestion}
           </Text>
           <Spacer height={2} />

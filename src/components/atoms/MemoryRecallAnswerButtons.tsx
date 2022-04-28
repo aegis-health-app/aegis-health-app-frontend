@@ -1,4 +1,4 @@
-import { Button, HStack, View, VStack } from 'native-base';
+import { Button, HStack, View, VStack, Text, useToast } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -41,7 +41,19 @@ const MemoryRecallAnswerButtons = (props: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [shouldShowAnswer, setShouldShowAnswer] = useState<boolean>(showAnswer);
-
+  const [canCheck, setCanCheck] = useState<boolean>(answer.answer !== 'null');
+  const [renderButton, setRenderButton] = useState<boolean>(true);
+  useEffect(() => {
+    console.log('setcan check');
+    setRenderButton(false);
+    setTimeout(() => {
+      setRenderButton(true);
+    }, 0);
+    if (answer.answer !== 'null') {
+      console.log('set can check');
+      setCanCheck(true);
+    }
+  }, [answer]);
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
   const exitGame = () => {
     console.log('call handle exit');
@@ -55,17 +67,28 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     console.log('call handle submit');
     console.log('answer array before payload is: ', answerArray);
     const payload = { answers: answerArray };
-    console.log('payload is: ');
-    console.log(payload);
-    await client.post('/memoryPractice/elderlyAnswers', payload);
-    console.log('answer submitted');
-
-    navigation.navigate('MemoryRecallFinishScreen');
+    try {
+      await client.post('/memoryPractice/elderlyAnswers', payload);
+      navigation.navigate('MemoryRecallFinishScreen');
+    } catch (err) {
+      toast.show({
+        title: t('memoryRecallElderly.failToSubmit')
+      });
+      console.log('error from sending payload');
+      navigation.navigate('MemoryRecallFinishScreen');
+    }
   };
   /**
    * The function handle when user check their choice question and show whether it is correct.
    */
+  const toast = useToast();
   const handleCheck = () => {
+    if (answer.answer === 'null') {
+      toast.show({
+        title: t('memoryRecallElderly.pleaseSelectAChoice')
+      });
+      return;
+    }
     console.log('handle check');
     setShowBg(true);
     setShouldShowAnswer(false);
@@ -75,10 +98,10 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const goNextQuestion = () => {
     //add data to answer array
-    // const answerTmp = answerArray;
-    // answerTmp.push(answer);
-    // setAnswerArray(answerTmp);
-    setAnswerArray((arr) => [...arr, answer]); //TODO: add answer for blank one
+    const answerTmp = answerArray;
+    answerTmp.push(answer);
+    setAnswerArray(answerTmp);
+    //setAnswerArray((arr) => [...arr, answer]); //TODO: add answer for blank one
     // console.log('go next question');
     // console.log('answer to send is: ', answer);
     // console.log('answer array is: ', answerArray);
@@ -99,19 +122,22 @@ const MemoryRecallAnswerButtons = (props: Props) => {
         <HStack space={4} marginTop={4} justifyContent={'flex-start'}>
           <Button
             w={'170 px'}
-            backgroundColor={!canNotGoBack ? null : 'muted.300'} //find the correct color for white
+            backgroundColor={!canNotGoBack ? null : 'muted.300'}
             disabled={canNotGoBack}
             colorScheme="primary"
             variant={!canNotGoBack ? 'outline' : 'solid'}
             onPress={() => setQuestionNumber(questionNumber - 1)}>
             {t('memoryRecallElderly.back')}
           </Button>
+          {/* <Text>{JSON.stringify(answer.answer !== 'null')}</Text>
+          <Text>{JSON.stringify(canCheck)}</Text>
+          <Text>
+            {JSON.stringify(
+              answer.answer !== 'null' && canCheck ? 'primary' : 'muted.300'
+            )}
+          </Text> */}
           {shouldShowAnswer ? (
-            <Button
-              w={'170 px'}
-              colorScheme="primary"
-              variant="solid"
-              onPress={() => handleCheck()}>
+            <Button w={'170 px'} variant="solid" onPress={handleCheck}>
               {t('memoryRecallElderly.check')}
             </Button>
           ) : (
@@ -119,7 +145,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
               w={'170 px'}
               colorScheme="primary"
               variant="solid"
-              onPress={() => goNextQuestion()}>
+              onPress={goNextQuestion}>
               {t('memoryRecallElderly.next')}
             </Button>
           )}

@@ -742,6 +742,8 @@
     "nicelyDone": "Nicely Done!",
     "gameFinish": "You have finished the game.",
     "returnToHomeScreen": "Return to home screen",
-    "tourGuide1": "Press the “Start Game” button to start the game."
+    "tourGuide1": "Press the “Start Game” button to start the game.",
+    "pleaseSelectAChoice": "Please select a choice.",
+    "failToSubmit": "Cannot submit your answer. Please try again later."
   }
 }
