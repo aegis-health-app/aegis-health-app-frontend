@@ -40,16 +40,15 @@ const MemoryRecallQuestionProgress = (
   const toast = useToast();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  //Skip function
+  /**
+   * handle when user press the skip button. Move to the next question
+   */
   const handleSkip = () => {
     const answer = { mid: mid, answer: 'skipped' };
     setQuestionNumber(questionNumber);
     const answerTmp = answerArray;
     answerTmp.push(answer);
     setAnswerArray(answerTmp);
-    console.log('answer to send is: ', answer);
-    console.log('answer array is: ', answerArray);
-    // setAnswer({ mid: mid, answer: 'null' });
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     } else {
@@ -58,15 +57,10 @@ const MemoryRecallQuestionProgress = (
   };
   const handleSubmit = async () => {
     const payload = { answer: answerArray };
-    console.log('payload is: ', payload);
-    // await client.post('/memoryPractice/elderlyAnswers', payload);
-    // navigation.navigate('MemoryRecallFinishScreen');
-
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
       navigation.navigate('MemoryRecallFinishScreen');
     } catch (err) {
-      console.log('error from sending payload');
       toast.show({
         title: t('memoryRecallElderly.failToSubmit')
       });
