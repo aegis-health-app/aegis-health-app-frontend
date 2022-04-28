@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AxiosError } from 'axios';
 import moment from 'moment';
 import { Button, Image, ScrollView, Text, View } from 'native-base';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import Divider from '../../components/atoms/Divider';
@@ -18,6 +18,7 @@ import { client } from '../../config/axiosConfig';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
 import { UserContext } from '../../contexts/UserContext';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { RootStackParamList } from '../../navigation/types';
 import HealthDataTable, { TableMode } from './HealthDataTable';
 
@@ -40,7 +41,7 @@ const AddHealthEntry = () => {
     handleSubmit,
     watch,
     reset
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ mode: 'onChange' });
 
   const [date, setDate] = useState(new Date());
   const [showSuccessAdd, setShowSuccessAdd] = useState<boolean>(false);
@@ -78,12 +79,19 @@ const AddHealthEntry = () => {
 
   const onFormSubmit = async (value) => {
     if (!user) return;
-    const fields = Object.keys(value).map((key) => {
-      return {
-        columnName: key,
-        value: value[key]
-      };
-    });
+    const fields = Object.keys(value)
+      .map((key) => {
+        if (healthTable?.columnNames.includes(key)) {
+          return {
+            columnName: key,
+            value: value[key]
+          };
+        }
+      })
+      .filter((element) => {
+        return element !== undefined;
+      });
+
     const payload = {
       hrName: currentHrName,
       timestamp: moment(date, 'YYYY/MM/DD HH:mm').add(7, 'h').startOf('minute'),
@@ -98,7 +106,7 @@ const AddHealthEntry = () => {
       );
       if (data) {
         reset();
-        getHealthRecordTable();
+        await getHealthRecordTable();
         setShowSuccessAdd(true);
       }
     } catch (error) {
@@ -115,9 +123,9 @@ const AddHealthEntry = () => {
     setDate(new Date(currentDate));
   };
 
-  useEffect(() => {
+  useAsyncEffect(async () => {
     navigation.setOptions({ title: currentHrName });
-    getHealthRecordTable();
+    await getHealthRecordTable();
   }, []);
 
   useFocusEffect(
@@ -126,6 +134,7 @@ const AddHealthEntry = () => {
       setTimeout(() => {
         setShowScreen(true);
       }, 0);
+      reset();
     }, [])
   );
 

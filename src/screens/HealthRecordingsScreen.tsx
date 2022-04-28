@@ -1,7 +1,7 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AddIcon, Button, ScrollView, Text, View, VStack } from 'native-base';
 import { useTranslation } from 'react-i18next';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import HealthRecordingCard from '../components/molecules/HealthRecordingCard';
@@ -22,7 +22,6 @@ const HealthRecordingsScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { user } = useContext(UserContext);
-  const [showScreen, setShowScreen] = useState<boolean>(true);
 
   const {
     setCurrentHrName,
@@ -66,15 +65,6 @@ const HealthRecordingsScreen = () => {
     });
   }, [eventEmitter]);
 
-  useFocusEffect(
-    useCallback(() => {
-      setShowScreen(false);
-      setTimeout(() => {
-        setShowScreen(true);
-      }, 0);
-    }, [])
-  );
-
   const [show, setShow] = useState(true);
 
   useEffect(() => {
@@ -84,7 +74,7 @@ const HealthRecordingsScreen = () => {
     }, 0);
   }, [showHealthRecordingsTourguide]);
 
-  if (!show || !showScreen) return null;
+  if (!show) return null;
 
   return (
     <View flex={1} mb={4}>
