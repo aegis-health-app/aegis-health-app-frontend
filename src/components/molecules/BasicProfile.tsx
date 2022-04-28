@@ -40,9 +40,11 @@ const BasicProfile = ({ data, image, mode }: BasicProfileProps) => {
   const { user } = useContext(UserContext);
   const getImage = () => {
     if (mode === 'SELF')
-      return user?.imageid ? { uri: user?.imageid } : images.picturePlaceholder;
+      return user?.imageid
+        ? { uri: user?.imageid + '?' + new Date() }
+        : images.picturePlaceholder;
     else {
-      if (image) return { uri: image };
+      if (image) return { uri: image + '?' + new Date() };
       if (image === '') return { uri: '' };
     }
   };
