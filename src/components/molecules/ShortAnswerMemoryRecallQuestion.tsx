@@ -54,7 +54,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
         <Spacer />
         <View>
           <Text fontSize={'lg'} fontWeight={'bold'}>
-            {questionNumber + 1}. {question} mid is: {mid}
+            {questionNumber + 1}. {question}
           </Text>
           <Spacer />
           <Text fontSize={'sm'} color={'gray.500'}>
