@@ -5,7 +5,7 @@ import { Button, Spacer } from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
-import { ImagePickerResponse } from 'react-native-image-picker';
+import { ImportanceLevel, RecurringInterval } from '../../dto/modules/reminder.dto';
 
 const ReminderScreen = () => {
   const {t} = useTranslation()
@@ -25,12 +25,14 @@ const ReminderScreen = () => {
         onPress={() =>
           navigation.navigate('EditReminderScreen', {
             info: {
-              dateTime: new Date(),
+              rid: 23,
+              startingDateTime: new Date(),
               image: undefined,
-              note: 'hi',
-              notifyMyCaretaker: false,
-              repetition: 'everyday',
-              title: 'hello'
+              note: '',
+              isRemindCaretaker: false,
+              title: 'reminder1',
+              importanceLevel: ImportanceLevel.LOW,
+              recursion: RecurringInterval.EVERY_DAY
             }
           })
         }>

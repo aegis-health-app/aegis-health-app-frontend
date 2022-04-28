@@ -4,7 +4,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 interface ItemInterface {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 const DropDownSelect = ({

@@ -555,7 +555,7 @@
     "deleteConfirmationDesc": "คุณต้องการลบการเตือนนี้หรือไม่ การตั้งเตือนซ้ำทุกครั้งจะถูกลบด้วย",
     "delete": "ลบ",
     "cancel": "ยกเลิก",
-    "ok": "OK"
+    "ok": "ยืนยัน"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
@@ -571,8 +571,10 @@
     "description": "คำอธิบาย",
     "images": "รูปภาพ",
     "noImageSelected": "ไม่มีรูปภาพที่เลือกไว้",
-    "repeatsEvery": "Repeats Every",
-    "repeatsOn": "Repeats On"
+    "yes": "ใช่",
+    "no": "ไม่",
+    "takeAPicture": "ถ่ายรูปใหม่",
+    "fromMyDevice": "เลือกจากอุปกรณ์ของคุณ"
   },
   "reminderRepeatitionPattern": {
     "doesNotRepeat": "ไม่แจ้งซ้ำ",
@@ -580,7 +582,20 @@
     "everyweek": "ทุกสัปดาห์",
     "everymonth": "ทุกเดือน",
     "everyyear": "ทุกปี",
-    "custom": "กำหนดเอง"
+    "custom": "กำหนดเอง",
+    "customRecurringSetting": "Custom Recurring Setting",
+    "repeatsEvery": "Repeats Every",
+    "repeatsOn": "Repeats On",
+    "date": "วันที่",
+    "week": "สัปดาห์",
+    "month": "เดือน",
+    "sa": "อา.",
+    "mo": "จ.",
+    "tu": "อ.",
+    "we": "พ.",
+    "th": "พฤ.",
+    "fr": "ศ.",
+    "su": "ส."
   },
   "connectElderlyError": {
     "header": "เกิดข้อผิดพลาด",
@@ -648,5 +663,19 @@
     "step4": "นี่คือการเตือนความจำของคุณ แตะที่การ์ดเพื่อดูรายละเอียด หรือระบุว่าการเตือนความจำเสร็จสิ้นโดยการกดปุ่ม “ฉันทำแล้ว”",
     "step5": "เลื่อนลงเพิื่อดูการตั้งเตือนเพิ่ม มากสุด 1 เดือน",
     "step6": "กดปุ่มนี้เพื่อดูวิธีการใช้งานหน้านี้อีกครั้ง"
+  },
+  "reminderImportanceLevel": {
+    "importanceLevel": "ระดับความสำคัญ",
+    "low": "ตำ่",
+    "medium": "กลาง",
+    "high": "สูง",
+    "lowPriority": "ระดับตำ่",
+    "mediumPriority": "ระดับกลาง",
+    "highPriority": "ระดับสูง",
+    "alertAtSelectedTime": "แจ้งเตือนเมื่อถึงเวลาที่กำหนด",
+    "noNotificationRepeatition": "ไม่มีการแจ้งเตือกซำ้",
+    "repeatNotification3Times": "แจ้งเตือนซ้ำ ทุกๆ 10 มากสุดนาที 3 ครั้ง",
+    "repeatNotificationUnitilComplete": "แจ้งเตือนซ้ำ ทุกๆ 10 นาที จนกว่าผู้สูงอายุกดปุ่ม “ฉันทำแล้ว",
+    "cancel": "ยกเลิก"
   }
 }
