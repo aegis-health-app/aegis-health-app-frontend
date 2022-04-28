@@ -43,7 +43,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
         <View>
           <Image
             source={{ uri: imageid }}
-            fallbackSource={images.healthRecording}
+            fallbackSource={require('../../assets/images/nullQuestion.png')}
             alt=" "
             width={'100%'}
             height={200}
