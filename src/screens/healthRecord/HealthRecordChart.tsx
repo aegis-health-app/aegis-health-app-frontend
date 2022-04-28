@@ -1,5 +1,5 @@
 import { CheckIcon, Select, View, VStack, Text } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
@@ -11,6 +11,8 @@ import {
   chartConfig,
   TimeFrame
 } from '../../constants/HealthRecordingConstants';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
+import { UserContext } from '../../contexts/UserContext';
 import { useTimeFrameOption } from '../../hooks/useTimeFrameOption';
 import { HealthRecordAnalytic } from '../../interfaces/healthRecording';
 import { getPeriodLable } from '../../utils/module/healthRecord';
@@ -26,6 +28,8 @@ const HealthRecordChart = (props: Props) => {
   const screenWidth = Dimensions.get('window').width;
   const { t } = useTranslation();
   const timeFrameOption = useTimeFrameOption();
+  const { user } = useContext(UserContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
 
   const [labels, setLabels] = useState<string[]>([]);
   const [datasets, setDatasets] = useState<Dataset[]>();
@@ -38,7 +42,9 @@ const HealthRecordChart = (props: Props) => {
     timeFrame: string
   ) => {
     const result = await client.get(
-      `healthRecord/analytics/${hrName}/${columnName}/${timeFrame}`
+      `healthRecord/analytics/${
+        user?.isElderly ? '' : `${currentElderlyUid}/`
+      }${hrName}/${columnName}/${timeFrame}`
     );
     const data = result.data as HealthRecordAnalytic;
     setData(data);

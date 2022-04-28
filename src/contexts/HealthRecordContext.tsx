@@ -49,8 +49,8 @@ const HealthRecordProvider = ({ ...props }) => {
     const tempHrName = currentHrName;
     const tempElderlyUid = elderlyUid;
     const { data } = await client.get(
-      `healthRecord/table/${
-        user.isElderly ? '' : `${tempElderlyUid}/`
+      `healthRecord/table${
+        user.isElderly ? '/' : `/${tempElderlyUid}/`
       }${tempHrName}`
     );
     const _data = { ...data, data: data.data.reverse() };
