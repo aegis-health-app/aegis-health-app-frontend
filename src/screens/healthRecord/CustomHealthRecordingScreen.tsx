@@ -26,6 +26,7 @@ import {
 import { UserContext } from '../../contexts/UserContext';
 import { client } from '../../config/axiosConfig';
 import { HealthRecordContext } from '../../contexts/HealthRecordContext';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
 
 interface Fields {
   name: string | undefined;
@@ -43,6 +44,7 @@ interface UpdateHealthRecordDTO {
   hrName: string;
   picture?: UploadImageDTO | object;
   listField: Fields[];
+  elderlyuid?: number;
 }
 
 const CustomHealthRecordingScreen = ({
@@ -72,6 +74,7 @@ const CustomHealthRecordingScreen = ({
   });
 
   const { user } = useContext(UserContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
   const { fetchHealthRecordings } = useContext(HealthRecordContext);
   const { requestCameraPermission } = usePermission();
 
@@ -170,14 +173,12 @@ const CustomHealthRecordingScreen = ({
       size: uploadImage?.fileSize
     };
 
-    const payload = {
+    let payload = {
       // @ts-ignore
       hrName: watchInputs.title ?? _title,
       picture: uploadImage ? imagePayload : undefined,
       listField: fieldList
     } as UpdateHealthRecordDTO;
-
-    console.log(payload);
 
     if (user?.isElderly) {
       try {
@@ -191,6 +192,7 @@ const CustomHealthRecordingScreen = ({
     }
     if (!user?.isElderly) {
       try {
+        payload.elderlyuid = currentElderlyUid;
         await client.post('/healthRecord/add/caretaker', payload);
         setShowSuccessAlert(true);
         fetchHealthRecordings();
