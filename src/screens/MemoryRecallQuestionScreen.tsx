@@ -30,7 +30,7 @@ const MemoryRecallQuestionScreen = () => {
       <View>
         <View>
           <MemoryRecallQuestionProgress
-            questionNumber={questionNumber + 1}
+            questionNumber={questionNumber}
             totalQuestion={totalQuestion}
             setQuestionNumber={setQuestionNumber}
             answerArray={answerArray}

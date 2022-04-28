@@ -40,7 +40,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
     setAnswerArray
   } = props;
   const { t } = useTranslation();
-  const [value, setValue] = useState('one');
+  const [value, setValue] = useState('null');
   const [showChoice, setShowChoice] = useState(true);
   const [showBg, setShowBg] = useState(false);
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
@@ -55,11 +55,11 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
   return (
     <View padding={'16 px'} display={'flex'} justifyContent={'space-between'}>
       {/* Image */}
-      <View>
+      <View minHeight={'460 px'}>
         <Image
           source={{ uri: imageid }}
           fallbackSource={images.healthRecording}
-          alt="temp image for memory recall question"
+          alt=" "
           width={'100%'}
           height={200}
           resizeMode="contain"
@@ -80,11 +80,10 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
               value={value}
               alignItems={'flex-start'}
               justifyItems={'flex-start'}
-              onChange={(nextValue) => {
-                console.log('value: ', nextValue);
-                setValue(nextValue);
-                setAnswer({ mid: mid, answer: value });
-                console.log('set value', nextValue);
+              onChange={(value) => {
+                const val = value;
+                setValue(val);
+                setAnswer({ mid: mid, answer: val });
               }}>
               <View
                 w={'100 %'}
