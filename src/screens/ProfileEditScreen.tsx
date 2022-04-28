@@ -77,8 +77,7 @@ const ProfileEditScreen = () => {
     };
     if (profileImage.base64 && user) {
       try {
-        const { data } = await client.post('/user/profile/image', imagePayload);
-        if (data) getUserProfile();
+        await client.post('/user/profile/image', imagePayload);
       } catch (error) {
         setShowImageUploadError(true);
       }
@@ -89,7 +88,6 @@ const ProfileEditScreen = () => {
     try {
       await client.patch('/user/profile', payload);
       setShowSuccessAlert(true);
-      getUserProfile();
     } catch (err) {
       setShowErrorAlert(true);
     }
@@ -113,7 +111,7 @@ const ProfileEditScreen = () => {
   const getImage = () => {
     if (newProfileImage && newProfileImage.assets)
       return { uri: newProfileImage.assets[0].uri };
-    if (user?.imageid) return { uri: user.imageid };
+    if (user?.imageid) return { uri: user.imageid + '?' + new Date() };
     return ProfilePic;
   };
 
@@ -135,6 +133,7 @@ const ProfileEditScreen = () => {
         isOpen={showSuccessAlert}
         close={() => {
           setShowSuccessAlert(false);
+          getUserProfile();
           if (!showImageUploadError) navigation.navigate('ProfileScreen');
         }}
         type={AlertType.SUCCESS}

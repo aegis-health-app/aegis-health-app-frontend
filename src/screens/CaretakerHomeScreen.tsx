@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   View,
@@ -41,7 +41,6 @@ const CaretakerHomeScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
-  const isFocused = useIsFocused();
 
   useAsyncEffect(async () => {
     const fetchData = async () => {
@@ -94,7 +93,11 @@ const CaretakerHomeScreen = () => {
                 onPress={() => navigation.navigate('ProfileScreen')}>
                 <View flexDir="row">
                   <Image
-                    source={user?.imageid ? { uri: user.imageid } : ProfilePic}
+                    source={
+                      user?.imageid
+                        ? { uri: user.imageid + '?' + new Date() }
+                        : ProfilePic
+                    }
                     width="12"
                     height="12"
                     borderRadius={4}
