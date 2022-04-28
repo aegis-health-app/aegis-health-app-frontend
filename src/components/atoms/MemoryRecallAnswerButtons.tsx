@@ -80,13 +80,11 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    * This function show the next question.
    */
   const goNextQuestion = () => {
-    //add data to answer array
     const answerTmp = answerArray;
     answerTmp.push(answer);
     setAnswerArray(answerTmp);
     setShortAnswer('');
     setAnswer({ mid: mid, answer: 'null' });
-    // setQuestionNumber(questionNumber + 1);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     } else {
