@@ -729,8 +729,8 @@
   "memoryRecallElderly":{
     "memoryRecall": "Memory Recall",
     "startGame": "Start Game",
-    "question": "Question",
-    "of": "of",
+    "question": "Question ",
+    "of": " of",
     "skip": "Skip",
     "selectAChoice": "Select a choice:",
     "typeInYourAnswer": "Type in your answer:",

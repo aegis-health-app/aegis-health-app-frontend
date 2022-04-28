@@ -214,7 +214,7 @@ const MainNavigation = () => {
               name="MemoryScreen"
               component={MemoryRecallScreen}
               options={{
-                title: 'Memory recall',
+                title: t('memoryRecallElderly.memoryRecall'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true,
@@ -236,7 +236,7 @@ const MainNavigation = () => {
               name="MemoryRecallQuestionScreen"
               component={MemoryRecallQuestionScreen}
               options={{
-                title: 'Memory recall',
+                title: t('memoryRecallElderly.memoryRecall'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true

@@ -6,13 +6,14 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import { client } from '../../config/axiosConfig';
+import { useTranslation } from 'react-i18next';
 
 type MemoryRecallQuestionProgressProps = {
   questionNumber: number;
   totalQuestion: number;
   setQuestionNumber;
   answerArray: Answer[];
-  setAnswerArray: (val: Answer[]) => void;
+  setAnswerArray: React.Dispatch<React.SetStateAction<Answer[]>>;
   mid: number;
 };
 
@@ -27,6 +28,7 @@ const MemoryRecallQuestionProgress = (
     setAnswerArray,
     mid
   } = props;
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const handleSkip = () => {
@@ -55,7 +57,8 @@ const MemoryRecallQuestionProgress = (
       <View style={styles.progressBar}>
         <View w={'80%'} mr={'12 px'}>
           <Text fontSize={'md'} fontWeight={'bold'}>
-            Question {questionNumber} of {totalQuestion}
+            {t('memoryRecallElderly.question')} {questionNumber}
+            {t('memoryRecallElderly.of')} {totalQuestion}
           </Text>
           <Spacer height={2} />
           <Box w="100%" maxW="400">
@@ -68,7 +71,7 @@ const MemoryRecallQuestionProgress = (
             colorScheme="primary"
             variant="outline"
             onPress={() => handleSkip()}>
-            Skip
+            {t('memoryRecallElderly.skip')}
           </Button>
         </View>
       </View>

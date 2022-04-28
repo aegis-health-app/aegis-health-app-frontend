@@ -5,6 +5,7 @@ import Spacer from '../atoms/Spacer';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import images from '../../assets/images';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   questionNumber: number;
@@ -19,7 +20,7 @@ type Props = {
   setQuestionNumber: (val: number) => void;
   totalQuestion: number;
   answerArray: Answer[];
-  setAnswerArray: (val: Answer[]) => void;
+  setAnswerArray: React.Dispatch<React.SetStateAction<Answer[]>>;
 };
 
 const ChoiceMemoryRecallQuestion = (props: Props) => {
@@ -38,6 +39,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
     answerArray,
     setAnswerArray
   } = props;
+  const { t } = useTranslation();
   const [value, setValue] = useState('one');
   const [showChoice, setShowChoice] = useState(true);
   const [showBg, setShowBg] = useState(false);
@@ -69,7 +71,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
           {questionNumber + 1}. {question}
         </Text>
         <Text fontSize={'sm'} color={'gray.500'}>
-          Select a choice:
+          {t('memoryRecallElderly.selectAChoice')}
         </Text>
         <View minHeight={'160 px'}>
           {showChoice && (

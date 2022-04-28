@@ -3,12 +3,12 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import useDimensions from '../hooks/useDimensions';
-import { Button, Image, Text, View, VStack } from 'native-base';
+import { Button, Image, Text, View } from 'native-base';
 import Spacer from '../components/atoms/Spacer';
+import { useTranslation } from 'react-i18next';
 
 const MemoryRecallFinishScreen = () => {
-  const { ScreenWidth, ScreenHeight } = useDimensions();
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
@@ -23,10 +23,10 @@ const MemoryRecallFinishScreen = () => {
         <Spacer h={34} />
         <View alignItems={'center'}>
           <Text fontWeight={'bold'} fontSize={'3xl'}>
-            Nicely done!
+            {t('memoryRecallElderly.nicelyDone')}
           </Text>
           <Text fontSize={'md'} textAlign={'center'}>
-            You have finished the game.{' '}
+            {t('memoryRecallElderly.gameFinish')}
           </Text>
         </View>
         <Spacer h={128} />
@@ -35,7 +35,7 @@ const MemoryRecallFinishScreen = () => {
           colorScheme="primary"
           variant="solid"
           onPress={() => navigation.navigate('MemoryScreen')}>
-          Exit game
+          {t('memoryRecallElderly.returnToHomeScreen')}
         </Button>
       </View>
     </SafeAreaView>

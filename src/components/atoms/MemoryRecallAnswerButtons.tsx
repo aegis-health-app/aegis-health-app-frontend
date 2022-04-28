@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import { client } from '../../config/axiosConfig';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   questionNumber: number;
@@ -36,10 +37,9 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     answerArray,
     setAnswerArray
   } = props;
+  const { t } = useTranslation();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  //TODO: create at question page instead
-  // const [answerArray, setAnswerArray] = useState<Answer[]>([]);
   const [shouldShowAnswer, setShouldShowAnswer] = useState<boolean>(showAnswer);
 
   /**This function is call when the user pressthe exit button. Submit all answer to backend */
@@ -104,7 +104,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
             colorScheme="primary"
             variant={!canNotGoBack ? 'outline' : 'solid'}
             onPress={() => setQuestionNumber(questionNumber - 1)}>
-            Back
+            {t('memoryRecallElderly.back')}
           </Button>
           {shouldShowAnswer ? (
             <Button
@@ -112,7 +112,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
               colorScheme="primary"
               variant="solid"
               onPress={() => handleCheck()}>
-              Check
+              {t('memoryRecallElderly.check')}
             </Button>
           ) : (
             <Button
@@ -120,7 +120,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
               colorScheme="primary"
               variant="solid"
               onPress={() => goNextQuestion()}>
-              Next
+              {t('memoryRecallElderly.next')}
             </Button>
           )}
         </HStack>
@@ -129,7 +129,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
           colorScheme="secondary"
           variant="outline"
           onPress={() => exitGame()}>
-          Exit game
+          {t('memoryRecallElderly.exitGame')}
         </Button>
       </VStack>
     </View>

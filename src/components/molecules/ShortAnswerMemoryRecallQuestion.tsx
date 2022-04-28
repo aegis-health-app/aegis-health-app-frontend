@@ -4,6 +4,7 @@ import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import images from '../../assets/images';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   questionNumber: number;
@@ -27,8 +28,9 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     answerArray,
     setAnswerArray
   } = props;
+  const { t } = useTranslation();
   const [shortAnswer, setShortAnswer] = useState('');
-  const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' }); //TODO: check why mid not called
+  const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
   const [showBg, setShowBg] = useState(false);
   const handleChange = (value: string) => {
     setShortAnswer(value);
@@ -57,12 +59,12 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
         </Text>
         <Spacer />
         <Text fontSize={'sm'} color={'gray.500'}>
-          Type in your answer:
+          {t('memoryRecallElderly.typeInYourAnswer')}
         </Text>
         <Input
           value={shortAnswer}
           onChangeText={handleChange}
-          placeholder="Type in your answer"
+          placeholder={t('memoryRecallElderly.answer')}
         />
       </View>
 
