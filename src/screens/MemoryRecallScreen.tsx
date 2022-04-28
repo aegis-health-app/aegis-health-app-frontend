@@ -3,7 +3,6 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import Spacer from '../components/atoms/Spacer';
-import { UserContext } from '../contexts/UserContext';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
@@ -17,7 +16,6 @@ import {
 
 const MemoryRecallScreen = () => {
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
   const [showScreen, setShowScreen] = useState<boolean>(true);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -75,14 +73,14 @@ const MemoryRecallScreen = () => {
           tourKey={tourKey}
           zone={1}
           shape="rectangle"
-          text={'Press the “Start Game” button to start the game.'}>
+          text={t('memoryRecallElderly.tourGuide1')}>
           <View>
             <Button
               w="100%"
               colorScheme="primary"
               variant="solid"
               onPress={() => navigation.navigate('MemoryRecallQuestionScreen')}>
-              Start Game
+              {t('memoryRecallElderly.startGame')}
             </Button>
           </View>
         </TourGuideZone>

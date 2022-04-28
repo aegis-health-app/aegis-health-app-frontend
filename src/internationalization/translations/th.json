@@ -729,8 +729,8 @@
   "memoryRecallElderly":{
     "memoryRecall": "ทบทวนความจำ",
     "startGame": "เริ่มเกม",
-    "question": "คำถามที่",
-    "of": "จาก",
+    "question": "คำถามที่ ",
+    "of": " จาก",
     "skip": "ข้าม",
     "selectAChoice": "เลือกตัวเลือก:",
     "typeInYourAnswer": "กรุณากรอกคำตอบของคุณ:",
