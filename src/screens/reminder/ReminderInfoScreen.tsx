@@ -123,6 +123,18 @@ const ReminderInfoScreen = ({ route }) => {
       </HStack>
       <Divider />
       <Text>{reminderInfo?.note}</Text>
+      <Spacer my={2} />
+      {reminderInfo?.imageid && (
+        <Image
+          source={{ uri: reminderInfo.imageid }}
+          width="full"
+          height="sm"
+          borderRadius={4}
+          marginRight={4}
+          fallbackElement={FallbackImage}
+          alt="Profile Picture"
+        />
+      )}
     </View>
   );
 };
