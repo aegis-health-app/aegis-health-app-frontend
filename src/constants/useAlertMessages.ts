@@ -136,6 +136,54 @@ export const useAlertMessages = () => {
       body: t('connectElderlyError.body'),
       primaryButton: t('connectElderlyError.primaryButton'),
       secondaryButton: t('connectElderlyError.secondaryButton')
+    },
+    createReminderSuccess: {
+      header: t('createReminderSuccess.header'),
+      body: t('createReminderSuccess.body'),
+      primaryButton: t('createReminderSuccess.primaryButton'),
+      secondaryButton: t('createReminderSuccess.secondaryButton')
+    },
+    createReminderError: {
+      header: t('createReminderError.header'),
+      body: t('createReminderError.body'),
+      primaryButton: t('createReminderError.primaryButton'),
+      secondaryButton: t('createReminderError.secondaryButton')
+    },
+    reminderInvalidStartingDateError: {
+      header: t('reminderInvalidStartingDateError.header'),
+      body: t('reminderInvalidStartingDateError.body'),
+      primaryButton: t('reminderInvalidStartingDateError.primaryButton'),
+      secondaryButton: t('reminderInvalidStartingDateError.secondaryButton')
+    },
+    reminderUploadImageError: {
+      header: t('reminderUploadImageError.header'),
+      body: t('reminderUploadImageError.body'),
+      primaryButton: t('reminderUploadImageError.primaryButton'),
+      secondaryButton: t('reminderUploadImageError.secondaryButton')
+    },
+    updateReminderSuccess: {
+      header: t('updateReminderSuccess.header'),
+      body: t('upateReminderSuccess.body'),
+      primaryButton: t('updateReminderSuccess.primaryButton'),
+      secondaryButton: t('updateReminderSuccess.secondaryButton')
+    },
+    updateReminderError: {
+      header: t('updateReminderError.header'),
+      body: t('updateReminderError.body'),
+      primaryButton: t('updateReminderError.primaryButton'),
+      secondaryButton: t('updateReminderError.secondaryButton')
+    },
+    deleteReminderSuccess: {
+      header: t('deleteReminderSuccess.header'),
+      body: t('deleteReminderSuccess.body'),
+      primaryButton: t('deleteReminderSuccess.primaryButton'),
+      secondaryButton: t('deeleteReminderSuccess.secondaryButton')
+    },
+    deleteReminderError: {
+      header: t('deleteReminderError.header'),
+      body: t('deleteReminderError.body'),
+      primaryButton: t('deleteReminderError.primaryButton'),
+      secondaryButton: t('deeleteReminderError.secondaryButton')
     }
   };
   return AlertMessages;

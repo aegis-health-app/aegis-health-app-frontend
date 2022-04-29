@@ -67,7 +67,7 @@ export type RootStackParamList = {
   ViewHistoryScreen: undefined;
   ViewHistoryDetailsScreen: { timestamp: string };
 
-  CreateReminderScreen: undefined;
+  CreateReminderScreen: { eid?: number };
   RemindersCompletedScreen: undefined;
   EditReminderScreen: { info: EditReminderInfo };
 };

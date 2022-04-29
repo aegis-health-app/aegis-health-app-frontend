@@ -677,5 +677,53 @@
     "repeatNotification3Times": "แจ้งเตือนซ้ำ ทุกๆ 10 มากสุดนาที 3 ครั้ง",
     "repeatNotificationUnitilComplete": "แจ้งเตือนซ้ำ ทุกๆ 10 นาที จนกว่าผู้สูงอายุกดปุ่ม “ฉันทำแล้ว",
     "cancel": "ยกเลิก"
+  },
+  "createReminderSuccess": {
+    "header": "สำเร็จ",
+    "body": "สร้างการแจ้งเตือนสำเร็จ",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "createReminderError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถสร้างการแจ้งเตือนของคุณได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "reminderInvalidStartingDateError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถเลือกวันที่ที่ผ่านมาแล้ว กรุณาเลือกวันที่อื่น",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "reminderUploadImageError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "รูปภาพการแจ้งเตือนมีขนาดไฟล์ใหญ่เกินไป กรุณาเลือกรูปที่มีขนาดไฟล์เล็กกว่านี้",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "editReminderSuccess": {
+    "header": "สำเร็จ",
+    "body": "แก้ไขการแจ้งเตือนสำเร็จ",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "editReminderError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถแก้ไขการแจ้งเตือนของคุณได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "deleteReminderSuccess": {
+    "header": "สำเร็จ",
+    "body": "ลบการแจ้งเตือนสำเร็จ",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
+  },
+  "deleteReminderError": {
+    "header": "เกิดข้อผิดพลาด",
+    "body": "ไม่สามารถลบการแจ้งเตือนของคุณได้ กรุณาลองอีกครั้ง",
+    "primaryButton": "รับทราบ",
+    "secondaryButton": ""
   }
 }
