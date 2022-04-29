@@ -2,6 +2,7 @@ import { ElderlyLinkResponse } from './../dto/modules/modules.dto';
 import { QuestionInfo } from './../dto/modules/memoryRecall';
 import { CaretakerInfoView } from '../dto/modules/user.dto';
 import { EmergencyInfo } from '../screens/EmergencyInfoScreen';
+import { Notification } from '../utils/user/notification';
 
 /**
  * Note: The screen name and its param type are defined here.
@@ -72,4 +73,5 @@ export type RootStackParamList = {
   CreateReminderScreen: { eid?: number };
   RemindersCompletedScreen: undefined;
   EditReminderScreen: { info: EditReminderInfo };
+  ReminderInfoScreen: { info: Notification };
 };
