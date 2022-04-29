@@ -1,53 +1,70 @@
 import { StyleSheet } from 'react-native';
-import { View, Text, Divider, VStack, HStack } from 'native-base';
+import { View, Text, Divider, VStack, HStack, Pressable } from 'native-base';
 import moment from 'moment';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
+import { ReminderNoti } from '../../utils/user/notification';
 
 type ModuleAlertCardProps = {
-  moduleName: string;
-  time: Date;
-  title: string;
-  description: string | undefined;
+  notification: ReminderNoti;
+  dismissNotification: () => void;
 };
 
 const ModuleAlertCard = ({
-  moduleName,
-  time,
-  title,
-  description
+  notification,
+  dismissNotification
 }: ModuleAlertCardProps) => {
   const { t } = useTranslation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const showReminderInfoScreen = useCallback(() => {
+    navigation.push('ReminderInfoScreen', { info: notification });
+  }, []);
 
   return (
     <View>
       <VStack px="4" py="2" backgroundColor="#fff" style={styles.card}>
         <HStack justifyContent="space-between">
           <Text color="darkBlue.600" fontSize="16">
-            {moduleName}
+            {t('modules.sender', { name: notification.user })}
           </Text>
           <Text color="darkBlue.600" fontSize="16">
-            {moment(time).format('hh:mm')}
+            {moment(notification.startingDateTime).format('hh:mm')}
           </Text>
         </HStack>
         <View>
           <Text fontSize="2xl" fontWeight="500">
-            {title}
+            {notification.title}
           </Text>
-          {description && <Text fontSize="lg">{description}</Text>}
+          {notification.note && <Text fontSize="lg">{notification.note}</Text>}
         </View>
         <HStack justifyContent="space-between" mt={4} mb={1}>
-          <View flex={2} alignItems="center">
-            <Text fontSize="lg" color="blue.500">
-              {t('modules.dismiss')}
-            </Text>
-          </View>
+          <Pressable
+            flex={2}
+            alignItems="center"
+            onPress={showReminderInfoScreen}>
+            {({ isPressed }) => (
+              <Text
+                fontSize={isPressed ? 'md' : 'lg'}
+                color={!isPressed ? 'darkBlue.600' : '#E4E4E7'}>
+                {t('modules.viewCard')}
+              </Text>
+            )}
+          </Pressable>
           <Divider orientation="vertical" mx="6" bg="gray.200" thickness={2} />
-          <View flex={2} alignItems="center">
-            <Text fontSize="lg" color="blue.500">
-              {t('modules.iDidIt')}
-            </Text>
-          </View>
+          <Pressable flex={2} alignItems="center" onPress={dismissNotification}>
+            {({ isPressed }) => (
+              <Text
+                fontSize={isPressed ? 'md' : 'lg'}
+                color={!isPressed ? 'darkBlue.600' : '#E4E4E7'}>
+                {t('modules.dismiss')}
+              </Text>
+            )}
+          </Pressable>
         </HStack>
       </VStack>
     </View>
