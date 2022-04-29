@@ -9,7 +9,6 @@ import ConnectCaretakerScreen from '../screens/ConnectCaretakerScreen';
 import ModulePickerScreen from '../screens/ModuleManageScreen';
 import HealthBlogScreen from './../screens/HealthBlogScreen';
 import EmergencyScreen from './../screens/EmergencyScreen';
-import ReminderScreen from '../screens/reminder/ReminderScreen';
 import MemoryRecallScreen from '../screens/MemoryRecallScreen';
 import { Icon } from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
@@ -55,6 +54,7 @@ import EditMemoryRecallQuestionsScreen from '../screens/EditMemoryRecallQuestion
 import RemindersScreen from '../screens/reminder/RemindersScreen';
 import RemindersCompletedScreen from '../screens/reminder/RemindersCompletedScreen';
 import MemoryRecallFinishScreen from '../screens/MemoryRecallFinishScreen';
+import ReminderInfoScreen from '../screens/reminder/ReminderInfoScreen';
 
 const MainNavigation = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -473,6 +473,16 @@ const MainNavigation = () => {
               component={EditReminderScreen}
               options={{
                 title: t('reminder.editReminder'),
+                headerTitleAlign: 'center',
+                headerTitleStyle: { fontSize: 20, fontWeight: '600' },
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="ReminderInfoScreen"
+              component={ReminderInfoScreen}
+              options={{
+                title: t('reminder.reminderInfo'),
                 headerTitleAlign: 'center',
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
                 headerShown: true
