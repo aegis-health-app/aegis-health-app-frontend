@@ -21,11 +21,7 @@ const HealthRecordInfoSection = () => {
           {t('healthRecording.addEntry')}
         </Text>
         <EditButton
-          onPress={() => {
-            navigation.navigate('EditHealthEntryScreen', {
-              recordTitle: 'Blood Pressure'
-            });
-          }}
+          onPress={() => navigation.navigate('EditHealthEntryScreen')}
         />
       </View>
       <Spacer />
