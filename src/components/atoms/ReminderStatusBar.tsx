@@ -29,7 +29,7 @@ export const statusDecoration = {
     border: 'transparent',
     icon: 'checkmark-circle',
     iconColor: 'emerald.600',
-    chip: 'emerald.300'
+    chip: 'info.300'
   }
 };
 
