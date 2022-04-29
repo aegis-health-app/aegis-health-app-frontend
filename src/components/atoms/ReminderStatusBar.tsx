@@ -44,7 +44,6 @@ const ReminderStatusBar: React.FC<StatusBarProps> = ({ status, ...props }) => {
     <HStack
       justifyContent="center"
       my={4}
-      mx={5}
       p={3}
       pl={0}
       backgroundColor={statusDecoration[status].bg}
