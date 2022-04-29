@@ -545,6 +545,7 @@
   "reminder": {
     "createReminder": "Create Reminder",
     "editReminder": "Edit Reminder",
+    "reminderInfo": "Details",
     "create": "Create",
     "edit": "Edit",
     "addANewReminder": "Add a new reminder +",
@@ -555,7 +556,10 @@
     "deleteConfirmationDesc": "Are you sure you want to delete this reminder? All of the recurring reminder will be deleted.",
     "delete": "Delete",
     "cancel": "Cancel",
-    "ok": "OK"
+    "ok": "OK",
+    "pending": "This task is not completed yet.",
+    "overdue": "This task is overdue.",
+    "done": "This task is complete."
   },
   "reminderForm": {
     "title": "Title",
@@ -725,8 +729,8 @@
     "body": "Cannot delete reminder at the moment. Please try again later",
     "primaryButton": "OK",
     "secondaryButton": ""
-  },  
-  "memoryRecallElderly":{
+  },
+  "memoryRecallElderly": {
     "memoryRecall": "Memory Recall",
     "startGame": "Start Game",
     "question": "Question ",
