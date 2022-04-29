@@ -677,5 +677,53 @@
     "repeatNotification3Times": "Repeat notification 3 times with 10 minutes intervals",
     "repeatNotificationUnitilComplete": "Repeat with 10 mintues interval until marked as completed",
     "cancel": "Cancel"
+  },
+  "createReminderSuccess": {
+    "header": "Success",
+    "body": "A new reminder has been successfully created",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "createReminderError": {
+    "header": "Error",
+    "body": "Cannot create reminder at this moment. Please try again later",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "reminderInvalidStartingDateError": {
+    "header": "Error",
+    "body": "Start date cannot be in the past",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "reminderUploadImageError": {
+    "header": "Error",
+    "body": "Image too large",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateReminderSuccess": {
+    "header": "Success",
+    "body": "The reminder has been successfully updated",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "updateReminderError": {
+    "header": "Error",
+    "body": "Cannot update reminder at this moment. Please try again later",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "deleteReminderSuccess": {
+    "header": "Success",
+    "body": "The reminder has been successfully deleted",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
+  "deleteReminderError": {
+    "header": "Error",
+    "body": "Cannot delete reminder at the moment. Please try again later",
+    "primaryButton": "OK",
+    "secondaryButton": ""
   }
 }

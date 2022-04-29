@@ -16,12 +16,20 @@ import {
 import { client } from '../../config/axiosConfig';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps
+} from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
+import Alert, { AlertType } from '../../components/organisms/Alert';
+import { AxiosError } from 'axios';
 
-const CreateReminderScreen = () => {
+const CreateReminderScreen = ({
+  route
+}: NativeStackScreenProps<RootStackParamList, 'CreateReminderScreen'>) => {
   const { t } = useTranslation();
-  const { user, isElderly } = useContext(UserContext);
+  const eid = route?.params?.eid;
+  const { isElderly } = useContext(UserContext);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -33,6 +41,11 @@ const CreateReminderScreen = () => {
   } = useForm({ mode: 'onTouched' });
   const watchInputs = watch();
 
+  const [showCreateReminderSuccess, setShowCreateReminderSuccess] =
+    useState<boolean>(false);
+  const [showCreateReminderError, setShowCreateReminderError] =
+    useState<boolean>(false);
+  const [createReminderErrorMessage, setCreateReminderErrorMessage] = useState('')
   const [date, setDate] = useState<Date>(new Date());
   const [image, setImage] = useState<ImagePickerResponse>();
   const [notifyMyCaretakers, setNotifyMyCaretaker] = useState<boolean>(true);
@@ -54,17 +67,19 @@ const CreateReminderScreen = () => {
   };
 
   const onSubmit = (data) => {
-    const uploadImage = image && image.assets ? image.assets[0] : undefined
-    const imagePayload = {
-      base64: uploadImage?.base64,
-      name: uploadImage?.fileName,
-      type: uploadImage?.type,
-      size: uploadImage?.fileSize
-    }
+    const uploadImage = image && image.assets ? image.assets[0] : undefined;
+    const imagePayload = uploadImage
+      ? {
+          base64: uploadImage?.base64,
+          name: uploadImage?.fileName,
+          type: uploadImage?.type,
+          size: uploadImage?.fileSize
+        }
+      : null;
 
     const response: ReminderInfo = {
       ...data,
-      startingDateTime: moment(date).add(7, 'h'),
+      startingDateTime: moment(date).add(7, 'h').toDate(),
       isRemindCaretaker: notifyMyCaretakers,
       image: imagePayload,
       recursion:
@@ -73,7 +88,7 @@ const CreateReminderScreen = () => {
           ? repeatition
           : null,
       importanceLevel: importanceLevel,
-      eid: isElderly ? null : user?.uid
+      eid: isElderly ? null : eid
     };
 
     if (
@@ -94,7 +109,6 @@ const CreateReminderScreen = () => {
         date: repeatsOnDate
       };
     }
-    console.log(response);
     return createReminder(response);
   };
 
@@ -102,14 +116,39 @@ const CreateReminderScreen = () => {
     try {
       const res = await client.post('/reminder', payload);
       console.log('created');
-      navigation.goBack();
-    } catch (err) {
-      console.log(err);
+      // navigation.goBack();
+      setShowCreateReminderSuccess(true);
+    } catch (error) {
+      const err = error as AxiosError
+      if (!err || !err.response) return;
+      console.log(err.response.status)
+      if (err.response.status === 400) setCreateReminderErrorMessage('reminderInvalidStartingDateError')
+      else if (err.response.status === 415) setCreateReminderErrorMessage("reminderUploadImageError")
+      else setCreateReminderErrorMessage("createReminderError")
+      setShowCreateReminderError(true);
     }
   };
 
   return (
     <>
+      <Alert
+        isOpen={showCreateReminderSuccess}
+        close={() => {
+          setShowCreateReminderSuccess(false);
+          navigation.navigate('RemindersScreen');
+        }}
+        type={AlertType.SUCCESS}
+        message="createReminderSuccess"
+      />
+      <Alert
+        isOpen={showCreateReminderError}
+        close={() => {
+          setShowCreateReminderError(false);
+          // navigation.navigate('ReminderScreen');
+        }}
+        type={AlertType.ERROR}
+        message={createReminderErrorMessage}
+      />
       <View style={styles.container}>
         <ReminderForm
           control={control}

@@ -1,4 +1,3 @@
-import { weekdays } from 'moment';
 import { AlertDialog, Button, Text, View } from 'native-base';
 import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,11 +31,7 @@ const CustomRecurringModal = ({
 }) => {
   const { t } = useTranslation();
   const cancelRef = useRef(null);
-  console.log(repeatsEvery)
 
-  // const [repeatEvery, setRepeatEvery] = useState<string>('week');
-  // const [repeatsOnWeekday, setRepeatsOnWeekday] = useState<string[]>([]);
-  // const [repeatsOnDate, setRepeatsOnDate] = useState<string>('1');
   const [errorLog, setErrorLog] = useState('');
   const repeatEveryList = [
     { value: RecursionPeriod.WEEK, label: 'Week' },
@@ -62,7 +57,6 @@ const CustomRecurringModal = ({
   ];
 
   const DateDisplay = () => {
-    console.log('rerender date');
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
@@ -80,7 +74,6 @@ const CustomRecurringModal = ({
 
   const onWeekdayButtonPressed = useCallback(
     (weekday) => {
-      console.log(weekday, 'pressed');
       if (repeatsOnWeekday.includes(weekday))
         setRepeatsOnWeekday(repeatsOnWeekday.filter((e) => e !== weekday));
       else setRepeatsOnWeekday([...repeatsOnWeekday, weekday]);
@@ -91,7 +84,6 @@ const CustomRecurringModal = ({
   const onOkButtonPressed = useCallback(() => {
     if (repeatsEvery === RecursionPeriod.WEEK) {
       if (!repeatsOnWeekday.length || !repeatsOnWeekday) {
-        console.log('yes');
         setErrorLog('Please choose a week day');
         return;
       }
@@ -99,7 +91,6 @@ const CustomRecurringModal = ({
         repeatEvery: 'week',
         repeatsOn: repeatsOnWeekday
       };
-      console.log(response);
       setDialogOpen(false)
       return;
     }
@@ -108,7 +99,6 @@ const CustomRecurringModal = ({
         repeatEvery: 'month',
         repeatsOn: repeatsOnDate
       };
-      console.log(response);
       setDialogOpen(false)
       return;
     }
@@ -121,7 +111,6 @@ const CustomRecurringModal = ({
   }, [defaultRepeatition, setRepeatition, setErrorLog]);
 
   const WeekDisplay = useCallback(() => {
-    console.log('rerender repeats on');
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
@@ -161,7 +150,6 @@ const CustomRecurringModal = ({
   }, [repeatsOnWeekday, errorLog]);
 
   const RepeatEveryDisplay = useCallback(() => {
-    console.log('rerender repeat every');
     return (
       <View>
         <Text fontSize={16} mb={2}>

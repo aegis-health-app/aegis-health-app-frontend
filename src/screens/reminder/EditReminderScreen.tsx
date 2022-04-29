@@ -17,11 +17,12 @@ import {
   ImportanceLevel,
   RecurringInterval,
   RecursionPeriod,
-  ReminderInfo
 } from '../../dto/modules/reminder.dto';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../contexts/UserContext';
 import { client } from '../../config/axiosConfig';
+import Alert, { AlertType } from '../../components/organisms/Alert';
+import { AxiosError } from 'axios';
 
 const EditReminderScreen = ({
   route
@@ -40,6 +41,12 @@ const EditReminderScreen = ({
   } = useForm({ mode: 'onTouched' });
   const watchInputs = watch();
   const cancelRef = useRef(null);
+
+  const [showUpdateReminderSuccess, setShowUpdateReminderSuccess] = useState<boolean>(false)
+  const [showUpdateReminderError, setShowUpdateReminderError] = useState<boolean>(false)
+  const [showDeleteReminderSuccess, setShowDeleteReminderSuccess] = useState<boolean>(false)
+  const [showDeleteReminderError, setShowDeleteReminderError] = useState<boolean>(false)
+  const [updateRemindeErrorMessage, setUpdateReminderErrorMessage] = useState('')
 
   const [date, setDate] = useState<Date>(info.startingDateTime);
   const [image, setImage] = useState<ImagePickerResponse | undefined>(
@@ -71,17 +78,17 @@ const EditReminderScreen = ({
   };
 
   const onSubmit = (data) => {
-    const uploadImage = image && image.assets ? image.assets[0] : undefined
+    const uploadImage = image && image.assets ? image.assets[0] : undefined;
     const imagePayload = {
       base64: uploadImage?.base64,
       name: uploadImage?.fileName,
       type: uploadImage?.type,
       size: uploadImage?.fileSize
-    }
+    };
 
     const response: EditReminderInfo = {
       ...data,
-      startingDateTime: moment(date).add(7, 'h'),
+      startingDateTime: moment(date).add(7, 'h').toDate(),
       isRemindCaretaker: notifyMyCaretakers,
       image: imagePayload,
       recursion:
@@ -105,7 +112,6 @@ const EditReminderScreen = ({
         date: repeatsOnDate
       };
     }
-    console.log(response);
     return updateReminder(response);
   };
 
@@ -114,8 +120,13 @@ const EditReminderScreen = ({
       const res = await client.put('/reminder', payload);
       console.log('updated');
       navigation.goBack();
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as AxiosError
+      if (!err || !err.response) return;
+      if (err.response.status === 400) setUpdateReminderErrorMessage('reminderInvalidStartingDateError')
+      else if (err.response.status === 415) setUpdateReminderErrorMessage("reminderUploadImageError")
+      else setUpdateReminderErrorMessage("updateReminderError")
+      setShowUpdateReminderError(true);
     }
   };
 
@@ -130,12 +141,48 @@ const EditReminderScreen = ({
       console.log('deleted');
       navigation.goBack();
     } catch (err) {
-      console.log(err);
+      setShowDeleteReminderError(true)
     }
   };
 
   return (
     <>
+      <Alert
+        isOpen={showUpdateReminderSuccess}
+        close={() => {
+          setShowUpdateReminderSuccess(false);
+          navigation.navigate('RemindersScreen');
+        }}
+        type={AlertType.SUCCESS}
+        message="updateReminderSuccess"
+      />
+      <Alert
+        isOpen={showUpdateReminderError}
+        close={() => {
+          setShowUpdateReminderError(false);
+          navigation.navigate('ReminderScreen');
+        }}
+        type={AlertType.ERROR}
+        message={updateRemindeErrorMessage}
+      />
+       <Alert
+        isOpen={showDeleteReminderSuccess}
+        close={() => {
+          setShowDeleteReminderSuccess(false);
+          navigation.navigate('RemindersScreen');
+        }}
+        type={AlertType.SUCCESS}
+        message="deleteReminderSuccess"
+      />
+      <Alert
+        isOpen={showDeleteReminderError}
+        close={() => {
+          setShowDeleteReminderError(false);
+          // navigation.navigate('ReminderScreen');
+        }}
+        type={AlertType.ERROR}
+        message="deleteReminderError"
+      />
       <AlertDialog
         leastDestructiveRef={cancelRef}
         isOpen={dialogOpen}
