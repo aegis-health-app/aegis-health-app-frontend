@@ -64,7 +64,7 @@ const ReminderInfoScreen = ({ route }) => {
     if (Date.now() > reminderInfo.startingDateTime.getTime())
       return ReminderStatus.OVERDUE;
     return ReminderStatus.PENDING;
-  }, [route]);
+  }, [route, reminderInfo]);
 
   const getRecursionLevel = useCallback(() => {
     const { recursion, customRecursion } = reminderInfo;
