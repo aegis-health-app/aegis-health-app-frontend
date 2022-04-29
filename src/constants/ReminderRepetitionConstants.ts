@@ -1,4 +1,4 @@
-import { RecurringInterval } from "../dto/modules/reminder.dto";
+import { RecurringInterval } from '../dto/modules/reminder.dto';
 
 export const ReminderRepetitionPattern = [
   {
@@ -22,3 +22,9 @@ export const ReminderRepetitionPattern = [
     value: RecurringInterval.CUSTOM
   }
 ];
+
+export const ReminderInfoScreenRecursion = {
+  EVERY_DAY: 'reminder.dayRecursion',
+  EVERY_WEEK: 'reminder.weekRecursion',
+  EVERY_MONTH: 'reminder.monthRecursion'
+};
