@@ -9,8 +9,8 @@ import Spacer from '../atoms/Spacer';
 const CustomRecurringModal = ({
   dialogOpen = false,
   setDialogOpen,
-  defaultRepeatition,
-  setRepeatition,
+  defaultRepetition,
+  setRepetition,
   repeatsEvery,
   setRepeatsEvery,
   repeatsOnWeekday = [],
@@ -20,8 +20,8 @@ const CustomRecurringModal = ({
 }: {
   dialogOpen: boolean;
   setDialogOpen: (dialogOpen: boolean) => void;
-  defaultRepeatition: RecurringInterval;
-  setRepeatition: (repeatition: RecurringInterval) => void;
+  defaultRepetition: RecurringInterval;
+  setRepetition: (repetition: RecurringInterval) => void;
   repeatsEvery: RecursionPeriod;
   setRepeatsEvery: (repeatsEvery: RecursionPeriod) => void;
   repeatsOnWeekday: number[];
@@ -47,20 +47,20 @@ const CustomRecurringModal = ({
   });
 
   const weekdayList = [
-    { value: 7, label: t('reminderRepeatitionPattern.sa') },
-    { value: 1, label: t('reminderRepeatitionPattern.mo') },
-    { value: 2, label: t('reminderRepeatitionPattern.tu') },
-    { value: 3, label: t('reminderRepeatitionPattern.we') },
-    { value: 4, label: t('reminderRepeatitionPattern.th') },
-    { value: 5, label: t('reminderRepeatitionPattern.fr') },
-    { value: 6, label: t('reminderRepeatitionPattern.su') }
+    { value: 7, label: t('reminderRepetitionPattern.sa') },
+    { value: 1, label: t('reminderRepetitionPattern.mo') },
+    { value: 2, label: t('reminderRepetitionPattern.tu') },
+    { value: 3, label: t('reminderRepetitionPattern.we') },
+    { value: 4, label: t('reminderRepetitionPattern.th') },
+    { value: 5, label: t('reminderRepetitionPattern.fr') },
+    { value: 6, label: t('reminderRepetitionPattern.su') }
   ];
 
   const DateDisplay = () => {
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
-          {t('reminderRepeatitionPattern.date')}
+          {t('reminderRepetitionPattern.date')}
         </Text>
         <DropDownSelect
           value={repeatsOnDate}
@@ -105,16 +105,16 @@ const CustomRecurringModal = ({
   }, [repeatsEvery, repeatsOnDate, repeatsOnWeekday, setErrorLog]);
 
   const onCancelButtonPressed = useCallback(() => {
-    setRepeatition(defaultRepeatition);
+    setRepetition(defaultRepetition);
     setErrorLog('');
     setDialogOpen(false);
-  }, [defaultRepeatition, setRepeatition, setErrorLog]);
+  }, [defaultRepetition, setRepetition, setErrorLog]);
 
   const WeekDisplay = useCallback(() => {
     return (
       <View style={styles.spacer}>
         <Text fontSize={16} mb={2}>
-          {t('reminderRepeatitionPattern.repeatsOn')}
+          {t('reminderRepetitionPattern.repeatsOn')}
         </Text>
         <View style={styles.itemRow}>
           {weekdayList.map((weekday) => {
@@ -137,7 +137,7 @@ const CustomRecurringModal = ({
                       ? styles.selectedButtonText
                       : styles.unselectedButtonText
                   ]}>
-                  {/* {t('reminderRepeatitionPattern.repeatsEvery')} */}
+                  {/* {t('reminderRepetitionPattern.repeatsEvery')} */}
                   {weekday.label}
                 </Text>
               </TouchableOpacity>
@@ -153,11 +153,11 @@ const CustomRecurringModal = ({
     return (
       <View>
         <Text fontSize={16} mb={2}>
-          {t('reminderRepeatitionPattern.repeatsEvery')}
+          {t('reminderRepetitionPattern.repeatsEvery')}
         </Text>
         <DropDownSelect
           value={repeatsEvery}
-          defaultValue="week"
+          defaultValue={RecursionPeriod.WEEK}
           items={repeatEveryList}
           setValue={setRepeatsEvery}
           zIndex={5100}
@@ -174,7 +174,7 @@ const CustomRecurringModal = ({
       <AlertDialog.Content style={styles.container}>
         {/* <AlertDialog.CloseButton /> */}
         <AlertDialog.Header>
-          {t('reminderRepeatitionPattern.customRecurringSetting')}
+          {t('reminderRepetitionPattern.customRecurringSetting')}
         </AlertDialog.Header>
         <AlertDialog.Body>
           {/* {t('reminder.deleteConfirmationDesc')} */}

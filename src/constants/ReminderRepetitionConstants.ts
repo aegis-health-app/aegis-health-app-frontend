@@ -1,6 +1,6 @@
 import { RecurringInterval } from "../dto/modules/reminder.dto";
 
-export const ReminderRepeatitionPattern = [
+export const ReminderRepetitionPattern = [
   {
     label: 'doesNotRepeat',
     value: RecurringInterval.DOES_NOT_REPEAT

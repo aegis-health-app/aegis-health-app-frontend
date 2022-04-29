@@ -49,7 +49,7 @@ const CreateReminderScreen = ({
   const [date, setDate] = useState<Date>(new Date());
   const [image, setImage] = useState<ImagePickerResponse>();
   const [notifyMyCaretakers, setNotifyMyCaretaker] = useState<boolean>(true);
-  const [repeatition, setRepeatition] = useState<RecurringInterval>(
+  const [repetition, setRepetition] = useState<RecurringInterval>(
     RecurringInterval.DOES_NOT_REPEAT
   );
   const [importanceLevel, setImportanceLevel] = useState<ImportanceLevel>(
@@ -83,16 +83,16 @@ const CreateReminderScreen = ({
       isRemindCaretaker: notifyMyCaretakers,
       image: imagePayload,
       recursion:
-        repeatition !== RecurringInterval.CUSTOM &&
-        repeatition !== RecurringInterval.DOES_NOT_REPEAT
-          ? repeatition
+        repetition !== RecurringInterval.CUSTOM &&
+        repetition !== RecurringInterval.DOES_NOT_REPEAT
+          ? repetition
           : null,
       importanceLevel: importanceLevel,
       eid: isElderly ? null : eid
     };
 
     if (
-      repeatition === RecurringInterval.CUSTOM &&
+      repetition === RecurringInterval.CUSTOM &&
       repeatsEvery === RecursionPeriod.WEEK
     ) {
       response.customRecursion = {
@@ -101,7 +101,7 @@ const CreateReminderScreen = ({
       };
     }
     if (
-      repeatition === RecurringInterval.CUSTOM &&
+      repetition === RecurringInterval.CUSTOM &&
       repeatsEvery === RecursionPeriod.MONTH
     ) {
       response.customRecursion = {
@@ -159,8 +159,8 @@ const CreateReminderScreen = ({
           setImage={setImage}
           notifyMyCaretakers={notifyMyCaretakers}
           setNotifyMyCaretaker={setNotifyMyCaretaker}
-          repeatition={repeatition}
-          setRepeatition={setRepeatition}
+          repetition={repetition}
+          setRepetition={setRepetition}
           importanceLevel={importanceLevel}
           setImportanceLevel={setImportanceLevel}
           repeatsEvery={repeatsEvery}

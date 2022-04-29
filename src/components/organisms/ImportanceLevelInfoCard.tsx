@@ -19,7 +19,7 @@ const ImportanceLevelInfoCard = ({
       icon: '--',
       descriptions: [
         t('reminderImportanceLevel.alertAtSelectedTime'),
-        t('reminderImportanceLevel.noNotificationRepeatition')
+        t('reminderImportanceLevel.noNotificationRepetition')
       ]
     },
     {
