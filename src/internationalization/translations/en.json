@@ -576,7 +576,7 @@
     "takeAPicture": "Take a Picture",
     "fromMyDevice": "From My Device"
   },
-  "reminderRepeatitionPattern": {
+  "reminderRepetitionPattern": {
     "doesNotRepeat": "Does Not Repeat",
     "everyday": "Every day",
     "everyweek": "Every Week",
@@ -673,7 +673,7 @@
     "mediumPriority": "Medium Priority",
     "highPriority": "High Priority",
     "alertAtSelectedTime": "Alert at the selected time",
-    "noNotificationRepeatition": "No notification repeatition",
+    "noNotificationRepetition": "No notification repetition",
     "repeatNotification3Times": "Repeat notification 3 times with 10 minutes intervals",
     "repeatNotificationUnitilComplete": "Repeat with 10 mintues interval until marked as completed",
     "cancel": "Cancel"

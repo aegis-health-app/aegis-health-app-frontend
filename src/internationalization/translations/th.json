@@ -576,7 +576,7 @@
     "takeAPicture": "ถ่ายรูปใหม่",
     "fromMyDevice": "เลือกจากอุปกรณ์ของคุณ"
   },
-  "reminderRepeatitionPattern": {
+  "reminderRepetitionPattern": {
     "doesNotRepeat": "ไม่แจ้งซ้ำ",
     "everyday": "ทุกวัน",
     "everyweek": "ทุกสัปดาห์",
@@ -673,7 +673,7 @@
     "mediumPriority": "ระดับกลาง",
     "highPriority": "ระดับสูง",
     "alertAtSelectedTime": "แจ้งเตือนเมื่อถึงเวลาที่กำหนด",
-    "noNotificationRepeatition": "ไม่มีการแจ้งเตือกซำ้",
+    "noNotificationRepetition": "ไม่มีการแจ้งเตือกซำ้",
     "repeatNotification3Times": "แจ้งเตือนซ้ำ ทุกๆ 10 มากสุดนาที 3 ครั้ง",
     "repeatNotificationUnitilComplete": "แจ้งเตือนซ้ำ ทุกๆ 10 นาที จนกว่าผู้สูงอายุกดปุ่ม “ฉันทำแล้ว",
     "cancel": "ยกเลิก"

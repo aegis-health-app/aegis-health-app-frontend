@@ -21,7 +21,7 @@ import RadioButtonGroup from '../molecules/RadioButtonGroup';
 import { useImageSelection } from '../../hooks/useImageSelection';
 import { ImagePickerResponse } from 'react-native-image-picker';
 import ExpansibleToggle from '../atoms/ExpansibleToggle';
-import { ReminderRepeatitionPattern } from '../../constants/ReminderRepeatitionConstants';
+import { ReminderRepetitionPattern } from '../../constants/ReminderRepetitionConstants';
 import { UserContext } from '../../contexts/UserContext';
 import CustomRecurringModal from '../organisms/CustomRecurringModal';
 import ImportanceLevelInfoCard from './ImportanceLevelInfoCard';
@@ -36,8 +36,8 @@ const ReminderForm = ({
   setImage,
   notifyMyCaretakers,
   setNotifyMyCaretaker,
-  repeatition,
-  setRepeatition,
+  repetition,
+  setRepetition,
   title,
   note,
   importanceLevel,
@@ -57,8 +57,8 @@ const ReminderForm = ({
   setImage: (image: ImagePickerResponse) => void;
   notifyMyCaretakers: boolean;
   setNotifyMyCaretaker: (value: boolean) => void;
-  repeatition: RecurringInterval;
-  setRepeatition: (repeatition: RecurringInterval) => void;
+  repetition: RecurringInterval;
+  setRepetition: (repetition: RecurringInterval) => void;
   title?: string;
   note?: string;
   importanceLevel: ImportanceLevel;
@@ -113,8 +113,8 @@ const ReminderForm = ({
   ];
 
   useEffect(() => {
-    repeatition === RecurringInterval.CUSTOM && setShowCustomModal(true);
-  }, [repeatition]);
+    repetition === RecurringInterval.CUSTOM && setShowCustomModal(true);
+  }, [repetition]);
 
   return (
     <>
@@ -123,8 +123,8 @@ const ReminderForm = ({
           <CustomRecurringModal
             dialogOpen={showCustomModal}
             setDialogOpen={setShowCustomModal}
-            defaultRepeatition={RecurringInterval.DOES_NOT_REPEAT}
-            setRepeatition={setRepeatition}
+            defaultRepetition={RecurringInterval.DOES_NOT_REPEAT}
+            setRepetition={setRepetition}
             repeatsEvery={repeatsEvery}
             setRepeatsEvery={setRepeatsEvery}
             repeatsOnDate={repeatsOnDate}
@@ -229,14 +229,14 @@ const ReminderForm = ({
                 {t('reminderForm.repeat')}
               </Text>
               <RadioButtonGroup
-                selections={ReminderRepeatitionPattern.map((r) => {
+                selections={ReminderRepetitionPattern.map((r) => {
                   return {
-                    label: t(`reminderRepeatitionPattern.${r.label}`),
+                    label: t(`reminderRepetitionPattern.${r.label}`),
                     value: r.value
                   };
                 })}
-                value={repeatition}
-                setValue={setRepeatition}
+                value={repetition}
+                setValue={setRepetition}
               />
             </View>
             {!isElderly ? (
