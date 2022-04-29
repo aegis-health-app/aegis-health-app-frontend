@@ -545,6 +545,7 @@
   "reminder": {
     "createReminder": "สร้างการเตือน",
     "editReminder": "แก้ไขการเตือน",
+    "reminderInfo": "รายละเอียด",
     "create": "สร้าง",
     "edit": "แก้ไข",
     "addANewReminder": "เพิ่มกาารเตือนความจำ +",
@@ -555,7 +556,10 @@
     "deleteConfirmationDesc": "คุณต้องการลบการเตือนนี้หรือไม่ การตั้งเตือนซ้ำทุกครั้งจะถูกลบด้วย",
     "delete": "ลบ",
     "cancel": "ยกเลิก",
-    "ok": "ยืนยัน"
+    "ok": "ยืนยัน",
+    "pending": "คุณยังไม่ได้ทำตามการเตือนความจำนี้",
+    "overdue": "การตั้งเตือนนี้เกินกำหนดเวลาแล้ว",
+    "done": "คุณได้ทำตามการตั้งเตือนนี้แล้ว"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
@@ -726,7 +730,7 @@
     "primaryButton": "รับทราบ",
     "secondaryButton": ""
   },
-  "memoryRecallElderly":{
+  "memoryRecallElderly": {
     "memoryRecall": "ทบทวนความจำ",
     "startGame": "เริ่มเกม",
     "question": "คำถามที่ ",
