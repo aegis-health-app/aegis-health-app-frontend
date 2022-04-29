@@ -1,10 +1,20 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, Button, HStack, Icon, Spacer, Box, View } from 'native-base';
+import {
+  Text,
+  Button,
+  HStack,
+  Icon,
+  Spacer,
+  Box,
+  View,
+  Image
+} from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
 import { useTranslation } from 'react-i18next';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import moment from 'moment';
+import { RootStackParamList } from '../../navigation/types';
 import ReminderStatusBar, {
   ReminderStatus,
   statusDecoration
@@ -14,15 +24,17 @@ import { ReminderNoti } from '../../utils/user/notification';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { client } from '../../config/axiosConfig';
 import { Reminder } from '../../dto/modules/reminder.dto';
-import moment from 'moment';
+
 import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepeatitionConstants';
 import Divider from '../../components/atoms/Divider';
+import { UserContext } from '../../contexts/UserContext';
+import { useLanguage } from '../../internationalization/useLanguage';
 
 const mockReminder: Reminder = {
   title: 'Take your drug',
-  startingDateTime: new Date(2020, 2, 31),
+  startingDateTime: new Date(2023, 2, 31, 13),
   isRemindCaretaker: true,
-  note: 'string',
+  note: 'mock note',
   importanceLevel: 'Low',
   recursion: 'EVERY_DAY',
   uid: 75,
@@ -31,6 +43,9 @@ const mockReminder: Reminder = {
 
 const ReminderInfoScreen = ({ route }) => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
+  const { user } = useContext(UserContext);
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -39,7 +54,11 @@ const ReminderInfoScreen = ({ route }) => {
     [route]
   );
 
-  const [reminderInfo, setReminder] = useState<Reminder>(mockReminder);
+  const [reminderInfo, setReminder] = useState<Reminder>({
+    ...mockReminder,
+    imageid: user?.imageid ?? ''
+  });
+
   const reminderStatus = useMemo<ReminderStatus>(() => {
     if (route?.params.info.isDone) return ReminderStatus.DONE;
     if (Date.now() > reminderInfo.startingDateTime.getTime())
@@ -56,16 +75,14 @@ const ReminderInfoScreen = ({ route }) => {
   }, [reminderInfo]);
 
   useAsyncEffect(async () => {
-    // const reminderData = (
-    //   await client.get<Reminder>('/reminder/get/elderly', {
-    //     params: {
-    //       rid: reminderId
-    //     }
-    //   })
-    // ).data;
+    const reminderData = (
+      await client.get<Reminder>('/reminder/get/elderly', {
+        params: {
+          rid: reminderId
+        }
+      })
+    ).data;
 
-    const reminderData = mockReminder;
-    console.log(reminderData);
     setReminder(reminderData);
   }, []);
 
