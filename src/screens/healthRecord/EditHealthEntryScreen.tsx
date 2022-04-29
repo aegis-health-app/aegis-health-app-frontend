@@ -46,7 +46,6 @@ const EditHealthEntryScreen = () => {
   const [tempDatetime, setTempDatetime] = useState<string>();
 
   const getImage = () => {
-    console.log(currentHrImage);
     if (newHealthRecordCover && newHealthRecordCover.assets)
       return { uri: newHealthRecordCover.assets[0].uri };
     if (currentHrImage) return { uri: currentHrImage + '?' + new Date() };
@@ -75,11 +74,11 @@ const EditHealthEntryScreen = () => {
     if (!user || !dateTime) return;
     const payload = {
       hrName: currentHrName,
-      timestamp: moment(tempDatetime).format('YYYY-MM-DD hh:mm:ss')
+      timestamp: moment(tempDatetime).format('YYYY-MM-DDTHH:mm:ss[Z]')
     };
     try {
       const { data } = await client.delete(
-        `healthRecord/healthData/${user?.isElderly ? 'elderly' : 'caretaker'}${
+        `healthRecord/healthData${user.isElderly ? '/elderly' : '/caretaker/'}${
           user.isElderly ? '' : currentElderlyUid
         }`,
         { data: payload }
@@ -94,7 +93,6 @@ const EditHealthEntryScreen = () => {
   const updateImage = async () => {
     if (!newHealthRecordCover || !newHealthRecordCover.assets) return;
     const newImage = newHealthRecordCover.assets[0];
-    console.log(currentHrName);
     const payload = {
       hrName: currentHrName,
       image: {
@@ -105,11 +103,6 @@ const EditHealthEntryScreen = () => {
       }
     };
     try {
-      console.log(
-        `/healthRecord/${user?.isElderly ? 'elderly' : 'caretaker'}${
-          user?.isElderly ? '' : currentElderlyUid
-        }`
-      );
       const { data } = await client.put(
         `/healthRecord${user?.isElderly ? '/elderly' : '/caretaker'}/${
           user?.isElderly ? '' : currentElderlyUid
