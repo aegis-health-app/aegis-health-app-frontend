@@ -559,7 +559,14 @@
     "ok": "OK",
     "pending": "This task is not completed yet.",
     "overdue": "This task is overdue.",
-    "done": "This task is complete."
+    "done": "This task is complete.",
+    "repeat": "Repeat",
+    "noRecursion": "Does not repeat",
+    "dayRecursion": "Every day",
+    "weekRecursion": "Every week",
+    "monthRecursion": "Every month",
+    "yearRecursion": "Every year",
+    "customRecursion": "Custom"
   },
   "reminderForm": {
     "title": "Title",
