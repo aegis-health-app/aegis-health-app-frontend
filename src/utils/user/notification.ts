@@ -11,14 +11,19 @@ export type NotificationFeed = {
   reminder: Notification[];
 };
 
-export type Notification =
-  | {
-      message: string;
-      messageType: NotificationType;
-    }
-  | EmergencyNoti;
+export type Notification = ReminderNoti | EmergencyNoti;
 
 export type EmergencyNoti = EmergencyInfo & { messageType: NotificationType };
+export type ReminderNoti = {
+  title: string;
+  note: string;
+  isDone: boolean;
+  startingDateTime: Date;
+  user: string;
+  rid: number;
+
+  messageType?: NotificationType;
+};
 
 export const determineMessageType = (data) => {
   if (data.latitude) return NotificationType.EMERGENCY;
