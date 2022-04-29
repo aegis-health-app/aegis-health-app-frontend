@@ -8,14 +8,25 @@ import useAsyncEffect from '../../hooks/useAsyncEffect';
 import {
   EmergencyNoti,
   getNotificationFeed,
-  Notification,
+  ReminderNoti,
   storeNotificationFeed
 } from '../../utils/user/notification';
+
+const mockReminder: ReminderNoti = {
+  title: 'Take your **** drug',
+  startingDateTime: new Date(2020, 2, 31),
+  note: 'mock note',
+  isDone: true,
+  user: 'Hempen Rope',
+  rid: 1
+};
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
 
-  const [reminderList, setReminderList] = useState<Notification[]>([]);
+  const [reminderList, setReminderList] = useState<ReminderNoti[]>([
+    mockReminder
+  ]);
   const [emergencyList, setEmergencyList] = useState<EmergencyNoti[]>([]);
 
   const appState = useRef(AppState.currentState);
@@ -85,10 +96,8 @@ const UpComingAlert = () => {
         <>
           {reminderList.length > 0 && (
             <ModuleAlertCard
-              moduleName="Lorem Ipsum"
-              title="Lorem Ipsum"
-              description="Lorem Ipsum"
-              time={new Date()}
+              notification={reminderList[0]}
+              dismissNotification={dismissNotification}
             />
           )}
         </>
