@@ -40,6 +40,12 @@ const ReminderInfoScreen = ({ route }) => {
   );
 
   const [reminderInfo, setReminder] = useState<Reminder>(mockReminder);
+  const reminderStatus = useMemo<ReminderStatus>(() => {
+    if (route?.params.info.isDone) return ReminderStatus.DONE;
+    if (Date.now() > reminderInfo.startingDateTime.getTime())
+      return ReminderStatus.OVERDUE;
+    return ReminderStatus.PENDING;
+  }, [route]);
 
   const getRecursionLevel = useCallback(() => {
     const { recursion, customRecursion } = reminderInfo;
@@ -80,7 +86,7 @@ const ReminderInfoScreen = ({ route }) => {
 
   return (
     <View px={5}>
-      <ReminderStatusBar status={ReminderStatus.PENDING} />
+      <ReminderStatusBar status={reminderStatus} />
       <Spacer />
       <HStack justifyContent="space-between">
         <FormHeader headerText={reminderInfo?.title ?? ''} />
@@ -101,17 +107,19 @@ const ReminderInfoScreen = ({ route }) => {
       </HStack>
       <HStack my={2}>
         <Box
-          backgroundColor={statusDecoration[ReminderStatus.PENDING].chip}
+          backgroundColor={statusDecoration[reminderStatus].chip}
           p={1}
           mr={2}
           borderRadius={2}>
           {moment(reminderInfo?.startingDateTime).format('DD/MM/YYYY')}
         </Box>
         <Box
-          backgroundColor={statusDecoration[ReminderStatus.PENDING].chip}
+          backgroundColor={statusDecoration[reminderStatus].chip}
           p={1}
           borderRadius={2}>
-          {moment(reminderInfo?.startingDateTime).format('HH:MM A')}
+          {moment(reminderInfo?.startingDateTime).format(
+            `HH:MM ${language() === 'en' ? 'A' : 'น.'}`
+          )}
         </Box>
       </HStack>
       <Spacer />
@@ -131,7 +139,6 @@ const ReminderInfoScreen = ({ route }) => {
           height="sm"
           borderRadius={4}
           marginRight={4}
-          fallbackElement={FallbackImage}
           alt="Profile Picture"
         />
       )}
