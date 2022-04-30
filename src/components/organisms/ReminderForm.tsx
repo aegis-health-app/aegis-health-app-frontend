@@ -239,7 +239,7 @@ const ReminderForm = ({
                 setValue={setRepetition}
               />
             </View>
-            {!isElderly ? (
+            {isElderly ? (
               <></>
             ) : (
               <>
