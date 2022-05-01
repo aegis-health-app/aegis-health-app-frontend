@@ -42,8 +42,6 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
     setDisplayName(await getDisplayName(uid));
   }, [isFocused]);
 
-  console.log(displayName)
-
   const handleDisplay = () => {
     if (displayName === '') return name;
     return displayName;
