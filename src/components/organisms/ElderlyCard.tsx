@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, View, Text, Button } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
@@ -8,12 +8,14 @@ import { useTranslation } from 'react-i18next';
 import useDimensions from '../../hooks/useDimensions';
 import FallbackImage from '../molecules/FallbackImage';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
+import useAsyncEffect from '../../hooks/useAsyncEffect';
+import { getDisplayName } from '../../utils/elderly/displayNames';
 
 type ElderlyCardProps = {
   name: string;
   imageId: string;
   userIsElderly: boolean;
-  uid?: number;
+  uid: number;
 };
 
 const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
@@ -31,6 +33,21 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
       setCurrentElderlyUid(uid);
     }
   }
+
+  const isFocused = useIsFocused();
+
+  const [displayName, setDisplayName] = useState<string>('');
+
+  useAsyncEffect(async () => {
+    setDisplayName(await getDisplayName(uid));
+  }, [isFocused]);
+
+  console.log(displayName)
+
+  const handleDisplay = () => {
+    if (displayName === '') return name;
+    return displayName;
+  };
 
   return (
     <View
@@ -52,7 +69,7 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
           alt="Profile Picture"
         />
         <Text flex={1} flexWrap="wrap" fontSize="lg" numberOfLines={1}>
-          {name}
+          {handleDisplay()}
         </Text>
       </>
 
