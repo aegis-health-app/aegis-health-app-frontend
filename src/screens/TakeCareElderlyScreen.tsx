@@ -27,6 +27,9 @@ import { UserContext } from '../contexts/UserContext';
 import { client } from '../config/axiosConfig';
 import HealthProfile from '../components/molecules/HealthProfile';
 import ModulePickerList from './../components/organisms/ModulePickerList';
+import Divider from '../components/atoms/Divider';
+import InputBox from '../components/atoms/Input';
+import { storeDisplayName } from '../utils/elderly/displayNames';
 
 const TakeCareElderlyScreen = () => {
   const navigation =
@@ -76,6 +79,12 @@ const TakeCareElderlyScreen = () => {
       }
     }
   }
+
+  console.log(uid);
+
+  const handleChange = (text: string) => {
+    storeDisplayName(uid as number, text);
+  };
 
   return (
     <SafeAreaView edges={['right', 'top', 'left']}>
@@ -136,6 +145,15 @@ const TakeCareElderlyScreen = () => {
               </View>
             </View>
           )}
+          <Divider />
+          <View paddingX={5}>
+            <InputBox
+              name={t('userForm.editName')}
+              onChangeText={handleChange}
+              defaultValue={elderly?.dname}
+            />
+          </View>
+          <Divider />
           <Button
             colorScheme="error"
             variant="outline"
