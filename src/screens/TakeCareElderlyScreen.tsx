@@ -80,8 +80,6 @@ const TakeCareElderlyScreen = () => {
     }
   }
 
-  console.log(uid);
-
   const handleChange = (text: string) => {
     storeDisplayName(uid as number, text);
   };
