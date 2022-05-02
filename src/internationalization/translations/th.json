@@ -328,7 +328,8 @@
     "phone": "หมายเลขโทรศัพท์",
     "openInMaps": "เปิดในแอปพลิเคชันแผนที่ ",
     "callSender": "โทรหา {{name}}",
-    "emergencyLocation": "สถานที่เกิดเหตุฉุกเฉิน"
+    "emergencyLocation": "สถานที่เกิดเหตุฉุกเฉิน",
+    "addressFallback": "โทรศัพท์มือถือของผู้สูงอายุไม่อนุญาตให้ใช้งานระบบระบุตำแหน่ง กรุณาติดต่อโดยตรง"
   },
   "emergencyNotification": {
     "header": "ฉุกเฉิน",
