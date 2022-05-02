@@ -532,7 +532,7 @@ const MainNavigation = () => {
               initialParams={{ isElderly: true }}
               options={{
                 title: t('auth.signUp'),
-                headerShown: true,
+                headerShown: false,
                 headerTitleAlign: 'center'
               }}
             />
