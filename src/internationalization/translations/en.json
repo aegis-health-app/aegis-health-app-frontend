@@ -285,6 +285,12 @@
     "primaryButton": "OK",
     "secondaryButton": ""
   },
+  "uploadImageLimitError": {
+    "header": "Error",
+    "body": "Your profile image is too large. Please select another image.",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
   "changePhoneNumber": {
     "blankPhoneNumberWarning": "Phone Number cannot be left blank",
     "invalidPhoneNumberWarning": "Please input a valid phone number",

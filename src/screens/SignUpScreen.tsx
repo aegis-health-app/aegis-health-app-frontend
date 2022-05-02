@@ -119,6 +119,8 @@ const SignUpScreen = ({ route }) => {
   const [newProfileImage, setNewProfileImage] = useState<ImagePickerResponse>();
   const [showImageUploadError, setShowImageUploadError] =
     useState<boolean>(false);
+  const [showImageUploadLimitError, setShowImageUploadLimitError] =
+    useState<boolean>(false);
 
   const backToPreviousStage = useCallback(() => {
     if (signUpStage > 1) setSignUpStage((prev) => prev - 1);
@@ -135,12 +137,13 @@ const SignUpScreen = ({ route }) => {
     };
 
     if (profileImage.base64) {
-      console.log(user);
       try {
         const { data } = await client.post('/user/profile/image', imagePayload);
         if (data) getUserProfile();
-      } catch (error) {
-        setShowImageUploadError(true);
+      } catch (error: any) {
+        if (error?.response?.status === 413) setShowImageUploadLimitError(true);
+        else setShowImageUploadError(true);
+        setNewProfileImage(undefined);
       }
     }
   }, [newProfileImage, setShowImageUploadError, user]);
@@ -174,7 +177,7 @@ const SignUpScreen = ({ route }) => {
           } else {
             setSignUpStage((prev) => prev + 1);
             const requestOTPResponse = await requestOTP(phoneNumber);
-            setOTPToken(requestOTPResponse.data.token);
+            setOTPToken(requestOTPResponse?.data?.token);
           }
         } else {
           setError('confirmPassword', {
@@ -251,6 +254,12 @@ const SignUpScreen = ({ route }) => {
         close={() => setShowImageUploadError(false)}
         type={AlertType.ERROR}
         message="uploadImageError"
+      />
+      <Alert
+        isOpen={showImageUploadLimitError}
+        close={() => setShowImageUploadLimitError(false)}
+        type={AlertType.ERROR}
+        message="uploadImageLimitError"
       />
       <SafeAreaView>
         <ScrollView>
