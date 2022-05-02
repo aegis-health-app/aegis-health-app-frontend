@@ -26,9 +26,16 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import { UserContext } from '../contexts/UserContext';
-import { requestOTP, signUp, SignUpPayload, verifyOTP } from '../utils/auth';
+import {
+  requestOTP,
+  signUp,
+  SignUpPayload,
+  verifyOTP,
+  verifyPhone
+} from '../utils/auth';
 import SignUpStageThree from '../components/organisms/SignUpStageThree';
 import Alert, { AlertType } from '../components/organisms/Alert';
+import SpinnerOverlay from '../components/atoms/SpinnerOverlay';
 
 export interface InformationList {
   label: string;
@@ -103,6 +110,7 @@ const SignUpScreen = ({ route }) => {
   const { user, getUserProfile } = useContext(UserContext);
 
   const [signUpStage, setSignUpStage] = useState<number>(1);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [otpToken, setOTPToken] = useState<string>('');
 
   const [gender, setGender] = useState('M');
@@ -153,11 +161,21 @@ const SignUpScreen = ({ route }) => {
         otp
       } = data;
 
+      setLoading(true);
+
       if (signUpStage === 1) {
         if (data.password === data.confirmPassword) {
-          const requestOTPResponse = await requestOTP(phoneNumber);
-          setOTPToken(requestOTPResponse.data.token);
-          setSignUpStage((prev) => prev + 1);
+          const verifyPhoneResponse = await verifyPhone(phoneNumber);
+          if (verifyPhoneResponse.status === 200) {
+            setError('phoneNumber', {
+              type: 'manual',
+              message: t('error.usedPhoneNumber')
+            });
+          } else {
+            setSignUpStage((prev) => prev + 1);
+            const requestOTPResponse = await requestOTP(phoneNumber);
+            setOTPToken(requestOTPResponse.data.token);
+          }
         } else {
           setError('confirmPassword', {
             type: 'manual',
@@ -212,6 +230,7 @@ const SignUpScreen = ({ route }) => {
           uploadNewProfileImage();
         } else await getUserProfile();
       }
+      setLoading(false);
     },
     [
       signUpStage,
