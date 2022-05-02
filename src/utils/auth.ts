@@ -34,8 +34,13 @@ export interface SignInPayload {
   password: string;
 }
 
-export const signUp = async (payload: SignUpPayload) =>
-  await client.post('/user/signUp', payload);
+export const signUp = async (payload: SignUpPayload) => {
+  try {
+    return await client.post('/user/signUp', payload);
+  } catch (e: any) {
+    return { ...e };
+  }
+};
 
 export const signIn = async (phone: string, password: string) => {
   try {
@@ -46,8 +51,13 @@ export const signIn = async (phone: string, password: string) => {
   }
 };
 
-export const requestOTP = async (phone: string) =>
-  await client.get(`/otp/request/${phone}`);
+export const requestOTP = async (phone: string) => {
+  try {
+    return await client.get(`/otp/request/${phone}`);
+  } catch (e: any) {
+    return { ...e };
+  }
+};
 
 export const verifyOTP = async (token: string, otp: string) => {
   try {
