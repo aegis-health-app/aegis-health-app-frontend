@@ -189,7 +189,7 @@ const SignUpScreen = ({ route }) => {
 
         if (
           verifyOTPResponse.status === 200 ||
-          verifyOTPResponse.data.status === 'success'
+          verifyOTPResponse?.data?.status === 'success'
         ) {
           setSignUpStage((prev) => prev + 1);
         } else {
@@ -278,6 +278,8 @@ const SignUpScreen = ({ route }) => {
                 handleSubmit={handleSubmit}
                 backToPreviousStage={backToPreviousStage}
                 continueToNextStage={continueToNextStage}
+                setLoading={setLoading}
+                setOTPToken={setOTPToken}
               />
             )}
 
