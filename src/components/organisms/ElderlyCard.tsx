@@ -10,6 +10,7 @@ import FallbackImage from '../molecules/FallbackImage';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { getDisplayName } from '../../utils/elderly/displayNames';
+import images from '../../assets/images';
 
 type ElderlyCardProps = {
   name: string;
@@ -59,7 +60,7 @@ const ElderlyCard = ({ name, imageId, uid }: ElderlyCardProps) => {
       style={styles.card}>
       <>
         <Image
-          source={{ uri: imageId }}
+          source={imageId ? { uri: imageId } : images.defaultProfile}
           style={styles.image}
           borderRadius={10}
           marginRight={3}
