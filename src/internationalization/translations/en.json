@@ -238,7 +238,8 @@
     "invalid": "Invalid {{name}}",
     "passwordNotMatched": "Password must match",
     "samePasswordWarning": "New password cannot be the same as the old password",
-    "wrongCredentials": "Incorrect phone number / password"
+    "wrongCredentials": "Incorrect phone number / password",
+    "usedPhoneNumber": "This phone number is already used"
   },
   "cameraPermissions": {
     "title": "Need Camera Permission",
