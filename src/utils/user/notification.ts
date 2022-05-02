@@ -61,10 +61,10 @@ export const cancelVibration = () => Vibration.cancel();
 
 export const getNotificationFeed: () => Promise<NotificationFeed> =
   async () => {
-    const feed = (await JSON.parse(
-      (await AsyncStorage.getItem('Aegis_NotiFeedList')) ??
-        '{ emergency: [], reminder: [] }'
-    )) as NotificationFeed;
+    const rawFeedList = await AsyncStorage.getItem('Aegis_NotiFeedList');
+    const feed = rawFeedList
+      ? await JSON.parse(rawFeedList)
+      : ({ emergency: [], reminder: [] } as NotificationFeed);
     return feed;
   };
 
