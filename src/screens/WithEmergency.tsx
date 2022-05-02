@@ -8,11 +8,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { mockEmergencyInfo } from '../components/molecules/EmergencyAlertCard';
 import EmergencyAlert from '../components/organisms/EmergencyAlert';
 import { NotificationType } from '../constants/NotificationType';
-import {
-  determineMessageType,
-  getNotificationFeed,
-  storeNotificationFeed
-} from '../utils/user/notification';
+import { determineMessageType } from '../utils/user/notification';
 import { EmergencyInfo } from './EmergencyInfoScreen';
 
 const withEmergency =
