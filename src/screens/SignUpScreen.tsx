@@ -244,7 +244,8 @@ const SignUpScreen = ({ route }) => {
   );
 
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView h="full">
+      <SpinnerOverlay isOpen={isLoading} />
       <Alert
         isOpen={showImageUploadError}
         close={() => setShowImageUploadError(false)}
