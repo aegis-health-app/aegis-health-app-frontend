@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Button, FlatList } from 'native-base';
+import { View, FlatList } from 'native-base';
 import AddButton from '../components/atoms/AddButton';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
