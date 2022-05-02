@@ -50,7 +50,9 @@ const EmergencyInfoScreen = ({ route }) => {
     []
   );
 
-  const [address, setAddress] = useState<string>('');
+  const [address, setAddress] = useState<string>(
+    t('emergency.addressFallback')
+  );
 
   useAsyncEffect(async () => {
     const addressString = await reverseGeocode(
@@ -58,7 +60,13 @@ const EmergencyInfoScreen = ({ route }) => {
       emergencyInfo.location.longtitude
     );
 
-    setAddress(addressString);
+    console.log(addressString);
+
+    setAddress(
+      addressString.length === 0
+        ? t('emergency.addressFallback')
+        : addressString
+    );
   }, [emergencyInfo, reverseGeocode]);
 
   const navigation =
