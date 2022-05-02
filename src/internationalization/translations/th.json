@@ -285,6 +285,12 @@
     "primaryButton": "ตกลง",
     "secondaryButton": ""
   },
+  "uploadImageLimitError": {
+    "header": "Error",
+    "body": "รูปประจำตัวของคุณมีขนาดเกินหนด กรุณาเลือกรูปภาพอื่น",
+    "primaryButton": "OK",
+    "secondaryButton": ""
+  },
   "changePhoneNumber": {
     "blankPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์",
     "invalidPhoneNumberWarning": "กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง",
