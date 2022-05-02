@@ -6,7 +6,8 @@ const images = {
   somyingImg: require('./somying.png'),
   selfCare: require('./selfCare.png'),
   elderlyCare: require('./elderlyCare.png'),
-  healthRecording: require('./healthRecording.png')
+  healthRecording: require('./healthRecording.png'),
+  defaultProfile: require('./defaultProfile.png')
 };
 
 export default images;
