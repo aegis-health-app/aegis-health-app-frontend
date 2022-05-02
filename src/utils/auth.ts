@@ -50,11 +50,23 @@ export const requestOTP = async (phone: string) =>
   await client.get(`/otp/request/${phone}`);
 
 export const verifyOTP = async (token: string, otp: string) => {
-  const payload = { token, pin: otp };
-  return await client.post('/otp/verifyOtp', payload);
+  try {
+    const payload = { token, pin: otp };
+    return await client.post('/otp/verifyOtp', payload);
+  } catch (e: any) {
+    return { ...e };
+  }
 };
 
 export const forgotPassword = async (phoneNo: string, newPassword: string) => {
   const payload = { phoneNo, newPassword };
   return await client.put('/user/forgotPassword', payload);
+};
+
+export const verifyPhone = async (phone: string) => {
+  try {
+    return await client.get(`/user/verifyPhoneNoExist/${phone}`);
+  } catch (e: any) {
+    return { ...e };
+  }
 };
