@@ -41,15 +41,17 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
     <View padding={'16 px'}>
       <View minHeight={'460 px'}>
         <View>
-          <Image
-            source={{ uri: imageid }}
-            fallbackSource={require('../../assets/images/nullQuestion.png')}
-            alt=" "
-            width={'100%'}
-            height={200}
-            resizeMode="contain"
-            mr={3}
-          />
+          {imageid && (
+            <Image
+              source={{ uri: imageid }}
+              fallbackElement={undefined}
+              alt=" "
+              width={'100%'}
+              height={200}
+              resizeMode="contain"
+              mr={3}
+            />
+          )}
         </View>
         <Spacer />
         <View>

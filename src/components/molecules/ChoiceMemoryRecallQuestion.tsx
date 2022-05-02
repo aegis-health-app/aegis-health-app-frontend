@@ -58,7 +58,7 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
       <View minHeight={'460 px'}>
         <Image
           source={{ uri: imageid }}
-          fallbackSource={require('../../assets/images/nullQuestion.png')}
+          fallbackElement={undefined}
           alt=" "
           width={'100%'}
           height={200}
