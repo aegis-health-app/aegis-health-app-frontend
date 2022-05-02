@@ -1,5 +1,5 @@
 import { Button, Pressable, Text } from 'native-base';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -7,6 +7,7 @@ import FormHeader from '../atoms/FormHeader';
 import FormDescription from '../atoms/FormDescription';
 import ControlledOTPInput from '../molecules/ControlledOTPInput';
 import OTPTimerButton from '../atoms/OTPTimerButton';
+import { requestOTP } from '../../utils/auth';
 
 const SignUpStageTwo = ({
   watch,
@@ -14,13 +15,20 @@ const SignUpStageTwo = ({
   errors,
   handleSubmit,
   backToPreviousStage,
-  continueToNextStage
+  continueToNextStage,
+  setLoading,
+  setOTPToken
 }) => {
   const { t } = useTranslation();
 
   const isValidOTP = watch('otp')?.length === 6;
 
-  const sendOTP = () => null;
+  const getOTP = useCallback(async () => {
+    setLoading(true);
+    const response = await requestOTP(watch('phoneNumber'));
+    setOTPToken(response?.data?.token);
+    setLoading(false);
+  }, [watch]);
 
   return (
     <View>
@@ -48,7 +56,7 @@ const SignUpStageTwo = ({
         isDisabled={!isValidOTP}>
         {t('auth.submitOTP')}
       </Button>
-      <OTPTimerButton onPress={sendOTP} />
+      <OTPTimerButton onPress={getOTP} />
     </View>
   );
 };
