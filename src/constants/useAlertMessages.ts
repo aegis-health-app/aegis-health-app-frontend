@@ -41,6 +41,12 @@ export const useAlertMessages = () => {
       primaryButton: t('uploadImageError.primaryButton'),
       secondaryButton: t('uploadImageError.secondaryButton')
     },
+    uploadImageLimitError: {
+      header: t('uploadImageLimitError.header'),
+      body: t('uploadImageLimitError.body'),
+      primaryButton: t('uploadImageLimitError.primaryButton'),
+      secondaryButton: t('uploadImageLimitError.secondaryButton')
+    },
     changePhoneNumberSuccess: {
       header: t('changePhoneNumberSuccess.header'),
       body: t('changePhoneNumberSuccess.body'),
