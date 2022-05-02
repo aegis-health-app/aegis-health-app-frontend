@@ -51,9 +51,10 @@ const HealthRecordChart = (props: Props) => {
     const datapoints = data.data.map((item) => {
       return item.value;
     });
-    if (datapoints && timeFrame)
+    if (datapoints.length && timeFrame) {
       setLabels(getPeriodLable(data.data, timeFrame as TimeFrame));
-    setDatasets([{ data: datapoints }]);
+      setDatasets([{ data: datapoints }]);
+    }
   };
 
   useEffect(() => {
