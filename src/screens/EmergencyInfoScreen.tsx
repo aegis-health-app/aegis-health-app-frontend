@@ -15,11 +15,11 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import images from '../assets/images';
 import useAsyncEffect from '../hooks/useAsyncEffect';
 import { RootStackParamList } from '../navigation/types';
 import { Geolocation, useGeolocation } from '../hooks/useGeolocation';
 import { openDialScreen } from '../utils/phone';
+import images from '../assets/images';
 
 export type EmergencyInfo = {
   name: string;
@@ -85,10 +85,15 @@ const EmergencyInfoScreen = ({ route }) => {
         </Text>
         <Image
           alt="Emergency Sender Profile Image"
-          source={images.sompochImg}
+          source={
+            emergencyInfo.elderlyImageId
+              ? { uri: emergencyInfo.elderlyImageId }
+              : images.defaultProfile
+          }
           width={160}
           height={160}
           mb="6"
+          borderRadius={8}
         />
         <VStack px={6}>
           {emergencyInfoList.map((info) => (
