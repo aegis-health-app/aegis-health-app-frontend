@@ -16,6 +16,9 @@ import { UserContext } from '../../contexts/UserContext';
 import ReminderItem from '../../components/molecules/ReminderItem';
 import ExpansibleToggle from '../../components/atoms/ExpansibleToggle';
 import ReminderDayHeader from '../../components/atoms/ReminderDayHeader';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
+import moment from 'moment';
+import { client } from '../../config/axiosConfig';
 
 const RemindersScreen = () => {
   const { t } = useTranslation();
@@ -23,6 +26,26 @@ const RemindersScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { user } = useContext(UserContext);
   const [showScreen, setShowScreen] = useState<boolean>(true);
+  const { isElderly } = useContext(UserContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
+  const [date, setDate] = useState<Date>(new Date());
+
+  useAsyncEffect(async () => {
+    const currentDate = moment(date).add(7, 'h').toDate();
+    const payload = {
+      currentDate: currentDate
+    };
+    console.log(currentDate);
+    try {
+      const res = await client.post(
+        '/reminder/unfinishedReminder/elderly',
+        payload
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [date]);
 
   useAsyncEffect(async () => {
     if (!user) return;
@@ -115,11 +138,12 @@ const RemindersScreen = () => {
           <Button
             onPress={() => {
               stop();
-              navigation.navigate('CreateReminderScreen', {});
+              navigation.navigate('CreateReminderScreen', {
+                eid: isElderly ? undefined : currentElderlyUid
+              });
             }}>
             <Text display="flex" flexDirection="column" color="white">
               {t('reminders.addReminder')}
-              {/* {t('healthRecordings.addRecording')}{' '} */}
               <AddIcon size="3" color="white" />
             </Text>
           </Button>
