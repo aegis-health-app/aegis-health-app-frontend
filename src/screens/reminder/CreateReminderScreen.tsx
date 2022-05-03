@@ -45,7 +45,8 @@ const CreateReminderScreen = ({
     useState<boolean>(false);
   const [showCreateReminderError, setShowCreateReminderError] =
     useState<boolean>(false);
-  const [createReminderErrorMessage, setCreateReminderErrorMessage] = useState('')
+  const [createReminderErrorMessage, setCreateReminderErrorMessage] =
+    useState('');
   const [date, setDate] = useState<Date>(new Date());
   const [image, setImage] = useState<ImagePickerResponse>();
   const [notifyMyCaretakers, setNotifyMyCaretaker] = useState<boolean>(true);
@@ -119,12 +120,14 @@ const CreateReminderScreen = ({
       // navigation.goBack();
       setShowCreateReminderSuccess(true);
     } catch (error) {
-      const err = error as AxiosError
+      const err = error as AxiosError;
       if (!err || !err.response) return;
-      console.log(err.response.status)
-      if (err.response.status === 400) setCreateReminderErrorMessage('reminderInvalidStartingDateError')
-      else if (err.response.status === 415) setCreateReminderErrorMessage("reminderUploadImageError")
-      else setCreateReminderErrorMessage("createReminderError")
+      console.log(err.response.status);
+      if (err.response.status === 400)
+        setCreateReminderErrorMessage('reminderInvalidStartingDateError');
+      else if (err.response.status === 415)
+        setCreateReminderErrorMessage('reminderUploadImageError');
+      else setCreateReminderErrorMessage('createReminderError');
       setShowCreateReminderError(true);
     }
   };
