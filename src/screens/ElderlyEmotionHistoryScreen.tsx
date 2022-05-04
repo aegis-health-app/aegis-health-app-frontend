@@ -1,4 +1,4 @@
-import { View, useToast, ScrollView, Spinner } from 'native-base';
+import { View, useToast, ScrollView, Text } from 'native-base';
 import React, { useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
@@ -11,6 +11,7 @@ import {
 import useAsyncEffect from './../hooks/useAsyncEffect';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import { useTranslation } from 'react-i18next';
 
 const ElderlyEmotionHistoryScreen = ({
   route
@@ -28,6 +29,8 @@ const ElderlyEmotionHistoryScreen = ({
   const [hist, setHist] = useState<EmotionHistory[]>([]);
   const [histCount, setHistCount] = useState(0);
 
+  const { t } = useTranslation();
+
   const toast = useToast();
   function handleDayPress(val: EmotionalHistoryFrequency) {
     const message = getEmotionFromHeatmapFrequency(val.date, val.count);
@@ -36,6 +39,7 @@ const ElderlyEmotionHistoryScreen = ({
 
   useAsyncEffect(async () => {
     const data = await getEmotionHistory(uid);
+
     if (data.count && data.records) {
       setHist(data.records);
       setHistCount(data.count);
@@ -72,7 +76,7 @@ const ElderlyEmotionHistoryScreen = ({
           </View>
         ) : (
           <View height="96" justifyContent="center" alignItems="center">
-            <Spinner size="lg" />
+            <Text fontSize="xl">{t('emotionalRecord.noData')}</Text>
           </View>
         )}
       </View>

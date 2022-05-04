@@ -374,7 +374,8 @@
     "NA": "N/A",
     "none": "No emotion record for today.",
     "switchLast": "This is your last time to toggle emotion switch for today",
-    "switchDisabled": "You cannot toggle emotion switch anymore for today"
+    "switchDisabled": "You cannot toggle emotion switch anymore for today",
+    "noData": "No Data"
   },
   "emotionTrackingCard": {
     "Monday": "Happy Monday",
