@@ -336,7 +336,7 @@
     "openInMaps": "Open in Maps ",
     "callSender": "Call {{name}}",
     "emergencyLocation": "Emergency Location",
-    "addressFallback": "Elderly's device did not allow location tracking. Please contaact directly."
+    "addressFallback": "Elderly's device did not allow location tracking. Please contact directly."
   },
   "emergencyNotification": {
     "header": "Alert",
