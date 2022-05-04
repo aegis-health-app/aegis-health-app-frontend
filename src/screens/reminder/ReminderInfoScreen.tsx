@@ -25,7 +25,7 @@ import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { client } from '../../config/axiosConfig';
 import { Reminder } from '../../dto/modules/reminder.dto';
 
-import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepeatitionConstants';
+import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepetitionConstants';
 import Divider from '../../components/atoms/Divider';
 import { UserContext } from '../../contexts/UserContext';
 import { useLanguage } from '../../internationalization/useLanguage';
