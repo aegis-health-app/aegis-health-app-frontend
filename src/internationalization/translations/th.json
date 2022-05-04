@@ -287,7 +287,7 @@
   },
   "uploadImageLimitError": {
     "header": "Error",
-    "body": "รูปประจำตัวของคุณมีขนาดเกินหนด กรุณาเลือกรูปภาพอื่น",
+    "body": "รูปประจำตัวของคุณมีขนาดเกินกำหนด กรุณาเลือกรูปภาพอื่น",
     "primaryButton": "OK",
     "secondaryButton": ""
   },
