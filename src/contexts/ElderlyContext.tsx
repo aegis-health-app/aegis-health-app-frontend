@@ -40,7 +40,13 @@ const ElderlyContextProvider = ({ ...props }) => {
     setCaretakerList(_caretakerList);
 
     if (_elderlyProfile.listModuleid) {
-      _elderlyProfile.listModuleid = [0, ..._elderlyProfile?.listModuleid, 100];
+      //@ts-ignore
+      _elderlyProfile.listModuleid = [
+        0,
+        ..._elderlyProfile?.listModuleid,
+        100
+      ].filter((id) => id !== 5);
+
       setElderlyProfile(_elderlyProfile);
     }
 
