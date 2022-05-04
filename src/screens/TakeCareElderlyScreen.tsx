@@ -48,6 +48,7 @@ const TakeCareElderlyScreen = () => {
     setElderly(_elderly);
 
     const { isEnabled } = await getIsEmotionTrackingOn(uid);
+    console.log({ isEnabled });
     setIsEmotionTrackerOn(isEnabled);
   }, [uid]);
 

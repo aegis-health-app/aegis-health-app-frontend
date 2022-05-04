@@ -7,7 +7,7 @@ export enum ModuleEnum {
   moduleManage = 100
 }
 
-export type ModuleId = 0 | 1 | 2 | 3 | 4 | 100;
+export type ModuleId = 0 | 1 | 2 | 3 | 4 | 5 | 100;
 
 export interface Module {
   moduleid: ModuleId;
