@@ -696,7 +696,8 @@
     "noNotificationRepetition": "ไม่มีการแจ้งเตือกซำ้",
     "repeatNotification3Times": "แจ้งเตือนซ้ำ ทุกๆ 10 มากสุดนาที 3 ครั้ง",
     "repeatNotificationUnitilComplete": "แจ้งเตือนซ้ำ ทุกๆ 10 นาที จนกว่าผู้สูงอายุกดปุ่ม “ฉันทำแล้ว",
-    "cancel": "ยกเลิก"
+    "cancel": "ยกเลิก",
+    "unabled": "ระดับความสำคัญจะถูกตั้งเป็นตำ่ เมื่อมีการแจ้งเตือนซำ้"
   },
   "createReminderSuccess": {
     "header": "สำเร็จ",

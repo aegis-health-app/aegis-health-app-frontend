@@ -115,7 +115,7 @@ const RemindersScreen = () => {
           <Button
             onPress={() => {
               stop();
-              navigation.navigate('CreateReminderScreen');
+              navigation.navigate('CreateReminderScreen', {});
             }}>
             <Text display="flex" flexDirection="column" color="white">
               {t('reminders.addReminder')}
