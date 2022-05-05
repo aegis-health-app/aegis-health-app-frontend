@@ -25,7 +25,12 @@ import { ReminderRepetitionPattern } from '../../constants/ReminderRepetitionCon
 import { UserContext } from '../../contexts/UserContext';
 import CustomRecurringModal from '../organisms/CustomRecurringModal';
 import ImportanceLevelInfoCard from './ImportanceLevelInfoCard';
-import { ImportanceLevel, RecurringInterval, RecursionPeriod } from '../../dto/modules/reminder.dto';
+import {
+  ImportanceLevel,
+  RecurringInterval,
+  RecursionPeriod
+} from '../../dto/modules/reminder.dto';
+import AuthFooter from '../atoms/AuthFooter';
 
 const ReminderForm = ({
   control,
@@ -68,7 +73,7 @@ const ReminderForm = ({
   repeatsOnWeekday: number[];
   setRepeatsOnWeekday: (repeatsOnWeekday: number[]) => void;
   repeatsOnDate: number;
-  setRepeatsOnDate: (repeatsOnDate: number) => void
+  setRepeatsOnDate: (repeatsOnDate: number) => void;
 }) => {
   const { t } = useTranslation();
   const { language } = useSettings();
@@ -108,12 +113,17 @@ const ReminderForm = ({
 
   const importantLevels = [
     { label: t('reminderImportanceLevel.low'), value: ImportanceLevel.LOW },
-    { label: t('reminderImportanceLevel.medium'), value: ImportanceLevel.MEDIUM },
+    {
+      label: t('reminderImportanceLevel.medium'),
+      value: ImportanceLevel.MEDIUM
+    },
     { label: t('reminderImportanceLevel.high'), value: ImportanceLevel.HIGH }
   ];
 
   useEffect(() => {
     repetition === RecurringInterval.CUSTOM && setShowCustomModal(true);
+    !(repetition === RecurringInterval.DOES_NOT_REPEAT) &&
+      setImportanceLevel(ImportanceLevel.LOW);
   }, [repetition]);
 
   return (
@@ -239,7 +249,7 @@ const ReminderForm = ({
                 setValue={setRepetition}
               />
             </View>
-            {isElderly ? (
+            {!isElderly ? (
               <></>
             ) : (
               <>
@@ -254,12 +264,24 @@ const ReminderForm = ({
                       <QuestionIcon name="question" size="6" />
                     </TouchableOpacity>
                   </View>
-
-                  <DropDownSelect
-                    value={importanceLevel}
-                    items={importantLevels}
-                    setValue={setImportanceLevel}
-                  />
+                  {repetition === RecurringInterval.DOES_NOT_REPEAT ? (
+                    <DropDownSelect
+                      value={importanceLevel}
+                      items={importantLevels}
+                      setValue={setImportanceLevel}
+                    />
+                  ) : (
+                    <>
+                      <View style={styles.disabledDropDown}>
+                        <Text fontSize={13}>
+                          {t('reminderImportanceLevel.low')}
+                        </Text>
+                      </View>
+                      <Text style={styles.warningText}>
+                        {t('reminderImportanceLevel.unabled')}
+                      </Text>
+                    </>
+                  )}
                 </View>
               </>
             )}
@@ -344,5 +366,18 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  disabledDropDown: {
+    borderWidth: 1,
+    borderColor: 'darkgray',
+    height: 50,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
+    borderRadius: 10
+  },
+  warningText: {
+    fontSize: 14,
+    color: 'orange',
+    margin: 5,
   }
 });

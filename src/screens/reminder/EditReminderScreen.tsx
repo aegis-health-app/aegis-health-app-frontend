@@ -16,7 +16,7 @@ import {
   EditReminderInfo,
   ImportanceLevel,
   RecurringInterval,
-  RecursionPeriod,
+  RecursionPeriod
 } from '../../dto/modules/reminder.dto';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../contexts/UserContext';
@@ -42,11 +42,16 @@ const EditReminderScreen = ({
   const watchInputs = watch();
   const cancelRef = useRef(null);
 
-  const [showUpdateReminderSuccess, setShowUpdateReminderSuccess] = useState<boolean>(false)
-  const [showUpdateReminderError, setShowUpdateReminderError] = useState<boolean>(false)
-  const [showDeleteReminderSuccess, setShowDeleteReminderSuccess] = useState<boolean>(false)
-  const [showDeleteReminderError, setShowDeleteReminderError] = useState<boolean>(false)
-  const [updateRemindeErrorMessage, setUpdateReminderErrorMessage] = useState('')
+  const [showUpdateReminderSuccess, setShowUpdateReminderSuccess] =
+    useState<boolean>(false);
+  const [showUpdateReminderError, setShowUpdateReminderError] =
+    useState<boolean>(false);
+  const [showDeleteReminderSuccess, setShowDeleteReminderSuccess] =
+    useState<boolean>(false);
+  const [showDeleteReminderError, setShowDeleteReminderError] =
+    useState<boolean>(false);
+  const [updateRemindeErrorMessage, setUpdateReminderErrorMessage] =
+    useState('');
 
   const [date, setDate] = useState<Date>(info.startingDateTime);
   const [image, setImage] = useState<ImagePickerResponse | undefined>(
@@ -121,11 +126,13 @@ const EditReminderScreen = ({
       console.log('updated');
       navigation.goBack();
     } catch (error) {
-      const err = error as AxiosError
+      const err = error as AxiosError;
       if (!err || !err.response) return;
-      if (err.response.status === 400) setUpdateReminderErrorMessage('reminderInvalidStartingDateError')
-      else if (err.response.status === 415) setUpdateReminderErrorMessage("reminderUploadImageError")
-      else setUpdateReminderErrorMessage("updateReminderError")
+      if (err.response.status === 400)
+        setUpdateReminderErrorMessage('reminderInvalidStartingDateError');
+      else if (err.response.status === 415)
+        setUpdateReminderErrorMessage('reminderUploadImageError');
+      else setUpdateReminderErrorMessage('updateReminderError');
       setShowUpdateReminderError(true);
     }
   };
@@ -141,7 +148,7 @@ const EditReminderScreen = ({
       console.log('deleted');
       navigation.goBack();
     } catch (err) {
-      setShowDeleteReminderError(true)
+      setShowDeleteReminderError(true);
     }
   };
 
@@ -165,7 +172,7 @@ const EditReminderScreen = ({
         type={AlertType.ERROR}
         message={updateRemindeErrorMessage}
       />
-       <Alert
+      <Alert
         isOpen={showDeleteReminderSuccess}
         close={() => {
           setShowDeleteReminderSuccess(false);

@@ -696,7 +696,8 @@
     "noNotificationRepetition": "No notification repetition",
     "repeatNotification3Times": "Repeat notification 3 times with 10 minutes intervals",
     "repeatNotificationUnitilComplete": "Repeat with 10 mintues interval until marked as completed",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "unabled": "important level is set to low when the reminder is repeated"
   },
   "createReminderSuccess": {
     "header": "Success",
