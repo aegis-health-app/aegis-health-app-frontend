@@ -41,10 +41,7 @@ const ReminderInfoScreen = ({ route }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const reminderId = useMemo<ReminderNoti>(
-    () => route?.params.info.rid,
-    [route]
-  );
+  const reminderId = useMemo<number>(() => route?.params.info.rid, [route]);
 
   const [reminderInfo, setReminder] = useState<Reminder>();
 
