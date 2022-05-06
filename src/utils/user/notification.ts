@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import moment from 'moment';
 import { Vibration } from 'react-native';
+import InCallManager from 'react-native-incall-manager';
 import { client } from '../../config/axiosConfig';
 import { NotificationType } from '../../constants/NotificationType';
 import { EmergencyInfo } from '../../screens/EmergencyInfoScreen';
@@ -18,9 +19,9 @@ export type ReminderNoti = {
   title: string;
   note: string;
   isDone: boolean;
-  startingDateTime: Date;
+  startingDateTime: string;
   user: string;
-  rid: number;
+  rid: string;
 
   messageType?: NotificationType;
 };
@@ -93,7 +94,7 @@ export const handleBackgroundMessage = async (
     };
 
     const feed = await getNotificationFeed();
-    console.log(feed);
+
     feed?.emergency?.push({
       ...emergencyPayload,
       messageType: NotificationType.EMERGENCY
@@ -101,6 +102,36 @@ export const handleBackgroundMessage = async (
 
     storeNotificationFeed(feed);
 
+    InCallManager.startRingtone('_DEFAULT_');
+    InCallManager.turnScreenOn();
+
     startEmergencyVibration();
+  } else if (type === NotificationType.EMERGENCY_CANCEL) {
+    InCallManager.stopRingtone();
+    InCallManager.stop();
+    InCallManager.turnScreenOn();
+  } else if (type === NotificationType.REMINDER && data) {
+    console.log(data);
+
+    const { title, note, isDone, startingDateTime, user, rid } = data;
+
+    const reminderPayload: ReminderNoti = {
+      title,
+      note,
+      isDone: isDone === 'true',
+      startingDateTime: startingDateTime,
+      user,
+      rid,
+      messageType: NotificationType.REMINDER
+    };
+    try {
+      const feed = await getNotificationFeed();
+
+      feed?.reminder?.push(reminderPayload);
+
+      storeNotificationFeed(feed);
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
