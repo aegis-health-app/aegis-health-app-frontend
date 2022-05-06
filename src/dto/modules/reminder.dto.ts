@@ -52,8 +52,8 @@ export type Reminder = {
   startingDateTime: Date;
   isRemindCaretaker: boolean;
   note: string;
-  importanceLevel: 'Low' | 'Medium' | 'High';
-  recursion?: 'EVERY_DAY' | 'EVERY_MONTH' | 'EVERY_WEEK';
+  importanceLevel: ImportanceLevel;
+  recursion?: RecurringInterval;
   customRecursion?: Recursion;
   uid: number;
   imageid: string;
