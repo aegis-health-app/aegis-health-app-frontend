@@ -53,7 +53,7 @@ const ReminderInfoScreen = ({ route }) => {
   }, [route, reminderInfo]);
 
   const getRecursionLevel = useCallback(() => {
-    const { recursion, customRecursion } = reminderInfo;
+    const { recursion, customRecursion } = reminderInfo ?? {};
 
     if (recursion) return t(ReminderInfoScreenRecursion[recursion]);
     if (customRecursion) return t('reminder.customRecursion');
