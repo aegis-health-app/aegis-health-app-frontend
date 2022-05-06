@@ -575,7 +575,9 @@
     "weekRecursion": "Every week",
     "monthRecursion": "Every month",
     "yearRecursion": "Every year",
-    "customRecursion": "Custom"
+    "customRecursion": "Custom",
+    "markComplete": "Mark as Complete",
+    "markNotComplete": "Mark as Not Complete"
   },
   "reminderForm": {
     "title": "Title",
