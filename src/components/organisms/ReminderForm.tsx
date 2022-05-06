@@ -191,7 +191,7 @@ const ReminderForm = ({
             {Platform.OS === 'android' && (
               <HStack justifyContent="space-between" alignItems="center">
                 <Text fontSize={16} fontWeight="900" w={100}>
-                  {getFormattedDate(date, language)}
+                  {moment(date).format('DD/MM/YYYY')}
                 </Text>
                 <Button variant="outline" onPress={() => showDatePicker()}>
                   {t('reminderForm.selectDate')}
