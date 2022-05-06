@@ -12,6 +12,9 @@ import {
   ReminderNoti,
   storeNotificationFeed
 } from '../../utils/user/notification';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
@@ -60,13 +63,20 @@ const UpComingAlert = () => {
     setReminderList(feed.reminder as ReminderNoti[]);
   }, [setEmergencyList]);
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const navigateToAllReminders = useCallback(() => {
+    navigation.navigate('RemindersScreen');
+  }, []);
+
   return (
     <View w="full" mt={6}>
       <HStack justifyContent="space-between" alignItems="center">
         <Text fontSize="2xl" fontWeight="600" mb={4}>
           {t('modules.notification')}
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={navigateToAllReminders}>
           <Text
             fontSize="lg"
             fontWeight="500"
