@@ -70,21 +70,32 @@ const ReminderInfoScreen = ({ route }) => {
     }
   }, [reminderId, setReminder]);
 
+  const editReminder = useCallback(() => {
+    if (reminderInfo) {
+      const {
+        title,
+        startingDateTime,
+        isRemindCaretaker,
+        note,
+        importanceLevel,
+        recursion,
+        customRecursion
+      } = reminderInfo;
 
-  const editReminder = useCallback(
-    () =>
       navigation.navigate('EditReminderScreen', {
         info: {
-          dateTime: new Date(),
-          image: undefined,
-          note: 'hi',
-          notifyMyCaretaker: false,
-          repetition: 'everyday',
-          title: 'hello'
+          title,
+          startingDateTime: new Date(startingDateTime),
+          isRemindCaretaker,
+          note,
+          importanceLevel,
+          recursion,
+          customRecursion,
+          rid: reminderId
         }
-      }),
-    []
-  );
+      });
+    }
+  }, [reminderId, reminderInfo]);
 
   return (
     <View px={5}>
