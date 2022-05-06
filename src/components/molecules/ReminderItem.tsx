@@ -1,25 +1,69 @@
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useContext } from 'react';
 import { View, Text, AspectRatio, Box, Heading, Image } from 'native-base';
-import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
 import { UserContext } from '../../contexts/UserContext';
+import { Reminder } from '../../interfaces/reminders';
+import { CaretakerContext } from '../../contexts/CaretakerContext';
+import moment from 'moment';
+import {
+  deleteReminderCaretaker,
+  deleteReminderElderly,
+  markAsCompletedElderly,
+  markAsNotCompleteElderly
+} from '../../utils/reminders';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
 
-const ReminderItem = () => {
-  const { user } = useContext(UserContext);
+interface Props {
+  data: Reminder;
+  isOverdue?: boolean;
+  isFinished?: boolean;
+  lastIndex: boolean;
+}
+
+const ReminderItem = ({ data, isOverdue, isFinished, lastIndex }: Props) => {
+  const {
+    rid,
+    title,
+    note,
+    importanceLevel,
+    imageid,
+    hour,
+    minute,
+    isRecurring
+  } = data;
+  const { isElderly } = useContext(UserContext);
+  const { currentElderlyUid } = useContext(CaretakerContext);
   const { t } = useTranslation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  // hardcode waiting for backend
-  const imageExists = true;
-  const isOverdue = true;
-  const enableBottomBar = true;
-  const isFinished = false;
-  // both enableBottomBar and isFinished can't be true at the same time
-  const elderly = true;
+  const markAsCompleteHandler = async (rid) => {
+    const currentDate = moment(new Date()).add(7, 'h').toDate();
+    if (isElderly) {
+      await markAsCompletedElderly(rid, currentDate);
+    }
+  };
+
+  const markAsNotCompleteHandler = async (rid) => {
+    if (isElderly) {
+      await markAsNotCompleteElderly(rid);
+    }
+  };
+
+  const deleteHandler = async (rid) => {
+    if (isElderly) {
+      await deleteReminderElderly(rid);
+    } else {
+      await deleteReminderCaretaker(currentElderlyUid, rid);
+    }
+  };
 
   const sidebarColor = isOverdue ? '#FDBA74' : '#7CC2FF';
 
-  return elderly ? (
+  return (
     <View flex={1} flexDirection="row" mb={4}>
       <View flex={1} alignItems="center" h="full" mr="3">
         <View
@@ -31,18 +75,23 @@ const ReminderItem = () => {
           mb="2"
           rounded="md">
           <Text fontSize={16} fontWeight="medium">
-            08:00
+            {hour.toString().length > 1 ? hour : `0${hour}`}:
+            {minute.toString().length > 1 ? minute : `0${minute}`}
           </Text>
         </View>
-        {/* TODO: not render this one when it's the last item */}
-        <View flex={1} backgroundColor={sidebarColor} w="1" h="full" />
+        {!lastIndex && (
+          <View flex={1} backgroundColor={sidebarColor} w="1" h="full" />
+        )}
       </View>
       <Box flex={5} shadow="2" rounded="lg" style={styles.card}>
-        <TouchableOpacity onPress={() => console.log('reminder item pressed')}>
-          {imageExists && (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('ReminderInfoScreen', { info: { rid: rid } })
+          }>
+          {imageid && (
             <AspectRatio w="100%">
               <Image
-                source={images.authBanner}
+                source={{ uri: imageid }}
                 alt="reminder image"
                 w="100%"
                 h="100%"
@@ -53,15 +102,22 @@ const ReminderItem = () => {
           <View
             p="4"
             backgroundColor="white"
-            roundedTop={imageExists ? null : 'lg'}
-            roundedBottom={enableBottomBar || isFinished ? null : 'lg'}>
+            roundedTop={imageid ? null : 'lg'}
+            roundedBottom={!isRecurring || isFinished ? null : 'lg'}>
             <Heading size={['md', 'lg', 'md']} fontWeight="medium">
-              Placeholder Reminder
+              <Text style={styles.priority}>
+                {importanceLevel === 'Medium'
+                  ? '! '
+                  : importanceLevel === 'High'
+                  ? '!!! '
+                  : null}
+              </Text>
+              {title}
             </Heading>
-            <Text>Description description description</Text>
+            {note ? <Text>{note}</Text> : null}
           </View>
         </TouchableOpacity>
-        {enableBottomBar && !isFinished && (
+        {isElderly && !isRecurring && !isFinished && (
           <View
             flexDirection="row"
             justifyContent="flex-end"
@@ -69,12 +125,12 @@ const ReminderItem = () => {
             py="2"
             backgroundColor="#F1F1F1"
             roundedBottom="lg">
-            <TouchableOpacity onPress={() => console.log('complete')}>
+            <TouchableOpacity onPress={() => markAsCompleteHandler(rid)}>
               <Text color="#005DB4">{t('reminders.markAsComplete')}</Text>
             </TouchableOpacity>
           </View>
         )}
-        {isFinished && !enableBottomBar && (
+        {isFinished && (
           <View
             flexDirection="row"
             justifyContent="space-between"
@@ -82,60 +138,18 @@ const ReminderItem = () => {
             py="2"
             backgroundColor="#F1F1F1"
             roundedBottom="lg">
-            <TouchableOpacity onPress={() => console.log('delete')}>
+            <TouchableOpacity onPress={() => deleteHandler(rid)}>
               <View backgroundColor="#FDBA74" px={5} rounded="md">
                 <Text color="#C2410C">{t('reminders.delete')}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => console.log('incomplete')}>
-              <Text color="#C2410C">{t('reminders.markAsIncomplete')}</Text>
-            </TouchableOpacity>
+            {isElderly && (
+              <TouchableOpacity onPress={() => markAsNotCompleteHandler(rid)}>
+                <Text color="#C2410C">{t('reminders.markAsIncomplete')}</Text>
+              </TouchableOpacity>
+            )}
           </View>
         )}
-      </Box>
-    </View>
-  ) : (
-    <View flex={1} flexDirection="row" mb={4}>
-      <View flex={1} alignItems="center" h="full" mr="3">
-        <View
-          justifyContent="center"
-          alignItems="center"
-          backgroundColor={sidebarColor}
-          w="100%"
-          h="8"
-          mb="2"
-          rounded="md">
-          <Text fontSize={16} fontWeight="medium">
-            08:00
-          </Text>
-        </View>
-        {/* TODO: not render this one when it's the last item */}
-        <View flex={1} backgroundColor={sidebarColor} w="1" h="full" />
-      </View>
-      <Box flex={5} shadow="2" rounded="lg" style={styles.card}>
-        <TouchableOpacity onPress={() => console.log('reminder item pressed')}>
-          {imageExists && (
-            <AspectRatio w="100%">
-              <Image
-                source={images.authBanner}
-                alt="reminder image"
-                w="100%"
-                h="100%"
-                roundedTop="lg"
-              />
-            </AspectRatio>
-          )}
-          <View
-            p="4"
-            backgroundColor="white"
-            rounded={imageExists ? null : 'lg'}
-            roundedBottom={imageExists && 'lg'}>
-            <Heading size={['md', 'lg', 'md']} fontWeight="medium">
-              Placeholder Reminder
-            </Heading>
-            <Text>Description description description</Text>
-          </View>
-        </TouchableOpacity>
       </Box>
     </View>
   );
@@ -152,6 +166,9 @@ const styles = StyleSheet.create({
     shadowRadius: 1.41,
     elevation: 2,
     borderRadius: 8
+  },
+  priority: {
+    color: '#C2410C'
   }
 });
 
