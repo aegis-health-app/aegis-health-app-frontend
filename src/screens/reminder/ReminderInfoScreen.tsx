@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   Text,
@@ -8,7 +8,8 @@ import {
   Spacer,
   Box,
   View,
-  Image
+  Image,
+  VStack
 } from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
@@ -22,21 +23,15 @@ import ReminderStatusBar, {
 import FormHeader from '../../components/atoms/FormHeader';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { client } from '../../config/axiosConfig';
-import {
-  ImportanceLevel,
-  RecurringInterval,
-  Reminder
-} from '../../dto/modules/reminder.dto';
+import { Reminder } from '../../dto/modules/reminder.dto';
 
 import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepetitionConstants';
 import Divider from '../../components/atoms/Divider';
-import { UserContext } from '../../contexts/UserContext';
 import { useLanguage } from '../../internationalization/useLanguage';
 
 const ReminderInfoScreen = ({ route }) => {
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const { user } = useContext(UserContext);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -97,6 +92,14 @@ const ReminderInfoScreen = ({ route }) => {
     }
   }, [reminderId, reminderInfo]);
 
+  const buttonMessages = useMemo(() => {
+    return {
+      PENDING: 'reminder.markComplete',
+      OVERDUE: 'reminder.markComplete',
+      DONE: 'reminder.markNotComplete'
+    };
+  }, []);
+
   return (
     <View px={5}>
       <ReminderStatusBar status={reminderStatus} />
@@ -155,6 +158,12 @@ const ReminderInfoScreen = ({ route }) => {
           alt="Profile Picture"
         />
       )}
+      <Button
+        colorScheme={reminderStatus === ReminderStatus.DONE ? 'red' : 'blue'}
+        w="full"
+        mt={6}>
+        {t(buttonMessages[reminderStatus])}
+      </Button>
     </View>
   );
 };

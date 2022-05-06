@@ -575,7 +575,9 @@
     "weekRecursion": "ทุกสัปดาห์",
     "monthRecursion": "ทุกเดือน",
     "yearRecursion": "ทุกปี",
-    "customRecursion": "กำหนดเอง"
+    "customRecursion": "กำหนดเอง",
+    "markComplete": "ฉันทำแล้ว",
+    "markNotComplete": "ฉันยังไม่ได้ทำ"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
