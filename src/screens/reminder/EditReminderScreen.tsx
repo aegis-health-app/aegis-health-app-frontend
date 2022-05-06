@@ -122,6 +122,7 @@ const EditReminderScreen = ({
 
   const updateReminder = async (payload) => {
     try {
+      payload.rid = parseInt(payload.rid, 10);
       const res = await client.put('/reminder', payload);
       console.log('updated');
       navigation.goBack();
