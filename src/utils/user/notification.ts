@@ -124,14 +124,11 @@ export const handleBackgroundMessage = async (
       rid,
       messageType: NotificationType.REMINDER
     };
-    try {
-      const feed = await getNotificationFeed();
 
-      feed?.reminder?.push(reminderPayload);
+    const feed = await getNotificationFeed();
 
-      storeNotificationFeed(feed);
-    } catch (e) {
-      console.error(e);
-    }
+    feed?.reminder?.push(reminderPayload);
+
+    storeNotificationFeed(feed);
   }
 };
