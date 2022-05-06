@@ -33,7 +33,7 @@ const ModuleAlertCard = ({
             {t('modules.sender', { name: notification.user })}
           </Text>
           <Text color="darkBlue.600" fontSize="16">
-            {moment(notification.startingDateTime).format('hh:mm')}
+            {moment(notification.startingDateTime).format('HH:mm')}
           </Text>
         </HStack>
         <View>
