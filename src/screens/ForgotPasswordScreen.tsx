@@ -62,16 +62,13 @@ const ForgotPasswordScreen = () => {
             message: t('general.incorrectOtp')
           });
         }
-      } else if (stage === stages.third) {
-        // WIP: need to wait for backend api endpoint
-        // Moved this logic into stage3 file
       }
     },
     [stage]
   );
 
   const resendOtp = async () => {
-    const res = await client.get(`/otp/request/${number}`);
+    const res = await requestOTP(number);
     setOtpToken(res.data.token);
   };
 
