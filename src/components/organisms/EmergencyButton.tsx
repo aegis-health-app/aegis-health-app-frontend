@@ -32,7 +32,9 @@ const EmergencyButton = ({ isEmergency, reportEmergency }) => {
               borderRadius={999}
               minWidth={buttonSize - 64}
               height={buttonSize - 64}>
-              <Text fontSize="8xl" color={isEmergency ? 'red.600' : 'white'}>
+              <Text
+                fontSize={ScreenWidth * 0.2}
+                color={isEmergency ? 'red.600' : 'white'}>
                 SOS
               </Text>
             </Button>
