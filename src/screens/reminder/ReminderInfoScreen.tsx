@@ -20,26 +20,18 @@ import ReminderStatusBar, {
   statusDecoration
 } from '../../components/atoms/ReminderStatusBar';
 import FormHeader from '../../components/atoms/FormHeader';
-import { ReminderNoti } from '../../utils/user/notification';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import { client } from '../../config/axiosConfig';
-import { Reminder } from '../../dto/modules/reminder.dto';
+import {
+  ImportanceLevel,
+  RecurringInterval,
+  Reminder
+} from '../../dto/modules/reminder.dto';
 
 import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepetitionConstants';
 import Divider from '../../components/atoms/Divider';
 import { UserContext } from '../../contexts/UserContext';
 import { useLanguage } from '../../internationalization/useLanguage';
-
-const mockReminder: Reminder = {
-  title: 'Take your drug',
-  startingDateTime: new Date(2023, 2, 31, 13),
-  isRemindCaretaker: true,
-  note: 'mock note',
-  importanceLevel: 'Low',
-  recursion: 'EVERY_DAY',
-  uid: 75,
-  imageid: 'asd15bsads'
-};
 
 const ReminderInfoScreen = ({ route }) => {
   const { t } = useTranslation();
@@ -54,10 +46,7 @@ const ReminderInfoScreen = ({ route }) => {
     [route]
   );
 
-  const [reminderInfo, setReminder] = useState<Reminder>({
-    ...mockReminder,
-    imageid: user?.imageid ?? ''
-  });
+  const [reminderInfo, setReminder] = useState<Reminder>();
 
   const reminderStatus = useMemo<ReminderStatus>(() => {
     if (route?.params.info.isDone) return ReminderStatus.DONE;
