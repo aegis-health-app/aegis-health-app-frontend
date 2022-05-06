@@ -12,21 +12,10 @@ import {
   storeNotificationFeed
 } from '../../utils/user/notification';
 
-const mockReminder: ReminderNoti = {
-  title: 'Take your **** drug',
-  startingDateTime: new Date(2020, 2, 31),
-  note: 'mock note',
-  isDone: true,
-  user: 'Hempen Rope',
-  rid: 1
-};
-
 const UpComingAlert = () => {
   const { t } = useTranslation();
 
-  const [reminderList, setReminderList] = useState<ReminderNoti[]>([
-    mockReminder
-  ]);
+  const [reminderList, setReminderList] = useState<ReminderNoti[]>([]);
   const [emergencyList, setEmergencyList] = useState<EmergencyNoti[]>([]);
 
   const appState = useRef(AppState.currentState);
@@ -53,7 +42,7 @@ const UpComingAlert = () => {
   useAsyncEffect(async () => {
     const feed = await getNotificationFeed();
     setEmergencyList(feed.emergency as EmergencyNoti[]);
-    setReminderList(feed.reminder);
+    setReminderList(feed.reminder as ReminderNoti[]);
   }, [appStateVisible]);
 
   const dismissNotification = useCallback(async () => {
@@ -65,7 +54,7 @@ const UpComingAlert = () => {
     await storeNotificationFeed(feed);
 
     setEmergencyList(feed.emergency as EmergencyNoti[]);
-    setReminderList(feed.reminder);
+    setReminderList(feed.reminder as ReminderNoti[]);
   }, [setEmergencyList]);
 
   return (
