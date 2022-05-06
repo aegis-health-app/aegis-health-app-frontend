@@ -47,7 +47,7 @@ const ReminderInfoScreen = ({ route }) => {
 
   const reminderStatus = useMemo<ReminderStatus>(() => {
     if (route?.params.info.isDone) return ReminderStatus.DONE;
-    if (Date.now() > reminderInfo.startingDateTime.getTime())
+    if (moment(reminderInfo?.startingDateTime).isBefore(Date.now()))
       return ReminderStatus.OVERDUE;
     return ReminderStatus.PENDING;
   }, [route, reminderInfo]);
