@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { HStack, Text, View } from 'native-base';
+import InCallManager from 'react-native-incall-manager';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 import { useTranslation } from 'react-i18next';
 import { AppState, TouchableOpacity } from 'react-native';
@@ -27,6 +28,8 @@ const UpComingAlert = () => {
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
+        InCallManager.stopRingtone();
+        InCallManager.stop();
         //App has come to the foreground
       }
 
