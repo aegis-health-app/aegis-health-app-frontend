@@ -15,42 +15,48 @@ import {
 import { UserContext } from '../../contexts/UserContext';
 import ReminderItem from '../../components/molecules/ReminderItem';
 import ExpansibleToggle from '../../components/atoms/ExpansibleToggle';
-import ReminderDayHeader from '../../components/atoms/ReminderDayHeader';
 import { CaretakerContext } from '../../contexts/CaretakerContext';
 import moment from 'moment';
-import { client } from '../../config/axiosConfig';
+import ReminderGroup from '../../components/molecules/ReminderGroup';
+import { UnfinishedReminders } from '../../interfaces/reminders';
+import {
+  fetchUnfinishedRemindersElderly,
+  fetchUnfinishedRemindersCaretaker
+} from '../../utils/reminders';
+import { translateDate } from '../../constants/DateTranslations';
+import { useSettings } from '../../hooks/useSettings';
 
 const RemindersScreen = () => {
   const { t } = useTranslation();
+  const { language } = useSettings();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { user } = useContext(UserContext);
   const [showScreen, setShowScreen] = useState<boolean>(true);
   const { isElderly } = useContext(UserContext);
   const { currentElderlyUid } = useContext(CaretakerContext);
+  const [reminders, setReminders] = useState<UnfinishedReminders>();
   const [date, setDate] = useState<Date>(new Date());
+  const dateFormat = 'dddd, DD MMMM';
 
   useAsyncEffect(async () => {
     const currentDate = moment(date).add(7, 'h').toDate();
-    const payload = {
-      currentDate: currentDate
-    };
-    console.log(currentDate);
     try {
-      const res = await client.post(
-        '/reminder/unfinishedReminder/elderly',
-        payload
-      );
-      console.log(res);
+      if (isElderly) {
+        const res = await fetchUnfinishedRemindersElderly(currentDate);
+        // console.log(JSON.stringify(res.data, null, '\t'));
+        setReminders(res.data);
+      } else {
+        const res = await fetchUnfinishedRemindersCaretaker(
+          currentElderlyUid,
+          currentDate
+        );
+        // console.log(JSON.stringify(res.data, null, '\t'));
+        setReminders(res.data);
+      }
     } catch (error) {
       console.log(error);
     }
   }, [date]);
-
-  useAsyncEffect(async () => {
-    if (!user) return;
-    // fetchReminders();
-  }, [user]);
 
   // tour guide copied and modified from settings screen
 
@@ -89,39 +95,6 @@ const RemindersScreen = () => {
   );
 
   if (!showScreen) return null;
-
-  const reminders = [
-    {
-      title: 'test',
-      description: 'test test test',
-      date: 0,
-      time: 0,
-      notifyCaretakers: false,
-      repeat: false,
-      priority: 1,
-      image: null
-    },
-    {
-      title: 'test',
-      description: 'test test test',
-      date: 0,
-      time: 0,
-      notifyCaretakers: false,
-      repeat: false,
-      priority: 1,
-      image: null
-    },
-    {
-      title: 'test',
-      description: 'test test test',
-      date: 0,
-      time: 0,
-      notifyCaretakers: false,
-      repeat: false,
-      priority: 1,
-      image: null
-    }
-  ];
 
   return (
     <View flex={1} mb={4}>
@@ -170,42 +143,29 @@ const RemindersScreen = () => {
           title="Overdue Activities"
           expand={true}
           divider={true}>
-          <ReminderDayHeader day="monday" />
-          <ReminderItem />
-          <ReminderItem />
+          {reminders && (
+            <ReminderGroup data={reminders.overdue} isOverdue={true} />
+          )}
         </ExpansibleToggle>
-        {/* {reminders.map((reminder, i) => (
-          <>
-            {i === 0 ? (
-              <TourGuideZone
-                tourKey={tourKey}
-                zone={3}
-                shape="rectangle"
-                text={t('healthRecordingsTutorial.step2')}>
-                <HealthRecordingCard
-                  key={i}
-                  backgroundColor="#fff"
-                  image={reminder.imageid}
-                  hrName={reminder.hrName}
-                  handlePress={() => {
-                    stop();
-                    console.log('press');
-                  }}
-                />
-              </TourGuideZone>
-            ) : (
-              <HealthRecordingCard
-                key={i}
-                backgroundColor="#fff"
-                image={reminder.imageid}
-                hrName={t(reminder.hrName)}
-                handlePress={() => {
-                  console.log('press');
-                }}
+        {reminders?.future.map((item, index) => (
+          <ExpansibleToggle
+            key={index}
+            title={
+              language === 'th'
+                ? translateDate(moment(item.date).format(dateFormat))
+                : moment(item.date).format(dateFormat)
+            }
+            expand={false}
+            divider={true}>
+            {item.reminder.map((reminder, index) => (
+              <ReminderItem
+                key={index}
+                data={reminder}
+                lastIndex={index === item.reminder.length - 1}
               />
-            )}
-          </>
-        ))} */}
+            ))}
+          </ExpansibleToggle>
+        ))}
       </ScrollView>
     </View>
   );
