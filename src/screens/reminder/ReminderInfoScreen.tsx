@@ -61,16 +61,15 @@ const ReminderInfoScreen = ({ route }) => {
   }, [reminderInfo]);
 
   useAsyncEffect(async () => {
-    const reminderData = (
-      await client.get<Reminder>('/reminder/get/elderly', {
-        params: {
-          rid: reminderId
-        }
-      })
-    ).data;
+    if (reminderId) {
+      const reminderData = (
+        await client.get<Reminder>(`/reminder/elderly/${reminderId}`)
+      ).data;
 
-    setReminder(reminderData);
-  }, []);
+      setReminder(reminderData);
+    }
+  }, [reminderId, setReminder]);
+
 
   const editReminder = useCallback(
     () =>
