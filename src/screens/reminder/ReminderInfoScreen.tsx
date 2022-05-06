@@ -131,7 +131,7 @@ const ReminderInfoScreen = ({ route }) => {
           p={1}
           borderRadius={2}>
           {moment(reminderInfo?.startingDateTime).format(
-            `HH:MM ${language() === 'en' ? 'A' : 'น.'}`
+            `HH:mm ${language() === 'en' ? 'A' : 'น.'}`
           )}
         </Box>
       </HStack>
