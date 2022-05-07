@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
   Text,
@@ -8,8 +8,7 @@ import {
   Spacer,
   Box,
   View,
-  Image,
-  VStack
+  Image
 } from 'native-base';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
@@ -106,7 +105,8 @@ const ReminderInfoScreen = ({ route }) => {
           importanceLevel,
           recursion,
           customRecursion,
-          rid: reminderId
+          rid: parseInt(reminderId, 10),
+          image: undefined
         }
       });
     }
