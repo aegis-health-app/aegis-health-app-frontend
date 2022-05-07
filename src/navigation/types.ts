@@ -73,5 +73,5 @@ export type RootStackParamList = {
   CreateReminderScreen: { eid?: number };
   RemindersCompletedScreen: undefined;
   EditReminderScreen: { info: EditReminderInfo };
-  ReminderInfoScreen: { info: Notification };
+  ReminderInfoScreen: { info: Notification | { rid: number } };
 };
