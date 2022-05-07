@@ -61,6 +61,10 @@ const ReminderInfoScreen = ({ route }) => {
         await client.get<Reminder>(`/reminder/elderly/${reminderId}`)
       ).data;
 
+      reminderData.startingDateTime = moment(reminderData.startingDateTime)
+        .add(-7, 'h')
+        .toDate();
+
       setReminder(reminderData);
     }
   }, [reminderId, setReminder]);
