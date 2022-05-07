@@ -52,8 +52,14 @@ export type Reminder = {
   note: string;
   importanceLevel: ImportanceLevel;
   recursion?: RecurringInterval;
-  customRecursion?: Recursion;
+  customRecursion?: RecursionInfo;
   uid: number;
   imageid: string;
   isDone?: boolean;
 };
+
+export interface RecursionInfo {
+  period: RecursionPeriod;
+  days?: number[]; //(1 | 2 | 3 | 4 | 5 | 6 | 7)[];
+  dates?: number[];
+}
