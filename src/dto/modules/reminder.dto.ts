@@ -45,8 +45,6 @@ export enum ImportanceLevel {
   HIGH = 'High'
 }
 
-type RecursionDay = [0 | 1 | 2 | 3 | 4 | 5 | 6 | 7];
-
 export type Reminder = {
   title: string;
   startingDateTime: Date;
@@ -57,4 +55,5 @@ export type Reminder = {
   customRecursion?: Recursion;
   uid: number;
   imageid: string;
+  isDone?: boolean;
 };
