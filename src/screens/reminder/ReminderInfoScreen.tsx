@@ -28,20 +28,36 @@ import { Reminder } from '../../dto/modules/reminder.dto';
 import { ReminderInfoScreenRecursion } from '../../constants/ReminderRepetitionConstants';
 import Divider from '../../components/atoms/Divider';
 import { useLanguage } from '../../internationalization/useLanguage';
+import { UserContext } from '../../contexts/UserContext';
 
 const ReminderInfoScreen = ({ route }) => {
   const { t } = useTranslation();
   const { language } = useLanguage();
 
+  const { isElderly } = useContext(UserContext);
+
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const reminderId = useMemo<number>(() => route?.params.info.rid, [route]);
+  const reminderId = useMemo<string>(() => route?.params.info.rid, [route]);
+  const elderlyId = useMemo<number>(() => route?.params.info.eid, [route]);
 
   const [reminderInfo, setReminder] = useState<Reminder>();
+  const isCloseToReminder = useMemo<boolean>(
+    () =>
+      moment(reminderInfo?.startingDateTime).diff(Date.now(), 'minutes') <= 30,
+    [reminderInfo]
+  );
+  const isRecurring = useMemo<boolean>(
+    () =>
+      reminderInfo?.recursion !== undefined ||
+      reminderInfo?.customRecursion !== undefined,
+    [reminderInfo]
+  );
 
   const reminderStatus = useMemo<ReminderStatus>(() => {
-    if (route?.params.info.isDone) return ReminderStatus.DONE;
+    if (route?.params.info.isDone || reminderInfo?.isDone)
+      return ReminderStatus.DONE;
     if (moment(reminderInfo?.startingDateTime).isBefore(Date.now()))
       return ReminderStatus.OVERDUE;
     return ReminderStatus.PENDING;
@@ -162,12 +178,15 @@ const ReminderInfoScreen = ({ route }) => {
           alt="Profile Picture"
         />
       )}
-      <Button
-        colorScheme={reminderStatus === ReminderStatus.DONE ? 'red' : 'blue'}
-        w="full"
-        mt={6}>
-        {t(buttonMessages[reminderStatus])}
-      </Button>
+      {isCloseToReminder && isElderly && !isRecurring && (
+        <Button
+          colorScheme={reminderStatus === ReminderStatus.DONE ? 'red' : 'blue'}
+          w="full"
+          mt={6}
+          onPress={updateReminderStatus}>
+          {t(buttonMessages[reminderStatus])}
+        </Button>
+      )}
     </View>
   );
 };
