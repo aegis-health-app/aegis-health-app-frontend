@@ -22,6 +22,7 @@ export type ReminderNoti = {
   startingDateTime: string;
   user: string;
   rid: string;
+  eid: string;
 
   messageType?: NotificationType;
 };
@@ -111,17 +112,16 @@ export const handleBackgroundMessage = async (
     InCallManager.stop();
     InCallManager.turnScreenOn();
   } else if (type === NotificationType.REMINDER && data) {
-    console.log(data);
-
     const { title, note, isDone, startingDateTime, user, rid } = data;
 
     const reminderPayload: ReminderNoti = {
       title,
       note,
       isDone: isDone === 'true',
-      startingDateTime: startingDateTime,
+      startingDateTime: moment(startingDateTime).add(-7, 'h').toISOString(),
       user,
       rid,
+      eid,
       messageType: NotificationType.REMINDER
     };
 
