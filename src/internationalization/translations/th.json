@@ -577,7 +577,8 @@
     "yearRecursion": "ทุกปี",
     "customRecursion": "กำหนดเอง",
     "markComplete": "ฉันทำแล้ว",
-    "markNotComplete": "ฉันยังไม่ได้ทำ"
+    "markNotComplete": "ฉันยังไม่ได้ทำ",
+    "timeLimit": "คุณสามารถทำตามการเตือนความจำนี้ล่วงหน้าได้ 30 นาทีก่อนเวลาที่กำหนดไว้เท่านั้น"
   },
   "reminderForm": {
     "title": "ชื่อการเตือนความจำ",
