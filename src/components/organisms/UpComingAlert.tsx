@@ -3,7 +3,7 @@ import { HStack, Text, View } from 'native-base';
 import InCallManager from 'react-native-incall-manager';
 import ModuleAlertCard from '../molecules/ModuleAlertCard';
 import { useTranslation } from 'react-i18next';
-import { AppState, TouchableOpacity } from 'react-native';
+import { AppState } from 'react-native';
 import EmergencyAlertCard from '../molecules/EmergencyAlertCard';
 import useAsyncEffect from '../../hooks/useAsyncEffect';
 import {
@@ -12,9 +12,6 @@ import {
   ReminderNoti,
   storeNotificationFeed
 } from '../../utils/user/notification';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../navigation/types';
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
@@ -63,29 +60,12 @@ const UpComingAlert = () => {
     setReminderList(feed.reminder as ReminderNoti[]);
   }, [setEmergencyList]);
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const navigateToAllReminders = useCallback(() => {
-    navigation.navigate('RemindersScreen');
-  }, []);
-
   return (
     <View w="full" mt={6}>
       <HStack justifyContent="space-between" alignItems="center">
         <Text fontSize="2xl" fontWeight="600" mb={4}>
           {t('modules.notification')}
         </Text>
-        <TouchableOpacity onPress={navigateToAllReminders}>
-          <Text
-            fontSize="lg"
-            fontWeight="500"
-            mb={4}
-            color="primary.500"
-            underline>
-            {t('modules.viewAll')}
-          </Text>
-        </TouchableOpacity>
       </HStack>
       {emergencyList.length > 0 ? (
         <EmergencyAlertCard
