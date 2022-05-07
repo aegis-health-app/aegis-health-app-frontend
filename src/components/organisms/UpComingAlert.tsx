@@ -69,16 +69,16 @@ const UpComingAlert = () => {
       </HStack>
       {emergencyList.length > 0 ? (
         <EmergencyAlertCard
-          sender={emergencyList[0].name}
-          time={emergencyList[0].time}
-          notification={emergencyList[0]}
+          sender={emergencyList[emergencyList.length - 1].name}
+          time={emergencyList[emergencyList.length - 1].time}
+          notification={emergencyList[emergencyList.length - 1]}
           dismissNotification={dismissNotification}
         />
       ) : (
         <>
           {reminderList.length > 0 && (
             <ModuleAlertCard
-              notification={reminderList[0]}
+              notification={reminderList[reminderList.length - 1]}
               dismissNotification={dismissNotification}
             />
           )}
