@@ -50,7 +50,8 @@ const ReminderInfoScreen = ({ route }) => {
   const isRecurring = useMemo<boolean>(
     () =>
       reminderInfo?.recursion !== undefined ||
-      reminderInfo?.customRecursion !== undefined,
+      reminderInfo?.customRecursion?.days?.length !== 0 ||
+      reminderInfo?.customRecursion?.dates?.length !== 0,
     [reminderInfo]
   );
 
@@ -66,7 +67,11 @@ const ReminderInfoScreen = ({ route }) => {
     const { recursion, customRecursion } = reminderInfo ?? {};
 
     if (recursion) return t(ReminderInfoScreenRecursion[recursion]);
-    if (customRecursion) return t('reminder.customRecursion');
+    if (
+      customRecursion?.days?.length !== 0 ||
+      customRecursion?.dates?.length !== 0
+    )
+      return t('reminder.customRecursion');
     return t('reminder.noRecursion');
   }, [reminderInfo]);
 
@@ -131,9 +136,10 @@ const ReminderInfoScreen = ({ route }) => {
             rid: parseInt(reminderId, 10)
           }
         );
-        if (updateResponse.status === 200) {
-          setReminder((prev) => prev);
-        }
+        if (updateResponse.status === 200)
+          setReminder((prev) => {
+            return prev ? { ...prev, isDone: false } : undefined;
+          });
       } else {
         const updateResponse = await client.put(
           isElderly
@@ -144,9 +150,10 @@ const ReminderInfoScreen = ({ route }) => {
             currentDate: moment(Date.now()).toISOString()
           }
         );
-        if (updateResponse.status === 200) {
-          setReminder((prev) => prev);
-        }
+        if (updateResponse.status === 200)
+          setReminder((prev) => {
+            return prev ? { ...prev, isDone: true } : undefined;
+          });
       }
     } catch (e) {
       console.log(e?.response.data);
@@ -155,8 +162,8 @@ const ReminderInfoScreen = ({ route }) => {
 
   return (
     <View px={5}>
-      <ReminderStatusBar status={reminderStatus} />
-      <Spacer />
+      {!isRecurring && <ReminderStatusBar status={reminderStatus} />}
+      <Spacer my={2} />
       <HStack justifyContent="space-between">
         <FormHeader headerText={reminderInfo?.title ?? ''} />
         <Button
@@ -199,7 +206,6 @@ const ReminderInfoScreen = ({ route }) => {
         <Text>{getRecursionLevel()}</Text>
       </HStack>
       <Divider />
-      <Text>{reminderInfo?.note}</Text>
       <Spacer my={2} />
       {reminderInfo?.imageid && (
         <Image
@@ -219,6 +225,9 @@ const ReminderInfoScreen = ({ route }) => {
           onPress={updateReminderStatus}>
           {t(buttonMessages[reminderStatus])}
         </Button>
+      )}
+      {!isCloseToReminder && isElderly && !isRecurring && (
+        <Text textAlign="center">{t('reminder.timeLimit')}</Text>
       )}
     </View>
   );
