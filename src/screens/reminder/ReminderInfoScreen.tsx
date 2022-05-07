@@ -120,6 +120,39 @@ const ReminderInfoScreen = ({ route }) => {
     };
   }, []);
 
+  const updateReminderStatus = useCallback(async () => {
+    try {
+      if (reminderStatus === ReminderStatus.DONE) {
+        const updateResponse = await client.put(
+          isElderly
+            ? '/reminder/markAsNotComplete/elderly'
+            : `/reminder/markAsNotComplete/caretaker/${elderlyId}`,
+          {
+            rid: parseInt(reminderId, 10)
+          }
+        );
+        if (updateResponse.status === 200) {
+          setReminder((prev) => prev);
+        }
+      } else {
+        const updateResponse = await client.put(
+          isElderly
+            ? '/reminder/markAsComplete/elderly'
+            : `/reminder/markAsComplete/caretaker/${elderlyId}`,
+          {
+            rid: parseInt(reminderId, 10),
+            currentDate: moment(Date.now()).toISOString()
+          }
+        );
+        if (updateResponse.status === 200) {
+          setReminder((prev) => prev);
+        }
+      }
+    } catch (e) {
+      console.log(e?.response.data);
+    }
+  }, [reminderStatus, elderlyId]);
+
   return (
     <View px={5}>
       <ReminderStatusBar status={reminderStatus} />
