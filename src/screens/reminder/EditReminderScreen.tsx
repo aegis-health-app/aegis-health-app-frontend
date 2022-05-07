@@ -84,12 +84,14 @@ const EditReminderScreen = ({
 
   const onSubmit = (data) => {
     const uploadImage = image && image.assets ? image.assets[0] : undefined;
-    const imagePayload = {
-      base64: uploadImage?.base64,
-      name: uploadImage?.fileName,
-      type: uploadImage?.type,
-      size: uploadImage?.fileSize
-    };
+    const imagePayload = uploadImage
+      ? {
+          base64: uploadImage?.base64,
+          name: uploadImage?.fileName,
+          type: uploadImage?.type,
+          size: uploadImage?.fileSize
+        }
+      : null;
 
     const response: EditReminderInfo = {
       ...data,
