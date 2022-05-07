@@ -40,7 +40,9 @@ const ModuleAlertCard = ({
           <Text fontSize="2xl" fontWeight="500">
             {notification.title}
           </Text>
-          {notification.note && <Text fontSize="lg">{notification.note}</Text>}
+          {notification.note.length > 0 && (
+            <Text fontSize="lg">{notification.note ?? ''}</Text>
+          )}
         </View>
         <HStack justifyContent="space-between" mt={4} mb={1}>
           <Pressable
