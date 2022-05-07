@@ -112,7 +112,7 @@ export const handleBackgroundMessage = async (
     InCallManager.stop();
     InCallManager.turnScreenOn();
   } else if (type === NotificationType.REMINDER && data) {
-    const { title, note, isDone, startingDateTime, user, rid } = data;
+    const { title, note, isDone, startingDateTime, user, rid, eid } = data;
 
     const reminderPayload: ReminderNoti = {
       title,
