@@ -577,7 +577,8 @@
     "yearRecursion": "Every year",
     "customRecursion": "Custom",
     "markComplete": "Mark as Complete",
-    "markNotComplete": "Mark as Not Complete"
+    "markNotComplete": "Mark as Not Complete",
+    "timeLimit": "You can only mark this task as done 30 minutes before the selected time."
   },
   "reminderForm": {
     "title": "Title",
