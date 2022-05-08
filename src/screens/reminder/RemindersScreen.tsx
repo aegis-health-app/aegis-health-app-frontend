@@ -52,7 +52,6 @@ const RemindersScreen = () => {
       if (isElderly) {
         const res = await fetchUnfinishedRemindersElderly(currentDate);
         // console.log(JSON.stringify(res.data, null, '\t'));
-        res.data.future = removeDuplicateReminders(res.data.future);
         setReminders(res.data);
       } else {
         const res = await fetchUnfinishedRemindersCaretaker(
@@ -60,7 +59,6 @@ const RemindersScreen = () => {
           currentDate
         );
         // console.log(JSON.stringify(res.data, null, '\t'));
-        res.data.future = removeDuplicateReminders(res.data.future);
         setReminders(res.data);
       }
     } catch (error) {
