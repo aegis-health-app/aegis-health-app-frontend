@@ -52,12 +52,10 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleSubmit = async () => {
     const payload = { answers: answerArray };
-    console.log('payload is: ', payload);
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
       navigation.navigate('MemoryRecallFinishScreen');
     } catch (err) {
-      console.log(err);
       toast.show({
         title: t('memoryRecallElderly.failToSubmit')
       });
@@ -88,7 +86,6 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     setShortAnswer('');
     setAnswer({ mid: mid, answer: 'null' });
     setShowBg(false);
-    // console.log('answer is: ', answer);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     } else {

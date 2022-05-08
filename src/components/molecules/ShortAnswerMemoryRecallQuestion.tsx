@@ -30,7 +30,6 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
   } = props;
   const { t } = useTranslation();
   const [shortAnswer, setShortAnswer] = useState('');
-  // console.log('mid 33 is: ', mid);
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
   const [showBg, setShowBg] = useState(false);
   const [showImage, setShowImage] = useState(true);
