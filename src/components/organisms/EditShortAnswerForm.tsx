@@ -28,6 +28,7 @@ import images from '../../assets/images';
 import { ShortAnswerValidationSchema } from './../../dto/modules/memoryRecall';
 import FallbackImage from './../molecules/FallbackImage';
 import { client } from './../../config/axiosConfig';
+import Alert, { AlertType } from './Alert';
 
 type EditShortAnswerFormProps = {
   question: QuestionDetailsResponse;
@@ -42,6 +43,7 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
   const [loading, setLoading] = useState(false);
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
+  const [showAlert, setShowAlert] = useState(false);
 
   const { width } = useWindowDimensions();
 
@@ -113,6 +115,13 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
 
   return (
     <View px={4} py={4}>
+      <Alert
+        isOpen={showAlert}
+        close={handleDelete}
+        cancel={() => setShowAlert(false)}
+        type={AlertType.ERROR}
+        message="deleteMemoryRecall"
+      />
       <VStack space={2}>
         <FormControl isRequired isInvalid={'question' in errors}>
           <Text bold>{t('createMemoryRecall.header')}</Text>
@@ -184,7 +193,7 @@ const EditShortAnswerForm = ({ question, mid }: EditShortAnswerFormProps) => {
         </Button>
         <Button
           w="full"
-          onPress={handleDelete}
+          onPress={() => setShowAlert(true)}
           colorScheme="error"
           variant="outline">
           <Text fontSize="md" color="error.500">
