@@ -1,5 +1,5 @@
 import { View } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MemoryRecallQuestionProgress from '../components/atoms/MemoryRecallQuestionProgress';
 import ChoiceMemoryRecallQuestion from '../components/molecules/ChoiceMemoryRecallQuestion';

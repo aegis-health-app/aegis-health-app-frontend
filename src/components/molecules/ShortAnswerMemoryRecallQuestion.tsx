@@ -1,10 +1,10 @@
 import { Image, Input, Text, View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import { useTranslation } from 'react-i18next';
-import FallbackImage from './FallbackImage';
+import { useFocusEffect } from '@react-navigation/native';
 
 type Props = {
   questionNumber: number;
@@ -33,6 +33,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
   // console.log('mid 33 is: ', mid);
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
   const [showBg, setShowBg] = useState(false);
+  const [showImage, setShowImage] = useState(true);
   const handleChange = (value: string) => {
     setShortAnswer(value);
     setAnswer({ mid: mid, answer: value });
@@ -40,25 +41,32 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
   useEffect(() => {
     setAnswer({ mid: mid, answer: 'null' });
   }, [mid]);
-  console.log(imageid);
+  useFocusEffect(
+    useCallback(() => {
+      setShowImage(false);
+      setTimeout(() => {
+        setShowImage(true);
+      }, 0);
+    }, [imageid])
+  );
 
   return (
     <View padding={'16 px'}>
       <View minHeight={'460 px'}>
-        <View>
-          <Image
-            source={{ uri: imageid }}
-            fallbackElement={FallbackImage}
-            alt=" "
-            width={'100%'}
-            height={200}
-            resizeMode="contain"
-            mr={3}
-          />
-        </View>
+        {showImage && (
+          <View>
+            <Image
+              source={{ uri: imageid }}
+              fallbackElement={undefined}
+              alt=" "
+              width={'100%'}
+              height={200}
+              resizeMode="contain"
+              mr={3}
+            />
+          </View>
+        )}
         <Spacer />
-        <Text>{JSON.stringify(imageid)}</Text>
-
         <View>
           <Text fontSize={'lg'} fontWeight={'bold'}>
             {questionNumber + 1}. {question}

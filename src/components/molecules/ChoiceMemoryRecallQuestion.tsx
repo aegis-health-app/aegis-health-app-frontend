@@ -1,11 +1,12 @@
 import { Image, Radio, Text, View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
 import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
+import { useFocusEffect } from '@react-navigation/native';
 
 type Props = {
   questionNumber: number;
@@ -45,26 +46,39 @@ const ChoiceMemoryRecallQuestion = (props: Props) => {
   const [showBg, setShowBg] = useState(false);
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
   const [shortAnswer, setShortAnswer] = useState('');
+  const [showImage, setShowImage] = useState(true);
   useEffect(() => {
     setShowChoice(false);
     setTimeout(() => {
       setShowChoice(true);
     }, 0);
   }, [questionNumber, showBg]);
+  useFocusEffect(
+    useCallback(() => {
+      setShowImage(false);
+      setTimeout(() => {
+        setShowImage(true);
+      }, 0);
+    }, [imageid])
+  );
 
   return (
     <View padding={'16 px'} display={'flex'} justifyContent={'space-between'}>
       {/* Image */}
       <View minHeight={'460 px'}>
-        <Image
-          source={{ uri: imageid }}
-          fallbackElement={undefined}
-          alt=" "
-          width={'100%'}
-          height={200}
-          resizeMode="contain"
-          mr={3}
-        />
+        {showImage && (
+          <View>
+            <Image
+              source={{ uri: imageid }}
+              fallbackElement={undefined}
+              alt=" "
+              width={'100%'}
+              height={200}
+              resizeMode="contain"
+              mr={3}
+            />
+          </View>
+        )}
         {/* Question and Answer */}
         <Spacer />
         <Text fontSize={'lg'} fontWeight={'bold'}>
