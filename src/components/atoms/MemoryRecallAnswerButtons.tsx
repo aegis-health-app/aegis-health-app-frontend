@@ -1,4 +1,4 @@
-import { Button, HStack, View, VStack, useToast } from 'native-base';
+import { Button, HStack, View, VStack, useToast, Text } from 'native-base';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -52,10 +52,12 @@ const MemoryRecallAnswerButtons = (props: Props) => {
    */
   const handleSubmit = async () => {
     const payload = { answers: answerArray };
+    console.log('payload is: ', payload);
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
       navigation.navigate('MemoryRecallFinishScreen');
     } catch (err) {
+      console.log(err);
       toast.show({
         title: t('memoryRecallElderly.failToSubmit')
       });
@@ -85,6 +87,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     setAnswerArray(answerTmp);
     setShortAnswer('');
     setAnswer({ mid: mid, answer: 'null' });
+    // console.log('answer is: ', answer);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     } else {

@@ -57,10 +57,12 @@ const MemoryRecallQuestionProgress = (
   };
   const handleSubmit = async () => {
     const payload = { answer: answerArray };
+    console.log('payload from skip is: ', payload);
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
       navigation.navigate('MemoryRecallFinishScreen');
     } catch (err) {
+      console.log(err);
       toast.show({
         title: t('memoryRecallElderly.failToSubmit')
       });
@@ -69,6 +71,8 @@ const MemoryRecallQuestionProgress = (
   };
   const questionProgress = questionNumber + 1;
   const progress = (questionProgress / totalQuestion) * 100;
+  console.log('answer array is: ', answerArray);
+
   return (
     <View paddingX={'16 px'} paddingTop={'16 px'}>
       <View style={styles.progressBar}>
