@@ -4,11 +4,13 @@ import {
   FirebaseMessagingTypes
 } from '@react-native-firebase/messaging';
 import moment from 'moment';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { mockEmergencyInfo } from '../components/molecules/EmergencyAlertCard';
 import EmergencyAlert from '../components/organisms/EmergencyAlert';
+import ReminderAlert from '../components/organisms/ReminderAlert';
 import { NotificationType } from '../constants/NotificationType';
-import { determineMessageType } from '../utils/user/notification';
+import { UserContext } from '../contexts/UserContext';
+import { determineMessageType, ReminderNoti } from '../utils/user/notification';
 import { EmergencyInfo } from './EmergencyInfoScreen';
 
 const withEmergency =
@@ -18,13 +20,17 @@ const withEmergency =
       useState<boolean>(false);
     const [emergencyInfo, setEmergencyInfo] =
       useState<EmergencyInfo>(mockEmergencyInfo);
+    const [showReminderAlert, setShowReminderAlert] = useState<boolean>(false);
+    const [reminderAlertInfo, setReminderAlertInfo] = useState<ReminderNoti>();
+
+    const { isElderly } = useContext(UserContext);
 
     const displayNotification = useCallback(
       (message: FirebaseMessagingTypes.RemoteMessage) => {
         const { data } = message;
         const type = determineMessageType(data);
 
-        if (type === NotificationType.EMERGENCY) {
+        if (type === NotificationType.EMERGENCY && !isElderly) {
           const emergencyPayload: EmergencyInfo = {
             address: data?.address ?? '',
             elderlyImageId: data?.elderlyImageId ?? '',
@@ -40,9 +46,28 @@ const withEmergency =
 
           setEmergencyInfo(emergencyPayload);
           setShowEmergencyAlert(true);
+        } else if (type === NotificationType.REMINDER && data) {
+          const { title, note, isDone, startingDateTime, user, rid, eid } =
+            data;
+
+          setReminderAlertInfo({
+            title,
+            note,
+            isDone: isDone === 'true',
+            startingDateTime: startingDateTime,
+            user,
+            rid,
+            eid
+          });
+          setShowReminderAlert(true);
         }
       },
-      [setEmergencyInfo, setShowEmergencyAlert]
+      [
+        setEmergencyInfo,
+        setShowEmergencyAlert,
+        setShowReminderAlert,
+        setReminderAlertInfo
+      ]
     );
 
     useEffect(() => {
@@ -62,6 +87,13 @@ const withEmergency =
           close={() => setShowEmergencyAlert(false)}
           emergencyInfo={emergencyInfo}
         />
+        {reminderAlertInfo && (
+          <ReminderAlert
+            isOpen={showReminderAlert}
+            close={() => setShowReminderAlert(false)}
+            reminderInfo={reminderAlertInfo}
+          />
+        )}
         <WrappedComponent {...props} />
       </>
     );

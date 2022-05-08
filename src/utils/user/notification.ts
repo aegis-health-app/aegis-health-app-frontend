@@ -59,6 +59,14 @@ export const startEmergencyVibration = () => {
   Vibration.vibrate(PATTERN, true);
 };
 
+export const startReminderVibration = () => {
+  const ONE_SECOND_IN_MS = 1000;
+
+  const PATTERN = [5 * ONE_SECOND_IN_MS, 5 * ONE_SECOND_IN_MS];
+
+  Vibration.vibrate(PATTERN, true);
+};
+
 export const cancelVibration = () => Vibration.cancel();
 
 export const getNotificationFeed: () => Promise<NotificationFeed> =
