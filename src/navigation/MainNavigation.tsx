@@ -84,7 +84,7 @@ const MainNavigation = () => {
             {user?.isElderly ? (
               <Stack.Screen
                 name="TabNavigation"
-                component={TabNavigation}
+                component={withEmergency(TabNavigation)}
                 options={{ headerShown: false }}
               />
             ) : (
@@ -183,7 +183,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="RemindersScreen"
-              component={RemindersScreen}
+              component={withEmergency(RemindersScreen)}
               options={{
                 title: t('reminders.remindersHeader'),
                 headerShown: true,
@@ -205,14 +205,14 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="RemindersCompletedScreen"
-              component={RemindersCompletedScreen}
+              component={withEmergency(RemindersCompletedScreen)}
               options={{
                 title: t('reminders.completedHeader')
               }}
             />
             <Stack.Screen
               name="MemoryScreen"
-              component={MemoryRecallScreen}
+              component={withEmergency(MemoryRecallScreen)}
               options={{
                 title: t('memoryRecallElderly.memoryRecall'),
                 headerTitleAlign: 'center',
@@ -234,7 +234,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="MemoryRecallQuestionScreen"
-              component={MemoryRecallQuestionScreen}
+              component={withEmergency(MemoryRecallQuestionScreen)}
               options={{
                 title: t('memoryRecallElderly.memoryRecall'),
                 headerTitleAlign: 'center',
@@ -244,7 +244,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="MemoryRecallFinishScreen"
-              component={MemoryRecallFinishScreen}
+              component={withEmergency(MemoryRecallFinishScreen)}
               options={{
                 title: 'Complete!',
                 headerTitleAlign: 'center',
@@ -382,7 +382,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="HealthRecordAnalyticsScreen"
-              component={HealthRecordAnalyticsScreen}
+              component={withEmergency(HealthRecordAnalyticsScreen)}
               options={{
                 title: t('healthRecording.analytics'),
                 headerTitleAlign: 'center',
@@ -397,7 +397,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ViewQuestionPoolScreen"
-              component={ViewQuestionPoolScreen}
+              component={withEmergency(ViewQuestionPoolScreen)}
               options={{
                 title: t('viewQuestionPool.questionPool'),
                 headerTitleAlign: 'center',
@@ -407,7 +407,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ViewAssignedQuestionsScreen"
-              component={ViewAssignedQuestionsScreen}
+              component={withEmergency(ViewAssignedQuestionsScreen)}
               options={{
                 title: t('viewAssignedQuestions.memoryPractice'),
                 headerTitleAlign: 'center',
@@ -431,7 +431,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ViewHistoryScreen"
-              component={ViewHistoryScreen}
+              component={withEmergency(ViewHistoryScreen)}
               options={{
                 title: t('viewHistory.analytic'),
                 headerTitleAlign: 'center',
@@ -441,7 +441,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ViewHistoryDetailsScreen"
-              component={ViewHistoryDetailsScreen}
+              component={withEmergency(ViewHistoryDetailsScreen)}
               options={{
                 title: t('viewHistory.result'),
                 headerTitleAlign: 'center',
@@ -451,7 +451,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="CreateReminderScreen"
-              component={CreateReminderScreen}
+              component={withEmergency(CreateReminderScreen)}
               options={{
                 title: t('reminder.createReminder'),
                 headerTitleStyle: { fontSize: 20, fontWeight: '600' },
@@ -460,7 +460,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="QuestionPoolScreen"
-              component={QuestionPoolScreen}
+              component={withEmergency(QuestionPoolScreen)}
               options={{
                 title: t('createMemoryRecall.questionPool'),
                 headerTitleAlign: 'center',
@@ -470,7 +470,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="EditReminderScreen"
-              component={EditReminderScreen}
+              component={withEmergency(EditReminderScreen)}
               options={{
                 title: t('reminder.editReminder'),
                 headerTitleAlign: 'center',
@@ -480,7 +480,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="ReminderInfoScreen"
-              component={ReminderInfoScreen}
+              component={withEmergency(ReminderInfoScreen)}
               options={{
                 title: t('reminder.reminderInfo'),
                 headerTitleAlign: 'center',
@@ -490,7 +490,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="CreateMemoryRecallQuestionsScreen"
-              component={CreateMemoryRecallQuestionsScreen}
+              component={withEmergency(CreateMemoryRecallQuestionsScreen)}
               options={{
                 title: t('createMemoryRecall.header'),
                 headerTitleAlign: 'center',
@@ -500,7 +500,7 @@ const MainNavigation = () => {
             />
             <Stack.Screen
               name="EditMemoryRecallQuestionsScreen"
-              component={EditMemoryRecallQuestionsScreen}
+              component={withEmergency(EditMemoryRecallQuestionsScreen)}
               options={{
                 title: t('createMemoryRecall.editMemoryScreen'),
                 headerTitleAlign: 'center',
