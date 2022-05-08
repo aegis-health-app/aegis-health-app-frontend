@@ -190,6 +190,12 @@ export const useAlertMessages = () => {
       body: t('deleteReminderError.body'),
       primaryButton: t('deleteReminderError.primaryButton'),
       secondaryButton: t('deeleteReminderError.secondaryButton')
+    },
+    deleteMemoryRecall: {
+      header: t('deleteMemoryRecall.header'),
+      body: t('deleteMemoryRecall.body'),
+      primaryButton: t('deleteMemoryRecall.primaryButton'),
+      secondaryButton: t('deleteMemoryRecall.secondaryButton')
     }
   };
   return AlertMessages;

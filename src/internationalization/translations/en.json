@@ -769,5 +769,11 @@
     "tourGuide1": "Press the “Start Game” button to start the game.",
     "pleaseSelectAChoice": "Please select a choice.",
     "failToSubmit": "Cannot submit your answer. Please try again later."
+  },
+  "deleteMemoryRecall": {
+    "header": "Confirmation",
+    "body": "Are you sure you want to delete this question?",
+    "primaryButton": "Delete",
+    "secondaryButton": "Cancel"
   }
 }

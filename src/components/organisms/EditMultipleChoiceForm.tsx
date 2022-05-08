@@ -29,6 +29,7 @@ import images from '../../assets/images';
 import FallbackImage from './../molecules/FallbackImage';
 import { useMultipleChoiceValidation } from '../../hooks/useMultipleChoiceValidation';
 import { client } from './../../config/axiosConfig';
+import Alert, { AlertType } from './Alert';
 
 type MultipleChoiceFormProps = {
   question: QuestionDetailsResponse;
@@ -44,6 +45,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
   const { currentElderlyUid } = useContext(CaretakerContext);
   const navigation = useNavigation();
   const MultipleChoiceValidationSchema = useMultipleChoiceValidation();
+  const [showAlert, setShowAlert] = useState(false);
 
   const { width } = useWindowDimensions();
 
@@ -130,6 +132,13 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
 
   return (
     <View px={4} py={4}>
+      <Alert
+        isOpen={showAlert}
+        close={handleDelete}
+        cancel={() => setShowAlert(false)}
+        type={AlertType.ERROR}
+        message="deleteMemoryRecall"
+      />
       <VStack space={2}>
         <FormControl isRequired isInvalid={'question' in errors}>
           <Text bold>{t('createMemoryRecall.header')}</Text>
@@ -277,7 +286,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
         </Button>
         <Button
           w="full"
-          onPress={handleDelete}
+          onPress={() => setShowAlert(true)}
           colorScheme="error"
           variant="outline">
           <Text fontSize="md" color="error.500">

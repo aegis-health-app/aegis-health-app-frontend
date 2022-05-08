@@ -769,5 +769,11 @@
     "tourGuide1": "กดปุ่ม “เริ่มเกม” เพื่อเริ่มเล่นเกม",
     "pleaseSelectAChoice": "กรุณาเลือกตัวเลือก",
     "failToSubmit": "ไม่สามารถบันทึกคำตอบได้ กรุณาลองใหม่อีกครั้งในภายหลัง"
+  },
+  "deleteMemoryRecall": {
+    "header": "การยืนยัน",
+    "body": "คุณแน่ใจหรือไม่ที่จะลบคำถามนี้",
+    "primaryButton": "ลบ",
+    "secondaryButton": "ยกเลิก"
   }
 }
