@@ -25,7 +25,8 @@ import ReminderGroup from '../../components/molecules/ReminderGroup';
 import { UnfinishedReminders } from '../../interfaces/reminders';
 import {
   fetchUnfinishedRemindersElderly,
-  fetchUnfinishedRemindersCaretaker
+  fetchUnfinishedRemindersCaretaker,
+  removeDuplicateReminders
 } from '../../utils/reminders';
 import { translateDate } from '../../constants/DateTranslations';
 import { useSettings } from '../../hooks/useSettings';
@@ -46,10 +47,12 @@ const RemindersScreen = () => {
 
   useAsyncEffect(async () => {
     const currentDate = moment(date).add(7, 'h').toDate();
+
     try {
       if (isElderly) {
         const res = await fetchUnfinishedRemindersElderly(currentDate);
         // console.log(JSON.stringify(res.data, null, '\t'));
+        res.data.future = removeDuplicateReminders(res.data.future);
         setReminders(res.data);
       } else {
         const res = await fetchUnfinishedRemindersCaretaker(
@@ -57,6 +60,7 @@ const RemindersScreen = () => {
           currentDate
         );
         // console.log(JSON.stringify(res.data, null, '\t'));
+        res.data.future = removeDuplicateReminders(res.data.future);
         setReminders(res.data);
       }
     } catch (error) {

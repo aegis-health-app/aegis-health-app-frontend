@@ -108,3 +108,9 @@ export const deleteReminderCaretaker = async (eid, rid) => {
     return { ...e };
   }
 };
+
+export const removeDuplicateReminders = (reminders) => {
+  return reminders.sort().filter(function (item, pos, ary) {
+    return !pos || item.date !== ary[pos - 1]?.date;
+  });
+};
