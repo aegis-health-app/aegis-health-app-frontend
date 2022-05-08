@@ -1,4 +1,4 @@
-import { Button, HStack, View, VStack, useToast, Text } from 'native-base';
+import { Button, HStack, View, VStack, useToast } from 'native-base';
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
