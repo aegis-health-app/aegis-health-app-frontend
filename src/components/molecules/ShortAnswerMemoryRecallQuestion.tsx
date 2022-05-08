@@ -1,10 +1,10 @@
 import { Image, Input, Text, View } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
-import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
+import FallbackImage from './FallbackImage';
 
 type Props = {
   questionNumber: number;
@@ -30,12 +30,17 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
   } = props;
   const { t } = useTranslation();
   const [shortAnswer, setShortAnswer] = useState('');
+  // console.log('mid 33 is: ', mid);
   const [answer, setAnswer] = useState<Answer>({ mid: mid, answer: 'null' });
   const [showBg, setShowBg] = useState(false);
   const handleChange = (value: string) => {
     setShortAnswer(value);
     setAnswer({ mid: mid, answer: value });
   };
+  useEffect(() => {
+    setAnswer({ mid: mid, answer: 'null' });
+  }, [mid]);
+  console.log(imageid);
 
   return (
     <View padding={'16 px'}>
@@ -43,7 +48,7 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
         <View>
           <Image
             source={{ uri: imageid }}
-            fallbackElement={undefined}
+            fallbackElement={FallbackImage}
             alt=" "
             width={'100%'}
             height={200}
@@ -52,6 +57,8 @@ const ShortAnswerMemoryRecallQuestion = (props: Props) => {
           />
         </View>
         <Spacer />
+        <Text>{JSON.stringify(imageid)}</Text>
+
         <View>
           <Text fontSize={'lg'} fontWeight={'bold'}>
             {questionNumber + 1}. {question}
