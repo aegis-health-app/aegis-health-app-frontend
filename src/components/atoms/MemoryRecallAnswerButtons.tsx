@@ -87,6 +87,7 @@ const MemoryRecallAnswerButtons = (props: Props) => {
     setAnswerArray(answerTmp);
     setShortAnswer('');
     setAnswer({ mid: mid, answer: 'null' });
+    setShowBg(false);
     // console.log('answer is: ', answer);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();

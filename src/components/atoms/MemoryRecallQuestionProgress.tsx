@@ -44,11 +44,12 @@ const MemoryRecallQuestionProgress = (
    * handle when user press the skip button. Move to the next question
    */
   const handleSkip = () => {
-    const answer = { mid: mid, answer: 'skipped' };
+    const answer = { mid: mid, answer: '' };
     setQuestionNumber(questionNumber);
     const answerTmp = answerArray;
     answerTmp.push(answer);
     setAnswerArray(answerTmp);
+    console.log('answer array skip is: ', answerArray);
     if (questionNumber + 1 === totalQuestion) {
       handleSubmit();
     } else {
@@ -56,7 +57,7 @@ const MemoryRecallQuestionProgress = (
     }
   };
   const handleSubmit = async () => {
-    const payload = { answer: answerArray };
+    const payload = { answers: answerArray };
     console.log('payload from skip is: ', payload);
     try {
       await client.post('/memoryPractice/elderlyAnswers', payload);
