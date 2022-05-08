@@ -20,7 +20,6 @@ const MemoryRecallQuestionScreen = () => {
     setQuestionSet(data);
   }, []);
   const totalQuestion: number = questionSet?.questions.length ?? 0;
-  console.log('question set: ', questionSet);
 
   return (
     <SafeAreaView>

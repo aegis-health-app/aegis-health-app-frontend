@@ -4,7 +4,6 @@ import MemoryRecallAnswerButtons from '../atoms/MemoryRecallAnswerButtons';
 import Spacer from '../atoms/Spacer';
 import { getBackGroundColor } from '../../utils/elderly/memoryRecallElderly';
 import { Answer } from '../../dto/modules/memoryRecallElderly.dto';
-import images from '../../assets/images';
 import { useTranslation } from 'react-i18next';
 import { useFocusEffect } from '@react-navigation/native';
 
