@@ -206,6 +206,7 @@ const ReminderInfoScreen = ({ route }) => {
         <Text>{getRecursionLevel()}</Text>
       </HStack>
       <Divider />
+      <Text>{reminderInfo?.note}</Text>
       <Spacer my={2} />
       {reminderInfo?.imageid && (
         <Image
