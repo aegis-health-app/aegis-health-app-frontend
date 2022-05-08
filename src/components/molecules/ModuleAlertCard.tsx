@@ -1,12 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { View, Text, Divider, VStack, HStack, Pressable } from 'native-base';
 import moment from 'moment';
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { ReminderNoti } from '../../utils/user/notification';
+import { UserContext } from '../../contexts/UserContext';
+import { client } from '../../config/axiosConfig';
 
 type ModuleAlertCardProps = {
   notification: ReminderNoti;
@@ -21,8 +23,23 @@ const ModuleAlertCard = ({
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const { isElderly } = useContext(UserContext);
+
   const showReminderInfoScreen = useCallback(() => {
     navigation.push('ReminderInfoScreen', { info: notification });
+  }, []);
+
+  const completeReminder = useCallback(async () => {
+    const updateResponse = await client.put(
+      '/reminder/markAsComplete/elderly',
+      {
+        rid: parseInt(notification.rid, 10),
+        currentDate: moment(Date.now()).toISOString()
+      }
+    );
+    if (updateResponse.status === 200) {
+      dismissNotification();
+    }
   }, []);
 
   return (
@@ -48,12 +65,12 @@ const ModuleAlertCard = ({
           <Pressable
             flex={2}
             alignItems="center"
-            onPress={showReminderInfoScreen}>
+            onPress={isElderly ? completeReminder : showReminderInfoScreen}>
             {({ isPressed }) => (
               <Text
                 fontSize={isPressed ? 'md' : 'lg'}
                 color={!isPressed ? 'darkBlue.600' : '#E4E4E7'}>
-                {t('modules.viewCard')}
+                {t(isElderly ? 'reminder.markComplete' : 'modules.viewCard')}
               </Text>
             )}
           </Pressable>
