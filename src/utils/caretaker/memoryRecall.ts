@@ -12,10 +12,10 @@ export async function getAllQuestions(eid: number): Promise<QuestionInfo[]> {
   return data?.questions as QuestionInfo[];
 }
 
-export async function getQuestionDetails(eid: number, mid: string) {
+export async function getQuestionDetails(eid: number, mid: number) {
   const { data } = await client.post('/memoryPractice/selectedQuestion', {
     elderlyuid: eid,
-    mid: mid.toString()
+    mid: mid
   });
 
   return data as QuestionDetails;
@@ -38,7 +38,7 @@ export async function changeSelectedStatus(
 ) {
   await client.put(`memoryPractice/editSelection/${isSelected}`, {
     elderlyuid: eid,
-    mid: mid.toString()
+    mid: mid
   });
 }
 
@@ -50,6 +50,6 @@ export async function sendEditedQuestion(
   await client.put('memoryPractice/editQuestion', {
     ...question,
     elderlyuid: eid,
-    mid: mid.toString()
+    mid: mid
   });
 }

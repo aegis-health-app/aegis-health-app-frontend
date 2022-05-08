@@ -122,7 +122,7 @@ const EditMultipleChoiceForm = ({ question, mid }: MultipleChoiceFormProps) => {
 
   async function handleDelete() {
     await client.delete('/memoryPractice/deleteQuestion', {
-      data: { elderlyuid: currentElderlyUid, mid: mid.toString() }
+      data: { elderlyuid: currentElderlyUid, mid: mid }
     });
 
     navigation.goBack();

@@ -1,4 +1,4 @@
-import { ScrollView } from 'native-base';
+import { ScrollView, Text } from 'native-base';
 import React, { useContext, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
