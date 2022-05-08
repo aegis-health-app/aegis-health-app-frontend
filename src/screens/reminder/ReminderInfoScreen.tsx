@@ -78,7 +78,11 @@ const ReminderInfoScreen = ({ route }) => {
   useAsyncEffect(async () => {
     if (reminderId) {
       const reminderData = (
-        await client.get<Reminder>(`/reminder/elderly/${reminderId}`)
+        await client.get<Reminder>(
+          isElderly
+            ? `/reminder/elderly/${reminderId}`
+            : `/reminder/caretaker/${elderlyId}/${reminderId}`
+        )
       ).data;
 
       reminderData.startingDateTime = moment(reminderData.startingDateTime)
@@ -87,7 +91,7 @@ const ReminderInfoScreen = ({ route }) => {
 
       setReminder(reminderData);
     }
-  }, [reminderId, setReminder]);
+  }, [reminderId, setReminder, isElderly]);
 
   const editReminder = useCallback(() => {
     if (reminderInfo) {
