@@ -1,7 +1,11 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AddIcon, Button, ScrollView, Text, View } from 'native-base';
 import { useTranslation } from 'react-i18next';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useIsFocused,
+  useNavigation
+} from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/types';
 import { StyleSheet } from 'react-native';
@@ -38,6 +42,8 @@ const RemindersScreen = () => {
   const [date, setDate] = useState<Date>(new Date());
   const dateFormat = 'dddd, DD MMMM';
 
+  const isFocused = useIsFocused();
+
   useAsyncEffect(async () => {
     const currentDate = moment(date).add(7, 'h').toDate();
     try {
@@ -56,7 +62,7 @@ const RemindersScreen = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [date]);
+  }, [date, isFocused]);
 
   // tour guide copied and modified from settings screen
 
