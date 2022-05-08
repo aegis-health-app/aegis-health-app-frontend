@@ -9,9 +9,11 @@ import useAsyncEffect from '../../hooks/useAsyncEffect';
 import {
   EmergencyNoti,
   getNotificationFeed,
+  handleBackgroundMessage,
   ReminderNoti,
   storeNotificationFeed
 } from '../../utils/user/notification';
+import { firebase } from '@react-native-firebase/messaging';
 
 const UpComingAlert = () => {
   const { t } = useTranslation();
@@ -21,6 +23,12 @@ const UpComingAlert = () => {
 
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
+
+  const refreshFeed = useCallback(async () => {
+    const feed = await getNotificationFeed();
+    setEmergencyList(feed.emergency as EmergencyNoti[]);
+    setReminderList(feed.reminder as ReminderNoti[]);
+  }, [setEmergencyList, setReminderList]);
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (nextAppState) => {
@@ -42,10 +50,19 @@ const UpComingAlert = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = firebase
+      .messaging()
+      .onMessage(async (remoteMessage) => {
+        await handleBackgroundMessage(remoteMessage);
+        await refreshFeed();
+      });
+
+    return unsubscribe;
+  }, []);
+
   useAsyncEffect(async () => {
-    const feed = await getNotificationFeed();
-    setEmergencyList(feed.emergency as EmergencyNoti[]);
-    setReminderList(feed.reminder as ReminderNoti[]);
+    refreshFeed();
   }, [appStateVisible]);
 
   const dismissNotification = useCallback(async () => {
