@@ -50,8 +50,10 @@ const UpComingAlert = () => {
 
   const dismissNotification = useCallback(async () => {
     const feed = await getNotificationFeed();
-    if (feed.emergency.length > 0) feed.emergency.splice(0, 1);
-    else if (feed.reminder.length > 0) feed.reminder.splice(0, 1);
+    if (feed.emergency.length > 0)
+      feed.emergency.splice(feed.emergency.length - 1);
+    else if (feed.reminder.length > 0)
+      feed.reminder.splice(feed.reminder.length - 1);
 
     console.log(feed);
     await storeNotificationFeed(feed);
